@@ -51,6 +51,7 @@ dependencies:
   provider: ^6.0.5
   permission_handler: any
   json_serializable: any
+  equatable: ^2.0.5
   xml: ^6.1.0
 
 

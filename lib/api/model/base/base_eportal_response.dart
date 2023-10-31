@@ -1,11 +1,14 @@
-import 'package:eportal/api/model/base/base_eportal_xml.dart';
+class BaseEportalResponse {
+  int status = 0;
 
+  String message = "Có lỗi xảy ra vui lòng thử lại sau";
 
-class BaseEportalResponse
-{
-  BaseEportalResponse();
+  BaseEportalResponse({required this.status, required this.message});
 
-  BaseEportalResponse.fromJson(Map<String, dynamic> json);
+  BaseEportalResponse.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    message = json['message'];
+  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

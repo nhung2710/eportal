@@ -1,8 +1,17 @@
+import 'package:eportal/constant/application_constant.dart';
+import 'package:eportal/extension/string_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'api/adapter/callapidemo.dart';
+import 'api/adapter/base/base_adapter_api.dart';
+import 'api/model/request/commonnew/home_works_list_request.dart';
+import 'api/model/response/commonnew/home_works_list_response.dart';
+import 'application/global_application.dart';
 
-void main() {
+Future<void> main() async {
+  GlobalApplication().sharedPreferences = await SharedPreferences.getInstance();
+  GlobalApplication().UserName = GlobalApplication().sharedPreferences.getString(ApplicationConstant.USERNAME).replaceWhenNullOrWhiteSpace();
+  GlobalApplication().UserPassword = GlobalApplication().sharedPreferences.getString(ApplicationConstant.USERPASSWORD).replaceWhenNullOrWhiteSpace();
   runApp(const MyApp());
 }
 
@@ -60,7 +69,9 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   Future<void> _incrementCounter() async {
-    var a = await CallApiDemo.CallHomeNewsList();
+    var ab = await BaseAdapterApi().callApiAsync(
+        HomeWorksListRequest(obj: HomeWorksListXml(flag: 2, top: 1)));
+    var json = HomeWorksListResponse.fromJson(ab);
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
