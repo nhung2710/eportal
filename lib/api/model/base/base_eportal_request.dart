@@ -1,0 +1,11 @@
+import 'package:eportal/api/model/base/base_eportal_xml.dart';
+
+abstract class BaseEportalRequest<T extends BaseEportalXml>
+{
+  T? obj;
+  BaseEportalRequest({this.obj});
+  bool isAuthentication() => true;
+  String getTagXml() => "";
+  String getStringUri() => "";
+  Uri getUri() => Uri.parse(getStringUri());
+}
