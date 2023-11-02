@@ -5,6 +5,8 @@ import 'package:eportal/api/model/request/commonnew/home_works_list_request.dart
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //
@@ -154,7 +156,7 @@ class UserFragment extends StatelessWidget{
   Widget build(BuildContext context)  => Column(
     children: [
       Container(
-          padding: const EdgeInsets.only(top: 10 , bottom: 10 ,left: 5,right: 10),
+          padding: const EdgeInsets.only(top: 10 , bottom: 10 ,left: 5,right: 30),
           color: Colors.white,
           height: 80,
           child: const Row(
@@ -179,43 +181,345 @@ class UserFragment extends StatelessWidget{
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Container(
-                  padding: const EdgeInsets.only(right: 10,left: 10,top: 10,bottom: 10),
+                  padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
                   child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                            flex: 1,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    padding: const EdgeInsets.only(top: 5,bottom: 5),
-                                    child: const Text("UserFragment",textAlign: TextAlign.end,style: AppTextStyle.labelTitleBold)
-                                ),
-                                Container(
-                                    padding: const EdgeInsets.only(top: 5,bottom: 5),
-                                    child: const Text("UserFragment",textAlign: TextAlign.end,style: AppTextStyle.labelTitle)
-                                ),
-                              ],
-                            )
-                        ),
-                        const Text("Sửa",textAlign: TextAlign.end,style: AppTextStyle.labelAction)
-                      ],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                          flex: 1,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                  padding: const EdgeInsets.only(top: 5,bottom: 5),
+                                  child: const Text("Thông tin",textAlign: TextAlign.end,style: AppTextStyle.labelTitleBold)
+                              ),
+                              Container(
+                                  padding: const EdgeInsets.only(top: 5,bottom: 5),
+                                  child: const Text("Chưa cập nhật",textAlign: TextAlign.end,style: AppTextStyle.labelTitle)
+                              ),
+                            ],
+                          )
+                      ),
+                      const Text("Sửa",textAlign: TextAlign.end,style: AppTextStyle.labelAction)
+                    ],
                   ),
                 ),
-                SizedBox(
-                    height: 50,
-                    child: Container(
-                        color: Colors.white,
-                        child: const Text("UserFragment")
-                    )
+                const Divider(
+                  color: Colors.black12,
+                  height: 0.5,
+                  thickness: 0.5,
                 ),
-                SizedBox(
-                    height: 50,
-                    child: Container(
-                        color: Colors.white,
-                        child: const Text("UserFragment")
-                    )
+                Container(
+                  padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                          flex: 1,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                  padding: const EdgeInsets.only(top: 5,bottom: 5),
+                                  child: const Text("Thông tin",textAlign: TextAlign.end,style: AppTextStyle.labelTitleBold)
+                              ),
+                              Container(
+                                  padding: const EdgeInsets.only(top: 5,bottom: 5),
+                                  child: const Text("Chưa cập nhật",textAlign: TextAlign.end,style: AppTextStyle.labelTitle)
+                              ),
+                            ],
+                          )
+                      ),
+                      const Text("Sửa",textAlign: TextAlign.end,style: AppTextStyle.labelAction)
+                    ],
+                  ),
+                ),
+                const Divider(
+                  color: Colors.black12,
+                  height: 0.5,
+                  thickness: 0.5,
+                ),
+                Container(
+                  padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                          flex: 1,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                  padding: const EdgeInsets.only(top: 5,bottom: 5),
+                                  child: const Text("Thông tin",textAlign: TextAlign.end,style: AppTextStyle.labelTitleBold)
+                              ),
+                              Container(
+                                  padding: const EdgeInsets.only(top: 5,bottom: 5),
+                                  child: const Text("Chưa cập nhật",textAlign: TextAlign.end,style: AppTextStyle.labelTitle)
+                              ),
+                            ],
+                          )
+                      ),
+                      const Text("Sửa",textAlign: TextAlign.end,style: AppTextStyle.labelAction)
+                    ],
+                  ),
+                ),
+                const Divider(
+                  color: Colors.black12,
+                  height: 0.5,
+                  thickness: 0.5,
+                ),
+                Container(
+                  padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
+                  child:
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          padding: const EdgeInsets.only(top: 5,bottom: 5),
+                          child: const Text("Quản lý hồ sơ",textAlign: TextAlign.end,style: AppTextStyle.labelTitleBold)
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(
+                  color: Colors.black12,
+                  height: 0.5,
+                  thickness: 0.5,
+                ),
+                Container(
+                  padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Icon(Icons.insert_chart,size: 30,color: Colors.green,),
+                      const Expanded(
+                          flex: 1,
+                          child:
+                          Padding(
+                            padding: EdgeInsets.only( left: 10,right: 10),
+                            child: Text("Thông tin tìm việc",textAlign: TextAlign.start,style: AppTextStyle.labelTitleBold),
+                          )
+                      ),
+                      Switch(
+                          value: true, onChanged: (v)=> {}
+                      )
+                    ],
+                  ),
+                ),
+                const Divider(
+                  color: Colors.black12,
+                  height: 0.5,
+                  thickness: 0.5,
+                ),
+                Container(
+                  padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Icon(Icons.insert_chart,size: 30,color: Colors.green,),
+                      const Expanded(
+                          flex: 1,
+                          child:
+                          Padding(
+                            padding: EdgeInsets.only( left: 10,right: 10),
+                            child: Text("Cho phép NTD liên hệ",textAlign: TextAlign.start,style: AppTextStyle.labelTitleBold),
+                          )
+                      ),
+                      Switch(
+                          value: false,
+                          onChanged: (v)=> {},
+                          activeColor: Colors.red,
+
+
+                      )
+                    ],
+                  ),
+                ),
+                const Divider(
+                  color: Colors.black12,
+                  height: 0.5,
+                  thickness: 0.5,
+                ),
+                Container(
+                  padding: const EdgeInsets.only(right: 10,left: 10,top: 10,bottom: 10),
+                  child: Image.network('https://down-vn.img.susercontent.com/file/vn-50009109-df0b36a3c21c48b987c7d7eb12dd129d',
+                    height: 80,
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
+                  child:
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+
+                    children: [
+                      Container(
+                          padding: const EdgeInsets.only(top: 5,bottom: 5),
+                          child: const Text("Quản lý tìm việc",textAlign: TextAlign.end,style: AppTextStyle.labelTitleBold)
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
+                  child: GridView.count(
+                    shrinkWrap: true,
+                    childAspectRatio: 2.2,
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 5,
+                    children: List.generate(5, (index) =>Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.black12,
+                            ),
+                            padding: const EdgeInsets.all(10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                      padding: const EdgeInsets.all(5),
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white,
+                                      ),
+                                      child: const Icon(Icons.shopping_bag,color: Colors.green,)
+                                  ),
+                                ),
+                                const Expanded(
+                                    flex: 1,
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Text("Việc làm đang ứng tuyển",textAlign: TextAlign.start,style: AppTextStyle.labelTitleBold),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Text("0",textAlign: TextAlign.end,style: AppTextStyle.labelTitleBold),
+                                        )
+                                      ],
+                                    )
+                                )
+                              ],
+                            )
+                        )),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(right: 10,left: 10,top: 10,bottom: 10),
+                  child: Image.network('https://down-vn.img.susercontent.com/file/vn-50009109-df0b36a3c21c48b987c7d7eb12dd129d',
+                    height: 80,
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+                const Divider(
+                  color: Colors.black12,
+                  height: 10,
+                  thickness: 10,
+                ),
+                Container(
+                  padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
+                  child:
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          padding: const EdgeInsets.only(top: 5,bottom: 5),
+                          child: const Text("Cài đặt tài khoản",textAlign: TextAlign.end,style: AppTextStyle.labelTitleBold)
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
+                  child: GridView.count(
+                    shrinkWrap: true,
+                    childAspectRatio: 10,
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount: 1,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 5,
+                    children: List.generate(5, (index) =>Container(
+                        decoration: const BoxDecoration(
+                          border: Border(bottom: BorderSide(
+                              color: Colors.black12,
+                              width: 0.5
+                          )),
+                        ),
+                        padding: const EdgeInsets.all(10),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.lock),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+
+                                  padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
+                                  child: const Text("Tính năng mới",textAlign: TextAlign.start,style: AppTextStyle.labelTitleBold)
+                              ),
+                            ),
+                            const FaIcon(FontAwesomeIcons.angleRight)
+                          ],
+                        )
+                    )),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
+                  child:
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          padding: const EdgeInsets.only(top: 5,bottom: 5),
+                          child: const Text("Chính sách và hỗ trợ",textAlign: TextAlign.end,style: AppTextStyle.labelTitleBold)
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
+                  child: GridView.count(
+                    shrinkWrap: true,
+                    childAspectRatio: 10,
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount: 1,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 5,
+                    children: List.generate(5, (index) =>Container(
+                        decoration: const BoxDecoration(
+                          border: Border(bottom: BorderSide(
+                              color: Colors.black12,
+                              width: 0.5
+                          )),
+                        ),
+                        padding: const EdgeInsets.all(10),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.lock),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+
+                                  padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
+                                  child: const Text("Tính năng mới",textAlign: TextAlign.start,style: AppTextStyle.labelTitleBold)
+                              ),
+                            ),
+                            const FaIcon(FontAwesomeIcons.angleRight)
+                          ],
+                        )
+                    )),
+                  ),
                 ),
               ],
             )
