@@ -16,6 +16,7 @@ import 'application/global_application.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   GlobalApplication().Preferences = await SharedPreferences.getInstance();
   GlobalApplication().UserName = GlobalApplication().Preferences.getString(ApplicationConstant.USERNAME).replaceWhenNullOrWhiteSpace();
   GlobalApplication().UserPassword = GlobalApplication().Preferences.getString(ApplicationConstant.USERPASSWORD).replaceWhenNullOrWhiteSpace();

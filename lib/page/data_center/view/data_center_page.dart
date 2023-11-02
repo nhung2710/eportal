@@ -1,7 +1,9 @@
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eportal/api/adapter/base/base_adapter_api.dart';
 import 'package:eportal/api/model/request/commonnew/home_works_list_request.dart';
+import 'package:eportal/page/login/view/login_page.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +40,7 @@ class _DataCenterPageState extends BasePageState<DataCenterPage>{
   @override
   Widget pageUI(BuildContext context) => Scaffold(
     body: PageView(
+      physics: const NeverScrollableScrollPhysics(),
       controller: _pageController,
       onPageChanged: (index) {
         setState(() {
@@ -52,6 +55,21 @@ class _DataCenterPageState extends BasePageState<DataCenterPage>{
         UserFragment()
       ],
 
+    ),
+    floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
+    floatingActionButton: FloatingActionButton(
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50),
+      ),
+      hoverColor: Colors.blue,
+      focusColor: Colors.red,
+      foregroundColor: Colors.black,
+      backgroundColor: Colors.green,
+      onPressed: () {
+        showBottomError("Tính năng đang phát triển");
+      },
+      child: const Icon(Icons.add,color: Colors.white),
     ),
     bottomNavigationBar: BottomNavigationBar(
       currentIndex: _currentIndex,
@@ -95,22 +113,223 @@ class _DataCenterPageState extends BasePageState<DataCenterPage>{
   );
 
   void _onTabTapped(int index) {
-    _pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 100),
-      curve: Curves.ease,
-    );
+    _pageController.jumpToPage(index);
   }
 }
 class HomeFragment extends StatelessWidget{
   const HomeFragment({super.key});
   @override
-  Widget build(BuildContext context)  => SingleChildScrollView(
-    child: SizedBox(
-      height: MediaQuery.of(context).size.height - MediaQuery.of(context).viewPadding.top,
-      width: MediaQuery.of(context).size.width,
-      child: const Center(
-        child: Text("HomeFragment"),
+  Widget build(BuildContext context)  => Container(
+    color: Colors.black12,
+    child: SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+              margin: const EdgeInsets.fromLTRB(10,5,10,5),
+              padding: const EdgeInsets.all(3),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.white12,
+              ),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: CachedNetworkImage(
+                      placeholder: (context, url) => const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => Image.asset('assets/images/ErrorImage.png'),
+                      fit: BoxFit.contain,
+                      imageUrl: 'https://via.placeholder.com/100',
+                      imageBuilder: (context, imageProvider) { // you can access to imageProvider
+                        return CircleAvatar( // or any widget that use imageProvider like (PhotoView)
+                          backgroundImage: imageProvider,
+                        );
+                      },
+                    )
+
+                  ),
+                  Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Chào trần hữu tùng",style: AppTextStyle.labelTitleBold.copyWith(fontSize: 12,)),
+                            Text("Chúc bạn buổi sáng tốt lành",style: AppTextStyle.labelTitle.copyWith(fontSize: 12,color: Colors.black26),),
+                          ],
+                        ),
+                      )
+                  )
+                ],
+              )
+          ),
+          Container(
+              margin: const EdgeInsets.fromLTRB(10,5,10,5),
+              padding: const EdgeInsets.all(3),
+              color: Colors.white12,
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: Icon(Icons.search),
+                  ),
+                  Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Bạn muốn tìm việc",style: AppTextStyle.labelTitleBold.copyWith(fontSize: 12,)),
+                            Text("Địa điểm - Công ty Vị tri ngành",style: AppTextStyle.labelTitle.copyWith(fontSize: 12,color: Colors.black26),),
+                          ],
+                        ),
+                      )
+                  ),
+                  const SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: Icon(Icons.map_outlined,color: Colors.green,),
+                  ),
+                ],
+              )
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(10,5,10,5),
+            child: SizedBox(
+              height: 80,
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (_,index) => Container(
+                      margin: const EdgeInsets.all(4.0),
+                      height: 50,
+                      width: 50,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.black12,
+                      ),
+                    child: Icon(index % 3 == 0 ? Icons.account_balance_wallet_rounded : index % 3 == 1 ? Icons.ac_unit_outlined : Icons.ad_units_rounded,color: Colors.orange,)
+                  )
+              ),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(10,5,10,5),
+            color: Colors.orange,
+            child: Container(
+                padding: const EdgeInsets.only(right: 10,left: 10,top: 10,bottom: 10),
+                child: 	CachedNetworkImage(
+                  placeholder: (context, url) => const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Image.asset('assets/images/ErrorImage.png'),
+                  fit: BoxFit.contain,
+                  imageUrl: 'https://down-vn.img.susercontent.com/file/vn-50009109-df0b36a3c21c48b987c7d7eb12dd129d',
+                  imageBuilder: (context, imageProvider) { // you can access to imageProvider
+                    return Image( // or any widget that use imageProvider like (PhotoView)
+                      image: imageProvider,
+                      height: 40,
+                      fit: BoxFit.fitWidth,
+                    );
+                  },
+                )
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(10,5,10,0),
+            padding: const EdgeInsets.all(3),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.white12,
+            ),
+            child: Text("Top công ty hàng đầu",style: AppTextStyle.labelTitleBold.copyWith(fontSize: 16,)),
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(10,0,10,5),
+            padding: const EdgeInsets.all(3),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.white12,
+            ),
+            child: RichText(
+              text: TextSpan(
+                style:AppTextStyle.labelTitleBold.copyWith(fontSize: 12,color: Colors.green),
+                children: const [
+                  TextSpan(text: "Tìm hiểu thêm"),
+                  WidgetSpan(
+                    child: Padding(
+                      padding: EdgeInsets.all(2.0),
+                      child: SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: Icon(Icons.info_outline,color: Colors.green,)
+                      ),
+                    ),
+                  ),
+                ]
+              )
+
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(10,0,10,5),
+            padding: const EdgeInsets.all(3),
+            child: GridView.builder(
+                itemCount: 20,
+                gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.65
+                ),
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (_,index)=>
+                Card(
+                  margin: const EdgeInsets.all(5),
+                  borderOnForeground: true,
+                  color: Colors.white,
+                  elevation: 1,
+                  child: GridTile(
+                    header: Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: Center(
+                          child: Text("$index")
+                      ),
+                    ),
+                    footer: Container(
+                        height: 30,
+                        margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                        child: ElevatedButton.icon(
+                          label: const Text('Theo dõi'),
+                          onPressed: () => {},
+                          icon: const Icon(Icons.add),
+                        )
+                    ),
+                    child: Center(
+                        child: Container(
+                            padding: const EdgeInsets.only(right: 10,left: 10,top: 10,bottom: 10),
+                            child: 	CachedNetworkImage(
+                              placeholder: (context, url) => const CircularProgressIndicator(),
+                              errorWidget: (context, url, error) => Image.asset('assets/images/ErrorImage.png'),
+                              fit: BoxFit.fill,
+                              imageUrl: 'https://down-vn.img.susercontent.com/file/vn-50009109-df0b36a3c21c48b987c7d7eb12dd129d',
+                              imageBuilder: (context, imageProvider) { // you can access to imageProvider
+                                return Image( // or any widget that use imageProvider like (PhotoView)
+                                  image: imageProvider,
+                                  fit: BoxFit.fill,
+                                );
+                              },
+                            )
+                        )
+                    ),
+                  ),
+
+                )
+            ),
+          )
+        ],
       ),
     ),
   );
@@ -130,12 +349,32 @@ class ProfileFragment extends StatelessWidget{
 class CommentFragment extends StatelessWidget{
   const CommentFragment({super.key});
   @override
-  @override
   Widget build(BuildContext context)  => SingleChildScrollView(
-    child: SizedBox(
-      height: MediaQuery.of(context).size.height - MediaQuery.of(context).viewPadding.top,
-      width: MediaQuery.of(context).size.width,
-      child: const Text("CommentFragment"),
+    child: Container(
+        color: Colors.blue,
+        child: Column(
+          children: List.generate(100, (index) => Container(
+            height: 100,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.black26,
+            ),
+            padding: const EdgeInsets.all(10),
+            margin:  const EdgeInsets.all(10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                    child: Text("Comment $index",style: AppTextStyle.labelTitleBold.copyWith(fontSize: 14,color: Colors.white),)
+                ),
+                Expanded(
+                    child: Text("Nội dung $index",style: AppTextStyle.labelTitle.copyWith(fontSize: 12,color: Colors.white),)
+                )
+              ],
+            ),
+          )),
+        )
     ),
   );
 }
@@ -143,10 +382,31 @@ class NotificationFragment extends StatelessWidget{
   const NotificationFragment({super.key});
   @override
   Widget build(BuildContext context)  => SingleChildScrollView(
-    child: SizedBox(
-      height: MediaQuery.of(context).size.height - MediaQuery.of(context).viewPadding.top,
-      width: MediaQuery.of(context).size.width,
-      child: const Text("NotificationFragment"),
+    child: Container(
+      color: Colors.red,
+      child: Column(
+        children: List.generate(100, (index) => Container(
+          height: 100,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.black26,
+          ),
+          padding: const EdgeInsets.all(10),
+          margin:  const EdgeInsets.all(10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                  child: Text("Tiêu đề $index",style: AppTextStyle.labelTitleBold.copyWith(fontSize: 14,color: Colors.white),)
+              ),
+              Expanded(
+                  child: Text("Nội dung $index",style: AppTextStyle.labelTitle.copyWith(fontSize: 12,color: Colors.white),)
+              )
+            ],
+          ),
+        )),
+      )
     ),
   );
 }
@@ -159,13 +419,21 @@ class UserFragment extends StatelessWidget{
           padding: const EdgeInsets.only(top: 10 , bottom: 10 ,left: 5,right: 30),
           color: Colors.white,
           height: 80,
-          child: const Row(
+          child: Row(
             children: [
-              CircleAvatar(
-                backgroundImage:NetworkImage('https://via.placeholder.com/100'),
-                backgroundColor: Colors.transparent,
-              ),
-              Expanded(
+              CachedNetworkImage(
+                placeholder: (context, url) => const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => Image.asset('assets/images/ErrorImage.png'),
+                fit: BoxFit.contain,
+                imageUrl: 'https://via.placeholder.com/100',
+                imageBuilder: (context, imageProvider) { // you can access to imageProvider
+                  return CircleAvatar( // or any widget that use imageProvider like (PhotoView)
+                    backgroundImage: imageProvider,
+                  );
+                },
+              )
+              ,
+              const Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(top: 10,bottom: 10,left: 10,right: 10),
                     child: Text("Trần Hữu Tùng"),
@@ -346,9 +614,21 @@ class UserFragment extends StatelessWidget{
                 ),
                 Container(
                   padding: const EdgeInsets.only(right: 10,left: 10,top: 10,bottom: 10),
-                  child: Image.network('https://down-vn.img.susercontent.com/file/vn-50009109-df0b36a3c21c48b987c7d7eb12dd129d',
-                    height: 80,
-                    fit: BoxFit.fitWidth,
+                  child: Container(
+                      padding: const EdgeInsets.only(right: 10,left: 10,top: 10,bottom: 10),
+                      child: 	CachedNetworkImage(
+                        placeholder: (context, url) => const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Image.asset('assets/images/ErrorImage.png'),
+                        fit: BoxFit.contain,
+                        imageUrl: 'https://down-vn.img.susercontent.com/file/vn-50009109-df0b36a3c21c48b987c7d7eb12dd129d',
+                        imageBuilder: (context, imageProvider) { // you can access to imageProvider
+                          return Image( // or any widget that use imageProvider like (PhotoView)
+                            image: imageProvider,
+                            height: 80,
+                            fit: BoxFit.fitWidth,
+                          );
+                        },
+                      )
                   ),
                 ),
                 Container(
@@ -369,8 +649,8 @@ class UserFragment extends StatelessWidget{
                   padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
                   child: GridView.count(
                     shrinkWrap: true,
-                    childAspectRatio: 2.2,
                     physics: const NeverScrollableScrollPhysics(),
+                    childAspectRatio: 2,
                     crossAxisCount: 2,
                     crossAxisSpacing: 5,
                     mainAxisSpacing: 5,
@@ -395,17 +675,17 @@ class UserFragment extends StatelessWidget{
                                       child: const Icon(Icons.shopping_bag,color: Colors.green,)
                                   ),
                                 ),
-                                const Expanded(
+                                Expanded(
                                     flex: 1,
                                     child: Row(
                                       children: [
                                         Expanded(
                                           flex: 2,
-                                          child: Text("Việc làm đang ứng tuyển",textAlign: TextAlign.start,style: AppTextStyle.labelTitleBold),
+                                          child: Text("Việc làm đang ứng tuyển",textAlign: TextAlign.start,style: AppTextStyle.labelTitleBold.copyWith(fontSize: 8)),
                                         ),
                                         Expanded(
                                           flex: 1,
-                                          child: Text("0",textAlign: TextAlign.end,style: AppTextStyle.labelTitleBold),
+                                          child: Text("0",textAlign: TextAlign.end,style: AppTextStyle.labelTitleBold.copyWith(fontSize: 8)),
                                         )
                                       ],
                                     )
@@ -417,10 +697,19 @@ class UserFragment extends StatelessWidget{
                 ),
                 Container(
                   padding: const EdgeInsets.only(right: 10,left: 10,top: 10,bottom: 10),
-                  child: Image.network('https://down-vn.img.susercontent.com/file/vn-50009109-df0b36a3c21c48b987c7d7eb12dd129d',
-                    height: 80,
-                    fit: BoxFit.fitWidth,
-                  ),
+                  child: 	CachedNetworkImage(
+                    placeholder: (context, url) => const CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Image.asset('assets/images/ErrorImage.png'),
+                    fit: BoxFit.contain,
+                    imageUrl: 'https://down-vn.img.susercontent.com/file/vn-50009109-df0b36a3c21c48b987c7d7eb12dd129d',
+                    imageBuilder: (context, imageProvider) { // you can access to imageProvider
+                      return Image( // or any widget that use imageProvider like (PhotoView)
+                        image: imageProvider,
+                        height: 80,
+                        fit: BoxFit.fitWidth,
+                      );
+                    },
+                  )
                 ),
                 const Divider(
                   color: Colors.black12,
@@ -442,13 +731,7 @@ class UserFragment extends StatelessWidget{
                 ),
                 Container(
                   padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
-                  child: GridView.count(
-                    shrinkWrap: true,
-                    childAspectRatio: 10,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: 1,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
+                  child: Column(
                     children: List.generate(5, (index) =>Container(
                         decoration: const BoxDecoration(
                           border: Border(bottom: BorderSide(
@@ -463,16 +746,15 @@ class UserFragment extends StatelessWidget{
                             Expanded(
                               flex: 1,
                               child: Container(
-
-                                  padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
+                                  margin: const EdgeInsets.only(right: 10,left: 10),
                                   child: const Text("Tính năng mới",textAlign: TextAlign.start,style: AppTextStyle.labelTitleBold)
                               ),
                             ),
-                            const FaIcon(FontAwesomeIcons.angleRight)
+                            const FaIcon(FontAwesomeIcons.angleRight,size: 20)
                           ],
                         )
                     )),
-                  ),
+                  )
                 ),
                 Container(
                   padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
@@ -488,38 +770,40 @@ class UserFragment extends StatelessWidget{
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
-                  child: GridView.count(
-                    shrinkWrap: true,
-                    childAspectRatio: 10,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: 1,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
-                    children: List.generate(5, (index) =>Container(
-                        decoration: const BoxDecoration(
-                          border: Border(bottom: BorderSide(
-                              color: Colors.black12,
-                              width: 0.5
-                          )),
-                        ),
-                        padding: const EdgeInsets.all(10),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.lock),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-
-                                  padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
-                                  child: const Text("Tính năng mới",textAlign: TextAlign.start,style: AppTextStyle.labelTitleBold)
+                    padding: const EdgeInsets.only(right: 10,left: 10,top: 5,bottom: 5),
+                    child: Column(
+                      children: List.generate(5, (index) =>Container(
+                          decoration: const BoxDecoration(
+                            border: Border(bottom: BorderSide(
+                                color: Colors.black12,
+                                width: 0.5
+                            )),
+                          ),
+                          padding: const EdgeInsets.all(10),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.lock),
+                              Expanded(
+                                flex: 1,
+                                child: Container(
+                                    margin: const EdgeInsets.only(right: 10,left: 10),
+                                    child: const Text("Tính năng mới",textAlign: TextAlign.start,style: AppTextStyle.labelTitleBold)
+                                ),
                               ),
-                            ),
-                            const FaIcon(FontAwesomeIcons.angleRight)
-                          ],
-                        )
-                    )),
-                  ),
+                              const FaIcon(FontAwesomeIcons.angleRight,size: 20)
+                            ],
+                          )
+                      )),
+                    )
+                ),
+                Container(
+                    height: 50,
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    margin: const EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      child: const Text('Đăng nhập'),
+                      onPressed: () => _signInAsync(context),
+                    )
                 ),
               ],
             )
@@ -527,4 +811,8 @@ class UserFragment extends StatelessWidget{
       )
     ],
   );
+
+  _signInAsync(context) {
+    Navigator.push(context,MaterialPageRoute(builder: (context) => const LoginPage()));
+  }
 }
