@@ -1,3 +1,4 @@
+import 'package:eportal/style/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -15,8 +16,12 @@ class BasePage extends StatefulWidget {
 class BasePageState<T extends StatefulWidget> extends State<T> {
   @override
   Widget build(BuildContext context){
-    return Scaffold(
-      body: pageUI(context),
+    return SafeArea(
+      bottom: false,
+      child: Scaffold(
+        backgroundColor: AppTheme.nearlyWhite,
+        body: pageUI(context),
+      ),
     );
   }
 

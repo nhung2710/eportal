@@ -2,25 +2,33 @@ import 'dart:io';
 
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/extension/string_extension.dart';
-import 'package:eportal/page/data_center/view/data_center_page.dart';
-import 'package:eportal/page/login/view/login_page.dart';
+import 'package:eportal/screen/dashboard/page/dashboard_page.dart';
+import 'package:eportal/style/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'api/adapter/base/base_adapter_api.dart';
-import 'api/model/request/commonnew/home_works_list_request.dart';
-import 'api/model/response/commonnew/home_works_list_response.dart';
 import 'application/global_application.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.white,
+    statusBarIconBrightness: Brightness.dark,
+    statusBarBrightness:Brightness.light,
+    systemNavigationBarColor: Colors.white,
+    systemNavigationBarDividerColor: Colors.transparent,
+    systemNavigationBarIconBrightness: Brightness.dark,
+  ));
   GlobalApplication().Preferences = await SharedPreferences.getInstance();
   GlobalApplication().UserName = GlobalApplication().Preferences.getString(ApplicationConstant.USERNAME).replaceWhenNullOrWhiteSpace();
   GlobalApplication().UserPassword = GlobalApplication().Preferences.getString(ApplicationConstant.USERPASSWORD).replaceWhenNullOrWhiteSpace();
-  runApp(const MyApp());
+
+  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown
+  ]).then((_) => runApp(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -30,14 +38,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Ứng dụng demo',
+      title: 'eportal',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
+        textTheme: AppTheme.textTheme,
+        platform: TargetPlatform.iOS,
 
       ),
-      home: const DataCenterPage()
+      home: const DashboardPage()
     );
   }
 }
