@@ -25,7 +25,6 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
     );
   }
 
-
   Widget pageUI(BuildContext context){
      return const Text("Categories List");
   }

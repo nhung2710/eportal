@@ -12,15 +12,15 @@ import 'package:flutter/material.dart';
 //
 
 
-class DashboardPage extends BasePage{
-  const DashboardPage({super.key});
+class DashboardBusinessPage extends BasePage{
+  const DashboardBusinessPage({super.key});
 
 
   @override
-  State<StatefulWidget> createState() => _DashboardPageState();
+  State<StatefulWidget> createState() => _DashboardBusinessPageState();
 }
 
-class _DashboardPageState extends BasePageState<DashboardPage>{
+class _DashboardBusinessPageState extends BasePageState<DashboardBusinessPage>{
   int _currentIndex = 0;
   final PageController _pageController = PageController(initialPage: 0);
 

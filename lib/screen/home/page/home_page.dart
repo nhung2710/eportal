@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:eportal/application/global_application.dart';
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
@@ -56,8 +57,8 @@ class _HomePageState extends BasePageState<HomePage>{
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Chào trần hữu tùng",style: AppTextStyle.labelTitleBold.copyWith(fontSize: 12,)),
-                            Text("Chúc bạn buổi sáng tốt lành",style: AppTextStyle.labelTitle.copyWith(fontSize: 12,color: Colors.black26),),
+                            Text(GlobalApplication().HelloUser(),style: AppTextStyle.labelTitleBold.copyWith(fontSize: 12,)),
+                            Text(GlobalApplication().HelloMessage(),style: AppTextStyle.labelTitle.copyWith(fontSize: 12,color: Colors.black26),),
                           ],
                         ),
                       )
