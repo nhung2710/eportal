@@ -30,7 +30,7 @@ class BaseAdapterApi {
       stringBuffer.write('</AuthHeader>');
       stringBuffer.write('</soap:Header>');
     }
-    stringBuffer.write('<soap:Body>${request.obj?.toXml()}</soap:Body>');
+    stringBuffer.write('<soap:Body>${request.obj.toXml()}</soap:Body>');
     stringBuffer.write('</soap:Envelope>');
     var responseSoapBody =
         await _callWebServiceAsync(request.getUri(), stringBuffer.toString());

@@ -51,7 +51,7 @@ class _ChatBotPageState extends BasePageState<ChatBotPage>{
                               color: Colors.white,
                             ),
                             margin: const EdgeInsets.only(top: 8),
-                            padding: EdgeInsets.only(top: 10,bottom: 10,left: 5, right: 5),
+                            padding: const EdgeInsets.only(top: 10,bottom: 10,left: 5, right: 5),
                             child: Column(
                               children: [
                                   Container(
@@ -97,7 +97,7 @@ class _ChatBotPageState extends BasePageState<ChatBotPage>{
                                 color: Colors.white,
                               ),
                               margin: const EdgeInsets.only(top: 8),
-                              padding: EdgeInsets.only(top: 10,bottom: 10,left: 5, right: 5),
+                              padding: const EdgeInsets.only(top: 10,bottom: 10,left: 5, right: 5),
                               child: Column(
                                 children: [
                                   Container(

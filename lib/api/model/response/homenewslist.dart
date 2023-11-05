@@ -31,8 +31,8 @@ class HomeNewsList {
 }
 
 class Data {
-  Null? categoryParentName;
-  Null? categoryName;
+  Null categoryParentName;
+  Null categoryName;
   int? total;
   int? newDay;
   int? newId;

@@ -6,6 +6,7 @@ import 'package:eportal/custom/custom_message_exception.dart';
 import 'package:eportal/extension/string_extension.dart';
 import 'package:eportal/screen/dashboard/page/dashboard_page.dart';
 import 'package:eportal/screen/dashboard_business/page/dashboard_business_page.dart';
+import 'package:eportal/screen/dashboard_worker/page/dashboard_worker_page.dart';
 import 'package:eportal/screen/forgot_password/page/forgot_password.dart';
 import 'package:eportal/screen/home/page/home_page.dart';
 import 'package:eportal/screen/register/page/register_page.dart';
@@ -141,7 +142,7 @@ class _LoginPageState extends BasePageState<LoginPage>{
           GlobalApplication().FullName = nameController.text;
           GlobalApplication().UserName = nameController.text;
           GlobalApplication().UserPassword = passwordController.text;
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const DashboardPage()));
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const DashboardWorkerPage()));
       });
     }
   }
