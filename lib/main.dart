@@ -22,8 +22,8 @@ Future<void> main() async {
     systemNavigationBarIconBrightness: Brightness.dark,
   ));
   GlobalApplication().Preferences = await SharedPreferences.getInstance();
-  GlobalApplication().UserName = GlobalApplication().Preferences.getString(ApplicationConstant.USERNAME).replaceWhenNullOrWhiteSpace();
-  GlobalApplication().UserPassword = GlobalApplication().Preferences.getString(ApplicationConstant.USERPASSWORD).replaceWhenNullOrWhiteSpace();
+  GlobalApplication().UserName = GlobalApplication().Preferences.getString(ApplicationConstant.USER_NAME).replaceWhenNullOrWhiteSpace();
+  GlobalApplication().UserPassword = GlobalApplication().Preferences.getString(ApplicationConstant.USER_PASSWORD).replaceWhenNullOrWhiteSpace();
 
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,

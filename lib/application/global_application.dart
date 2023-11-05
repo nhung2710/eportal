@@ -1,5 +1,6 @@
 import 'package:eportal/api/constant/application_api_constant.dart';
 import 'package:eportal/constant/application_constant.dart';
+import 'package:eportal/extension/string_extension.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GlobalApplication {
@@ -27,6 +28,13 @@ class GlobalApplication {
   String get FullName => _FullName;
 
   set UserPassword(String UserPassword) => _UserPassword = UserPassword;
+
+  String getStringOneTimePreferences(String key){
+    var value = _Preferences.getString(key).replaceWhenNullOrEmpty();
+    _Preferences.remove(key);
+    return value;
+  }
+
   String HelloMessage()
   {
     DateTime now = DateTime.now();
@@ -46,14 +54,22 @@ class GlobalApplication {
 
     return "Chúc bạn $message tốt lành";
   }
-
+  void SignIn(String username,String password){
+    FullName = username;
+    UserName = username;
+    UserPassword = password;
+  }
+  void SignOut(){
+    FullName = "bạn";
+    UserName = ApplicationConstant.EMPTY;
+    UserPassword = ApplicationConstant.EMPTY;
+  }
   String HelloUser()
   {
     return "Chào $_FullName";
   }
   GlobalApplication._internal() {
-    _FullName = "bạn";
-    _UserPassword = ApplicationConstant.EMPTY;
+    SignOut();
     //_UserName = "eportal";
     //_UserPassword = "CT03-M14IC-PO22SE-0SOFT4-A0P1J";
   }

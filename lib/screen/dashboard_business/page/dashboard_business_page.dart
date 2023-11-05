@@ -1,9 +1,15 @@
+import 'package:eportal/screen/candidate/page/candidate_page.dart';
+import 'package:eportal/screen/candidate_filter/page/candidate_filter_page.dart';
+import 'package:eportal/screen/chat_bot/page/chat_bot_page.dart';
+import 'package:eportal/screen/employer_profile/page/employer_profile_page.dart';
 import 'package:eportal/screen/home/page/home_page.dart';
 import 'package:eportal/screen/media/page/media_page.dart';
 import 'package:eportal/screen/news/page/news_page.dart';
 import 'package:eportal/screen/question_and_answer/page/question_and_answer_page.dart';
 import 'package:eportal/screen/setting/page/setting_page.dart';
+import 'package:eportal/screen/setting_business/page/setting_business_page.dart';
 import 'package:eportal/widget/base/base_page.dart';
+import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
 import 'package:flutter/material.dart';
 
 //
@@ -45,11 +51,10 @@ class _DashboardBusinessPageState extends BasePageState<DashboardBusinessPage>{
         });
       },
       children: const <Widget>[
-        HomePage(),
-        NewsPage(),
-        QuestionAndAnswerPage(),
-        MediaPage(),
-        SettingPage(),
+        EmployerProfilePage(),
+        CandidatePage(),
+        CandidateFilterPage(),
+        SettingBusinessPage(),
       ],
 
     ),
@@ -68,6 +73,23 @@ class _DashboardBusinessPageState extends BasePageState<DashboardBusinessPage>{
       },
       child: const Icon(Icons.add,color: Colors.white),
     ),*/
+    /*floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
+    floatingActionButton: ExpandableFab(
+        distance: 120,
+        children: [
+          ActionButton(
+            icon: const Icon(Icons.chat, color: Colors.white,),
+            onPressed: () {
+
+              startLoading();
+              Future.delayed(const Duration(seconds: 5))
+                  .then((value){
+                stopLoading();
+                Navigator.push(context,MaterialPageRoute(builder: (context) => const ChatBotPage()));
+              });
+            },
+          ),
+        ]),*/
     bottomNavigationBar: BottomNavigationBar(
       currentIndex: _currentIndex,
       onTap: _onTabTapped,
@@ -80,24 +102,19 @@ class _DashboardBusinessPageState extends BasePageState<DashboardBusinessPage>{
       unselectedFontSize: 8,
       items: const [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home,color: Colors.blueAccent,),
-          label: "Trang chủ",
-          activeIcon: Icon(Icons.home,color: Colors.red,),
+          icon: Icon(Icons.account_balance_wallet_rounded,color: Colors.blueAccent,),
+          label: "Hồ sơ",
+          activeIcon: Icon(Icons.account_balance_wallet_rounded,color: Colors.red,),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.newspaper,color: Colors.blueAccent,),
-          label: "Tin tức",
-          activeIcon: Icon(Icons.newspaper,color: Colors.red,),
+          icon: Icon(Icons.account_circle,color: Colors.blueAccent,),
+          label: "Ứng viên",
+          activeIcon: Icon(Icons.account_circle,color: Colors.red,),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.comment,color: Colors.blueAccent,),
-          label: "Hỏi đáp",
-          activeIcon: Icon(Icons.comment,color: Colors.red,),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.perm_media,color: Colors.blueAccent,),
-          label: "Đa phương tiện",
-          activeIcon: Icon(Icons.perm_media,color: Colors.red,),
+          icon: Icon(Icons.manage_search,color: Colors.blueAccent,),
+          label: "Tìm kiếm",
+          activeIcon: Icon(Icons.manage_search,color: Colors.red,),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.settings,color: Colors.blueAccent,),

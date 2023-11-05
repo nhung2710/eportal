@@ -20,11 +20,17 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
       bottom: false,
       child: Scaffold(
         backgroundColor: AppTheme.nearlyWhite,
-        body: pageUI(context),
+        body: Container(
+          color: currentBackgroundColor(),
+          height: double.infinity,
+          padding: EdgeInsets.all(currentPadding()),
+          child: pageUI(context),
+        )
       ),
     );
   }
-
+  double currentPadding() => 5;
+  Color currentBackgroundColor() => Colors.black12;
   Widget pageUI(BuildContext context){
      return const Text("Categories List");
   }
@@ -69,13 +75,33 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
     );
   }
 
-  Future<void> showCenterError(String error) async {
+  Future<bool?> showCenterError(String error) async {
     hiddenKeyboard();
-    Alert(context: context,
+    return Alert(context: context,
         type: AlertType.error,
-
         title: "Thông báo",
         desc: error,
+        buttons: [
+          DialogButton(
+            onPressed: () => Navigator.pop(context),
+            gradient: const LinearGradient(colors: [
+              Color.fromRGBO(116, 116, 191, 1.0),
+              Color.fromRGBO(52, 138, 199, 1.0)
+            ]),
+            child: const Text(
+              "Tôi đã biết",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          )
+        ]
+    ).show();
+  }
+  Future<bool?> showCenterMessage(String message) async {
+    hiddenKeyboard();
+    return Alert(context: context,
+        type: AlertType.info,
+        title: "Thông báo",
+        desc: message,
         buttons: [
           DialogButton(
             onPressed: () => Navigator.pop(context),

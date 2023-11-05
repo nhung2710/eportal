@@ -1,29 +1,28 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eportal/constant/application_constant.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/image/image_loading.dart';
 import 'package:flutter/material.dart';
-
 //
-// Created by BlackRose on 11/3/2023.
+// Created by BlackRose on 05/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class MediaPage extends BasePage{
-  const MediaPage({super.key});
+
+class CandidateSavePage extends BasePage{
+  const CandidateSavePage({super.key});
 
 
   @override
-  State<StatefulWidget> createState() => _MediaPageState();
+  State<StatefulWidget> createState() => _CandidateSavePageState();
 }
 
-class _MediaPageState extends BasePageState<MediaPage>{
+class _CandidateSavePageState extends BasePageState<CandidateSavePage>{
   @override
   Widget pageUI(BuildContext context) => SingleChildScrollView(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
+          margin: const EdgeInsets.only(top: 10),
           child: GridView.builder(
             shrinkWrap: true,
             itemCount: 50,
@@ -56,5 +55,6 @@ class _MediaPageState extends BasePageState<MediaPage>{
       ],
     ),
   );
+
 
 }

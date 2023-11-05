@@ -1,8 +1,10 @@
 class ApplicationConstant {
   ApplicationConstant._internal();
   static const String EMPTY = "";
-  static const String USERNAME = "USERNAME";
-  static const String USERPASSWORD = "USERPASSWORD";
+  static const String USER_NAME = "USER_NAME";
+  static const String USER_PASSWORD = "USER_PASSWORD";
+  static const String REGISTER_USER_NAME = "REGISTER_USER_NAME";
+  static const String REGISTER_USER_PASSWORD = "REGISTER_USER_PASSWORD";
   static const String URL_NEWS = "https://i1-kinhdoanh.vnecdn.net/2023/11/02/fed1-2023-11-02t161657-025-169-7434-6504-1698917034.jpg?w=680&h=0&q=100&dpr=1&fit=crop&s=GNQB8GFL2zQyoJOZjePMrQ";
   static final List<String> URL_NEW = [
     'https://static-images.vnncdn.net/files/publish/2023/11/3/nguoi-trung-dau-gia-bien-so-51k-88888-hon-15-ty-dong-dang-nop-tien-264.jpg?width=400',
