@@ -20,6 +20,7 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
       bottom: false,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
+        appBar: GetAppBar(),
         body: Container(
           color: currentBackgroundColor(),
           height: double.infinity,
@@ -117,4 +118,6 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
         ]
     ).show();
   }
+  PreferredSizeWidget? GetAppBar() => null;
 }
+
