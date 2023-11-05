@@ -1,5 +1,6 @@
 import 'package:eportal/screen/candidate/page/candidate_page.dart';
 import 'package:eportal/screen/candidate_filter/page/candidate_filter_page.dart';
+import 'package:eportal/screen/curriculum_vitae_worker/page/curriculum_vitae_worker_page.dart';
 import 'package:eportal/screen/employer_profile/page/employer_profile_page.dart';
 import 'package:eportal/screen/setting_business/page/setting_business_page.dart';
 import 'package:eportal/widget/base/base_page.dart';
@@ -42,7 +43,7 @@ class _DashboardWorkerPageState extends BasePageState<DashboardWorkerPage>{
         });
       },
       children: const <Widget>[
-        EmployerProfilePage(),
+        CurriculumVitaeWorkerPage(),
         CandidatePage(),
         CandidateFilterPage(),
         CandidateFilterPage(),

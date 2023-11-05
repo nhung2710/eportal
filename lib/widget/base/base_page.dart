@@ -19,7 +19,7 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
     return SafeArea(
       bottom: false,
       child: Scaffold(
-        backgroundColor: AppTheme.nearlyWhite,
+        resizeToAvoidBottomInset: false,
         body: Container(
           color: currentBackgroundColor(),
           height: double.infinity,
