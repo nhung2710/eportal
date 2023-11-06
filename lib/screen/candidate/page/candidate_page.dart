@@ -14,44 +14,48 @@ import 'package:flutter/material.dart';
 
 class CandidatePage extends BasePage{
   const CandidatePage({super.key});
-
-
   @override
   State<StatefulWidget> createState() => _CandidatePageState();
 }
 
 class _CandidatePageState extends BasePageState<CandidatePage>{
   @override
+  bool isHasAppBar(BuildContext context)  => false;
+  @override
+  double currentPadding(BuildContext context) => 0;
+
+  @override
   Widget pageUI(BuildContext context) => DefaultTabController(
     length: 3,
-    child: Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        toolbarHeight: 0,
-        bottom: const TabBar(
-          tabs: [
-            Tab(
-                icon: Icon(Icons.remove_red_eye_outlined,size: 20,),
-                text: "Xem",
-            ),
-            Tab(
-                icon: Icon(Icons.save_alt_sharp,size: 20,),
-              text: "Lưu",
-            ),
-            Tab(
+    child: Column(
+      children: [
+        Container(
+          color: Colors.blue,
+          child: const TabBar(
+            indicatorColor: Colors.white,
+            tabs: [
+              Tab(
+                icon: Icon(Icons.remove_red_eye_sharp,size: 20,),
+              ),
+              Tab(
+                icon: Icon(Icons.save,size: 20,),
+              ),
+              Tab(
                 icon: Icon(Icons.block,size: 20,),
-                text: "Chặn",
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
-      ),
-      body: const TabBarView(
-        children: [
-          CandidateViewPage(),
-          CandidateSavePage(),
-          CandidateBlockPage(),
-        ],
-      ),
+        const Expanded(
+            child: TabBarView(
+              children: [
+                CandidateViewPage(),
+                CandidateSavePage(),
+                CandidateBlockPage(),
+              ],
+            ),
+        )
+      ],
     ),
   );
 

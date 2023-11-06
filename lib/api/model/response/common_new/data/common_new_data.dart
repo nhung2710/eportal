@@ -1,33 +1,10 @@
-class HomeWorksListResponse {
-  List<Data>? data;
-  int? status;
-  String? message;
+import 'package:flutter/material.dart';
 
-  HomeWorksListResponse({this.data, this.status, this.message});
-
-  HomeWorksListResponse.fromJson(Map<String, dynamic> json) {
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
-      });
-    }
-    status = json['status'];
-    message = json['message'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    data['status'] = status;
-    data['message'] = message;
-    return data;
-  }
-}
-
-class Data {
+//
+// Created by BlackRose on 11/6/2023.
+// Copyright (c) 2023 Hilo All rights reserved.
+//
+class CommonNewData {
   String? parentID;
   int? gtvl;
   int? id;
@@ -87,67 +64,67 @@ class Data {
   String? updatedUser;
   int? portalID;
 
-  Data(
+  CommonNewData(
       {this.parentID,
-      this.gtvl,
-      this.id,
-      this.ages,
-      this.workTime,
-      this.ungVienID,
-      this.isInvite,
-      this.tinhTP,
-      this.idSend,
-      this.tuyenDungID,
-      this.doanhNghiepID,
-      this.businessVn,
-      this.jobPlace,
-      this.ketQuaPhongVan,
-      this.levelDesiredID,
-      this.isFlag,
-      this.isView,
-      this.isSend,
-      this.total,
-      this.workID,
-      this.businessID,
-      this.title,
-      this.salaryID,
-      this.quantity,
-      this.experienceID,
-      this.gender,
-      this.levelID,
-      this.quanHuyen,
-      this.typeOfID,
-      this.careerID,
-      this.description,
-      this.requirement,
-      this.benefit,
-      this.requirementsProfile,
-      this.expiredDate,
-      this.submissionSend,
-      this.startDate,
-      this.endDate,
-      this.contactUser,
-      this.contactAddress,
-      this.contactMobile,
-      this.contactEmail,
-      this.contactDes,
-      this.isHot,
-      this.isGhim,
-      this.isFast,
-      this.isUrgent,
-      this.isApproval,
-      this.approvalUser,
-      this.approvalDate,
-      this.isDelete,
-      this.deletedUser,
-      this.deletedDate,
-      this.createdDate,
-      this.createdUser,
-      this.updatedDate,
-      this.updatedUser,
-      this.portalID});
+        this.gtvl,
+        this.id,
+        this.ages,
+        this.workTime,
+        this.ungVienID,
+        this.isInvite,
+        this.tinhTP,
+        this.idSend,
+        this.tuyenDungID,
+        this.doanhNghiepID,
+        this.businessVn,
+        this.jobPlace,
+        this.ketQuaPhongVan,
+        this.levelDesiredID,
+        this.isFlag,
+        this.isView,
+        this.isSend,
+        this.total,
+        this.workID,
+        this.businessID,
+        this.title,
+        this.salaryID,
+        this.quantity,
+        this.experienceID,
+        this.gender,
+        this.levelID,
+        this.quanHuyen,
+        this.typeOfID,
+        this.careerID,
+        this.description,
+        this.requirement,
+        this.benefit,
+        this.requirementsProfile,
+        this.expiredDate,
+        this.submissionSend,
+        this.startDate,
+        this.endDate,
+        this.contactUser,
+        this.contactAddress,
+        this.contactMobile,
+        this.contactEmail,
+        this.contactDes,
+        this.isHot,
+        this.isGhim,
+        this.isFast,
+        this.isUrgent,
+        this.isApproval,
+        this.approvalUser,
+        this.approvalDate,
+        this.isDelete,
+        this.deletedUser,
+        this.deletedDate,
+        this.createdDate,
+        this.createdUser,
+        this.updatedDate,
+        this.updatedUser,
+        this.portalID});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  CommonNewData.fromJson(Map<String, dynamic> json) {
     parentID = json['parent_ID'];
     gtvl = json['gtvl'];
     id = json['id'];

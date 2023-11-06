@@ -23,108 +23,50 @@ class SettingBusinessPage extends BasePage{
 
 class _SettingBusinessPageState extends BasePageState<SettingBusinessPage>{
   @override
+  bool isHasAppBar(BuildContext context) => false;
+  @override
   Widget pageUI(BuildContext context) =>Column(
     children: [
-      GlobalApplication().IsLogin ? Container(
-          padding: const EdgeInsets.only(left: 5),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            color: Colors.white,
-          ),
-          height: 60,
-          child: Row(
-            children: [
-              ImageLoading(
-                imageUrl: 'https://via.placeholder.com/100',
-                imageBuilder: (context, imageProvider) { // you can access to imageProvider
-                  return CircleAvatar( // or any widget that use imageProvider like (PhotoView)
-                    backgroundImage: imageProvider,
-                  );
-                },
-              )
-              ,
-              Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 10,bottom: 10,left: 10,right: 10),
-                    child: Text(GlobalApplication().HelloUser()),
-                  )
-              )
-            ],
-          )
-      ) : Container(
-          height: 50,
-          color: Colors.white,
-          width: double.infinity,
-          child: ElevatedButton(
-            child: const Text('Đăng nhập'),
-            onPressed: () => _signInAsync(context),
-          )
-      ),
       Expanded(
-        child: Container(
-          margin: const EdgeInsets.only(top: 5),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  child: GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    childAspectRatio: 4,
-                    crossAxisCount: 1,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
-                    children: ApplicationConstant.SETTING_MENU.map((item) {
-                      return Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GridView.count(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                childAspectRatio: 4,
+                crossAxisCount: 1,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 5,
+                children: ApplicationConstant.SETTING_MENU.map((item) {
+                  return Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.account_circle_outlined,color: Colors.grey,),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                                margin: const EdgeInsets.only(right: 10,left: 10),
+                                child: Text("$item",textAlign: TextAlign.start,style: AppTextStyle.labelTitle.copyWith(color:Colors.blue))
+                            ),
                           ),
-                          padding: const EdgeInsets.all(10),
-                          child: Row(
-                            children: [
-                              const Icon(Icons.account_circle_outlined,color: Colors.grey,),
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                    margin: const EdgeInsets.only(right: 10,left: 10),
-                                    child: Text("$item",textAlign: TextAlign.start,style: AppTextStyle.labelTitle.copyWith(color:Colors.blue))
-                                ),
-                              ),
-                              const FaIcon(FontAwesomeIcons.angleRight,size: 20)
-                            ],
-                          )
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ],
-            ),
+                          const FaIcon(FontAwesomeIcons.angleRight,size: 20)
+                        ],
+                      )
+                  );
+                }).toList(),
+              ),
+            ],
           ),
         ),
       ),
-      GlobalApplication().IsLogin ? Container(
-          height: 50,
-          width: double.infinity,
-          margin: const EdgeInsets.only(top: 10,bottom: 10),
-          child: ElevatedButton(
-            child: const Text('Đăng xuất'),
-            onPressed: () => _signOutAsync(context),
-          )
-      ) : Container()
     ],
   );
-
-  _signInAsync(BuildContext context) {
-    Navigator.push(context,MaterialPageRoute(builder: (context) => const LoginPage()));
-
-  }
-
-  _signOutAsync(BuildContext context) {
-    GlobalApplication().SignOut();
-    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const DashboardPage()));
-  }
 
 }

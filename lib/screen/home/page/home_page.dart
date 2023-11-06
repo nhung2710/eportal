@@ -21,48 +21,13 @@ class HomePage extends BasePage{
 
 class _HomePageState extends BasePageState<HomePage>{
   @override
+  bool isHasAppBar(BuildContext context) => false;
+  @override
   Widget pageUI(BuildContext context) => SingleChildScrollView(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-            padding: const EdgeInsets.only(left: 5),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.white,
-            ),
-            child: Row(
-              children: [
-                SizedBox(
-                    width: 40,
-                    height: 40,
-                    child: ImageLoading(
-                        imageUrl: 'https://via.placeholder.com/100',
-                        imageBuilder: (context, imageProvider) { // you can access to imageProvider
-                          return CircleAvatar( // or any widget that use imageProvider like (PhotoView)
-                            backgroundImage: imageProvider,
-                          );
-                        }
-                    )
-                ),
-                Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(GlobalApplication().HelloUser(),style: AppTextStyle.labelTitleBold.copyWith(fontSize: 12,)),
-                          Text(GlobalApplication().HelloMessage(),style: AppTextStyle.labelTitle.copyWith(fontSize: 12,color: Colors.black26),),
-                        ],
-                      ),
-                    )
-                )
-              ],
-            )
-        ),
-        Container(
-            margin: const EdgeInsets.only(top: 10),
             padding: const EdgeInsets.only(left: 5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
@@ -97,7 +62,7 @@ class _HomePageState extends BasePageState<HomePage>{
             )
         ),
         Container(
-          margin: const EdgeInsets.only(top: 10),
+          margin: const EdgeInsets.only(top: 5),
           child: SizedBox(
             height: 50,
             child: ListView.builder(
@@ -116,7 +81,7 @@ class _HomePageState extends BasePageState<HomePage>{
           ),
         ),
         Container(
-            margin: const EdgeInsets.only(top: 10),
+            margin: const EdgeInsets.only(top: 5),
             padding: const EdgeInsets.only(left: 5,top: 10,bottom: 10),
             width: double.infinity,
             decoration: BoxDecoration(
@@ -134,7 +99,7 @@ class _HomePageState extends BasePageState<HomePage>{
             )
         ),
         Container(
-          margin: const EdgeInsets.only(top: 10),
+          margin: const EdgeInsets.only(top: 5),
           child: CarouselSlider(
             options: CarouselOptions(
               height: 200.0,
@@ -171,7 +136,7 @@ class _HomePageState extends BasePageState<HomePage>{
           ),
         ),
         Container(
-            margin: const EdgeInsets.only(top: 10),
+            margin: const EdgeInsets.only(top: 5),
             padding: const EdgeInsets.only(left: 5,top: 10,bottom: 10),
             width: double.infinity,
             decoration: BoxDecoration(
@@ -189,7 +154,7 @@ class _HomePageState extends BasePageState<HomePage>{
             )
         ),
         Container(
-          margin: const EdgeInsets.only(top: 10),
+          margin: const EdgeInsets.only(top: 5),
           child: CarouselSlider(
             options: CarouselOptions(
               height: 200.0,
@@ -226,7 +191,7 @@ class _HomePageState extends BasePageState<HomePage>{
           ),
         ),
         Container(
-            margin: const EdgeInsets.only(top: 10),
+            margin: const EdgeInsets.only(top: 5),
             padding: const EdgeInsets.only(left: 5,top: 10,bottom: 10),
             width: double.infinity,
             decoration: BoxDecoration(
@@ -244,7 +209,7 @@ class _HomePageState extends BasePageState<HomePage>{
             )
         ),
         Container(
-          margin: const EdgeInsets.only(top: 10),
+          margin: const EdgeInsets.only(top: 5),
           child: CarouselSlider(
             options: CarouselOptions(
               height: 200.0,
@@ -281,7 +246,7 @@ class _HomePageState extends BasePageState<HomePage>{
           ),
         ),
         Container(
-            margin: const EdgeInsets.only(top: 10),
+            margin: const EdgeInsets.only(top: 5),
             padding: const EdgeInsets.only(left: 5,top: 10,bottom: 10),
             width: double.infinity,
             decoration: BoxDecoration(
@@ -299,7 +264,7 @@ class _HomePageState extends BasePageState<HomePage>{
             )
         ),
         Container(
-          margin: const EdgeInsets.only(top: 10),
+          margin: const EdgeInsets.only(top: 5),
           child: CarouselSlider(
             options: CarouselOptions(
               height: 200.0,
@@ -355,7 +320,7 @@ class _HomePageState extends BasePageState<HomePage>{
             )
         ),
         Container(
-          margin: const EdgeInsets.only(top: 10),
+          margin: const EdgeInsets.only(top: 5),
           child: CarouselSlider(
             options: CarouselOptions(
               height: 200.0,

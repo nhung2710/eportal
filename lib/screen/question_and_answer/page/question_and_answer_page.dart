@@ -23,6 +23,8 @@ class QuestionAndAnswerPage extends BasePage{
 class _QuestionAndAnswerPageState extends BasePageState<QuestionAndAnswerPage>{
   TextEditingController textEditingController = TextEditingController();
   @override
+  bool isHasAppBar(BuildContext context) => false;
+  @override
   Widget pageUI(BuildContext context) => SingleChildScrollView(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,

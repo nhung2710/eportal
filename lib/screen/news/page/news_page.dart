@@ -20,6 +20,8 @@ class NewsPage extends BasePage{
 
 class _NewsPageState extends BasePageState<NewsPage>{
   @override
+  bool isHasAppBar(BuildContext context) => false;
+  @override
   Widget pageUI(BuildContext context) => SingleChildScrollView(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,

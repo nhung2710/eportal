@@ -1,9 +1,14 @@
+import 'package:eportal/application/global_application.dart';
 import 'package:eportal/screen/candidate/page/candidate_page.dart';
 import 'package:eportal/screen/candidate_filter/page/candidate_filter_page.dart';
+import 'package:eportal/screen/chat_bot/page/chat_bot_page.dart';
 import 'package:eportal/screen/curriculum_vitae_worker/page/curriculum_vitae_worker_page.dart';
 import 'package:eportal/screen/employer_profile/page/employer_profile_page.dart';
 import 'package:eportal/screen/setting_business/page/setting_business_page.dart';
+import 'package:eportal/widget/app_bar/default_app_bar.dart';
 import 'package:eportal/widget/base/base_page.dart';
+import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
+import 'package:eportal/widget/image/image_loading.dart';
 import 'package:flutter/material.dart';
 
 //
@@ -32,6 +37,47 @@ class _DashboardWorkerPageState extends BasePageState<DashboardWorkerPage>{
     // TODO: implement initState
     super.initState();
   }
+
+  @override
+  PreferredSizeWidget? getAppBar(BuildContext context) => DefaultAppBar.get(context);
+  @override
+  Widget? getBottomNavigationBar(BuildContext context) => BottomNavigationBar(
+    currentIndex: _currentIndex,
+    onTap: _onTabTapped,
+    backgroundColor: Colors.white,
+    type: BottomNavigationBarType.fixed,
+    iconSize: 24,
+    fixedColor: Colors.red,
+    unselectedItemColor: Colors.blueAccent,
+    selectedFontSize: 8,
+    unselectedFontSize: 8,
+    items: const [
+      BottomNavigationBarItem(
+        icon: Icon(Icons.account_balance_wallet_rounded,color: Colors.blueAccent,),
+        label: "Hồ sơ",
+        activeIcon: Icon(Icons.account_balance_wallet_rounded,color: Colors.red,),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.account_circle,color: Colors.blueAccent,),
+        label: "Ứng viên",
+        activeIcon: Icon(Icons.account_circle,color: Colors.red,),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.manage_search,color: Colors.blueAccent,),
+        label: "Tìm kiếm",
+        activeIcon: Icon(Icons.manage_search,color: Colors.red,),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.settings,color: Colors.blueAccent,),
+        label: "Cài đặt",
+        activeIcon: Icon(Icons.settings,color: Colors.red,),
+      ),
+    ],
+
+  );
+
+  @override
+  double currentPadding(BuildContext context) => 0;
   @override
   Widget pageUI(BuildContext context) => Scaffold(
     body: PageView(
@@ -46,79 +92,7 @@ class _DashboardWorkerPageState extends BasePageState<DashboardWorkerPage>{
         CurriculumVitaeWorkerPage(),
         CandidatePage(),
         CandidateFilterPage(),
-        CandidateFilterPage(),
         SettingBusinessPage(),
-      ],
-
-    ),
-    /*floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
-    floatingActionButton: FloatingActionButton(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(50),
-      ),
-      hoverColor: Colors.blue,
-      focusColor: Colors.red,
-      foregroundColor: Colors.black,
-      backgroundColor: Colors.green,
-      onPressed: () {
-        showBottomError("Tính năng đang phát triển");
-      },
-      child: const Icon(Icons.add,color: Colors.white),
-    ),*/
-    /*floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
-    floatingActionButton: ExpandableFab(
-        distance: 120,
-        children: [
-          ActionButton(
-            icon: const Icon(Icons.chat, color: Colors.white,),
-            onPressed: () {
-
-              startLoading();
-              Future.delayed(const Duration(seconds: 5))
-                  .then((value){
-                stopLoading();
-                Navigator.push(context,MaterialPageRoute(builder: (context) => const ChatBotPage()));
-              });
-            },
-          ),
-        ]),*/
-    bottomNavigationBar: BottomNavigationBar(
-      currentIndex: _currentIndex,
-      onTap: _onTabTapped,
-      backgroundColor: Colors.white,
-      type: BottomNavigationBarType.fixed,
-      iconSize: 24,
-      fixedColor: Colors.red,
-      unselectedItemColor: Colors.blueAccent,
-      selectedFontSize: 8,
-      unselectedFontSize: 8,
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.account_balance_wallet_rounded,color: Colors.blueAccent,),
-          label: "Hồ sơ",
-          activeIcon: Icon(Icons.account_balance_wallet_rounded,color: Colors.red,),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.history,color: Colors.blueAccent,),
-          label: "Ứng tuyển",
-          activeIcon: Icon(Icons.history,color: Colors.red,),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.manage_search,color: Colors.blueAccent,),
-          label: "Tìm kiếm",
-          activeIcon: Icon(Icons.manage_search,color: Colors.red,),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.app_registration,color: Colors.blueAccent,),
-          label: "Đăng ký",
-          activeIcon: Icon(Icons.app_registration,color: Colors.red,),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.settings,color: Colors.blueAccent,),
-          label: "Cài đặt",
-          activeIcon: Icon(Icons.settings,color: Colors.red,),
-        ),
       ],
 
     ),

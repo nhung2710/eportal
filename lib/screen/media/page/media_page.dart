@@ -19,6 +19,8 @@ class MediaPage extends BasePage{
 
 class _MediaPageState extends BasePageState<MediaPage>{
   @override
+  bool isHasAppBar(BuildContext context) => false;
+  @override
   Widget pageUI(BuildContext context) => SingleChildScrollView(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,

@@ -18,6 +18,8 @@ class CandidateBlockPage extends BasePage{
 
 class _CandidateBlockPageState extends BasePageState<CandidateBlockPage>{
   @override
+  bool isHasAppBar(BuildContext context)  => false;
+  @override
   Widget pageUI(BuildContext context) => SingleChildScrollView(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,

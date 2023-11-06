@@ -14,24 +14,29 @@ class BasePage extends StatefulWidget {
 }
 
 class BasePageState<T extends StatefulWidget> extends State<T> {
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context){
-    return SafeArea(
-      bottom: false,
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: GetAppBar(),
-        body: Container(
-          color: currentBackgroundColor(),
-          height: double.infinity,
-          padding: EdgeInsets.all(currentPadding()),
-          child: pageUI(context),
-        )
+    return Form(
+      key: formKey,
+      child: SafeArea(
+        bottom: false,
+        child: Scaffold(
+          resizeToAvoidBottomInset: true,
+          appBar: getAppBar(context),
+          body: Container(
+            color: currentBackgroundColor(context),
+            height: double.infinity,
+            padding: EdgeInsets.all(currentPadding(context)),
+            child: pageUI(context),
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
+          floatingActionButton: getFloatingActionButton(context),
+          bottomNavigationBar: getBottomNavigationBar(context),
+        ),
       ),
     );
   }
-  double currentPadding() => 5;
-  Color currentBackgroundColor() => Colors.black12;
   Widget pageUI(BuildContext context){
      return const Text("Categories List");
   }
@@ -118,6 +123,32 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
         ]
     ).show();
   }
-  PreferredSizeWidget? GetAppBar() => null;
+  PreferredSizeWidget? getAppBar(BuildContext context) => isHasAppBar(context) ?  AppBar(
+    title: Text(getPageTitle(context)),
+    automaticallyImplyLeading: getAutomaticallyImplyLeading(context),
+  ) : null;
+  Future<void> loadDataDemo(){
+    startLoading();
+    return Future.delayed(const Duration(milliseconds: 200))
+      .then((value){
+      stopLoading();
+      return value;
+    });
+  }
+
+  bool getAutomaticallyImplyLeading(BuildContext context) => true;
+  bool isHasAppBar(BuildContext context) => true;
+  String getPageTitle(BuildContext context) => "Thông báo";
+
+  Widget? getFloatingActionButton(BuildContext context)  => null;
+
+  Widget? getBottomNavigationBar(BuildContext context) => null;
+  double currentPadding(BuildContext context) => 5;
+  Color currentBackgroundColor(BuildContext context) => Colors.black12;
+  bool isValidForm(BuildContext context) => formKey.currentState!.validate();
+  bool isValid() => isValidForm(context);
+  void backPage() => Navigator.pop(context);
+  void nextPage(WidgetBuilder builder)=> Navigator.push(context,MaterialPageRoute(builder: builder));
+  void nextPageWithoutBack(WidgetBuilder builder)=> Navigator.pushReplacement(context,MaterialPageRoute(builder: builder));
 }
 

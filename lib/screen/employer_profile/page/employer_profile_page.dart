@@ -20,69 +20,84 @@ class EmployerProfilePage extends BasePage{
 }
 
 class _EmployerProfilePageState extends BasePageState<EmployerProfilePage>{
+
   @override
-  Widget pageUI(BuildContext context) => Scaffold(
-    body: SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-              padding: const EdgeInsets.only(left: 5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: Colors.white,
-              ),
-              child: Row(
-                children: [
-                  SizedBox(
-                      width: 40,
-                      height: 40,
-                      child: ImageLoading(
-                          imageUrl: 'https://via.placeholder.com/100',
-                          imageBuilder: (context, imageProvider) { // you can access to imageProvider
-                            return CircleAvatar( // or any widget that use imageProvider like (PhotoView)
-                              backgroundImage: imageProvider,
-                            );
-                          }
-                      )
-                  ),
-                  Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(GlobalApplication().HelloUser(),style: AppTextStyle.labelTitleBold.copyWith(fontSize: 12,)),
-                            Text(GlobalApplication().HelloMessage(),style: AppTextStyle.labelTitle.copyWith(fontSize: 12,color: Colors.black26),),
-                          ],
-                        ),
-                      )
-                  )
-                ],
-              )
-          ),
-          Container(
-              margin: const EdgeInsets.only(top: 10),
-              padding: const EdgeInsets.only(left: 5,top: 10,bottom: 10),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: Colors.white,
-              ),
-              child: const Row(
-                children: [
-                  Icon(Icons.newspaper),
-                  Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Text("Danh sách việc làm đã đăng tuyển",textAlign: TextAlign.start,style: AppTextStyle.labelTitleBold,),
-                  ),
-                ],
-              )
-          ),
-          Container(
+  Widget? getFloatingActionButton(BuildContext context) => FloatingActionButton(
+    elevation: 0,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(50),
+    ),
+    hoverColor: Colors.blue,
+    focusColor: Colors.red,
+    foregroundColor: Colors.black,
+    backgroundColor: Colors.blue,
+    onPressed: () {
+      showBottomError("Tính năng đang phát triển");
+    },
+    child: const Icon(Icons.add,color: Colors.white),
+  );
+  @override
+  Widget pageUI(BuildContext context) => SingleChildScrollView(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+            padding: const EdgeInsets.only(left: 5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.white,
+            ),
+            child: Row(
+              children: [
+                SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: ImageLoading(
+                        imageUrl: 'https://via.placeholder.com/100',
+                        imageBuilder: (context, imageProvider) { // you can access to imageProvider
+                          return CircleAvatar( // or any widget that use imageProvider like (PhotoView)
+                            backgroundImage: imageProvider,
+                          );
+                        }
+                    )
+                ),
+                Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(GlobalApplication().HelloUser(),style: AppTextStyle.labelTitleBold.copyWith(fontSize: 12,)),
+                          Text(GlobalApplication().HelloMessage(),style: AppTextStyle.labelTitle.copyWith(fontSize: 12,color: Colors.black26),),
+                        ],
+                      ),
+                    )
+                )
+              ],
+            )
+        ),
+        Container(
             margin: const EdgeInsets.only(top: 10),
-            child: GridView.builder(
+            padding: const EdgeInsets.only(left: 5,top: 10,bottom: 10),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.white,
+            ),
+            child: const Row(
+              children: [
+                Icon(Icons.newspaper),
+                Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Text("Danh sách việc làm đã đăng tuyển",textAlign: TextAlign.start,style: AppTextStyle.labelTitleBold,),
+                ),
+              ],
+            )
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 10),
+          child: GridView.builder(
             shrinkWrap: true,
             itemCount: 6,
             physics: const NeverScrollableScrollPhysics(),
@@ -109,24 +124,8 @@ class _EmployerProfilePageState extends BasePageState<EmployerProfilePage>{
               );
             },
           ),
-          ),
-        ],
-      ),
-    ),
-    floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
-    floatingActionButton: FloatingActionButton(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(50),
-      ),
-      hoverColor: Colors.blue,
-      focusColor: Colors.red,
-      foregroundColor: Colors.black,
-      backgroundColor: Colors.blue,
-      onPressed: () {
-        showBottomError("Tính năng đang phát triển");
-      },
-      child: const Icon(Icons.add,color: Colors.white),
+        ),
+      ],
     ),
   );
 

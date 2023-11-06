@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:eportal/api/constant/application_api_constant.dart';
 import 'package:eportal/api/model/base/base_eportal_request.dart';
 import 'package:eportal/application/global_application.dart';
 import 'package:http/http.dart';
@@ -12,23 +13,25 @@ class BaseAdapterApi {
   factory BaseAdapterApi() {
     return _instance;
   }
-
   BaseAdapterApi._internal();
+  static final Map<String, String> _Maps = {
+    "xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance",
+    "xmlns:xsd":"http://www.w3.org/2001/XMLSchema",
+    "xmlns:soap":"http://schemas.xmlsoap.org/soap/envelope",
+  };
 
   Future<Map<String, dynamic>> callApiAsync(BaseEportalRequest request) async {
     StringBuffer stringBuffer =
         StringBuffer('<?xml version="1.0" encoding="utf-8"?>');
-    stringBuffer.write(
-        '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">');
+    stringBuffer.write('<soap:Envelope ${getMapXml()}>');
+    stringBuffer.write('<soap:Header>');
+    stringBuffer.write('<AuthHeader xmlns="http://tempuri.org/">');
+    stringBuffer.write('<userLogin>$ApplicationApiConstant.BASE_AUTH_HEADER_USER_LOGIN</userLogin>');
+    stringBuffer.write('<password>${ApplicationApiConstant.BASE_AUTH_HEADER_PASSWORD}</password>');
+    stringBuffer.write('</AuthHeader>');
+    stringBuffer.write('</soap:Header>');
     if (request.isAuthentication()) {
-      stringBuffer.write('<soap:Header>');
-      stringBuffer.write('<AuthHeader xmlns="http://tempuri.org/">');
-      stringBuffer
-          .write('<userLogin>${GlobalApplication().UserName}</userLogin>');
-      stringBuffer
-          .write('<password>${GlobalApplication().UserPassword}</password>');
-      stringBuffer.write('</AuthHeader>');
-      stringBuffer.write('</soap:Header>');
+
     }
     stringBuffer.write('<soap:Body>${request.obj.toXml()}</soap:Body>');
     stringBuffer.write('</soap:Envelope>');
@@ -67,4 +70,6 @@ class BaseAdapterApi {
       return "";
     }
   }
+
+  getMapXml()  => _Maps.entries.map((entry) => "${entry.key}=\"${entry.value}\"").join(" ");
 }
