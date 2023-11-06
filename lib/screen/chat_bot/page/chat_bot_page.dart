@@ -22,142 +22,154 @@ class ChatBotPage extends BasePage{
 class _ChatBotPageState extends BasePageState<ChatBotPage>{
   TextEditingController textEditingController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  
+
   List<ChatMessage> messages = [];
-  @override
-  Widget pageUI(BuildContext context) => Container(
-    padding: const EdgeInsets.fromLTRB(8,8,8,8),
-    height: double.infinity,
-    child: SingleChildScrollView(
-      controller: _scrollController,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: messages.map((e){
-          switch(e.type){
-            case ChatMessageType.Bot:
-              return Row(
 
-                children: [
-                  Expanded(
-                    flex:3,
-                    child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.white,
-                        ),
-                        margin: const EdgeInsets.only(top: 8),
-                        padding: const EdgeInsets.only(top: 10,bottom: 10,left: 5, right: 5),
-                        child: Column(
-                          children: [
-                            Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.white,
-                                ),
-                                margin: const EdgeInsets.only(top: 8),
-                                padding: const EdgeInsets.all(5),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text("Bot chat"),
-                                    Text(e.message),
-                                  ],
-                                )
-                            )
-                          ],
-                        )
-                    ),
-                  ),
-                  Expanded(
-                    flex:1,
-                    child: Container(),
-                  ),
-                ],
-              );
-            case ChatMessageType.User:
-              return Row(
-                children: [
-                  Expanded(
-                    flex:1,
-                    child: Container(),
-                  ),
-                  Expanded(
-                    flex:3,
-                    child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.white,
-                        ),
-                        margin: const EdgeInsets.only(top: 8),
-                        padding: const EdgeInsets.only(top: 10,bottom: 10,left: 5, right: 5),
-                        child: Column(
-                          children: [
-                            Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.white,
-                                ),
-                                margin: const EdgeInsets.only(top: 8),
-                                padding: const EdgeInsets.all(5),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Text(e.message),
-                                  ],
-                                )
-                            )
-                          ],
-                        )
-                    ),
-                  ),
-                ],
-              );
-              break;
-          }
-          return Container();
-        }
-        ).toList(),
-      ),
-    ),
-  );
   @override
-  getBottomNavigationBar(BuildContext context) =>Container(
-    margin: const EdgeInsets.fromLTRB(8,8,8,8),
-    color: Colors.white,
-    child: TextFormField(
-      controller: textEditingController,
-      maxLength: 50,
-      textInputAction: TextInputAction.done,
-      validator: (text) {
-        if (text == null || text.isEmpty) {
-          return 'Vui lòng nhập nội dung muốn gửi';
-        }
-        return null;
-      },
-      onFieldSubmitted:  (value) => _sendMessageAsync(context),
-      decoration: InputDecoration(
-        border: const OutlineInputBorder(
+  double currentPadding(BuildContext context) => 0;
 
+  @override
+  Widget pageUI(BuildContext context) => Column(
+    children: [
+      Expanded(
+        child: Container(
+          padding: const EdgeInsets.all(5),
+          height: double.infinity,
+          width: double.infinity,
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: messages.map((e){
+                switch(e.type){
+                  case ChatMessageType.Bot:
+                    return Row(
+
+                      children: [
+                        Expanded(
+                          flex:3,
+                          child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.white,
+                              ),
+                              margin: const EdgeInsets.only(top: 8),
+                              padding: const EdgeInsets.only(top: 10,bottom: 10,left: 5, right: 5),
+                              child: Column(
+                                children: [
+                                  Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.white,
+                                      ),
+                                      margin: const EdgeInsets.only(top: 8),
+                                      padding: const EdgeInsets.all(5),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Text("Bot chat"),
+                                          Text(e.message),
+                                        ],
+                                      )
+                                  )
+                                ],
+                              )
+                          ),
+                        ),
+                        Expanded(
+                          flex:1,
+                          child: Container(),
+                        ),
+                      ],
+                    );
+                  case ChatMessageType.User:
+                    return Row(
+                      children: [
+                        Expanded(
+                          flex:1,
+                          child: Container(),
+                        ),
+                        Expanded(
+                          flex:3,
+                          child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.white,
+                              ),
+                              margin: const EdgeInsets.only(top: 8),
+                              padding: const EdgeInsets.only(top: 10,bottom: 10,left: 5, right: 5),
+                              child: Column(
+                                children: [
+                                  Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.white,
+                                      ),
+                                      margin: const EdgeInsets.only(top: 8),
+                                      padding: const EdgeInsets.all(5),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          Text(e.message),
+                                        ],
+                                      )
+                                  )
+                                ],
+                              )
+                          ),
+                        ),
+                      ],
+                    );
+                    break;
+                }
+                return Container();
+              }
+              ).toList(),
+            ),
+          ),
         ),
-        suffixIcon: IconButton(
-          icon: const Icon(Icons.send,color: Colors.blue,),
-          onPressed: () {
-            _sendMessageAsync(context);
+      ),
+      Container(
+        margin: const EdgeInsets.all(5),
+        color: Colors.white,
+        child: TextFormField(
+          controller: textEditingController,
+          maxLength: 50,
+          textInputAction: TextInputAction.send,
+          validator: (text) {
+            if (text == null || text.isEmpty) {
+              return 'Vui lòng nhập nội dung muốn gửi';
+            }
+            return null;
           },
-        ),
+          onFieldSubmitted:  (value) => _sendMessageAsync(context),
+          decoration: InputDecoration(
+            border: const OutlineInputBorder(
 
-        labelText: 'Nội dung',
-        counterText: "",
-      ),
-    ),
+            ),
+            suffixIcon: IconButton(
+              icon: const Icon(Icons.send,color: Colors.blue,),
+              onPressed: () {
+                _sendMessageAsync(context);
+              },
+            ),
+
+            labelText: 'Nội dung',
+            counterText: "",
+          ),
+        ),
+      )
+    ],
   );
+  @override
+  getBottomNavigationBar(BuildContext context) =>null;
 
   @override
   String getPageTitle(BuildContext context) => "Chat bot";
@@ -209,10 +221,7 @@ class _ChatBotPageState extends BasePageState<ChatBotPage>{
   }
   void _botSendMessageAsync(BuildContext context) {
 
-    loadDataDemo()
-    .then((value){
-      _addMessage(getRandomGreeting(),ChatMessageType.Bot);
-    });
+    _addMessage(getRandomGreeting(),ChatMessageType.Bot);
 
   }
 

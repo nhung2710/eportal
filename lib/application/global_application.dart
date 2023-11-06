@@ -1,6 +1,7 @@
 import 'package:eportal/api/constant/application_api_constant.dart';
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/extension/string_extension.dart';
+import 'package:eportal/model/setting_page_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GlobalApplication {
@@ -16,6 +17,7 @@ class GlobalApplication {
   set Preferences(SharedPreferences preferences) {
     _Preferences = preferences;
   }
+
 
   factory GlobalApplication() {
     return _instance;
@@ -68,6 +70,7 @@ class GlobalApplication {
   {
     return "Chào $_FullName";
   }
+
   GlobalApplication._internal() {
     SignOut();
     //_UserName = "eportal";
