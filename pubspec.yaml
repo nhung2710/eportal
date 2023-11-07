@@ -92,6 +92,8 @@ flutter:
   assets:
     - assets/images/Logo.jpg
     - assets/images/ErrorImage.png
+    - assets/texts/about.txt
+    - assets/texts/policy.txt
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
@@ -119,7 +121,7 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
 flutter_native_splash:
-  color: "#42a5f5"
+  color: "#ffffff"
   image: assets/images/Logo.jpg
   android_12:
     image: assets/images/Logo.jpg

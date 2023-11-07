@@ -1,6 +1,7 @@
 import 'package:eportal/application/global_application.dart';
-import 'package:eportal/screen/dashboard/page/dashboard_page.dart';
-import 'package:eportal/screen/login/page/login_page.dart';
+import 'package:eportal/screen/anonymous/home/home_page.dart';
+import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
+import 'package:eportal/screen/share/sign_in/page/sign_in_page.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/image/image_loading.dart';
 import 'package:flutter/material.dart';
@@ -44,11 +45,11 @@ class DefaultAppBar {
     actions: [
       GlobalApplication().IsLogin ? IconButton(onPressed: () {
         GlobalApplication().SignOut();
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const DashboardPage()));
+        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const HomePage()));
       }, icon: const Icon(Icons.logout),color: Colors.blue,) :
       IconButton(onPressed: ()
       {
-        Navigator.push(context,MaterialPageRoute(builder: (context) => const LoginPage()));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => const SignInPage()));
       }, icon: const Icon(Icons.login,color: Colors.blue),)
     ],
     automaticallyImplyLeading: false,

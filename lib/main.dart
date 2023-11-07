@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/extension/string_extension.dart';
-import 'package:eportal/screen/dashboard/page/dashboard_page.dart';
+import 'package:eportal/screen/anonymous/home/home_page.dart';
 import 'package:eportal/style/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         platform: TargetPlatform.iOS,
 
       ),
-      home: const DashboardPage()
+      home: const HomePage()
     );
   }
 }
