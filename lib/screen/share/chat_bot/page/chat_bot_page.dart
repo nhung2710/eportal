@@ -144,7 +144,7 @@ class _ChatBotPageState extends BasePageState<ChatBotPage>{
               crossAxisAlignment: e.isBot?CrossAxisAlignment.start:CrossAxisAlignment.end,
               mainAxisAlignment: e.isBot?MainAxisAlignment.start:MainAxisAlignment.end,
               children: [
-                Text(e.message,style: AppTextStyle.labelTitleBold.copyWith(color: !e.isBot ? Colors.blue : Colors.white)),
+                Text(e.message,style: AppTextStyle.titleAppbarPage.copyWith(color: !e.isBot ? Colors.blue : Colors.white)),
               ],
             )
         ),

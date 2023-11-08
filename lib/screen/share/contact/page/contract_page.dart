@@ -39,7 +39,7 @@ class _ContractPageState extends BasePageState<ContractPage>{
                   Icon(Icons.question_answer),
                   Padding(
                     padding: EdgeInsets.only(left: 10),
-                    child: Text("Hỏi và đáp",textAlign: TextAlign.start,style: AppTextStyle.labelTitleBold,),
+                    child: Text("Hỏi và đáp",textAlign: TextAlign.start,style: AppTextStyle.titleAppbarPage,),
                   ),
                 ],
               )

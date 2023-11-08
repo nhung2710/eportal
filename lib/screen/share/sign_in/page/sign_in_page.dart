@@ -1,8 +1,12 @@
 import 'package:eportal/application/global_application.dart';
 import 'package:eportal/constant/application_constant.dart';
-import 'package:eportal/screen/anonymous/home/home_page.dart';
+import 'package:eportal/screen/anonymous/home/home_page.dart' as anonymous;
+import 'package:eportal/screen/admin/home/home_page.dart' as admin;
+import 'package:eportal/screen/employer/home/home_page.dart' as employer;
+import 'package:eportal/screen/worker//home/home_page.dart' as worker;
 import 'package:eportal/screen/share/forgot_password/page/forgot_password_page.dart';
 import 'package:eportal/screen/share/sign_up/page/sign_up_page.dart';
+import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
@@ -22,114 +26,120 @@ class SignInPage extends BasePage{
 class _SignInPageState extends BasePageState<SignInPage>{
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
+  @override
+  double currentPadding(BuildContext context) =>10;
   @override
   Color currentBackgroundColor(BuildContext context)  => Colors.white;
   @override
   bool isHasAppBar(BuildContext context) => false;
-
   @override
   Widget pageUI(BuildContext context)  {
     nameController.text = GlobalApplication().getStringOneTimePreferences(ApplicationConstant.REGISTER_USER_NAME);
     passwordController.text = GlobalApplication().getStringOneTimePreferences(ApplicationConstant.REGISTER_USER_PASSWORD);
-    return Padding(
-        padding: const EdgeInsets.all(10),
-        child: ListView(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 30,bottom: 20),
-              child: Image.asset('assets/images/Logo.jpg',
-                alignment: Alignment.center,
-                height: 125,
-                width: 125,
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: TextFormField(
-                controller: nameController,
-                maxLength: 50,
-                textInputAction: TextInputAction.next,
-                validator: (text) {
-                  if (text == null || text.isEmpty) {
-                    return 'Tài khoản không được để trống';
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Tài khoản',
-                  counterText: "",
+    return ListView(
+      children: <Widget>[
+        Container(
+          margin: const EdgeInsets.only(top: 30),
+          child: Image.asset('assets/images/Logo.jpg',
+            alignment: Alignment.center,
+            height: 125,
+            width: 125,
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 10),
+          child: TextFormField(
+            controller: nameController,
+            maxLength: 50,
+            textInputAction: TextInputAction.next,
+            validator: (text) {
+              if (text == null || text.isEmpty) {
+                return 'Tài khoản không được để trống';
+              }
+              return null;
+            },
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Tài khoản',
+              counterText: "",
 
-                ),
+            ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 10),
+          child: TextFormField(
+            obscureText: true,
+            controller: passwordController,
+            maxLength: 50,
+            textInputAction: TextInputAction.done,
+            validator: (text) {
+              if (text == null || text.isEmpty) {
+                return 'Mật khẩu không được để trống';
+              }
+              return null;
+            },
+            onFieldSubmitted:  (value) => _signIn(context),
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Mật khẩu',
+              counterText: "",
+            ),
+          ),
+        ),
+        Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: ElevatedButton(
+              child: Container(
+                  padding: const EdgeInsets.all(10),
+                  child: const Text('Đăng nhập NLD')
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-              child: TextFormField(
-                obscureText: true,
-                controller: passwordController,
-                maxLength: 50,
-                textInputAction: TextInputAction.done,
-                validator: (text) {
-                  if (text == null || text.isEmpty) {
-                    return 'Mật khẩu không được để trống';
-                  }
-                  return null;
-                },
-                onFieldSubmitted:  (value) => _signIn(context),
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Mật khẩu',
-                  counterText: "",
-                ),
+              onPressed: () => _signIn(context),
+            )
+        ),
+        Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: ElevatedButton(
+              child: Container(
+                  padding: const EdgeInsets.all(10),
+                  child: const Text('Đăng nhập DN')
               ),
-            ),
-            TextButton(
-              onPressed: () => _forgotPassword(context),
-              child: const Text('Quên mật khẩu',),
-            ),
-            Container(
-                height: 50,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: ElevatedButton(
-                  child: const Text('Đăng nhập NLD'),
-                  onPressed: () => _signIn(context),
-                )
-            ),
-            Container(
-                height: 50,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                margin:  const EdgeInsets.only(top: 10),
-                child: ElevatedButton(
-                  child: const Text('Đăng nhập DN'),
-                  onPressed: () => _signInBusiness(context),
-                )
-            ),
-            Container(
-                height: 50,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                margin:  const EdgeInsets.only(top: 10),
-                child: ElevatedButton(
-                  child: const Text('Đăng nhập QL'),
-                  onPressed: () => _signInAdmin(context),
-                )
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text('Bạn chưa có tài khoản?'),
-                TextButton(
-                  child: const Text(
-                    'Đăng ký',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  onPressed: () => _signUp(context),
-                )
-              ],
-            ),
-          ],
-        ));
+              onPressed: () => _signInBusiness(context),
+            )
+        ),
+        Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: ElevatedButton(
+              child: Container(
+                  padding: const EdgeInsets.all(10),
+                  child: const Text('Đăng nhập QL')
+              ),
+              onPressed: () => _signInAdmin(context),
+            )
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              const Text('Bạn chưa có tài khoản?'),
+              TextButton(
+                child: Text('Đăng ký',style: AppTextStyle.titleAppbarPage.copyWith(color: Colors.blue),),
+                onPressed: () => _signUp(context),
+              )
+            ],
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 5),
+          child: TextButton(
+            onPressed: () => _forgotPassword(context),
+            child: Text('Quên mật khẩu',style: AppTextStyle.titleAppbarPage.copyWith(color: Colors.blue),),
+          ),
+        ),
+      ],
+    );
   }
 
 
@@ -141,7 +151,7 @@ class _SignInPageState extends BasePageState<SignInPage>{
         GlobalApplication().FullName = nameController.text;
         GlobalApplication().UserName = nameController.text;
         GlobalApplication().UserPassword = passwordController.text;
-        nextPage((context) => const HomePage());
+        nextPage((context) => const worker.HomePage());
       });
     }
   }
@@ -165,7 +175,7 @@ class _SignInPageState extends BasePageState<SignInPage>{
         GlobalApplication().FullName = nameController.text;
         GlobalApplication().UserName = nameController.text;
         GlobalApplication().UserPassword = passwordController.text;
-        nextPage((context) => const HomePage());
+        nextPage((context) => const employer.HomePage());
       });
 
     }
@@ -179,7 +189,7 @@ class _SignInPageState extends BasePageState<SignInPage>{
         GlobalApplication().FullName = nameController.text;
         GlobalApplication().UserName = nameController.text;
         GlobalApplication().UserPassword = passwordController.text;
-        nextPage((context) => const HomePage());
+        nextPage((context) => const admin.HomePage());
       });
 
     }

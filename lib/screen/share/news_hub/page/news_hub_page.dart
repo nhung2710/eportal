@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eportal/application/global_application.dart';
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
+import 'package:eportal/screen/share/news_hub/widget/news_slide_item.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
@@ -27,10 +28,9 @@ class _NewsHubPageState extends BasePageState<NewsHubPage>{
 
   @override
   Widget? getFloatingActionButton(BuildContext context) => ExpandableFab(
-      distance: 120,
       children: [
         ActionButton(
-          icon: const Icon(Icons.newspaper, color: Colors.white,),
+          icon: const Icon(Icons.newspaper, color: Colors.white),
           onPressed: () {
             loadDataDemo().then((value) => nextPage((context) => const ChatBotPage()));
           },
@@ -70,12 +70,12 @@ class _NewsHubPageState extends BasePageState<NewsHubPage>{
                 Expanded(
                     child: Container(
                       padding: const EdgeInsets.all(10),
-                      child: Column(
+                      child: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Bạn muốn tìm kiếm tin tức",style: AppTextStyle.labelTitleBold.copyWith(fontSize: 12,)),
-                          Text("Việc làm - quảng cáo - chính trị - văn bản pháp luật",overflow: TextOverflow.ellipsis,style: AppTextStyle.labelTitle.copyWith(fontSize: 12,color: Colors.black26),),
+                          Text("Bạn muốn tìm kiếm tin tức",style: AppTextStyle.titlePage),
+                          Text("Việc làm - quảng cáo - chính trị - văn bản pháp luật",style: AppTextStyle.titleHintPage,),
                         ],
                       ),
                     )
@@ -100,12 +100,12 @@ class _NewsHubPageState extends BasePageState<NewsHubPage>{
                 Expanded(
                     child: Container(
                       padding: const EdgeInsets.all(10),
-                      child: Column(
+                      child: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Bạn muốn tìm việc",style: AppTextStyle.labelTitleBold.copyWith(fontSize: 12,)),
-                          Text("Địa điểm - Công ty Vị tri ngành",style: AppTextStyle.labelTitle.copyWith(fontSize: 12,color: Colors.black26),),
+                          Text("Bạn muốn tìm việc",style: AppTextStyle.titlePage),
+                          Text("Địa điểm - Công ty Vị tri ngành",style: AppTextStyle.titleHintPage,),
                         ],
                       ),
                     )
@@ -119,22 +119,37 @@ class _NewsHubPageState extends BasePageState<NewsHubPage>{
             )
         ),
         Container(
-          margin: const EdgeInsets.only(top: 5),
-          child: SizedBox(
-            height: 50,
-            child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (_,index) => Container(
-                    margin: const EdgeInsets.all(4.0),
-                    width: 50,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white60,
-                    ),
-                    child: Icon(index % 3 == 0 ? Icons.account_balance_wallet_rounded : index % 3 == 1 ? Icons.ac_unit_outlined : Icons.ad_units_rounded,color: Colors.orange,)
-                )
+            margin: const EdgeInsets.only(top: 5),
+            padding: const EdgeInsets.only(left: 5,top: 10,bottom: 10),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.white,
             ),
+            child: const Padding(
+              padding: EdgeInsets.only(left: 5),
+              child: Text("Tin tức",maxLines: 1,textAlign: TextAlign.start,style: AppTextStyle.titlePage,),
+            )
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 5),
+          child: CarouselSlider(
+            options: CarouselOptions(
+              viewportFraction: 1,
+              aspectRatio: 2,
+              animateToClosest:  true,
+              initialPage: 0,
+              enableInfiniteScroll: true,
+              reverse: false,
+              autoPlay: true,
+              autoPlayInterval: const Duration(seconds: 10),
+              autoPlayAnimationDuration: const Duration(milliseconds: 3000),
+              autoPlayCurve: Curves.fastOutSlowIn,
+              enlargeCenterPage: true,
+              enlargeFactor: 0.2,
+              scrollDirection: Axis.horizontal,
+            ),
+            items: ApplicationConstant.URL_NEW.map((item) => Builder(builder: (BuildContext context) => NewsSlideItem(imageUrl: item),)).toList(),
           ),
         ),
         Container(
@@ -145,23 +160,17 @@ class _NewsHubPageState extends BasePageState<NewsHubPage>{
               borderRadius: BorderRadius.circular(5),
               color: Colors.white,
             ),
-            child: const Row(
-              children: [
-                Icon(Icons.newspaper),
-                Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text("Tin tức",textAlign: TextAlign.start,style: AppTextStyle.labelTitleBold,),
-                ),
-              ],
+            child: const Padding(
+              padding: EdgeInsets.only(left: 5),
+              child: Text("Việc làm",maxLines: 1,textAlign: TextAlign.start,style: AppTextStyle.titlePage,),
             )
         ),
         Container(
           margin: const EdgeInsets.only(top: 5),
           child: CarouselSlider(
             options: CarouselOptions(
-              height: 200.0,
+              viewportFraction: 1,
               aspectRatio: 2,
-              viewportFraction: 0.7,
               animateToClosest:  true,
               initialPage: 0,
               enableInfiniteScroll: true,
@@ -174,22 +183,7 @@ class _NewsHubPageState extends BasePageState<NewsHubPage>{
               enlargeFactor: 0.2,
               scrollDirection: Axis.horizontal,
             ),
-            items: ApplicationConstant.URL_NEW.map((item) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                      child: ImageLoading(
-                          imageUrl: item,
-                          imageBuilder: (context, imageProvider)
-                          {
-                            return Image(image: imageProvider,
-                              fit: BoxFit.cover,
-                            );
-                          }
-                      )
-                  );                    },
-              );                }).toList(),
+            items: ApplicationConstant.URL_NEW.map((item) => Builder(builder: (BuildContext context) => NewsSlideItem(imageUrl: item),)).toList(),
           ),
         ),
         Container(
@@ -200,23 +194,17 @@ class _NewsHubPageState extends BasePageState<NewsHubPage>{
               borderRadius: BorderRadius.circular(5),
               color: Colors.white,
             ),
-            child: const Row(
-              children: [
-                Icon(Icons.newspaper),
-                Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text("Việc làm",textAlign: TextAlign.start,style: AppTextStyle.labelTitleBold,),
-                ),
-              ],
+            child: const Padding(
+              padding: EdgeInsets.only(left: 5),
+              child: Text("Hồ sơ xin việc",maxLines: 1,textAlign: TextAlign.start,style: AppTextStyle.titlePage,),
             )
         ),
         Container(
           margin: const EdgeInsets.only(top: 5),
           child: CarouselSlider(
             options: CarouselOptions(
-              height: 200.0,
+              viewportFraction: 1,
               aspectRatio: 2,
-              viewportFraction: 0.7,
               animateToClosest:  true,
               initialPage: 0,
               enableInfiniteScroll: true,
@@ -229,22 +217,7 @@ class _NewsHubPageState extends BasePageState<NewsHubPage>{
               enlargeFactor: 0.2,
               scrollDirection: Axis.horizontal,
             ),
-            items: ApplicationConstant.URL_NEW.map((item) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                      child: ImageLoading(
-                          imageUrl: item,
-                          imageBuilder: (context, imageProvider)
-                          {
-                            return Image(image: imageProvider,
-                              fit: BoxFit.cover,
-                            );
-                          }
-                      )
-                  );                    },
-              );                }).toList(),
+            items: ApplicationConstant.URL_NEW.map((item) => Builder(builder: (BuildContext context) => NewsSlideItem(imageUrl: item),)).toList(),
           ),
         ),
         Container(
@@ -255,23 +228,17 @@ class _NewsHubPageState extends BasePageState<NewsHubPage>{
               borderRadius: BorderRadius.circular(5),
               color: Colors.white,
             ),
-            child: const Row(
-              children: [
-                Icon(Icons.newspaper),
-                Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text("Hồ sơ xin việc",textAlign: TextAlign.start,style: AppTextStyle.labelTitleBold,),
-                ),
-              ],
+            child: const Padding(
+              padding: EdgeInsets.only(left: 5),
+              child: Text("Văn bản pháp luật",maxLines: 1,textAlign: TextAlign.start,style: AppTextStyle.titlePage,),
             )
         ),
         Container(
           margin: const EdgeInsets.only(top: 5),
           child: CarouselSlider(
             options: CarouselOptions(
-              height: 200.0,
+              viewportFraction: 1,
               aspectRatio: 2,
-              viewportFraction: 0.7,
               animateToClosest:  true,
               initialPage: 0,
               enableInfiniteScroll: true,
@@ -284,133 +251,7 @@ class _NewsHubPageState extends BasePageState<NewsHubPage>{
               enlargeFactor: 0.2,
               scrollDirection: Axis.horizontal,
             ),
-            items: ApplicationConstant.URL_NEW.map((item) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                      child: ImageLoading(
-                          imageUrl: item,
-                          imageBuilder: (context, imageProvider)
-                          {
-                            return Image(image: imageProvider,
-                              fit: BoxFit.cover,
-                            );
-                          }
-                      )
-                  );                    },
-              );                }).toList(),
-          ),
-        ),
-        Container(
-            margin: const EdgeInsets.only(top: 5),
-            padding: const EdgeInsets.only(left: 5,top: 10,bottom: 10),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.white,
-            ),
-            child: const Row(
-              children: [
-                Icon(Icons.newspaper),
-                Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text("Quảng cáo",textAlign: TextAlign.start,style: AppTextStyle.labelTitleBold,),
-                ),
-              ],
-            )
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 5),
-          child: CarouselSlider(
-            options: CarouselOptions(
-              height: 200.0,
-              aspectRatio: 2,
-              viewportFraction: 0.7,
-              animateToClosest:  true,
-              initialPage: 0,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 10),
-              autoPlayAnimationDuration: const Duration(milliseconds: 3000),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              enlargeCenterPage: true,
-              enlargeFactor: 0.2,
-              scrollDirection: Axis.horizontal,
-            ),
-            items: ApplicationConstant.URL_NEW.map((item) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                      child: ImageLoading(
-                          imageUrl: item,
-                          imageBuilder: (context, imageProvider)
-                          {
-                            return Image(image: imageProvider,
-                              fit: BoxFit.cover,
-                            );
-                          }
-                      )
-                  );                    },
-              );                }).toList(),
-          ),
-        ),
-
-        Container(
-            margin: const EdgeInsets.only(top: 10),
-            padding: const EdgeInsets.only(left: 5,top: 10,bottom: 10),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.white,
-            ),
-            child: const Row(
-              children: [
-                Icon(Icons.newspaper),
-                Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text("Văn bản pháp luật",textAlign: TextAlign.start,style: AppTextStyle.labelTitleBold,),
-                ),
-              ],
-            )
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 5),
-          child: CarouselSlider(
-            options: CarouselOptions(
-              height: 200.0,
-              aspectRatio: 2,
-              viewportFraction: 0.7,
-              animateToClosest:  true,
-              initialPage: 0,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 10),
-              autoPlayAnimationDuration: const Duration(milliseconds: 3000),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              enlargeCenterPage: true,
-              enlargeFactor: 0.2,
-              scrollDirection: Axis.horizontal,
-            ),
-            items: ApplicationConstant.URL_NEW.map((item) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                      child: ImageLoading(
-                          imageUrl: item,
-                          imageBuilder: (context, imageProvider)
-                          {
-                            return Image(image: imageProvider,
-                              fit: BoxFit.cover,
-                            );
-                          }
-                      )
-                  );                    },
-              );                }).toList(),
+            items: ApplicationConstant.URL_NEW.map((item) => Builder(builder: (BuildContext context) => NewsSlideItem(imageUrl: item),)).toList(),
           ),
         ),
       ],

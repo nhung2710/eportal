@@ -12,7 +12,6 @@ import 'application/global_application.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.white,
     statusBarIconBrightness: Brightness.dark,
@@ -38,15 +37,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'eportal',
+      title: 'Demo',
       debugShowCheckedModeBanner: false,
+
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: AppTheme.textTheme,
         platform: TargetPlatform.iOS,
-
       ),
-      home: const HomePage()
+      home: const HomePage(),
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          child: child!,
+        );
+      },
     );
   }
 }

@@ -34,8 +34,8 @@ class DefaultAppBar {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(GlobalApplication().HelloUser(),style: AppTextStyle.labelTitleBold.copyWith(fontSize: 12,)),
-                  Text(GlobalApplication().HelloMessage(),style: AppTextStyle.labelTitle.copyWith(fontSize: 12,color: Colors.black26),),
+                  Text(GlobalApplication().HelloUser(),style: AppTextStyle.titlePage),
+                  Text(GlobalApplication().HelloMessage(),style: AppTextStyle.titleHintPage,),
                 ],
               ),
             )
