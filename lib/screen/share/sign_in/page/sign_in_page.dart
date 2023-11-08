@@ -8,6 +8,7 @@ import 'package:eportal/screen/share/forgot_password/page/forgot_password_page.d
 import 'package:eportal/screen/share/sign_up/page/sign_up_page.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 //
@@ -119,23 +120,32 @@ class _SignInPageState extends BasePageState<SignInPage>{
         ),
         Container(
           margin: const EdgeInsets.only(top: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const Text('Bạn chưa có tài khoản?'),
-              TextButton(
-                child: Text('Đăng ký',style: AppTextStyle.titleAppbarPage.copyWith(color: Colors.blue),),
-                onPressed: () => _signUp(context),
-              )
-            ],
+          child: Center(
+            child: RichText(
+              text: TextSpan(
+                style: AppTextStyle.titleAppbarPage.copyWith(color: Colors.black,fontWeight: FontWeight.normal),
+                children: <TextSpan>[
+                  const TextSpan(text: 'Bạn chưa có tài khoản? '),
+                  TextSpan(text: 'Đăng ký', style: AppTextStyle.titleAppbarPage.copyWith(color: Colors.blue),
+                    recognizer: TapGestureRecognizer()..onTap = () => _signUp(context)
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 10),
+          child: GestureDetector(
+              onTap: () => _forgotPassword(context),
+              child: Center(child: Text('Quên mật khẩu',style: AppTextStyle.titleAppbarPage.copyWith(color: Colors.blue),))
           ),
         ),
         Container(
           margin: const EdgeInsets.only(top: 5),
-          child: TextButton(
-            onPressed: () => _forgotPassword(context),
-            child: Text('Quên mật khẩu',style: AppTextStyle.titleAppbarPage.copyWith(color: Colors.blue),),
+          child: GestureDetector(
+              onTap: () => backPage(),
+              child: Center(child: Text('Bỏ qua',style: AppTextStyle.titleAppbarPage.copyWith(color: Colors.grey),))
           ),
         ),
       ],
@@ -193,5 +203,9 @@ class _SignInPageState extends BasePageState<SignInPage>{
       });
 
     }
+  }
+
+  _skipPage(BuildContext context) {
+
   }
 }

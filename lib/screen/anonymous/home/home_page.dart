@@ -22,7 +22,7 @@ class HomePage extends BasePage{
 
 class _HomePageState extends BasePageStateActive<HomePage>  {
   int _currentIndex = 0;
-  final PageController _pageController = PageController(initialPage: 0);
+  final PageController _pageController = PageController(initialPage: 0,keepPage: true);
 
 
   @override

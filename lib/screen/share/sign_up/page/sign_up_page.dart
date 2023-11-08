@@ -25,137 +25,137 @@ class _SignUpPageState extends BasePageState<SignUpPage>{
   TextEditingController phoneController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
+  @override
+  String getPageTitle(BuildContext context) => "Đăng ký tài khoản";
   @override
   Color currentBackgroundColor(BuildContext context)  => Colors.white;
   @override
-  Widget pageUI(BuildContext context)  => Padding(
-      padding: const EdgeInsets.all(10),
-      child: ListView(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 30,bottom: 20),
-            child: Image.asset('assets/images/Logo.jpg',
-              alignment: Alignment.center,
-              height: 125,
-              width: 125,
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(10),
-            child: TextFormField(
-              controller: fullNameController,
-              maxLength: 50,
-              textInputAction: TextInputAction.next,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Họ và tên không được để trống';
-                }
-                return null;
-              },
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Họ và tên',
-                counterText: "",
+  Widget pageUI(BuildContext context)  => ListView(
+    children: <Widget>[
+      Container(
+        margin: const EdgeInsets.only(top: 30),
+        child: Image.asset('assets/images/Logo.jpg',
+          alignment: Alignment.center,
+          height: 125,
+          width: 125,
+        ),
+      ),
+      Container(
+        margin: const EdgeInsets.only(top: 10),
+        child: TextFormField(
+          controller: fullNameController,
+          maxLength: 50,
+          textInputAction: TextInputAction.next,
+          validator: (text) {
+            if (text == null || text.isEmpty) {
+              return 'Họ và tên không được để trống';
+            }
+            return null;
+          },
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Họ và tên',
+            counterText: "",
 
-              ),
-            ),
           ),
-          Container(
-            padding: const EdgeInsets.all(10),
-            child: TextFormField(
-              controller: emailController,
-              maxLength: 50,
-              textInputAction: TextInputAction.next,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Địa chỉ thư điện tử không được để trống';
-                }
-                return null;
-              },
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Địa chỉ thư điện tử',
-                counterText: "",
+        ),
+      ),
+      Container(
+        margin: const EdgeInsets.only(top: 10),
+        child: TextFormField(
+          controller: emailController,
+          maxLength: 50,
+          textInputAction: TextInputAction.next,
+          validator: (text) {
+            if (text == null || text.isEmpty) {
+              return 'Địa chỉ thư điện tử không được để trống';
+            }
+            return null;
+          },
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Địa chỉ thư điện tử',
+            counterText: "",
 
-              ),
-            ),
           ),
-          Container(
-            padding: const EdgeInsets.all(10),
-            child: TextFormField(
-              controller: phoneController,
-              maxLength: 50,
-              textInputAction: TextInputAction.next,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Số điện thoại không được để trống';
-                }
-                return null;
-              },
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Số điện thoại',
-                counterText: "",
+        ),
+      ),
+      Container(
+        margin: const EdgeInsets.only(top: 10),
+        child: TextFormField(
+          controller: phoneController,
+          maxLength: 50,
+          textInputAction: TextInputAction.next,
+          validator: (text) {
+            if (text == null || text.isEmpty) {
+              return 'Số điện thoại không được để trống';
+            }
+            return null;
+          },
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Số điện thoại',
+            counterText: "",
 
-              ),
-            ),
           ),
-          Container(
-            padding: const EdgeInsets.all(10),
-            child: TextFormField(
-              controller: nameController,
-              maxLength: 50,
-              textInputAction: TextInputAction.next,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Tài khoản không được để trống';
-                }
-                return null;
-              },
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Tài khoản',
-                counterText: "",
+        ),
+      ),
+      Container(
+        margin: const EdgeInsets.only(top: 10),
+        child: TextFormField(
+          controller: nameController,
+          maxLength: 50,
+          textInputAction: TextInputAction.next,
+          validator: (text) {
+            if (text == null || text.isEmpty) {
+              return 'Tài khoản không được để trống';
+            }
+            return null;
+          },
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Tài khoản',
+            counterText: "",
 
-              ),
+          ),
+        ),
+      ),
+      Container(
+        margin: const EdgeInsets.only(top: 10),
+        child: TextFormField(
+          obscureText: true,
+          controller: passwordController,
+          maxLength: 50,
+          textInputAction: TextInputAction.done,
+          validator: (text) {
+            if (text == null || text.isEmpty) {
+              return 'Mật khẩu không được để trống';
+            }
+            return null;
+          },
+          onFieldSubmitted:  (value) => _registerAccount(context),
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Mật khẩu',
+            counterText: "",
+          ),
+        ),
+      ),
+      Container(
+          margin: const EdgeInsets.only(top: 10),
+          child: ElevatedButton(
+            child: Container(
+                padding: const EdgeInsets.all(10),
+              child: const Text('Đăng ký'),
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-            child: TextFormField(
-              obscureText: true,
-              controller: passwordController,
-              maxLength: 50,
-              textInputAction: TextInputAction.done,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Mật khẩu không được để trống';
-                }
-                return null;
-              },
-              onFieldSubmitted:  (value) => _registerAccountAsync(context),
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Mật khẩu',
-                counterText: "",
-              ),
-            ),
-          ),
-          Container(
-              height: 50,
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              margin:  const EdgeInsets.only(top: 10),
-              child: ElevatedButton(
-                child: const Text('Đăng ký'),
-                onPressed: () => _registerAccountAsync(context),
-              )
-          ),
-        ],
-      ));
+            onPressed: () => _registerAccount(context),
+          )
+      ),
+    ],
+  );
 
 
-  _registerAccountAsync(BuildContext context) {
+  _registerAccount(BuildContext context) {
     if(isValid()){
       loadDataDemo()
           .then((value){

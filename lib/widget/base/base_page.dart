@@ -1,3 +1,4 @@
+import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/style/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -131,7 +132,7 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
     ).show();
   }
   PreferredSizeWidget? getAppBar(BuildContext context) => isHasAppBar(context) ?  AppBar(
-    title: Text(getPageTitle(context)),
+    title: Text(getPageTitle(context),style: AppTextStyle.titleAppbarPage,),
     automaticallyImplyLeading: getAutomaticallyImplyLeading(context),
   ) : null;
   Future<void> loadDataDemo(){

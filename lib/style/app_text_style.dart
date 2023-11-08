@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 //
 class AppTextStyle {
 
-  static const TextStyle titleAppbarPage = TextStyle(color: Colors.white,fontSize: 14,overflow: TextOverflow.ellipsis,fontWeight: FontWeight.bold);
-  static const TextStyle titlePage = TextStyle(color: Colors.black,fontSize: 12,overflow: TextOverflow.ellipsis,fontWeight: FontWeight.bold);
-  static const TextStyle titleHintPage = TextStyle(color: Colors.black26,fontSize: 10,overflow: TextOverflow.ellipsis,fontWeight: FontWeight.bold);
+  static const TextStyle titleAppbarPage = TextStyle(color: Colors.white,fontSize: 16,overflow: TextOverflow.ellipsis,fontWeight: FontWeight.bold);
+  static const TextStyle titlePage = TextStyle(color: Colors.black,fontSize: 14,overflow: TextOverflow.ellipsis,fontWeight: FontWeight.bold);
+  static const TextStyle titleHintPage = TextStyle(color: Colors.black26,fontSize: 14,overflow: TextOverflow.ellipsis,fontWeight: FontWeight.bold);
 
 
   static const TextStyle title = TextStyle(color: Colors.black,fontSize: 12,overflow: TextOverflow.ellipsis);

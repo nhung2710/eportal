@@ -18,7 +18,7 @@ class MultimediaPage extends BasePage{
   State<StatefulWidget> createState() => _MultimediaPageState();
 }
 
-class _MultimediaPageState extends BasePageState<MultimediaPage>{
+class _MultimediaPageState extends BasePageStateActive<MultimediaPage>{
   @override
   bool isHasAppBar(BuildContext context) => false;
   @override

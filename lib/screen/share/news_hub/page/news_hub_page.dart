@@ -22,7 +22,7 @@ class NewsHubPage extends BasePage{
   State<StatefulWidget> createState() => _NewsHubPageState();
 }
 
-class _NewsHubPageState extends BasePageState<NewsHubPage>{
+class _NewsHubPageState extends BasePageStateActive<NewsHubPage>{
   @override
   bool isHasAppBar(BuildContext context) => false;
 

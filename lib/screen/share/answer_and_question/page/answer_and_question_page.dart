@@ -21,7 +21,7 @@ class AnswerAndQuestionPage extends BasePage{
   State<StatefulWidget> createState() => _AnswerAndQuestionPageState();
 }
 
-class _AnswerAndQuestionPageState extends BasePageState<AnswerAndQuestionPage>{
+class _AnswerAndQuestionPageState extends BasePageStateActive<AnswerAndQuestionPage>{
   TextEditingController textEditingController = TextEditingController();
   @override
   bool isHasAppBar(BuildContext context) => false;

@@ -25,7 +25,7 @@ class SettingPage extends BasePage{
   State<StatefulWidget> createState() => _SettingPageState();
 }
 
-class _SettingPageState extends BasePageState<SettingPage>{
+class _SettingPageState extends BasePageStateActive<SettingPage>{
 
   var actions = {
     "Thông tin": [
