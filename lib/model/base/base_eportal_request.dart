@@ -1,4 +1,4 @@
-import 'package:eportal/api/model/base/base_eportal_xml.dart';
+import 'package:eportal/model/base/base_eportal_xml.dart';
 
 abstract class BaseEportalRequest<T extends BaseEportalXml> {
   T obj;

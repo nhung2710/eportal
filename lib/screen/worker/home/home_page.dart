@@ -3,6 +3,9 @@ import 'package:eportal/screen/share/answer_and_question/page/answer_and_questio
 import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
 import 'package:eportal/screen/share/multimedia/page/multimedia_page.dart';
 import 'package:eportal/screen/share/news_hub/page/news_hub_page.dart';
+import 'package:eportal/screen/worker/find_job/page/find_job_page.dart';
+import 'package:eportal/screen/worker/history/page/history_page.dart';
+import 'package:eportal/screen/worker/profile/page/profile_page.dart';
 import 'package:eportal/widget/app_bar/default_app_bar.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
@@ -24,7 +27,8 @@ class _HomePageState extends BasePageStateActive<HomePage>  {
   int _currentIndex = 0;
   final PageController _pageController = PageController(initialPage: 0,keepPage: true);
 
-
+  @override
+  double currentPadding(BuildContext context) => 0;
   @override
   void dispose() {
     _pageController.dispose();
@@ -53,14 +57,19 @@ class _HomePageState extends BasePageStateActive<HomePage>  {
         activeIcon: Icon(Icons.home,color: Colors.red,),
       ),
       BottomNavigationBarItem(
-        icon: Icon(Icons.question_mark,color: Colors.blueAccent,),
-        label: "Hỏi đáp",
-        activeIcon: Icon(Icons.question_mark,color: Colors.red,),
+        icon: Icon(Icons.file_copy,color: Colors.blueAccent,),
+        label: "Hồ sơ",
+        activeIcon: Icon(Icons.file_copy,color: Colors.red,),
       ),
       BottomNavigationBarItem(
-        icon: Icon(Icons.perm_media,color: Colors.blueAccent,),
-        label: "Đa phương tiện",
-        activeIcon: Icon(Icons.perm_media,color: Colors.red,),
+        icon: Icon(Icons.manage_search,color: Colors.blueAccent,),
+        label: "Tìm kiếm",
+        activeIcon: Icon(Icons.manage_search,color: Colors.red,),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.history,color: Colors.blueAccent,),
+        label: "Lịch sử",
+        activeIcon: Icon(Icons.history,color: Colors.red,),
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.settings,color: Colors.blueAccent,),
@@ -85,8 +94,9 @@ class _HomePageState extends BasePageStateActive<HomePage>  {
     },
     children: const <Widget>[
       NewsHubPage(),
-      AnswerAndQuestionPage(),
-      MultimediaPage(),
+      ProfilePage(),
+      FindJobPage(),
+      HistoryPage(),
       SettingPage(),
     ],
   );

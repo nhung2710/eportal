@@ -23,20 +23,18 @@ class _AboutPageState extends BasePageState<AboutPage>{
   String getPageTitle(BuildContext context)  => "Giới thiệu";
   late Future<String> _content;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    _content = getContent();
-    super.initState();
-  }
 
+  @override
+  void initDataLoading() {
+    _content = getContent();
+  }
   @override
   Widget pageUI(BuildContext context) => SingleChildScrollView(
     child: FutureBuilder<String>(
       future: _content,
       builder: (BuildContext context, AsyncSnapshot<String> snapshot)
       {
-        return snapshot.hasData ? Text(snapshot.data!) : CircularProgressIndicator();
+        return snapshot.hasData ? Text(snapshot.data!) : const CircularProgressIndicator();
 
       }
     ),

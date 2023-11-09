@@ -1,6 +1,6 @@
-import 'package:eportal/api/model/base/base_eportal_response.dart';
-import 'package:eportal/api/model/response/common_new/data/common_new_data.dart';
-import 'package:eportal/api/model/response/common_new/home_news_list_response.dart';
+
+import 'package:eportal/model/base/base_eportal_response.dart';
+import 'package:eportal/model/api/response/common_new/data/common_new_data.dart';
 import 'package:flutter/material.dart';
 
 //

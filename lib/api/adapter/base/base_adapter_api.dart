@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:eportal/api/constant/application_api_constant.dart';
-import 'package:eportal/api/model/base/base_eportal_request.dart';
 import 'package:eportal/application/global_application.dart';
+import 'package:eportal/model/base/base_eportal_request.dart';
 import 'package:http/http.dart';
 import 'package:xml/xml.dart';
 
@@ -17,7 +17,7 @@ class BaseAdapterApi {
   static final Map<String, String> _Maps = {
     "xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance",
     "xmlns:xsd":"http://www.w3.org/2001/XMLSchema",
-    "xmlns:soap":"http://schemas.xmlsoap.org/soap/envelope",
+    "xmlns:soap":"http://schemas.xmlsoap.org/soap/envelope/",
   };
 
   Future<Map<String, dynamic>> callApiAsync(BaseEportalRequest request) async {
@@ -26,7 +26,7 @@ class BaseAdapterApi {
     stringBuffer.write('<soap:Envelope ${getMapXml()}>');
     stringBuffer.write('<soap:Header>');
     stringBuffer.write('<AuthHeader xmlns="http://tempuri.org/">');
-    stringBuffer.write('<userLogin>$ApplicationApiConstant.BASE_AUTH_HEADER_USER_LOGIN</userLogin>');
+    stringBuffer.write('<userLogin>${ApplicationApiConstant.BASE_AUTH_HEADER_USER_LOGIN}</userLogin>');
     stringBuffer.write('<password>${ApplicationApiConstant.BASE_AUTH_HEADER_PASSWORD}</password>');
     stringBuffer.write('</AuthHeader>');
     stringBuffer.write('</soap:Header>');
@@ -39,10 +39,20 @@ class BaseAdapterApi {
         await _callWebServiceAsync(request.getUri(), stringBuffer.toString());
     if (responseSoapBody.isNotEmpty) {
       final xmlResponse = XmlDocument.parse(responseSoapBody);
+
+      log('getTagXml: ${request.getTagXml()}');
       var elements = xmlResponse.findAllElements(request.getTagXml());
       for (var item in elements) {
         var jsonValue = item.innerText;
         return json.decode(jsonValue);
+      }
+      var faultStringElements = xmlResponse.findAllElements("faultstring");
+      if(faultStringElements.isNotEmpty){
+
+        var result = <String, dynamic>{};
+        result["status"] = 0;
+        result["message"] = faultStringElements.first.innerText;
+        return result;
       }
     }
     var result = <String, dynamic>{};

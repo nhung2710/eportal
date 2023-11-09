@@ -1,104 +1,47 @@
-import 'dart:io';
-
-import 'package:eportal/constant/application_constant.dart';
+import 'package:eportal/constant/application_regex_constant.dart';
 import 'package:eportal/extension/string_extension.dart';
 import 'package:eportal/screen/anonymous/home/home_page.dart';
-import 'package:eportal/screen/share/onboarding/page/onboarding_page.dart';
-import 'package:eportal/style/app_theme.dart';
+import 'package:eportal/screen/share/sign_up/page/sign_up_page.dart';
+import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'application/global_application.dart';
-Future<bool> checkAppRunFirstTime(){
-  bool? isFirstRunApp = GlobalApplication().Preferences.getBool(ApplicationConstant.FIRST_TIME_OPEN_APP);
-  return GlobalApplication().Preferences.remove(ApplicationConstant.REGISTER_USER_PASSWORD)
-      .then((value) => GlobalApplication().Preferences.remove(ApplicationConstant.REGISTER_USER_NAME))
-      .then((value) =>GlobalApplication().Preferences.setBool(ApplicationConstant.FIRST_TIME_OPEN_APP,true))
-      //.then((value) => isFirstRunApp??false)
-      .then((value) => true);
-}
+//
+// Created by BlackRose on 11/7/2023.
+// Copyright (c) 2023 Hilo All rights reserved.
+//
+class OnboardingPage extends BasePage{
+  const OnboardingPage({super.key});
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.white,
-    statusBarIconBrightness: Brightness.dark,
-    statusBarBrightness:Brightness.light,
-    systemNavigationBarColor: Colors.white,
-    systemNavigationBarDividerColor: Colors.transparent,
-    systemNavigationBarIconBrightness: Brightness.dark,
-  ));
-  GlobalApplication().Preferences = await SharedPreferences.getInstance();
-  GlobalApplication().UserName = GlobalApplication().Preferences.getString(ApplicationConstant.USER_NAME).replaceWhenNullOrWhiteSpace();
-  GlobalApplication().UserPassword = GlobalApplication().Preferences.getString(ApplicationConstant.USER_PASSWORD).replaceWhenNullOrWhiteSpace();
-
-  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown
-  ])
-  .then((_) => checkAppRunFirstTime())
-  .then((isFirstRunApp) => runApp(MyApp(isFirstRunApp: isFirstRunApp)));
-}
-
-class MyApp extends StatelessWidget {
-  final PageStorageBucket _bucket = PageStorageBucket();
-  bool isFirstRunApp;
-  MyApp({super.key,required this.isFirstRunApp});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        textTheme: AppTheme.textTheme,
-        platform: TargetPlatform.iOS,
-      ),
-      home: PageStorage(
-          key: key,
-          bucket: _bucket,
-        //child: isFirstRunApp?  const OnboardingPage():const HomePage(),
-          child: isFirstRunApp?  const HomePage():const HomePage(),
-      ),
-      builder: (context, child) {
-        return MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-          child: child!,
-        );
-      },
-    );
-  }
-}
-
-
-class OnBoardingPage extends StatefulWidget {
-  const OnBoardingPage({Key? key}) : super(key: key);
 
   @override
-  OnBoardingPageState createState() => OnBoardingPageState();
+  State<StatefulWidget> createState() => _OnboardingPageState();
 }
 
-class OnBoardingPageState extends State<OnBoardingPage> {
+class _OnboardingPageState extends BasePageState<OnboardingPage>{
+  TextEditingController emailController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+
   final introKey = GlobalKey<IntroductionScreenState>();
 
-  void _onIntroEnd(context) {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => const HomePage()),
-    );
-  }
+  @override
+  String getPageTitle(BuildContext context) => "Quên mật khẩu";
+
+  @override
+  bool isHasAppBar(BuildContext context)  => false;
+
+  @override
+  Color currentBackgroundColor(BuildContext context)  => Colors.white;
+
 
 
   Widget _buildImage(String assetName, [double width = 350]) {
     return Image.asset('assets/images/$assetName', width: width);
   }
-
   @override
-  Widget build(BuildContext context) {
+  Widget pageUI(BuildContext context) {
+
     const bodyStyle = TextStyle(fontSize: 19.0);
 
     const pageDecoration = PageDecoration(
@@ -108,31 +51,19 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       pageColor: Colors.white,
       imagePadding: EdgeInsets.zero,
     );
-
     return IntroductionScreen(
       key: introKey,
       globalBackgroundColor: Colors.white,
       allowImplicitScrolling: true,
-      autoScrollDuration: 3000,
-      infiniteAutoScroll: true,
+      autoScrollDuration: 60 * 1000,
+      infiniteAutoScroll: false,
       globalHeader: Align(
-        alignment: Alignment.topRight,
+        alignment: Alignment.topCenter,
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(top: 16, right: 16),
             child: _buildImage('Logo.jpg', 100),
           ),
-        ),
-      ),
-      globalFooter: SizedBox(
-        width: double.infinity,
-        height: 60,
-        child: ElevatedButton(
-          child: const Text(
-            'Let\'s go right away!',
-            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-          ),
-          onPressed: () => _onIntroEnd(context),
         ),
       ),
       pages: [
@@ -202,8 +133,8 @@ class OnBoardingPageState extends State<OnBoardingPage> {
           reverse: true,
         ),
       ],
-      onDone: () => _onIntroEnd(context),
-      onSkip: () => _onIntroEnd(context), // You can override onSkip callback
+      onDone: () => nextPageWithoutBack((context) => const HomePage()),
+      onSkip: () => nextPageWithoutBack((context) => const HomePage()), // You can override onSkip callback
       showSkipButton: true,
       skipOrBackFlex: 0,
       nextFlex: 0,
@@ -215,9 +146,7 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       done: const Text('Done', style: TextStyle(fontWeight: FontWeight.w600)),
       curve: Curves.fastLinearToSlowEaseIn,
       controlsMargin: const EdgeInsets.all(16),
-      controlsPadding: kIsWeb
-          ? const EdgeInsets.all(12.0)
-          : const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
+      controlsPadding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
       dotsDecorator: const DotsDecorator(
         size: Size(10.0, 10.0),
         color: Color(0xFFBDBDBD),
@@ -234,4 +163,8 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       ),
     );
   }
+
+
+
+
 }

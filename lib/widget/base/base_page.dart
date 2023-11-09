@@ -1,6 +1,11 @@
+import 'package:eportal/api/constant/application_api_constant.dart';
+import 'package:eportal/constant/application_constant.dart';
+import 'package:eportal/extension/string_extension.dart';
+import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/style/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 //
@@ -15,6 +20,7 @@ class BasePage extends StatefulWidget {
 }
 
 class BasePageState<T extends StatefulWidget> extends State<T> {
+  final localKey = GlobalKey<State<T>>();
   final formKey = GlobalKey<FormState>();
 
   final ScrollController scrollController = ScrollController();
@@ -22,6 +28,15 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
   void dispose() {
     scrollController.dispose();
     super.dispose();
+  }
+  @override
+  void initState() {
+    initDataLoading();
+    // TODO: implement initState
+    super.initState();
+  }
+  void initDataLoading(){
+
   }
   @override
   Widget build(BuildContext context){
@@ -36,7 +51,11 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
             color: currentBackgroundColor(context),
             height: double.infinity,
             padding: EdgeInsets.all(currentPadding(context)),
-            child: pageUI(context),
+            child: RefreshIndicator(
+                color: Colors.blue,
+                onRefresh: () async => initDataLoading(),
+                child: pageUI(context)
+            ),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
           floatingActionButton: getFloatingActionButton(context),
@@ -162,6 +181,7 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
 }
 
 class BasePageStateActive<T extends StatefulWidget> extends State<T> with AutomaticKeepAliveClientMixin {
+  final localKey = GlobalKey<State<T>>();
   final formKey = GlobalKey<FormState>();
   @override
   bool get wantKeepAlive => true;
@@ -172,6 +192,17 @@ class BasePageStateActive<T extends StatefulWidget> extends State<T> with Automa
     scrollController.dispose();
     super.dispose();
   }
+  @override
+  void initState() {
+    initDataLoading();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  void initDataLoading(){
+
+  }
+
   @override
   Widget build(BuildContext context){
     super.build(context);
@@ -186,7 +217,12 @@ class BasePageStateActive<T extends StatefulWidget> extends State<T> with Automa
             color: currentBackgroundColor(context),
             height: double.infinity,
             padding: EdgeInsets.all(currentPadding(context)),
-            child: pageUI(context),
+            child: RefreshIndicator(
+                color: Colors.blue,
+
+                onRefresh: () async => initDataLoading(),
+                child: pageUI(context)
+            ),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
           floatingActionButton: getFloatingActionButton(context),
@@ -309,4 +345,32 @@ class BasePageStateActive<T extends StatefulWidget> extends State<T> with Automa
   void nextPage(WidgetBuilder builder)=> Navigator.push(context,MaterialPageRoute(builder: builder));
   void nextPageWithoutBack(WidgetBuilder builder)=> Navigator.pushReplacement(context,MaterialPageRoute(builder: builder));
   Future<void> scrollToEnd() => scrollController.animateTo(scrollController.position.maxScrollExtent,duration: const Duration(milliseconds: 300),curve: Curves.easeOut);
+
+  Widget handlerBaseState<K>(BaseState state,BlocWidgetBuilder<K> builder){
+
+    if (state is BaseInitial) {
+      return buildScreenLoading();
+    } else if (state is BaseLoading) {
+      return buildScreenLoading();
+    } else if (state is BaseError) {
+      return buildScreenError(state.message.replaceWhenNullOrWhiteSpace(ApplicationConstant.SYSTEM_ERROR));
+    } else if (state is BaseLoaded<K>){
+      return builder(context,state.data);
+    }
+    else{
+        return buildScreenError(ApplicationConstant.SYSTEM_ERROR);
+    }
+  }
+
+  Widget buildScreenLoading() => Center(
+    child: Container(
+        height: 100,
+        child: const Center(child: CircularProgressIndicator())
+    ),
+  );
+  Widget buildScreenError(String error) => Container(
+      height: 100,
+      color: Colors.red,
+      child: Text(error,style: AppTextStyle.title.copyWith(color: Colors.red),)
+  );
 }

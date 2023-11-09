@@ -26,7 +26,7 @@ class _ExpandableFabState extends State<ExpandableFab> with SingleTickerProvider
   @override
   void initState() {
     super.initState();
-
+    _open = widget.children.length <= 1;
     _controller = AnimationController(
         value: _open ? 1.0 : 0.0,
         duration: const Duration(milliseconds: 100),
@@ -71,43 +71,57 @@ class _ExpandableFabState extends State<ExpandableFab> with SingleTickerProvider
   }
 
   Widget _tapToClose() {
-    return _open ? ActionButton(icon: const Icon(Icons.close,color: Colors.blue,),
+    return _open && widget.children.length > 1 ? ActionButton(icon: const Icon(Icons.close,color: Colors.blue,),
       onPressed: _toggle,
       color: Colors.white,
     ) : Container();
   }
 
   Widget _tapToOpen() {
-    return !_open ? ActionButton(icon: const Icon(Icons.add,color: Colors.white),
+    return !_open && widget.children.length > 1 ? ActionButton(icon: const Icon(Icons.add,color: Colors.white),
       onPressed: _toggle,
     ) : Container();
   }
 
   List<Widget> _buildExpandableFabButton() {
-    final List<Widget> children = <Widget>[];
     final count = widget.children.length;
-    final spaceGroupdistance = widget.spaceGroupdistance;
-    final int addNumberGroup = widget.addNumberGroup;
-    int countLoop = widget.initNumberGroup;
-    int j = 0;
-    int k = 0;
-    double angleInDegreesChild = 0.0;
-    for(var i = 0 ; i < count ; i++){
-      final stepChild = 90.0 / (countLoop - 1);
-      children.add(
-          _ExpandableFab(
-              directionDegrees: angleInDegreesChild,
-              maxDistance: widget.distance + spaceGroupdistance * k,
-              progress: _expandAnimation,
-              child: widget.children[i])
-      );
-      angleInDegreesChild+= stepChild;
-      j++;
-      if(j == countLoop){
-        k++;
-        j = 0;
-        countLoop += addNumberGroup;
-        angleInDegreesChild = 0;
+    final List<Widget> children = <Widget>[];
+    if(count > 1){
+
+      final spaceGroupDistance = widget.spaceGroupdistance;
+      final int addNumberGroup = widget.addNumberGroup;
+      int countLoop = widget.initNumberGroup;
+      int j = 0;
+      int k = 0;
+      double angleInDegreesChild = 0.0;
+      for(var i = 0 ; i < count ; i++){
+        final stepChild = 90.0 / (countLoop - 1);
+        children.add(
+            _ExpandableFab(
+                directionDegrees: angleInDegreesChild,
+                maxDistance: widget.distance + spaceGroupDistance * k,
+                progress: _expandAnimation,
+                child: widget.children[i])
+        );
+        angleInDegreesChild+= stepChild;
+        j++;
+        if(j == countLoop){
+          k++;
+          j = 0;
+          countLoop += addNumberGroup;
+          angleInDegreesChild = 0;
+        }
+      }
+    }
+    else{
+      for(var i = 0 ; i < count ; i++){
+        children.add(
+            _ExpandableFab(
+                directionDegrees: 0,
+                maxDistance: 0,
+                progress: _expandAnimation,
+                child: widget.children[i])
+        );
       }
     }
 

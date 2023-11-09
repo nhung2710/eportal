@@ -1,13 +1,23 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eportal/application/global_application.dart';
+import 'package:eportal/bloc/common_new/home_works_list/home_works_list_bloc.dart';
 import 'package:eportal/constant/application_constant.dart';
+import 'package:eportal/event/common_new/home_works_list/home_works_list_event.dart';
+import 'package:eportal/extension/string_extension.dart';
+import 'package:eportal/model/api/request/commonnew/data/common_new_data.dart' as requestData;
+import 'package:eportal/model/api/request/commonnew/home_works_list_request.dart';
+import 'package:eportal/model/api/response/common_new/home_works_list_response.dart';
 import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
+import 'package:eportal/screen/share/news_hub/widget/home_work_list_preview.dart';
 import 'package:eportal/screen/share/news_hub/widget/news_slide_item.dart';
+import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
 import 'package:eportal/widget/image/image_loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //
 // Created by BlackRose on 11/7/2023.
@@ -25,7 +35,6 @@ class NewsHubPage extends BasePage{
 class _NewsHubPageState extends BasePageStateActive<NewsHubPage>{
   @override
   bool isHasAppBar(BuildContext context) => false;
-
   @override
   Widget? getFloatingActionButton(BuildContext context) => ExpandableFab(
       children: [
@@ -90,32 +99,15 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage>{
         ),
         Container(
             margin: const EdgeInsets.only(top: 5),
-            padding: const EdgeInsets.only(left: 5),
+            padding: const EdgeInsets.only(left: 5,top: 10,bottom: 10),
+            width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
               color: Colors.white,
             ),
-            child: Row(
-              children: [
-                Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Bạn muốn tìm việc",style: AppTextStyle.titlePage),
-                          Text("Địa điểm - Công ty Vị tri ngành",style: AppTextStyle.titleHintPage,),
-                        ],
-                      ),
-                    )
-                ),
-                const SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: Icon(Icons.search,color: Colors.green,),
-                ),
-              ],
+            child: const Padding(
+              padding: EdgeInsets.only(left: 5),
+              child: Text("Tuyển dụng",maxLines: 1,textAlign: TextAlign.start,style: AppTextStyle.titlePage,),
             )
         ),
         Container(
@@ -126,31 +118,42 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage>{
               borderRadius: BorderRadius.circular(5),
               color: Colors.white,
             ),
-            child: const Padding(
-              padding: EdgeInsets.only(left: 5),
-              child: Text("Tin tức",maxLines: 1,textAlign: TextAlign.start,style: AppTextStyle.titlePage,),
+            child: DefaultTabController(
+              key: localKey,
+              length: 3,
+              child: Column(
+                children: [
+                  const TabBar(
+                    indicatorColor: Colors.blue,
+                    labelColor: Colors.blue,
+                    labelStyle: AppTextStyle.title,
+                    indicatorWeight: 1,
+                    tabs: [
+                      Tab(
+                        text: "Tốt nhất",
+                      ),
+                      Tab(
+                        text: "Mới nhất",
+                      ),
+                      Tab(
+                        text: "Lương cao",
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 150,
+                    child: TabBarView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        HomeWorkListPreview(flag: 0),
+                        HomeWorkListPreview(flag: 1),
+                        HomeWorkListPreview(flag: 2),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             )
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 5),
-          child: CarouselSlider(
-            options: CarouselOptions(
-              viewportFraction: 1,
-              aspectRatio: 2,
-              animateToClosest:  true,
-              initialPage: 0,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 10),
-              autoPlayAnimationDuration: const Duration(milliseconds: 3000),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              enlargeCenterPage: true,
-              enlargeFactor: 0.2,
-              scrollDirection: Axis.horizontal,
-            ),
-            items: ApplicationConstant.URL_NEW.map((item) => Builder(builder: (BuildContext context) => NewsSlideItem(imageUrl: item),)).toList(),
-          ),
         ),
         Container(
             margin: const EdgeInsets.only(top: 5),

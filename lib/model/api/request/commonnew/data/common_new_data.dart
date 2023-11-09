@@ -1,4 +1,5 @@
-import 'package:eportal/api/model/base/base_eportal_xml.dart';
+
+import 'package:eportal/model/base/base_eportal_xml.dart';
 import 'package:flutter/material.dart';
 
 //
@@ -9,7 +10,7 @@ class CommonNewData extends BaseEportalXml {
   int? flag;
   int? top;
 
-  CommonNewData({this.flag, this.top});
+  CommonNewData({this.flag, this.top = 10});
 
   @override
   StringBuffer toXml() {

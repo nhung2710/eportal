@@ -26,21 +26,15 @@ class _PolicyPageState extends BasePageState<PolicyPage>{
   late Future<String> _content;
 
   @override
-  void initState() {
-    // TODO: implement initState
+  void initDataLoading() {
     _content = getContent();
-    super.initState();
   }
 
   @override
   Widget pageUI(BuildContext context) => SingleChildScrollView(
     child: FutureBuilder<String>(
         future: _content,
-        builder: (BuildContext context, AsyncSnapshot<String> snapshot)
-        {
-          return snapshot.hasData ? Text(snapshot.data!) : CircularProgressIndicator();
-
-        }
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) => snapshot.hasData ? Text(snapshot.data!) : const CircularProgressIndicator()
     ),
   );
 

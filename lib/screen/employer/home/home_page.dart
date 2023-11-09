@@ -1,4 +1,5 @@
-import 'package:eportal/screen/anonymous/setting/page/setting_page.dart';
+
+import 'package:eportal/screen/employer/setting/page/setting_page.dart';
 import 'package:eportal/screen/share/answer_and_question/page/answer_and_question_page.dart';
 import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
 import 'package:eportal/screen/share/multimedia/page/multimedia_page.dart';

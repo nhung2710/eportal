@@ -1,3 +1,5 @@
+import 'package:eportal/constant/application_constant.dart';
+import 'package:eportal/extension/string_extension.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/image/image_loading.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +10,9 @@ import 'package:flutter/material.dart';
 //
 class NewsSlideItem extends StatelessWidget{
 
-  final String imageUrl;
-  const NewsSlideItem({super.key, required this.imageUrl});
+  final String? imageUrl;
+  final String? title;
+  const NewsSlideItem({super.key, this.imageUrl = ApplicationConstant.URL_NEWS, this.title = "Khủng hoảng thịt cừu tại Úc, người chăn nuôi phải mang cho không"});
   @override
   Widget build(BuildContext context)  => Container(
       width: double.infinity,
@@ -26,7 +29,7 @@ class NewsSlideItem extends StatelessWidget{
             child: SizedBox(
               width: double.infinity,
               child: ImageLoading(
-                imageUrl: imageUrl,
+                imageUrl: imageUrl.replaceWhenNullOrWhiteSpace(ApplicationConstant.URL_NEWS),
                 imageBuilder: (context, imageProvider)
                 {
                   return Image(image: imageProvider,
@@ -36,7 +39,7 @@ class NewsSlideItem extends StatelessWidget{
         ),
             ),
           ),
-          const Text("Khủng hoảng thịt cừu tại Úc, người chăn nuôi phải mang cho không",
+          Text(title.replaceWhenNullOrWhiteSpace("Khủng hoảng thịt cừu tại Úc, người chăn nuôi phải mang cho không"),
             maxLines: 2,
             textAlign: TextAlign.justify,
             overflow: TextOverflow.ellipsis,
