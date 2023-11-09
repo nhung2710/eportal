@@ -8,6 +8,7 @@ import 'package:eportal/model/api/request/commonnew/data/common_new_data.dart' a
 import 'package:eportal/model/api/request/commonnew/home_works_list_request.dart';
 import 'package:eportal/model/api/response/common_new/home_works_list_response.dart';
 import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
+import 'package:eportal/screen/share/news_hub/widget/home_news_list_preview.dart';
 import 'package:eportal/screen/share/news_hub/widget/home_work_list_preview.dart';
 import 'package:eportal/screen/share/news_hub/widget/news_slide_item.dart';
 import 'package:eportal/state/base/base_state.dart';
@@ -92,7 +93,7 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage>{
                 const SizedBox(
                   width: 40,
                   height: 40,
-                  child: Icon(Icons.search,color: Colors.green,),
+                  child: Icon(Icons.search,color: Colors.blue,),
                 ),
               ],
             )
@@ -107,8 +108,19 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage>{
             ),
             child: const Padding(
               padding: EdgeInsets.only(left: 5),
-              child: Text("Tuyển dụng",maxLines: 1,textAlign: TextAlign.start,style: AppTextStyle.titlePage,),
+              child: Text("Tin tức",maxLines: 1,textAlign: TextAlign.start,style: AppTextStyle.titlePage,),
             )
+        ),
+        Container(
+            margin: const EdgeInsets.only(top: 5),
+            padding: const EdgeInsets.only(left: 5,top: 10,bottom: 10),
+            width: double.infinity,
+            height: 150,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.white,
+            ),
+            child: HomeNewsListPreview(flag: 1,)
         ),
         Container(
             margin: const EdgeInsets.only(top: 5),

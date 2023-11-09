@@ -1,8 +1,10 @@
 import 'package:eportal/api/adapter/base/base_adapter_api.dart';
 import 'package:eportal/event/base/base_event.dart';
+import 'package:eportal/event/common_new/home_news_list/home_news_list_event.dart';
 import 'package:eportal/event/common_new/home_works_list/home_works_list_event.dart';
 import 'package:eportal/model/api/request/commonnew/home_works_list_request.dart';
 import 'package:eportal/model/api/response/common_new/home_works_list_response.dart';
+import 'package:eportal/repository/common_new/home_news_list/home_news_list_repository.dart';
 import 'package:eportal/repository/common_new/home_works_list/home_works_list_repository.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/state/common_new/home_works_list/home_works_list_state.dart';
@@ -12,16 +14,16 @@ import 'package:bloc/bloc.dart';
 // Created by BlackRose on 11/9/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class HomeWorksListBloc extends Bloc<BaseEvent, BaseState> {
+class HomeNewsListBloc extends Bloc<BaseEvent, BaseState> {
 
-  HomeWorksListBloc() : super(BaseInitial()){
-    final HomeWorksListRepository apiRepository = HomeWorksListRepository();
+  HomeNewsListBloc() : super(BaseInitial()){
+    final HomeNewsListRepository apiRepository = HomeNewsListRepository();
 
-    on<HomeWorksListCommonEvent>((event, emit) async {
+    on<HomeNewsListCommonEvent>((event, emit) async {
       try {
         emit(BaseLoading());
         await Future.delayed(const Duration(seconds: 10));
-        final response = await apiRepository.getHomeWorksList(event.request);
+        final response = await apiRepository.getHomeNewsList(event.request);
         emit(BaseLoaded(response));
         if (response.status != 2) {
           emit(BaseError(response.message));
