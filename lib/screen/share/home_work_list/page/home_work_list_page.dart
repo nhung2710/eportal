@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 // Created by BlackRose on 11/9/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class EmptyExamplePage extends BasePage{
-  const EmptyExamplePage({super.key});
+class HomeWorkListPage extends BasePage{
+  const HomeWorkListPage({super.key});
 
 
   @override
-  State<StatefulWidget> createState() => _EmptyExamplePageState();
+  State<StatefulWidget> createState() => _HomeWorkListPageState();
 }
 
-class _EmptyExamplePageState extends BasePageStateActive<EmptyExamplePage>{
+class _HomeWorkListPageState extends BasePageStateActive<HomeWorkListPage>{
 
   @override
   bool isHasAppBar(BuildContext context) => false;

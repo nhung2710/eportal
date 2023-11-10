@@ -1,10 +1,19 @@
+import 'package:eportal/bloc/common_new/gioi_thieu_trung_tam/gioi_thieu_trung_tam_bloc.dart';
 import 'package:eportal/constant/application_constant.dart';
+import 'package:eportal/event/common_new/gioi_thieu_trung_tam/gioi_thieu_trung_tam_event.dart';
+import 'package:eportal/extension/string_extension.dart';
+import 'package:eportal/model/api/request/common_new/data/common_new_data.dart';
+import 'package:eportal/model/api/request/common_new/gioi_thieu_trung_tam_request.dart';
+import 'package:eportal/model/api/response/common_new/gioi_thieu_trung_tam_response.dart';
+import 'package:eportal/screen/share/empty_example/page/empty_example_page.dart';
+import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/image/image_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
 //
 // Created by BlackRose on 11/7/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -19,36 +28,43 @@ class AboutPage extends BasePage{
 
 class _AboutPageState extends BasePageState<AboutPage>{
 
-  @override
-  String getPageTitle(BuildContext context)  => "Giới thiệu";
-  late Future<String> _content;
-
-
+  GioiThieuTrungTamBloc gioiThieuTrungTamBloc = GioiThieuTrungTamBloc();
   @override
   void initDataLoading() {
-    _content = getContent();
+    gioiThieuTrungTamBloc.add(GioiThieuTrungTamEvent(request: GioiThieuTrungTamRequest(obj: CommonNewData(top: 1))));
+    super.initDataLoading();
   }
   @override
+  String getPageTitle(BuildContext context)  => "Giới thiệu";
+
+  @override
+  Color currentBackgroundColor(BuildContext context)  => Colors.white;
+
+  @override
   Widget pageUI(BuildContext context) => SingleChildScrollView(
-    child: FutureBuilder<String>(
-      future: _content,
-      builder: (BuildContext context, AsyncSnapshot<String> snapshot)
-      {
-        return snapshot.hasData ? Text(snapshot.data!) : const CircularProgressIndicator();
+    child: BlocProvider(
+        create: (_) => gioiThieuTrungTamBloc,
+        child: BlocListener<GioiThieuTrungTamBloc,BaseState>(
+          listener: (BuildContext context, BaseState state) {
 
-      }
+          },
+          child: BlocBuilder<GioiThieuTrungTamBloc, BaseState>(
+            builder: (BuildContext context, BaseState state) => handlerBaseState<GioiThieuTrungTamResponse>(state,
+                  (context, state) => Container(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Html(
+                      data: state.data.replaceWhenNullOrWhiteSpace(),
+                      style: {
+                        '#': Style(
+                          fontSize: FontSize(16),
+                        ),
+                      },
+                    ),
+                  ),
+          ),
+        )
     ),
+  )
   );
-
-  Future<String> getContent() async {
-    try {
-      return await rootBundle.loadString('assets/texts/about.txt');
-    }
-    catch (e) {
-      // If encountering an error, return 0.
-      print(e);
-    }
-    return "";
-  }
 
 }

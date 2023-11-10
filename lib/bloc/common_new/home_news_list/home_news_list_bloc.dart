@@ -2,7 +2,7 @@ import 'package:eportal/api/adapter/base/base_adapter_api.dart';
 import 'package:eportal/event/base/base_event.dart';
 import 'package:eportal/event/common_new/home_news_list/home_news_list_event.dart';
 import 'package:eportal/event/common_new/home_works_list/home_works_list_event.dart';
-import 'package:eportal/model/api/request/commonnew/home_works_list_request.dart';
+import 'package:eportal/model/api/request/common_new/home_works_list_request.dart';
 import 'package:eportal/model/api/response/common_new/home_works_list_response.dart';
 import 'package:eportal/repository/common_new/home_news_list/home_news_list_repository.dart';
 import 'package:eportal/repository/common_new/home_works_list/home_works_list_repository.dart';
@@ -19,7 +19,7 @@ class HomeNewsListBloc extends Bloc<BaseEvent, BaseState> {
   HomeNewsListBloc() : super(BaseInitial()){
     final HomeNewsListRepository apiRepository = HomeNewsListRepository();
 
-    on<HomeNewsListCommonEvent>((event, emit) async {
+    on<HomeNewsListEvent>((event, emit) async {
       try {
         emit(BaseLoading());
         await Future.delayed(const Duration(seconds: 10));

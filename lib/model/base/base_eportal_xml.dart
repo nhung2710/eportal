@@ -4,5 +4,4 @@ class BaseEportalXml {
     return buffer;
   }
 
-  String getDefaultNameSpace() => 'xmlns="http://tempuri.org/"';
 }

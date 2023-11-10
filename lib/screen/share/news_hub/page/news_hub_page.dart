@@ -4,8 +4,8 @@ import 'package:eportal/bloc/common_new/home_works_list/home_works_list_bloc.dar
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/event/common_new/home_works_list/home_works_list_event.dart';
 import 'package:eportal/extension/string_extension.dart';
-import 'package:eportal/model/api/request/commonnew/data/common_new_data.dart' as requestData;
-import 'package:eportal/model/api/request/commonnew/home_works_list_request.dart';
+import 'package:eportal/model/api/request/common_new/data/common_new_data.dart' as requestData;
+import 'package:eportal/model/api/request/common_new/home_works_list_request.dart';
 import 'package:eportal/model/api/response/common_new/home_works_list_response.dart';
 import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
 import 'package:eportal/screen/share/news_hub/widget/home_news_list_preview.dart';
@@ -106,21 +106,19 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage>{
               borderRadius: BorderRadius.circular(5),
               color: Colors.white,
             ),
-            child: const Padding(
-              padding: EdgeInsets.only(left: 5),
-              child: Text("Tin tức",maxLines: 1,textAlign: TextAlign.start,style: AppTextStyle.titlePage,),
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: double.infinity,
+                  child: const Text("Tin tức",maxLines: 1,textAlign: TextAlign.start,style: AppTextStyle.titlePage,),
+                ),
+                SizedBox(
+                  height: 200,
+                  child: HomeNewsListPreview(flag: 1,),
+                )
+              ],
             )
-        ),
-        Container(
-            margin: const EdgeInsets.only(top: 5),
-            padding: const EdgeInsets.only(left: 5,top: 10,bottom: 10),
-            width: double.infinity,
-            height: 150,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.white,
-            ),
-            child: HomeNewsListPreview(flag: 1,)
         ),
         Container(
             margin: const EdgeInsets.only(top: 5),
@@ -135,11 +133,16 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage>{
               length: 3,
               child: Column(
                 children: [
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    width: double.infinity,
+                    child: const Text("Tin tuyển dụng",maxLines: 1,textAlign: TextAlign.start,style: AppTextStyle.titlePage,),
+                  ),
                   const TabBar(
                     indicatorColor: Colors.blue,
                     labelColor: Colors.blue,
                     labelStyle: AppTextStyle.title,
-                    indicatorWeight: 1,
+                    indicatorWeight: 2,
                     tabs: [
                       Tab(
                         text: "Tốt nhất",
@@ -153,7 +156,7 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage>{
                     ],
                   ),
                   SizedBox(
-                    height: 150,
+                    height: 200,
                     child: TabBarView(
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
@@ -175,31 +178,19 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage>{
               borderRadius: BorderRadius.circular(5),
               color: Colors.white,
             ),
-            child: const Padding(
-              padding: EdgeInsets.only(left: 5),
-              child: Text("Việc làm",maxLines: 1,textAlign: TextAlign.start,style: AppTextStyle.titlePage,),
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: double.infinity,
+                  child: const Text("Doanh nghiệp tuyển dụng",maxLines: 1,textAlign: TextAlign.start,style: AppTextStyle.titlePage,),
+                ),
+                SizedBox(
+                  height: 200,
+                  child: HomeNewsListPreview(flag: 1,),
+                )
+              ],
             )
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 5),
-          child: CarouselSlider(
-            options: CarouselOptions(
-              viewportFraction: 1,
-              aspectRatio: 2,
-              animateToClosest:  true,
-              initialPage: 0,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 10),
-              autoPlayAnimationDuration: const Duration(milliseconds: 3000),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              enlargeCenterPage: true,
-              enlargeFactor: 0.2,
-              scrollDirection: Axis.horizontal,
-            ),
-            items: ApplicationConstant.URL_NEW.map((item) => Builder(builder: (BuildContext context) => NewsSlideItem(imageUrl: item),)).toList(),
-          ),
         ),
         Container(
             margin: const EdgeInsets.only(top: 5),
@@ -209,31 +200,19 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage>{
               borderRadius: BorderRadius.circular(5),
               color: Colors.white,
             ),
-            child: const Padding(
-              padding: EdgeInsets.only(left: 5),
-              child: Text("Hồ sơ xin việc",maxLines: 1,textAlign: TextAlign.start,style: AppTextStyle.titlePage,),
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: double.infinity,
+                  child: const Text("Hồ sơ ứng tuyển",maxLines: 1,textAlign: TextAlign.start,style: AppTextStyle.titlePage,),
+                ),
+                SizedBox(
+                  height: 200,
+                  child: HomeNewsListPreview(flag: 1,),
+                )
+              ],
             )
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 5),
-          child: CarouselSlider(
-            options: CarouselOptions(
-              viewportFraction: 1,
-              aspectRatio: 2,
-              animateToClosest:  true,
-              initialPage: 0,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 10),
-              autoPlayAnimationDuration: const Duration(milliseconds: 3000),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              enlargeCenterPage: true,
-              enlargeFactor: 0.2,
-              scrollDirection: Axis.horizontal,
-            ),
-            items: ApplicationConstant.URL_NEW.map((item) => Builder(builder: (BuildContext context) => NewsSlideItem(imageUrl: item),)).toList(),
-          ),
         ),
         Container(
             margin: const EdgeInsets.only(top: 5),
@@ -243,32 +222,21 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage>{
               borderRadius: BorderRadius.circular(5),
               color: Colors.white,
             ),
-            child: const Padding(
-              padding: EdgeInsets.only(left: 5),
-              child: Text("Văn bản pháp luật",maxLines: 1,textAlign: TextAlign.start,style: AppTextStyle.titlePage,),
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: double.infinity,
+                  child: const Text("Văn bản pháp luật",maxLines: 1,textAlign: TextAlign.start,style: AppTextStyle.titlePage,),
+                ),
+                SizedBox(
+                  height: 200,
+                  child: HomeNewsListPreview(flag: 1,),
+                )
+              ],
             )
         ),
-        Container(
-          margin: const EdgeInsets.only(top: 5),
-          child: CarouselSlider(
-            options: CarouselOptions(
-              viewportFraction: 1,
-              aspectRatio: 2,
-              animateToClosest:  true,
-              initialPage: 0,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 10),
-              autoPlayAnimationDuration: const Duration(milliseconds: 3000),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              enlargeCenterPage: true,
-              enlargeFactor: 0.2,
-              scrollDirection: Axis.horizontal,
-            ),
-            items: ApplicationConstant.URL_NEW.map((item) => Builder(builder: (BuildContext context) => NewsSlideItem(imageUrl: item),)).toList(),
-          ),
-        ),
+
       ],
     ),
   );

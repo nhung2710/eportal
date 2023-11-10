@@ -178,6 +178,34 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
   void nextPage(WidgetBuilder builder)=> Navigator.push(context,MaterialPageRoute(builder: builder));
   void nextPageWithoutBack(WidgetBuilder builder)=> Navigator.pushReplacement(context,MaterialPageRoute(builder: builder));
   Future<void> scrollToEnd() => scrollController.animateTo(scrollController.position.maxScrollExtent,duration: const Duration(milliseconds: 300),curve: Curves.easeOut);
+
+  Widget handlerBaseState<K>(BaseState state,BlocWidgetBuilder<K> builder){
+
+    if (state is BaseInitial) {
+      return buildScreenLoading();
+    } else if (state is BaseLoading) {
+      return buildScreenLoading();
+    } else if (state is BaseError) {
+      return buildScreenError(state.message.replaceWhenNullOrWhiteSpace(ApplicationConstant.SYSTEM_ERROR));
+    } else if (state is BaseLoaded<K>){
+      return builder(context,state.data);
+    }
+    else{
+      return buildScreenError(ApplicationConstant.SYSTEM_ERROR);
+    }
+  }
+
+  Widget buildScreenLoading() => Center(
+    child: Container(
+        height: 100,
+        child: const Center(child: CircularProgressIndicator())
+    ),
+  );
+  Widget buildScreenError(String error) => Container(
+      height: 100,
+      color: Colors.red,
+      child: Text(error,style: AppTextStyle.title.copyWith(color: Colors.red),)
+  );
 }
 
 class BasePageStateActive<T extends StatefulWidget> extends State<T> with AutomaticKeepAliveClientMixin {

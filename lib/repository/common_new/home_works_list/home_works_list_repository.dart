@@ -1,5 +1,5 @@
 import 'package:eportal/api/adapter/base/base_adapter_api.dart';
-import 'package:eportal/model/api/request/commonnew/home_works_list_request.dart';
+import 'package:eportal/model/api/request/common_new/home_works_list_request.dart';
 import 'package:eportal/model/api/response/common_new/home_works_list_response.dart';
 import 'package:flutter/material.dart';
 

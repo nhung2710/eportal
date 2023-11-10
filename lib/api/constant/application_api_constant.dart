@@ -9,7 +9,12 @@ class ApplicationApiConstant {
   static const API_COMMON_NEW = '$BASE_API_APP_URI/commonnew.asmx';
   static const API_COMMON_NEW_OP = '$API_COMMON_NEW?op=';
 
-  static const API_COMMONNEW_OP_HOME_WORKS_LIST = '$BASE_API_APP_URI/commonnew.asmx?op=HomeWorksList';
-  static const API_COMMONNEW_OP_HOME_NEWS_LIST = '$BASE_API_APP_URI/commonnew.asmx?op=HomeNewsList';
-  static const API_COMMONNEW_OP_HOME_SLIDE_LIST = '$BASE_API_APP_URI/commonnew.asmx?op=HomeSlideList';
+  static const API_RESULT = 'Result';
+
+
+  static const API_OP_HOME_WORKS_LIST = "HomeWorksList";
+  static const API_OP_HOME_NEWS_LIST = "HomeNewsList";
+  static const API_OP_HOME_SLIDE_LIST = "HomeSlideList";
+  static const API_OP_GIOI_THIEU_TRUNG_TAM_LIST = "GioiThieuTrungTam";
+
 }
