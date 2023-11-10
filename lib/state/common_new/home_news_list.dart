@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class HomeWorksListState extends BaseLoaded<HomeNewsListResponse> {
-  const HomeWorksListState(super.data);
+class HomeNewsListState extends BaseLoaded<HomeNewsListResponse> {
+  const HomeNewsListState(super.data);
 
 }
