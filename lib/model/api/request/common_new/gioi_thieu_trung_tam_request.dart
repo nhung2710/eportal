@@ -11,7 +11,7 @@ class GioiThieuTrungTamRequest extends BaseEportalRequest<CommonNewData> {
   GioiThieuTrungTamRequest({required super.obj});
 
   @override
-  String getQuery()  => ApplicationApiConstant.API_OP_GIOI_THIEU_TRUNG_TAM_LIST;
+  String getQuery()  => ApplicationApiConstant.API_COMMON_NEW_OP_GIOI_THIEU_TRUNG_TAM;
   @override
   int getTimeCache()  => 10 * 60;
 

@@ -1,5 +1,6 @@
-import 'package:eportal/bloc/common_new/home_works_list/home_works_list_bloc.dart';
-import 'package:eportal/event/common_new/home_works_list/home_works_list_event.dart';
+
+import 'package:eportal/bloc/common_new/home_works_list_bloc.dart';
+import 'package:eportal/event/common_new/home_works_list_event.dart';
 import 'package:eportal/extension/string_extension.dart';
 import 'package:eportal/model/api/request/common_new/data/common_new_data.dart';
 import 'package:eportal/model/api/request/common_new/home_works_list_request.dart';

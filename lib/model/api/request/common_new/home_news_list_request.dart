@@ -11,7 +11,7 @@ class HomeNewsListRequest extends BaseEportalRequest<CommonNewData> {
   HomeNewsListRequest({required super.obj});
 
   @override
-  String getQuery()  => ApplicationApiConstant.API_OP_HOME_NEWS_LIST;
+  String getQuery()  => ApplicationApiConstant.API_COMMON_NEW_OP_HOME_NEWS_LIST;
 
 }
 

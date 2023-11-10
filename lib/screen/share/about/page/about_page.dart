@@ -1,6 +1,6 @@
-import 'package:eportal/bloc/common_new/gioi_thieu_trung_tam/gioi_thieu_trung_tam_bloc.dart';
+import 'package:eportal/bloc/common_new/gioi_thieu_trung_tam_bloc.dart';
 import 'package:eportal/constant/application_constant.dart';
-import 'package:eportal/event/common_new/gioi_thieu_trung_tam/gioi_thieu_trung_tam_event.dart';
+import 'package:eportal/event/common_new/gioi_thieu_trung_tam_event.dart';
 import 'package:eportal/extension/string_extension.dart';
 import 'package:eportal/model/api/request/common_new/data/common_new_data.dart';
 import 'package:eportal/model/api/request/common_new/gioi_thieu_trung_tam_request.dart';

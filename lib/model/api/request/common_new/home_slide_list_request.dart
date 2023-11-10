@@ -6,7 +6,7 @@ class HomeSlideListRequest extends BaseEportalRequest<CommonNewData> {
   HomeSlideListRequest({required super.obj});
 
   @override
-  String getQuery()  => ApplicationApiConstant.API_OP_HOME_SLIDE_LIST;
+  String getQuery()  => ApplicationApiConstant.API_COMMON_NEW_OP_HOME_SLIDE_LIST;
 
 }
 
