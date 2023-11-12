@@ -1,9 +1,5 @@
-import 'package:eportal/constant/application_regex_constant.dart';
-import 'package:eportal/extension/string_extension.dart';
 import 'package:eportal/screen/anonymous/home/home_page.dart';
-import 'package:eportal/screen/share/sign_up/page/sign_up_page.dart';
 import 'package:eportal/widget/base/base_page.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
@@ -11,15 +7,14 @@ import 'package:introduction_screen/introduction_screen.dart';
 // Created by BlackRose on 11/7/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class OnboardingPage extends BasePage{
+class OnboardingPage extends BasePage {
   const OnboardingPage({super.key});
-
 
   @override
   State<StatefulWidget> createState() => _OnboardingPageState();
 }
 
-class _OnboardingPageState extends BasePageState<OnboardingPage>{
+class _OnboardingPageState extends BasePageState<OnboardingPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
 
@@ -29,19 +24,17 @@ class _OnboardingPageState extends BasePageState<OnboardingPage>{
   String getPageTitle(BuildContext context) => "Quên mật khẩu";
 
   @override
-  bool isHasAppBar(BuildContext context)  => false;
+  bool isHasAppBar(BuildContext context) => false;
 
   @override
-  Color currentBackgroundColor(BuildContext context)  => Colors.white;
-
-
+  Color currentBackgroundColor(BuildContext context) => Colors.white;
 
   Widget _buildImage(String assetName, [double width = 350]) {
     return Image.asset('assets/images/$assetName', width: width);
   }
+
   @override
   Widget pageUI(BuildContext context) {
-
     const bodyStyle = TextStyle(fontSize: 19.0);
 
     const pageDecoration = PageDecoration(
@@ -70,21 +63,21 @@ class _OnboardingPageState extends BasePageState<OnboardingPage>{
         PageViewModel(
           title: "Fractional shares",
           body:
-          "Instead of having to buy an entire share, invest any amount you want.",
+              "Instead of having to buy an entire share, invest any amount you want.",
           image: _buildImage('introduction_1.jpg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Learn as you go",
           body:
-          "Download the Stockpile app and master the market with our mini-lesson.",
+              "Download the Stockpile app and master the market with our mini-lesson.",
           image: _buildImage('introduction_2.jpg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Kids and teens",
           body:
-          "Kids and teens can track their stocks 24/7 and place trades that you approve.",
+              "Kids and teens can track their stocks 24/7 and place trades that you approve.",
           image: _buildImage('introduction_3.jpg'),
           decoration: pageDecoration,
         ),
@@ -134,7 +127,8 @@ class _OnboardingPageState extends BasePageState<OnboardingPage>{
         ),
       ],
       onDone: () => nextPageWithoutBack((context) => const HomePage()),
-      onSkip: () => nextPageWithoutBack((context) => const HomePage()), // You can override onSkip callback
+      onSkip: () => nextPageWithoutBack((context) => const HomePage()),
+      // You can override onSkip callback
       showSkipButton: true,
       skipOrBackFlex: 0,
       nextFlex: 0,
@@ -163,8 +157,4 @@ class _OnboardingPageState extends BasePageState<OnboardingPage>{
       ),
     );
   }
-
-
-
-
 }

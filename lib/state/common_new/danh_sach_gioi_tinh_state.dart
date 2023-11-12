@@ -8,5 +8,4 @@ import 'package:eportal/state/base/base_state.dart';
 
 class DanhSachGioiTinhState extends BaseLoaded<DanhSachGioiTinhResponse> {
   const DanhSachGioiTinhState(super.data);
-
 }

@@ -7,9 +7,10 @@ import 'package:eportal/model/api/request/common_new/danh_sach_trinh_do_request.
 import 'package:eportal/model/api/response/common_new/danh_sach_trinh_do_response.dart';
 
 class DanhSachTrinhDoRepository {
-
-  Future<DanhSachTrinhDoResponse> getDanhSachTrinhDo(DanhSachTrinhDoRequest request) {
-    return BaseAdapterApi().callApiAsync(request)
+  Future<DanhSachTrinhDoResponse> getDanhSachTrinhDo(
+      DanhSachTrinhDoRequest request) {
+    return BaseAdapterApi()
+        .callApiAsync(request)
         .then((value) => DanhSachTrinhDoResponse.fromJson(value));
   }
 }

@@ -3,5 +3,4 @@ class BaseEportalXml {
     var buffer = StringBuffer();
     return buffer;
   }
-
 }

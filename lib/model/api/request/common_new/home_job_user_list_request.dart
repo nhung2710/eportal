@@ -6,5 +6,6 @@ class HomeJobUserListRequest extends BaseEportalRequest<CommonNewData> {
   HomeJobUserListRequest({required super.obj});
 
   @override
-  String getQuery()  => ApplicationApiConstant.API_COMMON_NEW_OP_HOME_JOB_USER_LIST;
+  String getQuery() =>
+      ApplicationApiConstant.API_COMMON_NEW_OP_HOME_JOB_USER_LIST;
 }

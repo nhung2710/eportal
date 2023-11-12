@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+
 
 //
 // Created by BlackRose on 11/7/2023.
@@ -8,5 +8,7 @@ class ChatBotMessage {
   bool isBot;
   String message;
   String title;
-  ChatBotMessage({required this.isBot,required this.message,required this.title});
+
+  ChatBotMessage(
+      {required this.isBot, required this.message, required this.title});
 }

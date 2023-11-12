@@ -6,6 +6,5 @@ class JobUserDetailRequest extends BaseEportalRequest<CommonNewData> {
   JobUserDetailRequest({required super.obj});
 
   @override
-  String getQuery()  => ApplicationApiConstant.API_COMMON_NEW_OP_JOB_USER_DETAIL;
-
+  String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_JOB_USER_DETAIL;
 }

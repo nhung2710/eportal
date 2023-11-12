@@ -8,28 +8,27 @@ import 'package:flutter/material.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-
-class EmptyExamplePage extends BasePage{
+class EmptyExamplePage extends BasePage {
   bool isHasAppBar;
-  EmptyExamplePage({super.key,this.isHasAppBar = false});
 
+  EmptyExamplePage({super.key, this.isHasAppBar = false});
 
   @override
   State<StatefulWidget> createState() => _EmptyExamplePageState();
 }
 
-class _EmptyExamplePageState extends BasePageStateActive<EmptyExamplePage>{
-
+class _EmptyExamplePageState extends BasePageStateActive<EmptyExamplePage> {
   @override
   bool isHasAppBar(BuildContext context) => widget.isHasAppBar;
 
   @override
-  double currentPadding(BuildContext context)  => 0;
+  double currentPadding(BuildContext context) => 0;
+
   @override
   Widget pageUI(BuildContext context) => Container(
-    color: _getRandomColor(),
-  );
+        color: _getRandomColor(),
+      );
 
-
-  _getRandomColor() => Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
+  _getRandomColor() =>
+      Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
 }

@@ -7,9 +7,9 @@ import 'package:eportal/model/api/request/common_new/news_search_request.dart';
 import 'package:eportal/model/api/response/common_new/news_search_response.dart';
 
 class NewsSearchRepository {
-
   Future<NewsSearchResponse> getNewsSearch(NewsSearchRequest request) {
-    return BaseAdapterApi().callApiAsync(request)
+    return BaseAdapterApi()
+        .callApiAsync(request)
         .then((value) => NewsSearchResponse.fromJson(value));
   }
 }

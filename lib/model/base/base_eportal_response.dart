@@ -5,7 +5,7 @@ class BaseEportalResponse {
   BaseEportalResponse({required this.status, required this.message});
 
   factory BaseEportalResponse.fromJson(Map<String, dynamic> json) {
-    return BaseEportalResponse(status: json["status"],message: json["message"]);
+    return BaseEportalResponse(
+        status: json["status"], message: json["message"]);
   }
-
 }

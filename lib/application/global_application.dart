@@ -1,7 +1,5 @@
-import 'package:eportal/api/constant/application_api_constant.dart';
-import 'package:eportal/constant/application_constant.dart';
-import 'package:eportal/extension/string_extension.dart';
-import 'package:eportal/model/setting_page_model.dart';
+import '../constant/application_constant.dart';
+import '../extension/string_extension.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GlobalApplication {
@@ -10,14 +8,16 @@ class GlobalApplication {
   String _FullName = ApplicationConstant.EMPTY;
   String _UserPassword = ApplicationConstant.EMPTY;
   late SharedPreferences _Preferences;
+
   String get UserName => _UserName;
 
   String get UserPassword => _UserPassword;
+
   SharedPreferences get Preferences => _Preferences;
+
   set Preferences(SharedPreferences preferences) {
     _Preferences = preferences;
   }
-
 
   factory GlobalApplication() {
     return _instance;
@@ -26,48 +26,49 @@ class GlobalApplication {
   bool get IsLogin => _UserName.isNotEmpty && _UserPassword.isNotEmpty;
 
   set UserName(String UserName) => _UserName = UserName;
+
   set FullName(String FullName) => _FullName = FullName;
+
   String get FullName => _FullName;
 
   set UserPassword(String UserPassword) => _UserPassword = UserPassword;
 
-  String getStringOneTimePreferences(String key){
+  String getStringOneTimePreferences(String key) {
     var value = _Preferences.getString(key).replaceWhenNullOrEmpty();
     _Preferences.remove(key);
     return value;
   }
 
-  String HelloMessage()
-  {
+  String HelloMessage() {
     DateTime now = DateTime.now();
     int currentHour = now.hour;
     String message = ApplicationConstant.EMPTY;
 
-    if(currentHour >= 6  && currentHour <= 11)
+    if (currentHour >= 6 && currentHour <= 11)
       message = "buổi sáng";
-    else
-    if(currentHour >= 11  && currentHour <= 16)
+    else if (currentHour >= 11 && currentHour <= 16)
       message = "buổi trưa";
-    else
-    if(currentHour >= 16  && currentHour <= 19)
+    else if (currentHour >= 16 && currentHour <= 19)
       message = "buổi chiều";
     else
       message = "buổi tối";
 
     return "Chúc bạn $message tốt lành";
   }
-  void SignIn(String username,String password){
+
+  void SignIn(String username, String password) {
     FullName = username;
     UserName = username;
     UserPassword = password;
   }
-  void SignOut(){
+
+  void SignOut() {
     FullName = "bạn";
     UserName = ApplicationConstant.EMPTY;
     UserPassword = ApplicationConstant.EMPTY;
   }
-  String HelloUser()
-  {
+
+  String HelloUser() {
     return "Chào $_FullName";
   }
 

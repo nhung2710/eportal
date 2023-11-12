@@ -9,15 +9,14 @@ import 'package:flutter/material.dart';
 // Created by BlackRose on 11/7/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class ChatBotPage extends BasePage{
+class ChatBotPage extends BasePage {
   const ChatBotPage({super.key});
-
 
   @override
   State<StatefulWidget> createState() => _ChatBotPageState();
 }
 
-class _ChatBotPageState extends BasePageState<ChatBotPage>{
+class _ChatBotPageState extends BasePageState<ChatBotPage> {
   TextEditingController textEditingController = TextEditingController();
 
   final List<ChatBotMessage> ChatBotMessages = [];
@@ -27,68 +26,71 @@ class _ChatBotPageState extends BasePageState<ChatBotPage>{
 
   @override
   Widget pageUI(BuildContext context) => Column(
-    children: [
-      Expanded(
-        child: Container(
-          padding: const EdgeInsets.all(5),
-          height: double.infinity,
-          width: double.infinity,
-          child: SingleChildScrollView(
-            controller: scrollController,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: ChatBotMessages.map((e)=> _showInput(e)).toList(),
+        children: [
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(5),
+              height: double.infinity,
+              width: double.infinity,
+              child: SingleChildScrollView(
+                controller: scrollController,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: ChatBotMessages.map((e) => _showInput(e)).toList(),
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-      Container(
-        margin: const EdgeInsets.all(5),
-        color: Colors.white,
-        child: TextFormField(
-          controller: textEditingController,
-          maxLength: 50,
-          textInputAction: TextInputAction.send,
-          validator: (text) {
-            if (text == null || text.isEmpty) {
-              return 'Vui lòng nhập nội dung muốn gửi';
-            }
-            return null;
-          },
-          onFieldSubmitted:  (value) => _sendMessageAsync(context),
-          decoration: InputDecoration(
-            border: const OutlineInputBorder(
-
-            ),
-            suffixIcon: IconButton(
-              icon: const Icon(Icons.send,color: Colors.blue,),
-              onPressed: () {
-                _sendMessageAsync(context);
+          Container(
+            margin: const EdgeInsets.all(5),
+            color: Colors.white,
+            child: TextFormField(
+              controller: textEditingController,
+              maxLength: 50,
+              textInputAction: TextInputAction.send,
+              validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Vui lòng nhập nội dung muốn gửi';
+                }
+                return null;
               },
+              onFieldSubmitted: (value) => _sendMessageAsync(context),
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                suffixIcon: IconButton(
+                  icon: const Icon(
+                    Icons.send,
+                    color: Colors.blue,
+                  ),
+                  onPressed: () {
+                    _sendMessageAsync(context);
+                  },
+                ),
+                labelText: 'Nội dung',
+                counterText: "",
+              ),
             ),
+          )
+        ],
+      );
 
-            labelText: 'Nội dung',
-            counterText: "",
-          ),
-        ),
-      )
-    ],
-  );
   @override
-  getBottomNavigationBar(BuildContext context) =>null;
+  getBottomNavigationBar(BuildContext context) => null;
 
   @override
   String getPageTitle(BuildContext context) => "Trợ lý ảo";
 
-  _addMessage(ChatBotMessage chatBotMessage){
+  _addMessage(ChatBotMessage chatBotMessage) {
     setState(() {
       ChatBotMessages.add(chatBotMessage);
     });
   }
+
   _sendMessageAsync(BuildContext context) {
-    if(isValid()){
-      _addMessage(ChatBotMessage(isBot: false,message: textEditingController.text,title: "Tôi"));
+    if (isValid()) {
+      _addMessage(ChatBotMessage(
+          isBot: false, message: textEditingController.text, title: "Tôi"));
       textEditingController.clear();
       _botSendMessageAsync(context);
     }
@@ -117,40 +119,48 @@ class _ChatBotPageState extends BasePageState<ChatBotPage>{
     "Hi, what's going on?",
     "Howdy, partner!"
   ];
+
   String getRandomGreeting() {
     Random random = Random();
     int index = random.nextInt(greetings.length);
     return greetings[index];
   }
-  void _botSendMessageAsync(BuildContext context) {
-    Future.delayed(const Duration(milliseconds: 500)).then((value) => _addMessage(ChatBotMessage(isBot: true,message: getRandomGreeting() ,title: "Bot")))
-    .then((value) => scrollToEnd());
-  }
-  Widget _showInput(ChatBotMessage e) => Row(
-    mainAxisAlignment: MainAxisAlignment.start,
-    children: [
-      e.isBot ? Container() : Expanded(flex: 1,child:Container()),
-      Expanded(
-        flex:4,
-        child: Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: e.isBot ? Colors.blue : Colors.white,
-            ),
-            margin: const EdgeInsets.only(top: 8),
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: e.isBot?CrossAxisAlignment.start:CrossAxisAlignment.end,
-              mainAxisAlignment: e.isBot?MainAxisAlignment.start:MainAxisAlignment.end,
-              children: [
-                Text(e.message,style: AppTextStyle.titleAppbarPage.copyWith(color: !e.isBot ? Colors.blue : Colors.white)),
-              ],
-            )
-        ),
-      ),
-      !e.isBot ? Container() : Expanded(flex: 1,child:Container()),
-    ],
-  );
 
+  void _botSendMessageAsync(BuildContext context) {
+    Future.delayed(const Duration(milliseconds: 500))
+        .then((value) => _addMessage(ChatBotMessage(
+            isBot: true, message: getRandomGreeting(), title: "Bot")))
+        .then((value) => scrollToEnd());
+  }
+
+  Widget _showInput(ChatBotMessage e) => Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          e.isBot ? Container() : Expanded(flex: 1, child: Container()),
+          Expanded(
+            flex: 4,
+            child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: e.isBot ? Colors.blue : Colors.white,
+                ),
+                margin: const EdgeInsets.only(top: 8),
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: e.isBot
+                      ? CrossAxisAlignment.start
+                      : CrossAxisAlignment.end,
+                  mainAxisAlignment:
+                      e.isBot ? MainAxisAlignment.start : MainAxisAlignment.end,
+                  children: [
+                    Text(e.message,
+                        style: AppTextStyle.titleAppbarPage.copyWith(
+                            color: !e.isBot ? Colors.blue : Colors.white)),
+                  ],
+                )),
+          ),
+          !e.isBot ? Container() : Expanded(flex: 1, child: Container()),
+        ],
+      );
 }

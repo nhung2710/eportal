@@ -6,6 +6,6 @@ class HomeBusinessListRequest extends BaseEportalRequest<CommonNewData> {
   HomeBusinessListRequest({required super.obj});
 
   @override
-  String getQuery()  => ApplicationApiConstant.API_COMMON_NEW_OP_HOME_BUSINESS_LIST;
-
+  String getQuery() =>
+      ApplicationApiConstant.API_COMMON_NEW_OP_HOME_BUSINESS_LIST;
 }

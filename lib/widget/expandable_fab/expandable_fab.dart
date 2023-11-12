@@ -1,12 +1,21 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
 
 //
 // Created by BlackRose on 05/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class ExpandableFab extends StatefulWidget {
-  const ExpandableFab({Key? key, required this.children, this.distance = 100, this.spaceGroupdistance = 50, this.addNumberGroup = 1,this.initNumberGroup = 4, this.icon}) : super(key: key);
+  const ExpandableFab(
+      {Key? key,
+      required this.children,
+      this.distance = 100,
+      this.spaceGroupdistance = 50,
+      this.addNumberGroup = 1,
+      this.initNumberGroup = 4,
+      this.icon})
+      : super(key: key);
   final IconData? icon;
   final List<Widget> children;
   final double distance;
@@ -17,8 +26,9 @@ class ExpandableFab extends StatefulWidget {
   @override
   _ExpandableFabState createState() => _ExpandableFabState();
 }
-class _ExpandableFabState extends State<ExpandableFab> with SingleTickerProviderStateMixin {
 
+class _ExpandableFabState extends State<ExpandableFab>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _expandAnimation;
   bool _open = false;
@@ -35,16 +45,15 @@ class _ExpandableFabState extends State<ExpandableFab> with SingleTickerProvider
     _expandAnimation = CurvedAnimation(
         parent: _controller,
         curve: Curves.fastOutSlowIn,
-        reverseCurve: Curves.easeOutQuad
-    );
+        reverseCurve: Curves.easeOutQuad);
   }
 
   void _toggle() {
     setState(() {
       _open = !_open;
-      if(_open){
+      if (_open) {
         _controller.forward();
-      }else{
+      } else {
         _controller.reverse();
       }
     });
@@ -71,61 +80,62 @@ class _ExpandableFabState extends State<ExpandableFab> with SingleTickerProvider
   }
 
   Widget _tapToClose() {
-    return _open && widget.children.length > 1 ? ActionButton(icon: const Icon(Icons.close,color: Colors.blue,),
-      onPressed: _toggle,
-      color: Colors.white,
-    ) : Container();
+    return _open && widget.children.length > 1
+        ? ActionButton(
+            icon: const Icon(
+              Icons.close,
+              color: Colors.blue,
+            ),
+            onPressed: _toggle,
+            color: Colors.white,
+          )
+        : Container();
   }
 
   Widget _tapToOpen() {
-    return !_open && widget.children.length > 1 ? ActionButton(icon: const Icon(Icons.add,color: Colors.white),
-      onPressed: _toggle,
-    ) : Container();
+    return !_open && widget.children.length > 1
+        ? ActionButton(
+            icon: const Icon(Icons.add, color: Colors.white),
+            onPressed: _toggle,
+          )
+        : Container();
   }
 
   List<Widget> _buildExpandableFabButton() {
     final count = widget.children.length;
     final List<Widget> children = <Widget>[];
-    if(count > 1){
-
+    if (count > 1) {
       final spaceGroupDistance = widget.spaceGroupdistance;
       final int addNumberGroup = widget.addNumberGroup;
       int countLoop = widget.initNumberGroup;
       int j = 0;
       int k = 0;
       double angleInDegreesChild = 0.0;
-      for(var i = 0 ; i < count ; i++){
+      for (var i = 0; i < count; i++) {
         final stepChild = 90.0 / (countLoop - 1);
-        children.add(
-            _ExpandableFab(
-                directionDegrees: angleInDegreesChild,
-                maxDistance: widget.distance + spaceGroupDistance * k,
-                progress: _expandAnimation,
-                child: widget.children[i])
-        );
-        angleInDegreesChild+= stepChild;
+        children.add(_ExpandableFab(
+            directionDegrees: angleInDegreesChild,
+            maxDistance: widget.distance + spaceGroupDistance * k,
+            progress: _expandAnimation,
+            child: widget.children[i]));
+        angleInDegreesChild += stepChild;
         j++;
-        if(j == countLoop){
+        if (j == countLoop) {
           k++;
           j = 0;
           countLoop += addNumberGroup;
           angleInDegreesChild = 0;
         }
       }
-    }
-    else{
-      for(var i = 0 ; i < count ; i++){
-        children.add(
-            _ExpandableFab(
-                directionDegrees: 0,
-                maxDistance: 0,
-                progress: _expandAnimation,
-                child: widget.children[i])
-        );
+    } else {
+      for (var i = 0; i < count; i++) {
+        children.add(_ExpandableFab(
+            directionDegrees: 0,
+            maxDistance: 0,
+            progress: _expandAnimation,
+            child: widget.children[i]));
       }
     }
-
-
 
     /*final step = 90.0 / (count - 1);
 
@@ -145,7 +155,11 @@ class _ExpandableFabState extends State<ExpandableFab> with SingleTickerProvider
 
 class _ExpandableFab extends StatelessWidget {
   const _ExpandableFab(
-      {Key? key, required this.directionDegrees, required this.maxDistance, required this.progress, required this.child})
+      {Key? key,
+      required this.directionDegrees,
+      required this.maxDistance,
+      required this.progress,
+      required this.child})
       : super(key: key);
 
   final double directionDegrees;
@@ -159,9 +173,7 @@ class _ExpandableFab extends StatelessWidget {
       animation: progress!,
       builder: (context, child) {
         final offset = Offset.fromDirection(
-            directionDegrees * (math.pi / 180),
-            progress!.value * maxDistance
-        );
+            directionDegrees * (math.pi / 180), progress!.value * maxDistance);
 
         return Positioned(
           right: 4.0 + offset.dx,
@@ -179,8 +191,15 @@ class _ExpandableFab extends StatelessWidget {
     );
   }
 }
+
 class ActionButton extends StatelessWidget {
-  const ActionButton({Key? key, this.onPressed, required this.icon,this.color = Colors.blue,this.size = 50}) : super(key: key);
+  const ActionButton(
+      {Key? key,
+      this.onPressed,
+      required this.icon,
+      this.color = Colors.blue,
+      this.size = 50})
+      : super(key: key);
 
   final VoidCallback? onPressed;
   final Icon icon;

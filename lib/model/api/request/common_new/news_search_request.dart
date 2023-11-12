@@ -6,6 +6,5 @@ class NewsSearchRequest extends BaseEportalRequest<CommonNewData> {
   NewsSearchRequest({required super.obj});
 
   @override
-  String getQuery()  => ApplicationApiConstant.API_COMMON_NEW_OP_NEWS_SEARCH;
-
+  String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_NEWS_SEARCH;
 }

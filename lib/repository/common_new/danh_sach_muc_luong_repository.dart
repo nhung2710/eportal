@@ -7,9 +7,10 @@ import 'package:eportal/model/api/request/common_new/danh_sach_muc_luong_request
 import 'package:eportal/model/api/response/common_new/danh_sach_muc_luong_response.dart';
 
 class DanhSachMucLuongRepository {
-
-  Future<DanhSachMucLuongResponse> getDanhSachMucLuong(DanhSachMucLuongRequest request) {
-    return BaseAdapterApi().callApiAsync(request)
+  Future<DanhSachMucLuongResponse> getDanhSachMucLuong(
+      DanhSachMucLuongRequest request) {
+    return BaseAdapterApi()
+        .callApiAsync(request)
         .then((value) => DanhSachMucLuongResponse.fromJson(value));
   }
 }

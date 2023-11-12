@@ -6,6 +6,5 @@ class JobUserSearchRequest extends BaseEportalRequest<CommonNewData> {
   JobUserSearchRequest({required super.obj});
 
   @override
-  String getQuery()  => ApplicationApiConstant.API_COMMON_NEW_OP_JOB_USER_SEARCH;
-
+  String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_JOB_USER_SEARCH;
 }

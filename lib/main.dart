@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/extension/string_extension.dart';
 import 'package:eportal/screen/anonymous/home/home_page.dart';
-import 'package:eportal/screen/share/onboarding/page/onboarding_page.dart';
 import 'package:eportal/style/app_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +9,21 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'application/global_application.dart';
-Future<bool> checkAppRunFirstTime(){
-  bool? isFirstRunApp = GlobalApplication().Preferences.getBool(ApplicationConstant.FIRST_TIME_OPEN_APP);
-  return GlobalApplication().Preferences.remove(ApplicationConstant.REGISTER_USER_PASSWORD)
-      .then((value) => GlobalApplication().Preferences.remove(ApplicationConstant.REGISTER_USER_NAME))
-      .then((value) =>GlobalApplication().Preferences.setBool(ApplicationConstant.FIRST_TIME_OPEN_APP,true))
-      //.then((value) => isFirstRunApp??false)
+
+Future<bool> checkAppRunFirstTime() {
+  bool? isFirstRunApp = GlobalApplication()
+      .Preferences
+      .getBool(ApplicationConstant.FIRST_TIME_OPEN_APP);
+  return GlobalApplication()
+      .Preferences
+      .remove(ApplicationConstant.REGISTER_USER_PASSWORD)
+      .then((value) => GlobalApplication()
+          .Preferences
+          .remove(ApplicationConstant.REGISTER_USER_NAME))
+      .then((value) => GlobalApplication()
+          .Preferences
+          .setBool(ApplicationConstant.FIRST_TIME_OPEN_APP, true))
+      .then((value) => isFirstRunApp??false)
       .then((value) => true);
 }
 
@@ -26,27 +32,34 @@ Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.white,
     statusBarIconBrightness: Brightness.dark,
-    statusBarBrightness:Brightness.light,
+    statusBarBrightness: Brightness.light,
     systemNavigationBarColor: Colors.white,
     systemNavigationBarDividerColor: Colors.transparent,
     systemNavigationBarIconBrightness: Brightness.dark,
   ));
   GlobalApplication().Preferences = await SharedPreferences.getInstance();
-  GlobalApplication().UserName = GlobalApplication().Preferences.getString(ApplicationConstant.USER_NAME).replaceWhenNullOrWhiteSpace();
-  GlobalApplication().UserPassword = GlobalApplication().Preferences.getString(ApplicationConstant.USER_PASSWORD).replaceWhenNullOrWhiteSpace();
+  GlobalApplication().UserName = GlobalApplication()
+      .Preferences
+      .getString(ApplicationConstant.USER_NAME)
+      .replaceWhenNullOrWhiteSpace();
+  GlobalApplication().UserPassword = GlobalApplication()
+      .Preferences
+      .getString(ApplicationConstant.USER_PASSWORD)
+      .replaceWhenNullOrWhiteSpace();
 
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
   ])
-  .then((_) => checkAppRunFirstTime())
-  .then((isFirstRunApp) => runApp(MyApp(isFirstRunApp: isFirstRunApp)));
+      .then((_) => checkAppRunFirstTime())
+      .then((isFirstRunApp) => runApp(MyApp(isFirstRunApp: isFirstRunApp)));
 }
 
 class MyApp extends StatelessWidget {
   final PageStorageBucket _bucket = PageStorageBucket();
   bool isFirstRunApp;
-  MyApp({super.key,required this.isFirstRunApp});
+
+  MyApp({super.key, required this.isFirstRunApp});
 
   // This widget is the root of your application.
   @override
@@ -60,10 +73,10 @@ class MyApp extends StatelessWidget {
         platform: TargetPlatform.iOS,
       ),
       home: PageStorage(
-          key: key,
-          bucket: _bucket,
+        key: key,
+        bucket: _bucket,
         //child: isFirstRunApp?  const OnboardingPage():const HomePage(),
-          child: isFirstRunApp?  const HomePage():const HomePage(),
+        child: isFirstRunApp ? const HomePage() : const HomePage(),
       ),
       builder: (context, child) {
         return MediaQuery(
@@ -74,7 +87,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({Key? key}) : super(key: key);
@@ -91,7 +103,6 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       MaterialPageRoute(builder: (_) => const HomePage()),
     );
   }
-
 
   Widget _buildImage(String assetName, [double width = 350]) {
     return Image.asset('assets/images/$assetName', width: width);
@@ -139,21 +150,21 @@ class OnBoardingPageState extends State<OnBoardingPage> {
         PageViewModel(
           title: "Fractional shares",
           body:
-          "Instead of having to buy an entire share, invest any amount you want.",
+              "Instead of having to buy an entire share, invest any amount you want.",
           image: _buildImage('introduction_1.jpg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Learn as you go",
           body:
-          "Download the Stockpile app and master the market with our mini-lesson.",
+              "Download the Stockpile app and master the market with our mini-lesson.",
           image: _buildImage('introduction_2.jpg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Kids and teens",
           body:
-          "Kids and teens can track their stocks 24/7 and place trades that you approve.",
+              "Kids and teens can track their stocks 24/7 and place trades that you approve.",
           image: _buildImage('introduction_3.jpg'),
           decoration: pageDecoration,
         ),
@@ -203,7 +214,8 @@ class OnBoardingPageState extends State<OnBoardingPage> {
         ),
       ],
       onDone: () => _onIntroEnd(context),
-      onSkip: () => _onIntroEnd(context), // You can override onSkip callback
+      onSkip: () => _onIntroEnd(context),
+      // You can override onSkip callback
       showSkipButton: true,
       skipOrBackFlex: 0,
       nextFlex: 0,

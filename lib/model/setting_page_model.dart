@@ -1,4 +1,3 @@
-import 'package:eportal/enum/setting_router_page.dart';
 import 'package:flutter/material.dart';
 
 //
@@ -9,5 +8,7 @@ class SettingPageModel {
   IconData icon;
   String title;
   WidgetBuilder builder;
-  SettingPageModel({required this.icon,required this.title,required this.builder});
+
+  SettingPageModel(
+      {required this.icon, required this.title, required this.builder});
 }

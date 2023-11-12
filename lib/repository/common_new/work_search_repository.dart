@@ -7,9 +7,9 @@ import 'package:eportal/model/api/request/common_new/work_search_request.dart';
 import 'package:eportal/model/api/response/common_new/work_search_response.dart';
 
 class WorkSearchRepository {
-
   Future<WorkSearchResponse> getWorkSearch(WorkSearchRequest request) {
-    return BaseAdapterApi().callApiAsync(request)
+    return BaseAdapterApi()
+        .callApiAsync(request)
         .then((value) => WorkSearchResponse.fromJson(value));
   }
 }

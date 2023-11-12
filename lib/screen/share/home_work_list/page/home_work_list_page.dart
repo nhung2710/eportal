@@ -5,24 +5,20 @@ import 'package:flutter/material.dart';
 // Created by BlackRose on 11/9/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class HomeWorkListPage extends BasePage{
+class HomeWorkListPage extends BasePage {
   const HomeWorkListPage({super.key});
-
 
   @override
   State<StatefulWidget> createState() => _HomeWorkListPageState();
 }
 
-class _HomeWorkListPageState extends BasePageStateActive<HomeWorkListPage>{
-
+class _HomeWorkListPageState extends BasePageStateActive<HomeWorkListPage> {
   @override
   bool isHasAppBar(BuildContext context) => false;
 
   @override
-  double currentPadding(BuildContext context)  => 0;
+  double currentPadding(BuildContext context) => 0;
+
   @override
-  Widget pageUI(BuildContext context) => Container(
-  );
-
-
+  Widget pageUI(BuildContext context) => Container();
 }

@@ -6,6 +6,6 @@ class HomeDocumentListRequest extends BaseEportalRequest<CommonNewData> {
   HomeDocumentListRequest({required super.obj});
 
   @override
-  String getQuery()  => ApplicationApiConstant.API_COMMON_NEW_OP_HOME_DOCUMENT_LIST;
-
+  String getQuery() =>
+      ApplicationApiConstant.API_COMMON_NEW_OP_HOME_DOCUMENT_LIST;
 }

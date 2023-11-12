@@ -1,4 +1,3 @@
-
 enum FormzSubmissionStatus {
   /// The form has not yet been submitted.
   initial,

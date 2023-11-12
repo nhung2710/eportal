@@ -8,5 +8,4 @@ import 'package:eportal/state/base/base_state.dart';
 
 class DanhSachMucLuong extends BaseLoaded<HomeWorksListResponse> {
   const DanhSachMucLuong(super.data);
-
 }

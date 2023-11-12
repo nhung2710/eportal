@@ -1,7 +1,5 @@
 import 'package:eportal/model/base/base_eportal_request.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 
 //
 // Created by BlackRose on 11/9/2023.
@@ -9,6 +7,7 @@ import 'package:http/http.dart';
 //
 abstract class BaseEvent<T extends BaseEportalRequest> extends Equatable {
   final T request;
+
   const BaseEvent({required this.request});
 
   @override

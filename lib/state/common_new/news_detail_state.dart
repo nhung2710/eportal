@@ -3,7 +3,9 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class HomeWorksListState extends BaseLoaded<HomeWorksListResponse> {
-  const HomeWorksListState(super.data);
+import '../../model/api/response/common_new/news_detail_response.dart';
+import '../base/base_state.dart';
 
+class NewsDetailState extends BaseLoaded<NewsDetailResponse> {
+  const NewsDetailState(super.data);
 }

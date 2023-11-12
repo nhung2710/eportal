@@ -7,9 +7,10 @@ import 'package:eportal/model/api/request/common_new/home_document_list_request.
 import 'package:eportal/model/api/response/common_new/home_document_list_response.dart';
 
 class HomeDocumentListRepository {
-
-  Future<HomeDocumentListResponse> getHomeDocumentList(HomeDocumentListRequest request) {
-    return BaseAdapterApi().callApiAsync(request)
+  Future<HomeDocumentListResponse> getHomeDocumentList(
+      HomeDocumentListRequest request) {
+    return BaseAdapterApi()
+        .callApiAsync(request)
         .then((value) => HomeDocumentListResponse.fromJson(value));
   }
 }

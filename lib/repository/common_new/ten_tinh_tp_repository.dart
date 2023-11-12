@@ -7,9 +7,9 @@ import 'package:eportal/model/api/request/common_new/ten_tinh_tp_request.dart';
 import 'package:eportal/model/api/response/common_new/ten_tinh_tp_response.dart';
 
 class TenTinhTpRepository {
-
   Future<TenTinhTpResponse> getTenTinhTp(TenTinhTpRequest request) {
-    return BaseAdapterApi().callApiAsync(request)
+    return BaseAdapterApi()
+        .callApiAsync(request)
         .then((value) => TenTinhTpResponse.fromJson(value));
   }
 }

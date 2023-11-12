@@ -6,6 +6,6 @@ class DanhSachTinhTpRequest extends BaseEportalRequest<CommonNewData> {
   DanhSachTinhTpRequest({required super.obj});
 
   @override
-  String getQuery()  => ApplicationApiConstant.API_COMMON_NEW_OP_DANH_SACH_TINH_TP;
-
+  String getQuery() =>
+      ApplicationApiConstant.API_COMMON_NEW_OP_DANH_SACH_TINH_TP;
 }

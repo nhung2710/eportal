@@ -1,6 +1,4 @@
-
 import 'package:eportal/model/base/base_eportal_xml.dart';
-import 'package:flutter/material.dart';
 
 //
 // Created by BlackRose on 11/6/2023.

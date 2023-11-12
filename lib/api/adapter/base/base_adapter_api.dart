@@ -9,14 +9,15 @@ import 'package:eportal/extension/string_extension.dart';
 import 'package:eportal/model/base/base_eportal_request.dart';
 import 'package:http/http.dart';
 import 'package:xml/xml.dart';
-class CacheApi
-{
+
+class CacheApi {
   String? body;
   int? timeout;
-  CacheApi({this.body,this.timeout});
+
+  CacheApi({this.body, this.timeout});
 
   CacheApi.fromJson(Map<String, dynamic> json) {
-    body = json['body']??ApplicationConstant.EMPTY;
+    body = json['body'] ?? ApplicationConstant.EMPTY;
     timeout = json['timeout'];
   }
 
@@ -34,21 +35,21 @@ class BaseAdapterApi {
   factory BaseAdapterApi() {
     return _instance;
   }
+
   BaseAdapterApi._internal();
+
   static final Map<String, String> _Maps = {
-    "xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance",
-    "xmlns:xsd":"http://www.w3.org/2001/XMLSchema",
-    "xmlns:soap":"http://schemas.xmlsoap.org/soap/envelope/",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
+    "xmlns:soap": "http://schemas.xmlsoap.org/soap/envelope/",
   };
 
   Future<Map<String, dynamic>> callApiAsync(BaseEportalRequest request) async {
-
     await Future.delayed(const Duration(seconds: 1));
     Uri uri = Uri();
-    if(!request.getQuery().isNullOrWhiteSpace()){
+    if (!request.getQuery().isNullOrWhiteSpace()) {
       uri = Uri.parse("${request.getBaseUri()}${request.getQuery()}");
-    }
-    else{
+    } else {
       uri = request.getUri();
     }
     StringBuffer stringBuffer =
@@ -56,15 +57,16 @@ class BaseAdapterApi {
     stringBuffer.write('<soap:Envelope ${getMapXml()}>');
     stringBuffer.write('<soap:Header>');
     stringBuffer.write('<AuthHeader xmlns="http://tempuri.org/">');
-    stringBuffer.write('<userLogin>${ApplicationApiConstant.BASE_AUTH_HEADER_USER_LOGIN}</userLogin>');
-    stringBuffer.write('<password>${ApplicationApiConstant.BASE_AUTH_HEADER_PASSWORD}</password>');
+    stringBuffer.write(
+        '<userLogin>${ApplicationApiConstant.BASE_AUTH_HEADER_USER_LOGIN}</userLogin>');
+    stringBuffer.write(
+        '<password>${ApplicationApiConstant.BASE_AUTH_HEADER_PASSWORD}</password>');
     stringBuffer.write('</AuthHeader>');
     stringBuffer.write('</soap:Header>');
-    if (request.isAuthentication()) {
-
-    }
+    if (request.isAuthentication()) {}
     stringBuffer.write('<soap:Body>');
-    stringBuffer.write('<${request.getTagXmlRequest()} ${request.getDefaultNameSpace()}>');
+    stringBuffer.write(
+        '<${request.getTagXmlRequest()} ${request.getDefaultNameSpace()}>');
     stringBuffer.write('${request.obj.toXml()}');
     stringBuffer.write('</${request.getTagXmlRequest()}>');
     stringBuffer.write('</soap:Body>');
@@ -72,24 +74,24 @@ class BaseAdapterApi {
 
     String responseSoapBody = ApplicationConstant.EMPTY;
     String requestBody = stringBuffer.toString();
-    var keyCache = "${md5.convert(utf8.encode(requestBody))}|${md5.convert(utf8.encode(uri.toString()))}";
+    var keyCache =
+        "${md5.convert(utf8.encode(requestBody))}|${md5.convert(utf8.encode(uri.toString()))}";
     var valueTimeCache = request.getTimeCache();
     bool isUseCache = false;
-    if(valueTimeCache > 0)
-    {
-
-        var valueCache = GlobalApplication().Preferences.getString(keyCache);
-        if(!valueCache.isNullOrWhiteSpace())
-        {
-          var cacheApi = CacheApi.fromJson(json.decode(valueCache!));
-          if(cacheApi.timeout != null && cacheApi.timeout! >= DateTime.now().millisecondsSinceEpoch){
-            responseSoapBody = cacheApi.body.replaceWhenNullOrWhiteSpace();
-            isUseCache = responseSoapBody.isNullOrWhiteSpace();
-          }
+    if (valueTimeCache > 0) {
+      var valueCache = GlobalApplication().Preferences.getString(keyCache);
+      if (!valueCache.isNullOrWhiteSpace()) {
+        var cacheApi = CacheApi.fromJson(json.decode(valueCache!));
+        if (cacheApi.timeout != null &&
+            cacheApi.timeout! >= DateTime.now().millisecondsSinceEpoch) {
+          responseSoapBody = cacheApi.body.replaceWhenNullOrWhiteSpace();
+          isUseCache = responseSoapBody.isNullOrWhiteSpace();
         }
+      }
     }
-    if(responseSoapBody.isNullOrWhiteSpace()) {
-      responseSoapBody = await _callWebServiceAsync(uri, requestBody,request.getContentType());
+    if (responseSoapBody.isNullOrWhiteSpace()) {
+      responseSoapBody = await _callWebServiceAsync(
+          uri, requestBody, request.getContentType());
     }
     if (!responseSoapBody.isNullOrWhiteSpace()) {
       final xmlResponse = XmlDocument.parse(responseSoapBody);
@@ -98,14 +100,20 @@ class BaseAdapterApi {
       var elements = xmlResponse.findAllElements(request.getTagXmlResponse());
       for (var item in elements) {
         var jsonValue = item.innerText;
-        if(!isUseCache) {
-          GlobalApplication().Preferences.setString(keyCache, json.encode(CacheApi(body: responseSoapBody,timeout: DateTime.now().add(Duration(seconds: valueTimeCache)).millisecondsSinceEpoch).toJson()));
+        if (!isUseCache) {
+          GlobalApplication().Preferences.setString(
+              keyCache,
+              json.encode(CacheApi(
+                      body: responseSoapBody,
+                      timeout: DateTime.now()
+                          .add(Duration(seconds: valueTimeCache))
+                          .millisecondsSinceEpoch)
+                  .toJson()));
         }
         return json.decode(jsonValue);
       }
       var faultStringElements = xmlResponse.findAllElements("faultstring");
-      if(faultStringElements.isNotEmpty){
-
+      if (faultStringElements.isNotEmpty) {
         var result = <String, dynamic>{};
         result["status"] = 0;
         result["message"] = faultStringElements.first.innerText;
@@ -118,7 +126,8 @@ class BaseAdapterApi {
     return result;
   }
 
-  Future<String> _callWebServiceAsync(Uri uri, String request, String contentType) async {
+  Future<String> _callWebServiceAsync(
+      Uri uri, String request, String contentType) async {
     try {
       log('data: $request');
       log('uri: $uri');
@@ -129,8 +138,7 @@ class BaseAdapterApi {
           "Content-Length": request.length.toString(),
         },
         body: request,
-      )
-      .timeout(const Duration(seconds: 60));
+      ).timeout(const Duration(seconds: 60));
       log('body: ${responseSoap.body}');
       return responseSoap.body;
     } on Exception catch (ex) {
@@ -139,5 +147,6 @@ class BaseAdapterApi {
     }
   }
 
-  getMapXml()  => _Maps.entries.map((entry) => "${entry.key}=\"${entry.value}\"").join(" ");
+  getMapXml() =>
+      _Maps.entries.map((entry) => "${entry.key}=\"${entry.value}\"").join(" ");
 }

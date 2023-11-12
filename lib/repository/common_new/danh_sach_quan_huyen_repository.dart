@@ -7,9 +7,10 @@ import 'package:eportal/model/api/request/common_new/danh_sach_quan_huyen_reques
 import 'package:eportal/model/api/response/common_new/danh_sach_quan_huyen_response.dart';
 
 class DanhSachQuanHuyenRepository {
-
-  Future<DanhSachQuanHuyenResponse> getDanhSachQuanHuyen(DanhSachQuanHuyenRequest request) {
-    return BaseAdapterApi().callApiAsync(request)
+  Future<DanhSachQuanHuyenResponse> getDanhSachQuanHuyen(
+      DanhSachQuanHuyenRequest request) {
+    return BaseAdapterApi()
+        .callApiAsync(request)
         .then((value) => DanhSachQuanHuyenResponse.fromJson(value));
   }
 }

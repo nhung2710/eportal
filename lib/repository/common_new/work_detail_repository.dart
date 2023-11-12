@@ -7,9 +7,9 @@ import 'package:eportal/model/api/request/common_new/work_detail_request.dart';
 import 'package:eportal/model/api/response/common_new/work_detail_response.dart';
 
 class WorkDetailRepository {
-
   Future<WorkDetailResponse> getWorkDetail(WorkDetailRequest request) {
-    return BaseAdapterApi().callApiAsync(request)
+    return BaseAdapterApi()
+        .callApiAsync(request)
         .then((value) => WorkDetailResponse.fromJson(value));
   }
 }

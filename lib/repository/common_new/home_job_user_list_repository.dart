@@ -7,9 +7,10 @@ import 'package:eportal/model/api/request/common_new/home_job_user_list_request.
 import 'package:eportal/model/api/response/common_new/home_job_user_list_response.dart';
 
 class HomeJobUserListRepository {
-
-  Future<HomeJobUserListResponse> getHomeJobUserList(HomeJobUserListRequest request) {
-    return BaseAdapterApi().callApiAsync(request)
+  Future<HomeJobUserListResponse> getHomeJobUserList(
+      HomeJobUserListRequest request) {
+    return BaseAdapterApi()
+        .callApiAsync(request)
         .then((value) => HomeJobUserListResponse.fromJson(value));
   }
 }

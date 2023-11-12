@@ -7,9 +7,10 @@ import 'package:eportal/model/api/request/common_new/danh_sach_gioi_tinh_request
 import 'package:eportal/model/api/response/common_new/danh_sach_gioi_tinh_response.dart';
 
 class DanhSachGioiTinhRepository {
-
-  Future<DanhSachGioiTinhResponse> getDanhSachGioiTinh(DanhSachGioiTinhRequest request) {
-    return BaseAdapterApi().callApiAsync(request)
+  Future<DanhSachGioiTinhResponse> getDanhSachGioiTinh(
+      DanhSachGioiTinhRequest request) {
+    return BaseAdapterApi()
+        .callApiAsync(request)
         .then((value) => DanhSachGioiTinhResponse.fromJson(value));
   }
 }

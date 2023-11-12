@@ -7,9 +7,9 @@ import 'package:eportal/model/api/request/common_new/job_user_detail_request.dar
 import 'package:eportal/model/api/response/common_new/job_user_detail_response.dart';
 
 class JobUserDetailRepository {
-
   Future<JobUserDetailResponse> getJobUserDetail(JobUserDetailRequest request) {
-    return BaseAdapterApi().callApiAsync(request)
+    return BaseAdapterApi()
+        .callApiAsync(request)
         .then((value) => JobUserDetailResponse.fromJson(value));
   }
 }

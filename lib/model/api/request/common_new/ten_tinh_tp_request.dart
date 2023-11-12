@@ -6,6 +6,5 @@ class TenTinhTpRequest extends BaseEportalRequest<CommonNewData> {
   TenTinhTpRequest({required super.obj});
 
   @override
-  String getQuery()  => ApplicationApiConstant.API_COMMON_NEW_OP_TEN_TINH_TP;
-
+  String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_TEN_TINH_TP;
 }

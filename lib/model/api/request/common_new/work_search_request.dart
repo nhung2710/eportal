@@ -6,6 +6,5 @@ class WorkSearchRequest extends BaseEportalRequest<CommonNewData> {
   WorkSearchRequest({required super.obj});
 
   @override
-  String getQuery()  => ApplicationApiConstant.API_COMMON_NEW_OP_WORK_SEARCH;
-
+  String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_WORK_SEARCH;
 }

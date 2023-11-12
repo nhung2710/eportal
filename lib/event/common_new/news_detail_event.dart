@@ -1,0 +1,11 @@
+
+//
+// Created by BlackRose on 11/10/2023.
+// Copyright (c) 2023 Hilo All rights reserved.
+//
+import '../../model/api/request/common_new/news_detail_request.dart';
+import '../base/base_event.dart';
+
+class NewsDetailEvent extends BaseEvent<NewsDetailRequest> {
+  const NewsDetailEvent({required super.request});
+}

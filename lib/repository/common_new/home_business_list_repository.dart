@@ -7,9 +7,10 @@ import 'package:eportal/model/api/request/common_new/home_business_list_request.
 import 'package:eportal/model/api/response/common_new/home_business_list_response.dart';
 
 class HomeBusinessListRepository {
-
-  Future<HomeBusinessListResponse> getHomeBusinessList(HomeBusinessListRequest request) {
-    return BaseAdapterApi().callApiAsync(request)
+  Future<HomeBusinessListResponse> getHomeBusinessList(
+      HomeBusinessListRequest request) {
+    return BaseAdapterApi()
+        .callApiAsync(request)
         .then((value) => HomeBusinessListResponse.fromJson(value));
   }
 }
