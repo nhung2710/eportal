@@ -6,6 +6,7 @@ import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
 import 'package:flutter/material.dart';
 
+import '../../job_user_search/page/job_user_search_page.dart';
 import '../../news_search/page/news_search_page.dart';
 import '../../work_search/page/work_search_page.dart';
 import '../widget/home_business_list_preview.dart';
@@ -131,7 +132,7 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                   color: Colors.white,
                 ),
                 child: GestureDetector(
-                  onTap: () => nextPage((context) => const WorkSearchPage()),
+                  onTap: () => nextPage((context) => const JobUserSearchPage()),
                   child: Row(
                     children: [
                       Expanded(

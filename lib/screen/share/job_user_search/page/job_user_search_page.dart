@@ -1,10 +1,52 @@
 import 'dart:math';
-
+import 'dart:convert' show utf8;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
+import '../../../../bloc/common_new/danh_sach_doanh_nghiep_bloc.dart';
+import '../../../../bloc/common_new/danh_sach_gioi_tinh_bloc.dart';
+import '../../../../bloc/common_new/danh_sach_kinh_nghiem_bloc.dart';
+import '../../../../bloc/common_new/danh_sach_muc_luong_bloc.dart';
+import '../../../../bloc/common_new/danh_sach_quan_huyen_bloc.dart';
+import '../../../../bloc/common_new/danh_sach_tinh_tp_bloc.dart';
+import '../../../../bloc/common_new/danh_sach_trinh_do_bloc.dart';
+import '../../../../bloc/common_new/job_user_search_bloc.dart';
+import '../../../../bloc/common_new/ten_tinh_tp_bloc.dart';
+import '../../../../bloc/common_new/work_search_bloc.dart';
+import '../../../../event/common_new/danh_sach_kinh_nghiem_event.dart';
+import '../../../../event/common_new/danh_sach_muc_luong_event.dart';
+import '../../../../event/common_new/danh_sach_quan_huyen_event.dart';
+import '../../../../event/common_new/danh_sach_tinh_tp_event.dart';
+import '../../../../event/common_new/danh_sach_trinh_do_event.dart';
+import '../../../../event/common_new/job_user_search_event.dart';
+import '../../../../event/common_new/work_search_event.dart';
+import '../../../../extension/string_extension.dart';
+import '../../../../model/api/request/common_new/danh_sach_kinh_nghiem_request.dart';
+import '../../../../model/api/request/common_new/danh_sach_muc_luong_request.dart';
+import '../../../../model/api/request/common_new/danh_sach_quan_huyen_request.dart';
+import '../../../../model/api/request/common_new/danh_sach_tinh_tp_request.dart';
+import '../../../../model/api/request/common_new/danh_sach_trinh_do_request.dart';
+import '../../../../model/api/request/common_new/data/common_new_data.dart';
+import '../../../../model/api/request/common_new/data/job_user_search_data.dart';
+import '../../../../model/api/request/common_new/data/work_search_data.dart';
+import '../../../../model/api/request/common_new/job_user_search_request.dart';
+import '../../../../model/api/request/common_new/work_search_request.dart';
+import '../../../../model/api/response/common_new/danh_sach_doanh_nghiep_response.dart';
+import '../../../../model/api/response/common_new/danh_sach_kinh_nghiem_response.dart';
+import '../../../../model/api/response/common_new/danh_sach_muc_luong_response.dart';
+import '../../../../model/api/response/common_new/danh_sach_quan_huyen_response.dart';
+import '../../../../model/api/response/common_new/danh_sach_tinh_tp_response.dart';
+import '../../../../model/api/response/common_new/data/danh_sach_tinh_tp_data.dart';
+import '../../../../model/api/response/common_new/job_user_search_response.dart';
+import '../../../../model/api/response/common_new/work_search_response.dart';
 import '../../../../model/share/chat_bot/chat_bot_message.dart';
+import '../../../../state/base/base_state.dart';
 import '../../../../style/app_text_style.dart';
 import '../../../../widget/base/base_page.dart';
+import '../../../../widget/expandable_fab/expandable_fab.dart';
+import '../../empty_example/page/empty_example_page.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //
 // Created by BlackRose on 13/11/2023.
@@ -19,33 +61,306 @@ class JobUserSearchPage extends BasePage {
 }
 
 class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
+  JobUserSearchBloc jobUserSearchBloc = JobUserSearchBloc();
+  DanhSachTinhTpBloc danhSachTinhTpBloc = DanhSachTinhTpBloc();
+  DanhSachQuanHuyenBloc danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
+  DanhSachDoanhNghiepBloc danhSachDoanhNghiepBloc = DanhSachDoanhNghiepBloc();
+  DanhSachMucLuongBloc danhSachMucLuongBloc = DanhSachMucLuongBloc();
+  DanhSachKinhNghiemBloc danhSachKinhNghiemBloc = DanhSachKinhNghiemBloc();
+  DanhSachGioiTinhBloc danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
+  DanhSachTrinhDoBloc danhSachTrinhDoBloc = DanhSachTrinhDoBloc();
+  JobUserSearchRequest request = JobUserSearchRequest(obj: JobUserSearchData());
   TextEditingController textEditingController = TextEditingController();
 
-  final List<ChatBotMessage> ChatBotMessages = [];
+  @override
+  void initDataLoading() {
+    jobUserSearchBloc.add(JobUserSearchEvent(request: request));
+    danhSachTinhTpBloc.add(DanhSachTinhTpEvent(
+        request: DanhSachTinhTpRequest(obj: CommonNewData())));
+    danhSachMucLuongBloc.add(DanhSachMucLuongEvent(
+        request: DanhSachMucLuongRequest(obj: CommonNewData())));
+    danhSachKinhNghiemBloc.add(DanhSachKinhNghiemEvent(
+        request: DanhSachKinhNghiemRequest(obj: CommonNewData())));
+    super.initDataLoading();
+  }
 
   @override
-  double currentPadding(BuildContext context) => 0;
+  Widget? getEndDrawer(BuildContext context) => Container(
+        child: SafeArea(
+          child: Container(
+            color: Colors.white,
+            padding: const EdgeInsets.all(10),
+            width: MediaQuery.of(context).size.width * 0.9,
+            child: Column(children: [
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: Text("Tiêu chí tìm kiếm thêm"),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: BlocProvider(
+                    create: (_) => danhSachTinhTpBloc,
+                    child: BlocListener<DanhSachTinhTpBloc, BaseState>(
+                      listener: (BuildContext context, BaseState state) {},
+                      child: BlocBuilder<DanhSachTinhTpBloc, BaseState>(
+                        builder: (BuildContext context, BaseState state) =>
+                            handlerBaseState<DanhSachTinhTpResponse>(
+                                state,
+                                (context, state) => DropdownButtonFormField(
+                                      value: request.obj.tinhTP,
+                                      items: (state.data ?? [])
+                                          .map((e) => DropdownMenuItem<int>(
+                                                value: e.regionalID,
+                                                child: Text(
+                                                  "${e.regionalName}",
+                                                  style: AppTextStyle.title,
+                                                ),
+                                              ))
+                                          .toList(),
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: 'Thành phố',
+                                        counterText: "",
+                                      ),
+                                      onChanged: (v) {
+                                        request.obj.tinhTP = v;
+                                        danhSachQuanHuyenBloc.add(
+                                            DanhSachQuanHuyenEvent(
+                                                request:
+                                                    DanhSachQuanHuyenRequest(
+                                                        obj: CommonNewData())));
+                                      },
+                                    ),
+                                initWidget: DropdownButtonFormField(
+                                  items: []
+                                      .map((e) => DropdownMenuItem<int>(
+                                            value: e,
+                                            child: Text("${e}"),
+                                          ))
+                                      .toList(),
+                                  decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Thành phố',
+                                    counterText: "",
+                                  ),
+                                  onChanged: (v) {
+                                    request.obj.tinhTP = v;
+                                    danhSachQuanHuyenBloc.add(
+                                        DanhSachQuanHuyenEvent(
+                                            request: DanhSachQuanHuyenRequest(
+                                                obj: CommonNewData())));
+                                  },
+                                )),
+                      ),
+                    )),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: BlocProvider(
+                    create: (_) => danhSachQuanHuyenBloc,
+                    child: BlocListener<DanhSachQuanHuyenBloc, BaseState>(
+                      listener: (BuildContext context, BaseState state) {},
+                      child: BlocBuilder<DanhSachQuanHuyenBloc, BaseState>(
+                        builder: (BuildContext context, BaseState state) =>
+                            handlerBaseState<DanhSachQuanHuyenResponse>(
+                                state,
+                                (context, state) => DropdownButtonFormField(
+                                      value: request.obj.tinhTP,
+                                      items: (state.data ?? [])
+                                          .map((e) => DropdownMenuItem<int>(
+                                                value: e.regionalID,
+                                                child: Text(
+                                                  "${e.regionalName}",
+                                                  style: AppTextStyle.title,
+                                                ),
+                                              ))
+                                          .toList(),
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: 'Quận huyện',
+                                        counterText: "",
+                                      ),
+                                      onChanged: (v) {},
+                                    ),
+                                initWidget: DropdownButtonFormField(
+                                  items: []
+                                      .map((e) => DropdownMenuItem<int>(
+                                            value: e,
+                                            child: Text("${e}"),
+                                          ))
+                                      .toList(),
+                                  decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Quận huyện',
+                                    counterText: "",
+                                  ),
+                                  onChanged: (v) {
+                                    request.obj.tinhTP = v;
+                                    danhSachQuanHuyenBloc.add(
+                                        DanhSachQuanHuyenEvent(
+                                            request: DanhSachQuanHuyenRequest(
+                                                obj: CommonNewData())));
+                                  },
+                                )),
+                      ),
+                    )),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: BlocProvider(
+                    create: (_) => danhSachDoanhNghiepBloc,
+                    child: BlocListener<DanhSachDoanhNghiepBloc, BaseState>(
+                      listener: (BuildContext context, BaseState state) {},
+                      child: BlocBuilder<DanhSachDoanhNghiepBloc, BaseState>(
+                        builder: (BuildContext context, BaseState state) =>
+                            handlerBaseState<DanhSachDoanhNghiepResponse>(
+                                state,
+                                (context, state) => DropdownButtonFormField(
+                                      value: request.obj.tinhTP,
+                                      items: (state.data ?? [])
+                                          .map((e) => DropdownMenuItem<String>(
+                                                value: Uuid().v1(),
+                                                child: Text(
+                                                  "${Uuid().v1()}",
+                                                  style: AppTextStyle.title,
+                                                ),
+                                              ))
+                                          .toList(),
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: 'Doanh nghiệp',
+                                        counterText: "",
+                                      ),
+                                      onChanged: (v) {},
+                                    ),
+                                initWidget: DropdownButtonFormField(
+                                  items: []
+                                      .map((e) => DropdownMenuItem<int>(
+                                            value: e,
+                                            child: Text("${e}"),
+                                          ))
+                                      .toList(),
+                                  decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Doanh nghiệp',
+                                    counterText: "",
+                                  ),
+                                  onChanged: (v) {
+                                    request.obj.tinhTP = v;
+                                    danhSachQuanHuyenBloc.add(
+                                        DanhSachQuanHuyenEvent(
+                                            request: DanhSachQuanHuyenRequest(
+                                                obj: CommonNewData())));
+                                  },
+                                )),
+                      ),
+                    )),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: BlocProvider(
+                    create: (_) => danhSachMucLuongBloc,
+                    child: BlocListener<DanhSachMucLuongBloc, BaseState>(
+                      listener: (BuildContext context, BaseState state) {},
+                      child: BlocBuilder<DanhSachMucLuongBloc, BaseState>(
+                        builder: (BuildContext context, BaseState state) =>
+                            handlerBaseState<DanhSachMucLuongResponse>(
+                                state,
+                                (context, state) => DropdownButtonFormField(
+                                      value: request.obj.tinhTP,
+                                      items: (state.data ?? [])
+                                          .map((e) => DropdownMenuItem<String>(
+                                                value: e.salaryID,
+                                                child: Text(
+                                                  e.salaryName.supportHtml(),
+                                                  style: AppTextStyle.title,
+                                                ),
+                                              ))
+                                          .toList(),
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: 'Mức lương',
+                                        counterText: "",
+                                      ),
+                                      onChanged: (v) {},
+                                    ),
+                                initWidget: DropdownButtonFormField(
+                                  items: []
+                                      .map((e) => DropdownMenuItem<int>(
+                                            value: e,
+                                            child: Text("${e}"),
+                                          ))
+                                      .toList(),
+                                  decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Mức lương',
+                                    counterText: "",
+                                  ),
+                                  onChanged: (v) {
+                                    request.obj.mucLuong = v;
+                                  },
+                                )),
+                      ),
+                    )),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: BlocProvider(
+                    create: (_) => danhSachKinhNghiemBloc,
+                    child: BlocListener<DanhSachKinhNghiemBloc, BaseState>(
+                      listener: (BuildContext context, BaseState state) {},
+                      child: BlocBuilder<DanhSachKinhNghiemBloc, BaseState>(
+                        builder: (BuildContext context, BaseState state) =>
+                            handlerBaseState<DanhSachKinhNghiemResponse>(
+                                state,
+                                (context, state) => DropdownButtonFormField(
+                                      value: request.obj.tinhTP,
+                                      items: (state.data ?? [])
+                                          .map((e) => DropdownMenuItem<String>(
+                                                value: e.experienceID,
+                                                child: Text(
+                                                  e.experienceName
+                                                      .supportHtml(),
+                                                  style: AppTextStyle.title,
+                                                ),
+                                              ))
+                                          .toList(),
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: 'Kinh nghiệm',
+                                        counterText: "",
+                                      ),
+                                      onChanged: (v) {},
+                                    ),
+                                initWidget: DropdownButtonFormField(
+                                  items: []
+                                      .map((e) => DropdownMenuItem<int>(
+                                            value: e,
+                                            child: Text(""),
+                                          ))
+                                      .toList(),
+                                  decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Kinh nghiệm',
+                                    counterText: "",
+                                  ),
+                                  onChanged: (v) {
+                                    request.obj.kinhNghiem = v;
+                                  },
+                                )),
+                      ),
+                    )),
+              ),
+            ]),
+          ),
+        ),
+      );
 
   @override
   Widget pageUI(BuildContext context) => Column(
         children: [
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(5),
-              height: double.infinity,
-              width: double.infinity,
-              child: SingleChildScrollView(
-                controller: scrollController,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: ChatBotMessages.map((e) => _showInput(e)).toList(),
-                ),
-              ),
-            ),
-          ),
           Container(
-            margin: const EdgeInsets.all(5),
+            margin: const EdgeInsets.only(bottom: 5, top: 5),
             color: Colors.white,
             child: TextFormField(
               controller: textEditingController,
@@ -57,7 +372,7 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
                 }
                 return null;
               },
-              onFieldSubmitted: (value) => _sendMessageAsync(context),
+              onFieldSubmitted: (value) => _findNews(context),
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 suffixIcon: IconButton(
@@ -66,14 +381,71 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
                     color: Colors.blue,
                   ),
                   onPressed: () {
-                    _sendMessageAsync(context);
+                    _findNews(context);
                   },
                 ),
                 labelText: 'Nội dung',
                 counterText: "",
               ),
             ),
-          )
+          ),
+          Expanded(
+            child: BlocProvider(
+                create: (_) => jobUserSearchBloc,
+                child: BlocListener<JobUserSearchBloc, BaseState>(
+                  listener: (BuildContext context, BaseState state) {},
+                  child: BlocBuilder<JobUserSearchBloc, BaseState>(
+                    builder: (BuildContext context, BaseState state) =>
+                        handlerBaseState<JobUserSearchResponse>(
+                      state,
+                      (context, state) => Column(
+                        children: [
+                          Container(
+                            child: Text(state.toString()),
+                          ),
+                          Expanded(
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: state.data?.length ?? 0,
+                                itemBuilder: (context, i) => GestureDetector(
+                                      onTap: () => nextPage(
+                                          (context) => EmptyExamplePage(
+                                                isHasAppBar: true,
+                                              )),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.white,
+                                        ),
+                                        padding: const EdgeInsets.all(10),
+                                        margin: const EdgeInsets.only(top: 5),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              flex: 1,
+                                              child: Text(
+                                                "1",
+                                                style: AppTextStyle.title
+                                                    .copyWith(
+                                                        color: Colors.blue,
+                                                        overflow: TextOverflow
+                                                            .visible,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )),
+          ),
         ],
       );
 
@@ -81,88 +453,12 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
   getBottomNavigationBar(BuildContext context) => null;
 
   @override
-  String getPageTitle(BuildContext context) => "Trợ lý ảo";
+  String getPageTitle(BuildContext context) => "Tìm hồ sơ xin việc";
 
-  _addMessage(ChatBotMessage chatBotMessage) {
-    setState(() {
-      ChatBotMessages.add(chatBotMessage);
-    });
-  }
-
-  _sendMessageAsync(BuildContext context) {
+  void _findNews(BuildContext context) {
     if (isValid()) {
-      _addMessage(ChatBotMessage(
-          isBot: false, message: textEditingController.text, title: "Tôi"));
-      textEditingController.clear();
-      _botSendMessageAsync(context);
+      request.obj.tuKhoa = textEditingController.text;
+      jobUserSearchBloc.add(JobUserSearchEvent(request: request));
     }
-    scrollToEnd();
   }
-
-  List<String> greetings = [
-    "Hello!",
-    "Hi there!",
-    "Hey!",
-    "Good morning!",
-    "Good afternoon!",
-    "Good evening!",
-    "Howdy!",
-    "What's up!",
-    "Greetings!",
-    "Salutations!",
-    "How are you?",
-    "What's new?",
-    "How's it going!",
-    "Nice to see you!",
-    "Welcome!",
-    "Hey, how's everything?",
-    "Yo!",
-    "Aloha!",
-    "Hi, what's going on?",
-    "Howdy, partner!"
-  ];
-
-  String getRandomGreeting() {
-    Random random = Random();
-    int index = random.nextInt(greetings.length);
-    return greetings[index];
-  }
-
-  void _botSendMessageAsync(BuildContext context) {
-    Future.delayed(const Duration(milliseconds: 1000))
-        .then((value) => _addMessage(ChatBotMessage(
-            isBot: true, message: getRandomGreeting(), title: "Bot")))
-        .then((value) => scrollToEnd());
-  }
-
-  Widget _showInput(ChatBotMessage e) => Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          e.isBot ? Container() : Expanded(flex: 1, child: Container()),
-          Expanded(
-            flex: 4,
-            child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: e.isBot ? Colors.blue : Colors.white,
-                ),
-                margin: const EdgeInsets.only(top: 8),
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: e.isBot
-                      ? CrossAxisAlignment.start
-                      : CrossAxisAlignment.end,
-                  mainAxisAlignment:
-                      e.isBot ? MainAxisAlignment.start : MainAxisAlignment.end,
-                  children: [
-                    Text(e.message,
-                        style: AppTextStyle.titleAppbarPage.copyWith(
-                            color: !e.isBot ? Colors.blue : Colors.white)),
-                  ],
-                )),
-          ),
-          !e.isBot ? Container() : Expanded(flex: 1, child: Container()),
-        ],
-      );
 }
