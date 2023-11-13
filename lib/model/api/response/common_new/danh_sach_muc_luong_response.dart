@@ -4,14 +4,22 @@
 //
 import 'package:eportal/model/base/base_eportal_response.dart';
 
+import 'data/danh_sach_muc_luong_data.dart';
+
 class DanhSachMucLuongResponse extends BaseEportalResponse {
-  String? data;
+  List<DanhSachMucLuongData>? data;
 
   DanhSachMucLuongResponse({this.data, required status, required message})
       : super(status: status, message: message);
 
   factory DanhSachMucLuongResponse.fromJson(Map<String, dynamic> json) {
+    List<DanhSachMucLuongData> data = <DanhSachMucLuongData>[];
+    if (json['data'] != null) {
+      json['data'].forEach((v) {
+        data.add(DanhSachMucLuongData.fromJson(v));
+      });
+    }
     return DanhSachMucLuongResponse(
-        data: json["data"], status: json["status"], message: json["message"]);
+        data: data, status: json["status"], message: json["message"]);
   }
 }

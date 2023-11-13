@@ -23,8 +23,12 @@ class DanhSachDoanhNghiepBloc extends Bloc<BaseEvent, BaseState> {
         if (response.status != 2) {
           emit(BaseError(response.message));
         }
-      } on Exception catch (e) {
+      } on Exception
+      catch (e) {
         emit(BaseError(e.toString()));
+      }
+      catch (error) {
+
       }
     });
   }

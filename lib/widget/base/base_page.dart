@@ -56,6 +56,8 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
                 onRefresh: () async => initDataLoading(),
                 child: pageUI(context)),
           ),
+          endDrawer: getEndDrawer(context),
+          drawer: getDrawer(context),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.miniEndFloat,
           floatingActionButton: getFloatingActionButton(context),
@@ -64,6 +66,10 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
       ),
     );
   }
+
+  Widget? getEndDrawer(BuildContext context) => null;
+
+  Widget? getDrawer(BuildContext context) => null;
 
   Widget pageUI(BuildContext context) {
     return const Text("Categories List");
@@ -203,11 +209,12 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
 
   Future<void> scrollToEnd() =>
       scrollController.animateTo(scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
+          duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
 
-  Widget handlerBaseState<K>(BaseState state, BlocWidgetBuilder<K> builder) {
+  Widget handlerBaseState<K>(BaseState state, BlocWidgetBuilder<K> builder,
+      {Widget? initWidget}) {
     if (state is BaseInitial) {
-      return buildScreenLoading();
+      return initWidget ?? Container();
     } else if (state is BaseLoading) {
       return buildScreenLoading();
     } else if (state is BaseError) {
@@ -228,7 +235,6 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
 
   Widget buildScreenError(String error) => Container(
       height: 100,
-      color: Colors.red,
       child: Text(
         error,
         style: AppTextStyle.title.copyWith(color: Colors.red),
@@ -448,7 +454,7 @@ class BasePageStateActive<T extends StatefulWidget> extends State<T>
 
   Widget buildScreenError(String error) => Container(
       height: 100,
-      color: Colors.red,
+      color: Colors.transparent,
       child: Text(
         error,
         style: AppTextStyle.title.copyWith(color: Colors.red),

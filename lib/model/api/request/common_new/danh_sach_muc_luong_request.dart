@@ -6,6 +6,9 @@ class DanhSachMucLuongRequest extends BaseEportalRequest<CommonNewData> {
   DanhSachMucLuongRequest({required super.obj});
 
   @override
+  int getTimeCache() => 60;
+
+  @override
   String getQuery() =>
       ApplicationApiConstant.API_COMMON_NEW_OP_DANH_SACH_MUC_LUONG;
 }

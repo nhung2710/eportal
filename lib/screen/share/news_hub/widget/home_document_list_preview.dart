@@ -11,33 +11,36 @@ import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/show_full_info/show_full_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
 
+import '../../../../bloc/common_new/home_document_list_bloc.dart';
+import '../../../../constant/application_constant.dart';
+import '../../../../event/common_new/home_document_list_event.dart';
+import '../../../../model/api/request/common_new/home_document_list_request.dart';
+import '../../../../model/api/response/common_new/home_document_list_response.dart';
+import '../../../../widget/image/image_loading.dart';
 //
-// Created by BlackRose on 11/9/2023.
+// Created by BlackRose on 13/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
+class HomeDocumentListPreview extends BasePage {
 
-class HomeWorkListPreview extends BasePage {
-  int flag;
-
-  HomeWorkListPreview({super.key, required this.flag});
+  const HomeDocumentListPreview({super.key});
 
   @override
-  State<StatefulWidget> createState() => _HomeWorkListPreviewState();
+  State<StatefulWidget> createState() => _HomeDocumentListPreviewState();
 }
 
-class _HomeWorkListPreviewState
-    extends BasePageStateActive<HomeWorkListPreview> {
-  HomeWorksListBloc homeWorksListCommonBloc = HomeWorksListBloc();
+class _HomeDocumentListPreviewState
+    extends BasePageStateActive<HomeDocumentListPreview> {
+  HomeDocumentListBloc homeDocumentListBloc = HomeDocumentListBloc();
 
   @override
   bool isHasAppBar(BuildContext context) => false;
 
   @override
   void initDataLoading() {
-    homeWorksListCommonBloc.add(HomeWorksListEvent(
-        request: HomeWorksListRequest(
-            obj: CommonNewData(flag: widget.flag, top: 7))));
+    homeDocumentListBloc.add(HomeDocumentListEvent(request: HomeDocumentListRequest(obj: CommonNewData(top: ApplicationConstant.NUMBER_PREVIEW_ITEM))));
     super.initDataLoading();
   }
 
@@ -49,23 +52,23 @@ class _HomeWorkListPreviewState
 
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
-      create: (_) => homeWorksListCommonBloc,
-      child: BlocListener<HomeWorksListBloc, BaseState>(
+      create: (_) => homeDocumentListBloc,
+      child: BlocListener<HomeDocumentListBloc, BaseState>(
         listener: (BuildContext context, BaseState state) {},
-        child: BlocBuilder<HomeWorksListBloc, BaseState>(
+        child: BlocBuilder<HomeDocumentListBloc, BaseState>(
           builder: (BuildContext context, BaseState state) =>
-              handlerBaseState<HomeWorksListResponse>(
-            state,
-            (context, state) => Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: state.data?.length ?? 0,
-                      itemBuilder: (context, i) => GestureDetector(
+              handlerBaseState<HomeDocumentListResponse>(
+                state,
+                    (context, state) => Column(
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: state.data?.length ?? 0,
+                          itemBuilder: (context, i) => GestureDetector(
                             onTap: () => nextPage((context) => EmptyExamplePage(
-                                  isHasAppBar: true,
-                                )),
+                              isHasAppBar: true,
+                            )),
                             child: Container(
                               padding: const EdgeInsets.only(top: 10),
                               child: Text(
@@ -76,15 +79,15 @@ class _HomeWorkListPreviewState
                               ),
                             ),
                           )),
-                ),
-                ShowFullInfo(
-                  onTap: () => nextPage((context) => EmptyExamplePage(
+                    ),
+                    ShowFullInfo(
+                      onTap: () => nextPage((context) => EmptyExamplePage(
                         isHasAppBar: true,
                       )),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
+              ),
         ),
       ));
 }

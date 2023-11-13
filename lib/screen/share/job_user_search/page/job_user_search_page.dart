@@ -1,22 +1,24 @@
 import 'dart:math';
 
-import 'package:eportal/model/share/chat_bot/chat_bot_message.dart';
-import 'package:eportal/style/app_text_style.dart';
-import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../model/share/chat_bot/chat_bot_message.dart';
+import '../../../../style/app_text_style.dart';
+import '../../../../widget/base/base_page.dart';
+
 //
-// Created by BlackRose on 11/7/2023.
+// Created by BlackRose on 13/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class ChatBotPage extends BasePage {
-  const ChatBotPage({super.key});
+
+class JobUserSearchPage extends BasePage {
+  const JobUserSearchPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _ChatBotPageState();
+  State<StatefulWidget> createState() => _JobUserSearchPageState();
 }
 
-class _ChatBotPageState extends BasePageState<ChatBotPage> {
+class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
   TextEditingController textEditingController = TextEditingController();
 
   final List<ChatBotMessage> ChatBotMessages = [];

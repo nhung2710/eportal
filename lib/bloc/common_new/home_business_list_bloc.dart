@@ -19,9 +19,12 @@ class HomeBusinessListBloc extends Bloc<BaseEvent, BaseState> {
         emit(BaseLoading());
         final response =
         await apiRepository.getHomeBusinessList(event.request);
-        emit(BaseLoaded(response));
-        if (response.status != 2) {
+
+        if ((response.status??0) != 2) {
           emit(BaseError(response.message));
+        }
+        else {
+          emit(BaseLoaded(response));
         }
       } on Exception catch (e) {
         emit(BaseError(e.toString()));

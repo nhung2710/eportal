@@ -1,4 +1,7 @@
+import '../api/constant/application_api_constant.dart';
 import '../constant/application_constant.dart';
+import 'package:html/parser.dart' as htmlparser;
+import 'package:html/dom.dart' as dom;
 
 extension StringNullExtension on String? {
   bool isNull() => this == null;
@@ -19,6 +22,12 @@ extension StringNullExtension on String? {
 
   String replaceWhenNullOrWhiteSpace([String? replace]) =>
       !isNullOrWhiteSpace() ? this! : replace ?? ApplicationConstant.EMPTY;
+
+  String getImageUrl() => "${ApplicationApiConstant.BASE_URI_MEDIA}/$this";
+
+  String supportHtml() => isNullOrWhiteSpace()
+      ? ApplicationConstant.EMPTY
+      : (htmlparser.parse(this).firstChild?.text).replaceWhenNullOrWhiteSpace();
 }
 
 extension StringExtension on String {

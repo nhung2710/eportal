@@ -1,6 +1,7 @@
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/extension/string_extension.dart';
 import 'package:eportal/screen/anonymous/home/home_page.dart';
+import 'package:eportal/screen/share/onboarding/page/onboarding_page.dart';
 import 'package:eportal/style/app_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,15 +17,8 @@ Future<bool> checkAppRunFirstTime() {
       .getBool(ApplicationConstant.FIRST_TIME_OPEN_APP);
   return GlobalApplication()
       .Preferences
-      .remove(ApplicationConstant.REGISTER_USER_PASSWORD)
-      .then((value) => GlobalApplication()
-          .Preferences
-          .remove(ApplicationConstant.REGISTER_USER_NAME))
-      .then((value) => GlobalApplication()
-          .Preferences
-          .setBool(ApplicationConstant.FIRST_TIME_OPEN_APP, true))
-      .then((value) => isFirstRunApp??false)
-      .then((value) => true);
+      .setBool(ApplicationConstant.FIRST_TIME_OPEN_APP, false)
+      .then((value) => isFirstRunApp ?? true);
 }
 
 Future<void> main() async {
@@ -75,8 +69,8 @@ class MyApp extends StatelessWidget {
       home: PageStorage(
         key: key,
         bucket: _bucket,
-        //child: isFirstRunApp?  const OnboardingPage():const HomePage(),
-        child: isFirstRunApp ? const HomePage() : const HomePage(),
+        child: isFirstRunApp ? const OnboardingPage() : const HomePage(),
+        //child: isFirstRunApp ? const HomePage() : const HomePage(),
       ),
       builder: (context, child) {
         return MediaQuery(

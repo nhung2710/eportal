@@ -2,7 +2,9 @@ import 'package:eportal/api/constant/application_api_constant.dart';
 import 'package:eportal/model/api/request/common_new/data/common_new_data.dart';
 import 'package:eportal/model/base/base_eportal_request.dart';
 
-class WorkSearchRequest extends BaseEportalRequest<CommonNewData> {
+import 'data/work_search_data.dart';
+
+class WorkSearchRequest extends BaseEportalRequest<WorkSearchData> {
   WorkSearchRequest({required super.obj});
 
   @override

@@ -15,7 +15,6 @@ class HomeNewsListBloc extends Bloc<BaseEvent, BaseState> {
     on<HomeNewsListEvent>((event, emit) async {
       try {
         emit(BaseLoading());
-        await Future.delayed(const Duration(seconds: 10));
         final response = await apiRepository.getHomeNewsList(event.request);
         emit(BaseLoaded(response));
         if (response.status != 2) {
