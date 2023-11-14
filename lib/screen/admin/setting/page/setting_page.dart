@@ -8,6 +8,9 @@ import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../../share/change_password/page/change_password_page.dart';
+import '../../../share/change_user_info/page/change_user_info_page.dart';
+
 //
 // Created by BlackRose on 11/7/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -25,11 +28,11 @@ class _SettingPageState extends BasePageState<SettingPage> {
       SettingPageModel(
           icon: Icons.change_circle_outlined,
           title: "Đổi thông tin",
-          builder: (context) => const SettingPage()),
+          builder: (context) => const ChangeUserInfoPage()),
       SettingPageModel(
           icon: Icons.password_sharp,
           title: "Đổi mật khẩu",
-          builder: (context) => const SettingPage()),
+          builder: (context) => const ChangePasswordPage()),
     ],
     "Biểu đồ": [
       SettingPageModel(

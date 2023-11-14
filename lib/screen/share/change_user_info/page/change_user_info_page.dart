@@ -1,30 +1,28 @@
-import 'package:eportal/application/global_application.dart';
-import 'package:eportal/constant/application_constant.dart';
-import 'package:eportal/screen/share/sign_in/page/sign_in_page.dart';
-import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import '../../../../widget/base/base_page.dart';
 
 //
-// Created by BlackRose on 11/7/2023.
+// Created by BlackRose on 14/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class SignUpPage extends BasePage {
-  const SignUpPage({super.key});
+class ChangeUserInfoPage extends BasePage {
+  const ChangeUserInfoPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _SignUpPageState();
+  State<StatefulWidget> createState() => _ChangeUserInfoPageState();
 }
 
-class _SignUpPageState extends BasePageState<SignUpPage> {
+class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
   TextEditingController fullNameController = TextEditingController();
+  TextEditingController birthDayController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
 
   @override
-  String getPageTitle(BuildContext context) => "Đăng ký tài khoản";
+  String getPageTitle(BuildContext context) => "Thay thông tin";
 
   @override
   Color currentBackgroundColor(BuildContext context) => Colors.white;
@@ -49,12 +47,42 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
               textInputAction: TextInputAction.next,
               validator: (text) {
                 if (text == null || text.isEmpty) {
-                  return 'Họ và tên không được để trống';
+                  return 'Tên đầy đủ không được để trống';
                 }
                 return null;
               },
               decoration: const InputDecoration(
-                labelText: 'Họ và tên',
+                labelText: 'Tên đầy đủ',
+                counterText: "",
+              ),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: TextFormField(
+              controller: birthDayController,
+              maxLength: 50,
+              textInputAction: TextInputAction.next,
+              validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Ngày tháng năm sinh không được để trống';
+                }
+                return null;
+              },
+              onTap: () async {
+                FocusScope.of(context).unfocus();
+                DateTime? pickerDate = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime.now());
+                if (pickerDate != null) {
+                  birthDayController.text =
+                      DateFormat('dd/MM/yyyy').format(pickerDate);
+                }
+              },
+              decoration: const InputDecoration(
+                labelText: 'Ngày tháng năm sinh',
                 counterText: "",
               ),
             ),
@@ -81,6 +109,7 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
             margin: const EdgeInsets.only(top: 10),
             child: TextFormField(
               controller: phoneController,
+              keyboardType: TextInputType.number,
               maxLength: 50,
               textInputAction: TextInputAction.next,
               validator: (text) {
@@ -98,37 +127,18 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
           Container(
             margin: const EdgeInsets.only(top: 10),
             child: TextFormField(
-              controller: nameController,
-              maxLength: 50,
-              textInputAction: TextInputAction.next,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Tài khoản không được để trống';
-                }
-                return null;
-              },
-              decoration: const InputDecoration(
-                labelText: 'Tài khoản',
-                counterText: "",
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: TextFormField(
-              obscureText: true,
-              controller: passwordController,
+              controller: addressController,
               maxLength: 50,
               textInputAction: TextInputAction.done,
               validator: (text) {
                 if (text == null || text.isEmpty) {
-                  return 'Mật khẩu không được để trống';
+                  return 'Địa chỉ không được để trống';
                 }
                 return null;
               },
-              onFieldSubmitted: (value) => _registerAccount(context),
+              onFieldSubmitted: (value) => _changeUserInfo(context),
               decoration: const InputDecoration(
-                labelText: 'Mật khẩu',
+                labelText: 'Địa chỉ',
                 counterText: "",
               ),
             ),
@@ -138,23 +148,18 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
               child: ElevatedButton(
                 child: Container(
                   padding: const EdgeInsets.all(10),
-                  child: const Text('Đăng ký'),
+                  child: const Text('Thay đổi thông tin'),
                 ),
-                onPressed: () => _registerAccount(context),
+                onPressed: () => _changeUserInfo(context),
               )),
         ],
       );
 
-  _registerAccount(BuildContext context) {
+  _changeUserInfo(BuildContext context) {
     if (isValid()) {
       loadDataDemo().then((value) {
-        GlobalApplication().Preferences.setString(
-            ApplicationConstant.REGISTER_USER_NAME, nameController.text);
-        GlobalApplication().Preferences.setString(
-            ApplicationConstant.REGISTER_USER_PASSWORD,
-            passwordController.text);
-        showCenterMessage("Bạn đã tạo tài khoản thành công")
-            .then((value) => nextPage((context) => const SignInPage()));
+        showCenterMessage("Thay đổi thông tin thành công")
+            .then((value) => backPage());
       });
     }
   }
