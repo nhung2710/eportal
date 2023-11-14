@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../constant/application_constant.dart';
+import '../../../../style/app_color.dart';
 import '../../home_works_list/page/home_works_list_page.dart';
 
 //
@@ -40,7 +41,9 @@ class _HomeWorksListPreviewState
   void initDataLoading() {
     homeWorksListCommonBloc.add(HomeWorksListEvent(
         request: HomeWorksListRequest(
-            obj: CommonNewData(flag: widget.flag, top: ApplicationConstant.NUMBER_PREVIEW_ITEM))));
+            obj: CommonNewData(
+                flag: widget.flag,
+                top: ApplicationConstant.NUMBER_PREVIEW_ITEM))));
     super.initDataLoading();
   }
 
@@ -72,16 +75,19 @@ class _HomeWorksListPreviewState
                             child: Container(
                               padding: const EdgeInsets.only(top: 10),
                               child: Text(
-                                "${i + 1}.  ${(state.data?.elementAt(i).title).replaceWhenNullOrWhiteSpace()}",
+                                (state.data?.elementAt(i).title)
+                                    .replaceWhenNullOrWhiteSpace(),
                                 style: AppTextStyle.title.copyWith(
-                                    color: Colors.blue,
+                                    color: AppColor.colorOfText,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
                           )),
                 ),
                 ShowFullInfo(
-                  onTap: () => nextPage((context) => HomeWorksListPage(flag: widget.flag,)),
+                  onTap: () => nextPage((context) => HomeWorksListPage(
+                        flag: widget.flag,
+                      )),
                 ),
               ],
             ),

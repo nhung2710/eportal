@@ -28,6 +28,7 @@ import '../../../../model/api/request/common_new/danh_sach_quan_huyen_request.da
 import '../../../../model/api/request/common_new/danh_sach_tinh_tp_request.dart';
 import '../../../../model/api/request/common_new/danh_sach_trinh_do_request.dart';
 import '../../../../model/api/request/common_new/data/common_new_data.dart';
+import '../../../../model/api/request/common_new/data/danh_sach_quan_huyen_data.dart';
 import '../../../../model/api/request/common_new/data/job_user_search_data.dart';
 import '../../../../model/api/request/common_new/data/work_search_data.dart';
 import '../../../../model/api/request/common_new/job_user_search_request.dart';
@@ -118,7 +119,6 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
                                               ))
                                           .toList(),
                                       decoration: const InputDecoration(
-                                        border: OutlineInputBorder(),
                                         labelText: 'Thành phố',
                                         counterText: "",
                                       ),
@@ -126,9 +126,10 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
                                         request.obj.tinhTP = v;
                                         danhSachQuanHuyenBloc.add(
                                             DanhSachQuanHuyenEvent(
-                                                request:
-                                                    DanhSachQuanHuyenRequest(
-                                                        obj: CommonNewData())));
+                                                request: DanhSachQuanHuyenRequest(
+                                                    obj: DanhSachQuanHuyenData(
+                                                        id: request
+                                                            .obj.tinhTP))));
                                       },
                                     ),
                                 initWidget: DropdownButtonFormField(
@@ -139,7 +140,6 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
                                           ))
                                       .toList(),
                                   decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
                                     labelText: 'Thành phố',
                                     counterText: "",
                                   ),
@@ -148,7 +148,8 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
                                     danhSachQuanHuyenBloc.add(
                                         DanhSachQuanHuyenEvent(
                                             request: DanhSachQuanHuyenRequest(
-                                                obj: CommonNewData())));
+                                                obj: DanhSachQuanHuyenData(
+                                                    id: request.obj.tinhTP))));
                                   },
                                 )),
                       ),
@@ -165,7 +166,7 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
                             handlerBaseState<DanhSachQuanHuyenResponse>(
                                 state,
                                 (context, state) => DropdownButtonFormField(
-                                      value: request.obj.tinhTP,
+                                      value: request.obj.quanHuyen,
                                       items: (state.data ?? [])
                                           .map((e) => DropdownMenuItem<int>(
                                                 value: e.regionalID,
@@ -176,11 +177,12 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
                                               ))
                                           .toList(),
                                       decoration: const InputDecoration(
-                                        border: OutlineInputBorder(),
                                         labelText: 'Quận huyện',
                                         counterText: "",
                                       ),
-                                      onChanged: (v) {},
+                                      onChanged: (v) {
+                                        request.obj.quanHuyen = v;
+                                      },
                                     ),
                                 initWidget: DropdownButtonFormField(
                                   items: []
@@ -190,16 +192,11 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
                                           ))
                                       .toList(),
                                   decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
                                     labelText: 'Quận huyện',
                                     counterText: "",
                                   ),
                                   onChanged: (v) {
-                                    request.obj.tinhTP = v;
-                                    danhSachQuanHuyenBloc.add(
-                                        DanhSachQuanHuyenEvent(
-                                            request: DanhSachQuanHuyenRequest(
-                                                obj: CommonNewData())));
+                                    request.obj.quanHuyen = v;
                                   },
                                 )),
                       ),
@@ -216,7 +213,7 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
                             handlerBaseState<DanhSachDoanhNghiepResponse>(
                                 state,
                                 (context, state) => DropdownButtonFormField(
-                                      value: request.obj.tinhTP,
+                                      value: request.obj.doanhNghiep,
                                       items: (state.data ?? [])
                                           .map((e) => DropdownMenuItem<String>(
                                                 value: Uuid().v1(),
@@ -227,30 +224,26 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
                                               ))
                                           .toList(),
                                       decoration: const InputDecoration(
-                                        border: OutlineInputBorder(),
                                         labelText: 'Doanh nghiệp',
                                         counterText: "",
                                       ),
-                                      onChanged: (v) {},
+                                      onChanged: (v) {
+                                        request.obj.doanhNghiep = v;
+                                      },
                                     ),
                                 initWidget: DropdownButtonFormField(
                                   items: []
-                                      .map((e) => DropdownMenuItem<int>(
+                                      .map((e) => DropdownMenuItem<String>(
                                             value: e,
                                             child: Text("${e}"),
                                           ))
                                       .toList(),
                                   decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
                                     labelText: 'Doanh nghiệp',
                                     counterText: "",
                                   ),
                                   onChanged: (v) {
-                                    request.obj.tinhTP = v;
-                                    danhSachQuanHuyenBloc.add(
-                                        DanhSachQuanHuyenEvent(
-                                            request: DanhSachQuanHuyenRequest(
-                                                obj: CommonNewData())));
+                                    request.obj.doanhNghiep = v;
                                   },
                                 )),
                       ),
@@ -267,7 +260,7 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
                             handlerBaseState<DanhSachMucLuongResponse>(
                                 state,
                                 (context, state) => DropdownButtonFormField(
-                                      value: request.obj.tinhTP,
+                                      value: request.obj.mucLuong,
                                       items: (state.data ?? [])
                                           .map((e) => DropdownMenuItem<String>(
                                                 value: e.salaryID,
@@ -278,21 +271,21 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
                                               ))
                                           .toList(),
                                       decoration: const InputDecoration(
-                                        border: OutlineInputBorder(),
                                         labelText: 'Mức lương',
                                         counterText: "",
                                       ),
-                                      onChanged: (v) {},
+                                      onChanged: (v) {
+                                        request.obj.mucLuong = v;
+                                      },
                                     ),
                                 initWidget: DropdownButtonFormField(
                                   items: []
-                                      .map((e) => DropdownMenuItem<int>(
+                                      .map((e) => DropdownMenuItem<String>(
                                             value: e,
                                             child: Text("${e}"),
                                           ))
                                       .toList(),
                                   decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
                                     labelText: 'Mức lương',
                                     counterText: "",
                                   ),
@@ -314,7 +307,7 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
                             handlerBaseState<DanhSachKinhNghiemResponse>(
                                 state,
                                 (context, state) => DropdownButtonFormField(
-                                      value: request.obj.tinhTP,
+                                      value: request.obj.kinhNghiem,
                                       items: (state.data ?? [])
                                           .map((e) => DropdownMenuItem<String>(
                                                 value: e.experienceID,
@@ -326,21 +319,21 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
                                               ))
                                           .toList(),
                                       decoration: const InputDecoration(
-                                        border: OutlineInputBorder(),
                                         labelText: 'Kinh nghiệm',
                                         counterText: "",
                                       ),
-                                      onChanged: (v) {},
+                                      onChanged: (v) {
+                                        request.obj.kinhNghiem = v;
+                                      },
                                     ),
                                 initWidget: DropdownButtonFormField(
                                   items: []
-                                      .map((e) => DropdownMenuItem<int>(
+                                      .map((e) => DropdownMenuItem<String>(
                                             value: e,
                                             child: Text(""),
                                           ))
                                       .toList(),
                                   decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
                                     labelText: 'Kinh nghiệm',
                                     counterText: "",
                                   ),

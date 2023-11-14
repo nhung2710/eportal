@@ -16,15 +16,22 @@ class ImageLoading extends StatelessWidget {
   Widget build(BuildContext context) => CachedNetworkImage(
         progressIndicatorBuilder: (context, url, downloadProgress) =>
             const Center(
-          child: Text(
-            'Loading...',
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: 10,
+          child: SizedBox(
+            width: 100,
+            height: 100,
+            child: Text(
+              'Loading...',
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 10,
+              ),
             ),
           ),
         ),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
+        errorWidget: (context, url, error) => const Icon(
+          Icons.error,
+          size: 40,
+        ),
         //Image.asset('assets/images/ErrorImage.png'),
         fit: BoxFit.cover,
         imageUrl: imageUrl,

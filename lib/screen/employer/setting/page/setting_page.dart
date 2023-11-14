@@ -8,6 +8,8 @@ import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../style/app_color.dart';
+
 //
 // Created by BlackRose on 11/7/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -95,8 +97,8 @@ class _SettingPageState extends BasePageState<SettingPage> {
                           width: double.infinity,
                           child: Text(
                             e.key,
-                            style:
-                                AppTextStyle.title.copyWith(color: Colors.blue),
+                            style: AppTextStyle.title
+                                .copyWith(color: AppColor.colorOfText),
                           )),
                       Column(
                         children: e.value

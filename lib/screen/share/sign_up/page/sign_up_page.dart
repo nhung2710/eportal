@@ -30,7 +30,8 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
   Color currentBackgroundColor(BuildContext context) => Colors.white;
 
   @override
-  Widget pageUI(BuildContext context) => ListView(
+  Widget pageUI(BuildContext context) =>
+      ListView(
         children: <Widget>[
           Container(
             margin: const EdgeInsets.only(top: 30),
@@ -54,7 +55,7 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
                 return null;
               },
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+
                 labelText: 'Họ và tên',
                 counterText: "",
               ),
@@ -73,7 +74,7 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
                 return null;
               },
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+
                 labelText: 'Địa chỉ thư điện tử',
                 counterText: "",
               ),
@@ -92,7 +93,7 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
                 return null;
               },
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+
                 labelText: 'Số điện thoại',
                 counterText: "",
               ),
@@ -111,7 +112,7 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
                 return null;
               },
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+
                 labelText: 'Tài khoản',
                 counterText: "",
               ),
@@ -132,7 +133,7 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
               },
               onFieldSubmitted: (value) => _registerAccount(context),
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+
                 labelText: 'Mật khẩu',
                 counterText: "",
               ),

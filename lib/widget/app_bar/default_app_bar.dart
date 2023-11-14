@@ -5,6 +5,8 @@ import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/image/image_loading.dart';
 import 'package:flutter/material.dart';
 
+import '../../style/app_color.dart';
+
 //
 // Created by BlackRose on 11/6/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -55,7 +57,7 @@ class DefaultAppBar {
                             builder: (context) => const HomePage()));
                   },
                   icon: const Icon(Icons.logout),
-                  color: Colors.blue,
+                  color: AppColor.colorOfText,
                 )
               : IconButton(
                   onPressed: () {

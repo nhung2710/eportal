@@ -5,18 +5,19 @@
 import 'package:eportal/model/base/base_eportal_response.dart';
 
 import 'data/common_new_data.dart';
+import 'data/home_document_list_data.dart';
 
 class HomeDocumentListResponse extends BaseEportalResponse {
-  List<CommonNewData>? data;
+  List<HomeDocumentListData>? data;
 
   HomeDocumentListResponse({this.data, required status, required message})
       : super(status: status, message: message);
 
   factory HomeDocumentListResponse.fromJson(Map<String, dynamic> json) {
-    List<CommonNewData> data = <CommonNewData>[];
+    List<HomeDocumentListData> data = <HomeDocumentListData>[];
     if (json['data'] != null) {
       json['data'].forEach((v) {
-        data.add(CommonNewData.fromJson(v));
+        data.add(HomeDocumentListData.fromJson(v));
       });
     }
     return HomeDocumentListResponse(

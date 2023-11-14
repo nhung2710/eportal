@@ -10,6 +10,7 @@ import '../../../../model/api/request/common_new/data/common_new_data.dart';
 import '../../../../model/api/request/common_new/home_news_list_request.dart';
 import '../../../../model/api/response/common_new/home_news_list_response.dart';
 import '../../../../state/base/base_state.dart';
+import '../../../../style/app_color.dart';
 import '../../../../style/app_text_style.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/image/image_loading.dart';
@@ -102,7 +103,7 @@ class _HomeNewsListPageState extends BasePageStateActive<HomeNewsListPage> {
                                       (state.data?.elementAt(i).title)
                                           .replaceWhenNullOrWhiteSpace(),
                                       style: AppTextStyle.title.copyWith(
-                                          color: Colors.blue,
+                                          color: AppColor.colorOfText,
                                           overflow: TextOverflow.visible,
                                           fontWeight: FontWeight.bold),
                                     ),

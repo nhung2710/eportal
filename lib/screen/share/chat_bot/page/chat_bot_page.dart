@@ -57,7 +57,6 @@ class _ChatBotPageState extends BasePageState<ChatBotPage> {
               },
               onFieldSubmitted: (value) => _sendMessageAsync(context),
               decoration: InputDecoration(
-                border: const OutlineInputBorder(),
                 suffixIcon: IconButton(
                   icon: const Icon(
                     Icons.send,
@@ -143,7 +142,7 @@ class _ChatBotPageState extends BasePageState<ChatBotPage> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
-                  color: e.isBot ? Colors.blue : Colors.white,
+                  color: e.isBot ? Colors.blue : Colors.green,
                 ),
                 margin: const EdgeInsets.only(top: 8),
                 padding: const EdgeInsets.all(10),
@@ -156,7 +155,7 @@ class _ChatBotPageState extends BasePageState<ChatBotPage> {
                   children: [
                     Text(e.message,
                         style: AppTextStyle.titleAppbarPage.copyWith(
-                            color: !e.isBot ? Colors.blue : Colors.white)),
+                            color: !e.isBot ? Colors.white : Colors.white)),
                   ],
                 )),
           ),

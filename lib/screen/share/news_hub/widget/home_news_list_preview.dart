@@ -9,6 +9,7 @@ import '../../../../model/api/request/common_new/home_news_list_request.dart';
 import '../../../../model/api/request/common_new/home_works_list_request.dart';
 import '../../../../model/api/response/common_new/home_news_list_response.dart';
 import '../../../../model/api/response/common_new/home_works_list_response.dart';
+import '../../../../style/app_color.dart';
 import '../../../../widget/image/image_loading.dart';
 import '../../empty_example/page/empty_example_page.dart';
 import '../../../../state/base/base_state.dart';
@@ -45,7 +46,9 @@ class _HomeNewsListPreviewState
   void initDataLoading() {
     homeNewsListBloc.add(HomeNewsListEvent(
         request: HomeNewsListRequest(
-            obj: CommonNewData(flag: widget.flag, top: ApplicationConstant.NUMBER_PREVIEW_ITEM))));
+            obj: CommonNewData(
+                flag: widget.flag,
+                top: ApplicationConstant.NUMBER_PREVIEW_ITEM))));
     super.initDataLoading();
   }
 
@@ -80,22 +83,32 @@ class _HomeNewsListPreviewState
                                 children: [
                                   SizedBox(
                                       width: 80,
-                                      child: ImageLoading(imageUrl: state.data!.elementAt(i).imagePath.getImageUrl()
-                                        , imageBuilder: (BuildContext context, ImageProvider<Object> imageProvider) {
+                                      child: ImageLoading(
+                                        imageUrl: state.data!
+                                            .elementAt(i)
+                                            .imagePath
+                                            .getImageUrl(),
+                                        imageBuilder: (BuildContext context,
+                                            ImageProvider<Object>
+                                                imageProvider) {
                                           return ClipRRect(
-                                            borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(5.0)),
                                             child: Image(
                                               image: imageProvider,
                                               fit: BoxFit.fill,
                                             ),
                                           );
-                                        },)),
+                                        },
+                                      )),
                                   Expanded(
                                     flex: 1,
                                     child: Text(
-                                      (state.data?.elementAt(i).title).replaceWhenNullOrWhiteSpace(),
+                                      (state.data?.elementAt(i).title)
+                                          .replaceWhenNullOrWhiteSpace(),
                                       style: AppTextStyle.title.copyWith(
-                                          color: Colors.blue,
+                                          color: AppColor.colorOfText,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
@@ -105,7 +118,8 @@ class _HomeNewsListPreviewState
                           )),
                 ),
                 ShowFullInfo(
-                  onTap: () => nextPage((context) => HomeNewsListPage(flag: widget.flag)),
+                  onTap: () => nextPage(
+                      (context) => HomeNewsListPage(flag: widget.flag)),
                 ),
               ],
             ),

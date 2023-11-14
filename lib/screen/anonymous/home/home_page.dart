@@ -6,6 +6,8 @@ import 'package:eportal/widget/app_bar/default_app_bar.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../../style/app_color.dart';
+
 //
 // Created by BlackRose on 11/7/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -41,53 +43,53 @@ class _HomePageState extends BasePageStateActive<HomePage> {
         backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
         iconSize: 24,
-        fixedColor: Colors.red,
-        unselectedItemColor: Colors.blueAccent,
+        fixedColor: AppColor.colorOfIcon,
+        unselectedItemColor: AppColor.colorOfText,
         selectedFontSize: 8,
         unselectedFontSize: 8,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
-              color: Colors.blueAccent,
+              color: AppColor.colorOfText,
             ),
             label: "Trang chủ",
             activeIcon: Icon(
               Icons.home,
-              color: Colors.red,
+              color: AppColor.colorOfIcon,
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.question_mark,
-              color: Colors.blueAccent,
+              color: AppColor.colorOfText,
             ),
             label: "Hỏi đáp",
             activeIcon: Icon(
               Icons.question_mark,
-              color: Colors.red,
+              color: AppColor.colorOfIcon,
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.perm_media,
-              color: Colors.blueAccent,
+              color: AppColor.colorOfText,
             ),
             label: "Đa phương tiện",
             activeIcon: Icon(
               Icons.perm_media,
-              color: Colors.red,
+              color: AppColor.colorOfIcon,
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.settings,
-              color: Colors.blueAccent,
+              color: AppColor.colorOfText,
             ),
             label: "Cài đặt",
             activeIcon: Icon(
               Icons.settings,
-              color: Colors.red,
+              color: AppColor.colorOfIcon,
             ),
           ),
         ],

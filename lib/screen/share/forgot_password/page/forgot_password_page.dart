@@ -51,7 +51,6 @@ class _ForgotPasswordPageState extends BasePageState<ForgotPasswordPage> {
               },
               onFieldSubmitted: (value) => _signUp(context),
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
                 labelText: 'Tài khoản',
                 counterText: "",
               ),
@@ -74,7 +73,6 @@ class _ForgotPasswordPageState extends BasePageState<ForgotPasswordPage> {
               },
               onFieldSubmitted: (value) => _signUp(context),
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
                 labelText: 'Địa chỉ thư điện tử',
                 counterText: "",
               ),

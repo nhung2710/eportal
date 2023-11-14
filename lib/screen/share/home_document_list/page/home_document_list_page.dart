@@ -1,58 +1,48 @@
-import 'package:eportal/bloc/common_new/home_works_list_bloc.dart';
-import 'package:eportal/event/common_new/home_works_list_event.dart';
-import 'package:eportal/extension/string_extension.dart';
-import 'package:eportal/model/api/request/common_new/data/common_new_data.dart';
-import 'package:eportal/model/api/request/common_new/home_works_list_request.dart';
-import 'package:eportal/model/api/response/common_new/home_works_list_response.dart';
-import 'package:eportal/screen/share/empty_example/page/empty_example_page.dart';
-import 'package:eportal/state/base/base_state.dart';
-import 'package:eportal/style/app_text_style.dart';
-import 'package:eportal/widget/base/base_page.dart';
-import 'package:eportal/widget/show_full_info/show_full_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_html/flutter_html.dart';
 
+import '../../../../bloc/common_new/home_document_list_bloc.dart';
 import '../../../../bloc/common_new/home_document_list_bloc.dart';
 import '../../../../constant/application_constant.dart';
 import '../../../../event/common_new/home_document_list_event.dart';
+import '../../../../extension/string_extension.dart';
+import '../../../../model/api/request/common_new/data/common_new_data.dart';
 import '../../../../model/api/request/common_new/home_document_list_request.dart';
 import '../../../../model/api/response/common_new/home_document_list_response.dart';
-import '../../../../style/app_color.dart';
+import '../../../../state/base/base_state.dart';
+import '../../../../style/app_text_style.dart';
+import '../../../../widget/base/base_page.dart';
 import '../../../../widget/image/image_loading.dart';
-import '../../home_document_list/page/home_document_list_page.dart';
+import '../../empty_example/page/empty_example_page.dart';
 
 //
-// Created by BlackRose on 13/11/2023.
+// Created by BlackRose on 14/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class HomeDocumentListPreview extends BasePage {
-  const HomeDocumentListPreview({super.key});
+
+class HomeDocumentListPage extends BasePage {
+  const HomeDocumentListPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _HomeDocumentListPreviewState();
+  State<StatefulWidget> createState() => _HomeDocumentListPageState();
 }
 
-class _HomeDocumentListPreviewState
-    extends BasePageStateActive<HomeDocumentListPreview> {
+class _HomeDocumentListPageState
+    extends BasePageStateActive<HomeDocumentListPage> {
   HomeDocumentListBloc homeDocumentListBloc = HomeDocumentListBloc();
 
   @override
-  bool isHasAppBar(BuildContext context) => false;
+  String getPageTitle(BuildContext context) {
+    return "Văn bản pháp luật";
+  }
 
   @override
   void initDataLoading() {
     homeDocumentListBloc.add(HomeDocumentListEvent(
         request: HomeDocumentListRequest(
-            obj: CommonNewData(top: ApplicationConstant.NUMBER_PREVIEW_ITEM))));
+            obj: CommonNewData(top: ApplicationConstant.NUMBER_FULL_ITEM))));
     super.initDataLoading();
   }
-
-  @override
-  Color currentBackgroundColor(BuildContext context) => Colors.transparent;
-
-  @override
-  double currentPadding(BuildContext context) => 0;
 
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
@@ -109,14 +99,18 @@ class _HomeDocumentListPreviewState
                                                   ?.elementAt(i)
                                                   .documentName)
                                               .supportHtml(),
-                                          style: AppTextStyle.titlePage,
-                                          maxLines: 2,
+                                          style: AppTextStyle.titlePage
+                                              .copyWith(
+                                                  overflow:
+                                                      TextOverflow.visible),
                                         ),
                                         Text(
                                           (state.data?.elementAt(i).contents)
                                               .supportHtml(),
-                                          maxLines: 1,
-                                          style: AppTextStyle.titleHintPage,
+                                          style: AppTextStyle.titleHintPage
+                                              .copyWith(
+                                                  overflow:
+                                                      TextOverflow.visible),
                                         ),
                                       ],
                                     ),
@@ -125,10 +119,6 @@ class _HomeDocumentListPreviewState
                               ),
                             ),
                           )),
-                ),
-                ShowFullInfo(
-                  onTap: () =>
-                      nextPage((context) => const HomeDocumentListPage()),
                 ),
               ],
             ),

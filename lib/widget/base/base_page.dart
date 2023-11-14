@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+import '../../style/app_color.dart';
+
 //
 // Created by BlackRose on 11/1/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -193,7 +195,7 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
 
   double currentPadding(BuildContext context) => 5;
 
-  Color currentBackgroundColor(BuildContext context) => Colors.black12;
+  Color currentBackgroundColor(BuildContext context) => AppColor.colorOfApp;
 
   bool isValidForm(BuildContext context) => formKey.currentState!.validate();
 
@@ -413,7 +415,7 @@ class BasePageStateActive<T extends StatefulWidget> extends State<T>
 
   double currentPadding(BuildContext context) => 5;
 
-  Color currentBackgroundColor(BuildContext context) => Colors.black12;
+  Color currentBackgroundColor(BuildContext context) => AppColor.colorOfApp;
 
   bool isValidForm(BuildContext context) => formKey.currentState!.validate();
 

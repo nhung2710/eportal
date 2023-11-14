@@ -13,10 +13,10 @@ class NewsSearchData extends BaseEportalXml {
   int? soTrangHienTai;
   int? soBanGhiTrenTrang;
   String? doanhNghiep;
-  int? mucLuong;
-  int? kinhNghiem;
+  String? mucLuong;
+  String? kinhNghiem;
   int? tinhTP;
-  String? quanHuyen;
+  int? quanHuyen;
 
   NewsSearchData(
       {this.tuKhoa,

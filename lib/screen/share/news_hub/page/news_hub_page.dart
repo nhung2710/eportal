@@ -6,6 +6,7 @@ import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../style/app_color.dart';
 import '../../job_user_search/page/job_user_search_page.dart';
 import '../../news_search/page/news_search_page.dart';
 import '../../work_search/page/work_search_page.dart';
@@ -53,6 +54,8 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                 padding: const EdgeInsets.only(left: 5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
+                  border:
+                      Border.all(color: AppColor.colorOfHintText, width: 0.5),
                   color: Colors.white,
                 ),
                 child: GestureDetector(
@@ -80,7 +83,7 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                         height: 40,
                         child: Icon(
                           Icons.search,
-                          color: Colors.blue,
+                          color: AppColor.colorOfIcon,
                         ),
                       ),
                     ],
@@ -91,6 +94,8 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                 margin: const EdgeInsets.only(top: 5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
+                  border:
+                      Border.all(color: AppColor.colorOfHintText, width: 0.5),
                   color: Colors.white,
                 ),
                 child: GestureDetector(
@@ -118,7 +123,7 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                         height: 40,
                         child: Icon(
                           Icons.search,
-                          color: Colors.blue,
+                          color: AppColor.colorOfIcon,
                         ),
                       ),
                     ],
@@ -129,6 +134,8 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                 margin: const EdgeInsets.only(top: 5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
+                  border:
+                      Border.all(color: AppColor.colorOfHintText, width: 0.5),
                   color: Colors.white,
                 ),
                 child: GestureDetector(
@@ -156,7 +163,7 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                         height: 40,
                         child: Icon(
                           Icons.search,
-                          color: Colors.blue,
+                          color: AppColor.colorOfIcon,
                         ),
                       ),
                     ],
@@ -168,6 +175,8 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
+                  border:
+                      Border.all(color: AppColor.colorOfHintText, width: 0.5),
                   color: Colors.white,
                 ),
                 child: Column(
@@ -199,6 +208,8 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
+                  border:
+                      Border.all(color: AppColor.colorOfHintText, width: 0.5),
                   color: Colors.white,
                 ),
                 child: DefaultTabController(
@@ -256,6 +267,8 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
+                  border:
+                      Border.all(color: AppColor.colorOfHintText, width: 0.5),
                   color: Colors.white,
                 ),
                 child: Column(
@@ -285,6 +298,8 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
+                  border:
+                      Border.all(color: AppColor.colorOfHintText, width: 0.5),
                   color: Colors.white,
                 ),
                 child: Column(
@@ -314,6 +329,8 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
+                  border:
+                      Border.all(color: AppColor.colorOfHintText, width: 0.5),
                   color: Colors.white,
                 ),
                 child: Column(

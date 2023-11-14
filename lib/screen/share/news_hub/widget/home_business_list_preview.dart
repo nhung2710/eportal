@@ -19,6 +19,7 @@ import '../../../../event/common_new/home_business_list_event.dart';
 import '../../../../model/api/request/common_new/home_business_list_request.dart';
 import '../../../../model/api/response/common_new/home_business_list_response.dart';
 import '../../../../widget/image/image_loading.dart';
+import '../../home_business_list/page/home_business_list_page.dart';
 
 //
 // Created by BlackRose on 13/11/2023.
@@ -109,10 +110,10 @@ class _HomeBusinessListPreviewState
                           )),
                 ),
                 ShowFullInfo(
-                  onTap: () => nextPage((context) => EmptyExamplePage(
-                        isHasAppBar: true,
-                      )),
-                ),
+                  onTap: () => nextPage(
+                    (context) => HomeBusinessListPage(),
+                  ),
+                )
               ],
             ),
           ),

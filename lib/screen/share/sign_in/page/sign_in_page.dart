@@ -65,7 +65,7 @@ class _SignInPageState extends BasePageState<SignInPage> {
               return null;
             },
             decoration: const InputDecoration(
-              border: OutlineInputBorder(),
+
               labelText: 'Tài khoản',
               counterText: "",
             ),
@@ -86,7 +86,7 @@ class _SignInPageState extends BasePageState<SignInPage> {
             },
             onFieldSubmitted: (value) => _signIn(context),
             decoration: const InputDecoration(
-              border: OutlineInputBorder(),
+              
               labelText: 'Mật khẩu',
               counterText: "",
             ),
@@ -142,10 +142,10 @@ class _SignInPageState extends BasePageState<SignInPage> {
               onTap: () => _forgotPassword(context),
               child: Center(
                   child: Text(
-                'Quên mật khẩu',
-                style:
+                    'Quên mật khẩu',
+                    style:
                     AppTextStyle.titleAppbarPage.copyWith(color: Colors.blue),
-              ))),
+                  ))),
         ),
         Container(
           margin: const EdgeInsets.only(top: 5),
@@ -153,10 +153,10 @@ class _SignInPageState extends BasePageState<SignInPage> {
               onTap: () => backPage(),
               child: Center(
                   child: Text(
-                'Bỏ qua',
-                style:
+                    'Bỏ qua',
+                    style:
                     AppTextStyle.titleAppbarPage.copyWith(color: Colors.grey),
-              ))),
+                  ))),
         ),
       ],
     );
