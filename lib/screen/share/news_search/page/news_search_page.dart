@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../../bloc/common_new/danh_sach_doanh_nghiep_bloc.dart';
 import '../../../../bloc/common_new/danh_sach_gioi_tinh_bloc.dart';
@@ -13,9 +14,25 @@ import '../../../../bloc/common_new/danh_sach_trinh_do_bloc.dart';
 import '../../../../bloc/common_new/home_news_list_bloc.dart';
 import '../../../../bloc/common_new/news_search_bloc.dart';
 import '../../../../bloc/common_new/ten_tinh_tp_bloc.dart';
+import '../../../../event/common_new/danh_sach_kinh_nghiem_event.dart';
+import '../../../../event/common_new/danh_sach_muc_luong_event.dart';
+import '../../../../event/common_new/danh_sach_quan_huyen_event.dart';
+import '../../../../event/common_new/danh_sach_tinh_tp_event.dart';
 import '../../../../event/common_new/news_search_event.dart';
+import '../../../../extension/string_extension.dart';
+import '../../../../model/api/request/common_new/danh_sach_kinh_nghiem_request.dart';
+import '../../../../model/api/request/common_new/danh_sach_muc_luong_request.dart';
+import '../../../../model/api/request/common_new/danh_sach_quan_huyen_request.dart';
+import '../../../../model/api/request/common_new/danh_sach_tinh_tp_request.dart';
+import '../../../../model/api/request/common_new/data/common_new_data.dart';
+import '../../../../model/api/request/common_new/data/danh_sach_quan_huyen_data.dart';
 import '../../../../model/api/request/common_new/data/news_search_data.dart';
 import '../../../../model/api/request/common_new/news_search_request.dart';
+import '../../../../model/api/response/common_new/danh_sach_doanh_nghiep_response.dart';
+import '../../../../model/api/response/common_new/danh_sach_kinh_nghiem_response.dart';
+import '../../../../model/api/response/common_new/danh_sach_muc_luong_response.dart';
+import '../../../../model/api/response/common_new/danh_sach_quan_huyen_response.dart';
+import '../../../../model/api/response/common_new/danh_sach_tinh_tp_response.dart';
 import '../../../../model/api/response/common_new/news_search_response.dart';
 import '../../../../model/share/chat_bot/chat_bot_message.dart';
 import '../../../../state/base/base_state.dart';
@@ -40,7 +57,6 @@ class NewsSearchPage extends BasePage {
 class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
   NewsSearchBloc newsSearchBloc = NewsSearchBloc();
   DanhSachTinhTpBloc danhSachTinhTpBloc = DanhSachTinhTpBloc();
-  TenTinhTpBloc tenTinhTpBloc = TenTinhTpBloc();
   DanhSachQuanHuyenBloc danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
   DanhSachDoanhNghiepBloc danhSachDoanhNghiepBloc = DanhSachDoanhNghiepBloc();
   DanhSachMucLuongBloc danhSachMucLuongBloc = DanhSachMucLuongBloc();
@@ -53,21 +69,278 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
   @override
   void initDataLoading() {
     newsSearchBloc.add(NewsSearchEvent(request: request));
-
+    danhSachTinhTpBloc.add(DanhSachTinhTpEvent(
+        request: DanhSachTinhTpRequest(obj: CommonNewData())));
+    danhSachMucLuongBloc.add(DanhSachMucLuongEvent(
+        request: DanhSachMucLuongRequest(obj: CommonNewData())));
+    danhSachKinhNghiemBloc.add(DanhSachKinhNghiemEvent(
+        request: DanhSachKinhNghiemRequest(obj: CommonNewData())));
     super.initDataLoading();
   }
 
   @override
-  Widget? getFloatingActionButton(BuildContext context) =>
-      ExpandableFab(children: [
-        ActionButton(
-          icon: const Icon(
-            Icons.filter_alt,
+  Widget? getEndDrawer(BuildContext context) => Container(
+        child: SafeArea(
+          child: Container(
             color: Colors.white,
+            padding: const EdgeInsets.all(10),
+            width: MediaQuery.of(context).size.width * 0.9,
+            child: Column(children: [
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: Text("Tiêu chí tìm kiếm thêm"),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: BlocProvider(
+                    create: (_) => danhSachTinhTpBloc,
+                    child: BlocListener<DanhSachTinhTpBloc, BaseState>(
+                      listener: (BuildContext context, BaseState state) {},
+                      child: BlocBuilder<DanhSachTinhTpBloc, BaseState>(
+                        builder: (BuildContext context, BaseState state) =>
+                            handlerBaseState<DanhSachTinhTpResponse>(
+                                state,
+                                (context, state) => DropdownButtonFormField(
+                                      value: request.obj.tinhTP,
+                                      items: (state.data ?? [])
+                                          .map((e) => DropdownMenuItem<int>(
+                                                value: e.regionalID,
+                                                child: Text(
+                                                  "${e.regionalName}",
+                                                  style: AppTextStyle.title,
+                                                ),
+                                              ))
+                                          .toList(),
+                                      decoration: const InputDecoration(
+                                        labelText: 'Thành phố',
+                                        counterText: "",
+                                      ),
+                                      onChanged: (v) {
+                                        request.obj.tinhTP = v;
+                                        danhSachQuanHuyenBloc.add(
+                                            DanhSachQuanHuyenEvent(
+                                                request: DanhSachQuanHuyenRequest(
+                                                    obj: DanhSachQuanHuyenData(
+                                                        id: request
+                                                            .obj.tinhTP))));
+                                      },
+                                    ),
+                                initWidget: DropdownButtonFormField(
+                                  items: []
+                                      .map((e) => DropdownMenuItem<int>(
+                                            value: e,
+                                            child: Text("${e}"),
+                                          ))
+                                      .toList(),
+                                  decoration: const InputDecoration(
+                                    labelText: 'Thành phố',
+                                    counterText: "",
+                                  ),
+                                  onChanged: (v) {
+                                    request.obj.tinhTP = v;
+                                    danhSachQuanHuyenBloc.add(
+                                        DanhSachQuanHuyenEvent(
+                                            request: DanhSachQuanHuyenRequest(
+                                                obj: DanhSachQuanHuyenData(
+                                                    id: request.obj.tinhTP))));
+                                  },
+                                )),
+                      ),
+                    )),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: BlocProvider(
+                    create: (_) => danhSachQuanHuyenBloc,
+                    child: BlocListener<DanhSachQuanHuyenBloc, BaseState>(
+                      listener: (BuildContext context, BaseState state) {},
+                      child: BlocBuilder<DanhSachQuanHuyenBloc, BaseState>(
+                        builder: (BuildContext context, BaseState state) =>
+                            handlerBaseState<DanhSachQuanHuyenResponse>(
+                                state,
+                                (context, state) => DropdownButtonFormField(
+                                      value: request.obj.quanHuyen,
+                                      items: (state.data ?? [])
+                                          .map((e) => DropdownMenuItem<int>(
+                                                value: e.regionalID,
+                                                child: Text(
+                                                  "${e.regionalName}",
+                                                  style: AppTextStyle.title,
+                                                ),
+                                              ))
+                                          .toList(),
+                                      decoration: const InputDecoration(
+                                        labelText: 'Quận huyện',
+                                        counterText: "",
+                                      ),
+                                      onChanged: (v) {
+                                        request.obj.quanHuyen = v;
+                                      },
+                                    ),
+                                initWidget: DropdownButtonFormField(
+                                  items: []
+                                      .map((e) => DropdownMenuItem<int>(
+                                            value: e,
+                                            child: Text("${e}"),
+                                          ))
+                                      .toList(),
+                                  decoration: const InputDecoration(
+                                    labelText: 'Quận huyện',
+                                    counterText: "",
+                                  ),
+                                  onChanged: (v) {
+                                    request.obj.quanHuyen = v;
+                                  },
+                                )),
+                      ),
+                    )),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: BlocProvider(
+                    create: (_) => danhSachDoanhNghiepBloc,
+                    child: BlocListener<DanhSachDoanhNghiepBloc, BaseState>(
+                      listener: (BuildContext context, BaseState state) {},
+                      child: BlocBuilder<DanhSachDoanhNghiepBloc, BaseState>(
+                        builder: (BuildContext context, BaseState state) =>
+                            handlerBaseState<DanhSachDoanhNghiepResponse>(
+                                state,
+                                (context, state) => DropdownButtonFormField(
+                                      value: request.obj.doanhNghiep,
+                                      items: (state.data ?? [])
+                                          .map((e) => DropdownMenuItem<String>(
+                                                value: Uuid().v1(),
+                                                child: Text(
+                                                  "${Uuid().v1()}",
+                                                  style: AppTextStyle.title,
+                                                ),
+                                              ))
+                                          .toList(),
+                                      decoration: const InputDecoration(
+                                        labelText: 'Doanh nghiệp',
+                                        counterText: "",
+                                      ),
+                                      onChanged: (v) {
+                                        request.obj.doanhNghiep = v;
+                                      },
+                                    ),
+                                initWidget: DropdownButtonFormField(
+                                  items: []
+                                      .map((e) => DropdownMenuItem<String>(
+                                            value: e,
+                                            child: Text("${e}"),
+                                          ))
+                                      .toList(),
+                                  decoration: const InputDecoration(
+                                    labelText: 'Doanh nghiệp',
+                                    counterText: "",
+                                  ),
+                                  onChanged: (v) {
+                                    request.obj.doanhNghiep = v;
+                                  },
+                                )),
+                      ),
+                    )),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: BlocProvider(
+                    create: (_) => danhSachMucLuongBloc,
+                    child: BlocListener<DanhSachMucLuongBloc, BaseState>(
+                      listener: (BuildContext context, BaseState state) {},
+                      child: BlocBuilder<DanhSachMucLuongBloc, BaseState>(
+                        builder: (BuildContext context, BaseState state) =>
+                            handlerBaseState<DanhSachMucLuongResponse>(
+                                state,
+                                (context, state) => DropdownButtonFormField(
+                                      value: request.obj.mucLuong,
+                                      items: (state.data ?? [])
+                                          .map((e) => DropdownMenuItem<String>(
+                                                value: e.salaryID,
+                                                child: Text(
+                                                  e.salaryName.supportHtml(),
+                                                  style: AppTextStyle.title,
+                                                ),
+                                              ))
+                                          .toList(),
+                                      decoration: const InputDecoration(
+                                        labelText: 'Mức lương',
+                                        counterText: "",
+                                      ),
+                                      onChanged: (v) {
+                                        request.obj.mucLuong = v;
+                                      },
+                                    ),
+                                initWidget: DropdownButtonFormField(
+                                  items: []
+                                      .map((e) => DropdownMenuItem<String>(
+                                            value: e,
+                                            child: Text("${e}"),
+                                          ))
+                                      .toList(),
+                                  decoration: const InputDecoration(
+                                    labelText: 'Mức lương',
+                                    counterText: "",
+                                  ),
+                                  onChanged: (v) {
+                                    request.obj.mucLuong = v;
+                                  },
+                                )),
+                      ),
+                    )),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: BlocProvider(
+                    create: (_) => danhSachKinhNghiemBloc,
+                    child: BlocListener<DanhSachKinhNghiemBloc, BaseState>(
+                      listener: (BuildContext context, BaseState state) {},
+                      child: BlocBuilder<DanhSachKinhNghiemBloc, BaseState>(
+                        builder: (BuildContext context, BaseState state) =>
+                            handlerBaseState<DanhSachKinhNghiemResponse>(
+                                state,
+                                (context, state) => DropdownButtonFormField(
+                                      value: request.obj.kinhNghiem,
+                                      items: (state.data ?? [])
+                                          .map((e) => DropdownMenuItem<String>(
+                                                value: e.experienceID,
+                                                child: Text(
+                                                  e.experienceName
+                                                      .supportHtml(),
+                                                  style: AppTextStyle.title,
+                                                ),
+                                              ))
+                                          .toList(),
+                                      decoration: const InputDecoration(
+                                        labelText: 'Kinh nghiệm',
+                                        counterText: "",
+                                      ),
+                                      onChanged: (v) {
+                                        request.obj.kinhNghiem = v;
+                                      },
+                                    ),
+                                initWidget: DropdownButtonFormField(
+                                  items: []
+                                      .map((e) => DropdownMenuItem<String>(
+                                            value: e,
+                                            child: Text(""),
+                                          ))
+                                      .toList(),
+                                  decoration: const InputDecoration(
+                                    labelText: 'Kinh nghiệm',
+                                    counterText: "",
+                                  ),
+                                  onChanged: (v) {
+                                    request.obj.kinhNghiem = v;
+                                  },
+                                )),
+                      ),
+                    )),
+              ),
+            ]),
           ),
-          onPressed: () => _saveSettingFilter(context),
         ),
-      ]);
+      );
 
   @override
   Widget pageUI(BuildContext context) => Column(
@@ -113,6 +386,9 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
                       state,
                       (context, state) => Column(
                         children: [
+                          Container(
+                            child: Text(state.toString()),
+                          ),
                           Expanded(
                             child: ListView.builder(
                                 shrinkWrap: true,
@@ -166,10 +442,9 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
   String getPageTitle(BuildContext context) => "Tìm tin bài";
 
   void _findNews(BuildContext context) {
-    if (isValid()) {}
-  }
-
-  _saveSettingFilter(BuildContext context) {
-    initDataLoading();
+    if (isValid()) {
+      request.obj.tuKhoa = textEditingController.text;
+      newsSearchBloc.add(NewsSearchEvent(request: request));
+    }
   }
 }
