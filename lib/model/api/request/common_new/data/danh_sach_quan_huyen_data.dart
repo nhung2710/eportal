@@ -7,16 +7,16 @@ import '../../../../base/base_eportal_xml.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class DanhSachQuanHuyenData extends BaseEportalXml {
-  int? id;
+  int? tinhTp;
 
-  DanhSachQuanHuyenData({this.id});
+  DanhSachQuanHuyenData({this.tinhTp});
 
   @override
   StringBuffer toXml() {
     // TODO: implement toXml
     var buffer = super.toXml();
-    if (id != null) {
-      buffer.write('<id>$id</id>');
+    if (tinhTp != null) {
+      buffer.write('<tinhTp>$tinhTp</tinhTp>');
     }
     return buffer;
   }

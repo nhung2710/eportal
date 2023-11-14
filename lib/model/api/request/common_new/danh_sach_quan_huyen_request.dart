@@ -9,6 +9,9 @@ class DanhSachQuanHuyenRequest
   DanhSachQuanHuyenRequest({required super.obj});
 
   @override
+  int getTimeCache() => 60 * 30;
+
+  @override
   String getQuery() =>
       ApplicationApiConstant.API_COMMON_NEW_OP_DANH_SACH_QUAN_HUYEN;
 }

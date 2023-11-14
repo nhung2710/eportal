@@ -13,6 +13,7 @@ import '../../../../bloc/common_new/danh_sach_tinh_tp_bloc.dart';
 import '../../../../bloc/common_new/danh_sach_trinh_do_bloc.dart';
 import '../../../../bloc/common_new/ten_tinh_tp_bloc.dart';
 import '../../../../bloc/common_new/work_search_bloc.dart';
+import '../../../../event/common_new/danh_sach_doanh_nghiep_event.dart';
 import '../../../../event/common_new/danh_sach_kinh_nghiem_event.dart';
 import '../../../../event/common_new/danh_sach_muc_luong_event.dart';
 import '../../../../event/common_new/danh_sach_quan_huyen_event.dart';
@@ -20,12 +21,14 @@ import '../../../../event/common_new/danh_sach_tinh_tp_event.dart';
 import '../../../../event/common_new/danh_sach_trinh_do_event.dart';
 import '../../../../event/common_new/work_search_event.dart';
 import '../../../../extension/string_extension.dart';
+import '../../../../model/api/request/common_new/danh_sach_doanh_nghiep_request.dart';
 import '../../../../model/api/request/common_new/danh_sach_kinh_nghiem_request.dart';
 import '../../../../model/api/request/common_new/danh_sach_muc_luong_request.dart';
 import '../../../../model/api/request/common_new/danh_sach_quan_huyen_request.dart';
 import '../../../../model/api/request/common_new/danh_sach_tinh_tp_request.dart';
 import '../../../../model/api/request/common_new/danh_sach_trinh_do_request.dart';
 import '../../../../model/api/request/common_new/data/common_new_data.dart';
+import '../../../../model/api/request/common_new/data/danh_sach_doanh_nghiep_data.dart';
 import '../../../../model/api/request/common_new/data/danh_sach_quan_huyen_data.dart';
 import '../../../../model/api/request/common_new/data/work_search_data.dart';
 import '../../../../model/api/request/common_new/work_search_request.dart';
@@ -88,29 +91,63 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
             padding: const EdgeInsets.all(10),
             width: MediaQuery.of(context).size.width * 0.9,
             child: Column(children: [
-              Container(
-                margin: const EdgeInsets.only(top: 10),
-                child: Text("Tiêu chí tìm kiếm thêm"),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 10),
-                child: BlocProvider(
-                    create: (_) => danhSachTinhTpBloc,
-                    child: BlocListener<DanhSachTinhTpBloc, BaseState>(
-                      listener: (BuildContext context, BaseState state) {},
-                      child: BlocBuilder<DanhSachTinhTpBloc, BaseState>(
-                        builder: (BuildContext context, BaseState state) =>
-                            handlerBaseState<DanhSachTinhTpResponse>(
-                                state,
-                                (context, state) => DropdownButtonFormField(
-                                      value: request.obj.tinhTP,
-                                      items: (state.data ?? [])
+              Expanded(
+                  child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    child: Text("Tiêu chí tìm kiếm thêm"),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    child: BlocProvider(
+                        create: (_) => danhSachTinhTpBloc,
+                        child: BlocListener<DanhSachTinhTpBloc, BaseState>(
+                          listener: (BuildContext context, BaseState state) {},
+                          child: BlocBuilder<DanhSachTinhTpBloc, BaseState>(
+                            builder: (BuildContext context, BaseState state) =>
+                                handlerBaseState<DanhSachTinhTpResponse>(
+                                    state,
+                                    (context, state) => DropdownButtonFormField(
+                                          isExpanded: true,
+                                          value: request.obj.tinhTp,
+                                          items: (state.data ?? [])
+                                              .map((e) => DropdownMenuItem<int>(
+                                                    value: e.regionalID,
+                                                    child: Text(
+                                                      "${e.regionalName}",
+                                                      style: AppTextStyle.title
+                                                          .copyWith(
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .visible),
+                                                    ),
+                                                  ))
+                                              .toList(),
+                                          decoration: const InputDecoration(
+                                            labelText: 'Thành phố',
+                                            counterText: "",
+                                          ),
+                                          onChanged: (v) {
+                                            request.obj.tinhTp = v;
+                                            request.obj.quanHuyen = null;
+                                            request.obj.doanhNghiep = null;
+                                            danhSachQuanHuyenBloc.add(
+                                                DanhSachQuanHuyenEvent(
+                                                    request: DanhSachQuanHuyenRequest(
+                                                        obj:
+                                                            DanhSachQuanHuyenData(
+                                                                tinhTp: request
+                                                                    .obj
+                                                                    .tinhTp))));
+                                          },
+                                        ),
+                                    initWidget: DropdownButtonFormField(
+                                      isExpanded: true,
+                                      items: []
                                           .map((e) => DropdownMenuItem<int>(
-                                                value: e.regionalID,
-                                                child: Text(
-                                                  "${e.regionalName}",
-                                                  style: AppTextStyle.title,
-                                                ),
+                                                value: e,
+                                                child: Text("${e}"),
                                               ))
                                           .toList(),
                                       decoration: const InputDecoration(
@@ -118,57 +155,65 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
                                         counterText: "",
                                       ),
                                       onChanged: (v) {
-                                        request.obj.tinhTP = v;
-                                        danhSachQuanHuyenBloc.add(
-                                            DanhSachQuanHuyenEvent(
-                                                request: DanhSachQuanHuyenRequest(
-                                                    obj: DanhSachQuanHuyenData(
-                                                        id: request
-                                                            .obj.tinhTP))));
+                                        request.obj.tinhTp = v;
+                                        request.obj.quanHuyen = null;
+                                        request.obj.doanhNghiep = null;
                                       },
-                                    ),
-                                initWidget: DropdownButtonFormField(
-                                  items: []
-                                      .map((e) => DropdownMenuItem<int>(
-                                            value: e,
-                                            child: Text("${e}"),
-                                          ))
-                                      .toList(),
-                                  decoration: const InputDecoration(
-                                    labelText: 'Thành phố',
-                                    counterText: "",
-                                  ),
-                                  onChanged: (v) {
-                                    request.obj.tinhTP = v;
-                                    danhSachQuanHuyenBloc.add(
-                                        DanhSachQuanHuyenEvent(
-                                            request: DanhSachQuanHuyenRequest(
-                                                obj: DanhSachQuanHuyenData(
-                                                    id: request.obj.tinhTP))));
-                                  },
-                                )),
-                      ),
-                    )),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 10),
-                child: BlocProvider(
-                    create: (_) => danhSachQuanHuyenBloc,
-                    child: BlocListener<DanhSachQuanHuyenBloc, BaseState>(
-                      listener: (BuildContext context, BaseState state) {},
-                      child: BlocBuilder<DanhSachQuanHuyenBloc, BaseState>(
-                        builder: (BuildContext context, BaseState state) =>
-                            handlerBaseState<DanhSachQuanHuyenResponse>(
-                                state,
-                                (context, state) => DropdownButtonFormField(
-                                      value: request.obj.quanHuyen,
-                                      items: (state.data ?? [])
+                                    )),
+                          ),
+                        )),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    child: BlocProvider(
+                        create: (_) => danhSachQuanHuyenBloc,
+                        child: BlocListener<DanhSachQuanHuyenBloc, BaseState>(
+                          listener: (BuildContext context, BaseState state) {},
+                          child: BlocBuilder<DanhSachQuanHuyenBloc, BaseState>(
+                            builder: (BuildContext context, BaseState state) =>
+                                handlerBaseState<DanhSachQuanHuyenResponse>(
+                                    state,
+                                    (context, state) => DropdownButtonFormField(
+                                          isExpanded: true,
+                                          value: request.obj.quanHuyen,
+                                          items: (state.data ?? [])
+                                              .map((e) => DropdownMenuItem<int>(
+                                                    value: e.regionalID,
+                                                    child: Text(
+                                                      "${e.regionalName}",
+                                                      style: AppTextStyle.title
+                                                          .copyWith(
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .visible),
+                                                    ),
+                                                  ))
+                                              .toList(),
+                                          decoration: const InputDecoration(
+                                            labelText: 'Quận huyện',
+                                            counterText: "",
+                                          ),
+                                          onChanged: (v) {
+                                            request.obj.quanHuyen = v;
+                                            request.obj.doanhNghiep = null;
+
+                                            danhSachDoanhNghiepBloc.add(
+                                                DanhSachDoanhNghiepEvent(
+                                                    request: DanhSachDoanhNghiepRequest(
+                                                        obj: DanhSachDoanhNghiepData(
+                                                            tinhTp: request
+                                                                .obj.tinhTp,
+                                                            quanHuyen: request
+                                                                .obj
+                                                                .quanHuyen))));
+                                          },
+                                        ),
+                                    initWidget: DropdownButtonFormField(
+                                      isExpanded: true,
+                                      items: []
                                           .map((e) => DropdownMenuItem<int>(
-                                                value: e.regionalID,
-                                                child: Text(
-                                                  "${e.regionalName}",
-                                                  style: AppTextStyle.title,
-                                                ),
+                                                value: e,
+                                                child: Text("${e}"),
                                               ))
                                           .toList(),
                                       decoration: const InputDecoration(
@@ -177,45 +222,56 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
                                       ),
                                       onChanged: (v) {
                                         request.obj.quanHuyen = v;
+                                        request.obj.doanhNghiep = null;
                                       },
-                                    ),
-                                initWidget: DropdownButtonFormField(
-                                  items: []
-                                      .map((e) => DropdownMenuItem<int>(
-                                            value: e,
-                                            child: Text("${e}"),
-                                          ))
-                                      .toList(),
-                                  decoration: const InputDecoration(
-                                    labelText: 'Quận huyện',
-                                    counterText: "",
-                                  ),
-                                  onChanged: (v) {
-                                    request.obj.quanHuyen = v;
-                                  },
-                                )),
-                      ),
-                    )),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 10),
-                child: BlocProvider(
-                    create: (_) => danhSachDoanhNghiepBloc,
-                    child: BlocListener<DanhSachDoanhNghiepBloc, BaseState>(
-                      listener: (BuildContext context, BaseState state) {},
-                      child: BlocBuilder<DanhSachDoanhNghiepBloc, BaseState>(
-                        builder: (BuildContext context, BaseState state) =>
-                            handlerBaseState<DanhSachDoanhNghiepResponse>(
-                                state,
-                                (context, state) => DropdownButtonFormField(
-                                      value: request.obj.doanhNghiep,
-                                      items: (state.data ?? [])
+                                    )),
+                          ),
+                        )),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    child: BlocProvider(
+                        create: (_) => danhSachDoanhNghiepBloc,
+                        child: BlocListener<DanhSachDoanhNghiepBloc, BaseState>(
+                          listener: (BuildContext context, BaseState state) {},
+                          child:
+                              BlocBuilder<DanhSachDoanhNghiepBloc, BaseState>(
+                            builder: (BuildContext context, BaseState state) =>
+                                handlerBaseState<DanhSachDoanhNghiepResponse>(
+                                    state,
+                                    (context, state) => DropdownButtonFormField(
+                                          isExpanded: true,
+                                          value: request.obj.doanhNghiep,
+                                          style: AppTextStyle.title,
+                                          items: (state.data ?? [])
+                                              .map((e) =>
+                                                  DropdownMenuItem<String>(
+                                                    value: e.businessID,
+                                                    child: Text(
+                                                      e.businessVn
+                                                          .supportHtml(),
+                                                      style: AppTextStyle.title
+                                                          .copyWith(
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .visible),
+                                                    ),
+                                                  ))
+                                              .toList(),
+                                          decoration: const InputDecoration(
+                                            labelText: 'Doanh nghiệp',
+                                            counterText: "",
+                                          ),
+                                          onChanged: (v) {
+                                            request.obj.doanhNghiep = v;
+                                          },
+                                        ),
+                                    initWidget: DropdownButtonFormField(
+                                      isExpanded: true,
+                                      items: []
                                           .map((e) => DropdownMenuItem<String>(
-                                                value: Uuid().v1(),
-                                                child: Text(
-                                                  "${Uuid().v1()}",
-                                                  style: AppTextStyle.title,
-                                                ),
+                                                value: e,
+                                                child: Text("${e}"),
                                               ))
                                           .toList(),
                                       decoration: const InputDecoration(
@@ -225,44 +281,48 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
                                       onChanged: (v) {
                                         request.obj.doanhNghiep = v;
                                       },
-                                    ),
-                                initWidget: DropdownButtonFormField(
-                                  items: []
-                                      .map((e) => DropdownMenuItem<String>(
-                                            value: e,
-                                            child: Text("${e}"),
-                                          ))
-                                      .toList(),
-                                  decoration: const InputDecoration(
-                                    labelText: 'Doanh nghiệp',
-                                    counterText: "",
-                                  ),
-                                  onChanged: (v) {
-                                    request.obj.doanhNghiep = v;
-                                  },
-                                )),
-                      ),
-                    )),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 10),
-                child: BlocProvider(
-                    create: (_) => danhSachMucLuongBloc,
-                    child: BlocListener<DanhSachMucLuongBloc, BaseState>(
-                      listener: (BuildContext context, BaseState state) {},
-                      child: BlocBuilder<DanhSachMucLuongBloc, BaseState>(
-                        builder: (BuildContext context, BaseState state) =>
-                            handlerBaseState<DanhSachMucLuongResponse>(
-                                state,
-                                (context, state) => DropdownButtonFormField(
-                                      value: request.obj.mucLuong,
-                                      items: (state.data ?? [])
+                                    )),
+                          ),
+                        )),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    child: BlocProvider(
+                        create: (_) => danhSachMucLuongBloc,
+                        child: BlocListener<DanhSachMucLuongBloc, BaseState>(
+                          listener: (BuildContext context, BaseState state) {},
+                          child: BlocBuilder<DanhSachMucLuongBloc, BaseState>(
+                            builder: (BuildContext context, BaseState state) =>
+                                handlerBaseState<DanhSachMucLuongResponse>(
+                                    state,
+                                    (context, state) => DropdownButtonFormField(
+                                          value: request.obj.mucLuong,
+                                          isExpanded: true,
+                                          items: (state.data ?? [])
+                                              .map((e) =>
+                                                  DropdownMenuItem<String>(
+                                                    value: e.salaryID,
+                                                    child: Text(
+                                                      e.salaryName
+                                                          .supportHtml(),
+                                                      style: AppTextStyle.title,
+                                                    ),
+                                                  ))
+                                              .toList(),
+                                          decoration: const InputDecoration(
+                                            labelText: 'Mức lương',
+                                            counterText: "",
+                                          ),
+                                          onChanged: (v) {
+                                            request.obj.mucLuong = v;
+                                          },
+                                        ),
+                                    initWidget: DropdownButtonFormField(
+                                      isExpanded: true,
+                                      items: []
                                           .map((e) => DropdownMenuItem<String>(
-                                                value: e.salaryID,
-                                                child: Text(
-                                                  e.salaryName.supportHtml(),
-                                                  style: AppTextStyle.title,
-                                                ),
+                                                value: e,
+                                                child: Text("${e}"),
                                               ))
                                           .toList(),
                                       decoration: const InputDecoration(
@@ -272,45 +332,48 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
                                       onChanged: (v) {
                                         request.obj.mucLuong = v;
                                       },
-                                    ),
-                                initWidget: DropdownButtonFormField(
-                                  items: []
-                                      .map((e) => DropdownMenuItem<String>(
-                                            value: e,
-                                            child: Text("${e}"),
-                                          ))
-                                      .toList(),
-                                  decoration: const InputDecoration(
-                                    labelText: 'Mức lương',
-                                    counterText: "",
-                                  ),
-                                  onChanged: (v) {
-                                    request.obj.mucLuong = v;
-                                  },
-                                )),
-                      ),
-                    )),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 10),
-                child: BlocProvider(
-                    create: (_) => danhSachKinhNghiemBloc,
-                    child: BlocListener<DanhSachKinhNghiemBloc, BaseState>(
-                      listener: (BuildContext context, BaseState state) {},
-                      child: BlocBuilder<DanhSachKinhNghiemBloc, BaseState>(
-                        builder: (BuildContext context, BaseState state) =>
-                            handlerBaseState<DanhSachKinhNghiemResponse>(
-                                state,
-                                (context, state) => DropdownButtonFormField(
-                                      value: request.obj.kinhNghiem,
-                                      items: (state.data ?? [])
+                                    )),
+                          ),
+                        )),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    child: BlocProvider(
+                        create: (_) => danhSachKinhNghiemBloc,
+                        child: BlocListener<DanhSachKinhNghiemBloc, BaseState>(
+                          listener: (BuildContext context, BaseState state) {},
+                          child: BlocBuilder<DanhSachKinhNghiemBloc, BaseState>(
+                            builder: (BuildContext context, BaseState state) =>
+                                handlerBaseState<DanhSachKinhNghiemResponse>(
+                                    state,
+                                    (context, state) => DropdownButtonFormField(
+                                          value: request.obj.kinhNghiem,
+                                          isExpanded: true,
+                                          items: (state.data ?? [])
+                                              .map((e) =>
+                                                  DropdownMenuItem<String>(
+                                                    value: e.experienceID,
+                                                    child: Text(
+                                                      e.experienceName
+                                                          .supportHtml(),
+                                                      style: AppTextStyle.title,
+                                                    ),
+                                                  ))
+                                              .toList(),
+                                          decoration: const InputDecoration(
+                                            labelText: 'Kinh nghiệm',
+                                            counterText: "",
+                                          ),
+                                          onChanged: (v) {
+                                            request.obj.kinhNghiem = v;
+                                          },
+                                        ),
+                                    initWidget: DropdownButtonFormField(
+                                      isExpanded: true,
+                                      items: []
                                           .map((e) => DropdownMenuItem<String>(
-                                                value: e.experienceID,
-                                                child: Text(
-                                                  e.experienceName
-                                                      .supportHtml(),
-                                                  style: AppTextStyle.title,
-                                                ),
+                                                value: e,
+                                                child: Text(""),
                                               ))
                                           .toList(),
                                       decoration: const InputDecoration(
@@ -320,24 +383,15 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
                                       onChanged: (v) {
                                         request.obj.kinhNghiem = v;
                                       },
-                                    ),
-                                initWidget: DropdownButtonFormField(
-                                  items: []
-                                      .map((e) => DropdownMenuItem<String>(
-                                            value: e,
-                                            child: Text(""),
-                                          ))
-                                      .toList(),
-                                  decoration: const InputDecoration(
-                                    labelText: 'Kinh nghiệm',
-                                    counterText: "",
-                                  ),
-                                  onChanged: (v) {
-                                    request.obj.kinhNghiem = v;
-                                  },
-                                )),
-                      ),
-                    )),
+                                    )),
+                          ),
+                        )),
+                  ),
+                ],
+              )),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: Text("Tiêu chí tìm kiếm thêm"),
               ),
             ]),
           ),

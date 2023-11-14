@@ -10,6 +10,9 @@ import 'package:flutter/material.dart';
 
 import '../../../share/change_password/page/change_password_page.dart';
 import '../../../share/change_user_info/page/change_user_info_page.dart';
+import '../../../share/chart_economically_active/page/chart_economically_active_page.dart';
+import '../../../share/chart_economically_inactive/page/chart_economically_inactive_page.dart';
+import '../../../share/chart_unemployment_rate/page/chart_unemployment_rate_page.dart';
 
 //
 // Created by BlackRose on 11/7/2023.
@@ -38,15 +41,15 @@ class _SettingPageState extends BasePageStateActive<SettingPage> {
       SettingPageModel(
           icon: Icons.bar_chart_outlined,
           title: "Lao động thất nghiệp",
-          builder: (context) => const SettingPage()),
+          builder: (context) => const ChartUnemploymentRatePage()),
       SettingPageModel(
           icon: Icons.bar_chart_outlined,
           title: "Lao động HDKT",
-          builder: (context) => const SettingPage()),
+          builder: (context) => const ChartEconomicallyActivePage()),
       SettingPageModel(
           icon: Icons.bar_chart_outlined,
           title: "Lao động không HDKT",
-          builder: (context) => const SettingPage())
+          builder: (context) => const ChartEconomicallyInactivePage())
     ],
     "Hệ thống": [
       SettingPageModel(

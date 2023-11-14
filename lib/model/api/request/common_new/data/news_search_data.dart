@@ -15,7 +15,7 @@ class NewsSearchData extends BaseEportalXml {
   String? doanhNghiep;
   String? mucLuong;
   String? kinhNghiem;
-  int? tinhTP;
+  int? tinhTp;
   int? quanHuyen;
 
   NewsSearchData(
@@ -24,7 +24,7 @@ class NewsSearchData extends BaseEportalXml {
       this.doanhNghiep,
       this.mucLuong,
       this.kinhNghiem,
-      this.tinhTP,
+      this.tinhTp,
       this.quanHuyen,
       this.soTrangHienTai = 1,
       this.soBanGhiTrenTrang = ApplicationConstant.NUMBER_PREVIEW_ITEM});
@@ -48,8 +48,8 @@ class NewsSearchData extends BaseEportalXml {
     if (kinhNghiem != null) {
       buffer.write('<kinhNghiem>$kinhNghiem</kinhNghiem>');
     }
-    if (tinhTP != null) {
-      buffer.write('<tinhTP>$tinhTP</tinhTP>');
+    if (tinhTp != null) {
+      buffer.write('<tinhTp>$tinhTp</tinhTp>');
     }
     if (quanHuyen != null) {
       buffer.write('<quanHuyen>$quanHuyen</quanHuyen>');

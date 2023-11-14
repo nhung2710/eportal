@@ -6,7 +6,7 @@ class DanhSachKinhNghiemRequest extends BaseEportalRequest<CommonNewData> {
   DanhSachKinhNghiemRequest({required super.obj});
 
   @override
-  int getTimeCache() => 60;
+  int getTimeCache() => 60 * 30;
 
   @override
   String getQuery() =>

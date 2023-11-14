@@ -101,7 +101,7 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
                             handlerBaseState<DanhSachTinhTpResponse>(
                                 state,
                                 (context, state) => DropdownButtonFormField(
-                                      value: request.obj.tinhTP,
+                                      value: request.obj.tinhTp,
                                       items: (state.data ?? [])
                                           .map((e) => DropdownMenuItem<int>(
                                                 value: e.regionalID,
@@ -116,13 +116,14 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
                                         counterText: "",
                                       ),
                                       onChanged: (v) {
-                                        request.obj.tinhTP = v;
+                                        request.obj.tinhTp = v;
+                                        request.obj.quanHuyen = null;
                                         danhSachQuanHuyenBloc.add(
                                             DanhSachQuanHuyenEvent(
                                                 request: DanhSachQuanHuyenRequest(
                                                     obj: DanhSachQuanHuyenData(
-                                                        id: request
-                                                            .obj.tinhTP))));
+                                                        tinhTp: request
+                                                            .obj.tinhTp))));
                                       },
                                     ),
                                 initWidget: DropdownButtonFormField(
@@ -137,12 +138,14 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
                                     counterText: "",
                                   ),
                                   onChanged: (v) {
-                                    request.obj.tinhTP = v;
+                                    request.obj.tinhTp = v;
+                                    request.obj.quanHuyen = null;
                                     danhSachQuanHuyenBloc.add(
                                         DanhSachQuanHuyenEvent(
                                             request: DanhSachQuanHuyenRequest(
                                                 obj: DanhSachQuanHuyenData(
-                                                    id: request.obj.tinhTP))));
+                                                    tinhTp:
+                                                        request.obj.tinhTp))));
                                   },
                                 )),
                       ),

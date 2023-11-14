@@ -122,7 +122,7 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                         ),
                       ),
                     ))),
-            /*Container(
+            Container(
                 padding: const EdgeInsets.only(left: 5),
                 margin: const EdgeInsets.only(top: 5),
                 decoration: BoxDecoration(
@@ -161,8 +161,8 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                       ),
                     ],
                   ),
-                )),*/
-            /*Container(
+                )),
+            Container(
                 padding: const EdgeInsets.only(left: 5),
                 margin: const EdgeInsets.only(top: 5),
                 decoration: BoxDecoration(
@@ -201,7 +201,7 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                       ),
                     ],
                   ),
-                )),*/
+                )),
             Container(
                 padding: const EdgeInsets.only(left: 5),
                 margin: const EdgeInsets.only(top: 5),
