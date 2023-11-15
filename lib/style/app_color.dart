@@ -9,4 +9,5 @@ class AppColor {
   static const Color colorOfHintText = Color(0xffC1C1C1);
   static const Color colorOfText = Color(0xff000000);
   static const Color colorOfIcon = Colors.green;
+  static const Color colorOfDrawer = Color(0xFFC1C1C1);
 }

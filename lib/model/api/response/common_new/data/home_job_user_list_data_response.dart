@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'danh_sach_tinh_tp_data.dart';
-
 //
 // Created by BlackRose on 13/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class DanhSachDoanhNghiepData {
+class HomeJobUserListDataResponse {
   int? id;
   int? status;
   String? careerID;
-  Null? isInvite;
-  Null? userAdmin;
+  bool? isInvite;
+  bool? userAdmin;
   String? tinhTP;
   String? idSend;
   int? soLuongUngVien;
@@ -48,7 +46,7 @@ class DanhSachDoanhNghiepData {
   String? approvalDate;
   int? portalId;
 
-  DanhSachDoanhNghiepData(
+  HomeJobUserListDataResponse(
       {this.id,
       this.status,
       this.careerID,
@@ -90,7 +88,7 @@ class DanhSachDoanhNghiepData {
       this.approvalDate,
       this.portalId});
 
-  DanhSachDoanhNghiepData.fromJson(Map<String, dynamic> json) {
+  HomeJobUserListDataResponse.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     status = json['status'];
     careerID = json['career_ID'];

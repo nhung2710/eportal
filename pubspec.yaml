@@ -64,7 +64,8 @@ dependencies:
   crypto: ^3.0.3
   uuid: ^4.2.1
   intl: ^0.18.1
-
+  dropdown_search: ^5.0.6
+  diacritic: ^0.1.4
 
 dev_dependencies:
   flutter_test:
@@ -95,6 +96,7 @@ flutter:
 
   assets:
     - assets/images/Logo.jpg
+    - assets/images/404.png
     - assets/images/ErrorImage.png
     - assets/images/introduction_1.jpg
     - assets/images/introduction_2.jpg

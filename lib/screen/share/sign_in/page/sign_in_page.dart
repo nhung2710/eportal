@@ -10,6 +10,8 @@ import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../../anonymous/home/home_page.dart' as anonymous;
+
 //
 // Created by BlackRose on 11/7/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -148,7 +150,7 @@ class _SignInPageState extends BasePageState<SignInPage> {
         Container(
           margin: const EdgeInsets.only(top: 5),
           child: GestureDetector(
-              onTap: () => backPage(),
+              onTap: () => _skipPage(context),
               child: Center(
                   child: Text(
                 'Trài nghiệm không đăng nhập',
@@ -185,7 +187,7 @@ class _SignInPageState extends BasePageState<SignInPage> {
         GlobalApplication().FullName = nameController.text;
         GlobalApplication().UserName = nameController.text;
         GlobalApplication().UserPassword = passwordController.text;
-        nextPage((context) => const employer.HomePage());
+        nextPageWithoutBack((context) => const employer.HomePage());
       });
     }
   }
@@ -196,10 +198,12 @@ class _SignInPageState extends BasePageState<SignInPage> {
         GlobalApplication().FullName = nameController.text;
         GlobalApplication().UserName = nameController.text;
         GlobalApplication().UserPassword = passwordController.text;
-        nextPage((context) => const admin.HomePage());
+        nextPageWithoutBack((context) => const admin.HomePage());
       });
     }
   }
 
-  _skipPage(BuildContext context) {}
+  _skipPage(BuildContext context) {
+    nextPageWithoutBack((context) => const anonymous.HomePage());
+  }
 }

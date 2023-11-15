@@ -4,20 +4,20 @@
 //
 import 'dart:convert';
 
-import 'package:eportal/model/api/response/common_new/data/news_search_data.dart';
+import 'package:eportal/model/api/response/common_new/data/news_search_data_response.dart';
 import 'package:eportal/model/base/base_eportal_response.dart';
 
 class NewsSearchResponse extends BaseEportalResponse {
-  List<NewsSearchData>? data;
+  List<NewsSearchDataResponse>? data;
 
   NewsSearchResponse({this.data, required status, required message})
       : super(status: status, message: message);
 
   factory NewsSearchResponse.fromJson(Map<String, dynamic> json) {
-    List<NewsSearchData> data = <NewsSearchData>[];
+    List<NewsSearchDataResponse> data = <NewsSearchDataResponse>[];
     if (json['data'] != null) {
       json['data'].forEach((v) {
-        data.add(NewsSearchData.fromJson(v));
+        data.add(NewsSearchDataResponse.fromJson(v));
       });
     }
     return NewsSearchResponse(

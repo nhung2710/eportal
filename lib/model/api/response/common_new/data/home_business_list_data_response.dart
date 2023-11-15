@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // Created by BlackRose on 13/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class HomeBusinessListData {
+class HomeBusinessListDataResponse {
   int? id;
   int? status;
   String? careerID;
@@ -46,49 +46,49 @@ class HomeBusinessListData {
   String? approvalDate;
   int? portalId;
 
-  HomeBusinessListData(
+  HomeBusinessListDataResponse(
       {this.id,
-        this.status,
-        this.careerID,
-        this.isInvite,
-        this.userAdmin,
-        this.tinhTP,
-        this.idSend,
-        this.soLuongUngVien,
-        this.soLuongTuyenDung,
-        this.tinhTrang,
-        this.soBan,
-        this.doanhNghiepID,
-        this.total,
-        this.scale,
-        this.businessID,
-        this.businessVn,
-        this.businessEn,
-        this.businessSort,
-        this.quanHuyen,
-        this.logo,
-        this.description,
-        this.taxCode,
-        this.mobile,
-        this.fax,
-        this.website,
-        this.email,
-        this.address,
-        this.contactUser,
-        this.contactMobile,
-        this.contactEmail,
-        this.createdDate,
-        this.createdUser,
-        this.updatedDate,
-        this.updatedUser,
-        this.isAdmin,
-        this.isActive,
-        this.isApproval,
-        this.approvalUser,
-        this.approvalDate,
-        this.portalId});
+      this.status,
+      this.careerID,
+      this.isInvite,
+      this.userAdmin,
+      this.tinhTP,
+      this.idSend,
+      this.soLuongUngVien,
+      this.soLuongTuyenDung,
+      this.tinhTrang,
+      this.soBan,
+      this.doanhNghiepID,
+      this.total,
+      this.scale,
+      this.businessID,
+      this.businessVn,
+      this.businessEn,
+      this.businessSort,
+      this.quanHuyen,
+      this.logo,
+      this.description,
+      this.taxCode,
+      this.mobile,
+      this.fax,
+      this.website,
+      this.email,
+      this.address,
+      this.contactUser,
+      this.contactMobile,
+      this.contactEmail,
+      this.createdDate,
+      this.createdUser,
+      this.updatedDate,
+      this.updatedUser,
+      this.isAdmin,
+      this.isActive,
+      this.isApproval,
+      this.approvalUser,
+      this.approvalDate,
+      this.portalId});
 
-  HomeBusinessListData.fromJson(Map<String, dynamic> json) {
+  HomeBusinessListDataResponse.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     status = json['status'];
     careerID = json['career_ID'];

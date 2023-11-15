@@ -4,7 +4,7 @@ import '../../../../constant/application_constant.dart';
 import '../../../../event/common_new/home_news_list_event.dart';
 import '../../../../event/common_new/home_works_list_event.dart';
 import '../../../../extension/string_extension.dart';
-import '../../../../model/api/request/common_new/data/common_new_data.dart';
+import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
 import '../../../../model/api/request/common_new/home_news_list_request.dart';
 import '../../../../model/api/request/common_new/home_works_list_request.dart';
 import '../../../../model/api/response/common_new/home_news_list_response.dart';
@@ -46,7 +46,7 @@ class _HomeNewsListPreviewState
   void initDataLoading() {
     homeNewsListBloc.add(HomeNewsListEvent(
         request: HomeNewsListRequest(
-            obj: CommonNewData(
+            obj: CommonNewDataRequest(
                 flag: widget.flag,
                 top: ApplicationConstant.NUMBER_PREVIEW_ITEM))));
     super.initDataLoading();
@@ -81,8 +81,8 @@ class _HomeNewsListPreviewState
                               padding: const EdgeInsets.only(top: 10),
                               child: Row(
                                 children: [
-                                  SizedBox(
-                                      width: 80,
+                                  Expanded(
+                                      flex: 1,
                                       child: ImageLoading(
                                         imageUrl: state.data!
                                             .elementAt(i)
@@ -102,8 +102,11 @@ class _HomeNewsListPreviewState
                                           );
                                         },
                                       )),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
                                   Expanded(
-                                    flex: 1,
+                                    flex: 4,
                                     child: Text(
                                       (state.data?.elementAt(i).title)
                                           .replaceWhenNullOrWhiteSpace(),

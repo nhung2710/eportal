@@ -4,12 +4,10 @@ import '../../../../../constant/application_constant.dart';
 import '../../../../base/base_eportal_xml.dart';
 
 //
-// Created by BlackRose on 13/11/2023.
+// Created by BlackRose on 15/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class NewsSearchData extends BaseEportalXml {
-  String? tuKhoa;
-  String? kieuSapXep;
+class SearchRequestData extends BaseEportalXml {
   int? soTrangHienTai;
   int? soBanGhiTrenTrang;
   String? doanhNghiep;
@@ -18,10 +16,8 @@ class NewsSearchData extends BaseEportalXml {
   int? tinhTp;
   int? quanHuyen;
 
-  NewsSearchData(
-      {this.tuKhoa,
-      this.kieuSapXep,
-      this.doanhNghiep,
+  SearchRequestData(
+      {this.doanhNghiep,
       this.mucLuong,
       this.kinhNghiem,
       this.tinhTp,
@@ -33,17 +29,8 @@ class NewsSearchData extends BaseEportalXml {
   StringBuffer toXml() {
     // TODO: implement toXml
     var buffer = super.toXml();
-    if (tuKhoa != null) {
-      buffer.write('<tuKhoa>$tuKhoa</tuKhoa>');
-    }
-    if (kieuSapXep != null) {
-      buffer.write('<kieuSapXep>$kieuSapXep</kieuSapXep>');
-    }
     if (doanhNghiep != null) {
       buffer.write('<doanhNghiep>$doanhNghiep</doanhNghiep>');
-    }
-    if (mucLuong != null) {
-      buffer.write('<mucLuong>$kieuSapXep</mucLuong>');
     }
     if (kinhNghiem != null) {
       buffer.write('<kinhNghiem>$kinhNghiem</kinhNghiem>');

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // Created by BlackRose on 13/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class HomeDocumentListData {
+class HomeDocumentListDataResponse {
   String? documentID;
   String? documentName;
   String? docTypeID;
@@ -32,7 +32,7 @@ class HomeDocumentListData {
   bool? sendView;
   int? total;
 
-  HomeDocumentListData(
+  HomeDocumentListDataResponse(
       {this.documentID,
       this.documentName,
       this.docTypeID,
@@ -60,7 +60,7 @@ class HomeDocumentListData {
       this.sendView,
       this.total});
 
-  HomeDocumentListData.fromJson(Map<String, dynamic> json) {
+  HomeDocumentListDataResponse.fromJson(Map<String, dynamic> json) {
     documentID = json['document_ID'];
     documentName = json['document_Name'];
     docTypeID = json['docType_ID'];

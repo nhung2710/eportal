@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // Created by BlackRose on 14/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class HomeSlideListData {
+class HomeSlideListDataResponse {
   int? total;
   int? id;
   String? tieuDe;
@@ -15,7 +15,7 @@ class HomeSlideListData {
   bool? hoatDong;
   String? avatar;
 
-  HomeSlideListData(
+  HomeSlideListDataResponse(
       {this.total,
       this.id,
       this.tieuDe,
@@ -26,7 +26,7 @@ class HomeSlideListData {
       this.hoatDong,
       this.avatar});
 
-  HomeSlideListData.fromJson(Map<String, dynamic> json) {
+  HomeSlideListDataResponse.fromJson(Map<String, dynamic> json) {
     total = json['total'];
     id = json['id'];
     tieuDe = json['tieuDe'];

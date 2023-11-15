@@ -1,10 +1,8 @@
-
-
 //
 // Created by BlackRose on 11/6/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class CommonNewData {
+class CommonNewDataResponse {
   String? parentID;
   int? gtvl;
   int? id;
@@ -64,7 +62,7 @@ class CommonNewData {
   String? updatedUser;
   int? portalID;
 
-  CommonNewData(
+  CommonNewDataResponse(
       {this.parentID,
       this.gtvl,
       this.id,
@@ -124,7 +122,7 @@ class CommonNewData {
       this.updatedUser,
       this.portalID});
 
-  CommonNewData.fromJson(Map<String, dynamic> json) {
+  CommonNewDataResponse.fromJson(Map<String, dynamic> json) {
     parentID = json['parent_ID'];
     gtvl = json['gtvl'];
     id = json['id'];

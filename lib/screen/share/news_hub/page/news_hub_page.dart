@@ -12,11 +12,12 @@ import '../../../../bloc/common_new/home_slide_list_bloc.dart';
 import '../../../../constant/application_constant.dart';
 import '../../../../event/common_new/home_slide_list_event.dart';
 import '../../../../extension/string_extension.dart';
-import '../../../../model/api/request/common_new/data/common_new_data.dart';
+import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
 import '../../../../model/api/request/common_new/home_slide_list_request.dart';
 import '../../../../model/api/response/common_new/home_slide_list_response.dart';
 import '../../../../state/base/base_state.dart';
 import '../../../../style/app_color.dart';
+import '../../../../widget/button_icon/custom_button_icon.dart';
 import '../../../../widget/image/image_loading.dart';
 import '../../empty_example/page/empty_example_page.dart';
 import '../../job_user_search/page/job_user_search_page.dart';
@@ -45,7 +46,8 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
   void initDataLoading() {
     homeSlideListBloc.add(HomeSlideListEvent(
         request: HomeSlideListRequest(
-            obj: CommonNewData(top: ApplicationConstant.NUMBER_FULL_ITEM))));
+            obj: CommonNewDataRequest(
+                top: ApplicationConstant.NUMBER_FULL_ITEM))));
     super.initDataLoading();
   }
 
@@ -123,125 +125,90 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                       ),
                     ))),
             Container(
-                padding: const EdgeInsets.only(left: 5),
-                margin: const EdgeInsets.only(top: 5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border:
-                      Border.all(color: AppColor.colorOfHintText, width: 0.5),
-                  color: Colors.white,
-                ),
-                child: GestureDetector(
-                  onTap: () => nextPage((context) => const NewsSearchPage()),
+              margin: const EdgeInsets.only(top: 5),
+              child: SizedBox(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      Expanded(
-                          child: Container(
-                        padding: const EdgeInsets.all(10),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Tìm kiếm tin bài",
-                                style: AppTextStyle.titlePage),
-                            Text(
-                              "Việc làm - quảng cáo - chính trị - văn bản pháp luật",
-                              style: AppTextStyle.titleHintPage,
-                            ),
-                          ],
-                        ),
-                      )),
-                      const SizedBox(
-                        width: 40,
-                        height: 40,
-                        child: Icon(
-                          Icons.search,
-                          color: AppColor.colorOfIcon,
-                        ),
+                      CustomButtonIcon(
+                        title: "Tin tức",
+                        iconData: Icons.newspaper,
+                        onTap: () =>
+                            nextPage((context) => const NewsSearchPage()),
+                      ),
+                      const VerticalDivider(
+                        width: 5,
+                      ),
+                      CustomButtonIcon(
+                        title: "Tuyển dụng",
+                        iconData: Icons.work,
+                        onTap: () =>
+                            nextPage((context) => const WorkSearchPage()),
+                      ),
+                      const VerticalDivider(
+                        width: 10,
+                      ),
+                      CustomButtonIcon(
+                        title: "Hồ sơ",
+                        iconData: Icons.people,
+                        onTap: () =>
+                            nextPage((context) => const JobUserSearchPage()),
+                      ),
+                      const VerticalDivider(
+                        width: 10,
+                      ),
+                      CustomButtonIcon(
+                        title: "Tìm việc",
+                        iconData: Icons.search,
+                      ),
+                      const VerticalDivider(
+                        width: 10,
+                      ),
+                      CustomButtonIcon(
+                        title: "Tìm việc",
+                        iconData: Icons.search,
+                      ),
+                      const VerticalDivider(
+                        width: 10,
+                      ),
+                      CustomButtonIcon(
+                        title: "Tìm việc",
+                        iconData: Icons.search,
+                      ),
+                      const VerticalDivider(
+                        width: 10,
+                      ),
+                      CustomButtonIcon(
+                        title: "Tìm việc",
+                        iconData: Icons.search,
+                      ),
+                      const VerticalDivider(
+                        width: 10,
+                      ),
+                      CustomButtonIcon(
+                        title: "Tìm việc",
+                        iconData: Icons.search,
+                      ),
+                      const VerticalDivider(
+                        width: 10,
+                      ),
+                      CustomButtonIcon(
+                        title: "Tìm việc",
+                        iconData: Icons.search,
+                      ),
+                      const VerticalDivider(
+                        width: 10,
+                      ),
+                      CustomButtonIcon(
+                        title: "Tìm việc",
+                        iconData: Icons.search,
                       ),
                     ],
                   ),
-                )),
-            Container(
-                padding: const EdgeInsets.only(left: 5),
-                margin: const EdgeInsets.only(top: 5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border:
-                      Border.all(color: AppColor.colorOfHintText, width: 0.5),
-                  color: Colors.white,
                 ),
-                child: GestureDetector(
-                  onTap: () => nextPage((context) => const WorkSearchPage()),
-                  child: Row(
-                    children: [
-                      Expanded(
-                          child: Container(
-                        padding: const EdgeInsets.all(10),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Tìm kiếm tin tuyển dụng",
-                                style: AppTextStyle.titlePage),
-                            Text(
-                              "Việc làm - quảng cáo - chính trị - văn bản pháp luật",
-                              style: AppTextStyle.titleHintPage,
-                            ),
-                          ],
-                        ),
-                      )),
-                      const SizedBox(
-                        width: 40,
-                        height: 40,
-                        child: Icon(
-                          Icons.search,
-                          color: AppColor.colorOfIcon,
-                        ),
-                      ),
-                    ],
-                  ),
-                )),
-            Container(
-                padding: const EdgeInsets.only(left: 5),
-                margin: const EdgeInsets.only(top: 5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border:
-                      Border.all(color: AppColor.colorOfHintText, width: 0.5),
-                  color: Colors.white,
-                ),
-                child: GestureDetector(
-                  onTap: () => nextPage((context) => const JobUserSearchPage()),
-                  child: Row(
-                    children: [
-                      Expanded(
-                          child: Container(
-                        padding: const EdgeInsets.all(10),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Tìm kiếm hồ sơ xin việc",
-                                style: AppTextStyle.titlePage),
-                            Text(
-                              "Việc làm - quảng cáo - chính trị - văn bản pháp luật",
-                              style: AppTextStyle.titleHintPage,
-                            ),
-                          ],
-                        ),
-                      )),
-                      const SizedBox(
-                        width: 40,
-                        height: 40,
-                        child: Icon(
-                          Icons.search,
-                          color: AppColor.colorOfIcon,
-                        ),
-                      ),
-                    ],
-                  ),
-                )),
+              ),
+            ),
             Container(
                 margin: const EdgeInsets.only(top: 5),
                 padding: const EdgeInsets.only(left: 5, top: 10, bottom: 10),

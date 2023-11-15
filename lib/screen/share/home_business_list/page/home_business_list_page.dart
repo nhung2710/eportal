@@ -5,7 +5,7 @@ import '../../../../bloc/common_new/home_business_list_bloc.dart';
 import '../../../../constant/application_constant.dart';
 import '../../../../event/common_new/home_business_list_event.dart';
 import '../../../../extension/string_extension.dart';
-import '../../../../model/api/request/common_new/data/common_new_data.dart';
+import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
 import '../../../../model/api/request/common_new/home_business_list_request.dart';
 import '../../../../model/api/response/common_new/home_business_list_response.dart';
 import '../../../../state/base/base_state.dart';
@@ -40,7 +40,8 @@ class _HomeBusinessListPageState
   void initDataLoading() {
     homeBusinessListBloc.add(HomeBusinessListEvent(
         request: HomeBusinessListRequest(
-            obj: CommonNewData(top: ApplicationConstant.NUMBER_FULL_ITEM))));
+            obj: CommonNewDataRequest(
+                top: ApplicationConstant.NUMBER_FULL_ITEM))));
     super.initDataLoading();
   }
 

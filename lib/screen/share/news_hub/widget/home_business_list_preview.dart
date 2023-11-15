@@ -1,7 +1,7 @@
 import 'package:eportal/bloc/common_new/home_works_list_bloc.dart';
 import 'package:eportal/event/common_new/home_works_list_event.dart';
 import 'package:eportal/extension/string_extension.dart';
-import 'package:eportal/model/api/request/common_new/data/common_new_data.dart';
+import 'package:eportal/model/api/request/common_new/data/common_new_data_request.dart';
 import 'package:eportal/model/api/request/common_new/home_works_list_request.dart';
 import 'package:eportal/model/api/response/common_new/home_works_list_response.dart';
 import 'package:eportal/screen/share/empty_example/page/empty_example_page.dart';
@@ -43,7 +43,8 @@ class _HomeBusinessListPreviewState
   void initDataLoading() {
     homeBusinessListBloc.add(HomeBusinessListEvent(
         request: HomeBusinessListRequest(
-            obj: CommonNewData(top: ApplicationConstant.NUMBER_PREVIEW_ITEM))));
+            obj: CommonNewDataRequest(
+                top: ApplicationConstant.NUMBER_PREVIEW_ITEM))));
     super.initDataLoading();
   }
 
@@ -97,11 +98,16 @@ class _HomeBusinessListPreviewState
                                           );
                                         },
                                       )),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
                                   Expanded(
                                     flex: 4,
                                     child: Text(
                                       (state.data?.elementAt(i).businessVn)
                                           .supportHtml(),
+                                      style: AppTextStyle.titlePage,
+                                      maxLines: 2,
                                     ),
                                   ),
                                 ],

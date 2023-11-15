@@ -7,13 +7,13 @@ import '../../../../base/base_eportal_xml.dart';
 // Created by BlackRose on 14/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class DanhSachDoanhNghiepData extends BaseEportalXml {
+class DanhSachDoanhNghiepDataRequest extends BaseEportalXml {
   int? tinhTp;
   int? quanHuyen;
   int? soTrangHienTai;
   int? soBanGhiTrenTrang;
 
-  DanhSachDoanhNghiepData(
+  DanhSachDoanhNghiepDataRequest(
       {this.tinhTp,
       this.quanHuyen,
       this.soTrangHienTai = 1,

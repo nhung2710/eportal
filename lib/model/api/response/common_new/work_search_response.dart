@@ -4,7 +4,7 @@
 //
 import 'dart:convert';
 
-import 'package:eportal/model/api/response/common_new/data/work_search_data.dart';
+import 'package:eportal/model/api/response/common_new/data/work_search_data_response.dart';
 import 'package:eportal/model/base/base_eportal_response.dart';
 
 class WorkSearchResponse extends BaseEportalResponse {

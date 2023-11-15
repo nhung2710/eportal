@@ -28,9 +28,9 @@ class ImageLoading extends StatelessWidget {
             ),
           ),
         ),
-        errorWidget: (context, url, error) => const Icon(
-          Icons.error,
-          size: 40,
+        errorWidget: (context, url, error) => Image.asset(
+          "assets/images/404.png",
+          fit: BoxFit.cover,
         ),
         //Image.asset('assets/images/ErrorImage.png'),
         fit: BoxFit.cover,

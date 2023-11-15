@@ -1,7 +1,7 @@
 import 'package:eportal/bloc/common_new/gioi_thieu_trung_tam_bloc.dart';
 import 'package:eportal/event/common_new/gioi_thieu_trung_tam_event.dart';
 import 'package:eportal/extension/string_extension.dart';
-import 'package:eportal/model/api/request/common_new/data/common_new_data.dart';
+import 'package:eportal/model/api/request/common_new/data/common_new_data_request.dart';
 import 'package:eportal/model/api/request/common_new/gioi_thieu_trung_tam_request.dart';
 import 'package:eportal/model/api/response/common_new/gioi_thieu_trung_tam_response.dart';
 import 'package:eportal/state/base/base_state.dart';
@@ -27,7 +27,7 @@ class _AboutPageState extends BasePageState<AboutPage> {
   @override
   void initDataLoading() {
     gioiThieuTrungTamBloc.add(GioiThieuTrungTamEvent(
-        request: GioiThieuTrungTamRequest(obj: CommonNewData(top: 1))));
+        request: GioiThieuTrungTamRequest(obj: CommonNewDataRequest(top: 1))));
     super.initDataLoading();
   }
 

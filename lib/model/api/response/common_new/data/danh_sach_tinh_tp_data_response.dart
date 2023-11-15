@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'danh_sach_tinh_tp_data.dart';
+import '../../../../../extension/string_extension.dart';
 
 //
 // Created by BlackRose on 13/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class DanhSachQuanHuyenData {
+class DanhSachTinhTpDataResponse {
   String? deletedDate;
   int? areaID;
   int? total;
@@ -21,8 +21,9 @@ class DanhSachQuanHuyenData {
   String? updatedUser;
   bool? isActive;
   int? isOrder;
+  String search = "";
 
-  DanhSachQuanHuyenData(
+  DanhSachTinhTpDataResponse(
       {this.deletedDate,
       this.areaID,
       this.total,
@@ -38,7 +39,7 @@ class DanhSachQuanHuyenData {
       this.isActive,
       this.isOrder});
 
-  DanhSachQuanHuyenData.fromJson(Map<String, dynamic> json) {
+  DanhSachTinhTpDataResponse.fromJson(Map<String, dynamic> json) {
     deletedDate = json['deletedDate'];
     areaID = json['areaID'];
     total = json['total'];
@@ -53,6 +54,7 @@ class DanhSachQuanHuyenData {
     updatedUser = json['updatedUser'];
     isActive = json['isActive'];
     isOrder = json['isOrder'];
+    search = regionalName.getValueSearch();
   }
 
   Map<String, dynamic> toJson() {
@@ -72,5 +74,10 @@ class DanhSachQuanHuyenData {
     data['isActive'] = this.isActive;
     data['isOrder'] = this.isOrder;
     return data;
+  }
+
+  bool filter(String filter) {
+    return filter.isNullOrWhiteSpace() ||
+        search.contains(filter.getValueSearch());
   }
 }

@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../extension/string_extension.dart';
+import 'danh_sach_tinh_tp_data_response.dart';
+
 //
 // Created by BlackRose on 13/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class HomeJobUserListData {
+class DanhSachDoanhNghiepDataResponse {
   int? id;
   int? status;
   String? careerID;
-  bool? isInvite;
-  bool? userAdmin;
+  Null? isInvite;
+  Null? userAdmin;
   String? tinhTP;
   String? idSend;
   int? soLuongUngVien;
@@ -45,50 +48,51 @@ class HomeJobUserListData {
   String? approvalUser;
   String? approvalDate;
   int? portalId;
+  String search = "";
 
-  HomeJobUserListData(
+  DanhSachDoanhNghiepDataResponse(
       {this.id,
-        this.status,
-        this.careerID,
-        this.isInvite,
-        this.userAdmin,
-        this.tinhTP,
-        this.idSend,
-        this.soLuongUngVien,
-        this.soLuongTuyenDung,
-        this.tinhTrang,
-        this.soBan,
-        this.doanhNghiepID,
-        this.total,
-        this.scale,
-        this.businessID,
-        this.businessVn,
-        this.businessEn,
-        this.businessSort,
-        this.quanHuyen,
-        this.logo,
-        this.description,
-        this.taxCode,
-        this.mobile,
-        this.fax,
-        this.website,
-        this.email,
-        this.address,
-        this.contactUser,
-        this.contactMobile,
-        this.contactEmail,
-        this.createdDate,
-        this.createdUser,
-        this.updatedDate,
-        this.updatedUser,
-        this.isAdmin,
-        this.isActive,
-        this.isApproval,
-        this.approvalUser,
-        this.approvalDate,
-        this.portalId});
+      this.status,
+      this.careerID,
+      this.isInvite,
+      this.userAdmin,
+      this.tinhTP,
+      this.idSend,
+      this.soLuongUngVien,
+      this.soLuongTuyenDung,
+      this.tinhTrang,
+      this.soBan,
+      this.doanhNghiepID,
+      this.total,
+      this.scale,
+      this.businessID,
+      this.businessVn,
+      this.businessEn,
+      this.businessSort,
+      this.quanHuyen,
+      this.logo,
+      this.description,
+      this.taxCode,
+      this.mobile,
+      this.fax,
+      this.website,
+      this.email,
+      this.address,
+      this.contactUser,
+      this.contactMobile,
+      this.contactEmail,
+      this.createdDate,
+      this.createdUser,
+      this.updatedDate,
+      this.updatedUser,
+      this.isAdmin,
+      this.isActive,
+      this.isApproval,
+      this.approvalUser,
+      this.approvalDate,
+      this.portalId});
 
-  HomeJobUserListData.fromJson(Map<String, dynamic> json) {
+  DanhSachDoanhNghiepDataResponse.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     status = json['status'];
     careerID = json['career_ID'];
@@ -129,6 +133,8 @@ class HomeJobUserListData {
     approvalUser = json['approvalUser'];
     approvalDate = json['approvalDate'];
     portalId = json['portalId'];
+    businessVn = businessVn.supportHtml();
+    search = businessVn.getValueSearch();
   }
 
   Map<String, dynamic> toJson() {
@@ -174,5 +180,10 @@ class HomeJobUserListData {
     data['approvalDate'] = this.approvalDate;
     data['portalId'] = this.portalId;
     return data;
+  }
+
+  bool filter(String filter) {
+    return filter.isNullOrWhiteSpace() ||
+        search.contains(filter.getValueSearch());
   }
 }
