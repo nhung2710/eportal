@@ -1,10 +1,7 @@
-import 'dart:convert';
 
 import '../api/constant/application_api_constant.dart';
 import '../constant/application_constant.dart';
 import 'package:html/parser.dart' as htmlparser;
-import 'package:html/dom.dart' as dom;
-import 'dart:convert';
 import 'package:diacritic/diacritic.dart';
 
 extension StringNullExtension on String? {

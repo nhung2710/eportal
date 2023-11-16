@@ -1,38 +1,32 @@
-import 'package:eportal/bloc/common_new/home_works_list_bloc.dart';
-import 'package:eportal/event/common_new/home_works_list_event.dart';
-import 'package:eportal/extension/string_extension.dart';
-import 'package:eportal/model/api/request/common_new/data/common_new_data_request.dart';
-import 'package:eportal/model/api/request/common_new/home_works_list_request.dart';
-import 'package:eportal/model/api/response/common_new/home_works_list_response.dart';
-import 'package:eportal/screen/share/empty_example/page/empty_example_page.dart';
-import 'package:eportal/state/base/base_state.dart';
-import 'package:eportal/style/app_text_style.dart';
-import 'package:eportal/widget/base/base_page.dart';
-import 'package:eportal/widget/show_full_info/show_full_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../bloc/common_new/home_works_list_bloc.dart';
 import '../../../../constant/application_constant.dart';
-import '../../../../style/app_color.dart';
+import '../../../../event/common_new/home_works_list_event.dart';
+import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
+import '../../../../model/api/request/common_new/home_works_list_request.dart';
+import '../../../../model/api/response/common_new/home_works_list_response.dart';
+import '../../../../state/base/base_state.dart';
+import '../../../../widget/base/base_page.dart';
 import '../../../../widget/news/news_widget.dart';
-import '../../home_works_list/page/home_works_list_page.dart';
+import '../../empty_example/page/empty_example_page.dart';
 
 //
-// Created by BlackRose on 11/9/2023.
+// Created by BlackRose on 16/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class HomeWorksListPreview extends BasePage {
+class NewsRecruitment extends BasePage {
   int flag;
 
-  HomeWorksListPreview({super.key, required this.flag});
+  NewsRecruitment({super.key, required this.flag});
 
   @override
-  State<StatefulWidget> createState() => _HomeWorksListPreviewState();
+  State<StatefulWidget> createState() => _NewsRecruitmentState();
 }
 
-class _HomeWorksListPreviewState
-    extends BasePageStateActive<HomeWorksListPreview> {
+class _NewsRecruitmentState extends BasePageStateActive<NewsRecruitment> {
   HomeWorksListBloc homeWorksListCommonBloc = HomeWorksListBloc();
 
   @override
@@ -44,7 +38,7 @@ class _HomeWorksListPreviewState
         request: HomeWorksListRequest(
             obj: CommonNewDataRequest(
                 flag: widget.flag,
-                top: ApplicationConstant.NUMBER_PREVIEW_ITEM))));
+                top: ApplicationConstant.NUMBER_FULL_ITEM))));
     super.initDataLoading();
   }
 
@@ -75,11 +69,6 @@ class _HomeWorksListPreviewState
                                 )),
                             title: state.data?.elementAt(i).title,
                           )),
-                ),
-                ShowFullInfo(
-                  onTap: () => nextPage((context) => HomeWorksListPage(
-                        flag: widget.flag,
-                      )),
                 ),
               ],
             ),

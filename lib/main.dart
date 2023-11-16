@@ -1,9 +1,8 @@
-import 'package:eportal/constant/application_constant.dart';
-import 'package:eportal/extension/string_extension.dart';
-import 'package:eportal/screen/anonymous/home/home_page.dart';
-import 'package:eportal/screen/share/onboarding/page/onboarding_page.dart';
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_theme.dart';
+import 'constant/application_constant.dart';
+import 'extension/string_extension.dart';
+import 'screen/anonymous/home/home_page.dart';
+import 'screen/share/onboarding/page/onboarding_page.dart';
+import 'style/app_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -50,6 +49,7 @@ Future<void> main() async {
       .then((isFirstRunApp) => runApp(MyApp(isFirstRunApp: isFirstRunApp)));
 }
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   final PageStorageBucket _bucket = PageStorageBucket();
   bool isFirstRunApp;

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 import '../../model/api/request/common_new/home_slide_list_request.dart';
 import '../base/base_event.dart';

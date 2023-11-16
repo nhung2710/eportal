@@ -125,92 +125,64 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                       ),
                     ))),
             Container(
-              margin: const EdgeInsets.only(top: 5),
-              child: SizedBox(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      CustomButtonIcon(
-                        title: "Tin tức",
-                        iconData: Icons.newspaper,
-                        onTap: () =>
-                            nextPage((context) => const NewsSearchPage()),
-                      ),
-                      const VerticalDivider(
-                        width: 5,
-                      ),
-                      CustomButtonIcon(
-                        title: "Tuyển dụng",
-                        iconData: Icons.work,
-                        onTap: () =>
-                            nextPage((context) => const WorkSearchPage()),
-                      ),
-                      const VerticalDivider(
-                        width: 10,
-                      ),
-                      CustomButtonIcon(
-                        title: "Hồ sơ",
-                        iconData: Icons.people,
-                        onTap: () =>
-                            nextPage((context) => const JobUserSearchPage()),
-                      ),
-                      const VerticalDivider(
-                        width: 10,
-                      ),
-                      CustomButtonIcon(
-                        title: "Tìm việc",
-                        iconData: Icons.search,
-                      ),
-                      const VerticalDivider(
-                        width: 10,
-                      ),
-                      CustomButtonIcon(
-                        title: "Tìm việc",
-                        iconData: Icons.search,
-                      ),
-                      const VerticalDivider(
-                        width: 10,
-                      ),
-                      CustomButtonIcon(
-                        title: "Tìm việc",
-                        iconData: Icons.search,
-                      ),
-                      const VerticalDivider(
-                        width: 10,
-                      ),
-                      CustomButtonIcon(
-                        title: "Tìm việc",
-                        iconData: Icons.search,
-                      ),
-                      const VerticalDivider(
-                        width: 10,
-                      ),
-                      CustomButtonIcon(
-                        title: "Tìm việc",
-                        iconData: Icons.search,
-                      ),
-                      const VerticalDivider(
-                        width: 10,
-                      ),
-                      CustomButtonIcon(
-                        title: "Tìm việc",
-                        iconData: Icons.search,
-                      ),
-                      const VerticalDivider(
-                        width: 10,
-                      ),
-                      CustomButtonIcon(
-                        title: "Tìm việc",
-                        iconData: Icons.search,
-                      ),
-                    ],
+              margin: const EdgeInsets.only(top: 10),
+              child: GridView.count(
+                crossAxisCount: 4,
+                shrinkWrap: true,
+                crossAxisSpacing: 5,
+                childAspectRatio: 1,
+                mainAxisSpacing: 5,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  CustomButtonIcon(
+                    title: "Tin tức",
+                    iconData: Icons.newspaper,
+                    onTap: () => nextPage((context) => const NewsSearchPage()),
                   ),
-                ),
+                  CustomButtonIcon(
+                    title: "Tuyển dụng",
+                    iconData: Icons.work,
+                    onTap: () => nextPage((context) => const WorkSearchPage()),
+                  ),
+                  CustomButtonIcon(
+                    title: "Hồ sơ",
+                    iconData: Icons.people,
+                    onTap: () =>
+                        nextPage((context) => const JobUserSearchPage()),
+                  ),
+                  CustomButtonIcon(
+                    title: "Doanh nghiệp",
+                    iconData: Icons.business_sharp,
+                  ),
+                  CustomButtonIcon(
+                    title: "Tìm việc",
+                    iconData: Icons.search,
+                  ),
+                  CustomButtonIcon(
+                    title: "Tìm việc",
+                    iconData: Icons.search,
+                  ),
+                  CustomButtonIcon(
+                    title: "Tìm việc",
+                    iconData: Icons.search,
+                  ),
+                  CustomButtonIcon(
+                    title: "Tìm việc",
+                    iconData: Icons.search,
+                  ),
+                  CustomButtonIcon(
+                    title: "Tìm việc",
+                    iconData: Icons.search,
+                  ),
+                  CustomButtonIcon(
+                    title: "Tìm việc",
+                    iconData: Icons.search,
+                  ),
+                ],
               ),
             ),
             Container(
-                margin: const EdgeInsets.only(top: 5),
+                margin: const EdgeInsets.only(top: 10),
                 padding: const EdgeInsets.only(left: 5, top: 10, bottom: 10),
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -234,7 +206,7 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                     ConstrainedBox(
                       constraints: const BoxConstraints(
                         minHeight: 35.0,
-                        maxHeight: 200.0,
+                        maxHeight: 400.0,
                       ),
                       child: HomeNewsListPreview(
                         flag: 1,
@@ -287,7 +259,7 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                       ConstrainedBox(
                         constraints: const BoxConstraints(
                           minHeight: 35.0,
-                          maxHeight: 200.0,
+                          maxHeight: 400.0,
                         ),
                         child: TabBarView(
                           physics: const NeverScrollableScrollPhysics(),
@@ -326,7 +298,7 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                     ConstrainedBox(
                       constraints: const BoxConstraints(
                         minHeight: 35.0,
-                        maxHeight: 200.0,
+                        maxHeight: 400.0,
                       ),
                       child: const HomeBusinessListPreview(),
                     )
@@ -357,7 +329,7 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                     ConstrainedBox(
                       constraints: const BoxConstraints(
                         minHeight: 35.0,
-                        maxHeight: 200.0,
+                        maxHeight: 400.0,
                       ),
                       child: const HomeJobUserListPreview(),
                     )

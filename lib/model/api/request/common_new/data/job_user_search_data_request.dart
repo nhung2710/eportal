@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 import 'news_search_data_request.dart';
 

@@ -20,7 +20,7 @@ class HomeBusinessListBloc extends Bloc<BaseEvent, BaseState> {
         final response =
         await apiRepository.getHomeBusinessList(event.request);
 
-        if ((response.status??0) != 2) {
+        if ((response.status) != 2) {
           emit(BaseError(response.message));
         }
         else {

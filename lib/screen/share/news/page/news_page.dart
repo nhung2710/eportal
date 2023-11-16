@@ -1,47 +1,34 @@
-import '../../../../bloc/common_new/home_news_list_bloc.dart';
-import '../../../../bloc/common_new/home_works_list_bloc.dart';
-import '../../../../constant/application_constant.dart';
-import '../../../../event/common_new/home_news_list_event.dart';
-import '../../../../event/common_new/home_works_list_event.dart';
-import '../../../../extension/string_extension.dart';
-import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
-import '../../../../model/api/request/common_new/home_news_list_request.dart';
-import '../../../../model/api/request/common_new/home_works_list_request.dart';
-import '../../../../model/api/response/common_new/home_news_list_response.dart';
-import '../../../../model/api/response/common_new/home_works_list_response.dart';
-import '../../../../style/app_color.dart';
-import '../../../../widget/image/image_loading.dart';
-import '../../../../widget/news/news_widget.dart';
-import '../../empty_example/page/empty_example_page.dart';
-import '../../../../state/base/base_state.dart';
-import '../../../../style/app_text_style.dart';
-import '../../../../widget/base/base_page.dart';
-import '../../../../widget/show_full_info/show_full_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../bloc/common_new/home_news_list_bloc.dart';
+import '../../../../constant/application_constant.dart';
+import '../../../../event/common_new/home_news_list_event.dart';
+import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
+import '../../../../model/api/request/common_new/home_news_list_request.dart';
+import '../../../../model/api/response/common_new/home_news_list_response.dart';
+import '../../../../state/base/base_state.dart';
+import '../../../../widget/base/base_page.dart';
+import '../../../../widget/news/news_widget.dart';
+import '../../empty_example/page/empty_example_page.dart';
 import '../../home_news_list/page/home_news_list_page.dart';
 
 //
-// Created by BlackRose on 11/9/2023.
+// Created by BlackRose on 16/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class HomeNewsListPreview extends BasePage {
+class NewsPage extends BasePage {
   int flag;
 
-  HomeNewsListPreview({super.key, required this.flag});
+  NewsPage({super.key, required this.flag});
 
   @override
-  State<StatefulWidget> createState() => _HomeNewsListPreviewState();
+  State<StatefulWidget> createState() => _NewsPageState();
 }
 
-class _HomeNewsListPreviewState
-    extends BasePageStateActive<HomeNewsListPreview> {
+class _NewsPageState extends BasePageState<NewsPage> {
   HomeNewsListBloc homeNewsListBloc = HomeNewsListBloc();
-
-  @override
-  bool isHasAppBar(BuildContext context) => false;
 
   @override
   void initDataLoading() {
@@ -52,12 +39,6 @@ class _HomeNewsListPreviewState
                 top: ApplicationConstant.NUMBER_PREVIEW_ITEM))));
     super.initDataLoading();
   }
-
-  @override
-  Color currentBackgroundColor(BuildContext context) => Colors.transparent;
-
-  @override
-  double currentPadding(BuildContext context) => 0;
 
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
@@ -83,13 +64,15 @@ class _HomeNewsListPreviewState
                             content: state.data?.elementAt(i).content,
                           )),
                 ),
-                ShowFullInfo(
-                  onTap: () => nextPage(
-                      (context) => HomeNewsListPage(flag: widget.flag)),
-                ),
               ],
             ),
           ),
         ),
       ));
+
+  @override
+  getBottomNavigationBar(BuildContext context) => null;
+
+  @override
+  String getPageTitle(BuildContext context) => "Tin tức";
 }

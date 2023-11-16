@@ -23,6 +23,7 @@ import '../../../../model/api/request/common_new/home_job_user_list_request.dart
 import '../../../../model/api/response/common_new/home_business_list_response.dart';
 import '../../../../model/api/response/common_new/home_job_user_list_response.dart';
 import '../../../../widget/image/image_loading.dart';
+import '../../../../widget/news/news_widget.dart';
 
 //
 // Created by BlackRose on 13/11/2023.
@@ -72,48 +73,13 @@ class _HomeJobUserListPreviewState
                   child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: state.data?.length ?? 0,
-                      itemBuilder: (context, i) => GestureDetector(
+                      itemBuilder: (context, i) => NewsWidget(
                             onTap: () => nextPage((context) => EmptyExamplePage(
                                   isHasAppBar: true,
                                 )),
-                            child: Container(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                      flex: 1,
-                                      child: ImageLoading(
-                                        imageUrl: state.data!
-                                            .elementAt(i)
-                                            .logo
-                                            .getImageUrl(),
-                                        imageBuilder: (BuildContext context,
-                                            ImageProvider<Object>
-                                                imageProvider) {
-                                          return ClipRRect(
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(5.0)),
-                                            child: Image(
-                                              image: imageProvider,
-                                              fit: BoxFit.fill,
-                                            ),
-                                          );
-                                        },
-                                      )),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    flex: 4,
-                                    child: Text(
-                                      (state.data?.elementAt(i).businessVn)
-                                          .supportHtml(),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            title: state.data?.elementAt(i).businessVn,
+                            imageUrl: state.data?.elementAt(i).logo,
+                            content: state.data?.elementAt(i).tinhTP,
                           )),
                 ),
                 ShowFullInfo(

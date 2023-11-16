@@ -20,6 +20,7 @@ import '../../../../model/api/request/common_new/home_document_list_request.dart
 import '../../../../model/api/response/common_new/home_document_list_response.dart';
 import '../../../../style/app_color.dart';
 import '../../../../widget/image/image_loading.dart';
+import '../../../../widget/news/news_widget.dart';
 import '../../home_document_list/page/home_document_list_page.dart';
 
 //
@@ -70,64 +71,13 @@ class _HomeDocumentListPreviewState
                   child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: state.data?.length ?? 0,
-                      itemBuilder: (context, i) => GestureDetector(
+                      itemBuilder: (context, i) => NewsWidget(
                             onTap: () => nextPage((context) => EmptyExamplePage(
                                   isHasAppBar: true,
                                 )),
-                            child: Container(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                      flex: 1,
-                                      child: ImageLoading(
-                                        imageUrl: state.data!
-                                            .elementAt(i)
-                                            .fileSource
-                                            .getImageUrl(),
-                                        imageBuilder: (BuildContext context,
-                                            ImageProvider<Object>
-                                                imageProvider) {
-                                          return ClipRRect(
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(5.0)),
-                                            child: Image(
-                                              image: imageProvider,
-                                              fit: BoxFit.fill,
-                                            ),
-                                          );
-                                        },
-                                      )),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    flex: 4,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          (state.data
-                                                  ?.elementAt(i)
-                                                  .documentName)
-                                              .supportHtml(),
-                                          style: AppTextStyle.titlePage,
-                                          maxLines: 2,
-                                        ),
-                                        Text(
-                                          (state.data?.elementAt(i).contents)
-                                              .supportHtml(),
-                                          maxLines: 1,
-                                          style: AppTextStyle.titleHintPage,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            title: state.data?.elementAt(i).documentName,
+                            imageUrl: state.data?.elementAt(i).fileSource,
+                            content: state.data?.elementAt(i).contents,
                           )),
                 ),
                 ShowFullInfo(

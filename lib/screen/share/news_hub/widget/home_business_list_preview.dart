@@ -19,6 +19,7 @@ import '../../../../event/common_new/home_business_list_event.dart';
 import '../../../../model/api/request/common_new/home_business_list_request.dart';
 import '../../../../model/api/response/common_new/home_business_list_response.dart';
 import '../../../../widget/image/image_loading.dart';
+import '../../../../widget/news/news_widget.dart';
 import '../../home_business_list/page/home_business_list_page.dart';
 
 //
@@ -69,50 +70,13 @@ class _HomeBusinessListPreviewState
                   child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: state.data?.length ?? 0,
-                      itemBuilder: (context, i) => GestureDetector(
+                      itemBuilder: (context, i) => NewsWidget(
                             onTap: () => nextPage((context) => EmptyExamplePage(
                                   isHasAppBar: true,
                                 )),
-                            child: Container(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                      flex: 1,
-                                      child: ImageLoading(
-                                        imageUrl: state.data!
-                                            .elementAt(i)
-                                            .logo
-                                            .getImageUrl(),
-                                        imageBuilder: (BuildContext context,
-                                            ImageProvider<Object>
-                                                imageProvider) {
-                                          return ClipRRect(
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(5.0)),
-                                            child: Image(
-                                              image: imageProvider,
-                                              fit: BoxFit.fill,
-                                            ),
-                                          );
-                                        },
-                                      )),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    flex: 4,
-                                    child: Text(
-                                      (state.data?.elementAt(i).businessVn)
-                                          .supportHtml(),
-                                      style: AppTextStyle.titlePage,
-                                      maxLines: 2,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            title: state.data?.elementAt(i).businessVn,
+                            imageUrl: state.data?.elementAt(i).logo,
+                            content: state.data?.elementAt(i).email,
                           )),
                 ),
                 ShowFullInfo(

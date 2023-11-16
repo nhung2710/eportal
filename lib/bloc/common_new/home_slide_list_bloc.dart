@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 
 import '../../event/base/base_event.dart';
 import '../../event/common_new/home_slide_list_event.dart';

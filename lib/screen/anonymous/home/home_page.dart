@@ -7,6 +7,7 @@ import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../../style/app_color.dart';
+import '../../share/home_manage/page/home_manage_page.dart';
 
 //
 // Created by BlackRose on 11/7/2023.
@@ -109,7 +110,7 @@ class _HomePageState extends BasePageStateActive<HomePage> {
           });
         },
         children: const <Widget>[
-          NewsHubPage(),
+          HomeManagePage(),
           AnswerAndQuestionPage(),
           MultimediaPage(),
           SettingPage(),

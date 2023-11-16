@@ -1,5 +1,4 @@
 import 'search_request_data.dart';
-import 'package:flutter/material.dart';
 
 import '../../../../../constant/application_constant.dart';
 import '../../../../base/base_eportal_xml.dart';

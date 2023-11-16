@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../extension/string_extension.dart';
+
 //
 // Created by BlackRose on 13/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -129,6 +131,7 @@ class HomeBusinessListDataResponse {
     approvalUser = json['approvalUser'];
     approvalDate = json['approvalDate'];
     portalId = json['portalId'];
+    businessVn = businessVn.supportHtml();
   }
 
   Map<String, dynamic> toJson() {
