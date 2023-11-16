@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../../../../extension/input_decoration_extension.dart';
 import '../../../../widget/base/base_page.dart';
 
 //
@@ -47,14 +48,12 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
               textInputAction: TextInputAction.next,
               validator: (text) {
                 if (text == null || text.isEmpty) {
-                  return 'Tên đầy đủ không được để trống';
+                  return 'Họ và tên không được để trống';
                 }
                 return null;
               },
-              decoration: const InputDecoration(
-                labelText: 'Tên đầy đủ',
-                counterText: "",
-              ),
+              decoration: const InputDecoration().defaultInputDecoration(
+                  hintText: 'Họ và tên', iconData: Icons.account_box),
             ),
           ),
           Container(
@@ -81,10 +80,8 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
                       DateFormat('dd/MM/yyyy').format(pickerDate);
                 }
               },
-              decoration: const InputDecoration(
-                labelText: 'Ngày tháng năm sinh',
-                counterText: "",
-              ),
+              decoration: const InputDecoration().defaultInputDecoration(
+                  hintText: 'Năm sinh', iconData: Icons.date_range),
             ),
           ),
           Container(
@@ -99,10 +96,8 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
                 }
                 return null;
               },
-              decoration: const InputDecoration(
-                labelText: 'Địa chỉ thư điện tử',
-                counterText: "",
-              ),
+              decoration: const InputDecoration().defaultInputDecoration(
+                  hintText: 'Địa chỉ thư điện tử', iconData: Icons.email),
             ),
           ),
           Container(
@@ -114,14 +109,12 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
               textInputAction: TextInputAction.next,
               validator: (text) {
                 if (text == null || text.isEmpty) {
-                  return 'Số điện thoại không được để trống';
+                  return 'Điện thoại không được để trống';
                 }
                 return null;
               },
-              decoration: const InputDecoration(
-                labelText: 'Số điện thoại',
-                counterText: "",
-              ),
+              decoration: const InputDecoration().defaultInputDecoration(
+                  hintText: 'Điện thoại', iconData: Icons.phone),
             ),
           ),
           Container(
@@ -137,10 +130,8 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
                 return null;
               },
               onFieldSubmitted: (value) => _changeUserInfo(context),
-              decoration: const InputDecoration(
-                labelText: 'Địa chỉ',
-                counterText: "",
-              ),
+              decoration: const InputDecoration().defaultInputDecoration(
+                  hintText: 'Địa chỉ', iconData: Icons.home),
             ),
           ),
           Container(

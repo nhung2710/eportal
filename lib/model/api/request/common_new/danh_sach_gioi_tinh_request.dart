@@ -6,6 +6,9 @@ class DanhSachGioiTinhRequest extends BaseEportalRequest<CommonNewDataRequest> {
   DanhSachGioiTinhRequest({required super.obj});
 
   @override
+  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_DEFAULT;
+
+  @override
   String getQuery() =>
       ApplicationApiConstant.API_COMMON_NEW_OP_DANH_SACH_GIOI_TINH;
 }

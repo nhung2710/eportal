@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../extension/input_decoration_extension.dart';
 import '../../../../widget/base/base_page.dart';
 
 //
@@ -50,10 +51,8 @@ class _ChangePasswordPageState extends BasePageState<ChangePasswordPage> {
                 }
                 return null;
               },
-              decoration: const InputDecoration(
-                labelText: 'Mật khẩu cũ',
-                counterText: "",
-              ),
+              decoration: const InputDecoration().defaultInputDecoration(
+                  hintText: 'Mật khẩu cũ', iconData: Icons.password),
             ),
           ),
           Container(
@@ -69,10 +68,8 @@ class _ChangePasswordPageState extends BasePageState<ChangePasswordPage> {
                 }
                 return null;
               },
-              decoration: const InputDecoration(
-                labelText: 'Mật khẩu',
-                counterText: "",
-              ),
+              decoration: const InputDecoration().defaultInputDecoration(
+                  hintText: 'Mật khẩu mới', iconData: Icons.password),
             ),
           ),
           Container(
@@ -89,10 +86,8 @@ class _ChangePasswordPageState extends BasePageState<ChangePasswordPage> {
                 return null;
               },
               onFieldSubmitted: (value) => _changePassword(context),
-              decoration: const InputDecoration(
-                labelText: 'Mật khẩu xác nhận',
-                counterText: "",
-              ),
+              decoration: const InputDecoration().defaultInputDecoration(
+                  hintText: 'Mật khẩu xác nhận', iconData: Icons.password),
             ),
           ),
           Container(

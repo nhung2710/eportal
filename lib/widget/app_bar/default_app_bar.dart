@@ -39,7 +39,8 @@ class DefaultAppBar {
                       style: AppTextStyle.titlePage),
                   Text(
                     GlobalApplication().HelloMessage(),
-                    style: AppTextStyle.titleHintPage,
+                    style: AppTextStyle.normal
+                        .copyWith(color: AppColor.colorOfHintText),
                   ),
                 ],
               ),

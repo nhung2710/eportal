@@ -76,57 +76,70 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
             color: Colors.white,
             child: TextFormField(
               controller: textEditingController,
-              maxLength: 50,
+              maxLength: 100,
               textInputAction: TextInputAction.send,
-              validator: (text) {
-                return null;
-              },
               onFieldSubmitted: (value) => _findNews(context),
               decoration: InputDecoration(
-                border: const OutlineInputBorder(),
+                isDense: true,
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(5.0),
+                  ),
+                ),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                 suffixIcon: IconButton(
                   icon: const Icon(
                     Icons.send,
                     color: Colors.blue,
+                    size: 20,
                   ),
+                  padding: EdgeInsets.zero,
                   onPressed: () {
                     _findNews(context);
                   },
                 ),
-                labelText: 'Tìm kiếm',
                 hintText: 'Tìm kiếm',
                 counterText: "",
               ),
+              style: AppTextStyle.normal,
             ),
           ),
           Expanded(
-            child: SingleChildScrollView(
-              child: BlocProvider(
-                  create: (_) => newsSearchBloc,
-                  child: BlocListener<NewsSearchBloc, BaseState>(
-                    listener: (BuildContext context, BaseState state) {},
-                    child: BlocBuilder<NewsSearchBloc, BaseState>(
-                      builder: (BuildContext context, BaseState state) =>
-                          handlerBaseState<NewsSearchResponse>(
-                        state,
-                        (context, state) => Column(
-                          children: [
-                            ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: state.data?.length ?? 0,
-                                itemBuilder: (context, i) => NewsWidget(
-                                      title: state.data?.elementAt(i).title,
-                                      imageUrl:
-                                          state.data?.elementAt(i).imagePath,
-                                      content: state.data?.elementAt(i).summary,
-                                    )),
-                          ],
-                        ),
-                      ),
+            child: BlocProvider(
+                create: (_) => newsSearchBloc,
+                child: BlocListener<NewsSearchBloc, BaseState>(
+                  listener: (BuildContext context, BaseState state) {},
+                  child: BlocBuilder<NewsSearchBloc, BaseState>(
+                    builder: (BuildContext context, BaseState state) =>
+                        handlerBaseState<NewsSearchResponse>(
+                      state,
+                      (context, state) => (state.data?.length ?? 0) == 0
+                          ? buildNotFoundData(context)
+                          : SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  ListView.builder(
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemCount: state.data!.length,
+                                      itemBuilder: (context, i) => NewsWidget(
+                                            title:
+                                                state.data?.elementAt(i).title,
+                                            imageUrl: state.data
+                                                ?.elementAt(i)
+                                                .imagePath,
+                                            content: state.data
+                                                ?.elementAt(i)
+                                                .summary,
+                                          )),
+                                ],
+                              ),
+                            ),
                     ),
-                  )),
-            ),
+                  ),
+                )),
           ),
         ],
       );
@@ -135,7 +148,7 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
   getBottomNavigationBar(BuildContext context) => null;
 
   @override
-  String getPageTitle(BuildContext context) => "Tin tức";
+  String getPageTitle(BuildContext context) => "Tìm kiếm";
 
   void _findNews(BuildContext context) {
     if (isValid()) {

@@ -6,6 +6,9 @@ class HomeJobUserListRequest extends BaseEportalRequest<CommonNewDataRequest> {
   HomeJobUserListRequest({required super.obj});
 
   @override
+  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_MEDIUM_DEFAULT;
+
+  @override
   String getQuery() =>
       ApplicationApiConstant.API_COMMON_NEW_OP_HOME_JOB_USER_LIST;
 }

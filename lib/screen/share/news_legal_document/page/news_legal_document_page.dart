@@ -45,17 +45,19 @@ class _NewsLegalDocumentPageState extends BasePageState<NewsLegalDocumentPage> {
           builder: (BuildContext context, BaseState state) =>
               handlerBaseState<HomeDocumentListResponse>(
             state,
-            (context, state) => ListView.builder(
-                shrinkWrap: true,
-                itemCount: state.data?.length ?? 0,
-                itemBuilder: (context, i) => NewsWidget(
-                      onTap: () => nextPage((context) => EmptyExamplePage(
-                            isHasAppBar: true,
-                          )),
-                      title: state.data?.elementAt(i).documentName,
-                      imageUrl: state.data?.elementAt(i).fileSource,
-                      content: state.data?.elementAt(i).contents,
-                    )),
+            (context, state) => (state.data?.length ?? 0) == 0
+                ? buildNotFoundData(context)
+                : ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: state.data!.length,
+                    itemBuilder: (context, i) => NewsWidget(
+                          onTap: () => nextPage((context) => EmptyExamplePage(
+                                isHasAppBar: true,
+                              )),
+                          title: state.data!.elementAt(i).documentName,
+                          imageUrl: state.data!.elementAt(i).fileSource,
+                          content: state.data!.elementAt(i).contents,
+                        )),
           ),
         ),
       ));

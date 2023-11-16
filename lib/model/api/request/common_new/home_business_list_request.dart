@@ -6,6 +6,9 @@ class HomeBusinessListRequest extends BaseEportalRequest<CommonNewDataRequest> {
   HomeBusinessListRequest({required super.obj});
 
   @override
+  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_MEDIUM_DEFAULT;
+
+  @override
   String getQuery() =>
       ApplicationApiConstant.API_COMMON_NEW_OP_HOME_BUSINESS_LIST;
 }

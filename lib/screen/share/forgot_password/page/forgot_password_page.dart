@@ -4,6 +4,9 @@ import 'package:eportal/screen/share/sign_up/page/sign_up_page.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../extension/input_decoration_extension.dart';
+import '../../../../style/app_color.dart';
+
 //
 // Created by BlackRose on 11/7/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -50,10 +53,8 @@ class _ForgotPasswordPageState extends BasePageState<ForgotPasswordPage> {
                 return null;
               },
               onFieldSubmitted: (value) => _signUp(context),
-              decoration: const InputDecoration(
-                labelText: 'Tài khoản',
-                counterText: "",
-              ),
+              decoration: const InputDecoration().defaultInputDecoration(
+                  hintText: 'Tài khoản', iconData: Icons.account_circle),
             ),
           ),
           Container(
@@ -62,20 +63,9 @@ class _ForgotPasswordPageState extends BasePageState<ForgotPasswordPage> {
               controller: emailController,
               maxLength: 50,
               textInputAction: TextInputAction.done,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Địa chỉ thư điện tử không được để trống';
-                }
-                if (!text.isValid(ApplicationRegexConstant.EMAIL)) {
-                  return 'Địa chỉ thư điện tử không hợp lệ';
-                }
-                return null;
-              },
               onFieldSubmitted: (value) => _signUp(context),
-              decoration: const InputDecoration(
-                labelText: 'Địa chỉ thư điện tử',
-                counterText: "",
-              ),
+              decoration: const InputDecoration().defaultInputDecoration(
+                  hintText: 'Địa chỉ thư điện tử', iconData: Icons.email),
             ),
           ),
           Container(

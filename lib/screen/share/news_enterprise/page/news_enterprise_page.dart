@@ -45,17 +45,19 @@ class _NewsEnterprisePageState extends BasePageState<NewsEnterprisePage> {
           builder: (BuildContext context, BaseState state) =>
               handlerBaseState<HomeBusinessListResponse>(
             state,
-            (context, state) => ListView.builder(
-                shrinkWrap: true,
-                itemCount: state.data?.length ?? 0,
-                itemBuilder: (context, i) => NewsWidget(
-                      onTap: () => nextPage((context) => EmptyExamplePage(
-                            isHasAppBar: true,
-                          )),
-                      title: state.data?.elementAt(i).businessVn,
-                      imageUrl: state.data?.elementAt(i).logo,
-                      content: state.data?.elementAt(i).email,
-                    )),
+            (context, state) => (state.data?.length ?? 0) == 0
+                ? buildNotFoundData(context)
+                : ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: state.data!.length,
+                    itemBuilder: (context, i) => NewsWidget(
+                          onTap: () => nextPage((context) => EmptyExamplePage(
+                                isHasAppBar: true,
+                              )),
+                          title: state.data!.elementAt(i).businessVn,
+                          imageUrl: state.data!.elementAt(i).logo,
+                          content: state.data!.elementAt(i).email,
+                        )),
           ),
         ),
       ));

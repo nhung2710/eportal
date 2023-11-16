@@ -10,6 +10,7 @@ import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../extension/input_decoration_extension.dart';
 import '../../../anonymous/home/home_page.dart' as anonymous;
 
 //
@@ -66,10 +67,8 @@ class _SignInPageState extends BasePageState<SignInPage> {
               }
               return null;
             },
-            decoration: const InputDecoration(
-              labelText: 'Tài khoản',
-              counterText: "",
-            ),
+            decoration: const InputDecoration().defaultInputDecoration(
+                hintText: "Tài khoản", iconData: Icons.account_circle),
           ),
         ),
         Container(
@@ -86,10 +85,8 @@ class _SignInPageState extends BasePageState<SignInPage> {
               return null;
             },
             onFieldSubmitted: (value) => _signIn(context),
-            decoration: const InputDecoration(
-              labelText: 'Mật khẩu',
-              counterText: "",
-            ),
+            decoration: const InputDecoration().defaultInputDecoration(
+                hintText: "Mật khẩu", iconData: Icons.password),
           ),
         ),
         Container(

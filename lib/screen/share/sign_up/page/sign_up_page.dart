@@ -4,6 +4,9 @@ import 'package:eportal/screen/share/sign_in/page/sign_in_page.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../extension/input_decoration_extension.dart';
+import '../../../../style/app_color.dart';
+
 //
 // Created by BlackRose on 11/7/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -53,10 +56,8 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
                 }
                 return null;
               },
-              decoration: const InputDecoration(
-                labelText: 'Họ và tên',
-                counterText: "",
-              ),
+              decoration: const InputDecoration().defaultInputDecoration(
+                  hintText: "Họ và tên", iconData: Icons.account_box),
             ),
           ),
           Container(
@@ -71,10 +72,8 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
                 }
                 return null;
               },
-              decoration: const InputDecoration(
-                labelText: 'Địa chỉ thư điện tử',
-                counterText: "",
-              ),
+              decoration: const InputDecoration().defaultInputDecoration(
+                  hintText: "Địa chỉ thư điện tử", iconData: Icons.email),
             ),
           ),
           Container(
@@ -89,10 +88,8 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
                 }
                 return null;
               },
-              decoration: const InputDecoration(
-                labelText: 'Số điện thoại',
-                counterText: "",
-              ),
+              decoration: const InputDecoration().defaultInputDecoration(
+                  hintText: "Số điện thoại", iconData: Icons.phone),
             ),
           ),
           Container(
@@ -107,10 +104,8 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
                 }
                 return null;
               },
-              decoration: const InputDecoration(
-                labelText: 'Tài khoản',
-                counterText: "",
-              ),
+              decoration: const InputDecoration().defaultInputDecoration(
+                  hintText: "Tài khoản", iconData: Icons.account_circle),
             ),
           ),
           Container(
@@ -127,10 +122,8 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
                 return null;
               },
               onFieldSubmitted: (value) => _registerAccount(context),
-              decoration: const InputDecoration(
-                labelText: 'Mật khẩu',
-                counterText: "",
-              ),
+              decoration: const InputDecoration().defaultInputDecoration(
+                  hintText: "Mật khẩu", iconData: Icons.password),
             ),
           ),
           Container(

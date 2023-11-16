@@ -6,6 +6,9 @@ class NewsDetailRequest extends BaseEportalRequest<CommonNewDataRequest> {
   NewsDetailRequest({required super.obj});
 
   @override
+  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_MEDIUM_DEFAULT;
+
+  @override
   String getQuery() =>
       ApplicationApiConstant.API_COMMON_NEW_OP_DANH_SACH_GIOI_TINH;
 }

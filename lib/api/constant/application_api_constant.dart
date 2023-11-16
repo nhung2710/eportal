@@ -8,7 +8,10 @@ class ApplicationApiConstant {
   static const API_COMMON_NEW = '$BASE_API_APP_URI/commonnew.asmx';
   static const API_COMMON_NEW_OP = '$API_COMMON_NEW?op=';
 
-  static const TIME_CACHE_DEFAULT = 60 * 60 * 6;
+  static const TIME_CACHE_LOW_DEFAULT = 60 * 5;
+  static const TIME_CACHE_MEDIUM_DEFAULT = TIME_CACHE_LOW_DEFAULT * 6;
+  static const TIME_CACHE_HIGH_DEFAULT = TIME_CACHE_MEDIUM_DEFAULT * 2;
+  static const TIME_CACHE_DEFAULT = TIME_CACHE_HIGH_DEFAULT * 6;
 
   static const API_RESULT = 'Result';
 

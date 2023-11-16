@@ -57,21 +57,24 @@ class _NewsRecruitmentState extends BasePageStateActive<NewsRecruitment> {
           builder: (BuildContext context, BaseState state) =>
               handlerBaseState<HomeWorksListResponse>(
             state,
-            (context, state) => Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: state.data?.length ?? 0,
-                      itemBuilder: (context, i) => NewsWidget(
-                            onTap: () => nextPage((context) => EmptyExamplePage(
-                                  isHasAppBar: true,
+            (context, state) => (state.data?.length ?? 0) == 0
+                ? buildNotFoundData(context)
+                : Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: state.data!.length,
+                            itemBuilder: (context, i) => NewsWidget(
+                                  onTap: () =>
+                                      nextPage((context) => EmptyExamplePage(
+                                            isHasAppBar: true,
+                                          )),
+                                  title: state.data!.elementAt(i).title,
                                 )),
-                            title: state.data?.elementAt(i).title,
-                          )),
-                ),
-              ],
-            ),
+                      ),
+                    ],
+                  ),
           ),
         ),
       ));

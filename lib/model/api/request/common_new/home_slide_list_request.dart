@@ -6,5 +6,8 @@ class HomeSlideListRequest extends BaseEportalRequest<CommonNewDataRequest> {
   HomeSlideListRequest({required super.obj});
 
   @override
+  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_HIGH_DEFAULT;
+
+  @override
   String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_HOME_SLIDE_LIST;
 }

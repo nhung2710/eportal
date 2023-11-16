@@ -134,7 +134,6 @@ class BaseAdapterApi {
         uri,
         headers: {
           "Content-Type": contentType,
-          "Content-Length": request.length.toString(),
         },
         body: request,
       ).timeout(const Duration(seconds: 60));

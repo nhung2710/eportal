@@ -80,7 +80,6 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-                margin: const EdgeInsets.only(top: 5),
                 child: BlocProvider(
                     create: (_) => homeSlideListBloc,
                     child: BlocListener<HomeSlideListBloc, BaseState>(
@@ -101,9 +100,9 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                               autoPlayInterval: const Duration(seconds: 10),
                               autoPlayAnimationDuration:
                                   const Duration(seconds: 5),
-                              autoPlayCurve: Curves.fastOutSlowIn,
+                              autoPlayCurve: Curves.fastEaseInToSlowEaseOut,
                               enlargeCenterPage: true,
-                              enlargeFactor: 0.1,
+                              enlargeFactor: 0.2,
                               enlargeStrategy: CenterPageEnlargeStrategy.zoom,
                               scrollDirection: Axis.horizontal,
                             ),
@@ -112,6 +111,7 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                                 builder: (BuildContext context) {
                                   return Card(
                                     elevation: 3,
+                                    margin: EdgeInsets.zero,
                                     color: AppColor.colorOfApp,
                                     shadowColor: AppColor.colorOfDrawer,
                                     borderOnForeground: false,

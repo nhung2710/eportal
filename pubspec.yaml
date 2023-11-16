@@ -98,6 +98,7 @@ flutter:
     - assets/images/Logo.jpg
     - assets/images/404.png
     - assets/images/ErrorImage.png
+    - assets/images/NotFoundData.jpg
     - assets/images/introduction_1.jpg
     - assets/images/introduction_2.jpg
     - assets/images/introduction_3.jpg

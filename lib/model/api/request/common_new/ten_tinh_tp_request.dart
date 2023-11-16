@@ -6,5 +6,8 @@ class TenTinhTpRequest extends BaseEportalRequest<CommonNewDataRequest> {
   TenTinhTpRequest({required super.obj});
 
   @override
+  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_DEFAULT;
+
+  @override
   String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_TEN_TINH_TP;
 }

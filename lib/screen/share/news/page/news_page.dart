@@ -9,9 +9,12 @@ import '../../../../model/api/request/common_new/home_news_list_request.dart';
 import '../../../../model/api/response/common_new/home_news_list_response.dart';
 import '../../../../state/base/base_state.dart';
 import '../../../../widget/base/base_page.dart';
+import '../../../../widget/expandable_fab/expandable_fab.dart';
 import '../../../../widget/news/news_widget.dart';
+import '../../chat_bot/page/chat_bot_page.dart';
 import '../../empty_example/page/empty_example_page.dart';
 import '../../home_news_list/page/home_news_list_page.dart';
+import '../../news_search/page/news_search_page.dart';
 
 //
 // Created by BlackRose on 16/11/2023.
@@ -39,6 +42,19 @@ class _NewsPageState extends BasePageState<NewsPage> {
                 top: ApplicationConstant.NUMBER_PREVIEW_ITEM))));
     super.initDataLoading();
   }
+
+  @override
+  Widget? getFloatingActionButton(BuildContext context) => ExpandableFab(
+        children: [
+          ActionButton(
+            icon: const Icon(
+              Icons.search,
+              color: Colors.white,
+            ),
+            onPressed: () => nextPage((context) => const NewsSearchPage()),
+          ),
+        ],
+      );
 
   @override
   Widget pageUI(BuildContext context) => BlocProvider(

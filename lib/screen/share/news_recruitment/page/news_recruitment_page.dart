@@ -1,3 +1,4 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -6,15 +7,23 @@ import '../../../../constant/application_constant.dart';
 import '../../../../event/common_new/home_news_list_event.dart';
 import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
 import '../../../../model/api/request/common_new/home_news_list_request.dart';
+import '../../../../model/api/response/common_new/data/danh_sach_doanh_nghiep_data_response.dart';
+import '../../../../model/api/response/common_new/data/danh_sach_kinh_nghiem_data_response.dart';
+import '../../../../model/api/response/common_new/data/danh_sach_muc_luong_data_response.dart';
+import '../../../../model/api/response/common_new/data/danh_sach_quan_huyen_data_response.dart';
+import '../../../../model/api/response/common_new/data/danh_sach_tinh_tp_data_response.dart';
 import '../../../../model/api/response/common_new/home_news_list_response.dart';
 import '../../../../state/base/base_state.dart';
 import '../../../../style/app_color.dart';
 import '../../../../style/app_text_style.dart';
 import '../../../../widget/base/base_page.dart';
+import '../../../../widget/drawer/filter_drawer.dart';
+import '../../../../widget/expandable_fab/expandable_fab.dart';
 import '../../../../widget/news/news_widget.dart';
 import '../../empty_example/page/empty_example_page.dart';
 import '../../home_news_list/page/home_news_list_page.dart';
 import '../../news_hub/widget/home_works_list_preview.dart';
+import '../../work_search/page/work_search_page.dart';
 import '../widget/news_recruitment.dart';
 
 //
@@ -85,8 +94,24 @@ class _NewsRecruitmentPageState extends BasePageState<NewsRecruitmentPage> {
       );
 
   @override
+  Widget? getFloatingActionButton(BuildContext context) =>
+      ExpandableFab(
+        children: [
+          ActionButton(
+            icon: const Icon(
+              Icons.search,
+              color: Colors.white,
+            ),
+            onPressed: () => nextPage((context) => const WorkSearchPage()),
+          ),
+        ],
+      );
+
+  @override
   getBottomNavigationBar(BuildContext context) => null;
 
   @override
   String getPageTitle(BuildContext context) => "Tuyển dụng";
+
+
 }

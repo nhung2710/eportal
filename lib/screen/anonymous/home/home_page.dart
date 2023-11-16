@@ -41,18 +41,18 @@ class _HomePageState extends BasePageStateActive<HomePage> {
   Widget? getBottomNavigationBar(BuildContext context) => BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
-        backgroundColor: Colors.white,
+        backgroundColor: AppColor.colorOfApp,
         type: BottomNavigationBarType.fixed,
         iconSize: 24,
         fixedColor: AppColor.colorOfIcon,
-        unselectedItemColor: AppColor.colorOfText,
+        unselectedItemColor: AppColor.colorOfHintText,
         selectedFontSize: 8,
         unselectedFontSize: 8,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
-              color: AppColor.colorOfText,
+              color: AppColor.colorOfHintText,
             ),
             label: "Trang chủ",
             activeIcon: Icon(
@@ -63,7 +63,7 @@ class _HomePageState extends BasePageStateActive<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.question_mark,
-              color: AppColor.colorOfText,
+              color: AppColor.colorOfHintText,
             ),
             label: "Hỏi đáp",
             activeIcon: Icon(
@@ -74,7 +74,7 @@ class _HomePageState extends BasePageStateActive<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.perm_media,
-              color: AppColor.colorOfText,
+              color: AppColor.colorOfHintText,
             ),
             label: "Đa phương tiện",
             activeIcon: Icon(
@@ -85,7 +85,7 @@ class _HomePageState extends BasePageStateActive<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.settings,
-              color: AppColor.colorOfText,
+              color: AppColor.colorOfHintText,
             ),
             label: "Cài đặt",
             activeIcon: Icon(

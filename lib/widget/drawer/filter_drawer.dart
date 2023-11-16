@@ -52,7 +52,7 @@ class FilterDrawer extends BasePage {
   State<StatefulWidget> createState() => _FilterDrawerState();
 }
 
-class _FilterDrawerState extends BaseScreenState<FilterDrawer> {
+class _FilterDrawerState extends BaseScreenStateActive<FilterDrawer> {
   DanhSachTinhTpBloc danhSachTinhTpBloc = DanhSachTinhTpBloc();
   DanhSachQuanHuyenBloc danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
   DanhSachDoanhNghiepBloc danhSachDoanhNghiepBloc = DanhSachDoanhNghiepBloc();
@@ -197,6 +197,7 @@ class _FilterDrawerState extends BaseScreenState<FilterDrawer> {
     return DropdownSearch<DanhSachTinhTpDataResponse>(
       popupProps: _buildPopupProps(context),
       selectedItem: danhSachTinhTpDataResponse,
+      clearButtonProps: _buildClearButtonProps(),
       filterFn: (data, filter) => data.filter(filter),
       asyncItems: (String filter) => Future.value(list),
       itemAsString: (DanhSachTinhTpDataResponse u) =>
@@ -230,6 +231,7 @@ class _FilterDrawerState extends BaseScreenState<FilterDrawer> {
       BuildContext context, List<DanhSachQuanHuyenDataResponse> list) {
     return DropdownSearch<DanhSachQuanHuyenDataResponse>(
       popupProps: _buildPopupProps(context),
+      clearButtonProps: _buildClearButtonProps(),
       filterFn: (data, filter) => data.filter(filter),
       asyncItems: (String filter) => Future.value(list),
       itemAsString: (DanhSachQuanHuyenDataResponse u) =>
@@ -256,6 +258,7 @@ class _FilterDrawerState extends BaseScreenState<FilterDrawer> {
       BuildContext context, List<DanhSachDoanhNghiepDataResponse> list) {
     return DropdownSearch<DanhSachDoanhNghiepDataResponse>(
       popupProps: _buildPopupProps(context),
+      clearButtonProps: _buildClearButtonProps(),
       filterFn: (data, filter) => data.filter(filter),
       selectedItem: danhSachDoanhNghiepDataResponse,
       asyncItems: (String filter) => Future.value(list),
@@ -275,6 +278,7 @@ class _FilterDrawerState extends BaseScreenState<FilterDrawer> {
       BuildContext context, List<DanhSachKinhNghiemDataResponse> list) {
     return DropdownSearch<DanhSachKinhNghiemDataResponse>(
       popupProps: _buildPopupProps(context),
+      clearButtonProps: _buildClearButtonProps(),
       filterFn: (data, filter) => data.filter(filter),
       selectedItem: danhSachKinhNghiemDataResponse,
       asyncItems: (String filter) => Future.value(list),
@@ -295,6 +299,7 @@ class _FilterDrawerState extends BaseScreenState<FilterDrawer> {
       BuildContext context, List<DanhSachMucLuongDataResponse> list) {
     return DropdownSearch<DanhSachMucLuongDataResponse>(
       popupProps: _buildPopupProps(context),
+      clearButtonProps: _buildClearButtonProps(),
       filterFn: (data, filter) => data.filter(filter),
       selectedItem: danhSachMucLuongDataResponse,
       asyncItems: (String filter) => Future.value(list),
@@ -329,4 +334,7 @@ class _FilterDrawerState extends BaseScreenState<FilterDrawer> {
         dropdownSearchDecoration: InputDecoration(
             labelText: title, hintText: "Vui lòng chọn ${title.toLowerCase()}"),
       );
+
+  ClearButtonProps _buildClearButtonProps() => const ClearButtonProps(
+      isVisible: true, padding: EdgeInsets.zero, color: Colors.black);
 }
