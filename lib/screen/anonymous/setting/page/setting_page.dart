@@ -27,16 +27,6 @@ class SettingPage extends BasePage {
 
 class _SettingPageState extends BasePageStateActive<SettingPage> {
   var actions = {
-    "Thông tin": [
-      SettingPageModel(
-          icon: Icons.change_circle_outlined,
-          title: "Đổi thông tin",
-          builder: (context) => const ChangeUserInfoPage()),
-      SettingPageModel(
-          icon: Icons.password_sharp,
-          title: "Đổi mật khẩu",
-          builder: (context) => const ChangePasswordPage()),
-    ],
     "Biểu đồ": [
       SettingPageModel(
           icon: Icons.bar_chart_outlined,

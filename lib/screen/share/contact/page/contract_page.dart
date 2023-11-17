@@ -1,6 +1,9 @@
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../../../style/app_color.dart';
 
 //
 // Created by BlackRose on 11/7/2023.
@@ -15,38 +18,202 @@ class ContractPage extends BasePage {
 
 class _ContractPageState extends BasePageState<ContractPage> {
   TextEditingController textEditingController = TextEditingController();
+  String email = "abc@gmail.com";
+  String website = "www.abc.com.vn";
+  String hotline = "0386110030";
+  String companyName = "CÔNG TY TRÁCH NHIỆM HỮU HẠN MỘT THÀNH VIÊN A";
+  String companyAddress =
+      "số 1 ngách 2 ngõ 22 phố Nguyễn Văn A phường Nguyễn Văn B Quận A Thành phố C";
 
   @override
   String getPageTitle(BuildContext context) => "Liên hệ";
 
   @override
-  Widget pageUI(BuildContext context) => SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: List.generate(
-            10,
-            (index) => Container(
-                margin: const EdgeInsets.only(top: 10),
-                padding: const EdgeInsets.only(left: 5, top: 10, bottom: 10),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.white,
-                ),
-                child: const Row(
+  Widget pageUI(BuildContext context) => Container(
+        child: Card(
+          elevation: 5,
+          color: AppColor.colorOfApp,
+          shadowColor: AppColor.colorOfDrawer,
+          borderOnForeground: false,
+          margin: const EdgeInsets.all(5),
+          shape: const RoundedRectangleBorder(
+              side: BorderSide(color: AppColor.colorOfDrawer, width: 0.2),
+              borderRadius: BorderRadius.all(Radius.circular(5))),
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
                   children: [
-                    Icon(Icons.question_answer),
-                    Padding(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Text(
-                        "Hỏi và đáp",
-                        textAlign: TextAlign.start,
-                        style: AppTextStyle.titleAppbarPage,
-                      ),
+                    Expanded(
+                        flex: 3,
+                        child: Text(
+                          "Tên công ty",
+                          style: AppTextStyle.title
+                              .copyWith(overflow: TextOverflow.visible),
+                        )),
+                    const VerticalDivider(
+                      thickness: 2,
+                      width: 5,
+                      color: Colors.transparent,
                     ),
+                    Expanded(
+                        flex: 4,
+                        child: Text(
+                          companyName,
+                          style: AppTextStyle.title.copyWith(
+                              overflow: TextOverflow.visible,
+                              color: AppColor.colorOfIcon),
+                        )),
                   ],
-                )),
+                ),
+                const Divider(
+                  height: 50,
+                  color: AppColor.colorOfDrawer,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                        flex: 3,
+                        child: Text(
+                          "Hotline",
+                          style: AppTextStyle.title
+                              .copyWith(overflow: TextOverflow.visible),
+                        )),
+                    const VerticalDivider(
+                      thickness: 2,
+                      width: 5,
+                      color: Colors.transparent,
+                    ),
+                    Expanded(
+                        flex: 4,
+                        child: GestureDetector(
+                          onTap: _launchHotline,
+                          child: Text(
+                            hotline,
+                            style: AppTextStyle.title.copyWith(
+                                overflow: TextOverflow.visible,
+                                color: AppColor.colorOfIcon),
+                          ),
+                        )),
+                  ],
+                ),
+                const Divider(
+                  height: 50,
+                  color: AppColor.colorOfDrawer,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                        flex: 3,
+                        child: Text(
+                          "Địa chỉ",
+                          style: AppTextStyle.title
+                              .copyWith(overflow: TextOverflow.visible),
+                        )),
+                    const VerticalDivider(
+                      thickness: 2,
+                      width: 5,
+                      color: Colors.transparent,
+                    ),
+                    Expanded(
+                        flex: 4,
+                        child: Text(
+                          companyAddress,
+                          style: AppTextStyle.title.copyWith(
+                              overflow: TextOverflow.visible,
+                              color: AppColor.colorOfIcon),
+                        )),
+                  ],
+                ),
+                const Divider(
+                  height: 50,
+                  color: AppColor.colorOfDrawer,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                        flex: 3,
+                        child: Text(
+                          "Email",
+                          style: AppTextStyle.title
+                              .copyWith(overflow: TextOverflow.visible),
+                        )),
+                    const VerticalDivider(
+                      thickness: 2,
+                      width: 5,
+                      color: Colors.transparent,
+                    ),
+                    Expanded(
+                        flex: 4,
+                        child: GestureDetector(
+                          onTap: _launchEmail,
+                          child: Text(
+                            email,
+                            style: AppTextStyle.title.copyWith(
+                                overflow: TextOverflow.visible,
+                                color: AppColor.colorOfIcon),
+                          ),
+                        )),
+                  ],
+                ),
+                const Divider(
+                  height: 50,
+                  color: AppColor.colorOfDrawer,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                        flex: 3,
+                        child: Text(
+                          "Website",
+                          style: AppTextStyle.title
+                              .copyWith(overflow: TextOverflow.visible),
+                        )),
+                    const VerticalDivider(
+                      thickness: 2,
+                      width: 5,
+                      color: Colors.transparent,
+                    ),
+                    Expanded(
+                        flex: 4,
+                        child: GestureDetector(
+                          onTap: _launchWeb,
+                          child: Text(
+                            website,
+                            style: AppTextStyle.title.copyWith(
+                                overflow: TextOverflow.visible,
+                                color: AppColor.colorOfIcon),
+                          ),
+                        )),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       );
+
+  void _launchHotline() {
+    launchUrl(Uri(scheme: 'tel', path: hotline));
+  }
+
+  void _launchEmail() {
+    launchUrl(
+        Uri(scheme: 'mailto', path: '${email}subject=Yêu cầu hỗ trợ&body='));
+  }
+
+  void _launchWeb() {
+    launchUrl(Uri.parse(website));
+  }
 }

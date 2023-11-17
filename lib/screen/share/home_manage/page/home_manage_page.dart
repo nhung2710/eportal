@@ -80,6 +80,7 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
+                margin: const EdgeInsets.only(top: 0),
                 child: BlocProvider(
                     create: (_) => homeSlideListBloc,
                     child: BlocListener<HomeSlideListBloc, BaseState>(
@@ -151,11 +152,11 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
             Container(
               margin: const EdgeInsets.only(top: 10),
               child: GridView.count(
-                crossAxisCount: 3,
+                crossAxisCount: 4,
                 shrinkWrap: true,
-                crossAxisSpacing: 10,
+                crossAxisSpacing: 20,
                 childAspectRatio: 1,
-                mainAxisSpacing: 10,
+                mainAxisSpacing: 20,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
                   CustomButtonIcon(
@@ -185,7 +186,7 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                   ),
                   CustomButtonIcon(
                     title: "Văn bản pháp luật",
-                    iconData: Icons.file_copy,
+                    iconData: Icons.folder_copy,
                     onTap: () => nextPage((context) => NewsLegalDocumentPage()),
                   ),
                 ],

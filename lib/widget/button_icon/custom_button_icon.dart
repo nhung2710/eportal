@@ -31,7 +31,7 @@ class CustomButtonIcon extends StatelessWidget {
               side: BorderSide(color: AppColor.colorOfDrawer, width: 0.1),
               borderRadius: BorderRadius.all(Radius.circular(5))),
           child: Container(
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(2),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

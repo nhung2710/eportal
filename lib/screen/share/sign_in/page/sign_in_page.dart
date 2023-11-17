@@ -46,115 +46,137 @@ class _SignInPageState extends BasePageState<SignInPage> {
         .getStringOneTimePreferences(ApplicationConstant.REGISTER_USER_NAME);
     passwordController.text = GlobalApplication().getStringOneTimePreferences(
         ApplicationConstant.REGISTER_USER_PASSWORD);
-    return ListView(
-      children: <Widget>[
-        Container(
-          margin: const EdgeInsets.only(top: 30),
-          child: Image.asset(
-            'assets/images/Logo.jpg',
-            alignment: Alignment.center,
-            height: 125,
-            width: 125,
+    return Center(
+      child: ListView(
+        shrinkWrap: true,
+        children: <Widget>[
+          Container(
+            margin: const EdgeInsets.only(top: 30),
+            child: Image.asset(
+              'assets/images/Logo.jpg',
+              alignment: Alignment.center,
+              height: 125,
+              width: 125,
+            ),
           ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 10),
-          child: FieldInput(
-            controller: nameController,
-            textInputAction: TextInputAction.next,
-            validator: (text) {
-              if (text == null || text.isEmpty) {
-                return 'Tài khoản không được để trống';
-              }
-              return null;
-            },
-
-            hintText: "Tài khoản",
-            icon: Icons.account_circle,
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: FieldInput(
+              controller: nameController,
+              textInputAction: TextInputAction.next,
+              validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Tài khoản không được để trống';
+                }
+                return null;
+              },
+              hintText: "Tài khoản",
+              icon: Icons.account_circle,
+            ),
           ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 10),
-          child: PasswordInput(
-            controller: passwordController,
-            textInputAction: TextInputAction.done,
-            validator: (text) {
-              if (text == null || text.isEmpty) {
-                return 'Mật khẩu không được để trống';
-              }
-              return null;
-            },
-            onFieldSubmitted: (value) => _signIn(context),
-            hintText: "Mật khẩu",
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: PasswordInput(
+              controller: passwordController,
+              textInputAction: TextInputAction.done,
+              validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Mật khẩu không được để trống';
+                }
+                return null;
+              },
+              onFieldSubmitted: (value) => _signIn(context),
+              hintText: "Mật khẩu",
+            ),
           ),
-        ),
-        Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: ElevatedButton(
-              child: Container(
-                  padding: const EdgeInsets.all(10),
-                  child: const Text('Đăng nhập NLD')),
-              onPressed: () => _signIn(context),
-            )),
-        Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: ElevatedButton(
-              child: Container(
-                  padding: const EdgeInsets.all(10),
-                  child: const Text('Đăng nhập DN')),
-              onPressed: () => _signInBusiness(context),
-            )),
-        Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: ElevatedButton(
-              child: Container(
-                  padding: const EdgeInsets.all(10),
-                  child: const Text('Đăng nhập QL')),
-              onPressed: () => _signInAdmin(context),
-            )),
-        Container(
-          margin: const EdgeInsets.only(top: 10),
-          child: Center(
-            child: RichText(
-              text: TextSpan(
-                style: AppTextStyle.titleAppbarPage.copyWith(
-                    color: Colors.black, fontWeight: FontWeight.normal),
-                children: <TextSpan>[
-                  const TextSpan(text: 'Bạn chưa có tài khoản? '),
-                  TextSpan(
-                      text: 'Đăng ký',
-                      style: AppTextStyle.titleAppbarPage
-                          .copyWith(color: Colors.blue),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () => _signUp(context)),
+          Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      child: Container(
+                          padding: const EdgeInsets.all(10),
+                          child: const Text('NLD')),
+                      onPressed: () => _signIn(context),
+                    ),
+                  ),
+                  const VerticalDivider(
+                    width: 5,
+                  ),
+                  Expanded(
+                    child: ElevatedButton(
+                      child: Container(
+                          padding: const EdgeInsets.all(10),
+                          child: const Text('DN')),
+                      onPressed: () => _signInBusiness(context),
+                    ),
+                  ),
+                  const VerticalDivider(
+                    width: 5,
+                  ),
+                  Expanded(
+                    child: ElevatedButton(
+                      child: Container(
+                          padding: const EdgeInsets.all(10),
+                          child: const Text('QL')),
+                      onPressed: () => _signInAdmin(context),
+                    ),
+                  ),
                 ],
+              )),
+          Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: ElevatedButton(
+                child: Container(
+                    padding: const EdgeInsets.all(10),
+                    child: const Text('Đăng nhập')),
+                onPressed: () => _signIn(context),
+              )),
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: Center(
+              child: RichText(
+                text: TextSpan(
+                  style: AppTextStyle.titleAppbarPage.copyWith(
+                      color: Colors.black, fontWeight: FontWeight.normal),
+                  children: <TextSpan>[
+                    const TextSpan(text: 'Bạn chưa có tài khoản? '),
+                    TextSpan(
+                        text: 'Đăng ký',
+                        style: AppTextStyle.titleAppbarPage
+                            .copyWith(color: Colors.blue),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () => _signUp(context)),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 10),
-          child: GestureDetector(
-              onTap: () => _forgotPassword(context),
-              child: Center(
-                  child: Text(
-                    'Quên mật khẩu',
-                    style:
-                    AppTextStyle.titleAppbarPage.copyWith(color: Colors.blue),
-                  ))),
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 5),
-          child: GestureDetector(
-              onTap: () => _skipPage(context),
-              child: Center(
-                  child: Text(
-                    'Trài nghiệm không đăng nhập',
-                    style:
-                    AppTextStyle.titleAppbarPage.copyWith(color: Colors.grey),
-                  ))),
-        ),
-      ],
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: GestureDetector(
+                onTap: () => _forgotPassword(context),
+                child: Center(
+                    child: Text(
+                  'Quên mật khẩu',
+                  style:
+                      AppTextStyle.titleAppbarPage.copyWith(color: Colors.blue),
+                ))),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 5),
+            child: GestureDetector(
+                onTap: () => _skipPage(context),
+                child: Center(
+                    child: Text(
+                  'Trài nghiệm không đăng nhập',
+                  style:
+                      AppTextStyle.titleAppbarPage.copyWith(color: Colors.grey),
+                ))),
+          ),
+        ],
+      ),
     );
   }
 

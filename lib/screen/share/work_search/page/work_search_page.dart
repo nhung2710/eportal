@@ -50,6 +50,8 @@ import '../../../../style/app_text_style.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/drawer/filter_drawer.dart';
 import '../../../../widget/expandable_fab/expandable_fab.dart';
+import '../../../../widget/input/field_input.dart';
+import '../../../../widget/input/search_input.dart';
 import '../../empty_example/page/empty_example_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -87,7 +89,7 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
           Container(
             margin: const EdgeInsets.only(bottom: 5, top: 5),
             color: Colors.white,
-            child: TextFormField(
+            child: SearchInput(
               controller: textEditingController,
               maxLength: 50,
               textInputAction: TextInputAction.send,
@@ -98,20 +100,11 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
                 return null;
               },
               onFieldSubmitted: (value) => _findNews(context),
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                suffixIcon: IconButton(
-                  icon: const Icon(
-                    Icons.send,
-                    color: Colors.blue,
-                  ),
-                  onPressed: () {
-                    _findNews(context);
-                  },
-                ),
-                labelText: 'Nội dung',
-                counterText: "",
-              ),
+              icon: Icons.search,
+              onTap: () {
+                _findNews(context);
+              },
+              hintText: "Nội dung tìm kiếm",
             ),
           ),
           Expanded(

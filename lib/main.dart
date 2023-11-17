@@ -10,6 +10,7 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'application/global_application.dart';
+import 'package:window_manager/window_manager.dart';
 
 Future<bool> checkAppRunFirstTime() {
   bool? isFirstRunApp = GlobalApplication()
@@ -23,6 +24,21 @@ Future<bool> checkAppRunFirstTime() {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await windowManager.ensureInitialized();
+
+  WindowOptions windowOptions = const WindowOptions(
+    size: Size(414, 896),
+    center: true,
+    backgroundColor: Colors.transparent,
+    skipTaskbar: false,
+    titleBarStyle: TitleBarStyle.hidden,
+  );
+  windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show();
+    await windowManager.focus();
+  });
+
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.white,
     statusBarIconBrightness: Brightness.dark,
@@ -144,21 +160,21 @@ class OnBoardingPageState extends State<OnBoardingPage> {
         PageViewModel(
           title: "Fractional shares",
           body:
-              "Instead of having to buy an entire share, invest any amount you want.",
+          "Instead of having to buy an entire share, invest any amount you want.",
           image: _buildImage('introduction_1.jpg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Learn as you go",
           body:
-              "Download the Stockpile app and master the market with our mini-lesson.",
+          "Download the Stockpile app and master the market with our mini-lesson.",
           image: _buildImage('introduction_2.jpg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Kids and teens",
           body:
-              "Kids and teens can track their stocks 24/7 and place trades that you approve.",
+          "Kids and teens can track their stocks 24/7 and place trades that you approve.",
           image: _buildImage('introduction_3.jpg'),
           decoration: pageDecoration,
         ),

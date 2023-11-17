@@ -6,6 +6,8 @@ import 'package:eportal/widget/app_bar/default_app_bar.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../share/home_manage/page/home_manage_page.dart';
+
 //
 // Created by BlackRose on 11/7/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -107,7 +109,7 @@ class _HomePageState extends BasePageStateActive<HomePage> {
           });
         },
         children: const <Widget>[
-          NewsHubPage(),
+          HomeManagePage(),
           AnswerAndQuestionPage(),
           MultimediaPage(),
           SettingPage(),

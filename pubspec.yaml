@@ -66,6 +66,7 @@ dependencies:
   intl: ^0.18.1
   dropdown_search: ^5.0.6
   diacritic: ^0.1.4
+  window_manager: ^0.3.7
 
 dev_dependencies:
   flutter_test:
@@ -96,6 +97,7 @@ flutter:
 
   assets:
     - assets/images/Logo.jpg
+    - assets/images/Logo.png
     - assets/images/404.png
     - assets/images/ErrorImage.png
     - assets/images/NotFoundData.jpg

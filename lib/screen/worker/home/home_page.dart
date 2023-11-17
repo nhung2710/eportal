@@ -1,4 +1,5 @@
 import 'package:eportal/screen/anonymous/setting/page/setting_page.dart';
+import 'package:eportal/screen/share/home_manage/page/home_manage_page.dart';
 import 'package:eportal/screen/share/news_hub/page/news_hub_page.dart';
 import 'package:eportal/screen/worker/find_job/page/find_job_page.dart';
 import 'package:eportal/screen/worker/history/page/history_page.dart';
@@ -122,7 +123,7 @@ class _HomePageState extends BasePageStateActive<HomePage> {
           });
         },
         children: const <Widget>[
-          NewsHubPage(),
+          HomeManagePage(),
           ProfilePage(),
           FindJobPage(),
           HistoryPage(),
