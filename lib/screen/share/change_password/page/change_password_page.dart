@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../extension/input_decoration_extension.dart';
 import '../../../../widget/base/base_page.dart';
+import '../../../../widget/input/password_input.dart';
 
 //
 // Created by BlackRose on 14/11/2023.
@@ -30,18 +31,8 @@ class _ChangePasswordPageState extends BasePageState<ChangePasswordPage> {
   Widget pageUI(BuildContext context) => ListView(
         children: <Widget>[
           Container(
-            margin: const EdgeInsets.only(top: 30),
-            child: Image.asset(
-              'assets/images/Logo.jpg',
-              alignment: Alignment.center,
-              height: 125,
-              width: 125,
-            ),
-          ),
-          Container(
             margin: const EdgeInsets.only(top: 10),
-            child: TextFormField(
-              obscureText: true,
+            child: PasswordInput(
               controller: oldPasswordController,
               maxLength: 50,
               textInputAction: TextInputAction.next,
@@ -51,30 +42,27 @@ class _ChangePasswordPageState extends BasePageState<ChangePasswordPage> {
                 }
                 return null;
               },
-              decoration: const InputDecoration().defaultInputDecoration(
-                  hintText: 'Mật khẩu cũ', iconData: Icons.password),
+              hintText: 'Mật khẩu cũ',
             ),
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
-            child: TextFormField(
-              obscureText: true,
-              controller: newPasswordController,
-              maxLength: 50,
-              textInputAction: TextInputAction.next,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Mật khẩu mới không được để trống';
-                }
-                return null;
-              },
-              decoration: const InputDecoration().defaultInputDecoration(
-                  hintText: 'Mật khẩu mới', iconData: Icons.password),
-            ),
+            child: PasswordInput(
+                obscureText: true,
+                controller: newPasswordController,
+                maxLength: 50,
+                textInputAction: TextInputAction.next,
+                validator: (text) {
+                  if (text == null || text.isEmpty) {
+                    return 'Mật khẩu mới không được để trống';
+                  }
+                  return null;
+                },
+                hintText: 'Mật khẩu mới'),
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
-            child: TextFormField(
+            child: PasswordInput(
               obscureText: true,
               controller: confirmPasswordController,
               maxLength: 50,
@@ -86,8 +74,7 @@ class _ChangePasswordPageState extends BasePageState<ChangePasswordPage> {
                 return null;
               },
               onFieldSubmitted: (value) => _changePassword(context),
-              decoration: const InputDecoration().defaultInputDecoration(
-                  hintText: 'Mật khẩu xác nhận', iconData: Icons.password),
+              hintText: 'Mật khẩu xác nhận',
             ),
           ),
           Container(

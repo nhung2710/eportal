@@ -245,6 +245,10 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
   Widget buildNotFoundData(BuildContext buildContext) => Center(
         child: Image.asset("assets/images/NotFoundData.jpg"),
       );
+
+  Widget buildImplement(BuildContext buildContext) => Center(
+        child: Image.asset("assets/images/Implement.jpg"),
+      );
 }
 
 class BasePageStateActive<T extends StatefulWidget> extends State<T>
@@ -302,6 +306,10 @@ class BasePageStateActive<T extends StatefulWidget> extends State<T>
 
   Widget buildNotFoundData(BuildContext buildContext) => Center(
         child: Image.asset("assets/images/NotFoundData.jpg"),
+      );
+
+  Widget buildImplement(BuildContext buildContext) => Center(
+        child: Image.asset("assets/images/Implement.jpg"),
       );
 
   Widget pageUI(BuildContext context) {
@@ -505,6 +513,10 @@ class BaseScreenState<T extends StatefulWidget> extends State<T> {
 
   Widget buildNotFoundData(BuildContext buildContext) => Center(
         child: Image.asset("assets/images/NotFoundData.jpg"),
+      );
+
+  Widget buildImplement(BuildContext buildContext) => Center(
+        child: Image.asset("assets/images/Implement.jpg"),
       );
 
   Widget? getEndDrawer(BuildContext context) => null;
@@ -717,6 +729,10 @@ class BaseScreenStateActive<T extends StatefulWidget> extends State<T>
 
   Widget buildNotFoundData(BuildContext buildContext) => Center(
         child: Image.asset("assets/images/NotFoundData.jpg"),
+      );
+
+  Widget buildImplement(BuildContext buildContext) => Center(
+        child: Image.asset("assets/images/Implement.jpg"),
       );
 
   Widget? getEndDrawer(BuildContext context) => null;

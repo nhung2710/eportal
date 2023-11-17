@@ -1,8 +1,11 @@
+import 'dart:math';
 
 import '../api/constant/application_api_constant.dart';
 import '../constant/application_constant.dart';
 import 'package:html/parser.dart' as htmlparser;
 import 'package:diacritic/diacritic.dart';
+
+const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
 
 extension StringNullExtension on String? {
   bool isNull() => this == null;
@@ -37,6 +40,12 @@ extension StringNullExtension on String? {
 
   String getValueSearch() =>
       removeUnicode().replaceAll(RegExp(r'\s'), '').toUpperCase();
+
+  String randomString(int length) {
+    Random rnd = Random();
+    return String.fromCharCodes(Iterable.generate(
+        length, (_) => _chars.codeUnitAt(rnd.nextInt(_chars.length))));
+  }
 }
 
 extension StringExtension on String {
@@ -69,4 +78,10 @@ extension StringExtension on String {
 
   String getValueSearch() =>
       removeUnicode().replaceAll(RegExp(r'\s'), '').toUpperCase();
+
+  String randomString(int length) {
+    Random rnd = Random();
+    return String.fromCharCodes(Iterable.generate(
+        length, (_) => _chars.codeUnitAt(rnd.nextInt(_chars.length))));
+  }
 }

@@ -5,6 +5,8 @@ import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../widget/input/search_input.dart';
+
 //
 // Created by BlackRose on 11/7/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -45,10 +47,10 @@ class _ChatBotPageState extends BasePageState<ChatBotPage> {
           Container(
             margin: const EdgeInsets.all(5),
             color: Colors.white,
-            child: TextFormField(
+            child: SearchInput(
               controller: textEditingController,
-              maxLength: 50,
-              textInputAction: TextInputAction.send,
+              maxLength: 200,
+              textInputAction: TextInputAction.done,
               validator: (text) {
                 if (text == null || text.isEmpty) {
                   return 'Vui lòng nhập nội dung muốn gửi';
@@ -56,19 +58,9 @@ class _ChatBotPageState extends BasePageState<ChatBotPage> {
                 return null;
               },
               onFieldSubmitted: (value) => _sendMessageAsync(context),
-              decoration: InputDecoration(
-                suffixIcon: IconButton(
-                  icon: const Icon(
-                    Icons.send,
-                    color: Colors.blue,
-                  ),
-                  onPressed: () {
-                    _sendMessageAsync(context);
-                  },
-                ),
-                labelText: 'Nội dung',
-                counterText: "",
-              ),
+              onTap: () => _sendMessageAsync(context),
+              icon: Icons.message,
+              hintText: "Nội dung",
             ),
           )
         ],
@@ -155,7 +147,8 @@ class _ChatBotPageState extends BasePageState<ChatBotPage> {
                   children: [
                     Text(e.message,
                         style: AppTextStyle.titleAppbarPage.copyWith(
-                            color: !e.isBot ? Colors.white : Colors.white)),
+                            color: !e.isBot ? Colors.white : Colors.white,
+                            overflow: TextOverflow.visible)),
                   ],
                 )),
           ),

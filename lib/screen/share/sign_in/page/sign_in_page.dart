@@ -11,6 +11,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../extension/input_decoration_extension.dart';
+import '../../../../widget/input/field_input.dart';
+import '../../../../widget/input/password_input.dart';
 import '../../../anonymous/home/home_page.dart' as anonymous;
 
 //
@@ -57,9 +59,8 @@ class _SignInPageState extends BasePageState<SignInPage> {
         ),
         Container(
           margin: const EdgeInsets.only(top: 10),
-          child: TextFormField(
+          child: FieldInput(
             controller: nameController,
-            maxLength: 50,
             textInputAction: TextInputAction.next,
             validator: (text) {
               if (text == null || text.isEmpty) {
@@ -67,16 +68,15 @@ class _SignInPageState extends BasePageState<SignInPage> {
               }
               return null;
             },
-            decoration: const InputDecoration().defaultInputDecoration(
-                hintText: "Tài khoản", iconData: Icons.account_circle),
+
+            hintText: "Tài khoản",
+            icon: Icons.account_circle,
           ),
         ),
         Container(
           margin: const EdgeInsets.only(top: 10),
-          child: TextFormField(
-            obscureText: true,
+          child: PasswordInput(
             controller: passwordController,
-            maxLength: 50,
             textInputAction: TextInputAction.done,
             validator: (text) {
               if (text == null || text.isEmpty) {
@@ -85,8 +85,7 @@ class _SignInPageState extends BasePageState<SignInPage> {
               return null;
             },
             onFieldSubmitted: (value) => _signIn(context),
-            decoration: const InputDecoration().defaultInputDecoration(
-                hintText: "Mật khẩu", iconData: Icons.password),
+            hintText: "Mật khẩu",
           ),
         ),
         Container(
@@ -139,10 +138,10 @@ class _SignInPageState extends BasePageState<SignInPage> {
               onTap: () => _forgotPassword(context),
               child: Center(
                   child: Text(
-                'Quên mật khẩu',
-                style:
+                    'Quên mật khẩu',
+                    style:
                     AppTextStyle.titleAppbarPage.copyWith(color: Colors.blue),
-              ))),
+                  ))),
         ),
         Container(
           margin: const EdgeInsets.only(top: 5),
@@ -150,10 +149,10 @@ class _SignInPageState extends BasePageState<SignInPage> {
               onTap: () => _skipPage(context),
               child: Center(
                   child: Text(
-                'Trài nghiệm không đăng nhập',
-                style:
+                    'Trài nghiệm không đăng nhập',
+                    style:
                     AppTextStyle.titleAppbarPage.copyWith(color: Colors.grey),
-              ))),
+                  ))),
         ),
       ],
     );

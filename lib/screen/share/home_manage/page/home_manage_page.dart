@@ -109,30 +109,37 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                             items: (state.data ?? []).map((item) {
                               return Builder(
                                 builder: (BuildContext context) {
-                                  return Card(
-                                    elevation: 3,
-                                    margin: EdgeInsets.zero,
-                                    color: AppColor.colorOfApp,
-                                    shadowColor: AppColor.colorOfDrawer,
-                                    borderOnForeground: false,
-                                    shape: const RoundedRectangleBorder(
-                                        side: BorderSide(
-                                            color: AppColor.colorOfDrawer,
-                                            width: 0.1),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5))),
-                                    child: ClipRRect(
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(5.0)),
-                                        child: ImageLoading(
-                                            imageUrl: item.avatar.getImageUrl(),
-                                            imageBuilder:
-                                                (context, imageProvider) {
-                                              return Image(
-                                                image: imageProvider,
-                                                fit: BoxFit.fitHeight,
-                                              );
-                                            })),
+                                  return GestureDetector(
+                                    onTap: () =>
+                                        nextPage((context) => EmptyExamplePage(
+                                              isHasAppBar: true,
+                                            )),
+                                    child: Card(
+                                      elevation: 3,
+                                      margin: EdgeInsets.zero,
+                                      color: AppColor.colorOfApp,
+                                      shadowColor: AppColor.colorOfDrawer,
+                                      borderOnForeground: false,
+                                      shape: const RoundedRectangleBorder(
+                                          side: BorderSide(
+                                              color: AppColor.colorOfDrawer,
+                                              width: 0.1),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(5))),
+                                      child: ClipRRect(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(5.0)),
+                                          child: ImageLoading(
+                                              imageUrl:
+                                                  item.avatar.getImageUrl(),
+                                              imageBuilder:
+                                                  (context, imageProvider) {
+                                                return Image(
+                                                  image: imageProvider,
+                                                  fit: BoxFit.fitHeight,
+                                                );
+                                              })),
+                                    ),
                                   );
                                 },
                               );

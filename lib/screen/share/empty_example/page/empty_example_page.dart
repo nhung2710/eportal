@@ -17,18 +17,16 @@ class EmptyExamplePage extends BasePage {
   State<StatefulWidget> createState() => _EmptyExamplePageState();
 }
 
-class _EmptyExamplePageState extends BasePageStateActive<EmptyExamplePage> {
+class _EmptyExamplePageState extends BasePageState<EmptyExamplePage> {
   @override
   bool isHasAppBar(BuildContext context) => widget.isHasAppBar;
+
+  @override
+  String getPageTitle(BuildContext context) => "Đang phát triển";
 
   @override
   double currentPadding(BuildContext context) => 0;
 
   @override
-  Widget pageUI(BuildContext context) => Container(
-        color: _getRandomColor(),
-      );
-
-  _getRandomColor() =>
-      Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
+  Widget pageUI(BuildContext context) => buildImplement(context);
 }

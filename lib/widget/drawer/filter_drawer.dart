@@ -46,6 +46,12 @@ import '../base/base_page.dart';
 class FilterDrawer extends BasePage {
   SearchRequestData data;
 
+  DanhSachTinhTpDataResponse? danhSachTinhTpDataResponse;
+  DanhSachQuanHuyenDataResponse? danhSachQuanHuyenDataResponse;
+  DanhSachDoanhNghiepDataResponse? danhSachDoanhNghiepDataResponse;
+  DanhSachKinhNghiemDataResponse? danhSachKinhNghiemDataResponse;
+  DanhSachMucLuongDataResponse? danhSachMucLuongDataResponse;
+
   FilterDrawer({super.key, required this.data});
 
   @override
@@ -53,26 +59,41 @@ class FilterDrawer extends BasePage {
 }
 
 class _FilterDrawerState extends BaseScreenStateActive<FilterDrawer> {
-  DanhSachTinhTpBloc danhSachTinhTpBloc = DanhSachTinhTpBloc();
-  DanhSachQuanHuyenBloc danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
-  DanhSachDoanhNghiepBloc danhSachDoanhNghiepBloc = DanhSachDoanhNghiepBloc();
-  DanhSachMucLuongBloc danhSachMucLuongBloc = DanhSachMucLuongBloc();
-  DanhSachKinhNghiemBloc danhSachKinhNghiemBloc = DanhSachKinhNghiemBloc();
-  DanhSachGioiTinhBloc danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
-  DanhSachTrinhDoBloc danhSachTrinhDoBloc = DanhSachTrinhDoBloc();
-  DanhSachTinhTpDataResponse? danhSachTinhTpDataResponse;
-  DanhSachQuanHuyenDataResponse? danhSachQuanHuyenDataResponse;
-  DanhSachDoanhNghiepDataResponse? danhSachDoanhNghiepDataResponse;
-  DanhSachKinhNghiemDataResponse? danhSachKinhNghiemDataResponse;
-  DanhSachMucLuongDataResponse? danhSachMucLuongDataResponse;
+  late DanhSachTinhTpBloc danhSachTinhTpBloc;
+  late DanhSachQuanHuyenBloc danhSachQuanHuyenBloc;
+  late DanhSachDoanhNghiepBloc danhSachDoanhNghiepBloc;
+  late DanhSachMucLuongBloc danhSachMucLuongBloc;
+  late DanhSachKinhNghiemBloc danhSachKinhNghiemBloc;
+  late DanhSachGioiTinhBloc danhSachGioiTinhBloc;
+  late DanhSachTrinhDoBloc danhSachTrinhDoBloc;
 
   @override
   bool isHasAppBar(BuildContext context) => false;
 
   @override
   void initDataLoading() {
+    danhSachTinhTpBloc = DanhSachTinhTpBloc();
+    danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
+    danhSachDoanhNghiepBloc = DanhSachDoanhNghiepBloc();
+    danhSachMucLuongBloc = DanhSachMucLuongBloc();
+    danhSachKinhNghiemBloc = DanhSachKinhNghiemBloc();
+    danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
+    danhSachTrinhDoBloc = DanhSachTrinhDoBloc();
     danhSachTinhTpBloc.add(DanhSachTinhTpEvent(
         request: DanhSachTinhTpRequest(obj: CommonNewDataRequest())));
+    if (widget.danhSachTinhTpDataResponse != null) {
+      danhSachQuanHuyenBloc.add(DanhSachQuanHuyenEvent(
+          request: DanhSachQuanHuyenRequest(
+              obj: DanhSachQuanHuyenDataRequest(tinhTp: widget.data.tinhTp))));
+      if (widget.danhSachDoanhNghiepDataResponse != null) {
+        danhSachDoanhNghiepBloc.add(DanhSachDoanhNghiepEvent(
+            request: DanhSachDoanhNghiepRequest(
+                obj: DanhSachDoanhNghiepDataRequest(
+                    tinhTp: widget.data.tinhTp,
+                    quanHuyen: widget.data.quanHuyen))));
+      }
+    }
+
     danhSachMucLuongBloc.add(DanhSachMucLuongEvent(
         request: DanhSachMucLuongRequest(obj: CommonNewDataRequest())));
     danhSachKinhNghiemBloc.add(DanhSachKinhNghiemEvent(
@@ -91,7 +112,7 @@ class _FilterDrawerState extends BaseScreenStateActive<FilterDrawer> {
             children: [
               Container(
                 margin: const EdgeInsets.only(top: 10),
-                child: Text("Tiêu chí tìm kiếm thêm"),
+                child: const Text("Tiêu chí tìm kiếm thêm"),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 10),
@@ -185,10 +206,6 @@ class _FilterDrawerState extends BaseScreenStateActive<FilterDrawer> {
               ),
             ],
           )),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: Text("Tiêu chí tìm kiếm thêm"),
-          ),
         ]),
       );
 
@@ -196,20 +213,20 @@ class _FilterDrawerState extends BaseScreenStateActive<FilterDrawer> {
       BuildContext context, List<DanhSachTinhTpDataResponse> list) {
     return DropdownSearch<DanhSachTinhTpDataResponse>(
       popupProps: _buildPopupProps(context),
-      selectedItem: danhSachTinhTpDataResponse,
+      selectedItem: widget.danhSachTinhTpDataResponse,
       clearButtonProps: _buildClearButtonProps(),
       filterFn: (data, filter) => data.filter(filter),
       asyncItems: (String filter) => Future.value(list),
       itemAsString: (DanhSachTinhTpDataResponse u) =>
           u.regionalName.replaceWhenNullOrWhiteSpace(),
       onChanged: (DanhSachTinhTpDataResponse? data) {
-        if (danhSachTinhTpDataResponse != data) {
-          danhSachTinhTpDataResponse = data;
+        if (widget.danhSachTinhTpDataResponse != data) {
+          widget.danhSachTinhTpDataResponse = data;
           widget.data.tinhTp = data?.regionalID;
           widget.data.quanHuyen = null;
           widget.data.doanhNghiep = null;
-          danhSachQuanHuyenDataResponse = null;
-          danhSachDoanhNghiepDataResponse = null;
+          widget.danhSachQuanHuyenDataResponse = null;
+          widget.danhSachDoanhNghiepDataResponse = null;
           danhSachQuanHuyenBloc.add(DanhSachQuanHuyenEvent(
               request: DanhSachQuanHuyenRequest(
                   obj: DanhSachQuanHuyenDataRequest(
@@ -233,15 +250,16 @@ class _FilterDrawerState extends BaseScreenStateActive<FilterDrawer> {
       popupProps: _buildPopupProps(context),
       clearButtonProps: _buildClearButtonProps(),
       filterFn: (data, filter) => data.filter(filter),
+      selectedItem: widget.danhSachQuanHuyenDataResponse,
       asyncItems: (String filter) => Future.value(list),
       itemAsString: (DanhSachQuanHuyenDataResponse u) =>
           u.regionalName.replaceWhenNullOrWhiteSpace(),
       onChanged: (DanhSachQuanHuyenDataResponse? data) {
-        if (danhSachQuanHuyenDataResponse != data) {
-          danhSachQuanHuyenDataResponse = data;
+        if (widget.danhSachQuanHuyenDataResponse != data) {
+          widget.danhSachQuanHuyenDataResponse = data;
           widget.data.quanHuyen = data?.regionalID;
           widget.data.doanhNghiep = null;
-          danhSachDoanhNghiepDataResponse = null;
+          widget.danhSachDoanhNghiepDataResponse = null;
           danhSachDoanhNghiepBloc.add(DanhSachDoanhNghiepEvent(
               request: DanhSachDoanhNghiepRequest(
                   obj: DanhSachDoanhNghiepDataRequest(
@@ -260,13 +278,13 @@ class _FilterDrawerState extends BaseScreenStateActive<FilterDrawer> {
       popupProps: _buildPopupProps(context),
       clearButtonProps: _buildClearButtonProps(),
       filterFn: (data, filter) => data.filter(filter),
-      selectedItem: danhSachDoanhNghiepDataResponse,
+      selectedItem: widget.danhSachDoanhNghiepDataResponse,
       asyncItems: (String filter) => Future.value(list),
       itemAsString: (DanhSachDoanhNghiepDataResponse u) =>
           u.businessVn.replaceWhenNullOrWhiteSpace(),
       onChanged: (DanhSachDoanhNghiepDataResponse? data) {
-        if (danhSachDoanhNghiepDataResponse != data) {
-          danhSachDoanhNghiepDataResponse = data;
+        if (widget.danhSachDoanhNghiepDataResponse != data) {
+          widget.danhSachDoanhNghiepDataResponse = data;
           widget.data.doanhNghiep = data?.doanhNghiepID;
         }
       },
@@ -280,13 +298,13 @@ class _FilterDrawerState extends BaseScreenStateActive<FilterDrawer> {
       popupProps: _buildPopupProps(context),
       clearButtonProps: _buildClearButtonProps(),
       filterFn: (data, filter) => data.filter(filter),
-      selectedItem: danhSachKinhNghiemDataResponse,
+      selectedItem: widget.danhSachKinhNghiemDataResponse,
       asyncItems: (String filter) => Future.value(list),
       itemAsString: (DanhSachKinhNghiemDataResponse u) =>
           u.experienceName.replaceWhenNullOrWhiteSpace(),
       onChanged: (DanhSachKinhNghiemDataResponse? data) {
-        if (danhSachKinhNghiemDataResponse != data) {
-          danhSachKinhNghiemDataResponse = data;
+        if (widget.danhSachKinhNghiemDataResponse != data) {
+          widget.danhSachKinhNghiemDataResponse = data;
           widget.data.kinhNghiem = data?.experienceID;
         }
       },
@@ -301,13 +319,13 @@ class _FilterDrawerState extends BaseScreenStateActive<FilterDrawer> {
       popupProps: _buildPopupProps(context),
       clearButtonProps: _buildClearButtonProps(),
       filterFn: (data, filter) => data.filter(filter),
-      selectedItem: danhSachMucLuongDataResponse,
+      selectedItem: widget.danhSachMucLuongDataResponse,
       asyncItems: (String filter) => Future.value(list),
       itemAsString: (DanhSachMucLuongDataResponse u) =>
           u.salaryName.replaceWhenNullOrWhiteSpace(),
       onChanged: (DanhSachMucLuongDataResponse? data) {
-        if (danhSachMucLuongDataResponse != data) {
-          danhSachMucLuongDataResponse = data;
+        if (widget.danhSachMucLuongDataResponse != data) {
+          widget.danhSachMucLuongDataResponse = data;
         }
       },
       dropdownDecoratorProps:

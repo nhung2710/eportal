@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../extension/input_decoration_extension.dart';
 import '../../../../style/app_color.dart';
+import '../../../../widget/input/capcha_input.dart';
+import '../../../../widget/input/field_input.dart';
 
 //
 // Created by BlackRose on 11/7/2023.
@@ -32,17 +34,8 @@ class _ForgotPasswordPageState extends BasePageState<ForgotPasswordPage> {
   Widget pageUI(BuildContext context) => ListView(
         children: <Widget>[
           Container(
-            margin: const EdgeInsets.only(top: 30),
-            child: Image.asset(
-              'assets/images/Logo.jpg',
-              alignment: Alignment.center,
-              height: 125,
-              width: 125,
-            ),
-          ),
-          Container(
             margin: const EdgeInsets.only(top: 10),
-            child: TextFormField(
+            child: FieldInput(
               controller: usernameController,
               maxLength: 50,
               textInputAction: TextInputAction.next,
@@ -52,20 +45,31 @@ class _ForgotPasswordPageState extends BasePageState<ForgotPasswordPage> {
                 }
                 return null;
               },
-              onFieldSubmitted: (value) => _signUp(context),
-              decoration: const InputDecoration().defaultInputDecoration(
-                  hintText: 'Tài khoản', iconData: Icons.account_circle),
+              hintText: 'Tài khoản',
+              icon: Icons.account_circle,
             ),
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
-            child: TextFormField(
+            child: FieldInput(
               controller: emailController,
               maxLength: 50,
+              textInputAction: TextInputAction.next,
+              hintText: 'Địa chỉ thư điện tử',
+              validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Địa chỉ thư điện tử không được để trống';
+                }
+                return null;
+              },
+              icon: Icons.email,
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: CapchaInput(
               textInputAction: TextInputAction.done,
               onFieldSubmitted: (value) => _signUp(context),
-              decoration: const InputDecoration().defaultInputDecoration(
-                  hintText: 'Địa chỉ thư điện tử', iconData: Icons.email),
             ),
           ),
           Container(
