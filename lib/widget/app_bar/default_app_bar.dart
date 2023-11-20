@@ -58,7 +58,7 @@ class DefaultAppBar {
                             builder: (context) => const HomePage()));
                   },
                   icon: const Icon(Icons.logout),
-                  color: AppColor.colorOfText,
+                  color: AppColor.colorOfIcon,
                 )
               : IconButton(
                   onPressed: () {
@@ -67,7 +67,7 @@ class DefaultAppBar {
                         MaterialPageRoute(
                             builder: (context) => const SignInPage()));
                   },
-                  icon: const Icon(Icons.login, color: Colors.blue),
+                  icon: const Icon(Icons.login, color: AppColor.colorOfIcon),
                 )
         ],
         automaticallyImplyLeading: false,

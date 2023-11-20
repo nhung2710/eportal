@@ -1,6 +1,11 @@
 import 'package:eportal/model/setting_page_model.dart';
 import 'package:eportal/screen/anonymous/setting/widget/setting_item.dart';
 import 'package:eportal/screen/share/about/page/about_page.dart';
+import 'package:eportal/screen/share/change_password/page/change_password_page.dart';
+import 'package:eportal/screen/share/change_user_info/page/change_user_info_page.dart';
+import 'package:eportal/screen/share/chart_economically_active/page/chart_economically_active_page.dart';
+import 'package:eportal/screen/share/chart_economically_inactive/page/chart_economically_inactive_page.dart';
+import 'package:eportal/screen/share/chart_unemployment_rate/page/chart_unemployment_rate_page.dart';
 import 'package:eportal/screen/share/contact/page/contract_page.dart';
 import 'package:eportal/screen/share/policy/page/policy_page.dart';
 import 'package:eportal/screen/share/support/page/support_page.dart';
@@ -8,11 +13,8 @@ import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
-import '../../../share/change_password/page/change_password_page.dart';
-import '../../../share/change_user_info/page/change_user_info_page.dart';
-import '../../../share/chart_economically_active/page/chart_economically_active_page.dart';
-import '../../../share/chart_economically_inactive/page/chart_economically_inactive_page.dart';
-import '../../../share/chart_unemployment_rate/page/chart_unemployment_rate_page.dart';
+import '../../history/page/history_page.dart';
+
 
 //
 // Created by BlackRose on 11/7/2023.
@@ -36,6 +38,16 @@ class _SettingPageState extends BasePageState<SettingPage> {
           icon: Icons.password_sharp,
           title: "Đổi mật khẩu",
           builder: (context) => const ChangePasswordPage()),
+    ],
+    "Tính năng": [
+      SettingPageModel(
+          icon: Icons.notifications,
+          title: "Thông báo",
+          builder: (context) => const ChangeUserInfoPage()),
+      SettingPageModel(
+          icon: Icons.history,
+          title: "Lịch sử ứng tuyển",
+          builder: (context) => const HistoryPage()),
     ],
     "Biểu đồ": [
       SettingPageModel(

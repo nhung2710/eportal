@@ -1,12 +1,15 @@
-import 'package:eportal/screen/anonymous/setting/page/setting_page.dart';
+
 import 'package:eportal/screen/share/home_manage/page/home_manage_page.dart';
 import 'package:eportal/screen/share/news_hub/page/news_hub_page.dart';
+import 'package:eportal/screen/share/notification/page/notification_page.dart';
 import 'package:eportal/screen/worker/find_job/page/find_job_page.dart';
 import 'package:eportal/screen/worker/history/page/history_page.dart';
 import 'package:eportal/screen/worker/profile/page/profile_page.dart';
 import 'package:eportal/widget/app_bar/default_app_bar.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
+
+import '../setting/page/setting_page.dart';
 
 //
 // Created by BlackRose on 11/7/2023.
@@ -86,12 +89,12 @@ class _HomePageState extends BasePageStateActive<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.history,
+              Icons.notifications,
               color: Colors.blueAccent,
             ),
-            label: "Lịch sử",
+            label: "Thông báo",
             activeIcon: Icon(
-              Icons.history,
+              Icons.notifications,
               color: Colors.red,
             ),
           ),
@@ -126,7 +129,7 @@ class _HomePageState extends BasePageStateActive<HomePage> {
           HomeManagePage(),
           ProfilePage(),
           FindJobPage(),
-          HistoryPage(),
+          NotificationPage(),
           SettingPage(),
         ],
       );

@@ -32,180 +32,178 @@ class _SupportPageState extends BasePageState<SupportPage> {
   String getPageTitle(BuildContext context) => "Hỗ trợ";
 
   @override
-  Widget pageUI(BuildContext context) => Container(
-        child: Card(
-          elevation: 5,
-          color: AppColor.colorOfApp,
-          shadowColor: AppColor.colorOfDrawer,
-          borderOnForeground: false,
-          margin: const EdgeInsets.all(5),
-          shape: const RoundedRectangleBorder(
-              side: BorderSide(color: AppColor.colorOfDrawer, width: 0.2),
-              borderRadius: BorderRadius.all(Radius.circular(5))),
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                        flex: 3,
-                        child: Text(
-                          "Tên công ty",
-                          style: AppTextStyle.title
-                              .copyWith(overflow: TextOverflow.visible),
-                        )),
-                    const VerticalDivider(
-                      thickness: 2,
-                      width: 5,
-                      color: Colors.transparent,
-                    ),
-                    Expanded(
-                        flex: 4,
-                        child: Text(
-                          companyName,
-                          style: AppTextStyle.title.copyWith(
-                              overflow: TextOverflow.visible,
-                              color: AppColor.colorOfIcon),
-                        )),
-                  ],
-                ),
-                const Divider(
-                  height: 50,
-                  color: AppColor.colorOfDrawer,
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                        flex: 3,
-                        child: Text(
-                          "Hotline",
-                          style: AppTextStyle.title
-                              .copyWith(overflow: TextOverflow.visible),
-                        )),
-                    const VerticalDivider(
-                      thickness: 2,
-                      width: 5,
-                      color: Colors.transparent,
-                    ),
-                    Expanded(
-                        flex: 4,
-                        child: GestureDetector(
-                          onTap: _launchHotline,
-                          child: Text(
-                            hotline,
-                            style: AppTextStyle.title.copyWith(
-                                overflow: TextOverflow.visible,
-                                color: AppColor.colorOfIcon),
-                          ),
-                        )),
-                  ],
-                ),
-                const Divider(
-                  height: 50,
-                  color: AppColor.colorOfDrawer,
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                        flex: 3,
-                        child: Text(
-                          "Địa chỉ",
-                          style: AppTextStyle.title
-                              .copyWith(overflow: TextOverflow.visible),
-                        )),
-                    const VerticalDivider(
-                      thickness: 2,
-                      width: 5,
-                      color: Colors.transparent,
-                    ),
-                    Expanded(
-                        flex: 4,
-                        child: Text(
-                          companyAddress,
-                          style: AppTextStyle.title.copyWith(
-                              overflow: TextOverflow.visible,
-                              color: AppColor.colorOfIcon),
-                        )),
-                  ],
-                ),
-                const Divider(
-                  height: 50,
-                  color: AppColor.colorOfDrawer,
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                        flex: 3,
-                        child: Text(
-                          "Email",
-                          style: AppTextStyle.title
-                              .copyWith(overflow: TextOverflow.visible),
-                        )),
-                    const VerticalDivider(
-                      thickness: 2,
-                      width: 5,
-                      color: Colors.transparent,
-                    ),
-                    Expanded(
-                        flex: 4,
-                        child: GestureDetector(
-                          onTap: _launchEmail,
-                          child: Text(
-                            email,
-                            style: AppTextStyle.title.copyWith(
-                                overflow: TextOverflow.visible,
-                                color: AppColor.colorOfIcon),
-                          ),
-                        )),
-                  ],
-                ),
-                const Divider(
-                  height: 50,
-                  color: AppColor.colorOfDrawer,
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                        flex: 3,
-                        child: Text(
-                          '${"Website".replaceWhenNullOrWhiteSpace()}',
-                          style: AppTextStyle.title
-                              .copyWith(overflow: TextOverflow.visible),
-                        )),
-                    const VerticalDivider(
-                      thickness: 2,
-                      width: 5,
-                      color: Colors.transparent,
-                    ),
-                    Expanded(
-                        flex: 4,
-                        child: GestureDetector(
-                          onTap: _launchWeb,
-                          child: Text(
-                            website,
-                            style: AppTextStyle.title.copyWith(
-                                overflow: TextOverflow.visible,
-                                color: AppColor.colorOfIcon),
-                          ),
-                        )),
-                  ],
-                ),
-              ],
-            ),
+  Widget pageUI(BuildContext context) => Card(
+    elevation: 5,
+    color: AppColor.colorOfApp,
+    shadowColor: AppColor.colorOfDrawer,
+    borderOnForeground: false,
+    margin: const EdgeInsets.all(5),
+    shape: const RoundedRectangleBorder(
+        side: BorderSide(color: AppColor.colorOfDrawer, width: 0.2),
+        borderRadius: BorderRadius.all(Radius.circular(5))),
+    child: Container(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                  flex: 3,
+                  child: Text(
+                    "Tên công ty",
+                    style: AppTextStyle.title
+                        .copyWith(overflow: TextOverflow.visible),
+                  )),
+              const VerticalDivider(
+                thickness: 2,
+                width: 5,
+                color: Colors.transparent,
+              ),
+              Expanded(
+                  flex: 4,
+                  child: Text(
+                    companyName,
+                    style: AppTextStyle.title.copyWith(
+                        overflow: TextOverflow.visible,
+                        color: AppColor.colorOfIcon),
+                  )),
+            ],
           ),
-        ),
-      );
+          const Divider(
+            height: 50,
+            color: AppColor.colorOfDrawer,
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                  flex: 3,
+                  child: Text(
+                    "Hotline",
+                    style: AppTextStyle.title
+                        .copyWith(overflow: TextOverflow.visible),
+                  )),
+              const VerticalDivider(
+                thickness: 2,
+                width: 5,
+                color: Colors.transparent,
+              ),
+              Expanded(
+                  flex: 4,
+                  child: GestureDetector(
+                    onTap: _launchHotline,
+                    child: Text(
+                      hotline,
+                      style: AppTextStyle.title.copyWith(
+                          overflow: TextOverflow.visible,
+                          color: AppColor.colorOfIcon),
+                    ),
+                  )),
+            ],
+          ),
+          const Divider(
+            height: 50,
+            color: AppColor.colorOfDrawer,
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                  flex: 3,
+                  child: Text(
+                    "Địa chỉ",
+                    style: AppTextStyle.title
+                        .copyWith(overflow: TextOverflow.visible),
+                  )),
+              const VerticalDivider(
+                thickness: 2,
+                width: 5,
+                color: Colors.transparent,
+              ),
+              Expanded(
+                  flex: 4,
+                  child: Text(
+                    companyAddress,
+                    style: AppTextStyle.title.copyWith(
+                        overflow: TextOverflow.visible,
+                        color: AppColor.colorOfIcon),
+                  )),
+            ],
+          ),
+          const Divider(
+            height: 50,
+            color: AppColor.colorOfDrawer,
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                  flex: 3,
+                  child: Text(
+                    "Email",
+                    style: AppTextStyle.title
+                        .copyWith(overflow: TextOverflow.visible),
+                  )),
+              const VerticalDivider(
+                thickness: 2,
+                width: 5,
+                color: Colors.transparent,
+              ),
+              Expanded(
+                  flex: 4,
+                  child: GestureDetector(
+                    onTap: _launchEmail,
+                    child: Text(
+                      email,
+                      style: AppTextStyle.title.copyWith(
+                          overflow: TextOverflow.visible,
+                          color: AppColor.colorOfIcon),
+                    ),
+                  )),
+            ],
+          ),
+          const Divider(
+            height: 50,
+            color: AppColor.colorOfDrawer,
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                  flex: 3,
+                  child: Text(
+                    '${"Website".replaceWhenNullOrWhiteSpace()}',
+                    style: AppTextStyle.title
+                        .copyWith(overflow: TextOverflow.visible),
+                  )),
+              const VerticalDivider(
+                thickness: 2,
+                width: 5,
+                color: Colors.transparent,
+              ),
+              Expanded(
+                  flex: 4,
+                  child: GestureDetector(
+                    onTap: _launchWeb,
+                    child: Text(
+                      website,
+                      style: AppTextStyle.title.copyWith(
+                          overflow: TextOverflow.visible,
+                          color: AppColor.colorOfIcon),
+                    ),
+                  )),
+            ],
+          ),
+        ],
+      ),
+    ),
+  );
 
   void _launchHotline() {
     launchUrl(Uri(scheme: 'tel', path: hotline));

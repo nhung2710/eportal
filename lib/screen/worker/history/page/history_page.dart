@@ -16,21 +16,10 @@ class HistoryPage extends BasePage {
   State<StatefulWidget> createState() => _HistoryPageState();
 }
 
-class _HistoryPageState extends BasePageStateActive<HistoryPage> {
+class _HistoryPageState extends BasePageState<HistoryPage> {
   @override
-  bool isHasAppBar(BuildContext context) => false;
+  String getPageTitle(BuildContext context)  => "Lịch sử ứng tuyển";
 
-  @override
-  Widget? getFloatingActionButton(BuildContext context) =>
-      ExpandableFab(children: [
-        ActionButton(
-          icon: const Icon(Icons.app_registration, color: Colors.white),
-          onPressed: () {
-            loadDataDemo()
-                .then((value) => nextPage((context) => const ChatBotPage()));
-          },
-        ),
-      ]);
 
   @override
   double currentPadding(BuildContext context) => 0;
