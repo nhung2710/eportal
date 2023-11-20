@@ -1,3 +1,4 @@
+import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
@@ -18,39 +19,36 @@ class ContractPage extends BasePage {
 
 class _ContractPageState extends BasePageState<ContractPage> {
   TextEditingController textEditingController = TextEditingController();
-  String email = "abc@gmail.com";
-  String website = "www.abc.com.vn";
-  String hotline = "0386110030";
-  String companyName = "CÔNG TY TRÁCH NHIỆM HỮU HẠN MỘT THÀNH VIÊN A";
-  String companyAddress =
-      "số 1 ngách 2 ngõ 22 phố Nguyễn Văn A phường Nguyễn Văn B Quận A Thành phố C";
 
   @override
   String getPageTitle(BuildContext context) => "Liên hệ";
 
   @override
-  Widget pageUI(BuildContext context) => Container(
-        child: Card(
-          elevation: 5,
-          color: AppColor.colorOfApp,
-          shadowColor: AppColor.colorOfDrawer,
-          borderOnForeground: false,
-          margin: const EdgeInsets.all(5),
-          shape: const RoundedRectangleBorder(
-              side: BorderSide(color: AppColor.colorOfDrawer, width: 0.2),
-              borderRadius: BorderRadius.all(Radius.circular(5))),
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
+  Widget pageUI(BuildContext context) => Card(
+        elevation: AppElevation.sizeOfNormal,
+        color: AppColor.colorOfApp,
+        shadowColor: AppColor.colorOfIcon,
+        borderOnForeground: false,
+        margin: const EdgeInsets.all(5),
+        shape: const RoundedRectangleBorder(
+            side: BorderSide(color: AppColor.colorOfDrawer, width: 0.2),
+            borderRadius: BorderRadius.all(Radius.circular(5))),
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
                   mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                        flex: 3,
+                        flex: 1,
                         child: Text(
                           "Tên công ty",
                           style: AppTextStyle.title
@@ -62,103 +60,112 @@ class _ContractPageState extends BasePageState<ContractPage> {
                       color: Colors.transparent,
                     ),
                     Expanded(
-                        flex: 4,
-                        child: Text(
-                          companyName,
-                          style: AppTextStyle.title.copyWith(
-                              overflow: TextOverflow.visible,
-                              color: AppColor.colorOfIcon),
+                        flex: 3,
+                        child: GestureDetector(
+                          onTap: () => _launchHotline("02963831123"),
+                          child: Text(
+                            "TRUNG TÂM DỊCH VỤ VIỆC LÀM TỈNH HÒA BÌNH",
+                            textAlign: TextAlign.end,
+                            style: AppTextStyle.title.copyWith(
+                                overflow: TextOverflow.visible,
+                                color: AppColor.colorOfIcon),
+                          ),
                         )),
                   ],
                 ),
-                const Divider(
-                  height: 50,
-                  color: AppColor.colorOfDrawer,
-                ),
-                Row(
+              ),
+              const Divider(
+                height: 1,
+                color: AppColor.colorOfDrawer,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                        flex: 3,
-                        child: Text(
-                          "Hotline",
-                          style: AppTextStyle.title
-                              .copyWith(overflow: TextOverflow.visible),
-                        )),
-                    const VerticalDivider(
-                      thickness: 2,
-                      width: 5,
-                      color: Colors.transparent,
-                    ),
-                    Expanded(
-                        flex: 4,
-                        child: GestureDetector(
-                          onTap: _launchHotline,
-                          child: Text(
-                            hotline,
-                            style: AppTextStyle.title.copyWith(
-                                overflow: TextOverflow.visible,
-                                color: AppColor.colorOfIcon),
-                          ),
-                        )),
-                  ],
-                ),
-                const Divider(
-                  height: 50,
-                  color: AppColor.colorOfDrawer,
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                        flex: 3,
+                        flex: 1,
                         child: Text(
                           "Địa chỉ",
                           style: AppTextStyle.title
                               .copyWith(overflow: TextOverflow.visible),
                         )),
-                    const VerticalDivider(
-                      thickness: 2,
-                      width: 5,
-                      color: Colors.transparent,
-                    ),
                     Expanded(
-                        flex: 4,
-                        child: Text(
-                          companyAddress,
-                          style: AppTextStyle.title.copyWith(
-                              overflow: TextOverflow.visible,
-                              color: AppColor.colorOfIcon),
+                        flex: 3,
+                        child: GestureDetector(
+                          onTap: () => _launchHotline("02963831123"),
+                          child: Text(
+                            "570 đường Trần Hưng Đạo, Hòa Bình, Vietnam",
+                            textAlign: TextAlign.end,
+                            style: AppTextStyle.title.copyWith(
+                                overflow: TextOverflow.visible,
+                                color: AppColor.colorOfIcon),
+                          ),
                         )),
                   ],
                 ),
-                const Divider(
-                  height: 50,
-                  color: AppColor.colorOfDrawer,
-                ),
-                Row(
+              ),
+              const Divider(
+                height: 1,
+                color: AppColor.colorOfDrawer,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
                   mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
+                        flex: 1,
+                        child: Text(
+                          "Số điện thoại",
+                          style: AppTextStyle.title
+                              .copyWith(overflow: TextOverflow.visible),
+                        )),
+                    Expanded(
                         flex: 3,
+                        child: GestureDetector(
+                          onTap: () => _launchHotline("0943305444"),
+                          child: Text(
+                            "094 330 54 44",
+                            textAlign: TextAlign.end,
+                            style: AppTextStyle.title.copyWith(
+                                overflow: TextOverflow.visible,
+                                color: AppColor.colorOfIcon),
+                          ),
+                        )),
+                  ],
+                ),
+              ),
+              const Divider(
+                height: 1,
+                color: AppColor.colorOfDrawer,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                        flex: 1,
                         child: Text(
                           "Email",
                           style: AppTextStyle.title
                               .copyWith(overflow: TextOverflow.visible),
                         )),
-                    const VerticalDivider(
-                      thickness: 2,
-                      width: 5,
-                      color: Colors.transparent,
-                    ),
                     Expanded(
-                        flex: 4,
+                        flex: 3,
                         child: GestureDetector(
-                          onTap: _launchEmail,
+                          onTap: () =>
+                              _launchEmail("vieclamhoabinh.media@gmail.com"),
                           child: Text(
-                            email,
+                            "vieclamhoabinh.media@gmail.com",
+                            textAlign: TextAlign.end,
                             style: AppTextStyle.title.copyWith(
                                 overflow: TextOverflow.visible,
                                 color: AppColor.colorOfIcon),
@@ -166,31 +173,32 @@ class _ContractPageState extends BasePageState<ContractPage> {
                         )),
                   ],
                 ),
-                const Divider(
-                  height: 50,
-                  color: AppColor.colorOfDrawer,
-                ),
-                Row(
+              ),
+              const Divider(
+                height: 1,
+                color: AppColor.colorOfDrawer,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
                   mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                        flex: 3,
+                        flex: 1,
                         child: Text(
                           "Website",
                           style: AppTextStyle.title
                               .copyWith(overflow: TextOverflow.visible),
                         )),
-                    const VerticalDivider(
-                      thickness: 2,
-                      width: 5,
-                      color: Colors.transparent,
-                    ),
                     Expanded(
-                        flex: 4,
+                        flex: 3,
                         child: GestureDetector(
-                          onTap: _launchWeb,
+                          onTap: () => _launchWeb("www.eportal.top"),
                           child: Text(
-                            website,
+                            "www.eportal.top",
+                            textAlign: TextAlign.end,
                             style: AppTextStyle.title.copyWith(
                                 overflow: TextOverflow.visible,
                                 color: AppColor.colorOfIcon),
@@ -198,22 +206,86 @@ class _ContractPageState extends BasePageState<ContractPage> {
                         )),
                   ],
                 ),
-              ],
-            ),
+              ),
+              const Divider(
+                height: 1,
+                color: AppColor.colorOfDrawer,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: Text(
+                          "Facebook",
+                          style: AppTextStyle.title
+                              .copyWith(overflow: TextOverflow.visible),
+                        )),
+                    Expanded(
+                        flex: 3,
+                        child: GestureDetector(
+                          onTap: () => _launchEmail(
+                              "Trung tâm Dịch vụ việc làm Hòa Bình"),
+                          child: Text(
+                            "Trung tâm Dịch vụ việc làm Hòa Bình",
+                            textAlign: TextAlign.end,
+                            style: AppTextStyle.title.copyWith(
+                                overflow: TextOverflow.visible,
+                                color: AppColor.colorOfIcon),
+                          ),
+                        )),
+                  ],
+                ),
+              ),
+              const Divider(
+                height: 1,
+                color: AppColor.colorOfDrawer,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: Text(
+                          "Zalo",
+                          style: AppTextStyle.title
+                              .copyWith(overflow: TextOverflow.visible),
+                        )),
+                    Expanded(
+                        flex: 3,
+                        child: GestureDetector(
+                          onTap: () => _launchEmail(
+                              "Trung tâm Dịch vụ việc làm Hòa Bình"),
+                          child: Text(
+                            textAlign: TextAlign.end,
+                            "Trung tâm Dịch vụ việc làm Hòa Bình",
+                            style: AppTextStyle.title.copyWith(
+                                overflow: TextOverflow.visible,
+                                color: AppColor.colorOfIcon),
+                          ),
+                        )),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       );
 
-  void _launchHotline() {
+  void _launchHotline(String hotline) {
     launchUrl(Uri(scheme: 'tel', path: hotline));
   }
 
-  void _launchEmail() {
+  void _launchEmail(String email) {
     launchUrl(
         Uri(scheme: 'mailto', path: '${email}subject=Yêu cầu hỗ trợ&body='));
   }
 
-  void _launchWeb() {
+  void _launchWeb(String website) {
     launchUrl(Uri.parse(website));
   }
 }

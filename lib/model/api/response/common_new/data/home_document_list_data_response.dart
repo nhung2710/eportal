@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../extension/dateTime_extension.dart';
+import '../../../../../extension/string_extension.dart';
+
 //
 // Created by BlackRose on 13/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -73,6 +76,8 @@ class HomeDocumentListDataResponse {
     signerName = json['signerName'];
     promDate = json['promDate'];
     effectDate = json['effectDate'];
+    effectDate = effectDate.formatDateTimeApi();
+
     endDate = json['endDate'];
     fileName = json['fileName'];
     fileSource = json['fileSource'];

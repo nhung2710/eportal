@@ -1,5 +1,3 @@
-import 'package:eportal/model/setting_page_model.dart';
-import 'package:eportal/screen/anonymous/setting/widget/setting_item.dart';
 import 'package:eportal/screen/share/about/page/about_page.dart';
 import 'package:eportal/screen/share/contact/page/contract_page.dart';
 import 'package:eportal/screen/share/policy/page/policy_page.dart';
@@ -9,11 +7,13 @@ import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/list_viewer/custom_list_viewer.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../widget/list_viewer/setting_item_viewer.dart';
 import '../../../share/change_password/page/change_password_page.dart';
 import '../../../share/change_user_info/page/change_user_info_page.dart';
 import '../../../share/chart_economically_active/page/chart_economically_active_page.dart';
 import '../../../share/chart_economically_inactive/page/chart_economically_inactive_page.dart';
 import '../../../share/chart_unemployment_rate/page/chart_unemployment_rate_page.dart';
+import '../../../share/empty_example/page/empty_example_page.dart';
 
 //
 // Created by BlackRose on 11/7/2023.
@@ -37,6 +37,26 @@ class _SettingPageState extends BasePageState<SettingPage> {
           icon: Icons.password_sharp,
           title: "Đổi mật khẩu",
           builder: (context) => const ChangePasswordPage()),
+    ],
+    "Quản trị": [
+      SettingPageModel(
+          icon: Icons.newspaper,
+          title: "Tin bài",
+          builder: (context) => EmptyExamplePage(
+                isHasAppBar: true,
+              )),
+      SettingPageModel(
+          icon: Icons.event,
+          title: "Sự kiện",
+          builder: (context) => EmptyExamplePage(
+                isHasAppBar: true,
+              )),
+      SettingPageModel(
+          icon: Icons.image,
+          title: "Banner",
+          builder: (context) => EmptyExamplePage(
+                isHasAppBar: true,
+              ))
     ],
     "Biểu đồ": [
       SettingPageModel(
@@ -82,7 +102,7 @@ class _SettingPageState extends BasePageState<SettingPage> {
                   title: e.key,
                   children: e.value
                       .map((e) => CustomItemViewer(
-                          currrent: SettingItem(
+                          currrent: SettingItemViewer(
                               onTap: () => nextPage(e.builder),
                               settingPageModel: e)))
                       .toList()))

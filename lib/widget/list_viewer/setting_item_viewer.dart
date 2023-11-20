@@ -1,28 +1,37 @@
-import 'package:eportal/model/setting_page_model.dart';
 import 'package:eportal/style/app_color.dart';
+import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/style/app_size_icon.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //
-// Created by BlackRose on 11/8/2023.
+// Created by BlackRose on 20/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
+class SettingPageModel {
+  IconData icon;
+  String title;
+  WidgetBuilder builder;
 
-class SettingItem extends StatelessWidget {
+  SettingPageModel(
+      {required this.icon, required this.title, required this.builder});
+}
+
+class SettingItemViewer extends StatelessWidget {
   final SettingPageModel settingPageModel;
   final GestureTapCallback onTap;
 
-  const SettingItem(
+  const SettingItemViewer(
       {super.key, required this.settingPageModel, required this.onTap});
 
   @override
   Widget build(BuildContext context) => GestureDetector(
         onTap: onTap,
         child: Card(
-            margin: const EdgeInsets.only(top: 5, left: 10),
-            elevation: 5,
+            margin: const EdgeInsets.only(top: 10, left: 5, right: 5),
+            elevation: AppElevation.sizeOfNormal,
+            borderOnForeground: false,
+            shadowColor: AppColor.colorOfIcon,
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Row(
@@ -42,7 +51,7 @@ class SettingItem extends StatelessWidget {
                                 .copyWith(color: AppColor.colorOfIcon))),
                   ),
                   const Icon(
-                    FontAwesomeIcons.angleRight,
+                    Icons.navigate_next_sharp,
                     color: AppColor.colorOfIcon,
                     size: AppSizeIcon.sizeOfNormal,
                   )

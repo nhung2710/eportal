@@ -1,3 +1,4 @@
+import 'package:eportal/style/app_elevation.dart';
 import 'package:flutter/material.dart';
 
 import '../../style/app_color.dart';
@@ -23,9 +24,9 @@ class CustomButtonIcon extends StatelessWidget {
   Widget build(BuildContext context) => GestureDetector(
         onTap: onTap,
         child: Card(
-          elevation: 5,
+          elevation: AppElevation.sizeOfNormal,
           color: AppColor.colorOfApp,
-          shadowColor: AppColor.colorOfDrawer,
+          shadowColor: AppColor.colorOfIcon,
           borderOnForeground: false,
           shape: const RoundedRectangleBorder(
               side: BorderSide(color: AppColor.colorOfDrawer, width: 0.1),

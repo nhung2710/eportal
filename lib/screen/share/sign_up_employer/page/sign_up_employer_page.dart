@@ -1,36 +1,32 @@
 import 'package:eportal/application/global_application.dart';
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/screen/share/sign_in/page/sign_in_page.dart';
+import 'package:eportal/style/app_color.dart';
 import 'package:eportal/widget/base/base_page.dart';
+import 'package:eportal/widget/input/capcha_input.dart';
+import 'package:eportal/widget/input/field_input.dart';
+import 'package:eportal/widget/input/password_input.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../extension/input_decoration_extension.dart';
-import '../../../../style/app_color.dart';
-import '../../../../widget/input/capcha_input.dart';
-import '../../../../widget/input/field_input.dart';
-import '../../../../widget/input/password_input.dart';
-
 //
-// Created by BlackRose on 11/7/2023.
+// Created by BlackRose on 20/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class SignUpPage extends BasePage {
-  const SignUpPage({super.key});
+class SignUpEmployerPage extends BasePage {
+  const SignUpEmployerPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _SignUpPageState();
+  State<StatefulWidget> createState() => _SignUpEmployerPageState();
 }
 
-class _SignUpPageState extends BasePageState<SignUpPage> {
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
+class _SignUpEmployerPageState extends BasePageState<SignUpEmployerPage> {
+  TextEditingController fullNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmController = TextEditingController();
-  bool? isWorker = false;
 
   @override
   String getPageTitle(BuildContext context) => "Đăng ký tài khoản";
@@ -50,62 +46,19 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
               width: 125,
             ),
           ),
-          RadioListTile(
-            visualDensity: const VisualDensity(
-                horizontal: VisualDensity.minimumDensity,
-                vertical: VisualDensity.minimumDensity),
-            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            title: const Text(
-              'Người lao động tìm việc làm',
-            ),
-            contentPadding: EdgeInsets.zero,
-            activeColor: AppColor.colorOfIcon,
-            value: true,
-            groupValue: isWorker,
-            onChanged: (bool? value) {
-              setState(() {
-                isWorker = value;
-              });
-            },
-          ),
-          RadioListTile(
-            visualDensity: const VisualDensity(
-                horizontal: VisualDensity.minimumDensity,
-                vertical: VisualDensity.minimumDensity),
-            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            title: const Text('Doanh nghiệp tuyển dụng'),
-            contentPadding: EdgeInsets.zero,
-            activeColor: AppColor.colorOfIcon,
-            value: false,
-            groupValue: isWorker,
-            onChanged: (bool? value) {
-              setState(() {
-                isWorker = value;
-              });
-            },
-          ),
           Container(
             margin: const EdgeInsets.only(top: 10),
             child: FieldInput(
-              controller: firstNameController,
-              textInputAction: TextInputAction.next,
-              hintText: "Họ",
-              icon: Icons.people,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: lastNameController,
+              controller: fullNameController,
               textInputAction: TextInputAction.next,
               validator: (text) {
                 if (text == null || text.isEmpty) {
-                  return 'Tên không được để trống';
+                  return 'Họ và tên không được để trống';
                 }
                 return null;
               },
-              hintText: "Tên",
-              icon: Icons.person,
+              hintText: "Họ và tên",
+              icon: Icons.account_box,
             ),
           ),
           Container(
@@ -196,7 +149,7 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
             ),
           ),
           Container(
-              margin: const EdgeInsets.only(top: 10, bottom: 10),
+              margin: const EdgeInsets.only(top: 10),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: AppColor.colorOfIcon),
@@ -209,57 +162,6 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
         ],
       );
 
-  /*
-  @override
-  Widget pageUI(BuildContext context) => Center(
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: double.infinity,
-          color: Colors.transparent,
-          child: Image.asset(
-            'assets/images/Logo.jpg',
-            alignment: Alignment.center,
-            fit: BoxFit.contain,
-            height: 125,
-            width: 125,
-          ),
-        ),
-        Container(
-            margin: const EdgeInsets.only(top: 10),
-            width: double.infinity,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColor.colorOfIcon),
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                child: const Text('Bạn là người lao động tìm việc làm?'),
-              ),
-              onPressed: () =>
-                  nextPage((context) => const SignUpWorkerPage()),
-            )),
-        Container(
-            margin: const EdgeInsets.only(top: 10, bottom: 10),
-            width: double.infinity,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColor.colorOfIcon),
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                child: const Text('Bạn là doanh nghiệp cần tuyển dụng?'),
-              ),
-              onPressed: () =>
-                  nextPage((context) => const SignUpEmployerPage()),
-            )),
-        Container(
-          width: double.infinity,
-          color: Colors.transparent,
-          height: 125,
-        ),
-      ],
-    ),
-  );*/
   _registerAccount(BuildContext context) {
     if (isValid()) {
       loadDataDemo().then((value) {
@@ -268,8 +170,8 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
         GlobalApplication().Preferences.setString(
             ApplicationConstant.REGISTER_USER_PASSWORD,
             passwordController.text);
-        showCenterMessage("Bạn đã tạo tài khoản thành công")
-            .then((value) => nextPage((context) => const SignInPage()));
+        showCenterMessage("Bạn đã tạo tài khoản thành công").then(
+            (value) => nextPageWithoutBack((context) => const SignInPage()));
       });
     }
   }

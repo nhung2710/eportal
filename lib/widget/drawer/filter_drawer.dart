@@ -37,6 +37,7 @@ import '../../model/api/response/common_new/data/danh_sach_muc_luong_data_respon
 import '../../model/api/response/common_new/data/danh_sach_quan_huyen_data_response.dart';
 import '../../model/api/response/common_new/data/danh_sach_tinh_tp_data_response.dart';
 import '../../state/base/base_state.dart';
+import '../../style/app_text_style.dart';
 import '../base/base_page.dart';
 
 //
@@ -59,7 +60,7 @@ class FilterDrawer extends BasePage {
   State<StatefulWidget> createState() => _FilterDrawerState();
 }
 
-class _FilterDrawerState extends BaseScreenStateActive<FilterDrawer> {
+class _FilterDrawerState extends BaseScreenState<FilterDrawer> {
   late DanhSachTinhTpBloc danhSachTinhTpBloc;
   late DanhSachQuanHuyenBloc danhSachQuanHuyenBloc;
   late DanhSachDoanhNghiepBloc danhSachDoanhNghiepBloc;
@@ -342,7 +343,7 @@ class _FilterDrawerState extends BaseScreenStateActive<FilterDrawer> {
       searchFieldProps: const TextFieldProps(
         decoration: InputDecoration(
           border: OutlineInputBorder(),
-          contentPadding: EdgeInsets.fromLTRB(12, 12, 8, 0),
+          contentPadding: EdgeInsets.all(10),
           hintText: "Tìm kiếm...",
         ),
       ));
@@ -351,9 +352,17 @@ class _FilterDrawerState extends BaseScreenStateActive<FilterDrawer> {
           BuildContext context, String title) =>
       DropDownDecoratorProps(
         dropdownSearchDecoration: InputDecoration(
-            labelText: title, hintText: "Vui lòng chọn ${title.toLowerCase()}"),
+            labelText: title,
+            hintText: "Vui lòng chọn ${title.toLowerCase()}",
+            labelStyle:
+                AppTextStyle.titlePage.copyWith(color: AppColor.colorOfIcon),
+            hintStyle:
+                AppTextStyle.title.copyWith(color: AppColor.colorOfHintText)),
+        baseStyle: AppTextStyle.titlePage.copyWith(color: AppColor.colorOfIcon),
       );
 
   ClearButtonProps _buildClearButtonProps() => const ClearButtonProps(
-      isVisible: true, padding: EdgeInsets.zero, color: Colors.black);
+      isVisible: true,
+      padding: EdgeInsets.zero,
+      color: AppColor.colorOfHintText);
 }

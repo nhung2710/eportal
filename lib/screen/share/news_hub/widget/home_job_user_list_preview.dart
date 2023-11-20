@@ -77,8 +77,8 @@ class _HomeJobUserListPreviewState
                             onTap: () => nextPage((context) => EmptyExamplePage(
                                   isHasAppBar: true,
                                 )),
-                            title: state.data?.elementAt(i).businessVn,
-                            imageUrl: state.data?.elementAt(i).logo,
+                            title: state.data?.elementAt(i).education,
+                            isHasImage: false,
                             content: state.data?.elementAt(i).tinhTP,
                           )),
                 ),

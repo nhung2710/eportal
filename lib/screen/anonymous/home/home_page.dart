@@ -87,7 +87,7 @@ class _HomePageState extends BasePageStateActive<HomePage> {
               Icons.more_horiz,
               color: AppColor.colorOfHintText,
             ),
-            label: "Thêm",
+            label: "Mở rộng",
             activeIcon: Icon(
               Icons.more_horiz,
               color: AppColor.colorOfIcon,

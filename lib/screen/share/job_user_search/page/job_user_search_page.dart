@@ -79,6 +79,7 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
   @override
   Widget? getEndDrawer(BuildContext context) => FilterDrawer(
         data: request.obj,
+        key: localKey,
       );
 
   @override
@@ -91,12 +92,6 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
               controller: textEditingController,
               maxLength: 50,
               textInputAction: TextInputAction.send,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Vui lòng nhập nội dung muốn gửi';
-                }
-                return null;
-              },
               onFieldSubmitted: (value) => _findNews(context),
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),

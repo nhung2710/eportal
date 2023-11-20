@@ -1,178 +1,172 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../extension/string_extension.dart';
+
 //
 // Created by BlackRose on 13/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class HomeJobUserListDataResponse {
+  Null? userAdminText;
+  bool? isBHTN;
   int? id;
-  int? status;
-  String? careerID;
-  bool? isInvite;
-  bool? userAdmin;
-  String? tinhTP;
-  String? idSend;
-  int? soLuongUngVien;
-  int? soLuongTuyenDung;
-  int? tinhTrang;
-  int? soBan;
-  String? doanhNghiepID;
   int? total;
-  String? scale;
-  String? businessID;
-  String? businessVn;
-  String? businessEn;
-  String? businessSort;
+  bool? isPause;
+  bool? isTemp;
+  String? jobUserID;
+  String? title;
+  String? careerID;
+  String? currentLevel;
+  String? levelDesired;
+  String? tinhTP;
   String? quanHuyen;
-  String? logo;
-  String? description;
-  String? taxCode;
-  String? mobile;
-  String? fax;
-  String? website;
-  String? email;
-  String? address;
-  String? contactUser;
-  String? contactMobile;
-  String? contactEmail;
+  String? experienceID;
+  String? levelID;
+  String? salaryID;
+  String? needsID;
+  String? education;
+  String? careerGoals;
+  String? workExperience;
+  String? skillsForte;
+  String? userAdmin;
+  String? startDate;
+  String? endDate;
+  bool? isApproval;
+  String? approvalUser;
+  String? approvalDate;
+  bool? isDelete;
+  String? deletedUser;
+  String? deletedDate;
   String? createdDate;
   String? createdUser;
   String? updatedDate;
   String? updatedUser;
-  bool? isAdmin;
-  bool? isActive;
-  bool? isApproval;
-  String? approvalUser;
-  String? approvalDate;
-  int? portalId;
+  int? isView;
+  int? isSend;
+  int? portalID;
 
   HomeJobUserListDataResponse(
-      {this.id,
-      this.status,
-      this.careerID,
-      this.isInvite,
-      this.userAdmin,
-      this.tinhTP,
-      this.idSend,
-      this.soLuongUngVien,
-      this.soLuongTuyenDung,
-      this.tinhTrang,
-      this.soBan,
-      this.doanhNghiepID,
+      {this.userAdminText,
+      this.isBHTN,
+      this.id,
       this.total,
-      this.scale,
-      this.businessID,
-      this.businessVn,
-      this.businessEn,
-      this.businessSort,
+      this.isPause,
+      this.isTemp,
+      this.jobUserID,
+      this.title,
+      this.careerID,
+      this.currentLevel,
+      this.levelDesired,
+      this.tinhTP,
       this.quanHuyen,
-      this.logo,
-      this.description,
-      this.taxCode,
-      this.mobile,
-      this.fax,
-      this.website,
-      this.email,
-      this.address,
-      this.contactUser,
-      this.contactMobile,
-      this.contactEmail,
+      this.experienceID,
+      this.levelID,
+      this.salaryID,
+      this.needsID,
+      this.education,
+      this.careerGoals,
+      this.workExperience,
+      this.skillsForte,
+      this.userAdmin,
+      this.startDate,
+      this.endDate,
+      this.isApproval,
+      this.approvalUser,
+      this.approvalDate,
+      this.isDelete,
+      this.deletedUser,
+      this.deletedDate,
       this.createdDate,
       this.createdUser,
       this.updatedDate,
       this.updatedUser,
-      this.isAdmin,
-      this.isActive,
-      this.isApproval,
-      this.approvalUser,
-      this.approvalDate,
-      this.portalId});
+      this.isView,
+      this.isSend,
+      this.portalID});
 
   HomeJobUserListDataResponse.fromJson(Map<String, dynamic> json) {
+    userAdminText = json['userAdminText'];
+    isBHTN = json['isBHTN'];
     id = json['id'];
-    status = json['status'];
-    careerID = json['career_ID'];
-    isInvite = json['isInvite'];
-    userAdmin = json['userAdmin'];
-    tinhTP = json['tinhTP'];
-    idSend = json['idSend'];
-    soLuongUngVien = json['soLuongUngVien'];
-    soLuongTuyenDung = json['soLuongTuyenDung'];
-    tinhTrang = json['tinhTrang'];
-    soBan = json['soBan'];
-    doanhNghiepID = json['doanhNghiep_ID'];
     total = json['total'];
-    scale = json['scale'];
-    businessID = json['business_ID'];
-    businessVn = json['business_Vn'];
-    businessEn = json['business_En'];
-    businessSort = json['business_Sort'];
+    isPause = json['isPause'];
+    isTemp = json['isTemp'];
+    jobUserID = json['jobUser_ID'];
+    title = json['title'];
+    careerID = json['career_ID'];
+    currentLevel = json['currentLevel'];
+    levelDesired = json['levelDesired'];
+    tinhTP = json['tinhTP'];
     quanHuyen = json['quanHuyen'];
-    logo = json['logo'];
-    description = json['description'];
-    taxCode = json['taxCode'];
-    mobile = json['mobile'];
-    fax = json['fax'];
-    website = json['website'];
-    email = json['email'];
-    address = json['address'];
-    contactUser = json['contactUser'];
-    contactMobile = json['contactMobile'];
-    contactEmail = json['contactEmail'];
+    experienceID = json['experience_ID'];
+    levelID = json['level_ID'];
+    salaryID = json['salary_ID'];
+    needsID = json['needs_ID'];
+    education = json['education'];
+    education = education.supportHtml();
+    careerGoals = json['careerGoals'];
+    careerGoals = careerGoals.supportHtml();
+    workExperience = json['workExperience'];
+    workExperience = workExperience.supportHtml();
+    skillsForte = json['skillsForte'];
+    skillsForte = skillsForte.supportHtml();
+    userAdmin = json['userAdmin'];
+    startDate = json['startDate'];
+    endDate = json['endDate'];
+    isApproval = json['isApproval'];
+    approvalUser = json['approvalUser'];
+    approvalDate = json['approvalDate'];
+    isDelete = json['isDelete'];
+    deletedUser = json['deletedUser'];
+    deletedDate = json['deletedDate'];
     createdDate = json['createdDate'];
     createdUser = json['createdUser'];
     updatedDate = json['updatedDate'];
     updatedUser = json['updatedUser'];
-    isAdmin = json['isAdmin'];
-    isActive = json['isActive'];
-    isApproval = json['isApproval'];
-    approvalUser = json['approvalUser'];
-    approvalDate = json['approvalDate'];
-    portalId = json['portalId'];
+    isView = json['isView'];
+    isSend = json['isSend'];
+    portalID = json['portalID'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['userAdminText'] = this.userAdminText;
+    data['isBHTN'] = this.isBHTN;
     data['id'] = this.id;
-    data['status'] = this.status;
-    data['career_ID'] = this.careerID;
-    data['isInvite'] = this.isInvite;
-    data['userAdmin'] = this.userAdmin;
-    data['tinhTP'] = this.tinhTP;
-    data['idSend'] = this.idSend;
-    data['soLuongUngVien'] = this.soLuongUngVien;
-    data['soLuongTuyenDung'] = this.soLuongTuyenDung;
-    data['tinhTrang'] = this.tinhTrang;
-    data['soBan'] = this.soBan;
-    data['doanhNghiep_ID'] = this.doanhNghiepID;
     data['total'] = this.total;
-    data['scale'] = this.scale;
-    data['business_ID'] = this.businessID;
-    data['business_Vn'] = this.businessVn;
-    data['business_En'] = this.businessEn;
-    data['business_Sort'] = this.businessSort;
+    data['isPause'] = this.isPause;
+    data['isTemp'] = this.isTemp;
+    data['jobUser_ID'] = this.jobUserID;
+    data['title'] = this.title;
+    data['career_ID'] = this.careerID;
+    data['currentLevel'] = this.currentLevel;
+    data['levelDesired'] = this.levelDesired;
+    data['tinhTP'] = this.tinhTP;
     data['quanHuyen'] = this.quanHuyen;
-    data['logo'] = this.logo;
-    data['description'] = this.description;
-    data['taxCode'] = this.taxCode;
-    data['mobile'] = this.mobile;
-    data['fax'] = this.fax;
-    data['website'] = this.website;
-    data['email'] = this.email;
-    data['address'] = this.address;
-    data['contactUser'] = this.contactUser;
-    data['contactMobile'] = this.contactMobile;
-    data['contactEmail'] = this.contactEmail;
+    data['experience_ID'] = this.experienceID;
+    data['level_ID'] = this.levelID;
+    data['salary_ID'] = this.salaryID;
+    data['needs_ID'] = this.needsID;
+    data['education'] = this.education;
+    data['careerGoals'] = this.careerGoals;
+    data['workExperience'] = this.workExperience;
+    data['skillsForte'] = this.skillsForte;
+    data['userAdmin'] = this.userAdmin;
+    data['startDate'] = this.startDate;
+    data['endDate'] = this.endDate;
+    data['isApproval'] = this.isApproval;
+    data['approvalUser'] = this.approvalUser;
+    data['approvalDate'] = this.approvalDate;
+    data['isDelete'] = this.isDelete;
+    data['deletedUser'] = this.deletedUser;
+    data['deletedDate'] = this.deletedDate;
     data['createdDate'] = this.createdDate;
     data['createdUser'] = this.createdUser;
     data['updatedDate'] = this.updatedDate;
     data['updatedUser'] = this.updatedUser;
-    data['isAdmin'] = this.isAdmin;
-    data['isActive'] = this.isActive;
-    data['isApproval'] = this.isApproval;
-    data['approvalUser'] = this.approvalUser;
-    data['approvalDate'] = this.approvalDate;
-    data['portalId'] = this.portalId;
+    data['isView'] = this.isView;
+    data['isSend'] = this.isSend;
+    data['portalID'] = this.portalID;
     return data;
   }
 }

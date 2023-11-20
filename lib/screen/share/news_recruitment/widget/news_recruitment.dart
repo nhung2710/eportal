@@ -71,6 +71,7 @@ class _NewsRecruitmentState extends BasePageStateActive<NewsRecruitment> {
                                             isHasAppBar: true,
                                           )),
                                   title: state.data!.elementAt(i).title,
+                                  imageUrl: state.data!.elementAt(i).imageURL,
                                 )),
                       ),
                     ],

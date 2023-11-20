@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../extension/color_extension.dart';
 import '../../extension/string_extension.dart';
@@ -57,6 +58,7 @@ class _CapchaInputState extends State<CapchaInput> {
         controller: widget.controller,
         maxLength: widget.maxLength,
         textInputAction: widget.textInputAction,
+        inputFormatters: [UpperCaseTextFormatter()],
         validator: (text) {
           if (text == null || text.isEmpty) {
             return 'Mã xác nhận không được để trống';
@@ -115,15 +117,24 @@ class _CapchaInputState extends State<CapchaInput> {
       );
 
   void _newText() {
+    Random random = Random();
     numberReload = 0;
     widget.controller?.clear();
     code = "".randomString(widget.maxLength).toUpperCase();
     colors = List.generate(code.length, (index) => getRandomColor());
-    Random random = Random();
     fontSizes = List.generate(
         code.length,
         (index) =>
             (random.nextInt(5) + 16 + random.nextInt(index + 1)).toDouble());
     setState(() {});
+  }
+}
+
+class UpperCaseTextFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    return TextEditingValue(
+        text: newValue.text.toUpperCase(), selection: newValue.selection);
   }
 }

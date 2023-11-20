@@ -82,7 +82,10 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
   }
 
   @override
-  Widget? getEndDrawer(BuildContext context) => FilterDrawer(data: request.obj);
+  Widget? getEndDrawer(BuildContext context) => FilterDrawer(
+        data: request.obj,
+        key: localKey,
+      );
 
   @override
   Widget pageUI(BuildContext context) => Column(
@@ -94,12 +97,6 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
               controller: textEditingController,
               maxLength: 50,
               textInputAction: TextInputAction.send,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Vui lòng nhập nội dung muốn gửi';
-                }
-                return null;
-              },
               onFieldSubmitted: (value) => _findNews(context),
               icon: Icons.search,
               onTap: () {

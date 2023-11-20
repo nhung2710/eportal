@@ -55,14 +55,14 @@ class DefaultAppBar {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const HomePage()));
+                            builder: (context) => const SignInPage()));
                   },
                   icon: const Icon(Icons.logout),
                   color: AppColor.colorOfIcon,
                 )
               : IconButton(
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const SignInPage()));

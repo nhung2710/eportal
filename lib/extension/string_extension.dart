@@ -1,9 +1,14 @@
 import 'dart:math';
 
+import 'package:intl/intl.dart';
+
 import '../api/constant/application_api_constant.dart';
 import '../constant/application_constant.dart';
 import 'package:html/parser.dart' as htmlparser;
 import 'package:diacritic/diacritic.dart';
+
+import 'dateTime_extension.dart';
+import 'datetime_extension.dart';
 
 const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
 
@@ -27,11 +32,17 @@ extension StringNullExtension on String? {
   String replaceWhenNullOrWhiteSpace([String? replace]) =>
       !isNullOrWhiteSpace() ? this! : replace ?? ApplicationConstant.EMPTY;
 
-  String getImageUrl() => "${ApplicationApiConstant.BASE_URI_MEDIA}/$this";
+  String getImageUrl() {
+    if (isNullOrWhiteSpace()) return ApplicationApiConstant.BASE_URI_MEDIA;
+    if (this!.contains(ApplicationApiConstant.BASE_URI_MEDIA)) return this!;
+    return "${ApplicationApiConstant.BASE_URI_MEDIA}/$this";
+  }
 
   String supportHtml() => isNullOrWhiteSpace()
       ? ApplicationConstant.EMPTY
-      : (htmlparser.parse(this).firstChild?.text).replaceWhenNullOrWhiteSpace();
+      : (htmlparser.parse(this).firstChild?.text)
+          .replaceWhenNullOrWhiteSpace()
+          .trim();
 
   String removeUnicode() {
     var value = replaceWhenNullOrWhiteSpace();
@@ -45,6 +56,15 @@ extension StringNullExtension on String? {
     Random rnd = Random();
     return String.fromCharCodes(Iterable.generate(
         length, (_) => _chars.codeUnitAt(rnd.nextInt(_chars.length))));
+  }
+
+  DateTime? parseDateTime({String format = "yyyy-MM-ddTHH:mm:ss"}) {
+    return isNullOrWhiteSpace() ? null : DateFormat(format).parse(this!);
+  }
+
+  String formatDateTimeApi() {
+    return (parseDateTime()?.toFormatDateTime(format: "dd/MM/yyyy"))
+        .replaceWhenNullOrWhiteSpace();
   }
 }
 
@@ -65,7 +85,11 @@ extension StringExtension on String {
   String replaceWhenNullOrWhiteSpace([String? replace]) =>
       !isNullOrWhiteSpace() ? this : replace ?? ApplicationConstant.EMPTY;
 
-  String getImageUrl() => "${ApplicationApiConstant.BASE_URI_MEDIA}/$this";
+  String getImageUrl() {
+    if (isNullOrWhiteSpace()) return ApplicationApiConstant.BASE_URI_MEDIA;
+    if (this!.contains(ApplicationApiConstant.BASE_URI_MEDIA)) return this!;
+    return "${ApplicationApiConstant.BASE_URI_MEDIA}/$this";
+  }
 
   String supportHtml() => isNullOrWhiteSpace()
       ? ApplicationConstant.EMPTY
@@ -83,5 +107,14 @@ extension StringExtension on String {
     Random rnd = Random();
     return String.fromCharCodes(Iterable.generate(
         length, (_) => _chars.codeUnitAt(rnd.nextInt(_chars.length))));
+  }
+
+  DateTime? parseDateTime({String format = "yyyy-MM-ddTHH:mm:ss"}) {
+    return isNullOrWhiteSpace() ? null : DateFormat(format).parse(this);
+  }
+
+  String formatDateTimeApi() {
+    return (parseDateTime()?.toFormatDateTime(format: "dd/MM/yyyy"))
+        .replaceWhenNullOrWhiteSpace();
   }
 }

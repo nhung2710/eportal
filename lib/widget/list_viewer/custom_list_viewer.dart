@@ -1,4 +1,5 @@
 import 'package:eportal/style/app_color.dart';
+import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/style/app_size_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -31,9 +32,11 @@ class _CustomListViewerState extends State<CustomListViewer> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Card(
-                        margin: const EdgeInsets.only(top: 10),
-                        elevation: 5,
-                        borderOnForeground: false,
+                        margin:
+                            const EdgeInsets.only(top: 10, left: 5, right: 5),
+                        elevation: AppElevation.sizeOfNormal,
+                        borderOnForeground: true,
+                        shadowColor: AppColor.colorOfIcon,
                         child: GestureDetector(
                           onTap: () {
                             e.isExpanded = !e.isExpanded;
@@ -74,7 +77,7 @@ class _CustomListViewerState extends State<CustomListViewer> {
                       ),
                       e.isExpanded
                           ? Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: const EdgeInsets.only(left: 20),
                               child: Column(
                                 children: e.children
                                         ?.map<Widget>(
@@ -99,7 +102,7 @@ class CustomItemViewer {
   List<CustomItemViewer>? children = [];
 
   CustomItemViewer(
-      {this.isExpanded = false,
+      {this.isExpanded = true,
       this.icon,
       this.currrent,
       this.title,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../../../../extension/datetime_extension.dart';
 import '../../../../extension/input_decoration_extension.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/input/field_input.dart';
@@ -161,7 +162,8 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
         lastDate: DateTime.now());
     if (pickerDate != null) {
       birthDay = pickerDate;
-      birthDayController.text = DateFormat('dd/MM/yyyy').format(pickerDate);
+      birthDayController.text =
+          pickerDate.toFormatDateTime(format: 'dd/MM/yyyy');
     }
   }
 }

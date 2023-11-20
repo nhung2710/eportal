@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
 import 'package:eportal/screen/share/news_hub/widget/home_news_list_preview.dart';
 import 'package:eportal/screen/share/news_hub/widget/home_works_list_preview.dart';
+import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
@@ -75,7 +76,8 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
       ]);
 
   @override
-  Widget pageUI(BuildContext context) => SingleChildScrollView(
+  Widget pageUI(BuildContext context) =>
+      SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -88,65 +90,75 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                       child: BlocBuilder<HomeSlideListBloc, BaseState>(
                         builder: (BuildContext context, BaseState state) =>
                             handlerBaseState<HomeSlideListResponse>(
-                          state,
-                          (context, state) => CarouselSlider(
-                            options: CarouselOptions(
-                              aspectRatio: 2,
-                              viewportFraction: 1,
-                              animateToClosest: true,
-                              initialPage: 0,
-                              enableInfiniteScroll: true,
-                              reverse: false,
-                              autoPlay: true,
-                              autoPlayInterval: const Duration(seconds: 10),
-                              autoPlayAnimationDuration:
-                                  const Duration(seconds: 5),
-                              autoPlayCurve: Curves.fastEaseInToSlowEaseOut,
-                              enlargeCenterPage: true,
-                              enlargeFactor: 0.2,
-                              enlargeStrategy: CenterPageEnlargeStrategy.zoom,
-                              scrollDirection: Axis.horizontal,
-                            ),
-                            items: (state.data ?? []).map((item) {
-                              return Builder(
-                                builder: (BuildContext context) {
-                                  return GestureDetector(
-                                    onTap: () =>
-                                        nextPage((context) => EmptyExamplePage(
-                                              isHasAppBar: true,
-                                            )),
-                                    child: Card(
-                                      elevation: 4,
-                                      margin: EdgeInsets.zero,
-                                      color: AppColor.colorOfApp,
-                                      shadowColor: AppColor.colorOfDrawer,
-                                      borderOnForeground: false,
-                                      shape: const RoundedRectangleBorder(
-                                          side: BorderSide(
-                                              color: AppColor.colorOfDrawer,
-                                              width: 0.1),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5))),
-                                      child: ClipRRect(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(5.0)),
-                                          child: ImageLoading(
-                                              imageUrl:
-                                                  item.avatar.getImageUrl(),
-                                              imageBuilder:
-                                                  (context, imageProvider) {
-                                                return Image(
-                                                  image: imageProvider,
-                                                  fit: BoxFit.fitHeight,
-                                                );
-                                              })),
+                              state,
+                                  (context, state) =>
+                                  CarouselSlider(
+                                    options: CarouselOptions(
+                                      aspectRatio: 2,
+                                      viewportFraction: 1,
+                                      animateToClosest: true,
+                                      initialPage: 0,
+                                      enableInfiniteScroll: true,
+                                      reverse: false,
+                                      autoPlay: true,
+                                      autoPlayInterval: const Duration(
+                                          seconds: 3),
+                                      autoPlayAnimationDuration:
+                                      const Duration(seconds: 2),
+                                      autoPlayCurve: Curves
+                                          .fastEaseInToSlowEaseOut,
+                                      enlargeCenterPage: true,
+                                      enlargeFactor: 0.2,
+                                      enlargeStrategy: CenterPageEnlargeStrategy
+                                          .zoom,
+                                      scrollDirection: Axis.horizontal,
                                     ),
-                                  );
-                                },
-                              );
-                            }).toList(),
-                          ),
-                        ),
+                                    items: (state.data ?? []).map((item) {
+                                      return Builder(
+                                        builder: (BuildContext context) {
+                                          return GestureDetector(
+                                            onTap: () =>
+                                                nextPage((context) =>
+                                                    EmptyExamplePage(
+                                                      isHasAppBar: true,
+                                                    )),
+                                            child: Card(
+                                              elevation: AppElevation
+                                                  .sizeOfNormal,
+                                              margin: EdgeInsets.zero,
+                                              color: AppColor.colorOfApp,
+                                              shadowColor: AppColor.colorOfIcon,
+                                              borderOnForeground: false,
+                                              shape: const RoundedRectangleBorder(
+                                                  side: BorderSide(
+                                                      color: AppColor
+                                                          .colorOfDrawer,
+                                                      width: 0.1),
+                                                  borderRadius: BorderRadius
+                                                      .all(
+                                                      Radius.circular(5))),
+                                              child: ClipRRect(
+                                                  borderRadius: const BorderRadius
+                                                      .all(
+                                                      Radius.circular(5.0)),
+                                                  child: ImageLoading(
+                                                      imageUrl:
+                                                      item.avatar.getImageUrl(),
+                                                      imageBuilder:
+                                                          (context,
+                                                          imageProvider) {
+                                                        return Image(
+                                                          image: imageProvider,
+                                                          fit: BoxFit.fitHeight,
+                                                        );
+                                                      })),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    }).toList(),
+                                  ),
+                            ),
                       ),
                     ))),
             Container(
@@ -162,16 +174,20 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                   CustomButtonIcon(
                     title: "Tin tức",
                     iconData: Icons.newspaper,
-                    onTap: () => nextPage((context) => NewsPage(
-                          flag: 1,
-                        )),
+                    onTap: () =>
+                        nextPage((context) =>
+                            NewsPage(
+                              flag: 1,
+                            )),
                   ),
                   CustomButtonIcon(
                     title: "Tuyển dụng",
                     iconData: Icons.work,
-                    onTap: () => nextPage((context) => NewsRecruitmentPage(
-                          flag: 1,
-                        )),
+                    onTap: () =>
+                        nextPage((context) =>
+                            NewsRecruitmentPage(
+                              flag: 1,
+                            )),
                   ),
                   CustomButtonIcon(
                     title: "Hồ sơ",

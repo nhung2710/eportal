@@ -1,6 +1,7 @@
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/extension/string_extension.dart';
 import 'package:eportal/state/base/base_state.dart';
+import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,10 +21,10 @@ class BasePage extends StatefulWidget {
 }
 
 class BasePageState<T extends StatefulWidget> extends State<T> {
-  final localKey = GlobalKey<State<T>>();
-  final formKey = GlobalKey<FormState>();
+  GlobalKey<State<T>> localKey = GlobalKey<State<T>>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final ScrollController scrollController = ScrollController();
+  late ScrollController scrollController;
 
   @override
   void dispose() {
@@ -33,6 +34,7 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
 
   @override
   void initState() {
+    scrollController = ScrollController();
     initDataLoading();
     // TODO: implement initState
     super.initState();
@@ -61,7 +63,7 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
           endDrawer: getEndDrawer(context),
           drawer: getDrawer(context),
           floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniEndFloat,
+              FloatingActionButtonLocation.miniEndFloat,
           floatingActionButton: getFloatingActionButton(context),
           bottomNavigationBar: getBottomNavigationBar(context),
         ),
@@ -165,17 +167,16 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
         ]).show();
   }
 
-  PreferredSizeWidget? getAppBar(BuildContext context) =>
-      isHasAppBar(context)
-          ? AppBar(
-        title: Text(
-          getPageTitle(context),
-          style: AppTextStyle.titleAppbarPage,
-        ),
-        backgroundColor: AppColor.colorOfIcon,
-        automaticallyImplyLeading: getAutomaticallyImplyLeading(context),
-      )
-          : null;
+  PreferredSizeWidget? getAppBar(BuildContext context) => isHasAppBar(context)
+      ? AppBar(
+          title: Text(
+            getPageTitle(context),
+            style: AppTextStyle.titleAppbarPage,
+          ),
+          backgroundColor: AppColor.colorOfIcon,
+          automaticallyImplyLeading: getAutomaticallyImplyLeading(context),
+        )
+      : null;
 
   Future<void> loadDataDemo() {
     startLoading();
@@ -231,43 +232,32 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
     }
   }
 
-  Widget buildScreenLoading() =>
-      Center(
+  Widget buildScreenLoading() => Center(
         child: Container(
             height: 100,
             child: const Center(child: CircularProgressIndicator())),
       );
 
-  Widget buildScreenError(String error) =>
-      Container(
-          height: 100,
-          child: Text(
-            error,
-            style: AppTextStyle.title.copyWith(color: Colors.red),
-          ));
+  Widget buildScreenError(String error) => Container(
+      height: 100,
+      child: Text(
+        error,
+        style: AppTextStyle.title.copyWith(color: Colors.red),
+      ));
 
-  Widget buildNotFoundData(BuildContext buildContext) =>
-      Center(
+  Widget buildNotFoundData(BuildContext buildContext) => Center(
         child: Image.asset("assets/images/NotFoundData.jpg"),
       );
 
-  Widget buildImplement(BuildContext buildContext) =>
-      Center(
+  Widget buildImplement(BuildContext buildContext) => Center(
         child: Image.asset("assets/images/Implement.jpg"),
       );
 }
 
 class BasePageStateActive<T extends StatefulWidget> extends BasePageState<T>
     with AutomaticKeepAliveClientMixin {
-
   @override
   bool get wantKeepAlive => true;
-
-  @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
-  }
 
   @override
   void initState() {
@@ -298,19 +288,16 @@ class BasePageStateActive<T extends StatefulWidget> extends BasePageState<T>
                 child: pageUI(context)),
           ),
           floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniEndFloat,
+              FloatingActionButtonLocation.miniEndFloat,
           floatingActionButton: getFloatingActionButton(context),
           bottomNavigationBar: getBottomNavigationBar(context),
         ),
       ),
     );
   }
-
-
 }
 
 class BaseScreenState<T extends StatefulWidget> extends BasePageState<T> {
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -321,14 +308,10 @@ class BaseScreenState<T extends StatefulWidget> extends BasePageState<T> {
       ),
     );
   }
-
-
 }
 
 class BaseScreenStateActive<T extends StatefulWidget>
     extends BasePageStateActive<T> {
-
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -340,6 +323,4 @@ class BaseScreenStateActive<T extends StatefulWidget>
       ),
     );
   }
-
-
 }

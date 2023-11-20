@@ -4,6 +4,8 @@ import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_size_icon.dart';
 import 'package:flutter/material.dart';
 
+import '../../style/app_elevation.dart';
+
 //
 // Created by BlackRose on 05/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -219,7 +221,7 @@ class ActionButton extends StatelessWidget {
           shape: const CircleBorder(),
           clipBehavior: Clip.antiAlias,
           color: color,
-          elevation: 5,
+          elevation: AppElevation.sizeOfNormal,
           child: InkWell(
             onTap: onPressed,
             child: Padding(

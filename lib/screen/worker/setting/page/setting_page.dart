@@ -1,5 +1,3 @@
-import 'package:eportal/model/setting_page_model.dart';
-import 'package:eportal/screen/anonymous/setting/widget/setting_item.dart';
 import 'package:eportal/screen/share/about/page/about_page.dart';
 import 'package:eportal/screen/share/change_password/page/change_password_page.dart';
 import 'package:eportal/screen/share/change_user_info/page/change_user_info_page.dart';
@@ -13,6 +11,7 @@ import 'package:eportal/screen/share/support/page/support_page.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/list_viewer/custom_list_viewer.dart';
+import 'package:eportal/widget/list_viewer/setting_item_viewer.dart';
 import 'package:flutter/material.dart';
 
 import '../../history/page/history_page.dart';
@@ -44,25 +43,29 @@ class _SettingPageState extends BasePageState<SettingPage> {
       SettingPageModel(
           icon: Icons.app_registration,
           title: "Lịch tư vấn",
-          builder: (context) => EmptyExamplePage(
+          builder: (context) =>
+              EmptyExamplePage(
                 isHasAppBar: true,
               )),
       SettingPageModel(
           icon: Icons.app_registration,
           title: "Lịch giới thiệu việc làm",
-          builder: (context) => EmptyExamplePage(
+          builder: (context) =>
+              EmptyExamplePage(
                 isHasAppBar: true,
               )),
       SettingPageModel(
           icon: Icons.app_registration,
           title: "Lấy số thực hiện dịch vụ công",
-          builder: (context) => EmptyExamplePage(
+          builder: (context) =>
+              EmptyExamplePage(
                 isHasAppBar: true,
               )),
       SettingPageModel(
           icon: Icons.app_registration,
           title: "Hỏi và đáp",
-          builder: (context) => EmptyExamplePage(
+          builder: (context) =>
+              EmptyExamplePage(
                 isHasAppBar: true,
               )),
     ],
@@ -70,7 +73,8 @@ class _SettingPageState extends BasePageState<SettingPage> {
       SettingPageModel(
           icon: Icons.history,
           title: "Ứng tuyển",
-          builder: (context) => EmptyExamplePage(
+          builder: (context) =>
+              EmptyExamplePage(
                 isHasAppBar: true,
               )),
     ],
@@ -111,14 +115,17 @@ class _SettingPageState extends BasePageState<SettingPage> {
   @override
   bool isHasAppBar(BuildContext context) => false;
 
-  Widget pageUI(BuildContext context) => SingleChildScrollView(
+  Widget pageUI(BuildContext context) =>
+      SingleChildScrollView(
         child: CustomListViewer(
           children: actions.entries
-              .map((e) => CustomItemViewer(
+              .map((e) =>
+              CustomItemViewer(
                   title: e.key,
                   children: e.value
-                      .map((e) => CustomItemViewer(
-                          currrent: SettingItem(
+                      .map((e) =>
+                      CustomItemViewer(
+                          currrent: SettingItemViewer(
                               onTap: () => nextPage(e.builder),
                               settingPageModel: e)))
                       .toList()))

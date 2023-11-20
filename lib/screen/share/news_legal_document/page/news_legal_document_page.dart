@@ -55,8 +55,9 @@ class _NewsLegalDocumentPageState extends BasePageState<NewsLegalDocumentPage> {
                                 isHasAppBar: true,
                               )),
                           title: state.data!.elementAt(i).documentName,
-                          imageUrl: state.data!.elementAt(i).fileSource,
+                          isHasImage: false,
                           content: state.data!.elementAt(i).contents,
+                          time: state.data!.elementAt(i).effectDate,
                         )),
           ),
         ),
@@ -66,5 +67,5 @@ class _NewsLegalDocumentPageState extends BasePageState<NewsLegalDocumentPage> {
   getBottomNavigationBar(BuildContext context) => null;
 
   @override
-  String getPageTitle(BuildContext context) => "Doanh nghiệp";
+  String getPageTitle(BuildContext context) => "Văn bản pháp luật";
 }
