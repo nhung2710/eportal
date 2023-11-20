@@ -1,4 +1,6 @@
 import 'package:eportal/model/setting_page_model.dart';
+import 'package:eportal/style/app_color.dart';
+import 'package:eportal/style/app_size_icon.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -28,8 +30,8 @@ class SettingItem extends StatelessWidget {
               children: [
                 Icon(
                   settingPageModel.icon,
-                  color: Colors.blue,
-                  size: 20,
+                  color: AppColor.colorOfIcon,
+                  size: AppSizeIcon.sizeOfNormal,
                 ),
                 Expanded(
                   flex: 1,
@@ -37,13 +39,13 @@ class SettingItem extends StatelessWidget {
                       margin: const EdgeInsets.only(right: 10, left: 10),
                       child: Text(settingPageModel.title,
                           textAlign: TextAlign.start,
-                          style:
-                              AppTextStyle.title.copyWith(color: Colors.blue))),
+                          style: AppTextStyle.title
+                              .copyWith(color: AppColor.colorOfIcon))),
                 ),
                 const Icon(
                   Icons.navigate_next_sharp,
-                  color: Colors.blue,
-                  size: 20,
+                  color: AppColor.colorOfIcon,
+                  size: AppSizeIcon.sizeOfNormal,
                 )
               ],
             )),

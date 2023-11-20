@@ -1,4 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:eportal/style/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -336,8 +337,8 @@ class _FilterDrawerState extends BaseScreenStateActive<FilterDrawer> {
   PopupProps<T> _buildPopupProps<T>(BuildContext context) => PopupProps.dialog(
       showSearchBox: true,
       emptyBuilder: (context, searchEntry) => const Center(
-          child:
-              Text('Không có dữ liệu', style: TextStyle(color: Colors.blue))),
+          child: Text('Không có dữ liệu',
+              style: TextStyle(color: AppColor.colorOfIcon))),
       searchFieldProps: const TextFieldProps(
         decoration: InputDecoration(
           border: OutlineInputBorder(),

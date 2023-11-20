@@ -1,3 +1,5 @@
+import 'package:eportal/style/app_color.dart';
+
 import '../../style/app_text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +22,8 @@ class ShowFullInfo extends StatelessWidget {
           width: double.infinity,
           child: Text(
             "Xem tất cả >>",
-            style: AppTextStyle.titleChild1.copyWith(color: Colors.blue),
+            style:
+                AppTextStyle.titleChild1.copyWith(color: AppColor.colorOfIcon),
             textAlign: TextAlign.end,
           ),
         ),

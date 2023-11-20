@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 
+import 'package:eportal/style/app_color.dart';
+import 'package:eportal/style/app_size_icon.dart';
 import 'package:flutter/material.dart';
 
 //
@@ -84,7 +86,7 @@ class _ExpandableFabState extends State<ExpandableFab>
         ? ActionButton(
             icon: const Icon(
               Icons.close,
-              color: Colors.blue,
+              color: AppColor.colorOfIcon,
             ),
             onPressed: _toggle,
             color: Colors.white,
@@ -197,7 +199,7 @@ class ActionButton extends StatelessWidget {
       {Key? key,
       this.onPressed,
       required this.icon,
-      this.color = Colors.blue,
+      this.color = AppColor.colorOfIcon,
       this.size = 50})
       : super(key: key);
 
@@ -217,7 +219,7 @@ class ActionButton extends StatelessWidget {
           shape: const CircleBorder(),
           clipBehavior: Clip.antiAlias,
           color: color,
-          elevation: 4,
+          elevation: 5,
           child: InkWell(
             onTap: onPressed,
             child: Padding(

@@ -1,10 +1,10 @@
-
 import 'package:eportal/screen/share/home_manage/page/home_manage_page.dart';
 import 'package:eportal/screen/share/news_hub/page/news_hub_page.dart';
 import 'package:eportal/screen/share/notification/page/notification_page.dart';
 import 'package:eportal/screen/worker/find_job/page/find_job_page.dart';
 import 'package:eportal/screen/worker/history/page/history_page.dart';
 import 'package:eportal/screen/worker/profile/page/profile_page.dart';
+import 'package:eportal/style/app_color.dart';
 import 'package:eportal/widget/app_bar/default_app_bar.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
@@ -49,64 +49,64 @@ class _HomePageState extends BasePageStateActive<HomePage> {
         backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
         iconSize: 24,
-        fixedColor: Colors.red,
-        unselectedItemColor: Colors.blueAccent,
+        fixedColor: AppColor.colorOfIcon,
+        unselectedItemColor: AppColor.colorOfHintText,
         selectedFontSize: 8,
         unselectedFontSize: 8,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
-              color: Colors.blueAccent,
+              color: AppColor.colorOfHintText,
             ),
             label: "Trang chủ",
             activeIcon: Icon(
               Icons.home,
-              color: Colors.red,
+              color: AppColor.colorOfIcon,
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.file_copy,
-              color: Colors.blueAccent,
+              color: AppColor.colorOfHintText,
             ),
             label: "Hồ sơ",
             activeIcon: Icon(
               Icons.file_copy,
-              color: Colors.red,
+              color: AppColor.colorOfIcon,
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.manage_search,
-              color: Colors.blueAccent,
+              color: AppColor.colorOfHintText,
             ),
             label: "Tìm kiếm",
             activeIcon: Icon(
               Icons.manage_search,
-              color: Colors.red,
+              color: AppColor.colorOfIcon,
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.notifications,
-              color: Colors.blueAccent,
+              color: AppColor.colorOfHintText,
             ),
             label: "Thông báo",
             activeIcon: Icon(
               Icons.notifications,
-              color: Colors.red,
+              color: AppColor.colorOfIcon,
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.settings,
-              color: Colors.blueAccent,
+              Icons.more_horiz,
+              color: AppColor.colorOfHintText,
             ),
-            label: "Cài đặt",
+            label: "Thêm",
             activeIcon: Icon(
-              Icons.settings,
-              color: Colors.red,
+              Icons.more_horiz,
+              color: AppColor.colorOfIcon,
             ),
           ),
         ],

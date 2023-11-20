@@ -5,6 +5,7 @@ import 'package:eportal/screen/employer/home/home_page.dart' as employer;
 import 'package:eportal/screen/share/forgot_password/page/forgot_password_page.dart';
 import 'package:eportal/screen/share/sign_up/page/sign_up_page.dart';
 import 'package:eportal/screen/worker//home/home_page.dart' as worker;
+import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/gestures.dart';
@@ -95,6 +96,8 @@ class _SignInPageState extends BasePageState<SignInPage> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColor.colorOfIcon),
                       child: Container(
                           padding: const EdgeInsets.all(10),
                           child: const Text('NLD')),
@@ -106,6 +109,8 @@ class _SignInPageState extends BasePageState<SignInPage> {
                   ),
                   Expanded(
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColor.colorOfIcon),
                       child: Container(
                           padding: const EdgeInsets.all(10),
                           child: const Text('DN')),
@@ -117,6 +122,8 @@ class _SignInPageState extends BasePageState<SignInPage> {
                   ),
                   Expanded(
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColor.colorOfIcon),
                       child: Container(
                           padding: const EdgeInsets.all(10),
                           child: const Text('QL')),
@@ -128,6 +135,8 @@ class _SignInPageState extends BasePageState<SignInPage> {
           Container(
               margin: const EdgeInsets.only(top: 10),
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColor.colorOfIcon),
                 child: Container(
                     padding: const EdgeInsets.all(10),
                     child: const Text('Đăng nhập')),
@@ -145,7 +154,7 @@ class _SignInPageState extends BasePageState<SignInPage> {
                     TextSpan(
                         text: 'Đăng ký',
                         style: AppTextStyle.titleAppbarPage
-                            .copyWith(color: Colors.blue),
+                            .copyWith(color: AppColor.colorOfIcon),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () => _signUp(context)),
                   ],
@@ -160,8 +169,8 @@ class _SignInPageState extends BasePageState<SignInPage> {
                 child: Center(
                     child: Text(
                   'Quên mật khẩu',
-                  style:
-                      AppTextStyle.titleAppbarPage.copyWith(color: Colors.blue),
+                  style: AppTextStyle.titleAppbarPage
+                      .copyWith(color: AppColor.colorOfIcon),
                 ))),
           ),
           Container(

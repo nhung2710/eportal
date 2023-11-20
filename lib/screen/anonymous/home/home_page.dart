@@ -84,12 +84,12 @@ class _HomePageState extends BasePageStateActive<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.settings,
+              Icons.more_horiz,
               color: AppColor.colorOfHintText,
             ),
-            label: "Cài đặt",
+            label: "Thêm",
             activeIcon: Icon(
-              Icons.settings,
+              Icons.more_horiz,
               color: AppColor.colorOfIcon,
             ),
           ),

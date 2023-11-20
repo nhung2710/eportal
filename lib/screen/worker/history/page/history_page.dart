@@ -1,5 +1,6 @@
 import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
 import 'package:eportal/screen/share/empty_example/page/empty_example_page.dart';
+import 'package:eportal/style/app_color.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +19,7 @@ class HistoryPage extends BasePage {
 
 class _HistoryPageState extends BasePageState<HistoryPage> {
   @override
-  String getPageTitle(BuildContext context)  => "Lịch sử ứng tuyển";
-
+  String getPageTitle(BuildContext context) => "Lịch sử ứng tuyển";
 
   @override
   double currentPadding(BuildContext context) => 0;
@@ -33,26 +33,27 @@ class _HistoryPageState extends BasePageState<HistoryPage> {
             Container(
               color: Colors.white,
               child: const TabBar(
-                indicatorColor: Colors.blue,
+                indicatorColor: AppColor.colorOfIcon,
                 indicatorWeight: 1,
                 tabs: [
                   Tab(
                     icon: Icon(
                       Icons.history,
                       size: 20,
-                      color: Colors.blue,
+                      color: AppColor.colorOfIcon,
                     ),
                   ),
                   Tab(
-                    icon: Icon(Icons.work, size: 20, color: Colors.blue),
+                    icon:
+                        Icon(Icons.work, size: 20, color: AppColor.colorOfIcon),
                   ),
                   Tab(
                     icon: Icon(Icons.remove_red_eye_outlined,
-                        size: 20, color: Colors.blue),
+                        size: 20, color: AppColor.colorOfIcon),
                   ),
                   Tab(
                     icon: Icon(Icons.cloud_download_outlined,
-                        size: 20, color: Colors.blue),
+                        size: 20, color: AppColor.colorOfIcon),
                   ),
                 ],
               ),

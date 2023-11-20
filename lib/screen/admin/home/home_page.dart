@@ -2,6 +2,7 @@ import 'package:eportal/screen/anonymous/setting/page/setting_page.dart';
 import 'package:eportal/screen/share/answer_and_question/page/answer_and_question_page.dart';
 import 'package:eportal/screen/share/multimedia/page/multimedia_page.dart';
 import 'package:eportal/screen/share/news_hub/page/news_hub_page.dart';
+import 'package:eportal/style/app_color.dart';
 import 'package:eportal/widget/app_bar/default_app_bar.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
@@ -44,53 +45,53 @@ class _HomePageState extends BasePageStateActive<HomePage> {
         backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
         iconSize: 24,
-        fixedColor: Colors.red,
-        unselectedItemColor: Colors.blueAccent,
+        fixedColor: AppColor.colorOfIcon,
+        unselectedItemColor: AppColor.colorOfHintText,
         selectedFontSize: 8,
         unselectedFontSize: 8,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
-              color: Colors.blueAccent,
+              color: AppColor.colorOfHintText,
             ),
             label: "Trang chủ",
             activeIcon: Icon(
               Icons.home,
-              color: Colors.red,
+              color: AppColor.colorOfIcon,
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.question_mark,
-              color: Colors.blueAccent,
+              color: AppColor.colorOfHintText,
             ),
             label: "Hỏi đáp",
             activeIcon: Icon(
               Icons.question_mark,
-              color: Colors.red,
+              color: AppColor.colorOfIcon,
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.perm_media,
-              color: Colors.blueAccent,
+              color: AppColor.colorOfHintText,
             ),
             label: "Đa phương tiện",
             activeIcon: Icon(
               Icons.perm_media,
-              color: Colors.red,
+              color: AppColor.colorOfIcon,
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.settings,
-              color: Colors.blueAccent,
+              Icons.more_horiz,
+              color: AppColor.colorOfHintText,
             ),
-            label: "Cài đặt",
+            label: "Thêm",
             activeIcon: Icon(
-              Icons.settings,
-              color: Colors.red,
+              Icons.more_horiz,
+              color: AppColor.colorOfIcon,
             ),
           ),
         ],

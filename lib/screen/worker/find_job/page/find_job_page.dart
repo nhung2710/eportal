@@ -1,4 +1,5 @@
 import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
+import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
@@ -18,7 +19,6 @@ import '../../../share/empty_example/page/empty_example_page.dart';
 // Created by BlackRose on 11/9/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-
 
 class FindJobPage extends BasePage {
   const FindJobPage({super.key});
@@ -45,96 +45,95 @@ class _FindJobPageState extends BasePageStateActive<FindJobPage> {
 
   @override
   Widget pageUI(BuildContext context) => Column(
-    children: [
-      Container(
-        margin: const EdgeInsets.only(bottom: 5, top: 5),
-        color: Colors.white,
-        child: SearchInput(
-          controller: textEditingController,
-          maxLength: 50,
-          textInputAction: TextInputAction.send,
-          validator: (text) {
-            if (text == null || text.isEmpty) {
-              return 'Vui lòng nhập nội dung muốn gửi';
-            }
-            return null;
-          },
-          onFieldSubmitted: (value) => _findNews(context),
-          icon: Icons.search,
-          onTap: () {
-            _findNews(context);
-          },
-          hintText: "Nội dung tìm kiếm",
-        ),
-      ),
-      Expanded(
-        child: BlocProvider(
-            create: (_) => workSearchBloc,
-            child: BlocListener<WorkSearchBloc, BaseState>(
-              listener: (BuildContext context, BaseState state) {},
-              child: BlocBuilder<WorkSearchBloc, BaseState>(
-                builder: (BuildContext context, BaseState state) =>
-                    handlerBaseState<WorkSearchResponse>(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(bottom: 5, top: 5),
+            color: Colors.white,
+            child: SearchInput(
+              controller: textEditingController,
+              maxLength: 50,
+              textInputAction: TextInputAction.send,
+              validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Vui lòng nhập nội dung muốn gửi';
+                }
+                return null;
+              },
+              onFieldSubmitted: (value) => _findNews(context),
+              icon: Icons.search,
+              onTap: () {
+                _findNews(context);
+              },
+              hintText: "Nội dung tìm kiếm",
+            ),
+          ),
+          Expanded(
+            child: BlocProvider(
+                create: (_) => workSearchBloc,
+                child: BlocListener<WorkSearchBloc, BaseState>(
+                  listener: (BuildContext context, BaseState state) {},
+                  child: BlocBuilder<WorkSearchBloc, BaseState>(
+                    builder: (BuildContext context, BaseState state) =>
+                        handlerBaseState<WorkSearchResponse>(
                       state,
-                          (context, state) => (state.data?.length ?? 0) == 0
+                      (context, state) => (state.data?.length ?? 0) == 0
                           ? buildNotFoundData(context)
                           : Column(
-                        children: [
-                          Text(state.toString()),
-                          Expanded(
-                            child: ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: state.data?.length ?? 0,
-                                itemBuilder: (context, i) =>
-                                    GestureDetector(
-                                      onTap: () => nextPage(
-                                              (context) => EmptyExamplePage(
-                                            isHasAppBar: true,
-                                          )),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                          BorderRadius.circular(5),
-                                          color: Colors.white,
-                                        ),
-                                        padding: const EdgeInsets.all(10),
-                                        margin:
-                                        const EdgeInsets.only(top: 5),
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              flex: 1,
-                                              child: Text(
-                                                "1",
-                                                style: AppTextStyle.title
-                                                    .copyWith(
-                                                    color:
-                                                    Colors.blue,
-                                                    overflow:
-                                                    TextOverflow
-                                                        .visible,
-                                                    fontWeight:
-                                                    FontWeight
-                                                        .bold),
+                              children: [
+                                Text(state.toString()),
+                                Expanded(
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: state.data?.length ?? 0,
+                                      itemBuilder: (context, i) =>
+                                          GestureDetector(
+                                            onTap: () => nextPage(
+                                                (context) => EmptyExamplePage(
+                                                      isHasAppBar: true,
+                                                    )),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                color: Colors.white,
+                                              ),
+                                              padding: const EdgeInsets.all(10),
+                                              margin:
+                                                  const EdgeInsets.only(top: 5),
+                                              child: Row(
+                                                children: [
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child: Text(
+                                                      "1",
+                                                      style: AppTextStyle.title
+                                                          .copyWith(
+                                                              color: AppColor
+                                                                  .colorOfIcon,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .visible,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                    )),
-                          ),
-                        ],
-                      ),
+                                          )),
+                                ),
+                              ],
+                            ),
                     ),
-              ),
-            )),
-      ),
-    ],
-  );
+                  ),
+                )),
+          ),
+        ],
+      );
 
   @override
   getBottomNavigationBar(BuildContext context) => null;
-
 
   void _findNews(BuildContext context) {
     if (isValid()) {

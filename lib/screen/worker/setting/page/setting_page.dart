@@ -7,14 +7,15 @@ import 'package:eportal/screen/share/chart_economically_active/page/chart_econom
 import 'package:eportal/screen/share/chart_economically_inactive/page/chart_economically_inactive_page.dart';
 import 'package:eportal/screen/share/chart_unemployment_rate/page/chart_unemployment_rate_page.dart';
 import 'package:eportal/screen/share/contact/page/contract_page.dart';
+import 'package:eportal/screen/share/empty_example/page/empty_example_page.dart';
 import 'package:eportal/screen/share/policy/page/policy_page.dart';
 import 'package:eportal/screen/share/support/page/support_page.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
+import 'package:eportal/widget/list_viewer/custom_list_viewer.dart';
 import 'package:flutter/material.dart';
 
 import '../../history/page/history_page.dart';
-
 
 //
 // Created by BlackRose on 11/7/2023.
@@ -39,15 +40,39 @@ class _SettingPageState extends BasePageState<SettingPage> {
           title: "Đổi mật khẩu",
           builder: (context) => const ChangePasswordPage()),
     ],
-    "Tính năng": [
+    "Đăng ký": [
       SettingPageModel(
-          icon: Icons.notifications,
-          title: "Thông báo",
-          builder: (context) => const ChangeUserInfoPage()),
+          icon: Icons.app_registration,
+          title: "Lịch tư vấn",
+          builder: (context) => EmptyExamplePage(
+                isHasAppBar: true,
+              )),
+      SettingPageModel(
+          icon: Icons.app_registration,
+          title: "Lịch giới thiệu việc làm",
+          builder: (context) => EmptyExamplePage(
+                isHasAppBar: true,
+              )),
+      SettingPageModel(
+          icon: Icons.app_registration,
+          title: "Lấy số thực hiện dịch vụ công",
+          builder: (context) => EmptyExamplePage(
+                isHasAppBar: true,
+              )),
+      SettingPageModel(
+          icon: Icons.app_registration,
+          title: "Hỏi và đáp",
+          builder: (context) => EmptyExamplePage(
+                isHasAppBar: true,
+              )),
+    ],
+    "Lịch sử": [
       SettingPageModel(
           icon: Icons.history,
-          title: "Lịch sử ứng tuyển",
-          builder: (context) => const HistoryPage()),
+          title: "Ứng tuyển",
+          builder: (context) => EmptyExamplePage(
+                isHasAppBar: true,
+              )),
     ],
     "Biểu đồ": [
       SettingPageModel(
@@ -86,35 +111,17 @@ class _SettingPageState extends BasePageState<SettingPage> {
   @override
   bool isHasAppBar(BuildContext context) => false;
 
-  @override
   Widget pageUI(BuildContext context) => SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
+        child: CustomListViewer(
           children: actions.entries
-              .map((e) => Column(
-                    children: [
-                      Container(
-                          margin: const EdgeInsets.only(top: 5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.white,
-                          ),
-                          padding: const EdgeInsets.all(10),
-                          width: double.infinity,
-                          child: Text(
-                            e.key,
-                            style:
-                                AppTextStyle.title.copyWith(color: Colors.blue),
-                          )),
-                      Column(
-                        children: e.value
-                            .map((e) => SettingItem(
-                                onTap: () => nextPage(e.builder),
-                                settingPageModel: e))
-                            .toList(),
-                      )
-                    ],
-                  ))
+              .map((e) => CustomItemViewer(
+                  title: e.key,
+                  children: e.value
+                      .map((e) => CustomItemViewer(
+                          currrent: SettingItem(
+                              onTap: () => nextPage(e.builder),
+                              settingPageModel: e)))
+                      .toList()))
               .toList(),
         ),
       );

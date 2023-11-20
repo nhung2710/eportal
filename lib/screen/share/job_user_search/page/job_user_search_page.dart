@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'dart:convert' show utf8;
+import 'package:eportal/style/app_color.dart';
+import 'package:eportal/style/app_size_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
@@ -101,7 +103,8 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
                 suffixIcon: IconButton(
                   icon: const Icon(
                     Icons.send,
-                    color: Colors.blue,
+                    color: AppColor.colorOfIcon,
+                    size: AppSizeIcon.sizeOfNormal,
                   ),
                   onPressed: () {
                     _findNews(context);
@@ -151,7 +154,8 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
                                                 "1",
                                                 style: AppTextStyle.title
                                                     .copyWith(
-                                                        color: Colors.blue,
+                                                        color: AppColor
+                                                            .colorOfIcon,
                                                         overflow: TextOverflow
                                                             .visible,
                                                         fontWeight:

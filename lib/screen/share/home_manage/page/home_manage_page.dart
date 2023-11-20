@@ -116,7 +116,7 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                                               isHasAppBar: true,
                                             )),
                                     child: Card(
-                                      elevation: 3,
+                                      elevation: 4,
                                       margin: EdgeInsets.zero,
                                       color: AppColor.colorOfApp,
                                       shadowColor: AppColor.colorOfDrawer,

@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:convert' show utf8;
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:eportal/style/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
@@ -148,8 +149,8 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
                                                       "1",
                                                       style: AppTextStyle.title
                                                           .copyWith(
-                                                              color:
-                                                                  Colors.blue,
+                                                              color: AppColor
+                                                                  .colorOfIcon,
                                                               overflow:
                                                                   TextOverflow
                                                                       .visible,

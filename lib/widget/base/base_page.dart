@@ -54,14 +54,14 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
             height: double.infinity,
             padding: EdgeInsets.all(currentPadding(context)),
             child: RefreshIndicator(
-                color: Colors.blue,
+                color: AppColor.colorOfIcon,
                 onRefresh: () async => initDataLoading(),
                 child: pageUI(context)),
           ),
           endDrawer: getEndDrawer(context),
           drawer: getDrawer(context),
           floatingActionButtonLocation:
-              FloatingActionButtonLocation.miniEndFloat,
+          FloatingActionButtonLocation.miniEndFloat,
           floatingActionButton: getFloatingActionButton(context),
           bottomNavigationBar: getBottomNavigationBar(context),
         ),
@@ -165,15 +165,17 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
         ]).show();
   }
 
-  PreferredSizeWidget? getAppBar(BuildContext context) => isHasAppBar(context)
-      ? AppBar(
-          title: Text(
-            getPageTitle(context),
-            style: AppTextStyle.titleAppbarPage,
-          ),
-          automaticallyImplyLeading: getAutomaticallyImplyLeading(context),
-        )
-      : null;
+  PreferredSizeWidget? getAppBar(BuildContext context) =>
+      isHasAppBar(context)
+          ? AppBar(
+        title: Text(
+          getPageTitle(context),
+          style: AppTextStyle.titleAppbarPage,
+        ),
+        backgroundColor: AppColor.colorOfIcon,
+        automaticallyImplyLeading: getAutomaticallyImplyLeading(context),
+      )
+          : null;
 
   Future<void> loadDataDemo() {
     startLoading();
@@ -229,37 +231,37 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
     }
   }
 
-  Widget buildScreenLoading() => Center(
+  Widget buildScreenLoading() =>
+      Center(
         child: Container(
             height: 100,
             child: const Center(child: CircularProgressIndicator())),
       );
 
-  Widget buildScreenError(String error) => Container(
-      height: 100,
-      child: Text(
-        error,
-        style: AppTextStyle.title.copyWith(color: Colors.red),
-      ));
+  Widget buildScreenError(String error) =>
+      Container(
+          height: 100,
+          child: Text(
+            error,
+            style: AppTextStyle.title.copyWith(color: Colors.red),
+          ));
 
-  Widget buildNotFoundData(BuildContext buildContext) => Center(
+  Widget buildNotFoundData(BuildContext buildContext) =>
+      Center(
         child: Image.asset("assets/images/NotFoundData.jpg"),
       );
 
-  Widget buildImplement(BuildContext buildContext) => Center(
+  Widget buildImplement(BuildContext buildContext) =>
+      Center(
         child: Image.asset("assets/images/Implement.jpg"),
       );
 }
 
-class BasePageStateActive<T extends StatefulWidget> extends State<T>
+class BasePageStateActive<T extends StatefulWidget> extends BasePageState<T>
     with AutomaticKeepAliveClientMixin {
-  final localKey = GlobalKey<State<T>>();
-  final formKey = GlobalKey<FormState>();
 
   @override
   bool get wantKeepAlive => true;
-
-  final ScrollController scrollController = ScrollController();
 
   @override
   void dispose() {
@@ -291,12 +293,12 @@ class BasePageStateActive<T extends StatefulWidget> extends State<T>
             height: double.infinity,
             padding: EdgeInsets.all(currentPadding(context)),
             child: RefreshIndicator(
-                color: Colors.blue,
+                color: AppColor.colorOfIcon,
                 onRefresh: () async => initDataLoading(),
                 child: pageUI(context)),
           ),
           floatingActionButtonLocation:
-              FloatingActionButtonLocation.miniEndFloat,
+          FloatingActionButtonLocation.miniEndFloat,
           floatingActionButton: getFloatingActionButton(context),
           bottomNavigationBar: getBottomNavigationBar(context),
         ),
@@ -304,201 +306,10 @@ class BasePageStateActive<T extends StatefulWidget> extends State<T>
     );
   }
 
-  Widget buildNotFoundData(BuildContext buildContext) => Center(
-        child: Image.asset("assets/images/NotFoundData.jpg"),
-      );
 
-  Widget buildImplement(BuildContext buildContext) => Center(
-        child: Image.asset("assets/images/Implement.jpg"),
-      );
-
-  Widget pageUI(BuildContext context) {
-    return const Text("Categories List");
-  }
-
-  void hiddenKeyboard() {
-    FocusManager.instance.primaryFocus?.unfocus();
-  }
-
-  Future<void> startLoading() async {
-    hiddenKeyboard();
-    return await showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return const SimpleDialog(
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
-          // can change this to your prefered color
-          children: <Widget>[
-            Center(
-              child: CircularProgressIndicator(),
-            )
-          ],
-        );
-      },
-    );
-  }
-
-  Future<void> stopLoading() async {
-    hiddenKeyboard();
-    Navigator.of(context).pop();
-  }
-
-  Future<void> showBottomError(String error) async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        action: SnackBarAction(
-          label: 'Dismiss',
-          onPressed: () {
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          },
-        ),
-        backgroundColor: Colors.red,
-        content: Text(error),
-      ),
-    );
-  }
-
-  Future<bool?> showCenterError(String error) async {
-    hiddenKeyboard();
-    return Alert(
-        context: context,
-        type: AlertType.error,
-        title: "Thông báo",
-        desc: error,
-        buttons: [
-          DialogButton(
-            onPressed: () => Navigator.pop(context),
-            gradient: const LinearGradient(colors: [
-              Color.fromRGBO(116, 116, 191, 1.0),
-              Color.fromRGBO(52, 138, 199, 1.0)
-            ]),
-            child: const Text(
-              "Tôi đã biết",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          )
-        ]).show();
-  }
-
-  Future<bool?> showCenterMessage(String message) async {
-    hiddenKeyboard();
-    return Alert(
-        context: context,
-        type: AlertType.info,
-        title: "Thông báo",
-        desc: message,
-        buttons: [
-          DialogButton(
-            onPressed: () => Navigator.pop(context),
-            gradient: const LinearGradient(colors: [
-              Color.fromRGBO(116, 116, 191, 1.0),
-              Color.fromRGBO(52, 138, 199, 1.0)
-            ]),
-            child: const Text(
-              "Tôi đã biết",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          )
-        ]).show();
-  }
-
-  PreferredSizeWidget? getAppBar(BuildContext context) => isHasAppBar(context)
-      ? AppBar(
-          title: Text(getPageTitle(context)),
-          automaticallyImplyLeading: getAutomaticallyImplyLeading(context),
-        )
-      : null;
-
-  Future<void> loadDataDemo() {
-    startLoading();
-    return Future.delayed(const Duration(milliseconds: 200)).then((value) {
-      stopLoading();
-      return value;
-    });
-  }
-
-  bool getAutomaticallyImplyLeading(BuildContext context) => true;
-
-  bool isHasAppBar(BuildContext context) => true;
-
-  String getPageTitle(BuildContext context) => "Thông báo";
-
-  Widget? getFloatingActionButton(BuildContext context) => null;
-
-  Widget? getBottomNavigationBar(BuildContext context) => null;
-
-  double currentPadding(BuildContext context) => 5;
-
-  Color currentBackgroundColor(BuildContext context) => AppColor.colorOfApp;
-
-  bool isValidForm(BuildContext context) => formKey.currentState!.validate();
-
-  bool isValid() => isValidForm(context);
-
-  void backPage() => Navigator.pop(context);
-
-  void nextPage(WidgetBuilder builder) =>
-      Navigator.push(context, MaterialPageRoute(builder: builder));
-
-  void nextPageWithoutBack(WidgetBuilder builder) =>
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: builder));
-
-  Future<void> scrollToEnd() =>
-      scrollController.animateTo(scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
-
-  Widget handlerBaseState<K>(BaseState state, BlocWidgetBuilder<K> builder) {
-    if (state is BaseInitial) {
-      return buildScreenLoading();
-    } else if (state is BaseLoading) {
-      return buildScreenLoading();
-    } else if (state is BaseError) {
-      return buildScreenError(state.message
-          .replaceWhenNullOrWhiteSpace(ApplicationConstant.SYSTEM_ERROR));
-    } else if (state is BaseLoaded<K>) {
-      return builder(context, state.data);
-    } else {
-      return buildScreenError(ApplicationConstant.SYSTEM_ERROR);
-    }
-  }
-
-  Widget buildScreenLoading() => Center(
-        child: Container(
-            height: 100,
-            child: const Center(child: CircularProgressIndicator())),
-      );
-
-  Widget buildScreenError(String error) => Container(
-      height: 100,
-      color: Colors.transparent,
-      child: Text(
-        error,
-        style: AppTextStyle.title.copyWith(color: Colors.red),
-      ));
 }
 
-class BaseScreenState<T extends StatefulWidget> extends State<T> {
-  final localKey = GlobalKey<State<T>>();
-  final formKey = GlobalKey<FormState>();
-
-  final ScrollController scrollController = ScrollController();
-
-  @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    initDataLoading();
-    // TODO: implement initState
-    super.initState();
-  }
-
-  void initDataLoading() {}
+class BaseScreenState<T extends StatefulWidget> extends BasePageState<T> {
 
   @override
   Widget build(BuildContext context) {
@@ -511,209 +322,12 @@ class BaseScreenState<T extends StatefulWidget> extends State<T> {
     );
   }
 
-  Widget buildNotFoundData(BuildContext buildContext) => Center(
-        child: Image.asset("assets/images/NotFoundData.jpg"),
-      );
 
-  Widget buildImplement(BuildContext buildContext) => Center(
-        child: Image.asset("assets/images/Implement.jpg"),
-      );
-
-  Widget? getEndDrawer(BuildContext context) => null;
-
-  Widget? getDrawer(BuildContext context) => null;
-
-  Widget pageUI(BuildContext context) {
-    return const Text("Categories List");
-  }
-
-  void hiddenKeyboard() {
-    FocusManager.instance.primaryFocus?.unfocus();
-  }
-
-  Future<void> startLoading() async {
-    hiddenKeyboard();
-    return await showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return const SimpleDialog(
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
-          // can change this to your prefered color
-          children: <Widget>[
-            Center(
-              child: CircularProgressIndicator(),
-            )
-          ],
-        );
-      },
-    );
-  }
-
-  Future<void> stopLoading() async {
-    hiddenKeyboard();
-    Navigator.of(context).pop();
-  }
-
-  Future<void> showBottomError(String error) async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        action: SnackBarAction(
-          label: 'Dismiss',
-          onPressed: () {
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          },
-        ),
-        backgroundColor: Colors.red,
-        content: Text(error),
-      ),
-    );
-  }
-
-  Future<bool?> showCenterError(String error) async {
-    hiddenKeyboard();
-    return Alert(
-        context: context,
-        type: AlertType.error,
-        title: "Thông báo",
-        desc: error,
-        buttons: [
-          DialogButton(
-            onPressed: () => Navigator.pop(context),
-            gradient: const LinearGradient(colors: [
-              Color.fromRGBO(116, 116, 191, 1.0),
-              Color.fromRGBO(52, 138, 199, 1.0)
-            ]),
-            child: const Text(
-              "Tôi đã biết",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          )
-        ]).show();
-  }
-
-  Future<bool?> showCenterMessage(String message) async {
-    hiddenKeyboard();
-    return Alert(
-        context: context,
-        type: AlertType.info,
-        title: "Thông báo",
-        desc: message,
-        buttons: [
-          DialogButton(
-            onPressed: () => Navigator.pop(context),
-            gradient: const LinearGradient(colors: [
-              Color.fromRGBO(116, 116, 191, 1.0),
-              Color.fromRGBO(52, 138, 199, 1.0)
-            ]),
-            child: const Text(
-              "Tôi đã biết",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          )
-        ]).show();
-  }
-
-  PreferredSizeWidget? getAppBar(BuildContext context) => isHasAppBar(context)
-      ? AppBar(
-          title: Text(
-            getPageTitle(context),
-            style: AppTextStyle.titleAppbarPage,
-          ),
-          automaticallyImplyLeading: getAutomaticallyImplyLeading(context),
-        )
-      : null;
-
-  Future<void> loadDataDemo() {
-    startLoading();
-    return Future.delayed(const Duration(milliseconds: 200)).then((value) {
-      stopLoading();
-      return value;
-    });
-  }
-
-  bool getAutomaticallyImplyLeading(BuildContext context) => true;
-
-  bool isHasAppBar(BuildContext context) => true;
-
-  String getPageTitle(BuildContext context) => "Thông báo";
-
-  Widget? getFloatingActionButton(BuildContext context) => null;
-
-  Widget? getBottomNavigationBar(BuildContext context) => null;
-
-  double currentPadding(BuildContext context) => 5;
-
-  Color currentBackgroundColor(BuildContext context) => AppColor.colorOfApp;
-
-  bool isValidForm(BuildContext context) => formKey.currentState!.validate();
-
-  bool isValid() => isValidForm(context);
-
-  void backPage() => Navigator.pop(context);
-
-  void nextPage(WidgetBuilder builder) =>
-      Navigator.push(context, MaterialPageRoute(builder: builder));
-
-  void nextPageWithoutBack(WidgetBuilder builder) =>
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: builder));
-
-  Future<void> scrollToEnd() =>
-      scrollController.animateTo(scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
-
-  Widget handlerBaseState<K>(BaseState state, BlocWidgetBuilder<K> builder,
-      {Widget? initWidget}) {
-    if (state is BaseInitial) {
-      return initWidget ?? Container();
-    } else if (state is BaseLoading) {
-      return buildScreenLoading();
-    } else if (state is BaseError) {
-      return buildScreenError(state.message
-          .replaceWhenNullOrWhiteSpace(ApplicationConstant.SYSTEM_ERROR));
-    } else if (state is BaseLoaded<K>) {
-      return builder(context, state.data);
-    } else {
-      return buildScreenError(ApplicationConstant.SYSTEM_ERROR);
-    }
-  }
-
-  Widget buildScreenLoading() => Center(
-        child: Container(
-            height: 100,
-            child: const Center(child: CircularProgressIndicator())),
-      );
-
-  Widget buildScreenError(String error) => Container(
-      height: 100,
-      child: Text(
-        error,
-        style: AppTextStyle.title.copyWith(color: Colors.red),
-      ));
 }
 
-class BaseScreenStateActive<T extends StatefulWidget> extends State<T>
-    with AutomaticKeepAliveClientMixin {
-  final localKey = GlobalKey<State<T>>();
-  final formKey = GlobalKey<FormState>();
+class BaseScreenStateActive<T extends StatefulWidget>
+    extends BasePageStateActive<T> {
 
-  final ScrollController scrollController = ScrollController();
-
-  @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    initDataLoading();
-    // TODO: implement initState
-    super.initState();
-  }
-
-  void initDataLoading() {}
 
   @override
   Widget build(BuildContext context) {
@@ -727,187 +341,5 @@ class BaseScreenStateActive<T extends StatefulWidget> extends State<T>
     );
   }
 
-  Widget buildNotFoundData(BuildContext buildContext) => Center(
-        child: Image.asset("assets/images/NotFoundData.jpg"),
-      );
 
-  Widget buildImplement(BuildContext buildContext) => Center(
-        child: Image.asset("assets/images/Implement.jpg"),
-      );
-
-  Widget? getEndDrawer(BuildContext context) => null;
-
-  Widget? getDrawer(BuildContext context) => null;
-
-  Widget pageUI(BuildContext context) {
-    return const Text("Categories List");
-  }
-
-  void hiddenKeyboard() {
-    FocusManager.instance.primaryFocus?.unfocus();
-  }
-
-  Future<void> startLoading() async {
-    hiddenKeyboard();
-    return await showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return const SimpleDialog(
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
-          // can change this to your prefered color
-          children: <Widget>[
-            Center(
-              child: CircularProgressIndicator(),
-            )
-          ],
-        );
-      },
-    );
-  }
-
-  Future<void> stopLoading() async {
-    hiddenKeyboard();
-    Navigator.of(context).pop();
-  }
-
-  Future<void> showBottomError(String error) async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        action: SnackBarAction(
-          label: 'Dismiss',
-          onPressed: () {
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          },
-        ),
-        backgroundColor: Colors.red,
-        content: Text(error),
-      ),
-    );
-  }
-
-  Future<bool?> showCenterError(String error) async {
-    hiddenKeyboard();
-    return Alert(
-        context: context,
-        type: AlertType.error,
-        title: "Thông báo",
-        desc: error,
-        buttons: [
-          DialogButton(
-            onPressed: () => Navigator.pop(context),
-            gradient: const LinearGradient(colors: [
-              Color.fromRGBO(116, 116, 191, 1.0),
-              Color.fromRGBO(52, 138, 199, 1.0)
-            ]),
-            child: const Text(
-              "Tôi đã biết",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          )
-        ]).show();
-  }
-
-  Future<bool?> showCenterMessage(String message) async {
-    hiddenKeyboard();
-    return Alert(
-        context: context,
-        type: AlertType.info,
-        title: "Thông báo",
-        desc: message,
-        buttons: [
-          DialogButton(
-            onPressed: () => Navigator.pop(context),
-            gradient: const LinearGradient(colors: [
-              Color.fromRGBO(116, 116, 191, 1.0),
-              Color.fromRGBO(52, 138, 199, 1.0)
-            ]),
-            child: const Text(
-              "Tôi đã biết",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          )
-        ]).show();
-  }
-
-  PreferredSizeWidget? getAppBar(BuildContext context) => isHasAppBar(context)
-      ? AppBar(
-          title: Text(
-            getPageTitle(context),
-            style: AppTextStyle.titleAppbarPage,
-          ),
-          automaticallyImplyLeading: getAutomaticallyImplyLeading(context),
-        )
-      : null;
-
-  Future<void> loadDataDemo() {
-    startLoading();
-    return Future.delayed(const Duration(milliseconds: 200)).then((value) {
-      stopLoading();
-      return value;
-    });
-  }
-
-  bool getAutomaticallyImplyLeading(BuildContext context) => true;
-
-  bool isHasAppBar(BuildContext context) => true;
-
-  String getPageTitle(BuildContext context) => "Thông báo";
-
-  Widget? getFloatingActionButton(BuildContext context) => null;
-
-  Widget? getBottomNavigationBar(BuildContext context) => null;
-
-  double currentPadding(BuildContext context) => 5;
-
-  Color currentBackgroundColor(BuildContext context) => AppColor.colorOfApp;
-
-  bool isValidForm(BuildContext context) => formKey.currentState!.validate();
-
-  bool isValid() => isValidForm(context);
-
-  void backPage() => Navigator.pop(context);
-
-  void nextPage(WidgetBuilder builder) =>
-      Navigator.push(context, MaterialPageRoute(builder: builder));
-
-  void nextPageWithoutBack(WidgetBuilder builder) =>
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: builder));
-
-  Future<void> scrollToEnd() =>
-      scrollController.animateTo(scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
-
-  Widget handlerBaseState<K>(BaseState state, BlocWidgetBuilder<K> builder,
-      {Widget? initWidget}) {
-    if (state is BaseInitial) {
-      return initWidget ?? Container();
-    } else if (state is BaseLoading) {
-      return buildScreenLoading();
-    } else if (state is BaseError) {
-      return buildScreenError(state.message
-          .replaceWhenNullOrWhiteSpace(ApplicationConstant.SYSTEM_ERROR));
-    } else if (state is BaseLoaded<K>) {
-      return builder(context, state.data);
-    } else {
-      return buildScreenError(ApplicationConstant.SYSTEM_ERROR);
-    }
-  }
-
-  Widget buildScreenLoading() => Center(
-        child: Container(
-            height: 100,
-            child: const Center(child: CircularProgressIndicator())),
-      );
-
-  Widget buildScreenError(String error) => Container(
-      height: 100,
-      child: Text(
-        error,
-        style: AppTextStyle.title.copyWith(color: Colors.red),
-      ));
-
-  @override
-  bool get wantKeepAlive => true;
 }

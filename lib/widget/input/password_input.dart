@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../extension/input_decoration_extension.dart';
 import '../../style/app_color.dart';
+import '../../style/app_size_icon.dart';
 
 //
 // Created by BlackRose on 17/11/2023.
@@ -42,6 +43,11 @@ class _PasswordInputState extends State<PasswordInput> {
         decoration: InputDecoration(
           hintText: widget.hintText,
           isDense: true,
+          focusedBorder: OutlineInputBorder(
+            borderSide:
+                const BorderSide(color: AppColor.colorOfIcon, width: 2.0),
+            borderRadius: BorderRadius.circular(5.0),
+          ),
           prefixIconConstraints: const BoxConstraints(
             minWidth: 25,
             minHeight: 25,
@@ -51,7 +57,7 @@ class _PasswordInputState extends State<PasswordInput> {
             child: const Icon(
               Icons.lock,
               color: AppColor.colorOfIcon,
-              size: 20,
+              size: AppSizeIcon.sizeOfNormal,
             ),
           ),
           suffixIconConstraints: const BoxConstraints(
@@ -69,7 +75,7 @@ class _PasswordInputState extends State<PasswordInput> {
               child: Icon(
                 widget.obscureText ? Icons.visibility : Icons.visibility_off,
                 color: AppColor.colorOfIcon,
-                size: 20,
+                size: AppSizeIcon.sizeOfNormal,
               ),
             ),
           ),

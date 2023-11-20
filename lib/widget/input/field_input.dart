@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../style/app_color.dart';
+import '../../style/app_size_icon.dart';
 
 //
 // Created by BlackRose on 17/11/2023.
@@ -55,6 +56,11 @@ class _FieldInputState extends State<FieldInput> {
         onFieldSubmitted: widget.onFieldSubmitted,
         decoration: InputDecoration(
           hintText: widget.hintText,
+          focusedBorder: OutlineInputBorder(
+            borderSide:
+                const BorderSide(color: AppColor.colorOfIcon, width: 2.0),
+            borderRadius: BorderRadius.circular(5.0),
+          ),
           isDense: true,
           prefixIconConstraints: const BoxConstraints(
             minWidth: 25,
@@ -65,7 +71,7 @@ class _FieldInputState extends State<FieldInput> {
             child: Icon(
               widget.icon,
               color: AppColor.colorOfIcon,
-              size: 20,
+              size: AppSizeIcon.sizeOfNormal,
             ),
           ),
           suffixIcon: GestureDetector(
@@ -79,7 +85,7 @@ class _FieldInputState extends State<FieldInput> {
               child: const Icon(
                 Icons.clear,
                 color: AppColor.colorOfDrawer,
-                size: 20,
+                size: AppSizeIcon.sizeOfNormal,
               ),
             ),
           ),

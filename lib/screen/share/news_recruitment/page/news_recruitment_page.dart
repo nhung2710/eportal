@@ -47,15 +47,14 @@ class _NewsRecruitmentPageState extends BasePageState<NewsRecruitmentPage> {
   }
 
   @override
-  Widget pageUI(BuildContext context) =>
-      DefaultTabController(
+  Widget pageUI(BuildContext context) => DefaultTabController(
         key: localKey,
         length: 3,
         child: Column(
           children: [
             const TabBar(
               indicatorColor: AppColor.colorOfIcon,
-              labelColor: Colors.blue,
+              labelColor: AppColor.colorOfIcon,
               labelStyle: AppTextStyle.title,
               indicatorWeight: 2,
               tabs: [
@@ -94,8 +93,7 @@ class _NewsRecruitmentPageState extends BasePageState<NewsRecruitmentPage> {
       );
 
   @override
-  Widget? getFloatingActionButton(BuildContext context) =>
-      ExpandableFab(
+  Widget? getFloatingActionButton(BuildContext context) => ExpandableFab(
         children: [
           ActionButton(
             icon: const Icon(

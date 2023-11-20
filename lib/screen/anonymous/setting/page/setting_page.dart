@@ -6,6 +6,7 @@ import 'package:eportal/screen/share/policy/page/policy_page.dart';
 import 'package:eportal/screen/share/support/page/support_page.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
+import 'package:eportal/widget/list_viewer/custom_list_viewer.dart';
 import 'package:flutter/material.dart';
 
 import '../../../share/change_password/page/change_password_page.dart';
@@ -64,35 +65,17 @@ class _SettingPageState extends BasePageStateActive<SettingPage> {
   @override
   bool isHasAppBar(BuildContext context) => false;
 
-  @override
   Widget pageUI(BuildContext context) => SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
+        child: CustomListViewer(
           children: actions.entries
-              .map((e) => Column(
-                    children: [
-                      Container(
-                          margin: const EdgeInsets.only(top: 5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.white,
-                          ),
-                          padding: const EdgeInsets.all(10),
-                          width: double.infinity,
-                          child: Text(
-                            e.key,
-                            style:
-                                AppTextStyle.title.copyWith(color: Colors.blue),
-                          )),
-                      Column(
-                        children: e.value
-                            .map((e) => SettingItem(
-                                onTap: () => nextPage(e.builder),
-                                settingPageModel: e))
-                            .toList(),
-                      )
-                    ],
-                  ))
+              .map((e) => CustomItemViewer(
+                  title: e.key,
+                  children: e.value
+                      .map((e) => CustomItemViewer(
+                          currrent: SettingItem(
+                              onTap: () => nextPage(e.builder),
+                              settingPageModel: e)))
+                      .toList()))
               .toList(),
         ),
       );

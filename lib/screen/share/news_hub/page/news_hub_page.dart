@@ -240,8 +240,8 @@ class _NewsHubPageState extends BasePageStateActive<NewsHubPage> {
                         ),
                       ),
                       const TabBar(
-                        indicatorColor: Colors.blue,
-                        labelColor: Colors.blue,
+                        indicatorColor: AppColor.colorOfIcon,
+                        labelColor: AppColor.colorOfIcon,
                         labelStyle: AppTextStyle.title,
                         indicatorWeight: 2,
                         tabs: [

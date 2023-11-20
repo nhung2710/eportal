@@ -1,3 +1,5 @@
+import 'package:eportal/style/app_color.dart';
+import 'package:eportal/style/app_size_icon.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -27,8 +29,8 @@ class AnswerAndQuestionItem extends StatelessWidget {
                   children: [
                     const Icon(
                       Icons.question_answer,
-                      color: Colors.blue,
-                      size: 20,
+                      color: AppColor.colorOfIcon,
+                      size: AppSizeIcon.sizeOfNormal,
                     ),
                     Expanded(
                       flex: 1,
@@ -37,11 +39,77 @@ class AnswerAndQuestionItem extends StatelessWidget {
                           child: Text("Vấn đề $index",
                               textAlign: TextAlign.start,
                               style: AppTextStyle.title
-                                  .copyWith(color: Colors.blue))),
+                                  .copyWith(color: AppColor.colorOfIcon))),
                     ),
                     const Icon(
                       Icons.navigate_next_sharp,
-                      color: Colors.blue,
+                      color: AppColor.colorOfIcon,
+                      size: AppSizeIcon.sizeOfNormal,
+                    )
+                  ],
+                )),
+          ),
+          GestureDetector(
+            onTap: onTap,
+            child: Container(
+                margin: const EdgeInsets.only(top: 5, left: 15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.white,
+                ),
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.question_answer,
+                      color: AppColor.colorOfIcon,
+                      size: AppSizeIcon.sizeOfNormal,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                          margin: const EdgeInsets.only(right: 10, left: 10),
+                          child: Text("Kết quả $index",
+                              textAlign: TextAlign.start,
+                              style: AppTextStyle.title
+                                  .copyWith(color: AppColor.colorOfIcon))),
+                    ),
+                    const Icon(
+                      Icons.navigate_next_sharp,
+                      color: AppColor.colorOfIcon,
+                      size: AppSizeIcon.sizeOfNormal,
+                    )
+                  ],
+                )),
+          ),
+          GestureDetector(
+            onTap: onTap,
+            child: Container(
+                margin: const EdgeInsets.only(top: 5, left: 15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.white,
+                ),
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.question_answer,
+                      color: AppColor.colorOfIcon,
+                      size: 20,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                          margin: const EdgeInsets.only(right: 10, left: 10),
+                          child: Text("Kết quả $index",
+                              textAlign: TextAlign.start,
+                              style: AppTextStyle.title
+                                  .copyWith(color: AppColor.colorOfIcon))),
+                    ),
+                    const Icon(
+                      Icons.navigate_next_sharp,
+                      color: AppColor.colorOfIcon,
                       size: 20,
                     )
                   ],
@@ -60,7 +128,7 @@ class AnswerAndQuestionItem extends StatelessWidget {
                   children: [
                     const Icon(
                       Icons.question_answer,
-                      color: Colors.blue,
+                      color: AppColor.colorOfIcon,
                       size: 20,
                     ),
                     Expanded(
@@ -70,77 +138,11 @@ class AnswerAndQuestionItem extends StatelessWidget {
                           child: Text("Kết quả $index",
                               textAlign: TextAlign.start,
                               style: AppTextStyle.title
-                                  .copyWith(color: Colors.blue))),
+                                  .copyWith(color: AppColor.colorOfIcon))),
                     ),
                     const Icon(
                       Icons.navigate_next_sharp,
-                      color: Colors.blue,
-                      size: 20,
-                    )
-                  ],
-                )),
-          ),
-          GestureDetector(
-            onTap: onTap,
-            child: Container(
-                margin: const EdgeInsets.only(top: 5, left: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.white,
-                ),
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.question_answer,
-                      color: Colors.blue,
-                      size: 20,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                          margin: const EdgeInsets.only(right: 10, left: 10),
-                          child: Text("Kết quả $index",
-                              textAlign: TextAlign.start,
-                              style: AppTextStyle.title
-                                  .copyWith(color: Colors.blue))),
-                    ),
-                    const Icon(
-                      Icons.navigate_next_sharp,
-                      color: Colors.blue,
-                      size: 20,
-                    )
-                  ],
-                )),
-          ),
-          GestureDetector(
-            onTap: onTap,
-            child: Container(
-                margin: const EdgeInsets.only(top: 5, left: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.white,
-                ),
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.question_answer,
-                      color: Colors.blue,
-                      size: 20,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                          margin: const EdgeInsets.only(right: 10, left: 10),
-                          child: Text("Kết quả $index",
-                              textAlign: TextAlign.start,
-                              style: AppTextStyle.title
-                                  .copyWith(color: Colors.blue))),
-                    ),
-                    const Icon(
-                      Icons.navigate_next_sharp,
-                      color: Colors.blue,
+                      color: AppColor.colorOfIcon,
                       size: 20,
                     )
                   ],

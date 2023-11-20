@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:eportal/style/app_color.dart';
+import 'package:eportal/style/app_size_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
@@ -91,8 +93,8 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
                 suffixIcon: IconButton(
                   icon: const Icon(
                     Icons.send,
-                    color: Colors.blue,
-                    size: 20,
+                    color: AppColor.colorOfIcon,
+                    size: AppSizeIcon.sizeOfNormal,
                   ),
                   padding: EdgeInsets.zero,
                   onPressed: () {

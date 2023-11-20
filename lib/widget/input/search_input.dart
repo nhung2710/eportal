@@ -1,3 +1,4 @@
+import 'package:eportal/style/app_size_icon.dart';
 import 'package:flutter/material.dart';
 
 import '../../style/app_color.dart';
@@ -54,7 +55,7 @@ class _SearchInputState extends State<SearchInput> {
             child: Icon(
               widget.icon,
               color: AppColor.colorOfIcon,
-              size: 20,
+              size: AppSizeIcon.sizeOfNormal,
             ),
           ),
           suffixIcon: GestureDetector(
@@ -64,7 +65,7 @@ class _SearchInputState extends State<SearchInput> {
               child: const Icon(
                 Icons.send,
                 color: AppColor.colorOfIcon,
-                size: 20,
+                size: AppSizeIcon.sizeOfNormal,
               ),
             ),
           ),

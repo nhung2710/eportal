@@ -144,6 +144,8 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
           Container(
               margin: const EdgeInsets.only(top: 10),
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColor.colorOfIcon),
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   child: const Text('Đăng ký'),
