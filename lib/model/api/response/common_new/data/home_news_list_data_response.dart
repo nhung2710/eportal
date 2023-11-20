@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../extension/string_extension.dart';
+
 //
 // Created by BlackRose on 13/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -161,6 +163,7 @@ class HomeNewsListDataResponse {
     cancelPublishDate = json['cancelPublishDate'];
     cancelPublishUser = json['cancelPublishUser'];
     publishedDate = json['publishedDate'];
+    publishedDate = publishedDate.formatDateTimeApi();
     publishedUser = json['publishedUser'];
     userId = json['userId'];
     writerName = json['writerName'];

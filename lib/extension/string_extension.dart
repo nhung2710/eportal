@@ -8,7 +8,6 @@ import 'package:html/parser.dart' as htmlparser;
 import 'package:diacritic/diacritic.dart';
 
 import 'dateTime_extension.dart';
-import 'datetime_extension.dart';
 
 const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
 

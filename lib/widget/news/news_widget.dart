@@ -51,7 +51,7 @@ class NewsWidget extends StatelessWidget {
                   ? Expanded(
                       flex: 1,
                       child: SizedBox(
-                        height: 120,
+                        height: 100,
                         child: ImageLoading(
                           imageUrl: imageUrl.getImageUrl(),
                           imageError: imageError,
@@ -96,7 +96,7 @@ class NewsWidget extends StatelessWidget {
                         style: AppTextStyle.normal,
                       ),
                       Align(
-                        alignment: Alignment.centerRight,
+                        alignment: Alignment.bottomRight,
                         child: Text(
                           time.replaceWhenNullOrWhiteSpace(),
                           maxLines: 1,

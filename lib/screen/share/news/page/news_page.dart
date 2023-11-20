@@ -78,6 +78,7 @@ class _NewsPageState extends BasePageState<NewsPage> {
                             title: state.data?.elementAt(i).title,
                             imageUrl: state.data?.elementAt(i).imagePath,
                             content: state.data?.elementAt(i).content,
+                            time: state.data?.elementAt(i).publishedDate,
                           )),
                 ),
               ],

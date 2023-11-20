@@ -1,9 +1,11 @@
+import 'package:eportal/screen/share/view_pdf/page/view_pdf_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../bloc/common_new/home_document_list_bloc.dart';
 import '../../../../constant/application_constant.dart';
 import '../../../../event/common_new/home_document_list_event.dart';
+import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
 import '../../../../model/api/request/common_new/home_document_list_request.dart';
 import '../../../../model/api/response/common_new/home_document_list_response.dart';
@@ -51,8 +53,11 @@ class _NewsLegalDocumentPageState extends BasePageState<NewsLegalDocumentPage> {
                     shrinkWrap: true,
                     itemCount: state.data!.length,
                     itemBuilder: (context, i) => NewsWidget(
-                          onTap: () => nextPage((context) => EmptyExamplePage(
-                                isHasAppBar: true,
+                          onTap: () => nextPage((context) => ViewPdfPage(
+                                url: state.data!
+                                    .elementAt(i)
+                                    .fileSource
+                                    .getImageUrl(),
                               )),
                           title: state.data!.elementAt(i).documentName,
                           isHasImage: false,
