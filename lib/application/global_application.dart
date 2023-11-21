@@ -1,47 +1,36 @@
+import 'package:eportal/model/api/response/common_new/data/dang_nhap_data_response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constant/application_constant.dart';
 import '../extension/string_extension.dart';
 
+enum RoleType {
+  anonymous,
+  users,
+  bussiness,
+  cms,
+}
+
 class GlobalApplication {
   static final GlobalApplication _instance = GlobalApplication._internal();
-  String _UserName = ApplicationConstant.EMPTY;
-  String _FullName = ApplicationConstant.EMPTY;
-  String _UserPassword = ApplicationConstant.EMPTY;
-  String _UserId = ApplicationConstant.EMPTY;
-  late SharedPreferences _Preferences;
-
-  String get UserName => _UserName;
-
-  String get UserId => _UserId;
-
-  String get UserPassword => _UserPassword;
-
-  SharedPreferences get Preferences => _Preferences;
-
-  set Preferences(SharedPreferences preferences) {
-    _Preferences = preferences;
-  }
+  String UserName = ApplicationConstant.EMPTY;
+  String UserNameSaved = ApplicationConstant.EMPTY;
+  String UserPasswordSaved = ApplicationConstant.EMPTY;
+  String FullName = ApplicationConstant.EMPTY;
+  String UserPassword = ApplicationConstant.EMPTY;
+  String UserId = ApplicationConstant.EMPTY;
+  RoleType UserRoleType = RoleType.anonymous;
+  late SharedPreferences Preferences;
 
   factory GlobalApplication() {
     return _instance;
   }
 
-  bool get IsLogin => _UserName.isNotEmpty && _UserPassword.isNotEmpty;
-
-  set UserName(String UserName) => _UserName = UserName;
-
-  set UserId(String UserId) => _UserId = UserId;
-
-  set FullName(String FullName) => _FullName = FullName;
-
-  String get FullName => _FullName;
-
-  set UserPassword(String UserPassword) => _UserPassword = UserPassword;
+  bool get IsLogin => UserRoleType != RoleType.anonymous;
 
   String getStringOneTimePreferences(String key) {
-    var value = _Preferences.getString(key).replaceWhenNullOrEmpty();
-    _Preferences.remove(key);
+    var value = Preferences.getString(key).replaceWhenNullOrEmpty();
+    Preferences.remove(key);
     return value;
   }
 
@@ -50,38 +39,62 @@ class GlobalApplication {
     int currentHour = now.hour;
     String message = ApplicationConstant.EMPTY;
 
-    if (currentHour >= 6 && currentHour <= 11)
+    if (currentHour >= 6 && currentHour <= 11) {
       message = "buổi sáng";
-    else if (currentHour >= 11 && currentHour <= 16)
+    } else if (currentHour >= 11 && currentHour <= 16) {
       message = "buổi trưa";
-    else if (currentHour >= 16 && currentHour <= 19)
+    } else if (currentHour >= 16 && currentHour <= 19) {
       message = "buổi chiều";
-    else
+    } else {
       message = "buổi tối";
+    }
 
     return "Chúc bạn $message tốt lành";
   }
 
-  void SignIn(String username, String password, String userid) {
-    FullName = username;
-    UserName = username;
-    UserId = userid;
-    UserPassword = password;
+  Future<void> signIn(
+      DangNhapDataResponse? data, String userName, String password) async {
+    if (data != null) {
+      switch (data.role) {
+        case "users":
+          UserRoleType = RoleType.users;
+          break;
+        case "bussiness":
+          UserRoleType = RoleType.bussiness;
+          break;
+        case "cms":
+          UserRoleType = RoleType.cms;
+          break;
+        default:
+          break;
+      }
+      if (UserRoleType != RoleType.anonymous) {
+        FullName = data.userName.supportHtml();
+        UserName = userName;
+        UserNameSaved = userName;
+        UserId = data.userID.replaceWhenNullOrWhiteSpace();
+        UserPassword = password;
+        UserPasswordSaved = password;
+        await Preferences.setString(ApplicationConstant.USER_NAME, UserName);
+        await Preferences.setString(
+            ApplicationConstant.USER_PASSWORD, UserPassword);
+        await Preferences.setBool(ApplicationConstant.AUTO_LOGIN, true);
+      }
+    }
   }
 
-  void SignOut() {
+  Future<void> signOut() async {
     FullName = "bạn";
     UserName = ApplicationConstant.EMPTY;
     UserPassword = ApplicationConstant.EMPTY;
+    await Preferences.setBool(ApplicationConstant.AUTO_LOGIN, false);
   }
 
-  String HelloUser() {
-    return "Chào $_FullName";
+  String helloUser() {
+    return "Chào $FullName";
   }
 
   GlobalApplication._internal() {
-    SignOut();
-    //_UserName = "eportal";
-    //_UserPassword = "CT03-M14IC-PO22SE-0SOFT4-A0P1J";
+    signOut();
   }
 }

@@ -34,7 +34,7 @@ class DefaultAppBar {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(GlobalApplication().HelloUser(),
+                  Text(GlobalApplication().helloUser(),
                       style: AppTextStyle.titlePage),
                   Text(
                     GlobalApplication().HelloMessage(),
@@ -50,11 +50,11 @@ class DefaultAppBar {
           GlobalApplication().IsLogin
               ? IconButton(
                   onPressed: () {
-                    GlobalApplication().SignOut();
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SignInPage()));
+                    GlobalApplication().signOut().then((value) =>
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignInPage())));
                   },
                   icon: const Icon(Icons.logout),
                   color: AppColor.colorOfIcon,

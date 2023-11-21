@@ -6,19 +6,15 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class DangNhapResponse extends BaseEportalResponse {
-  List<DangNhapDataResponse>? data;
+  DangNhapDataResponse? data;
 
   DangNhapResponse({this.data, required status, required message})
       : super(status: status, message: message);
 
   factory DangNhapResponse.fromJson(Map<String, dynamic> json) {
-    List<DangNhapDataResponse> data = <DangNhapDataResponse>[];
-    if (json['data'] != null) {
-      json['data'].forEach((v) {
-        data.add(DangNhapDataResponse.fromJson(v));
-      });
-    }
     return DangNhapResponse(
-        data: data, status: json["status"], message: json["message"]);
+        data: DangNhapDataResponse.fromJson(json["data"]),
+        status: json["status"],
+        message: json["message"]);
   }
 }

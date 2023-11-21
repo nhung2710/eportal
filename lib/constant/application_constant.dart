@@ -7,6 +7,7 @@ class ApplicationConstant {
 
   static const String EMPTY = "";
   static const String FIRST_TIME_OPEN_APP = "FIRST_TIME_OPEN_APP";
+  static const String AUTO_LOGIN = "AUTO_LOGIN";
   static const String USER_NAME = "USER_NAME";
   static const String USER_PASSWORD = "USER_PASSWORD";
   static const String REGISTER_USER_NAME = "REGISTER_USER_NAME";

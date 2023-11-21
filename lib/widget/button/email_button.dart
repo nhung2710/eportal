@@ -23,7 +23,10 @@ class EmailButton extends StatelessWidget {
       );
 
   _sendEmail() {
-    launchUrl(
-        Uri(scheme: 'mailto', path: '${email}subject=Yêu cầu hỗ trợ&body='));
+    launchUrl(Uri(
+      scheme: 'mailto',
+      path: '$email',
+      query: 'subject=Yêu cầu hỗ trợ',
+    ));
   }
 }

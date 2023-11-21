@@ -122,13 +122,15 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
     );
   }
 
-  Future<bool?> showCenterError(String error) async {
+  Future<bool?> showCenterError(String? error) async {
     hiddenKeyboard();
     return Alert(
         context: context,
         type: AlertType.error,
         title: "Thông báo",
-        desc: error,
+        desc: error
+            .supportHtml()
+            .replaceWhenNullOrWhiteSpace(ApplicationConstant.SYSTEM_ERROR),
         buttons: [
           DialogButton(
             onPressed: () => Navigator.pop(context),

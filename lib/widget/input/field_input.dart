@@ -16,6 +16,8 @@ class FieldInput extends StatefulWidget {
   final TextInputAction? textInputAction;
   final IconData? icon;
   final int? maxLength;
+  final int? minLines;
+  final int? maxLines;
   final TextInputType? keyboardType;
 
   final FocusNode? focusNode;
@@ -29,6 +31,8 @@ class FieldInput extends StatefulWidget {
     this.icon,
     this.focusNode,
     this.keyboardType,
+    this.minLines,
+    this.maxLines,
     this.maxLength = 50,
     this.textInputAction,
   });
@@ -52,6 +56,8 @@ class _FieldInputState extends State<FieldInput> {
         textInputAction: widget.textInputAction,
         validator: widget.validator,
         focusNode: widget.focusNode,
+        minLines: widget.minLines,
+        maxLines: widget.maxLines,
         keyboardType: widget.keyboardType,
         onFieldSubmitted: widget.onFieldSubmitted,
         decoration: InputDecoration(

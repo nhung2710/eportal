@@ -49,11 +49,11 @@ Future<void> main() async {
     systemNavigationBarIconBrightness: Brightness.dark,
   ));
   GlobalApplication().Preferences = await SharedPreferences.getInstance();
-  GlobalApplication().UserName = GlobalApplication()
+  GlobalApplication().UserNameSaved = GlobalApplication()
       .Preferences
       .getString(ApplicationConstant.USER_NAME)
       .replaceWhenNullOrWhiteSpace();
-  GlobalApplication().UserPassword = GlobalApplication()
+  GlobalApplication().UserPasswordSaved = GlobalApplication()
       .Preferences
       .getString(ApplicationConstant.USER_PASSWORD)
       .replaceWhenNullOrWhiteSpace();
