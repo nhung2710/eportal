@@ -1,6 +1,6 @@
 import '../../../../api/constant/application_api_constant.dart';
-import 'data/danh_sach_doanh_nghiep_data_request.dart';
 import '../../../base/base_eportal_request.dart';
+import 'data/danh_sach_doanh_nghiep_data_request.dart';
 
 class DanhSachDoanhNghiepRequest
     extends BaseEportalRequest<DanhSachDoanhNghiepDataRequest> {

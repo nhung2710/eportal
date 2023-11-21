@@ -1,4 +1,3 @@
-
 import '../../../../../constant/application_constant.dart';
 import '../../../../base/base_eportal_xml.dart';
 
@@ -23,18 +22,10 @@ class DanhSachDoanhNghiepDataRequest extends BaseEportalXml {
   StringBuffer toXml() {
     // TODO: implement toXml
     var buffer = super.toXml();
-    if (tinhTp != null) {
-      buffer.write('<tinhTp>$tinhTp</tinhTp>');
-    }
-    if (quanHuyen != null) {
-      buffer.write('<quanHuyen>$quanHuyen</quanHuyen>');
-    }
-    if (soTrangHienTai != null) {
-      buffer.write('<soTrangHienTai>$soTrangHienTai</soTrangHienTai>');
-    }
-    if (soBanGhiTrenTrang != null) {
-      buffer.write('<soBanGhiTrenTrang>$soBanGhiTrenTrang</soBanGhiTrenTrang>');
-    }
+    buffer.write(createXml(tinhTp, "tinhTp"));
+    buffer.write(createXml(quanHuyen, "quanHuyen"));
+    buffer.write(createXml(soTrangHienTai, "soTrangHienTai"));
+    buffer.write(createXml(soBanGhiTrenTrang, "soBanGhiTrenTrang"));
     return buffer;
   }
 }

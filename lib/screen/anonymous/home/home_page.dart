@@ -1,7 +1,6 @@
 import 'package:eportal/screen/anonymous/setting/page/setting_page.dart';
 import 'package:eportal/screen/share/answer_and_question/page/answer_and_question_page.dart';
 import 'package:eportal/screen/share/multimedia/page/multimedia_page.dart';
-import 'package:eportal/screen/share/news_hub/page/news_hub_page.dart';
 import 'package:eportal/widget/app_bar/default_app_bar.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';

@@ -4,7 +4,6 @@ import 'package:eportal/screen/share/sign_in/page/sign_in_page.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../extension/input_decoration_extension.dart';
 import '../../../../style/app_color.dart';
 import '../../../../widget/input/capcha_input.dart';
 import '../../../../widget/input/field_input.dart';

@@ -1,4 +1,3 @@
-
 import '../../../../base/base_eportal_xml.dart';
 
 //
@@ -14,9 +13,7 @@ class DanhSachQuanHuyenDataRequest extends BaseEportalXml {
   StringBuffer toXml() {
     // TODO: implement toXml
     var buffer = super.toXml();
-    if (tinhTp != null) {
-      buffer.write('<tinhTp>$tinhTp</tinhTp>');
-    }
+    buffer.write(createXml(tinhTp, "tinhTp"));
     return buffer;
   }
 }

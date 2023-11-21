@@ -1,4 +1,3 @@
-
 import '../../../../../constant/application_constant.dart';
 import '../../../../base/base_eportal_xml.dart';
 
@@ -28,24 +27,12 @@ class SearchRequestData extends BaseEportalXml {
   StringBuffer toXml() {
     // TODO: implement toXml
     var buffer = super.toXml();
-    if (doanhNghiep != null) {
-      buffer.write('<doanhNghiep>$doanhNghiep</doanhNghiep>');
-    }
-    if (kinhNghiem != null) {
-      buffer.write('<kinhNghiem>$kinhNghiem</kinhNghiem>');
-    }
-    if (tinhTp != null) {
-      buffer.write('<tinhTp>$tinhTp</tinhTp>');
-    }
-    if (quanHuyen != null) {
-      buffer.write('<quanHuyen>$quanHuyen</quanHuyen>');
-    }
-    if (soBanGhiTrenTrang != null) {
-      buffer.write('<soTrangHienTai>$soTrangHienTai</soTrangHienTai>');
-    }
-    if (soBanGhiTrenTrang != null) {
-      buffer.write('<soBanGhiTrenTrang>$soBanGhiTrenTrang</soBanGhiTrenTrang>');
-    }
+    buffer.write(createXml(doanhNghiep, "doanhNghiep"));
+    buffer.write(createXml(kinhNghiem, "kinhNghiem"));
+    buffer.write(createXml(tinhTp ?? 0, "tinhTp"));
+    buffer.write(createXml(quanHuyen ?? 0, "quanHuyen"));
+    buffer.write(createXml(soTrangHienTai, "soTrangHienTai"));
+    buffer.write(createXml(soBanGhiTrenTrang, "soBanGhiTrenTrang"));
     return buffer;
   }
 }

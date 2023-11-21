@@ -1,5 +1,4 @@
 import 'package:eportal/application/global_application.dart';
-import 'package:eportal/screen/anonymous/home/home_page.dart';
 import 'package:eportal/screen/share/sign_in/page/sign_in_page.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/image/image_loading.dart';

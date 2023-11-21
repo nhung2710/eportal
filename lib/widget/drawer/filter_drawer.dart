@@ -25,7 +25,6 @@ import '../../model/api/request/common_new/data/common_new_data_request.dart';
 import '../../model/api/request/common_new/data/danh_sach_doanh_nghiep_data_request.dart';
 import '../../model/api/request/common_new/data/danh_sach_quan_huyen_data_request.dart';
 import '../../model/api/request/common_new/data/search_request_data.dart';
-import '../../model/api/request/common_new/work_search_request.dart';
 import '../../model/api/response/common_new/danh_sach_doanh_nghiep_response.dart';
 import '../../model/api/response/common_new/danh_sach_kinh_nghiem_response.dart';
 import '../../model/api/response/common_new/danh_sach_muc_luong_response.dart';
@@ -224,8 +223,8 @@ class _FilterDrawerState extends BaseScreenState<FilterDrawer> {
       onChanged: (DanhSachTinhTpDataResponse? data) {
         if (widget.danhSachTinhTpDataResponse != data) {
           widget.danhSachTinhTpDataResponse = data;
-          widget.data.tinhTp = data?.regionalID;
-          widget.data.quanHuyen = null;
+          widget.data.tinhTp = data?.regionalID ?? 0;
+          widget.data.quanHuyen = 0;
           widget.data.doanhNghiep = null;
           widget.danhSachQuanHuyenDataResponse = null;
           widget.danhSachDoanhNghiepDataResponse = null;

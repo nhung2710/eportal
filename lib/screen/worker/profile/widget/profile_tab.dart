@@ -7,7 +7,6 @@ import '../../../../style/app_color.dart';
 import '../../../../style/app_text_style.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/expandable_fab/expandable_fab.dart';
-import '../../../share/chat_bot/page/chat_bot_page.dart';
 import '../../profile_add/page/profile_add_page.dart';
 import '../../profile_edit/page/profile_edit_page.dart';
 

@@ -3,7 +3,6 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-import 'package:eportal/model/api/response/common_new/data/common_new_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/home_business_list_data_response.dart';
 
 import '../../../base/base_eportal_response.dart';

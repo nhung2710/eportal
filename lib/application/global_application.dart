@@ -1,15 +1,19 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../constant/application_constant.dart';
 import '../extension/string_extension.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class GlobalApplication {
   static final GlobalApplication _instance = GlobalApplication._internal();
   String _UserName = ApplicationConstant.EMPTY;
   String _FullName = ApplicationConstant.EMPTY;
   String _UserPassword = ApplicationConstant.EMPTY;
+  String _UserId = ApplicationConstant.EMPTY;
   late SharedPreferences _Preferences;
 
   String get UserName => _UserName;
+
+  String get UserId => _UserId;
 
   String get UserPassword => _UserPassword;
 
@@ -26,6 +30,8 @@ class GlobalApplication {
   bool get IsLogin => _UserName.isNotEmpty && _UserPassword.isNotEmpty;
 
   set UserName(String UserName) => _UserName = UserName;
+
+  set UserId(String UserId) => _UserId = UserId;
 
   set FullName(String FullName) => _FullName = FullName;
 
@@ -56,9 +62,10 @@ class GlobalApplication {
     return "Chúc bạn $message tốt lành";
   }
 
-  void SignIn(String username, String password) {
+  void SignIn(String username, String password, String userid) {
     FullName = username;
     UserName = username;
+    UserId = userid;
     UserPassword = password;
   }
 

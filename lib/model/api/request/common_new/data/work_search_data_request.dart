@@ -1,7 +1,3 @@
-import 'search_request_data.dart';
-
-import '../../../../../constant/application_constant.dart';
-import '../../../../base/base_eportal_xml.dart';
 import 'news_search_data_request.dart';
 
 //

@@ -1,6 +1,5 @@
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
-import 'package:pdf/pdf.dart';
 
 //
 // Created by BlackRose on 20/11/2023.

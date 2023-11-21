@@ -44,67 +44,76 @@ class NewsWidget extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(5))),
         child: Container(
           padding: const EdgeInsets.all(5),
+          height: 120,
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: [
               isHasImage
                   ? Expanded(
                       flex: 1,
-                      child: SizedBox(
-                        height: 100,
-                        child: ImageLoading(
-                          imageUrl: imageUrl.getImageUrl(),
-                          imageError: imageError,
-                          imageBuilder: (BuildContext context,
-                              ImageProvider<Object> imageProvider) {
-                            return ClipRRect(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(5.0)),
-                              child: Image(
-                                image: imageProvider,
-                                fit: BoxFit.contain,
-                              ),
-                            );
-                          },
-                        ),
+                      child: ImageLoading(
+                        imageUrl: imageUrl.getImageUrl(),
+                        imageError: imageError,
+                        imageBuilder: (BuildContext context,
+                            ImageProvider<Object> imageProvider) {
+                          return ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(5.0)),
+                            child: Image(
+                              image: imageProvider,
+                              fit: BoxFit.contain,
+                            ),
+                          );
+                        },
                       ))
                   : Container(),
               isHasImage
                   ? const VerticalDivider(
                       thickness: 2,
-                      width: 5,
-                      color: Colors.black,
+                      width: 10,
+                      color: Colors.transparent,
                     )
                   : Container(),
               Expanded(
                   flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${title.replaceWhenNullOrWhiteSpace()}\n\n',
-                        style: AppTextStyle.title,
-                        maxLines: 3,
-                      ),
-                      const Divider(
-                        height: 5,
-                        color: Colors.transparent,
-                      ),
-                      Text(
-                        content.replaceWhenNullOrWhiteSpace(),
-                        maxLines: 3,
-                        style: AppTextStyle.normal,
-                      ),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Text(
-                          time.replaceWhenNullOrWhiteSpace(),
-                          maxLines: 1,
-                          textAlign: TextAlign.right,
-                          style: AppTextStyle.normalChild1,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              title.addLine(3),
+                              style: AppTextStyle.title,
+                              maxLines: 3,
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              content.addLine(3),
+                              maxLines: 3,
+                              style: AppTextStyle.normal,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Text(
+                              time.addLine(1),
+                              maxLines: 1,
+                              textAlign: TextAlign.right,
+                              style: AppTextStyle.normalChild1,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   )),
             ],
           ),

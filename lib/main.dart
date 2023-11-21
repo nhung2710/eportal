@@ -1,16 +1,16 @@
-import 'constant/application_constant.dart';
-import 'extension/string_extension.dart';
-import 'screen/anonymous/home/home_page.dart';
-import 'screen/share/onboarding/page/onboarding_page.dart';
-import 'style/app_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'application/global_application.dart';
-import 'package:window_manager/window_manager.dart';
+import 'constant/application_constant.dart';
+import 'extension/string_extension.dart';
+import 'screen/anonymous/home/home_page.dart';
+import 'screen/share/onboarding/page/onboarding_page.dart';
+import 'style/app_theme.dart';
 
 Future<bool> checkAppRunFirstTime() {
   bool? isFirstRunApp = GlobalApplication()

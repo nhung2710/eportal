@@ -19,7 +19,6 @@ import '../../../../state/base/base_state.dart';
 import '../../../../style/app_color.dart';
 import '../../../../widget/button_icon/custom_button_icon.dart';
 import '../../../../widget/image/image_loading.dart';
-import '../../empty_example/page/empty_example_page.dart';
 import '../../job_user_search/page/job_user_search_page.dart';
 import '../../news_search/page/news_search_page.dart';
 import '../../work_search/page/work_search_page.dart';

@@ -36,4 +36,18 @@ class ApplicationApiConstant {
   static const API_COMMON_NEW_OP_NEWS_DETAIL = "NewsDetail";
   static const API_COMMON_NEW_OP_JOB_USER_SEARCH = "JobUserSearch";
   static const API_COMMON_NEW_OP_JOB_USER_DETAIL = "JobUserDetail";
+  static const API_COMMON_NEW_OP_FAQ_QUESTION_SEARCH = "FAQQuestionSearch";
+  static const API_COMMON_NEW_OP_FAQ_ADD_QUESTION = "FAQAddQuestion";
+  static const API_COMMON_NEW_OP_DANH_SACH_LINH_VUC_VAN_BAN =
+      "DanhSachLinhVucVanBan";
+  static const API_COMMON_NEW_OP_DANH_SACH_LOAI_VAN_BAN = "DanhSachLoaiVanBan";
+  static const API_COMMON_NEW_OP_DANH_SACH_CO_QUAN_BAN_HANH =
+      "DanhSachCoQuanBanHanh";
+  static const API_COMMON_NEW_OP_DOCUMENT_LIST = "DocumentList";
+  static const API_COMMON_NEW_OP_VIDEO_LIST = "VideoList";
+  static const API_COMMON_NEW_OP_VIDEO_DETAIL = "VideoDetail";
+  static const API_COMMON_NEW_OP_ALBUM_LIST = "AlbumList";
+  static const API_COMMON_NEW_OP_ALBUM_DETAIL = "AlbumDetail";
+  static const API_COMMON_NEW_OP_DANG_NHAP = "DangNhap";
+  static const API_COMMON_NEW_OP_DANG_KY = "DangKy";
 }

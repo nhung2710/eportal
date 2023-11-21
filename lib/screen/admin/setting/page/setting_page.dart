@@ -2,7 +2,6 @@ import 'package:eportal/screen/share/about/page/about_page.dart';
 import 'package:eportal/screen/share/contact/page/contract_page.dart';
 import 'package:eportal/screen/share/policy/page/policy_page.dart';
 import 'package:eportal/screen/share/support/page/support_page.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/list_viewer/custom_list_viewer.dart';
 import 'package:flutter/material.dart';

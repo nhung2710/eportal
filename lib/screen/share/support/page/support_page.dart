@@ -4,9 +4,7 @@ import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../extension/string_extension.dart';
 import '../../../../style/app_color.dart';
-import '../../../../widget/image/image_loading.dart';
 
 //
 // Created by BlackRose on 11/7/2023.

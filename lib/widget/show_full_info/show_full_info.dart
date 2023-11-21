@@ -1,7 +1,7 @@
 import 'package:eportal/style/app_color.dart';
+import 'package:flutter/material.dart';
 
 import '../../style/app_text_style.dart';
-import 'package:flutter/material.dart';
 
 //
 // Created by BlackRose on 11/10/2023.

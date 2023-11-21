@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-
 import '../../../../../extension/string_extension.dart';
-import 'danh_sach_tinh_tp_data_response.dart';
 
 //
 // Created by BlackRose on 13/11/2023.

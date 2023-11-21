@@ -12,7 +12,6 @@ import '../../../../model/api/response/common_new/home_document_list_response.da
 import '../../../../state/base/base_state.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/news/news_widget.dart';
-import '../../empty_example/page/empty_example_page.dart';
 
 //
 // Created by BlackRose on 16/11/2023.

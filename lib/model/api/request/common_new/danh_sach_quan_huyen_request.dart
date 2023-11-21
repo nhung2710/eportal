@@ -1,6 +1,5 @@
 import '../../../../api/constant/application_api_constant.dart';
 import '../../../base/base_eportal_request.dart';
-
 import 'data/danh_sach_quan_huyen_data_request.dart';
 
 class DanhSachQuanHuyenRequest

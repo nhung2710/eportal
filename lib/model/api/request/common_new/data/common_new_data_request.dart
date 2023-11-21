@@ -14,12 +14,8 @@ class CommonNewDataRequest extends BaseEportalXml {
   StringBuffer toXml() {
     // TODO: implement toXml
     var buffer = super.toXml();
-    if (flag != null) {
-      buffer.write('<flag>$flag</flag>');
-    }
-    if (top != null) {
-      buffer.write('<top>$top</top>');
-    }
+    buffer.write(createXml(flag, "flag"));
+    buffer.write(createXml(top, "top"));
     return buffer;
   }
 }

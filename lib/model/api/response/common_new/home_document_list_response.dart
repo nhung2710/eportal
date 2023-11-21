@@ -4,7 +4,6 @@
 //
 import 'package:eportal/model/base/base_eportal_response.dart';
 
-import 'data/common_new_data_response.dart';
 import 'data/home_document_list_data_response.dart';
 
 class HomeDocumentListResponse extends BaseEportalResponse {

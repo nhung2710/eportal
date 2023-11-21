@@ -8,11 +8,11 @@ import '../../../../../constant/application_constant.dart';
 //
 class NewsSearchDataRequest extends SearchRequestData {
   String? tuKhoa;
-  String? kieuSapXep;
+  int? kieuSapXep;
 
   NewsSearchDataRequest(
       {this.tuKhoa,
-      this.kieuSapXep,
+      this.kieuSapXep = 1,
       doanhNghiep,
       mucLuong,
       kinhNghiem,
@@ -33,12 +33,9 @@ class NewsSearchDataRequest extends SearchRequestData {
   StringBuffer toXml() {
     // TODO: implement toXml
     var buffer = super.toXml();
-    if (tuKhoa != null) {
-      buffer.write('<tuKhoa>$tuKhoa</tuKhoa>');
-    }
-    if (kieuSapXep != null) {
-      buffer.write('<kieuSapXep>$kieuSapXep</kieuSapXep>');
-    }
+    buffer.write(createXml(tuKhoa, "tuKhoa"));
+    buffer.write(createXml(mucLuong, "mucLuong"));
+    buffer.write(createXml(kieuSapXep, "kieuSapXep"));
     return buffer;
   }
 }

@@ -1,9 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
-import 'package:eportal/screen/share/news_hub/widget/home_news_list_preview.dart';
-import 'package:eportal/screen/share/news_hub/widget/home_works_list_preview.dart';
 import 'package:eportal/style/app_elevation.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
 import 'package:flutter/material.dart';
@@ -21,17 +18,11 @@ import '../../../../style/app_color.dart';
 import '../../../../widget/button_icon/custom_button_icon.dart';
 import '../../../../widget/image/image_loading.dart';
 import '../../empty_example/page/empty_example_page.dart';
-import '../../job_user_search/page/job_user_search_page.dart';
 import '../../news/page/news_page.dart';
 import '../../news_curriculum_vitae/page/news_curriculum_vitae_page.dart';
 import '../../news_enterprise/page/news_enterprise_page.dart';
-import '../../news_hub/widget/home_business_list_preview.dart';
-import '../../news_hub/widget/home_document_list_preview.dart';
-import '../../news_hub/widget/home_job_user_list_preview.dart';
 import '../../news_legal_document/page/news_legal_document_page.dart';
 import '../../news_recruitment/page/news_recruitment_page.dart';
-import '../../news_search/page/news_search_page.dart';
-import '../../work_search/page/work_search_page.dart';
 
 //
 // Created by BlackRose on 16/11/2023.
@@ -76,8 +67,7 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
       ]);
 
   @override
-  Widget pageUI(BuildContext context) =>
-      SingleChildScrollView(
+  Widget pageUI(BuildContext context) => SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -90,75 +80,65 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                       child: BlocBuilder<HomeSlideListBloc, BaseState>(
                         builder: (BuildContext context, BaseState state) =>
                             handlerBaseState<HomeSlideListResponse>(
-                              state,
-                                  (context, state) =>
-                                  CarouselSlider(
-                                    options: CarouselOptions(
-                                      aspectRatio: 2,
-                                      viewportFraction: 1,
-                                      animateToClosest: true,
-                                      initialPage: 0,
-                                      enableInfiniteScroll: true,
-                                      reverse: false,
-                                      autoPlay: true,
-                                      autoPlayInterval: const Duration(
-                                          seconds: 3),
-                                      autoPlayAnimationDuration:
-                                      const Duration(seconds: 2),
-                                      autoPlayCurve: Curves
-                                          .fastEaseInToSlowEaseOut,
-                                      enlargeCenterPage: true,
-                                      enlargeFactor: 0.2,
-                                      enlargeStrategy: CenterPageEnlargeStrategy
-                                          .zoom,
-                                      scrollDirection: Axis.horizontal,
-                                    ),
-                                    items: (state.data ?? []).map((item) {
-                                      return Builder(
-                                        builder: (BuildContext context) {
-                                          return GestureDetector(
-                                            onTap: () =>
-                                                nextPage((context) =>
-                                                    EmptyExamplePage(
-                                                      isHasAppBar: true,
-                                                    )),
-                                            child: Card(
-                                              elevation: AppElevation
-                                                  .sizeOfNormal,
-                                              margin: EdgeInsets.zero,
-                                              color: AppColor.colorOfApp,
-                                              shadowColor: AppColor.colorOfIcon,
-                                              borderOnForeground: false,
-                                              shape: const RoundedRectangleBorder(
-                                                  side: BorderSide(
-                                                      color: AppColor
-                                                          .colorOfDrawer,
-                                                      width: 0.1),
-                                                  borderRadius: BorderRadius
-                                                      .all(
-                                                      Radius.circular(5))),
-                                              child: ClipRRect(
-                                                  borderRadius: const BorderRadius
-                                                      .all(
-                                                      Radius.circular(5.0)),
-                                                  child: ImageLoading(
-                                                      imageUrl:
-                                                      item.avatar.getImageUrl(),
-                                                      imageBuilder:
-                                                          (context,
-                                                          imageProvider) {
-                                                        return Image(
-                                                          image: imageProvider,
-                                                          fit: BoxFit.fitHeight,
-                                                        );
-                                                      })),
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    }).toList(),
-                                  ),
+                          state,
+                          (context, state) => CarouselSlider(
+                            options: CarouselOptions(
+                              aspectRatio: 2,
+                              viewportFraction: 1,
+                              animateToClosest: true,
+                              initialPage: 0,
+                              enableInfiniteScroll: true,
+                              reverse: false,
+                              autoPlay: true,
+                              autoPlayInterval: const Duration(seconds: 3),
+                              autoPlayAnimationDuration:
+                                  const Duration(seconds: 2),
+                              autoPlayCurve: Curves.fastEaseInToSlowEaseOut,
+                              enlargeCenterPage: true,
+                              enlargeFactor: 0.2,
+                              enlargeStrategy: CenterPageEnlargeStrategy.zoom,
+                              scrollDirection: Axis.horizontal,
                             ),
+                            items: (state.data ?? []).map((item) {
+                              return Builder(
+                                builder: (BuildContext context) {
+                                  return GestureDetector(
+                                    onTap: () =>
+                                        nextPage((context) => EmptyExamplePage(
+                                              isHasAppBar: true,
+                                            )),
+                                    child: Card(
+                                      elevation: AppElevation.sizeOfNormal,
+                                      margin: EdgeInsets.zero,
+                                      color: AppColor.colorOfApp,
+                                      shadowColor: AppColor.colorOfIcon,
+                                      borderOnForeground: false,
+                                      shape: const RoundedRectangleBorder(
+                                          side: BorderSide(
+                                              color: AppColor.colorOfDrawer,
+                                              width: 0.1),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(5))),
+                                      child: ClipRRect(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(5.0)),
+                                          child: ImageLoading(
+                                              imageUrl:
+                                                  item.avatar.getImageUrl(),
+                                              imageBuilder:
+                                                  (context, imageProvider) {
+                                                return Image(
+                                                  image: imageProvider,
+                                                  fit: BoxFit.fitHeight,
+                                                );
+                                              })),
+                                    ),
+                                  );
+                                },
+                              );
+                            }).toList(),
+                          ),
+                        ),
                       ),
                     ))),
             Container(
@@ -174,20 +154,16 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                   CustomButtonIcon(
                     title: "Tin tức",
                     iconData: Icons.newspaper,
-                    onTap: () =>
-                        nextPage((context) =>
-                            NewsPage(
-                              flag: 1,
-                            )),
+                    onTap: () => nextPage((context) => NewsPage(
+                          flag: 1,
+                        )),
                   ),
                   CustomButtonIcon(
                     title: "Tuyển dụng",
                     iconData: Icons.work,
-                    onTap: () =>
-                        nextPage((context) =>
-                            NewsRecruitmentPage(
-                              flag: 1,
-                            )),
+                    onTap: () => nextPage((context) => NewsRecruitmentPage(
+                          flag: 1,
+                        )),
                   ),
                   CustomButtonIcon(
                     title: "Hồ sơ",

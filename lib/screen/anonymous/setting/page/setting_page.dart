@@ -2,14 +2,11 @@ import 'package:eportal/screen/share/about/page/about_page.dart';
 import 'package:eportal/screen/share/contact/page/contract_page.dart';
 import 'package:eportal/screen/share/policy/page/policy_page.dart';
 import 'package:eportal/screen/share/support/page/support_page.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/list_viewer/custom_list_viewer.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../widget/list_viewer/setting_item_viewer.dart';
-import '../../../share/change_password/page/change_password_page.dart';
-import '../../../share/change_user_info/page/change_user_info_page.dart';
 import '../../../share/chart_economically_active/page/chart_economically_active_page.dart';
 import '../../../share/chart_economically_inactive/page/chart_economically_inactive_page.dart';
 import '../../../share/chart_unemployment_rate/page/chart_unemployment_rate_page.dart';

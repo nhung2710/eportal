@@ -1,4 +1,3 @@
-import 'package:eportal/model/api/response/common_new/data/common_new_data_response.dart';
 import 'package:eportal/model/base/base_eportal_response.dart';
 
 import 'data/home_news_list_data_response.dart';

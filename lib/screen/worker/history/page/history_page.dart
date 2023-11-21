@@ -1,8 +1,6 @@
-import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
 import 'package:eportal/screen/share/empty_example/page/empty_example_page.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/widget/base/base_page.dart';
-import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
 import 'package:flutter/material.dart';
 
 //

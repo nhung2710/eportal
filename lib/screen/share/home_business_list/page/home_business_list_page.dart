@@ -12,7 +12,6 @@ import '../../../../state/base/base_state.dart';
 import '../../../../style/app_color.dart';
 import '../../../../style/app_text_style.dart';
 import '../../../../widget/base/base_page.dart';
-import '../../../../widget/image/image_loading.dart';
 import '../../empty_example/page/empty_example_page.dart';
 
 //

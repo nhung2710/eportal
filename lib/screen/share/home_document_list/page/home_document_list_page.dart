@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../bloc/common_new/home_document_list_bloc.dart';
-import '../../../../bloc/common_new/home_document_list_bloc.dart';
 import '../../../../constant/application_constant.dart';
 import '../../../../event/common_new/home_document_list_event.dart';
 import '../../../../extension/string_extension.dart';

@@ -1,12 +1,11 @@
 import 'dart:math';
 
+import 'package:diacritic/diacritic.dart';
+import 'package:html/parser.dart' as htmlparser;
 import 'package:intl/intl.dart';
 
 import '../api/constant/application_api_constant.dart';
 import '../constant/application_constant.dart';
-import 'package:html/parser.dart' as htmlparser;
-import 'package:diacritic/diacritic.dart';
-
 import 'dateTime_extension.dart';
 
 const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -35,6 +34,11 @@ extension StringNullExtension on String? {
     if (isNullOrWhiteSpace()) return ApplicationApiConstant.BASE_URI_MEDIA;
     if (this!.contains(ApplicationApiConstant.BASE_URI_MEDIA)) return this!;
     return "${ApplicationApiConstant.BASE_URI_MEDIA}/$this";
+  }
+
+  String addLine(int number) {
+    return replaceWhenNullOrWhiteSpace() +
+        List.generate(number, (index) => "\n").join("");
   }
 
   String supportHtml() => isNullOrWhiteSpace()
@@ -110,6 +114,11 @@ extension StringExtension on String {
 
   DateTime? parseDateTime({String format = "yyyy-MM-ddTHH:mm:ss"}) {
     return isNullOrWhiteSpace() ? null : DateFormat(format).parse(this);
+  }
+
+  String addLine(int number) {
+    return replaceWhenNullOrWhiteSpace() +
+        List.generate(number, (index) => "\n").join("");
   }
 
   String formatDateTimeApi() {

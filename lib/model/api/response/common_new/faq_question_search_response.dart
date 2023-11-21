@@ -1,0 +1,25 @@
+import 'package:eportal/model/api/response/common_new/data/faq_question_search_data_response.dart';
+import 'package:eportal/model/base/base_eportal_response.dart';
+
+//
+// Created by BlackRose on 21/11/2023.
+// Copyright (c) 2023 Hilo All rights reserved.
+//
+class FaqQuestionSearchResponse extends BaseEportalResponse {
+  List<FaqQuestionSearchDataResponse>? data;
+
+  FaqQuestionSearchResponse({this.data, required status, required message})
+      : super(status: status, message: message);
+
+  factory FaqQuestionSearchResponse.fromJson(Map<String, dynamic> json) {
+    List<FaqQuestionSearchDataResponse> data =
+        <FaqQuestionSearchDataResponse>[];
+    if (json['data'] != null) {
+      json['data'].forEach((v) {
+        data.add(FaqQuestionSearchDataResponse.fromJson(v));
+      });
+    }
+    return FaqQuestionSearchResponse(
+        data: data, status: json["status"], message: json["message"]);
+  }
+}

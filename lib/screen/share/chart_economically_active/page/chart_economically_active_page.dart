@@ -1,12 +1,8 @@
-import 'dart:math';
-
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
-import '../../../../bloc/common_new/gioi_thieu_trung_tam_bloc.dart';
 import '../../../../extension/color_extension.dart';
 import '../../../../widget/base/base_page.dart';
-import 'package:fl_chart/fl_chart.dart';
 
 //
 // Created by BlackRose on 14/11/2023.

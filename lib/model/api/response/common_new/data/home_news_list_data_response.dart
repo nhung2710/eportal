@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import '../../../../../extension/string_extension.dart';
 
 //
@@ -131,6 +129,7 @@ class HomeNewsListDataResponse {
     title = json['title'];
     imagePath = json['imagePath'];
     summary = json['summary'];
+    summary = summary.supportHtml();
     content = json['content'];
     isActive = json['isActive'];
     hotcat = json['hotcat'];

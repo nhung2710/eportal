@@ -11,9 +11,7 @@ import '../../../../state/base/base_state.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/expandable_fab/expandable_fab.dart';
 import '../../../../widget/news/news_widget.dart';
-import '../../chat_bot/page/chat_bot_page.dart';
 import '../../empty_example/page/empty_example_page.dart';
-import '../../home_news_list/page/home_news_list_page.dart';
 import '../../news_search/page/news_search_page.dart';
 
 //
@@ -77,7 +75,7 @@ class _NewsPageState extends BasePageState<NewsPage> {
                                 )),
                             title: state.data?.elementAt(i).title,
                             imageUrl: state.data?.elementAt(i).imagePath,
-                            content: state.data?.elementAt(i).content,
+                            content: state.data?.elementAt(i).summary,
                             time: state.data?.elementAt(i).publishedDate,
                           )),
                 ),

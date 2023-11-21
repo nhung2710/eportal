@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import '../../api/adapter/base/base_adapter_api.dart';
 import '../../model/api/request/common_new/home_slide_list_request.dart';
 import '../../model/api/response/common_new/home_slide_list_response.dart';

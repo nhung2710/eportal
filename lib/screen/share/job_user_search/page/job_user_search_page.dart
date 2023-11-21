@@ -1,56 +1,18 @@
-import 'dart:math';
-import 'dart:convert' show utf8;
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_size_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uuid/uuid.dart';
 
-import '../../../../bloc/common_new/danh_sach_doanh_nghiep_bloc.dart';
-import '../../../../bloc/common_new/danh_sach_gioi_tinh_bloc.dart';
-import '../../../../bloc/common_new/danh_sach_kinh_nghiem_bloc.dart';
-import '../../../../bloc/common_new/danh_sach_muc_luong_bloc.dart';
-import '../../../../bloc/common_new/danh_sach_quan_huyen_bloc.dart';
-import '../../../../bloc/common_new/danh_sach_tinh_tp_bloc.dart';
-import '../../../../bloc/common_new/danh_sach_trinh_do_bloc.dart';
 import '../../../../bloc/common_new/job_user_search_bloc.dart';
-import '../../../../bloc/common_new/ten_tinh_tp_bloc.dart';
-import '../../../../bloc/common_new/work_search_bloc.dart';
-import '../../../../event/common_new/danh_sach_kinh_nghiem_event.dart';
-import '../../../../event/common_new/danh_sach_muc_luong_event.dart';
-import '../../../../event/common_new/danh_sach_quan_huyen_event.dart';
-import '../../../../event/common_new/danh_sach_tinh_tp_event.dart';
-import '../../../../event/common_new/danh_sach_trinh_do_event.dart';
 import '../../../../event/common_new/job_user_search_event.dart';
-import '../../../../event/common_new/work_search_event.dart';
-import '../../../../extension/string_extension.dart';
-import '../../../../model/api/request/common_new/danh_sach_kinh_nghiem_request.dart';
-import '../../../../model/api/request/common_new/danh_sach_muc_luong_request.dart';
-import '../../../../model/api/request/common_new/danh_sach_quan_huyen_request.dart';
-import '../../../../model/api/request/common_new/danh_sach_tinh_tp_request.dart';
-import '../../../../model/api/request/common_new/danh_sach_trinh_do_request.dart';
-import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
-import '../../../../model/api/request/common_new/data/danh_sach_quan_huyen_data_request.dart';
 import '../../../../model/api/request/common_new/data/job_user_search_data_request.dart';
-import '../../../../model/api/request/common_new/data/work_search_data_request.dart';
 import '../../../../model/api/request/common_new/job_user_search_request.dart';
-import '../../../../model/api/request/common_new/work_search_request.dart';
-import '../../../../model/api/response/common_new/danh_sach_doanh_nghiep_response.dart';
-import '../../../../model/api/response/common_new/danh_sach_kinh_nghiem_response.dart';
-import '../../../../model/api/response/common_new/danh_sach_muc_luong_response.dart';
-import '../../../../model/api/response/common_new/danh_sach_quan_huyen_response.dart';
-import '../../../../model/api/response/common_new/danh_sach_tinh_tp_response.dart';
-import '../../../../model/api/response/common_new/data/danh_sach_tinh_tp_data_response.dart';
 import '../../../../model/api/response/common_new/job_user_search_response.dart';
-import '../../../../model/api/response/common_new/work_search_response.dart';
-import '../../../../model/share/chat_bot/chat_bot_message.dart';
 import '../../../../state/base/base_state.dart';
 import '../../../../style/app_text_style.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/drawer/filter_drawer.dart';
-import '../../../../widget/expandable_fab/expandable_fab.dart';
 import '../../empty_example/page/empty_example_page.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //
 // Created by BlackRose on 13/11/2023.
