@@ -5,9 +5,9 @@
 import 'package:eportal/model/base/base_eportal_response.dart';
 
 class NewsDetailResponse extends BaseEportalResponse {
-  String? data;
+  String data;
 
-  NewsDetailResponse({this.data, required status, required message})
+  NewsDetailResponse({required this.data, required status, required message})
       : super(status: status, message: message);
 
   factory NewsDetailResponse.fromJson(Map<String, dynamic> json) {

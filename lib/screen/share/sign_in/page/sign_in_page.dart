@@ -1,6 +1,7 @@
 import 'package:eportal/application/global_application.dart';
 import 'package:eportal/bloc/common_new/dang_nhap_bloc.dart';
 import 'package:eportal/constant/application_constant.dart';
+import 'package:eportal/enum/role_type.dart';
 import 'package:eportal/screen/admin/home/home_page.dart' as admin;
 import 'package:eportal/screen/employer/home/home_page.dart' as employer;
 import 'package:eportal/screen/share/forgot_password/page/forgot_password_page.dart';
@@ -20,6 +21,7 @@ import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/common_new/dang_nhap_request.dart';
 import '../../../../model/api/request/common_new/data/dang_nhap_data_request.dart';
 import '../../../../model/api/response/common_new/dang_nhap_response.dart';
+import '../../../../model/api/response/common_new/data/dang_nhap_data_response.dart';
 import '../../../../widget/input/field_input.dart';
 import '../../../../widget/input/password_input.dart';
 import '../../../anonymous/home/home_page.dart' as anonymous;
@@ -67,18 +69,13 @@ class _SignInPageState extends BasePageState<SignInPage> {
       create: (_) => dangNhapBloc,
       child: BlocListener<DangNhapBloc, BaseState>(
         listener: (context, state) {
-          if (state is BaseError) {
-            stopLoading();
-            showCenterError(state.message);
-          } else if (state is BaseLoaded<DangNhapResponse>) {
-            if ((state.data.data?.userName).isNullOrWhiteSpace()) {
-              stopLoading();
-              showCenterError(state.data.data?.message);
+          handlerActionLoaddingState<DangNhapResponse>(state, (obj) {
+            if ((obj.data.data?.userName).isNullOrWhiteSpace()) {
+              showCenterError(obj.data.data?.message);
             } else {
               GlobalApplication()
-                  .signIn(state.data.data, nameController.text,
-                      passwordController.text)
-                  .then((value) => stopLoading())
+                  .signIn(obj.data.data, nameController.text,
+                  passwordController.text)
                   .then((value) {
                 switch (GlobalApplication().UserRoleType) {
                   case RoleType.users:
@@ -91,12 +88,12 @@ class _SignInPageState extends BasePageState<SignInPage> {
                     nextPageWithoutBack((context) => const admin.HomePage());
                     break;
                   case RoleType.anonymous:
-                    // TODO: Handle this case.
+                  // TODO: Handle this case.
                     break;
                 }
               });
             }
-          }
+          });
         },
         child: Center(
           child: ListView(
@@ -117,7 +114,7 @@ class _SignInPageState extends BasePageState<SignInPage> {
                   controller: nameController,
                   textInputAction: TextInputAction.next,
                   validator: (text) {
-                    if (text == null || text.isEmpty) {
+                    if (text.isNullOrWhiteSpace()) {
                       return 'Tài khoản không được để trống';
                     }
                     return null;
@@ -132,7 +129,7 @@ class _SignInPageState extends BasePageState<SignInPage> {
                   controller: passwordController,
                   textInputAction: TextInputAction.done,
                   validator: (text) {
-                    if (text == null || text.isEmpty) {
+                    if (text.isNullOrWhiteSpace()) {
                       return 'Mật khẩu không được để trống';
                     }
                     return null;

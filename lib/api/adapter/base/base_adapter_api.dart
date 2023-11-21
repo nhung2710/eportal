@@ -78,7 +78,7 @@ class BaseAdapterApi {
     var valueTimeCache = request.getTimeCache();
     bool isUseCache = false;
     if (valueTimeCache > 0) {
-      var valueCache = GlobalApplication().Preferences.getString(keyCache);
+      var valueCache = GlobalApplication().Preferences?.getString(keyCache);
       if (!valueCache.isNullOrWhiteSpace()) {
         var cacheApi = CacheApi.fromJson(json.decode(valueCache!));
         if (cacheApi.timeout != null &&
@@ -100,7 +100,7 @@ class BaseAdapterApi {
       for (var item in elements) {
         var jsonValue = item.innerText;
         if (isUseCache) {
-          GlobalApplication().Preferences.setString(
+          await GlobalApplication().Preferences?.setString(
               keyCache,
               json.encode(CacheApi(
                       body: responseSoapBody,

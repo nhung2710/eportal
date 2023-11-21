@@ -8,9 +8,9 @@ import 'package:eportal/model/api/response/common_new/data/work_search_data_resp
 import 'package:eportal/model/base/base_eportal_response.dart';
 
 class WorkSearchResponse extends BaseEportalResponse {
-  List<WorkSearchDataResponse>? data;
+  List<WorkSearchDataResponse> data;
 
-  WorkSearchResponse({this.data, required status, required message})
+  WorkSearchResponse({required this.data, required status, required message})
       : super(status: status, message: message);
 
   factory WorkSearchResponse.fromJson(Map<String, dynamic> json) {

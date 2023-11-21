@@ -12,6 +12,9 @@ import '../../style/app_color.dart';
 // Created by BlackRose on 11/1/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
+
+typedef CallbackListener<T> = void Function(T obj);
+
 class BasePage extends StatefulWidget {
   const BasePage({super.key});
 
@@ -22,7 +25,7 @@ class BasePage extends StatefulWidget {
 class BasePageState<T extends StatefulWidget> extends State<T> {
   GlobalKey<State<T>> localKey = GlobalKey<State<T>>();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
+  DialogRoute? loaddingDialog;
   late ScrollController scrollController;
 
   @override
@@ -84,27 +87,32 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
 
   Future<void> startLoading() async {
     hiddenKeyboard();
-    return await showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return const SimpleDialog(
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
-          // can change this to your prefered color
-          children: <Widget>[
-            Center(
-              child: CircularProgressIndicator(),
-            )
-          ],
-        );
-      },
-    );
+    loaddingDialog = DialogRoute(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return const SimpleDialog(
+            elevation: 0.0,
+            backgroundColor: Colors.transparent,
+            // can change this to your prefered color
+            children: <Widget>[
+              Center(
+                child: CircularProgressIndicator(),
+              )
+            ],
+          );
+        });
+    if(loaddingDialog!=null) {
+      Navigator.of(context).push(loaddingDialog!);
+    }
   }
 
   Future<void> stopLoading() async {
     hiddenKeyboard();
-    Navigator.of(context).pop();
+    if(loaddingDialog!=null) {
+      Navigator.of(context).removeRoute(loaddingDialog!);
+      loaddingDialog = null;
+    }
   }
 
   Future<void> showBottomError(String error) async {
@@ -232,6 +240,22 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
       return buildScreenError(ApplicationConstant.SYSTEM_ERROR);
     }
   }
+
+  void handlerActionState<K>(BaseState state, CallbackListener<BaseLoaded<K>> callback) {
+    if (state is BaseError) {
+      showCenterError(state.message);
+    } else if (state is BaseLoaded<K>) {
+      return callback(state);
+    }
+  }
+  void handlerActionLoaddingState<K>(BaseState state, CallbackListener<BaseLoaded<K>> callback) {
+    if (state is BaseError) {
+      stopLoading().then((value) => showCenterError(state.message));
+    } else if (state is BaseLoaded<K>) {
+      stopLoading().then((value) => callback(state));
+    }
+  }
+
 
   Widget buildScreenLoading() => Center(
         child: Container(

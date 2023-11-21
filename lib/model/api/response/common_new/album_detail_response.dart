@@ -6,9 +6,9 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class AlbumDetailResponse extends BaseEportalResponse {
-  List<AlbumDetailDataResponse>? data;
+  List<AlbumDetailDataResponse> data;
 
-  AlbumDetailResponse({this.data, required status, required message})
+  AlbumDetailResponse({required this.data, required status, required message})
       : super(status: status, message: message);
 
   factory AlbumDetailResponse.fromJson(Map<String, dynamic> json) {

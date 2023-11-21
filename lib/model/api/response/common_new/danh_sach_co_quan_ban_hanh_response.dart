@@ -6,9 +6,9 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class DanhSachCoQuanBanHanhResponse extends BaseEportalResponse {
-  List<DanhSachCoQuanBanHanhDataResponse>? data;
+  List<DanhSachCoQuanBanHanhDataResponse> data;
 
-  DanhSachCoQuanBanHanhResponse({this.data, required status, required message})
+  DanhSachCoQuanBanHanhResponse({required this.data, required status, required message})
       : super(status: status, message: message);
 
   factory DanhSachCoQuanBanHanhResponse.fromJson(Map<String, dynamic> json) {

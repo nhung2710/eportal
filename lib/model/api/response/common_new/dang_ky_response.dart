@@ -6,19 +6,14 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class DangKyResponse extends BaseEportalResponse {
-  List<DangKyDataResponse>? data;
+  DangKyDataResponse data;
 
-  DangKyResponse({this.data, required status, required message})
+  DangKyResponse({required this.data, required status, required message})
       : super(status: status, message: message);
 
   factory DangKyResponse.fromJson(Map<String, dynamic> json) {
     List<DangKyDataResponse> data = <DangKyDataResponse>[];
-    if (json['data'] != null) {
-      json['data'].forEach((v) {
-        data.add(DangKyDataResponse.fromJson(v));
-      });
-    }
     return DangKyResponse(
-        data: data, status: json["status"], message: json["message"]);
+        data: DangKyDataResponse.fromJson(json['data']), status: json["status"], message: json["message"]);
   }
 }

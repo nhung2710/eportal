@@ -5,9 +5,9 @@
 import 'package:eportal/model/base/base_eportal_response.dart';
 
 class WorkDetailResponse extends BaseEportalResponse {
-  String? data;
+  String data;
 
-  WorkDetailResponse({this.data, required status, required message})
+  WorkDetailResponse({required this.data, required status, required message})
       : super(status: status, message: message);
 
   factory WorkDetailResponse.fromJson(Map<String, dynamic> json) {

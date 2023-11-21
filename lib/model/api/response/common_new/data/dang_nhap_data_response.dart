@@ -3,19 +3,36 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
+import 'package:eportal/enum/role_type.dart';
+
 class DangNhapDataResponse {
   String? userID;
   String? userName;
   String? message;
   String? role;
+  RoleType roleType = RoleType.anonymous;
 
-  DangNhapDataResponse({this.userID, this.userName, this.message, this.role});
+  DangNhapDataResponse({this.userID, this.userName, this.message, this.role,this.roleType = RoleType.anonymous});
 
   DangNhapDataResponse.fromJson(Map<String, dynamic> json) {
     userID = json['userID'];
     userName = json['userName'];
     message = json['message'];
     role = json['role'];
+    switch (role) {
+      case "users":
+        roleType = RoleType.users;
+        break;
+      case "bussiness":
+        roleType = RoleType.bussiness;
+        break;
+      case "cms":
+        roleType = RoleType.cms;
+        break;
+      default:
+        roleType = RoleType.anonymous;
+        break;
+    }
   }
 
   Map<String, dynamic> toJson() {

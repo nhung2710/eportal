@@ -5,9 +5,9 @@
 import 'package:eportal/model/base/base_eportal_response.dart';
 
 class TenTinhTpResponse extends BaseEportalResponse {
-  String? data;
+  String data;
 
-  TenTinhTpResponse({this.data, required status, required message})
+  TenTinhTpResponse({required this.data, required status, required message})
       : super(status: status, message: message);
 
   factory TenTinhTpResponse.fromJson(Map<String, dynamic> json) {

@@ -7,9 +7,9 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 import 'data/home_document_list_data_response.dart';
 
 class HomeDocumentListResponse extends BaseEportalResponse {
-  List<HomeDocumentListDataResponse>? data;
+  List<HomeDocumentListDataResponse> data;
 
-  HomeDocumentListResponse({this.data, required status, required message})
+  HomeDocumentListResponse({required this.data, required status, required message})
       : super(status: status, message: message);
 
   factory HomeDocumentListResponse.fromJson(Map<String, dynamic> json) {

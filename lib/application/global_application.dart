@@ -3,13 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constant/application_constant.dart';
 import '../extension/string_extension.dart';
+import 'package:eportal/enum/role_type.dart';
 
-enum RoleType {
-  anonymous,
-  users,
-  bussiness,
-  cms,
-}
 
 class GlobalApplication {
   static final GlobalApplication _instance = GlobalApplication._internal();
@@ -20,7 +15,7 @@ class GlobalApplication {
   String UserPassword = ApplicationConstant.EMPTY;
   String UserId = ApplicationConstant.EMPTY;
   RoleType UserRoleType = RoleType.anonymous;
-  late SharedPreferences Preferences;
+  SharedPreferences? Preferences;
 
   factory GlobalApplication() {
     return _instance;
@@ -29,8 +24,8 @@ class GlobalApplication {
   bool get IsLogin => UserRoleType != RoleType.anonymous;
 
   String getStringOneTimePreferences(String key) {
-    var value = Preferences.getString(key).replaceWhenNullOrEmpty();
-    Preferences.remove(key);
+    var value = (Preferences?.getString(key)).replaceWhenNullOrEmpty();
+    Preferences?.remove(key);
     return value;
   }
 
@@ -55,19 +50,7 @@ class GlobalApplication {
   Future<void> signIn(
       DangNhapDataResponse? data, String userName, String password) async {
     if (data != null) {
-      switch (data.role) {
-        case "users":
-          UserRoleType = RoleType.users;
-          break;
-        case "bussiness":
-          UserRoleType = RoleType.bussiness;
-          break;
-        case "cms":
-          UserRoleType = RoleType.cms;
-          break;
-        default:
-          break;
-      }
+      UserRoleType = data.roleType;
       if (UserRoleType != RoleType.anonymous) {
         FullName = data.userName.supportHtml();
         UserName = userName;
@@ -75,10 +58,10 @@ class GlobalApplication {
         UserId = data.userID.replaceWhenNullOrWhiteSpace();
         UserPassword = password;
         UserPasswordSaved = password;
-        await Preferences.setString(ApplicationConstant.USER_NAME, UserName);
-        await Preferences.setString(
+        await Preferences?.setString(ApplicationConstant.USER_NAME, UserName);
+        await Preferences?.setString(
             ApplicationConstant.USER_PASSWORD, UserPassword);
-        await Preferences.setBool(ApplicationConstant.AUTO_LOGIN, true);
+        await Preferences?.setBool(ApplicationConstant.AUTO_LOGIN, true);
       }
     }
   }
@@ -87,7 +70,8 @@ class GlobalApplication {
     FullName = "bạn";
     UserName = ApplicationConstant.EMPTY;
     UserPassword = ApplicationConstant.EMPTY;
-    await Preferences.setBool(ApplicationConstant.AUTO_LOGIN, false);
+    UserId = ApplicationConstant.EMPTY;
+    await Preferences?.setBool(ApplicationConstant.AUTO_LOGIN, false);
   }
 
   String helloUser() {

@@ -8,9 +8,9 @@ import 'package:eportal/model/api/response/common_new/data/news_search_data_resp
 import 'package:eportal/model/base/base_eportal_response.dart';
 
 class NewsSearchResponse extends BaseEportalResponse {
-  List<NewsSearchDataResponse>? data;
+  List<NewsSearchDataResponse> data;
 
-  NewsSearchResponse({this.data, required status, required message})
+  NewsSearchResponse({required this.data, required status, required message})
       : super(status: status, message: message);
 
   factory NewsSearchResponse.fromJson(Map<String, dynamic> json) {

@@ -6,9 +6,9 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class VideoDetailResponse extends BaseEportalResponse {
-  List<VideoDetailDataResponse>? data;
+  List<VideoDetailDataResponse> data;
 
-  VideoDetailResponse({this.data, required status, required message})
+  VideoDetailResponse({required this.data, required status, required message})
       : super(status: status, message: message);
 
   factory VideoDetailResponse.fromJson(Map<String, dynamic> json) {

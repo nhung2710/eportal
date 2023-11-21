@@ -12,14 +12,14 @@ import 'screen/anonymous/home/home_page.dart';
 import 'screen/share/onboarding/page/onboarding_page.dart';
 import 'style/app_theme.dart';
 
-Future<bool> checkAppRunFirstTime() {
+Future<bool> checkAppRunFirstTime() async {
   bool? isFirstRunApp = GlobalApplication()
       .Preferences
-      .getBool(ApplicationConstant.FIRST_TIME_OPEN_APP);
-  return GlobalApplication()
+      ?.getBool(ApplicationConstant.FIRST_TIME_OPEN_APP);
+  await GlobalApplication()
       .Preferences
-      .setBool(ApplicationConstant.FIRST_TIME_OPEN_APP, false)
-      .then((value) => isFirstRunApp ?? true);
+      ?.setBool(ApplicationConstant.FIRST_TIME_OPEN_APP, false);
+  return isFirstRunApp ?? true;
 }
 
 Future<void> main() async {
@@ -49,13 +49,13 @@ Future<void> main() async {
     systemNavigationBarIconBrightness: Brightness.dark,
   ));
   GlobalApplication().Preferences = await SharedPreferences.getInstance();
-  GlobalApplication().UserNameSaved = GlobalApplication()
+  GlobalApplication().UserNameSaved = (GlobalApplication()
       .Preferences
-      .getString(ApplicationConstant.USER_NAME)
+      ?.getString(ApplicationConstant.USER_NAME))
       .replaceWhenNullOrWhiteSpace();
-  GlobalApplication().UserPasswordSaved = GlobalApplication()
+  GlobalApplication().UserPasswordSaved = (GlobalApplication()
       .Preferences
-      .getString(ApplicationConstant.USER_PASSWORD)
+      ?.getString(ApplicationConstant.USER_PASSWORD))
       .replaceWhenNullOrWhiteSpace();
 
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[

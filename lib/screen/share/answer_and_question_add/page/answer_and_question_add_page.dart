@@ -1,7 +1,9 @@
 import 'package:eportal/application/global_application.dart';
 import 'package:eportal/constant/application_constant.dart';
+import 'package:eportal/model/api/response/common_new/faq_add_question_response.dart';
 import 'package:eportal/screen/share/answer_and_question/widget/answer_and_question_item.dart';
 import 'package:eportal/screen/share/sign_in/page/sign_in_page.dart';
+import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
@@ -9,6 +11,13 @@ import 'package:eportal/widget/input/capcha_input.dart';
 import 'package:eportal/widget/input/field_input.dart';
 import 'package:eportal/widget/input/password_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../bloc/common_new/faq_add_question_bloc.dart';
+import '../../../../event/common_new/faq_add_question_event.dart';
+import '../../../../extension/string_extension.dart';
+import '../../../../model/api/request/common_new/data/faq_add_question_data_request.dart';
+import '../../../../model/api/request/common_new/faq_add_question_request.dart';
 
 //
 // Created by BlackRose on 21/11/2023.
@@ -29,6 +38,7 @@ class _AnswerAndQuestionAddPageState
   TextEditingController phoneController = TextEditingController();
   TextEditingController contentController = TextEditingController();
   bool? isWorker = false;
+  FaqAddQuestionBloc faqAddQuestionBloc = FaqAddQuestionBloc();
 
   @override
   String getPageTitle(BuildContext context) => "Gửi câu hỏi";
@@ -37,94 +47,114 @@ class _AnswerAndQuestionAddPageState
   Color currentBackgroundColor(BuildContext context) => Colors.white;
 
   @override
-  Widget pageUI(BuildContext context) => ListView(
-        children: <Widget>[
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: fullNameController,
-              textInputAction: TextInputAction.next,
-              hintText: "Họ và tên",
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Địa chỉ thư điện tử không được để trống';
-                }
-                return null;
-              },
-              icon: Icons.person,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: emailController,
-              textInputAction: TextInputAction.next,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Địa chỉ thư điện tử không được để trống';
-                }
-                return null;
-              },
-              hintText: "Địa chỉ thư điện tử",
-              icon: Icons.email,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: phoneController,
-              textInputAction: TextInputAction.next,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Số điện thoại không được để trống';
-                }
-                return null;
-              },
-              icon: Icons.smartphone,
-              hintText: "Điện thoại",
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: contentController,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.multiline,
-              maxLength: 500,
-              minLines: 10,
-              maxLines: 20,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Tài khoản không được để trống';
-                }
-                return null;
-              },
-              icon: Icons.description,
-              hintText: "Nội dung",
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: CapchaInput(
-              textInputAction: TextInputAction.done,
-              onFieldSubmitted: (value) => _send(context),
-            ),
-          ),
-          Container(
-              margin: const EdgeInsets.only(top: 10, bottom: 10),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColor.colorOfIcon),
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  child: const Text('Gửi'),
+  Widget pageUI(BuildContext context) => BlocProvider(
+    create: (_) => faqAddQuestionBloc,
+    child: BlocListener<FaqAddQuestionBloc, BaseState>(
+      listener: (BuildContext context, BaseState state) {
+        handlerActionLoaddingState<FaqAddQuestionResponse>(state, (obj) async {
+
+        });
+      },
+      child: SingleChildScrollView(
+        child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  child: FieldInput(
+                    controller: fullNameController,
+                    textInputAction: TextInputAction.next,
+                    hintText: "Họ và tên",
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Địa chỉ thư điện tử không được để trống';
+                      }
+                      return null;
+                    },
+                    icon: Icons.person,
+                  ),
                 ),
-                onPressed: () => _send(context),
-              )),
-        ],
-      );
+                Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  child: FieldInput(
+                    controller: emailController,
+                    textInputAction: TextInputAction.next,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Địa chỉ thư điện tử không được để trống';
+                      }
+                      return null;
+                    },
+                    hintText: "Địa chỉ thư điện tử",
+                    icon: Icons.email,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  child: FieldInput(
+                    controller: phoneController,
+                    textInputAction: TextInputAction.next,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'Số điện thoại không được để trống';
+                      }
+                      return null;
+                    },
+                    icon: Icons.smartphone,
+                    hintText: "Điện thoại",
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  child: FieldInput(
+                    controller: contentController,
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.multiline,
+                    maxLength: 500,
+                    minLines: 10,
+                    maxLines: 20,
+                    validator: (text) {
+                      if (text.isNullOrWhiteSpace()) {
+                        return 'Nội dung không được để trống';
+                      }
+                      return null;
+                    },
+                    icon: Icons.description,
+                    hintText: "Nội dung",
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  child: CapchaInput(
+                    textInputAction: TextInputAction.done,
+                    onFieldSubmitted: (value) => _send(context),
+                  ),
+                ),
+                Container(
+                    margin: const EdgeInsets.only(top: 10, bottom: 10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColor.colorOfIcon),
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        child: const Text('Gửi'),
+                      ),
+                      onPressed: () => _send(context),
+                    )),
+              ],
+            ),
+      ),
+    ),
+  );
 
   _send(BuildContext context) {
-    if (isValid()) {}
+    if (isValid()) {
+      startLoading();
+      faqAddQuestionBloc.add(FaqAddQuestionEvent(request: FaqAddQuestionRequest(obj: FaqAddQuestionDataRequest(
+        hoTen: fullNameController.text,
+        email: emailController.text,
+        noiDung: contentController.text,
+        phone:  phoneController.text
+      ))));
+    }
   }
 }

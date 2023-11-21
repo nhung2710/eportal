@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../extension/string_extension.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/input/password_input.dart';
 
@@ -36,7 +37,7 @@ class _ChangePasswordPageState extends BasePageState<ChangePasswordPage> {
               maxLength: 50,
               textInputAction: TextInputAction.next,
               validator: (text) {
-                if (text == null || text.isEmpty) {
+                if (text.isNullOrWhiteSpace()) {
                   return 'Mật khẩu cũ không được để trống';
                 }
                 return null;
@@ -52,7 +53,7 @@ class _ChangePasswordPageState extends BasePageState<ChangePasswordPage> {
                 maxLength: 50,
                 textInputAction: TextInputAction.next,
                 validator: (text) {
-                  if (text == null || text.isEmpty) {
+                  if (text.isNullOrWhiteSpace()) {
                     return 'Mật khẩu mới không được để trống';
                   }
                   return null;
@@ -67,7 +68,7 @@ class _ChangePasswordPageState extends BasePageState<ChangePasswordPage> {
               maxLength: 50,
               textInputAction: TextInputAction.done,
               validator: (text) {
-                if (text == null || text.isEmpty) {
+                if (text.isNullOrWhiteSpace()) {
                   return 'Mật khẩu xác nhận không được để trống';
                 }
                 return null;

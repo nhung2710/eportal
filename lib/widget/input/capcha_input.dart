@@ -66,6 +66,7 @@ class _CapchaInputState extends State<CapchaInput> {
             if (numberReload >= 1) _newText();
             return 'Mã xác nhận không hợp lệ';
           }
+          //_newText();
           return null;
         },
         onFieldSubmitted: widget.onFieldSubmitted,
@@ -116,6 +117,7 @@ class _CapchaInputState extends State<CapchaInput> {
 
   void _newText() {
     Random random = Random();
+    widget.controller?.clear();
     numberReload = 0;
     widget.controller?.clear();
     code = "".randomString(widget.maxLength).toUpperCase();

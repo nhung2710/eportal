@@ -7,9 +7,9 @@ import 'data/home_slide_list_data_response.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class HomeSlideListResponse extends BaseEportalResponse {
-  List<HomeSlideListDataResponse>? data;
+  List<HomeSlideListDataResponse> data;
 
-  HomeSlideListResponse({this.data, required status, required message})
+  HomeSlideListResponse({required this.data, required status, required message})
       : super(status: status, message: message);
 
   factory HomeSlideListResponse.fromJson(Map<String, dynamic> json) {

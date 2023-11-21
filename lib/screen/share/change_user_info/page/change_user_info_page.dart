@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../extension/datetime_extension.dart';
+import '../../../../extension/string_extension.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/input/field_input.dart';
 
@@ -54,7 +55,7 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
               maxLength: 50,
               textInputAction: TextInputAction.next,
               validator: (text) {
-                if (text == null || text.isEmpty) {
+                if (text.isNullOrWhiteSpace()) {
                   return 'Họ và tên không được để trống';
                 }
                 return null;
@@ -71,7 +72,7 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
               textInputAction: TextInputAction.next,
               focusNode: focusNode,
               validator: (text) {
-                if (text == null || text.isEmpty) {
+                if (text.isNullOrWhiteSpace()) {
                   return 'Ngày tháng năm sinh không được để trống';
                 }
                 return null;
@@ -87,7 +88,7 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
               maxLength: 50,
               textInputAction: TextInputAction.next,
               validator: (text) {
-                if (text == null || text.isEmpty) {
+                if (text.isNullOrWhiteSpace()) {
                   return 'Địa chỉ thư điện tử không được để trống';
                 }
                 return null;
@@ -104,7 +105,7 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
                 maxLength: 50,
                 textInputAction: TextInputAction.next,
                 validator: (text) {
-                  if (text == null || text.isEmpty) {
+                  if (text.isNullOrWhiteSpace()) {
                     return 'Điện thoại không được để trống';
                   }
                   return null;
@@ -119,7 +120,7 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
               maxLength: 50,
               textInputAction: TextInputAction.done,
               validator: (text) {
-                if (text == null || text.isEmpty) {
+                if (text.isNullOrWhiteSpace()) {
                   return 'Địa chỉ không được để trống';
                 }
                 return null;

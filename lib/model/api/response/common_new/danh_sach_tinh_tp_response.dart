@@ -7,9 +7,9 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 import 'data/danh_sach_tinh_tp_data_response.dart';
 
 class DanhSachTinhTpResponse extends BaseEportalResponse {
-  List<DanhSachTinhTpDataResponse>? data;
+  List<DanhSachTinhTpDataResponse> data;
 
-  DanhSachTinhTpResponse({this.data, required status, required message})
+  DanhSachTinhTpResponse({required this.data, required status, required message})
       : super(status: status, message: message);
 
   factory DanhSachTinhTpResponse.fromJson(Map<String, dynamic> json) {

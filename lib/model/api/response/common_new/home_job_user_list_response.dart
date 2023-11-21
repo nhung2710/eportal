@@ -7,9 +7,9 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 import 'data/home_job_user_list_data_response.dart';
 
 class HomeJobUserListResponse extends BaseEportalResponse {
-  List<HomeJobUserListDataResponse>? data;
+  List<HomeJobUserListDataResponse> data;
 
-  HomeJobUserListResponse({this.data, required status, required message})
+  HomeJobUserListResponse({required this.data, required status, required message})
       : super(status: status, message: message);
 
   factory HomeJobUserListResponse.fromJson(Map<String, dynamic> json) {
