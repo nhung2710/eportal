@@ -46,7 +46,6 @@ class DanhSachMucLuongDataResponse {
     userName = json['userName'];
     updatedBy = json['updatedBy'];
     userUpdate = json['userUpdate'];
-    salaryName = salaryName.supportHtml();
     search = salaryName.getValueSearch();
   }
 

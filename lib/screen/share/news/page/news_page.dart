@@ -63,24 +63,27 @@ class _NewsPageState extends BasePageState<NewsPage> {
           builder: (BuildContext context, BaseState state) =>
               handlerBaseState<HomeNewsListResponse>(
             state,
-            (context, state) => Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: state.data?.length ?? 0,
-                      itemBuilder: (context, i) => NewsWidget(
-                            onTap: () => nextPage((context) => EmptyExamplePage(
-                                  isHasAppBar: true,
+            (context, state) => state.data.isEmpty
+                ? buildNotFoundData(context)
+                : Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: state.data.length,
+                            itemBuilder: (context, i) => NewsWidget(
+                                  onTap: () =>
+                                      nextPage((context) => EmptyExamplePage(
+                                            isHasAppBar: true,
+                                          )),
+                                  title: state.data.elementAt(i).title,
+                                  imageUrl: state.data.elementAt(i).imagePath,
+                                  content: state.data.elementAt(i).summary,
+                                  time: state.data.elementAt(i).publishedDate,
                                 )),
-                            title: state.data?.elementAt(i).title,
-                            imageUrl: state.data?.elementAt(i).imagePath,
-                            content: state.data?.elementAt(i).summary,
-                            time: state.data?.elementAt(i).publishedDate,
-                          )),
-                ),
-              ],
-            ),
+                      ),
+                    ],
+                  ),
           ),
         ),
       ));

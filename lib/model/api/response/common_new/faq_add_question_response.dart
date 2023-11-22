@@ -7,19 +7,16 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 //
 
 class FaqAddQuestionResponse extends BaseEportalResponse {
-  List<FaqAddQuestionDataResponse> data;
+  FaqAddQuestionDataResponse data;
 
-  FaqAddQuestionResponse({required this.data, required status, required message})
+  FaqAddQuestionResponse(
+      {required this.data, required status, required message})
       : super(status: status, message: message);
 
   factory FaqAddQuestionResponse.fromJson(Map<String, dynamic> json) {
-    List<FaqAddQuestionDataResponse> data = <FaqAddQuestionDataResponse>[];
-    if (json['data'] != null) {
-      json['data'].forEach((v) {
-        data.add(FaqAddQuestionDataResponse.fromJson(v));
-      });
-    }
     return FaqAddQuestionResponse(
-        data: data, status: json["status"], message: json["message"]);
+        data: FaqAddQuestionDataResponse.fromJson(json['data']),
+        status: json["status"],
+        message: json["message"]);
   }
 }

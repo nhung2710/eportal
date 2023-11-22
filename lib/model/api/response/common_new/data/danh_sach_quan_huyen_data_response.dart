@@ -52,7 +52,6 @@ class DanhSachQuanHuyenDataResponse {
     updatedUser = json['updatedUser'];
     isActive = json['isActive'];
     isOrder = json['isOrder'];
-    regionalName = regionalName.supportHtml();
     search = regionalName.getValueSearch();
   }
 

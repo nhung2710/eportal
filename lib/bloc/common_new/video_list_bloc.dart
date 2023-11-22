@@ -8,22 +8,27 @@ import 'package:eportal/repository/common_new/video_list_repository.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class VideoListBloc extends Bloc<BaseEvent, BaseState> {
-  VideoListBloc() : super(BaseInitial()) {
+import '../../model/api/response/common_new/data/video_list_data_response.dart';
+
+class VideoListBloc
+    extends Bloc<BaseEvent, BaseLoadMore<VideoListDataResponse>> {
+  VideoListBloc() : super(const BaseLoadMore<VideoListDataResponse>()) {
     final VideoListRepository apiRepository = VideoListRepository();
 
     on<VideoListEvent>((event, emit) async {
       try {
-        emit(BaseLoading());
+        if (state.hasReachedMax) return;
         final response = await apiRepository.getVideoList(event.request);
-        emit(BaseLoaded(response));
-        if (response.status != 2) {
-          emit(BaseError(response.message));
+        if (event.request.obj.soTrangHienTai == 1) {
+          emit(state.copyWith(
+              data: response.data, hasReachedMax: response.data.isEmpty));
+        } else {
+          emit(state.copyWith(
+              data: state.data..addAll(response.data),
+              hasReachedMax: response.data.isEmpty));
         }
-      } on Exception catch (e) {
-        emit(BaseError(e.toString()));
       } catch (e) {
-        emit(BaseError(e.toString()));
+        emit(state.copyWith(data: state.data, hasReachedMax: true));
       }
     });
   }

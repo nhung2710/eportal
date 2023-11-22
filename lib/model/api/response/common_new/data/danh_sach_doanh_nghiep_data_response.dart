@@ -130,7 +130,6 @@ class DanhSachDoanhNghiepDataResponse {
     approvalUser = json['approvalUser'];
     approvalDate = json['approvalDate'];
     portalId = json['portalId'];
-    businessVn = businessVn.supportHtml();
     search = businessVn.getValueSearch();
   }
 

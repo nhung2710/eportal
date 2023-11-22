@@ -46,7 +46,6 @@ class DanhSachKinhNghiemDataResponse {
     userName = json['userName'];
     updatedBy = json['updatedBy'];
     userUpdate = json['userUpdate'];
-    experienceName = experienceName.supportHtml();
     search = experienceName.getValueSearch();
   }
 

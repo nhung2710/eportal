@@ -129,7 +129,6 @@ class HomeBusinessListDataResponse {
     approvalUser = json['approvalUser'];
     approvalDate = json['approvalDate'];
     portalId = json['portalId'];
-    businessVn = businessVn.supportHtml();
   }
 
   Map<String, dynamic> toJson() {

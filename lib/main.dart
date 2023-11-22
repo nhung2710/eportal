@@ -10,6 +10,7 @@ import 'constant/application_constant.dart';
 import 'extension/string_extension.dart';
 import 'screen/anonymous/home/home_page.dart';
 import 'screen/share/onboarding/page/onboarding_page.dart';
+import 'style/app_color.dart';
 import 'style/app_theme.dart';
 
 Future<bool> checkAppRunFirstTime() async {
@@ -42,20 +43,20 @@ Future<void> main() async {
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.white,
-    statusBarIconBrightness: Brightness.dark,
+    statusBarIconBrightness: Brightness.light,
     statusBarBrightness: Brightness.light,
     systemNavigationBarColor: Colors.white,
     systemNavigationBarDividerColor: Colors.transparent,
-    systemNavigationBarIconBrightness: Brightness.dark,
+    systemNavigationBarIconBrightness: Brightness.light,
   ));
   GlobalApplication().Preferences = await SharedPreferences.getInstance();
   GlobalApplication().UserNameSaved = (GlobalApplication()
-      .Preferences
-      ?.getString(ApplicationConstant.USER_NAME))
+          .Preferences
+          ?.getString(ApplicationConstant.USER_NAME))
       .replaceWhenNullOrWhiteSpace();
   GlobalApplication().UserPasswordSaved = (GlobalApplication()
-      .Preferences
-      ?.getString(ApplicationConstant.USER_PASSWORD))
+          .Preferences
+          ?.getString(ApplicationConstant.USER_PASSWORD))
       .replaceWhenNullOrWhiteSpace();
 
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
@@ -80,9 +81,25 @@ class MyApp extends StatelessWidget {
       title: 'Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        textTheme: AppTheme.textTheme,
-        platform: TargetPlatform.iOS,
-      ),
+          textTheme: AppTheme.textTheme,
+          cardTheme: const CardTheme(surfaceTintColor: Colors.white),
+          iconTheme: const IconThemeData(color: Colors.white),
+          appBarTheme: const AppBarTheme(
+              color: Colors.white,
+              centerTitle: true,
+              iconTheme: IconThemeData(color: Colors.white)),
+          tabBarTheme: const TabBarTheme(
+              indicatorColor: AppColor.colorOfIcon,
+              dividerHeight: 3,
+              indicatorSize: TabBarIndicatorSize.tab),
+          dialogTheme: DialogTheme(
+            surfaceTintColor: Colors.white,
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+          ),
+          dialogBackgroundColor: Colors.white),
       home: PageStorage(
         key: key,
         bucket: _bucket,

@@ -129,7 +129,6 @@ class HomeNewsListDataResponse {
     title = json['title'];
     imagePath = json['imagePath'];
     summary = json['summary'];
-    summary = summary.supportHtml();
     content = json['content'];
     isActive = json['isActive'];
     hotcat = json['hotcat'];
@@ -162,7 +161,6 @@ class HomeNewsListDataResponse {
     cancelPublishDate = json['cancelPublishDate'];
     cancelPublishUser = json['cancelPublishUser'];
     publishedDate = json['publishedDate'];
-    publishedDate = publishedDate.formatDateTimeApi();
     publishedUser = json['publishedUser'];
     userId = json['userId'];
     writerName = json['writerName'];

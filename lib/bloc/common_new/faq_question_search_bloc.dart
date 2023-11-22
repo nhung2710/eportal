@@ -8,24 +8,36 @@ import 'package:eportal/repository/common_new/faq_question_search_repository.dar
 import 'package:eportal/state/base/base_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FaqQuestionSearchBloc extends Bloc<BaseEvent, BaseState> {
-  FaqQuestionSearchBloc() : super(BaseInitial()) {
+import '../../model/api/response/common_new/data/faq_question_search_data_response.dart';
+
+class FaqQuestionSearchBloc
+    extends Bloc<BaseEvent, BaseLoadMore<FaqQuestionSearchDataResponse>> {
+  FaqQuestionSearchBloc()
+      : super(const BaseLoadMore<FaqQuestionSearchDataResponse>()) {
     final FaqQuestionSearchRepository apiRepository =
         FaqQuestionSearchRepository();
 
     on<FaqQuestionSearchEvent>((event, emit) async {
       try {
-        emit(BaseLoading());
+        if (state.hasReachedMax) {
+          return;
+        }
         final response =
             await apiRepository.getFaqQuestionSearch(event.request);
-        emit(BaseLoaded(response));
-        if (response.status != 2) {
-          emit(BaseError(response.message));
+        if (event.request.obj.soTrangHienTai == 1) {
+          emit(state.copyWith(
+              data: response.data,
+              hasReachedMax: response.data.isEmpty,
+              status: DataStatus.success));
+        } else {
+          emit(state.copyWith(
+              data: state.data..addAll(response.data),
+              hasReachedMax: response.data.isEmpty,
+              status: DataStatus.success));
         }
-      } on Exception catch (e) {
-        emit(BaseError(e.toString()));
       } catch (e) {
-        emit(BaseError(e.toString()));
+        emit(state.copyWith(
+            data: state.data, hasReachedMax: true, status: DataStatus.success));
       }
     });
   }

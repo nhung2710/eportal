@@ -101,13 +101,9 @@ class HomeJobUserListDataResponse {
     salaryID = json['salary_ID'];
     needsID = json['needs_ID'];
     education = json['education'];
-    education = education.supportHtml();
     careerGoals = json['careerGoals'];
-    careerGoals = careerGoals.supportHtml();
     workExperience = json['workExperience'];
-    workExperience = workExperience.supportHtml();
     skillsForte = json['skillsForte'];
-    skillsForte = skillsForte.supportHtml();
     userAdmin = json['userAdmin'];
     startDate = json['startDate'];
     endDate = json['endDate'];

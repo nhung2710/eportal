@@ -254,7 +254,7 @@ class _FilterDrawerState extends BaseScreenState<FilterDrawer> {
       selectedItem: widget.danhSachQuanHuyenDataResponse,
       asyncItems: (String filter) => Future.value(list),
       itemAsString: (DanhSachQuanHuyenDataResponse u) =>
-          u.regionalName.replaceWhenNullOrWhiteSpace(),
+          u.regionalName.supportHtml(),
       onChanged: (DanhSachQuanHuyenDataResponse? data) {
         if (widget.danhSachQuanHuyenDataResponse != data) {
           widget.danhSachQuanHuyenDataResponse = data;
@@ -282,7 +282,7 @@ class _FilterDrawerState extends BaseScreenState<FilterDrawer> {
       selectedItem: widget.danhSachDoanhNghiepDataResponse,
       asyncItems: (String filter) => Future.value(list),
       itemAsString: (DanhSachDoanhNghiepDataResponse u) =>
-          u.businessVn.replaceWhenNullOrWhiteSpace(),
+          u.businessVn.supportHtml(),
       onChanged: (DanhSachDoanhNghiepDataResponse? data) {
         if (widget.danhSachDoanhNghiepDataResponse != data) {
           widget.danhSachDoanhNghiepDataResponse = data;
@@ -302,7 +302,7 @@ class _FilterDrawerState extends BaseScreenState<FilterDrawer> {
       selectedItem: widget.danhSachKinhNghiemDataResponse,
       asyncItems: (String filter) => Future.value(list),
       itemAsString: (DanhSachKinhNghiemDataResponse u) =>
-          u.experienceName.replaceWhenNullOrWhiteSpace(),
+          u.experienceName.supportHtml(),
       onChanged: (DanhSachKinhNghiemDataResponse? data) {
         if (widget.danhSachKinhNghiemDataResponse != data) {
           widget.danhSachKinhNghiemDataResponse = data;
@@ -323,7 +323,7 @@ class _FilterDrawerState extends BaseScreenState<FilterDrawer> {
       selectedItem: widget.danhSachMucLuongDataResponse,
       asyncItems: (String filter) => Future.value(list),
       itemAsString: (DanhSachMucLuongDataResponse u) =>
-          u.salaryName.replaceWhenNullOrWhiteSpace(),
+          u.salaryName.supportHtml(),
       onChanged: (DanhSachMucLuongDataResponse? data) {
         if (widget.danhSachMucLuongDataResponse != data) {
           widget.danhSachMucLuongDataResponse = data;

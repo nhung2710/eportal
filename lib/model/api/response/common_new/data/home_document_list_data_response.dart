@@ -73,7 +73,6 @@ class HomeDocumentListDataResponse {
     signerName = json['signerName'];
     promDate = json['promDate'];
     effectDate = json['effectDate'];
-    effectDate = effectDate.formatDateTimeApi();
 
     endDate = json['endDate'];
     fileName = json['fileName'];

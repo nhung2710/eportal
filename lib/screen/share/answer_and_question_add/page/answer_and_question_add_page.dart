@@ -48,15 +48,18 @@ class _AnswerAndQuestionAddPageState
 
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
-    create: (_) => faqAddQuestionBloc,
-    child: BlocListener<FaqAddQuestionBloc, BaseState>(
-      listener: (BuildContext context, BaseState state) {
-        handlerActionLoaddingState<FaqAddQuestionResponse>(state, (obj) async {
-
-        });
-      },
-      child: SingleChildScrollView(
-        child: Column(
+        create: (_) => faqAddQuestionBloc,
+        child: BlocListener<FaqAddQuestionBloc, BaseState>(
+          listener: (BuildContext context, BaseState state) {
+            handlerActionLoaddingState<FaqAddQuestionResponse>(state,
+                (obj) async {
+              showCenterMessage("Bạn đã gửi câu hỏi thành công")
+                  .then((value) => backPage());
+            });
+          },
+          child: SingleChildScrollView(
+            child: ListView(
+              shrinkWrap: true,
               children: [
                 Container(
                   margin: const EdgeInsets.only(top: 10),
@@ -136,25 +139,28 @@ class _AnswerAndQuestionAddPageState
                           backgroundColor: AppColor.colorOfIcon),
                       child: Container(
                         padding: const EdgeInsets.all(10),
-                        child: const Text('Gửi'),
+                        child: Text('Gửi',
+                            style: AppTextStyle.titlePage
+                                .copyWith(color: Colors.white)),
                       ),
                       onPressed: () => _send(context),
                     )),
               ],
             ),
-      ),
-    ),
-  );
+          ),
+        ),
+      );
 
   _send(BuildContext context) {
     if (isValid()) {
       startLoading();
-      faqAddQuestionBloc.add(FaqAddQuestionEvent(request: FaqAddQuestionRequest(obj: FaqAddQuestionDataRequest(
-        hoTen: fullNameController.text,
-        email: emailController.text,
-        noiDung: contentController.text,
-        phone:  phoneController.text
-      ))));
+      faqAddQuestionBloc.add(FaqAddQuestionEvent(
+          request: FaqAddQuestionRequest(
+              obj: FaqAddQuestionDataRequest(
+                  hoTen: fullNameController.text,
+                  email: emailController.text,
+                  noiDung: contentController.text,
+                  phone: phoneController.text))));
     }
   }
 }

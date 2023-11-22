@@ -5,7 +5,6 @@ import '../constant/application_constant.dart';
 import '../extension/string_extension.dart';
 import 'package:eportal/enum/role_type.dart';
 
-
 class GlobalApplication {
   static final GlobalApplication _instance = GlobalApplication._internal();
   String UserName = ApplicationConstant.EMPTY;
@@ -52,7 +51,7 @@ class GlobalApplication {
     if (data != null) {
       UserRoleType = data.roleType;
       if (UserRoleType != RoleType.anonymous) {
-        FullName = data.userName.supportHtml();
+        FullName = data.userName.replaceWhenNullOrWhiteSpace();
         UserName = userName;
         UserNameSaved = userName;
         UserId = data.userID.replaceWhenNullOrWhiteSpace();

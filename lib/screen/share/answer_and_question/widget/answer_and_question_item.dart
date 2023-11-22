@@ -1,7 +1,13 @@
+import 'package:eportal/model/api/response/common_new/data/faq_question_search_data_response.dart';
 import 'package:eportal/style/app_color.dart';
+import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/style/app_size_icon.dart';
 import 'package:eportal/style/app_text_style.dart';
+import 'package:eportal/widget/text_icon/text_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../../../../extension/string_extension.dart';
 
 //
 // Created by BlackRose on 11/8/2023.
@@ -9,145 +15,55 @@ import 'package:flutter/material.dart';
 //
 class AnswerAndQuestionItem extends StatelessWidget {
   final GestureTapCallback onTap;
-  final int index;
+  final FaqQuestionSearchDataResponse data;
+  int index;
 
-  const AnswerAndQuestionItem({super.key, required this.onTap, this.index = 0});
+  AnswerAndQuestionItem(
+      {super.key,
+      required this.onTap,
+      required this.data,
+      required this.index});
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          GestureDetector(
-            onTap: onTap,
-            child: Container(
-                margin: const EdgeInsets.only(top: 5, left: 5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.white,
-                ),
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.question_answer,
-                      color: AppColor.colorOfIcon,
-                      size: AppSizeIcon.sizeOfNormal,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                          margin: const EdgeInsets.only(right: 10, left: 10),
-                          child: Text("Vấn đề $index",
-                              textAlign: TextAlign.start,
-                              style: AppTextStyle.title
-                                  .copyWith(color: AppColor.colorOfIcon))),
-                    ),
-                    const Icon(
-                      Icons.navigate_next_sharp,
-                      color: AppColor.colorOfIcon,
-                      size: AppSizeIcon.sizeOfNormal,
-                    )
-                  ],
-                )),
-          ),
-          GestureDetector(
-            onTap: onTap,
-            child: Container(
-                margin: const EdgeInsets.only(top: 5, left: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.white,
-                ),
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.question_answer,
-                      color: AppColor.colorOfIcon,
-                      size: AppSizeIcon.sizeOfNormal,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                          margin: const EdgeInsets.only(right: 10, left: 10),
-                          child: Text("Kết quả $index",
-                              textAlign: TextAlign.start,
-                              style: AppTextStyle.title
-                                  .copyWith(color: AppColor.colorOfIcon))),
-                    ),
-                    const Icon(
-                      Icons.navigate_next_sharp,
-                      color: AppColor.colorOfIcon,
-                      size: AppSizeIcon.sizeOfNormal,
-                    )
-                  ],
-                )),
-          ),
-          GestureDetector(
-            onTap: onTap,
-            child: Container(
-                margin: const EdgeInsets.only(top: 5, left: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.white,
-                ),
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.question_answer,
-                      color: AppColor.colorOfIcon,
-                      size: 20,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                          margin: const EdgeInsets.only(right: 10, left: 10),
-                          child: Text("Kết quả $index",
-                              textAlign: TextAlign.start,
-                              style: AppTextStyle.title
-                                  .copyWith(color: AppColor.colorOfIcon))),
-                    ),
-                    const Icon(
-                      Icons.navigate_next_sharp,
-                      color: AppColor.colorOfIcon,
-                      size: 20,
-                    )
-                  ],
-                )),
-          ),
-          GestureDetector(
-            onTap: onTap,
-            child: Container(
-                margin: const EdgeInsets.only(top: 5, left: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.white,
-                ),
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.question_answer,
-                      color: AppColor.colorOfIcon,
-                      size: 20,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                          margin: const EdgeInsets.only(right: 10, left: 10),
-                          child: Text("Kết quả $index",
-                              textAlign: TextAlign.start,
-                              style: AppTextStyle.title
-                                  .copyWith(color: AppColor.colorOfIcon))),
-                    ),
-                    const Icon(
-                      Icons.navigate_next_sharp,
-                      color: AppColor.colorOfIcon,
-                      size: 20,
-                    )
-                  ],
-                )),
-          ),
-        ],
+  Widget build(BuildContext context) => Card(
+        elevation: AppElevation.sizeOfNormal,
+        color: AppColor.colorOfApp,
+        shadowColor: AppColor.colorOfIcon,
+        borderOnForeground: false,
+        margin: const EdgeInsets.all(5),
+        shape: const RoundedRectangleBorder(
+            side: BorderSide(color: AppColor.colorOfDrawer, width: 0.2),
+            borderRadius: BorderRadius.all(Radius.circular(5))),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(5),
+              child: TextIcon(
+                isHasBorder: false,
+                icon: FontAwesomeIcons.tag,
+                text: index.toString(),
+                textStyle: AppTextStyle.title,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5),
+              child: TextIcon(
+                isHasBorder: false,
+                icon: FontAwesomeIcons.question,
+                text: data.contents,
+                textStyle: AppTextStyle.normal,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5),
+              child: TextIcon(
+                isHasBorder: false,
+                icon: FontAwesomeIcons.noteSticky,
+                text: data.answerOb?.contents,
+                textStyle: AppTextStyle.normal,
+              ),
+            )
+          ],
+        ),
       );
 }

@@ -75,7 +75,7 @@ class _SignInPageState extends BasePageState<SignInPage> {
             } else {
               GlobalApplication()
                   .signIn(obj.data.data, nameController.text,
-                  passwordController.text)
+                      passwordController.text)
                   .then((value) {
                 switch (GlobalApplication().UserRoleType) {
                   case RoleType.users:
@@ -88,7 +88,7 @@ class _SignInPageState extends BasePageState<SignInPage> {
                     nextPageWithoutBack((context) => const admin.HomePage());
                     break;
                   case RoleType.anonymous:
-                  // TODO: Handle this case.
+                    // TODO: Handle this case.
                     break;
                 }
               });
@@ -145,7 +145,11 @@ class _SignInPageState extends BasePageState<SignInPage> {
                         backgroundColor: AppColor.colorOfIcon),
                     child: Container(
                         padding: const EdgeInsets.all(10),
-                        child: const Text('Đăng nhập')),
+                        child: Text(
+                          'Đăng nhập',
+                          style: AppTextStyle.titlePage
+                              .copyWith(color: Colors.white),
+                        )),
                     onPressed: () => _signIn(context),
                   )),
               Container(

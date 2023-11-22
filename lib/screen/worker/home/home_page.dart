@@ -1,6 +1,7 @@
+import 'package:eportal/screen/share/answer_and_question/page/answer_and_question_page.dart';
 import 'package:eportal/screen/share/home_manage/page/home_manage_page.dart';
+import 'package:eportal/screen/share/multimedia/page/multimedia_page.dart';
 import 'package:eportal/screen/share/notification/page/notification_page.dart';
-import 'package:eportal/screen/worker/find_job/page/find_job_page.dart';
 import 'package:eportal/screen/worker/profile/page/profile_page.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/widget/app_bar/default_app_bar.dart';
@@ -76,12 +77,23 @@ class _HomePageState extends BasePageStateActive<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.manage_search,
+              Icons.question_mark,
               color: AppColor.colorOfHintText,
             ),
-            label: "Tìm kiếm",
+            label: "Hỏi đáp",
             activeIcon: Icon(
-              Icons.manage_search,
+              Icons.question_mark,
+              color: AppColor.colorOfIcon,
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.perm_media,
+              color: AppColor.colorOfHintText,
+            ),
+            label: "Đa phương tiện",
+            activeIcon: Icon(
+              Icons.perm_media,
               color: AppColor.colorOfIcon,
             ),
           ),
@@ -126,7 +138,8 @@ class _HomePageState extends BasePageStateActive<HomePage> {
         children: const <Widget>[
           HomeManagePage(),
           ProfilePage(),
-          FindJobPage(),
+          AnswerAndQuestionPage(),
+          MultimediaPage(),
           NotificationPage(),
           SettingPage(),
         ],

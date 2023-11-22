@@ -25,18 +25,32 @@ class BasePage extends StatefulWidget {
 class BasePageState<T extends StatefulWidget> extends State<T> {
   GlobalKey<State<T>> localKey = GlobalKey<State<T>>();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   DialogRoute? loaddingDialog;
-  late ScrollController scrollController;
+  ScrollController? scrollController;
 
   @override
   void dispose() {
-    scrollController.dispose();
+    scrollController?.removeListener(_onScroll);
+    scrollController?.dispose();
+    scrollController = null;
     super.dispose();
   }
+
+  void _onScroll() {
+    final maxScroll = scrollController!.position.maxScrollExtent;
+    final currentScroll = scrollController!.offset;
+    if (currentScroll >= (maxScroll * 0.7)) {
+      getMoreData();
+    }
+  }
+
+  void getMoreData() {}
 
   @override
   void initState() {
     scrollController = ScrollController();
+    scrollController!.addListener(_onScroll);
     initDataLoading();
     // TODO: implement initState
     super.initState();
@@ -51,6 +65,7 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
       child: SafeArea(
         bottom: false,
         child: Scaffold(
+          key: scaffoldKey,
           resizeToAvoidBottomInset: true,
           appBar: getAppBar(context),
           body: Container(
@@ -102,14 +117,14 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
             ],
           );
         });
-    if(loaddingDialog!=null) {
+    if (loaddingDialog != null) {
       Navigator.of(context).push(loaddingDialog!);
     }
   }
 
   Future<void> stopLoading() async {
     hiddenKeyboard();
-    if(loaddingDialog!=null) {
+    if (loaddingDialog != null) {
       Navigator.of(context).removeRoute(loaddingDialog!);
       loaddingDialog = null;
     }
@@ -144,7 +159,8 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
             onPressed: () => Navigator.pop(context),
             gradient: const LinearGradient(colors: [
               Color.fromRGBO(116, 116, 191, 1.0),
-              Color.fromRGBO(52, 138, 199, 1.0)
+              Color.fromRGBO(52, 138, 199, 1.0),
+              AppColor.colorOfIcon,
             ]),
             child: const Text(
               "Tôi đã biết",
@@ -166,7 +182,8 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
             onPressed: () => Navigator.pop(context),
             gradient: const LinearGradient(colors: [
               Color.fromRGBO(116, 116, 191, 1.0),
-              Color.fromRGBO(52, 138, 199, 1.0)
+              Color.fromRGBO(52, 138, 199, 1.0),
+              AppColor.colorOfIcon
             ]),
             child: const Text(
               "Tôi đã biết",
@@ -222,7 +239,7 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: builder));
 
   Future<void> scrollToEnd() =>
-      scrollController.animateTo(scrollController.position.maxScrollExtent,
+      scrollController!.animateTo(scrollController!.position.maxScrollExtent,
           duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
 
   Widget handlerBaseState<K>(BaseState state, BlocWidgetBuilder<K> builder,
@@ -241,21 +258,23 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
     }
   }
 
-  void handlerActionState<K>(BaseState state, CallbackListener<BaseLoaded<K>> callback) {
+  void handlerActionState<K>(
+      BaseState state, CallbackListener<BaseLoaded<K>> callback) {
     if (state is BaseError) {
       showCenterError(state.message);
     } else if (state is BaseLoaded<K>) {
       return callback(state);
     }
   }
-  void handlerActionLoaddingState<K>(BaseState state, CallbackListener<BaseLoaded<K>> callback) {
+
+  void handlerActionLoaddingState<K>(
+      BaseState state, CallbackListener<BaseLoaded<K>> callback) {
     if (state is BaseError) {
       stopLoading().then((value) => showCenterError(state.message));
     } else if (state is BaseLoaded<K>) {
       stopLoading().then((value) => callback(state));
     }
   }
-
 
   Widget buildScreenLoading() => Center(
         child: Container(
@@ -285,15 +304,6 @@ class BasePageStateActive<T extends StatefulWidget> extends BasePageState<T>
   bool get wantKeepAlive => true;
 
   @override
-  void initState() {
-    initDataLoading();
-    // TODO: implement initState
-    super.initState();
-  }
-
-  void initDataLoading() {}
-
-  @override
   Widget build(BuildContext context) {
     super.build(context);
     return Form(
@@ -301,6 +311,7 @@ class BasePageStateActive<T extends StatefulWidget> extends BasePageState<T>
       child: SafeArea(
         bottom: false,
         child: Scaffold(
+          key: scaffoldKey,
           resizeToAvoidBottomInset: true,
           appBar: getAppBar(context),
           body: Container(
@@ -312,6 +323,8 @@ class BasePageStateActive<T extends StatefulWidget> extends BasePageState<T>
                 onRefresh: () async => initDataLoading(),
                 child: pageUI(context)),
           ),
+          endDrawer: getEndDrawer(context),
+          drawer: getDrawer(context),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.miniEndFloat,
           floatingActionButton: getFloatingActionButton(context),

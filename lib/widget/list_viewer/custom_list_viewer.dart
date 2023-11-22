@@ -36,7 +36,12 @@ class _CustomListViewerState extends State<CustomListViewer> {
                             const EdgeInsets.only(top: 10, left: 5, right: 5),
                         elevation: AppElevation.sizeOfNormal,
                         borderOnForeground: true,
+                        color: AppColor.colorOfApp,
                         shadowColor: AppColor.colorOfIcon,
+                        shape: const RoundedRectangleBorder(
+                            side: BorderSide(
+                                color: AppColor.colorOfDrawer, width: 0.1),
+                            borderRadius: BorderRadius.all(Radius.circular(5))),
                         child: GestureDetector(
                           onTap: () {
                             e.isExpanded = !e.isExpanded;

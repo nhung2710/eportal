@@ -66,7 +66,7 @@ extension StringNullExtension on String? {
   }
 
   String formatDateTimeApi() {
-    return (parseDateTime()?.toFormatDateTime(format: "dd/MM/yyyy"))
+    return (parseDateTime()?.toFormatDateTime(format: "dd/MM/yyyy HH:mm"))
         .replaceWhenNullOrWhiteSpace();
   }
 }
@@ -122,7 +122,7 @@ extension StringExtension on String {
   }
 
   String formatDateTimeApi() {
-    return (parseDateTime()?.toFormatDateTime(format: "dd/MM/yyyy"))
+    return (parseDateTime()?.toFormatDateTime(format: "dd/MM/yyyy HH:mm"))
         .replaceWhenNullOrWhiteSpace();
   }
 }

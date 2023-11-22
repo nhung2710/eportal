@@ -1,12 +1,10 @@
-
-
 //
 // Created by BlackRose on 13/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class WorkSearchDataResponse {
-  Null? imageURL;
-  Null? parentID;
+  String? imageURL;
+  String? parentID;
   int? gtvl;
   int? id;
   String? ages;
@@ -17,7 +15,7 @@ class WorkSearchDataResponse {
   String? idSend;
   String? tuyenDungID;
   String? doanhNghiepID;
-  Null? businessVn;
+  String? businessVn;
   String? jobPlace;
   int? ketQuaPhongVan;
   String? levelDesiredID;

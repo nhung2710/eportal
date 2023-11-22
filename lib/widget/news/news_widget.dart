@@ -44,7 +44,7 @@ class NewsWidget extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(5))),
         child: Container(
           padding: const EdgeInsets.all(5),
-          height: 120,
+          height: 160,
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -82,30 +82,41 @@ class NewsWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
+                          flex: 3,
                           child: Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              title.addLine(3),
+                              title.supportHtml().addLine(3),
                               style: AppTextStyle.title,
                               maxLines: 3,
                             ),
                           ),
                         ),
+                        const Divider(
+                          height: 5,
+                          color: Colors.transparent,
+                        ),
                         Expanded(
+                          flex: 3,
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              content.addLine(3),
+                              content.supportHtml().addLine(3),
                               maxLines: 3,
                               style: AppTextStyle.normal,
                             ),
                           ),
                         ),
+                        const Divider(
+                          height: 5,
+                          color: Colors.transparent,
+                        ),
                         Expanded(
+                          flex: 1,
                           child: Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              time.addLine(1),
+                              time.formatDateTimeApi().addLine(1),
                               maxLines: 1,
                               textAlign: TextAlign.right,
                               style: AppTextStyle.normalChild1,
