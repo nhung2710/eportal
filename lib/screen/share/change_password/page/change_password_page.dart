@@ -1,3 +1,5 @@
+import 'package:eportal/style/app_color.dart';
+import 'package:eportal/style/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../extension/string_extension.dart';
@@ -80,9 +82,13 @@ class _ChangePasswordPageState extends BasePageState<ChangePasswordPage> {
           Container(
               margin: const EdgeInsets.only(top: 10),
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColor.colorOfIcon),
                 child: Container(
                   padding: const EdgeInsets.all(10),
-                  child: const Text('Thay đổi mật khẩu'),
+                  child: Text('Thay đổi mật khẩu',
+                      style: AppTextStyle.titlePage
+                          .copyWith(color: Colors.white)),
                 ),
                 onPressed: () => _changePassword(context),
               )),
