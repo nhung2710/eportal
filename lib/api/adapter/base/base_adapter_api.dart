@@ -99,7 +99,7 @@ class BaseAdapterApi {
       var elements = xmlResponse.findAllElements(request.getTagXmlResponse());
       for (var item in elements) {
         var jsonValue = item.innerText;
-        if (isUseCache) {
+        if (valueTimeCache > 0 && !isUseCache) {
           await GlobalApplication().Preferences?.setString(
               keyCache,
               json.encode(CacheApi(

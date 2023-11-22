@@ -6,7 +6,7 @@ class BaseEportalXml {
   StringBuffer toXml() {
     var buffer = StringBuffer();
     if (!GlobalApplication().UserId.isNullOrWhiteSpace()) {
-      buffer.write(createXml("userid", GlobalApplication().UserId));
+      buffer.write(createXml( GlobalApplication().UserId,"userid"));
     }
     return buffer;
   }

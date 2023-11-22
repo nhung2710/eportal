@@ -90,7 +90,6 @@ class MyApp extends StatelessWidget {
               iconTheme: IconThemeData(color: Colors.white)),
           tabBarTheme: const TabBarTheme(
               indicatorColor: AppColor.colorOfIcon,
-              dividerHeight: 3,
               indicatorSize: TabBarIndicatorSize.tab),
           dialogTheme: DialogTheme(
             surfaceTintColor: Colors.white,
