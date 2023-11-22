@@ -1,60 +1,58 @@
+import 'package:eportal/enum/data_bloc_status.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../constant/application_constant.dart';
 
 //
 // Created by BlackRose on 11/9/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-abstract class BaseState extends Equatable {
-  const BaseState();
+class DataState<T> extends Equatable {
+  final DataBlocStatus status;
+  final T? data;
+  final String errorMessage;
+  const DataState({this.status = DataBlocStatus.init,this.data,this.errorMessage = ApplicationConstant.EMPTY});
 
+  DataState<T> copyWith({
+    DataBlocStatus? status,
+    T? data,
+    bool? hasReachedMax,
+    String? errorMessage,
+  }) {
+    return DataState<T>(
+      status: status ?? this.status,
+      data: data ?? this.data,
+      errorMessage:errorMessage??this.errorMessage
+    );
+  }
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [data,status,errorMessage];
 }
 
-class BaseInitial extends BaseState {}
-
-class BaseLoading extends BaseState {}
-
-class BaseLoaded<T> extends BaseState {
-  final T data;
-
-  const BaseLoaded(this.data);
-}
-
-class BaseError extends BaseState {
-  final String? message;
-
-  const BaseError(this.message);
-}
-
-enum DataStatus { loading, success }
-
-class BaseLoadMore<T> extends BaseState {
-  final DataStatus status;
+class DataMoreState<T> extends Equatable {
+  final DataBlocStatus status;
   final List<T> data;
+  final String errorMessage;
   final bool hasReachedMax;
   final int numberData;
+  const DataMoreState({this.status = DataBlocStatus.init,this.data = const [],
+    this.numberData = 0,this.hasReachedMax = false,this.errorMessage = ApplicationConstant.EMPTY});
 
-  const BaseLoadMore(
-      {this.status = DataStatus.loading,
-      this.hasReachedMax = false,
-      this.numberData = 0,
-      this.data = const []});
-
-  BaseLoadMore<T> copyWith({
-    DataStatus? status,
+  DataMoreState<T> copyWith({
+    DataBlocStatus? status,
     List<T>? data,
     bool? hasReachedMax,
     String? errorMessage,
   }) {
-    return BaseLoadMore<T>(
+    return DataMoreState<T>(
       status: status ?? this.status,
       data: data ?? this.data,
+      errorMessage: errorMessage??this.errorMessage,
       numberData: (data ?? this.data).length,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
     );
   }
-
   @override
-  List<Object?> get props => [status, data, hasReachedMax, numberData];
+  List<Object?> get props => [data,status,errorMessage,hasReachedMax,numberData];
 }
+

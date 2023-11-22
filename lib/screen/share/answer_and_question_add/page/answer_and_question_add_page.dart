@@ -18,6 +18,7 @@ import '../../../../event/common_new/faq_add_question_event.dart';
 import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/common_new/data/faq_add_question_data_request.dart';
 import '../../../../model/api/request/common_new/faq_add_question_request.dart';
+import '../../../../model/api/response/common_new/data/faq_add_question_data_response.dart';
 
 //
 // Created by BlackRose on 21/11/2023.
@@ -49,9 +50,9 @@ class _AnswerAndQuestionAddPageState
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
         create: (_) => faqAddQuestionBloc,
-        child: BlocListener<FaqAddQuestionBloc, BaseState>(
-          listener: (BuildContext context, BaseState state) {
-            handlerActionLoaddingState<FaqAddQuestionResponse>(state,
+        child: BlocListener<FaqAddQuestionBloc, DataState<FaqAddQuestionDataResponse>>(
+          listener: (BuildContext context, DataState<FaqAddQuestionDataResponse> state) {
+            handlerActionState<FaqAddQuestionDataResponse>(state,
                 (obj) async {
               showCenterMessage("Bạn đã gửi câu hỏi thành công")
                   .then((value) => backPage());

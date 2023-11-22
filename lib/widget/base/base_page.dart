@@ -1,4 +1,5 @@
 import 'package:eportal/constant/application_constant.dart';
+import 'package:eportal/enum/data_bloc_status.dart';
 import 'package:eportal/extension/string_extension.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_text_style.dart';
@@ -13,7 +14,7 @@ import '../../style/app_color.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-typedef CallbackListener<T> = void Function(T obj);
+typedef CallbackListener<T> = void Function(T? obj);
 
 class BasePage extends StatefulWidget {
   const BasePage({super.key});
@@ -242,39 +243,53 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
       scrollController!.animateTo(scrollController!.position.maxScrollExtent,
           duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
 
-  Widget handlerBaseState<K>(BaseState state, BlocWidgetBuilder<K> builder,
-      {Widget? initWidget}) {
-    if (state is BaseInitial) {
-      return initWidget ?? Container();
-    } else if (state is BaseLoading) {
-      return buildScreenLoading();
-    } else if (state is BaseError) {
-      return buildScreenError(state.message
-          .replaceWhenNullOrWhiteSpace(ApplicationConstant.SYSTEM_ERROR));
-    } else if (state is BaseLoaded<K>) {
-      return builder(context, state.data);
-    } else {
-      return buildScreenError(ApplicationConstant.SYSTEM_ERROR);
+
+  Widget handleDataState<T>(DataState<T> state, BlocWidgetBuilder<T?> builder,{Widget? initWidget}){
+    switch(state.status){
+      case DataBlocStatus.init:
+        return initWidget ?? Container();
+      case DataBlocStatus.loading:
+        return buildScreenLoading();
+      case DataBlocStatus.notfound:
+        return buildNotFoundData(context);
+      case DataBlocStatus.error:
+        return  buildScreenError(state.errorMessage);
+      case DataBlocStatus.success:
+        return builder(context, state.data);
+    }
+  }
+  Widget handleDataMoreState<T>(DataMoreState<T> state, BlocWidgetBuilder<List<T>> builder,{Widget? initWidget}){
+    switch(state.status){
+      case DataBlocStatus.init:
+        return initWidget ?? Container();
+      case DataBlocStatus.loading:
+        return buildScreenLoading();
+      case DataBlocStatus.notfound:
+        return buildNotFoundData(context);
+      case DataBlocStatus.error:
+        return  buildScreenError(state.errorMessage);
+      case DataBlocStatus.success:
+        return builder(context, state.data);
     }
   }
 
-  void handlerActionState<K>(
-      BaseState state, CallbackListener<BaseLoaded<K>> callback) {
-    if (state is BaseError) {
-      showCenterError(state.message);
-    } else if (state is BaseLoaded<K>) {
-      return callback(state);
+
+  void handlerActionState<T>(DataState<T> state , CallbackListener<T> callback) {
+    switch(state.status){
+      case DataBlocStatus.init:
+        break;
+      case DataBlocStatus.loading:
+        break;
+      case DataBlocStatus.notfound:
+        break;
+      case DataBlocStatus.error:
+        showCenterError(state.errorMessage);
+        break;
+      case DataBlocStatus.success:
+        return callback(state.data);
     }
   }
 
-  void handlerActionLoaddingState<K>(
-      BaseState state, CallbackListener<BaseLoaded<K>> callback) {
-    if (state is BaseError) {
-      stopLoading().then((value) => showCenterError(state.message));
-    } else if (state is BaseLoaded<K>) {
-      stopLoading().then((value) => callback(state));
-    }
-  }
 
   Widget buildScreenLoading() => Center(
         child: Container(

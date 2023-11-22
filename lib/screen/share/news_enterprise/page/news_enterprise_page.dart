@@ -1,3 +1,4 @@
+import 'package:eportal/model/api/response/common_new/data/home_business_list_data_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,24 +40,24 @@ class _NewsEnterprisePageState extends BasePageState<NewsEnterprisePage> {
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => homeBusinessListBloc,
-      child: BlocListener<HomeBusinessListBloc, BaseState>(
-        listener: (BuildContext context, BaseState state) {},
-        child: BlocBuilder<HomeBusinessListBloc, BaseState>(
-          builder: (BuildContext context, BaseState state) =>
-              handlerBaseState<HomeBusinessListResponse>(
+      child: BlocListener<HomeBusinessListBloc, DataState<List<HomeBusinessListDataResponse>>>(
+        listener: (BuildContext context, DataState<List<HomeBusinessListDataResponse>> state) {},
+        child: BlocBuilder<HomeBusinessListBloc, DataState<List<HomeBusinessListDataResponse>>>(
+          builder: (BuildContext context, DataState<List<HomeBusinessListDataResponse>> state) =>
+              handleDataState<List<HomeBusinessListDataResponse>>(
             state,
-            (context, state) => (state.data?.length ?? 0) == 0
+            (context, state) => (state!.length ?? 0) == 0
                 ? buildNotFoundData(context)
                 : ListView.builder(
                     shrinkWrap: true,
-                    itemCount: state.data!.length,
+                    itemCount: state!.length,
                     itemBuilder: (context, i) => NewsWidget(
                           onTap: () => nextPage((context) => EmptyExamplePage(
                                 isHasAppBar: true,
                               )),
-                          title: state.data!.elementAt(i).businessVn,
-                          imageUrl: state.data!.elementAt(i).logo,
-                          content: state.data!.elementAt(i).email,
+                          title: state!.elementAt(i).businessVn,
+                          imageUrl: state!.elementAt(i).logo,
+                          content: state!.elementAt(i).email,
                         )),
           ),
         ),

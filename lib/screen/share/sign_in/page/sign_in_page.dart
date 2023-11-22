@@ -67,14 +67,11 @@ class _SignInPageState extends BasePageState<SignInPage> {
   Widget pageUI(BuildContext context) {
     return BlocProvider(
       create: (_) => dangNhapBloc,
-      child: BlocListener<DangNhapBloc, BaseState>(
+      child: BlocListener<DangNhapBloc, DataState<DangNhapDataResponse>>(
         listener: (context, state) {
-          handlerActionLoaddingState<DangNhapResponse>(state, (obj) {
-            if ((obj.data.data?.userName).isNullOrWhiteSpace()) {
-              showCenterError(obj.data.data?.message);
-            } else {
+          handlerActionState<DangNhapDataResponse>(state, (obj) {
               GlobalApplication()
-                  .signIn(obj.data.data, nameController.text,
+                  .signIn(obj, nameController.text,
                       passwordController.text)
                   .then((value) {
                 switch (GlobalApplication().UserRoleType) {
@@ -92,7 +89,6 @@ class _SignInPageState extends BasePageState<SignInPage> {
                     break;
                 }
               });
-            }
           });
         },
         child: Center(

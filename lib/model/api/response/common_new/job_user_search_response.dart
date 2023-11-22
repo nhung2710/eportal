@@ -8,16 +8,16 @@ import 'package:eportal/model/api/response/common_new/data/job_user_search_data_
 import 'package:eportal/model/base/base_eportal_response.dart';
 
 class JobUserSearchResponse extends BaseEportalResponse {
-  List<JobUserSearchData> data;
+  List<JobUserSearchDataResponse> data;
 
   JobUserSearchResponse({required this.data, required status, required message})
       : super(status: status, message: message);
 
   factory JobUserSearchResponse.fromJson(Map<String, dynamic> json) {
-    List<JobUserSearchData> data = <JobUserSearchData>[];
+    List<JobUserSearchDataResponse> data = <JobUserSearchDataResponse>[];
     if (json['data'] != null) {
       json['data'].forEach((v) {
-        data.add(JobUserSearchData.fromJson(v));
+        data.add(JobUserSearchDataResponse.fromJson(v));
       });
     }
     return JobUserSearchResponse(

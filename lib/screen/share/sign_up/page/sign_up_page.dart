@@ -4,6 +4,7 @@ import 'package:eportal/event/common_new/dang_ky_event.dart';
 import 'package:eportal/model/api/request/common_new/dang_ky_request.dart';
 import 'package:eportal/model/api/request/common_new/data/dang_ky_data_request.dart';
 import 'package:eportal/model/api/response/common_new/dang_ky_response.dart';
+import 'package:eportal/model/api/response/common_new/data/dang_ky_data_response.dart';
 import 'package:eportal/screen/share/sign_in/page/sign_in_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
@@ -48,17 +49,12 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
     create: (_) => dangKyBloc,
-    child: BlocListener<DangKyBloc, BaseState>(
-      listener: (BuildContext context, BaseState state) {
-          handlerActionLoaddingState<DangKyResponse>(state, (obj) async {
-            if (obj.data.data.userName.isNullOrWhiteSpace()) {
-              showCenterError(obj.data.data.message);
-            } else {
-
-              await GlobalApplication().Preferences?.setString(ApplicationConstant.REGISTER_USER_NAME, obj.data.data.userName.replaceWhenNullOrWhiteSpace());
-              await GlobalApplication().Preferences?.setString(ApplicationConstant.REGISTER_USER_PASSWORD,passwordController.text);
-              nextPageWithoutBack((context) => const SignInPage());
-            }
+    child: BlocListener<DangKyBloc, DataState<DangKyDataResponse>>(
+      listener: (BuildContext context, DataState<DangKyDataResponse> state) {
+          handlerActionState<DangKyDataResponse>(state, (obj) async {
+            await GlobalApplication().Preferences?.setString(ApplicationConstant.REGISTER_USER_NAME, obj!.userName.replaceWhenNullOrWhiteSpace());
+            await GlobalApplication().Preferences?.setString(ApplicationConstant.REGISTER_USER_PASSWORD,passwordController.text);
+            nextPageWithoutBack((context) => const SignInPage());
           });
       },
       child: ListView(

@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:eportal/model/api/response/common_new/data/home_slide_list_data_response.dart';
 import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
 import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/widget/base/base_page.dart';
@@ -75,11 +76,11 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                 margin: const EdgeInsets.only(top: 0),
                 child: BlocProvider(
                     create: (_) => homeSlideListBloc,
-                    child: BlocListener<HomeSlideListBloc, BaseState>(
-                      listener: (BuildContext context, BaseState state) {},
-                      child: BlocBuilder<HomeSlideListBloc, BaseState>(
-                        builder: (BuildContext context, BaseState state) =>
-                            handlerBaseState<HomeSlideListResponse>(
+                    child: BlocListener<HomeSlideListBloc, DataState<List<HomeSlideListDataResponse>>>(
+                      listener: (BuildContext context, DataState<List<HomeSlideListDataResponse>> state) {},
+                      child: BlocBuilder<HomeSlideListBloc, DataState<List<HomeSlideListDataResponse>>>(
+                        builder: (BuildContext context, DataState<List<HomeSlideListDataResponse>> state) =>
+                            handleDataState<List<HomeSlideListDataResponse>>(
                           state,
                           (context, state) => CarouselSlider(
                             options: CarouselOptions(
@@ -99,7 +100,7 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                               enlargeStrategy: CenterPageEnlargeStrategy.zoom,
                               scrollDirection: Axis.horizontal,
                             ),
-                            items: (state.data ?? []).map((item) {
+                            items: state!.map((item) {
                               return Builder(
                                 builder: (BuildContext context) {
                                   return GestureDetector(

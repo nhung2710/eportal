@@ -1,3 +1,4 @@
+import 'package:eportal/model/api/response/common_new/data/home_news_list_data_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -57,29 +58,27 @@ class _NewsPageState extends BasePageState<NewsPage> {
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => homeNewsListBloc,
-      child: BlocListener<HomeNewsListBloc, BaseState>(
-        listener: (BuildContext context, BaseState state) {},
-        child: BlocBuilder<HomeNewsListBloc, BaseState>(
-          builder: (BuildContext context, BaseState state) =>
-              handlerBaseState<HomeNewsListResponse>(
+      child: BlocListener<HomeNewsListBloc, DataState<List<HomeNewsListDataResponse>>>(
+        listener: (BuildContext context, DataState<List<HomeNewsListDataResponse>> state) {},
+        child: BlocBuilder<HomeNewsListBloc, DataState<List<HomeNewsListDataResponse>>>(
+          builder: (BuildContext context, DataState<List<HomeNewsListDataResponse>> state) =>
+              handleDataState<List<HomeNewsListDataResponse>>(
             state,
-            (context, state) => state.data.isEmpty
-                ? buildNotFoundData(context)
-                : Column(
+            (context, state) => Column(
                     children: [
                       Expanded(
                         child: ListView.builder(
                             shrinkWrap: true,
-                            itemCount: state.data.length,
+                            itemCount: state!.length,
                             itemBuilder: (context, i) => NewsWidget(
                                   onTap: () =>
                                       nextPage((context) => EmptyExamplePage(
                                             isHasAppBar: true,
                                           )),
-                                  title: state.data.elementAt(i).title,
-                                  imageUrl: state.data.elementAt(i).imagePath,
-                                  content: state.data.elementAt(i).summary,
-                                  time: state.data.elementAt(i).publishedDate,
+                                  title: state!.elementAt(i).title,
+                                  imageUrl: state!.elementAt(i).imagePath,
+                                  content: state!.elementAt(i).summary,
+                                  time: state!.elementAt(i).publishedDate,
                                 )),
                       ),
                     ],

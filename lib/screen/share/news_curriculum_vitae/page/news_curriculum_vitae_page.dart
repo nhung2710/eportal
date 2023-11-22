@@ -1,3 +1,4 @@
+import 'package:eportal/model/api/response/common_new/data/home_job_user_list_data_response.dart';
 import 'package:eportal/screen/share/work_search/page/work_search_page.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_elevation.dart';
@@ -58,22 +59,22 @@ class _NewsCurriculumVitaePageState
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => homeJobUserListBloc,
-      child: BlocListener<HomeJobUserListBloc, BaseState>(
-        listener: (BuildContext context, BaseState state) {},
-        child: BlocBuilder<HomeJobUserListBloc, BaseState>(
-          builder: (BuildContext context, BaseState state) =>
-              handlerBaseState<HomeJobUserListResponse>(
+      child: BlocListener<HomeJobUserListBloc, DataState<List<HomeJobUserListDataResponse>>>(
+        listener: (BuildContext context, DataState<List<HomeJobUserListDataResponse>> state) {},
+        child: BlocBuilder<HomeJobUserListBloc, DataState<List<HomeJobUserListDataResponse>>>(
+          builder: (BuildContext context, DataState<List<HomeJobUserListDataResponse>> state) =>
+              handleDataState<List<HomeJobUserListDataResponse>>(
             state,
-            (context, state) => (state.data?.length ?? 0) == 0
+            (context, state) => (state!.length ?? 0) == 0
                 ? buildNotFoundData(context)
                 : ListView.builder(
                     shrinkWrap: true,
-                    itemCount: state.data!.length,
+                    itemCount: state!.length,
                     itemBuilder: (context, i) => GestureDetector(
                           onTap: () => nextPage(
                               (context) => NewsCurriculumVitaeDetailPage(
                                     homeJobUserListDataResponse:
-                                        state.data!.elementAt(i),
+                                        state!.elementAt(i),
                                   )),
                           child: Card(
                             elevation: AppElevation.sizeOfNormal,
@@ -96,7 +97,7 @@ class _NewsCurriculumVitaePageState
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      state.data!
+                                      state!
                                           .elementAt(i)
                                           .title
                                           .replaceWhenNullOrWhiteSpace(),
@@ -131,7 +132,7 @@ class _NewsCurriculumVitaePageState
                                         Expanded(
                                             flex: 3,
                                             child: Text(
-                                              state.data!
+                                              state!
                                                   .elementAt(i)
                                                   .education
                                                   .replaceWhenNullOrWhiteSpace(),
@@ -170,7 +171,7 @@ class _NewsCurriculumVitaePageState
                                         Expanded(
                                             flex: 3,
                                             child: Text(
-                                              state.data!
+                                              state!
                                                   .elementAt(i)
                                                   .careerGoals
                                                   .replaceWhenNullOrWhiteSpace(),
@@ -209,7 +210,7 @@ class _NewsCurriculumVitaePageState
                                         Expanded(
                                             flex: 3,
                                             child: Text(
-                                              state.data!
+                                              state!
                                                   .elementAt(i)
                                                   .workExperience
                                                   .replaceWhenNullOrWhiteSpace(),

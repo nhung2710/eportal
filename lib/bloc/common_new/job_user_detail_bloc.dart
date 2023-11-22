@@ -3,28 +3,32 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 import 'package:bloc/bloc.dart';
+import 'package:eportal/enum/data_bloc_status.dart';
 
 import '../../event/base/base_event.dart';
 import '../../event/common_new/job_user_detail_event.dart';
 import '../../repository/common_new/job_user_detail_repository.dart';
 import '../../state/base/base_state.dart';
 
-class JobUserDetailBloc extends Bloc<BaseEvent, BaseState> {
-  JobUserDetailBloc() : super(BaseInitial()) {
+class JobUserDetailBloc extends Bloc<BaseEvent, DataState<String>> {
+  JobUserDetailBloc() : super(const DataState<String>()) {
     final JobUserDetailRepository apiRepository =
     JobUserDetailRepository();
 
     on<JobUserDetailEvent>((event, emit) async {
       try {
-        emit(BaseLoading());
+        emit(state.copyWith(status: DataBlocStatus.loading));
         final response =
         await apiRepository.getJobUserDetail(event.request);
-        emit(BaseLoaded(response));
         if (response.status != 2) {
-          emit(BaseError(response.message));
+          emit(state.copyWith(errorMessage: response.message,status: DataBlocStatus.error));
         }
+        else{
+          emit(state.copyWith(data: response.data,status: DataBlocStatus.success));
+        }
+
       } on Exception catch (e) {
-        emit(BaseError(e.toString()));
+        emit(state.copyWith(errorMessage: e.toString(),status: DataBlocStatus.error));
       }
     });
   }

@@ -1,3 +1,4 @@
+import 'package:eportal/model/api/response/common_new/data/home_business_list_data_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,18 +48,18 @@ class _HomeBusinessListPageState
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => homeBusinessListBloc,
-      child: BlocListener<HomeBusinessListBloc, BaseState>(
-        listener: (BuildContext context, BaseState state) {},
-        child: BlocBuilder<HomeBusinessListBloc, BaseState>(
-          builder: (BuildContext context, BaseState state) =>
-              handlerBaseState<HomeBusinessListResponse>(
+      child: BlocListener<HomeBusinessListBloc, DataState<List<HomeBusinessListDataResponse>>>(
+        listener: (BuildContext context, DataState<List<HomeBusinessListDataResponse>> state) {},
+        child: BlocBuilder<HomeBusinessListBloc, DataState<List<HomeBusinessListDataResponse>>>(
+          builder: (BuildContext context, DataState<List<HomeBusinessListDataResponse>> state) =>
+              handleDataState<List<HomeBusinessListDataResponse>>(
             state,
             (context, state) => Column(
               children: [
                 Expanded(
                   child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: state.data?.length ?? 0,
+                      itemCount: state!.length,
                       itemBuilder: (context, i) => GestureDetector(
                             onTap: () => nextPage((context) => EmptyExamplePage(
                                   isHasAppBar: true,
@@ -71,7 +72,7 @@ class _HomeBusinessListPageState
                               padding: const EdgeInsets.all(10),
                               margin: const EdgeInsets.only(top: 5),
                               child: Text(
-                                "${(state.data?.elementAt(i).businessVn)?.supportHtml()}",
+                                "${(state!.elementAt(i).businessVn)?.supportHtml()}",
                                 style: AppTextStyle.title.copyWith(
                                     overflow: TextOverflow.visible,
                                     color: AppColor.colorOfText,

@@ -119,15 +119,15 @@ class _FilterDrawerState extends BaseScreenState<FilterDrawer> {
                 margin: const EdgeInsets.only(top: 10),
                 child: BlocProvider(
                     create: (_) => danhSachTinhTpBloc,
-                    child: BlocListener<DanhSachTinhTpBloc, BaseState>(
-                      listener: (BuildContext context, BaseState state) {},
-                      child: BlocBuilder<DanhSachTinhTpBloc, BaseState>(
-                        builder: (BuildContext context, BaseState state) =>
-                            handlerBaseState<DanhSachTinhTpResponse>(
+                    child: BlocListener<DanhSachTinhTpBloc, DataState<List<DanhSachTinhTpDataResponse>>>(
+                      listener: (BuildContext context, DataState<List<DanhSachTinhTpDataResponse>> state) {},
+                      child: BlocBuilder<DanhSachTinhTpBloc, DataState<List<DanhSachTinhTpDataResponse>>>(
+                        builder: (BuildContext context, DataState<List<DanhSachTinhTpDataResponse>> state) =>
+                            handleDataState<List<DanhSachTinhTpDataResponse>>(
                                 state,
                                 (context, state) =>
                                     _buildViewSearchDanhSachTinhTp(
-                                        context, state.data ?? []),
+                                        context, state ?? []),
                                 initWidget: _buildViewSearchDanhSachTinhTp(
                                     context, [])),
                       ),
@@ -137,15 +137,15 @@ class _FilterDrawerState extends BaseScreenState<FilterDrawer> {
                 margin: const EdgeInsets.only(top: 10),
                 child: BlocProvider(
                     create: (_) => danhSachQuanHuyenBloc,
-                    child: BlocListener<DanhSachQuanHuyenBloc, BaseState>(
-                      listener: (BuildContext context, BaseState state) {},
-                      child: BlocBuilder<DanhSachQuanHuyenBloc, BaseState>(
-                        builder: (BuildContext context, BaseState state) =>
-                            handlerBaseState<DanhSachQuanHuyenResponse>(
+                    child: BlocListener<DanhSachQuanHuyenBloc, DataState<List<DanhSachQuanHuyenDataResponse>>>(
+                      listener: (BuildContext context, DataState<List<DanhSachQuanHuyenDataResponse>> state) {},
+                      child: BlocBuilder<DanhSachQuanHuyenBloc, DataState<List<DanhSachQuanHuyenDataResponse>>>(
+                        builder: (BuildContext context, DataState<List<DanhSachQuanHuyenDataResponse>> state) =>
+                            handleDataState<List<DanhSachQuanHuyenDataResponse>>(
                                 state,
                                 (context, state) =>
                                     _buildViewSearchDanhSachQuanHuyen(
-                                        context, state.data ?? []),
+                                        context, state ?? []),
                                 initWidget: _buildViewSearchDanhSachQuanHuyen(
                                     context, [])),
                       ),
@@ -155,15 +155,15 @@ class _FilterDrawerState extends BaseScreenState<FilterDrawer> {
                 margin: const EdgeInsets.only(top: 10),
                 child: BlocProvider(
                     create: (_) => danhSachDoanhNghiepBloc,
-                    child: BlocListener<DanhSachDoanhNghiepBloc, BaseState>(
-                      listener: (BuildContext context, BaseState state) {},
-                      child: BlocBuilder<DanhSachDoanhNghiepBloc, BaseState>(
-                        builder: (BuildContext context, BaseState state) =>
-                            handlerBaseState<DanhSachDoanhNghiepResponse>(
+                    child: BlocListener<DanhSachDoanhNghiepBloc, DataState<List<DanhSachDoanhNghiepDataResponse>>>(
+                      listener: (BuildContext context, DataState<List<DanhSachDoanhNghiepDataResponse>> state) {},
+                      child: BlocBuilder<DanhSachDoanhNghiepBloc, DataState<List<DanhSachDoanhNghiepDataResponse>>>(
+                        builder: (BuildContext context, DataState<List<DanhSachDoanhNghiepDataResponse>> state) =>
+                            handleDataState<List<DanhSachDoanhNghiepDataResponse>>(
                                 state,
                                 (context, state) =>
                                     _buildViewSearchDanhSachDoanhNghiep(
-                                        context, state.data ?? []),
+                                        context, state ?? []),
                                 initWidget: _buildViewSearchDanhSachDoanhNghiep(
                                     context, [])),
                       ),
@@ -173,15 +173,15 @@ class _FilterDrawerState extends BaseScreenState<FilterDrawer> {
                 margin: const EdgeInsets.only(top: 10),
                 child: BlocProvider(
                     create: (_) => danhSachMucLuongBloc,
-                    child: BlocListener<DanhSachMucLuongBloc, BaseState>(
-                      listener: (BuildContext context, BaseState state) {},
-                      child: BlocBuilder<DanhSachMucLuongBloc, BaseState>(
-                        builder: (BuildContext context, BaseState state) =>
-                            handlerBaseState<DanhSachMucLuongResponse>(
+                    child: BlocListener<DanhSachMucLuongBloc, DataState<List<DanhSachMucLuongDataResponse>>>(
+                      listener: (BuildContext context, DataState<List<DanhSachMucLuongDataResponse>> state) {},
+                      child: BlocBuilder<DanhSachMucLuongBloc, DataState<List<DanhSachMucLuongDataResponse>>>(
+                        builder: (BuildContext context, DataState<List<DanhSachMucLuongDataResponse>> state) =>
+                            handleDataState<List<DanhSachMucLuongDataResponse>>(
                                 state,
                                 (context, state) =>
                                     _buildViewSearchDanhSachMucLuong(
-                                        context, state.data ?? []),
+                                        context, state ?? []),
                                 initWidget: _buildViewSearchDanhSachMucLuong(
                                     context, [])),
                       ),
@@ -191,15 +191,15 @@ class _FilterDrawerState extends BaseScreenState<FilterDrawer> {
                 margin: const EdgeInsets.only(top: 10),
                 child: BlocProvider(
                     create: (_) => danhSachKinhNghiemBloc,
-                    child: BlocListener<DanhSachKinhNghiemBloc, BaseState>(
-                      listener: (BuildContext context, BaseState state) {},
-                      child: BlocBuilder<DanhSachKinhNghiemBloc, BaseState>(
-                        builder: (BuildContext context, BaseState state) =>
-                            handlerBaseState<DanhSachKinhNghiemResponse>(
+                    child: BlocListener<DanhSachKinhNghiemBloc, DataState<List<DanhSachKinhNghiemDataResponse>>>(
+                      listener: (BuildContext context, DataState<List<DanhSachKinhNghiemDataResponse>> state) {},
+                      child: BlocBuilder<DanhSachKinhNghiemBloc, DataState<List<DanhSachKinhNghiemDataResponse>>>(
+                        builder: (BuildContext context, DataState<List<DanhSachKinhNghiemDataResponse>> state) =>
+                            handleDataState<List<DanhSachKinhNghiemDataResponse>>(
                                 state,
                                 (context, state) =>
                                     _buildViewSearchDanhSachKinhNghiem(
-                                        context, state.data ?? []),
+                                        context, state ?? []),
                                 initWidget: _buildViewSearchDanhSachKinhNghiem(
                                     context, [])),
                       ),

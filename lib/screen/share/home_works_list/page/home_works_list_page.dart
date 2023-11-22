@@ -1,3 +1,4 @@
+import 'package:eportal/model/api/response/common_new/data/home_works_list_data_response.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,18 +57,18 @@ class _HomeWorksListPageState extends BasePageStateActive<HomeWorksListPage> {
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => homeWorksListCommonBloc,
-      child: BlocListener<HomeWorksListBloc, BaseState>(
-        listener: (BuildContext context, BaseState state) {},
-        child: BlocBuilder<HomeWorksListBloc, BaseState>(
-          builder: (BuildContext context, BaseState state) =>
-              handlerBaseState<HomeWorksListResponse>(
+      child: BlocListener<HomeWorksListBloc, DataState<List<HomeWorksListDataResponse>>>(
+        listener: (BuildContext context, DataState<List<HomeWorksListDataResponse>> state) {},
+        child: BlocBuilder<HomeWorksListBloc, DataState<List<HomeWorksListDataResponse>>>(
+          builder: (BuildContext context, DataState<List<HomeWorksListDataResponse>> state) =>
+              handleDataState<List<HomeWorksListDataResponse>>(
             state,
             (context, state) => Column(
               children: [
                 Expanded(
                   child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: state.data?.length ?? 0,
+                      itemCount: state!.length ,
                       itemBuilder: (context, i) => GestureDetector(
                             onTap: () => nextPage((context) => EmptyExamplePage(
                                   isHasAppBar: true,
@@ -80,7 +81,7 @@ class _HomeWorksListPageState extends BasePageStateActive<HomeWorksListPage> {
                                 color: Colors.white,
                               ),
                               child: Text(
-                                "${(state.data?.elementAt(i).title)?.replaceWhenNullOrWhiteSpace()}",
+                                "${(state!.elementAt(i).title)?.supportHtml()}",
                                 style: AppTextStyle.title.copyWith(
                                     overflow: TextOverflow.visible,
                                     color: AppColor.colorOfText,

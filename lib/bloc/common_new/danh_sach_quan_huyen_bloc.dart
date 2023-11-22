@@ -3,28 +3,33 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 import 'package:bloc/bloc.dart';
+import 'package:eportal/enum/data_bloc_status.dart';
+import 'package:eportal/model/api/response/common_new/data/danh_sach_quan_huyen_data_response.dart';
 
 import '../../event/base/base_event.dart';
 import '../../event/common_new/danh_sach_quan_huyen_event.dart';
 import '../../repository/common_new/danh_sach_quan_huyen_repository.dart';
 import '../../state/base/base_state.dart';
 
-class DanhSachQuanHuyenBloc extends Bloc<BaseEvent, BaseState> {
-  DanhSachQuanHuyenBloc() : super(BaseInitial()) {
+class DanhSachQuanHuyenBloc extends Bloc<BaseEvent, DataState<List<DanhSachQuanHuyenDataResponse>>> {
+  DanhSachQuanHuyenBloc() : super(const DataState<List<DanhSachQuanHuyenDataResponse>>()) {
     final DanhSachQuanHuyenRepository apiRepository =
     DanhSachQuanHuyenRepository();
 
     on<DanhSachQuanHuyenEvent>((event, emit) async {
       try {
-        emit(BaseLoading());
+        emit(state.copyWith(status: DataBlocStatus.loading));
         final response =
         await apiRepository.getDanhSachQuanHuyen(event.request);
-        emit(BaseLoaded(response));
         if (response.status != 2) {
-          emit(BaseError(response.message));
+          emit(state.copyWith(errorMessage: response.message,status: DataBlocStatus.error));
         }
+        else{
+          emit(state.copyWith(data: response.data,status: DataBlocStatus.success));
+        }
+
       } on Exception catch (e) {
-        emit(BaseError(e.toString()));
+        emit(state.copyWith(errorMessage: e.toString(),status: DataBlocStatus.error));
       }
     });
   }

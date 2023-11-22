@@ -1,3 +1,4 @@
+import 'package:eportal/model/api/response/common_new/data/job_user_search_data_response.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_size_icon.dart';
 import 'package:flutter/material.dart';
@@ -75,11 +76,11 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
           Expanded(
             child: BlocProvider(
                 create: (_) => jobUserSearchBloc,
-                child: BlocListener<JobUserSearchBloc, BaseState>(
-                  listener: (BuildContext context, BaseState state) {},
-                  child: BlocBuilder<JobUserSearchBloc, BaseState>(
-                    builder: (BuildContext context, BaseState state) =>
-                        handlerBaseState<JobUserSearchResponse>(
+                child: BlocListener<JobUserSearchBloc, DataState<List<JobUserSearchDataResponse>>>(
+                  listener: (BuildContext context, DataState<List<JobUserSearchDataResponse>> state) {},
+                  child: BlocBuilder<JobUserSearchBloc, DataState<List<JobUserSearchDataResponse>>>(
+                    builder: (BuildContext context, DataState<List<JobUserSearchDataResponse>> state) =>
+                        handleDataState<List<JobUserSearchDataResponse>>(
                       state,
                       (context, state) => Column(
                         children: [
@@ -89,7 +90,7 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
                           Expanded(
                             child: ListView.builder(
                                 shrinkWrap: true,
-                                itemCount: state.data?.length ?? 0,
+                                itemCount: state!.length ,
                                 itemBuilder: (context, i) => GestureDetector(
                                       onTap: () => nextPage(
                                           (context) => EmptyExamplePage(

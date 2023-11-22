@@ -51,33 +51,31 @@ class _MultimediaPageState extends BasePageStateActive<MultimediaPage> {
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => videoListBloc,
-      child: BlocListener<VideoListBloc, BaseLoadMore<VideoListDataResponse>>(
+      child: BlocListener<VideoListBloc, DataMoreState<VideoListDataResponse>>(
         listener: (BuildContext context,
-            BaseLoadMore<VideoListDataResponse> state) {},
-        child: BlocBuilder<VideoListBloc, BaseLoadMore<VideoListDataResponse>>(
+            DataMoreState<VideoListDataResponse> state) {},
+        child: BlocBuilder<VideoListBloc, DataMoreState<VideoListDataResponse>>(
           builder: (BuildContext context,
-                  BaseLoadMore<VideoListDataResponse> state) =>
-              state.data.isEmpty
-                  ? buildNotFoundData(context)
-                  : Column(
-                      children: [
-                        Expanded(
-                          child: ListView.builder(
-                              shrinkWrap: true,
-                              controller: scrollController,
-                              itemCount: state.data.length,
-                              itemBuilder: (context, i) => NewsWidget(
-                                    onTap: () => nextPage((context) =>
-                                        VideoPage(
-                                            data: state.data.elementAt(i))),
-                                    title: state.data.elementAt(i).name,
-                                    imageUrl: state.data.elementAt(i).avatar,
-                                    content: state.data.elementAt(i).summary,
-                                    time: state.data.elementAt(i).publishedDate,
-                                  )),
-                        ),
-                      ],
-                    ),
+              DataMoreState<VideoListDataResponse> state) => handleDataMoreState(state, (context, state) => Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    controller: scrollController,
+                    itemCount: state.length,
+                    itemBuilder: (context, i) => NewsWidget(
+                      onTap: () => nextPage((context) =>
+                          VideoPage(
+                              data: state.elementAt(i))),
+                      title: state.elementAt(i).name,
+                      imageUrl: state.elementAt(i).avatar,
+                      content: state.elementAt(i).summary,
+                      time: state.elementAt(i).publishedDate,
+                    )),
+              ),
+            ],
+          ),)
+
         ),
       ));
 }

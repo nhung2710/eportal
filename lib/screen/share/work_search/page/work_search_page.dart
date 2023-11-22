@@ -1,3 +1,4 @@
+import 'package:eportal/model/api/response/common_new/data/work_search_data_response.dart';
 import 'package:eportal/screen/share/work_search_detail/page/work_search_detail_page.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_elevation.dart';
@@ -68,22 +69,20 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
           Expanded(
             child: BlocProvider(
                 create: (_) => workSearchBloc,
-                child: BlocListener<WorkSearchBloc, BaseState>(
-                  listener: (BuildContext context, BaseState state) {},
-                  child: BlocBuilder<WorkSearchBloc, BaseState>(
-                    builder: (BuildContext context, BaseState state) =>
-                        handlerBaseState<WorkSearchResponse>(
+                child: BlocListener<WorkSearchBloc, DataState<List<WorkSearchDataResponse>>>(
+                  listener: (BuildContext context, DataState<List<WorkSearchDataResponse>> state) {},
+                  child: BlocBuilder<WorkSearchBloc, DataState<List<WorkSearchDataResponse>>>(
+                    builder: (BuildContext context, DataState<List<WorkSearchDataResponse>> state) =>
+                        handleDataState<List<WorkSearchDataResponse>>(
                       state,
-                      (context, state) => (state.data?.length ?? 0) == 0
-                          ? buildNotFoundData(context)
-                          : ListView.builder(
+                      (context, state) => ListView.builder(
                               shrinkWrap: true,
-                              itemCount: state.data!.length,
+                              itemCount: state!.length,
                               itemBuilder: (context, i) => GestureDetector(
                                     onTap: () => nextPage(
                                         (context) => WorkSearchDetailPage(
                                               workSearchDataResponse:
-                                                  state.data!.elementAt(i),
+                                                  state!.elementAt(i),
                                             )),
                                     child: Card(
                                       elevation: AppElevation.sizeOfNormal,
@@ -110,7 +109,7 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
                                               padding:
                                                   const EdgeInsets.all(10.0),
                                               child: Text(
-                                                state.data!
+                                                state!
                                                     .elementAt(i)
                                                     .title
                                                     .supportHtml(),
@@ -151,7 +150,7 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
                                                   Expanded(
                                                       flex: 3,
                                                       child: Text(
-                                                        state.data!
+                                                        state!
                                                             .elementAt(i)
                                                             .description
                                                             .supportHtml(),
@@ -194,7 +193,7 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
                                                   Expanded(
                                                       flex: 3,
                                                       child: Text(
-                                                        state.data!
+                                                        state!
                                                             .elementAt(i)
                                                             .ages
                                                             .supportHtml(),
@@ -237,7 +236,7 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
                                                   Expanded(
                                                       flex: 3,
                                                       child: Text(
-                                                        state.data!
+                                                        state!
                                                             .elementAt(i)
                                                             .workTime
                                                             .supportHtml(),
@@ -280,7 +279,7 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
                                                   Expanded(
                                                       flex: 3,
                                                       child: Text(
-                                                        state.data!
+                                                        state!
                                                             .elementAt(i)
                                                             .requirement
                                                             .supportHtml(),

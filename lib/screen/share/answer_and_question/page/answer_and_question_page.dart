@@ -69,33 +69,32 @@ class _AnswerAndQuestionPageState
   Widget pageUI(BuildContext context) => BlocProvider(
         create: (_) => faqQuestionSearchBloc,
         child: BlocListener<FaqQuestionSearchBloc,
-            BaseLoadMore<FaqQuestionSearchDataResponse>>(
+            DataMoreState<FaqQuestionSearchDataResponse>>(
           listener: (BuildContext context, state) {},
           child: BlocBuilder<FaqQuestionSearchBloc,
-              BaseLoadMore<FaqQuestionSearchDataResponse>>(
+              DataMoreState<FaqQuestionSearchDataResponse>>(
             builder: (BuildContext context,
-                    BaseLoadMore<FaqQuestionSearchDataResponse> state) =>
-                state.data.isEmpty
-                    ? buildNotFoundData(context)
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              controller: scrollController,
-                              itemCount: state.data.length,
-                              itemBuilder: (BuildContext context, int index) =>
-                                  AnswerAndQuestionItem(
-                                data: state.data.elementAt(index),
-                                index: index,
-                                onTap: () {},
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                DataMoreState<FaqQuestionSearchDataResponse> state) => handleDataMoreState(state, (context, state) => Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    controller: scrollController,
+                    itemCount: state.length,
+                    itemBuilder: (BuildContext context, int index) =>
+                        AnswerAndQuestionItem(
+                          data: state.elementAt(index),
+                          index: index,
+                          onTap: () {},
+                        ),
+                  ),
+                ),
+                              ],
+                            ))
+            )
+                     ,
           ),
-        ),
+
       );
 }

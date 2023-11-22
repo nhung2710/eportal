@@ -1,3 +1,4 @@
+import 'package:eportal/model/api/response/common_new/data/home_document_list_data_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,18 +48,18 @@ class _HomeDocumentListPageState
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => homeDocumentListBloc,
-      child: BlocListener<HomeDocumentListBloc, BaseState>(
-        listener: (BuildContext context, BaseState state) {},
-        child: BlocBuilder<HomeDocumentListBloc, BaseState>(
-          builder: (BuildContext context, BaseState state) =>
-              handlerBaseState<HomeDocumentListResponse>(
+      child: BlocListener<HomeDocumentListBloc, DataState<List<HomeDocumentListDataResponse>>>(
+        listener: (BuildContext context, DataState<List<HomeDocumentListDataResponse>> state) {},
+        child: BlocBuilder<HomeDocumentListBloc, DataState<List<HomeDocumentListDataResponse>>>(
+          builder: (BuildContext context, DataState<List<HomeDocumentListDataResponse>> state) =>
+              handleDataState<List<HomeDocumentListDataResponse>>(
             state,
             (context, state) => Column(
               children: [
                 Expanded(
                   child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: state.data?.length ?? 0,
+                      itemCount: state!.length,
                       itemBuilder: (context, i) => GestureDetector(
                             onTap: () => nextPage((context) => EmptyExamplePage(
                                   isHasAppBar: true,
@@ -70,7 +71,7 @@ class _HomeDocumentListPageState
                                   Expanded(
                                       flex: 1,
                                       child: ImageLoading(
-                                        imageUrl: state.data!
+                                        imageUrl: state!
                                             .elementAt(i)
                                             .fileSource
                                             .getImageUrl(),
@@ -95,8 +96,7 @@ class _HomeDocumentListPageState
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          (state.data
-                                                  ?.elementAt(i)
+                                          (state!.elementAt(i)
                                                   .documentName)
                                               .supportHtml(),
                                           style: AppTextStyle.titlePage
@@ -105,7 +105,7 @@ class _HomeDocumentListPageState
                                                       TextOverflow.visible),
                                         ),
                                         Text(
-                                          (state.data?.elementAt(i).contents)
+                                          (state!.elementAt(i).contents)
                                               .supportHtml(),
                                           style: AppTextStyle.titleHintPage
                                               .copyWith(

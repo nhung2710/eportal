@@ -1,3 +1,4 @@
+import 'package:eportal/model/api/response/common_new/data/home_news_list_data_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -50,18 +51,18 @@ class _HomeNewsListPageState extends BasePageStateActive<HomeNewsListPage> {
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => homeNewsListCommonBloc,
-      child: BlocListener<HomeNewsListBloc, BaseState>(
-        listener: (BuildContext context, BaseState state) {},
-        child: BlocBuilder<HomeNewsListBloc, BaseState>(
-          builder: (BuildContext context, BaseState state) =>
-              handlerBaseState<HomeNewsListResponse>(
+      child: BlocListener<HomeNewsListBloc, DataState<List<HomeNewsListDataResponse>>>(
+        listener: (BuildContext context, DataState<List<HomeNewsListDataResponse>> state) {},
+        child: BlocBuilder<HomeNewsListBloc, DataState<List<HomeNewsListDataResponse>>>(
+          builder: (BuildContext context, DataState<List<HomeNewsListDataResponse>> state) =>
+              handleDataState<List<HomeNewsListDataResponse>>(
             state,
             (context, state) => Column(
               children: [
                 Expanded(
                   child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: state.data?.length ?? 0,
+                      itemCount: state!.length,
                       itemBuilder: (context, i) => GestureDetector(
                             onTap: () => nextPage((context) => EmptyExamplePage(
                                   isHasAppBar: true,
@@ -78,7 +79,7 @@ class _HomeNewsListPageState extends BasePageStateActive<HomeNewsListPage> {
                                   SizedBox(
                                       width: 80,
                                       child: ImageLoading(
-                                        imageUrl: state.data!
+                                        imageUrl: state!
                                             .elementAt(i)
                                             .imagePath
                                             .getImageUrl(),
@@ -99,8 +100,7 @@ class _HomeNewsListPageState extends BasePageStateActive<HomeNewsListPage> {
                                   Expanded(
                                     flex: 1,
                                     child: Text(
-                                      (state.data?.elementAt(i).title)
-                                          .replaceWhenNullOrWhiteSpace(),
+                                      (state!.elementAt(i).title).supportHtml(),
                                       style: AppTextStyle.title.copyWith(
                                           color: AppColor.colorOfText,
                                           overflow: TextOverflow.visible,

@@ -1,3 +1,4 @@
+import 'package:eportal/model/api/response/common_new/data/news_search_data_response.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_size_icon.dart';
 import 'package:flutter/material.dart';
@@ -77,35 +78,27 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
           Expanded(
             child: BlocProvider(
                 create: (_) => newsSearchBloc,
-                child: BlocListener<NewsSearchBloc, BaseState>(
-                  listener: (BuildContext context, BaseState state) {},
-                  child: BlocBuilder<NewsSearchBloc, BaseState>(
-                    builder: (BuildContext context, BaseState state) =>
-                        handlerBaseState<NewsSearchResponse>(
+                child: BlocListener<NewsSearchBloc, DataState<List<NewsSearchDataResponse>>>(
+                  listener: (BuildContext context, DataState<List<NewsSearchDataResponse>> state) {},
+                  child: BlocBuilder<NewsSearchBloc, DataState<List<NewsSearchDataResponse>>>(
+                    builder: (BuildContext context, DataState<List<NewsSearchDataResponse>> state) =>
+                        handleDataState<List<NewsSearchDataResponse>>(
                       state,
-                      (context, state) => (state.data?.length ?? 0) == 0
-                          ? buildNotFoundData(context)
-                          : SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  ListView.builder(
-                                      shrinkWrap: true,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      itemCount: state.data!.length,
-                                      itemBuilder: (context, i) => NewsWidget(
-                                            title:
-                                                state.data?.elementAt(i).title,
-                                            imageUrl: state.data
-                                                ?.elementAt(i)
-                                                .imagePath,
-                                            content: state.data
-                                                ?.elementAt(i)
-                                                .summary,
-                                          )),
-                                ],
-                              ),
-                            ),
+                      (context, state) => Column(
+                        children: [
+                          ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: state!.length,
+                              itemBuilder: (context, i) => NewsWidget(
+                                    title:
+                                        state!.elementAt(i).title,
+                                    imageUrl: state!.elementAt(i)
+                                        .imagePath,
+                                    content: state!.elementAt(i)
+                                        .summary,
+                                  )),
+                        ],
+                      ),
                     ),
                   ),
                 )),

@@ -1,3 +1,4 @@
+import 'package:eportal/model/api/response/common_new/data/home_document_list_data_response.dart';
 import 'package:eportal/screen/share/view_pdf/page/view_pdf_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,28 +41,26 @@ class _NewsLegalDocumentPageState extends BasePageState<NewsLegalDocumentPage> {
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => homeDocumentListBloc,
-      child: BlocListener<HomeDocumentListBloc, BaseState>(
-        listener: (BuildContext context, BaseState state) {},
-        child: BlocBuilder<HomeDocumentListBloc, BaseState>(
-          builder: (BuildContext context, BaseState state) =>
-              handlerBaseState<HomeDocumentListResponse>(
+      child: BlocListener<HomeDocumentListBloc, DataState<List<HomeDocumentListDataResponse>>>(
+        listener: (BuildContext context, DataState<List<HomeDocumentListDataResponse>> state) {},
+        child: BlocBuilder<HomeDocumentListBloc, DataState<List<HomeDocumentListDataResponse>>>(
+          builder: (BuildContext context, DataState<List<HomeDocumentListDataResponse>> state) =>
+              handleDataState<List<HomeDocumentListDataResponse>>(
             state,
-            (context, state) => (state.data?.length ?? 0) == 0
-                ? buildNotFoundData(context)
-                : ListView.builder(
+            (context, state) =>  ListView.builder(
                     shrinkWrap: true,
-                    itemCount: state.data!.length,
+                    itemCount: state!.length,
                     itemBuilder: (context, i) => NewsWidget(
                           onTap: () => nextPage((context) => ViewPdfPage(
-                                url: state.data!
+                                url: state!
                                     .elementAt(i)
                                     .fileSource
                                     .getImageUrl(),
                               )),
-                          title: state.data!.elementAt(i).documentName,
+                          title: state!.elementAt(i).documentName,
                           isHasImage: false,
-                          content: state.data!.elementAt(i).contents,
-                          time: state.data!.elementAt(i).effectDate,
+                          content: state!.elementAt(i).contents,
+                          time: state!.elementAt(i).effectDate,
                         )),
           ),
         ),
