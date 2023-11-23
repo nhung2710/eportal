@@ -23,11 +23,6 @@ class NewsRecruitmentPage extends BasePage {
 
 class _NewsRecruitmentPageState extends BasePageState<NewsRecruitmentPage> {
   @override
-  void initDataLoading() {
-    super.initDataLoading();
-  }
-
-  @override
   Widget pageUI(BuildContext context) => DefaultTabController(
         key: localKey,
         length: 3,

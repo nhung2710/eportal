@@ -3,8 +3,10 @@ import 'package:eportal/screen/share/work_search_detail/page/work_search_detail_
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
+import 'package:eportal/widget/text_icon/text_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../bloc/common_new/work_search_bloc.dart';
 import '../../../../event/common_new/work_search_event.dart';
@@ -17,6 +19,7 @@ import '../../../../style/app_text_style.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/drawer/filter_drawer.dart';
 import '../../../../widget/input/search_input.dart';
+import '../../../../widget/show_full_info/show_full_info.dart';
 
 //
 // Created by BlackRose on 13/11/2023.
@@ -121,178 +124,76 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Text(
-                                            state!
-                                                .elementAt(i)
-                                                .title
-                                                .supportHtml(),
-                                            style: AppTextStyle.title.copyWith(
-                                                overflow: TextOverflow.visible,
-                                                color: AppColor.colorOfIcon),
-                                          ),
+                                        TextIcon(
+                                          text: state
+                                              .elementAt(i)
+                                              .title
+                                              .supportHtml(),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 3,
+                                          icon: FontAwesomeIcons.tags,
+                                          textStyle: AppTextStyle.title
+                                              .copyWith(
+                                                  color: Colors.black,
+                                                  fontSize: 12),
+                                          isHasBorder: false,
                                         ),
-                                        const Divider(
-                                          height: 1,
-                                          color: AppColor.colorOfDrawer,
+                                        TextIcon(
+                                          text: state
+                                              .elementAt(i)
+                                              .description
+                                              .supportHtml(),
+                                          overflow: TextOverflow.ellipsis,
+                                          icon: FontAwesomeIcons.briefcase,
+                                          maxLines: 3,
+                                          textStyle: AppTextStyle.title
+                                              .copyWith(
+                                                  color: Colors.black,
+                                                  fontSize: 12),
+                                          isHasBorder: false,
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Expanded(
-                                                  flex: 1,
-                                                  child: Text(
-                                                    "Ngành nghề",
-                                                    style: AppTextStyle.title
-                                                        .copyWith(
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .visible),
-                                                  )),
-                                              const VerticalDivider(
-                                                thickness: 2,
-                                                width: 5,
-                                                color: Colors.transparent,
-                                              ),
-                                              Expanded(
-                                                  flex: 3,
-                                                  child: Text(
-                                                    state!
-                                                        .elementAt(i)
-                                                        .description
-                                                        .supportHtml(),
-                                                    maxLines: 3,
-                                                    style: AppTextStyle.title
-                                                        .copyWith(
-                                                            color: AppColor
-                                                                .colorOfIcon),
-                                                  )),
-                                            ],
-                                          ),
+                                        TextIcon(
+                                          overflow: TextOverflow.ellipsis,
+                                          text: state
+                                              .elementAt(i)
+                                              .ages
+                                              .supportHtml(),
+                                          maxLines: 3,
+                                          icon: FontAwesomeIcons.child,
+                                          textStyle: AppTextStyle.title
+                                              .copyWith(
+                                                  color: Colors.black,
+                                                  fontSize: 12),
+                                          isHasBorder: false,
                                         ),
-                                        const Divider(
-                                          height: 1,
-                                          color: AppColor.colorOfDrawer,
+                                        TextIcon(
+                                          text: state
+                                              .elementAt(i)
+                                              .workTime
+                                              .supportHtml(),
+                                          overflow: TextOverflow.ellipsis,
+                                          icon: FontAwesomeIcons.businessTime,
+                                          maxLines: 3,
+                                          textStyle: AppTextStyle.title
+                                              .copyWith(
+                                                  color: Colors.black,
+                                                  fontSize: 12),
+                                          isHasBorder: false,
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Expanded(
-                                                  flex: 1,
-                                                  child: Text(
-                                                    "Tuổi",
-                                                    style: AppTextStyle.title
-                                                        .copyWith(
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .visible),
-                                                  )),
-                                              const VerticalDivider(
-                                                thickness: 2,
-                                                width: 5,
-                                                color: Colors.transparent,
-                                              ),
-                                              Expanded(
-                                                  flex: 3,
-                                                  child: Text(
-                                                    state!
-                                                        .elementAt(i)
-                                                        .ages
-                                                        .supportHtml(),
-                                                    maxLines: 3,
-                                                    style: AppTextStyle.title
-                                                        .copyWith(
-                                                            color: AppColor
-                                                                .colorOfIcon),
-                                                  )),
-                                            ],
-                                          ),
+                                        TextIcon(
+                                          text: state.elementAt(i).benefit,
+                                          icon: FontAwesomeIcons.thumbsUp,
+                                          maxLines: 3,
+                                          overflow: TextOverflow.ellipsis,
+                                          textStyle: AppTextStyle.title
+                                              .copyWith(
+                                                  color: Colors.blue,
+                                                  fontSize: 14),
+                                          isHasBorder: false,
                                         ),
-                                        const Divider(
-                                          height: 1,
-                                          color: AppColor.colorOfDrawer,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Expanded(
-                                                  flex: 1,
-                                                  child: Text(
-                                                    "Thời gian làm",
-                                                    style: AppTextStyle.title
-                                                        .copyWith(
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .visible),
-                                                  )),
-                                              const VerticalDivider(
-                                                thickness: 2,
-                                                width: 5,
-                                                color: Colors.transparent,
-                                              ),
-                                              Expanded(
-                                                  flex: 3,
-                                                  child: Text(
-                                                    state!
-                                                        .elementAt(i)
-                                                        .workTime
-                                                        .supportHtml(),
-                                                    maxLines: 3,
-                                                    style: AppTextStyle.title
-                                                        .copyWith(
-                                                            color: AppColor
-                                                                .colorOfIcon),
-                                                  )),
-                                            ],
-                                          ),
-                                        ),
-                                        const Divider(
-                                          height: 1,
-                                          color: AppColor.colorOfDrawer,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Expanded(
-                                                  flex: 1,
-                                                  child: Text(
-                                                    "Yêu cầu",
-                                                    style: AppTextStyle.title
-                                                        .copyWith(
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .visible),
-                                                  )),
-                                              const VerticalDivider(
-                                                thickness: 2,
-                                                width: 5,
-                                                color: Colors.transparent,
-                                              ),
-                                              Expanded(
-                                                  flex: 3,
-                                                  child: Text(
-                                                    state!
-                                                        .elementAt(i)
-                                                        .requirement
-                                                        .supportHtml(),
-                                                    maxLines: 3,
-                                                    style: AppTextStyle.title
-                                                        .copyWith(
-                                                            color: AppColor
-                                                                .colorOfIcon),
-                                                  )),
-                                            ],
-                                          ),
-                                        ),
+                                        ShowFullInfo(
+                                          text: "Xem chi tiết",
+                                        )
                                       ],
                                     ),
                                   ),

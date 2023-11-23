@@ -1,3 +1,4 @@
+import 'package:eportal/model/api/request/common_new/data/home_business_list_data_request.dart';
 import 'package:eportal/model/api/response/common_new/data/home_business_list_data_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,19 +32,21 @@ class _NewsEnterprisePageState extends BasePageState<NewsEnterprisePage> {
   @override
   void initDataLoading() {
     homeBusinessListBloc.add(HomeBusinessListEvent(
-        request: HomeBusinessListRequest(
-            obj: CommonNewDataRequest(
-                top: ApplicationConstant.NUMBER_FULL_ITEM))));
+        request: HomeBusinessListRequest(obj: HomeBusinessListDataRequest())));
     super.initDataLoading();
   }
 
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => homeBusinessListBloc,
-      child: BlocListener<HomeBusinessListBloc, DataState<List<HomeBusinessListDataResponse>>>(
-        listener: (BuildContext context, DataState<List<HomeBusinessListDataResponse>> state) {},
-        child: BlocBuilder<HomeBusinessListBloc, DataState<List<HomeBusinessListDataResponse>>>(
-          builder: (BuildContext context, DataState<List<HomeBusinessListDataResponse>> state) =>
+      child: BlocListener<HomeBusinessListBloc,
+          DataState<List<HomeBusinessListDataResponse>>>(
+        listener: (BuildContext context,
+            DataState<List<HomeBusinessListDataResponse>> state) {},
+        child: BlocBuilder<HomeBusinessListBloc,
+            DataState<List<HomeBusinessListDataResponse>>>(
+          builder: (BuildContext context,
+                  DataState<List<HomeBusinessListDataResponse>> state) =>
               handleDataState<List<HomeBusinessListDataResponse>>(
             state,
             (context, state) => (state!.length ?? 0) == 0

@@ -67,9 +67,10 @@ dependencies:
   dropdown_search: ^5.0.6
   diacritic: ^0.1.4
   window_manager: ^0.3.7
-  pdf: ^3.10.6
   youtube_player_flutter: ^8.1.2
   video_player: ^2.8.1
+  syncfusion_flutter_pdfviewer: ^23.2.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

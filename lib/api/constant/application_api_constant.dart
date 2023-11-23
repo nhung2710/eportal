@@ -21,6 +21,8 @@ class ApplicationApiConstant {
   static const API_COMMON_NEW_OP_HOME_JOB_USER_LIST = "HomeJobUserList";
   static const API_COMMON_NEW_OP_HOME_BUSINESS_LIST = "HomeBusinessList";
   static const API_COMMON_NEW_OP_HOME_DOCUMENT_LIST = "HomeDocumentList";
+  static const API_COMMON_NEW_OP_HOME_ADVERTISE_LIST = "HomeAdvertiseList";
+
   static const API_COMMON_NEW_OP_GIOI_THIEU_TRUNG_TAM = "GioiThieuTrungTam";
   static const API_COMMON_NEW_OP_DANH_SACH_TINH_TP = "DanhSachTinhTP";
   static const API_COMMON_NEW_OP_TEN_TINH_TP = "TenTinhTP";

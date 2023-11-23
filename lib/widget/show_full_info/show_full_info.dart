@@ -9,8 +9,9 @@ import '../../style/app_text_style.dart';
 //
 class ShowFullInfo extends StatelessWidget {
   GestureTapCallback? onTap;
+  String text;
 
-  ShowFullInfo({super.key, this.onTap});
+  ShowFullInfo({super.key, this.onTap, this.text = "Xem tất cả"});
 
   @override
   Widget build(BuildContext context) => GestureDetector(
@@ -21,7 +22,7 @@ class ShowFullInfo extends StatelessWidget {
           padding: const EdgeInsets.only(top: 2, bottom: 2, right: 10),
           width: double.infinity,
           child: Text(
-            "Xem tất cả >>",
+            "$text >>",
             style:
                 AppTextStyle.titleChild1.copyWith(color: AppColor.colorOfIcon),
             textAlign: TextAlign.end,

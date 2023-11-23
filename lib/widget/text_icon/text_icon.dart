@@ -18,12 +18,14 @@ class TextIcon extends StatelessWidget {
   int? maxLines;
   double padding;
   bool isHasBorder;
+  TextOverflow overflow;
 
   TextIcon({
     super.key,
     this.icon,
     this.textStyle,
     this.text,
+    this.overflow = TextOverflow.visible,
     this.isHasBorder = true,
     this.padding = 5,
     this.maxLines,
@@ -61,18 +63,19 @@ class TextIcon extends StatelessWidget {
                 ),
               ),
             ), // icon
-            Flexible(
+            Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(
-                    top: 5.0, bottom: 5, right: 30, left: 10),
+                padding: const EdgeInsets.all(10),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     text.supportHtml(),
                     textAlign: TextAlign.left,
-                    style: AppTextStyle.title
-                        .copyWith(color: AppColor.colorOfIcon),
-                    overflow: TextOverflow.fade,
+                    style: textStyle ??
+                        AppTextStyle.title.copyWith(
+                          color: AppColor.colorOfIcon,
+                        ),
+                    overflow: overflow,
                     maxLines: maxLines,
                   ),
                 ),

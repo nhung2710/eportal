@@ -1,7 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:eportal/bloc/common_new/home_advertise_list_bloc.dart';
 import 'package:eportal/bloc/common_new/home_business_list_bloc.dart';
+import 'package:eportal/event/common_new/home_advertise_list_event.dart';
 import 'package:eportal/event/common_new/home_business_list_event.dart';
+import 'package:eportal/model/api/request/common_new/data/home_advertise_list_data_request.dart';
+import 'package:eportal/model/api/request/common_new/data/home_business_list_data_request.dart';
+import 'package:eportal/model/api/request/common_new/data/home_slide_list_data_request.dart';
+import 'package:eportal/model/api/request/common_new/home_advertise_list_request.dart';
 import 'package:eportal/model/api/request/common_new/home_business_list_request.dart';
+import 'package:eportal/model/api/response/common_new/data/home_advertise_list_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/home_business_list_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/home_slide_list_data_response.dart';
 import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
@@ -44,19 +51,18 @@ class HomeManagePage extends BasePage {
 
 class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
   HomeSlideListBloc homeSlideListBloc = HomeSlideListBloc();
-
+  HomeAdvertiseListBloc homeAdvertiseListBloc = HomeAdvertiseListBloc();
   HomeBusinessListBloc homeBusinessListBloc = HomeBusinessListBloc();
 
   @override
   void initDataLoading() {
     homeSlideListBloc.add(HomeSlideListEvent(
-        request: HomeSlideListRequest(
-            obj: CommonNewDataRequest(
-                top: ApplicationConstant.NUMBER_FULL_ITEM))));
+        request: HomeSlideListRequest(obj: HomeSlideListDataRequest())));
     homeBusinessListBloc.add(HomeBusinessListEvent(
-        request: HomeBusinessListRequest(
-            obj: CommonNewDataRequest(
-                top: ApplicationConstant.NUMBER_FULL_ITEM))));
+        request: HomeBusinessListRequest(obj: HomeBusinessListDataRequest())));
+    homeAdvertiseListBloc.add(HomeAdvertiseListEvent(
+        request:
+            HomeAdvertiseListRequest(obj: HomeAdvertiseListDataRequest())));
     super.initDataLoading();
   }
 
@@ -107,7 +113,7 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                               enableInfiniteScroll: true,
                               reverse: false,
                               autoPlay: true,
-                              autoPlayInterval: const Duration(seconds: 10),
+                              autoPlayInterval: const Duration(seconds: 20),
                               autoPlayAnimationDuration:
                                   const Duration(seconds: 2),
                               autoPlayCurve: Curves.fastEaseInToSlowEaseOut,
@@ -204,6 +210,105 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
             Container(
                 margin: const EdgeInsets.only(top: 50),
                 child: BlocProvider(
+                    create: (_) => homeAdvertiseListBloc,
+                    child: BlocListener<HomeAdvertiseListBloc,
+                        DataState<List<HomeAdvertiseListDataResponse>>>(
+                      listener: (BuildContext context,
+                          DataState<List<HomeAdvertiseListDataResponse>>
+                              state) {},
+                      child: BlocBuilder<HomeAdvertiseListBloc,
+                          DataState<List<HomeAdvertiseListDataResponse>>>(
+                        builder: (BuildContext context,
+                                DataState<List<HomeAdvertiseListDataResponse>>
+                                    state) =>
+                            handleDataState<
+                                List<HomeAdvertiseListDataResponse>>(
+                          state,
+                          (context, state) => CarouselSlider(
+                            options: CarouselOptions(
+                              aspectRatio: 1.1,
+                              viewportFraction: 0.9,
+                              animateToClosest: true,
+                              initialPage: 0,
+                              enableInfiniteScroll: true,
+                              reverse: false,
+                              autoPlay: true,
+                              autoPlayInterval: const Duration(seconds: 30),
+                              autoPlayAnimationDuration:
+                                  const Duration(seconds: 2),
+                              autoPlayCurve: Curves.fastEaseInToSlowEaseOut,
+                              enlargeCenterPage: true,
+                              enlargeFactor: 0.5,
+                              enlargeStrategy: CenterPageEnlargeStrategy.zoom,
+                              scrollDirection: Axis.horizontal,
+                            ),
+                            items: state!.map((item) {
+                              return Builder(
+                                builder: (BuildContext context) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: GestureDetector(
+                                      onTap: () => nextPage(
+                                          (context) => EmptyExamplePage(
+                                                isHasAppBar: true,
+                                              )),
+                                      child: Card(
+                                        elevation: AppElevation.sizeOfNormal,
+                                        margin: EdgeInsets.zero,
+                                        color: AppColor.colorOfApp,
+                                        shadowColor: AppColor.colorOfIcon,
+                                        borderOnForeground: false,
+                                        shape: const RoundedRectangleBorder(
+                                            side: BorderSide(
+                                                color: AppColor.colorOfDrawer,
+                                                width: 0.1),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5))),
+                                        child: ClipRRect(
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(5.0)),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Text(
+                                                    item.advertiseName
+                                                        .supportHtml(),
+                                                    maxLines: 3,
+                                                    textAlign: TextAlign.center,
+                                                    style: AppTextStyle.title,
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: ImageLoading(
+                                                      imageUrl: item.images
+                                                          .getImageUrl(),
+                                                      imageBuilder: (context,
+                                                          imageProvider) {
+                                                        return Image(
+                                                          image: imageProvider,
+                                                          fit: BoxFit.fill,
+                                                        );
+                                                      }),
+                                                ),
+                                              ],
+                                            )),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+                    ))),
+            Container(
+                margin: const EdgeInsets.only(top: 50),
+                child: BlocProvider(
                     create: (_) => homeBusinessListBloc,
                     child: BlocListener<HomeBusinessListBloc,
                         DataState<List<HomeBusinessListDataResponse>>>(
@@ -219,14 +324,14 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                           state,
                           (context, state) => CarouselSlider(
                             options: CarouselOptions(
-                              aspectRatio: 1.4,
-                              viewportFraction: 0.8,
+                              aspectRatio: 1.1,
+                              viewportFraction: 0.9,
                               animateToClosest: true,
                               initialPage: 0,
                               enableInfiniteScroll: true,
                               reverse: false,
                               autoPlay: true,
-                              autoPlayInterval: const Duration(seconds: 5),
+                              autoPlayInterval: const Duration(seconds: 10),
                               autoPlayAnimationDuration:
                                   const Duration(seconds: 2),
                               autoPlayCurve: Curves.fastEaseInToSlowEaseOut,
@@ -282,10 +387,9 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                                                   child: Text(
                                                     item.businessVn
                                                         .supportHtml(),
-                                                    maxLines: 1,
-                                                    textAlign: TextAlign.right,
-                                                    style: AppTextStyle
-                                                        .normalChild1,
+                                                    maxLines: 3,
+                                                    textAlign: TextAlign.center,
+                                                    style: AppTextStyle.title,
                                                   ),
                                                 )
                                               ],
