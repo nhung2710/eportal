@@ -1,5 +1,6 @@
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
+import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../extension/datetime_extension.dart';
@@ -133,19 +134,10 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
             ),
           ),
           Container(
-              margin: const EdgeInsets.only(top: 10),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColor.colorOfIcon),
+            margin: const EdgeInsets.only(top: 10),
+            child: DefaultButton(
                 onPressed: () => _changeUserInfo(context),
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  child: Text('Thay đổi thông tin',
-                      style: AppTextStyle.titlePage
-                          .copyWith(color: Colors.white),
-                ),
-              )
-  ),
+                text: 'Thay đổi thông tin'),
           ),
         ],
       );

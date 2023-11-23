@@ -11,29 +11,41 @@ import '../../event/common_new/work_search_event.dart';
 import '../../repository/common_new/work_search_repository.dart';
 import '../../state/base/base_state.dart';
 
-class WorkSearchBloc extends Bloc<BaseEvent, DataState<List<WorkSearchDataResponse>>> {
-  WorkSearchBloc() : super(const DataState<List<WorkSearchDataResponse>>()) {
-    final WorkSearchRepository apiRepository =
-    WorkSearchRepository();
+class WorkSearchBloc
+    extends Bloc<BaseEvent, DataMoreState<WorkSearchDataResponse>> {
+  WorkSearchBloc() : super(const DataMoreState<WorkSearchDataResponse>()) {
+    final WorkSearchRepository apiRepository = WorkSearchRepository();
 
     on<WorkSearchEvent>((event, emit) async {
       try {
-        emit(state.copyWith(status: DataBlocStatus.loading));
-        final response =
-        await apiRepository.getWorkSearch(event.request);
-        if (response.status != 2) {
-          emit(state.copyWith(errorMessage: response.message,status: DataBlocStatus.error));
+        if (state.hasReachedMax && event.request.obj.soTrangHienTai != 1) {
+          return;
         }
-        else{
-          if(response.data.isEmpty) {
-            emit(state.copyWith(status: DataBlocStatus.notfound));
-          } else {
-            emit(state.copyWith(data: response.data,status: DataBlocStatus.success));
-          }
+        if (state.status == DataBlocStatus.init ||
+            event.request.obj.soTrangHienTai == 1) {
+          emit(state.copyWith(status: DataBlocStatus.loading));
         }
-
+        final response = await apiRepository.getWorkSearch(event.request);
+        if (event.request.obj.soTrangHienTai == 1) {
+          emit(state.copyWith(
+              data: response.data,
+              hasReachedMax:
+                  response.data.length < event.request.obj.soBanGhiTrenTrang,
+              status: response.data.isEmpty
+                  ? DataBlocStatus.notfound
+                  : DataBlocStatus.success));
+        } else {
+          emit(state.copyWith(
+              data: state.data..addAll(response.data),
+              hasReachedMax:
+                  response.data.length < event.request.obj.soBanGhiTrenTrang,
+              status: DataBlocStatus.success));
+        }
       } on Exception catch (e) {
-        emit(state.copyWith(errorMessage: e.toString(),status: DataBlocStatus.error));
+        emit(state.copyWith(
+            errorMessage: e.toString(),
+            status: DataBlocStatus.success,
+            hasReachedMax: true));
       }
     });
   }

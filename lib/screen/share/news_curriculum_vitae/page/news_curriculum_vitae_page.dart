@@ -59,10 +59,14 @@ class _NewsCurriculumVitaePageState
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => homeJobUserListBloc,
-      child: BlocListener<HomeJobUserListBloc, DataState<List<HomeJobUserListDataResponse>>>(
-        listener: (BuildContext context, DataState<List<HomeJobUserListDataResponse>> state) {},
-        child: BlocBuilder<HomeJobUserListBloc, DataState<List<HomeJobUserListDataResponse>>>(
-          builder: (BuildContext context, DataState<List<HomeJobUserListDataResponse>> state) =>
+      child: BlocListener<HomeJobUserListBloc,
+          DataState<List<HomeJobUserListDataResponse>>>(
+        listener: (BuildContext context,
+            DataState<List<HomeJobUserListDataResponse>> state) {},
+        child: BlocBuilder<HomeJobUserListBloc,
+            DataState<List<HomeJobUserListDataResponse>>>(
+          builder: (BuildContext context,
+                  DataState<List<HomeJobUserListDataResponse>> state) =>
               handleDataState<List<HomeJobUserListDataResponse>>(
             state,
             (context, state) => (state!.length ?? 0) == 0
@@ -97,10 +101,7 @@ class _NewsCurriculumVitaePageState
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      state!
-                                          .elementAt(i)
-                                          .title
-                                          .replaceWhenNullOrWhiteSpace(),
+                                      state!.elementAt(i).title.supportHtml(),
                                       style: AppTextStyle.title.copyWith(
                                           overflow: TextOverflow.visible,
                                           color: AppColor.colorOfIcon),
@@ -135,7 +136,7 @@ class _NewsCurriculumVitaePageState
                                               state!
                                                   .elementAt(i)
                                                   .education
-                                                  .replaceWhenNullOrWhiteSpace(),
+                                                  .supportHtml(),
                                               maxLines: 3,
                                               style: AppTextStyle.title
                                                   .copyWith(
@@ -174,7 +175,7 @@ class _NewsCurriculumVitaePageState
                                               state!
                                                   .elementAt(i)
                                                   .careerGoals
-                                                  .replaceWhenNullOrWhiteSpace(),
+                                                  .supportHtml(),
                                               maxLines: 3,
                                               style: AppTextStyle.title
                                                   .copyWith(
@@ -213,7 +214,7 @@ class _NewsCurriculumVitaePageState
                                               state!
                                                   .elementAt(i)
                                                   .workExperience
-                                                  .replaceWhenNullOrWhiteSpace(),
+                                                  .supportHtml(),
                                               maxLines: 3,
                                               style: AppTextStyle.title
                                                   .copyWith(

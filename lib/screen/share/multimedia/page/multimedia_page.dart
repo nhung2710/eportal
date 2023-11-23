@@ -24,10 +24,10 @@ class MultimediaPage extends BasePage {
   const MultimediaPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _MultimediaPageState();
+  State<StatefulWidget> createState() => MultimediaPageState();
 }
 
-class _MultimediaPageState extends BasePageStateActive<MultimediaPage> {
+class MultimediaPageState extends BasePageStateActive<MultimediaPage> {
   VideoListBloc videoListBloc = VideoListBloc();
   VideoListDataRequest request = VideoListDataRequest();
 
@@ -55,27 +55,28 @@ class _MultimediaPageState extends BasePageStateActive<MultimediaPage> {
         listener: (BuildContext context,
             DataMoreState<VideoListDataResponse> state) {},
         child: BlocBuilder<VideoListBloc, DataMoreState<VideoListDataResponse>>(
-          builder: (BuildContext context,
-              DataMoreState<VideoListDataResponse> state) => handleDataMoreState(state, (context, state) => Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    controller: scrollController,
-                    itemCount: state.length,
-                    itemBuilder: (context, i) => NewsWidget(
-                      onTap: () => nextPage((context) =>
-                          VideoPage(
-                              data: state.elementAt(i))),
-                      title: state.elementAt(i).name,
-                      imageUrl: state.elementAt(i).avatar,
-                      content: state.elementAt(i).summary,
-                      time: state.elementAt(i).publishedDate,
-                    )),
-              ),
-            ],
-          ),)
-
-        ),
+            builder: (BuildContext context,
+                    DataMoreState<VideoListDataResponse> state) =>
+                handleDataMoreState(
+                  state,
+                  (context, state) => Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            controller: scrollController,
+                            itemCount: state.length,
+                            itemBuilder: (context, i) => NewsWidget(
+                                  onTap: () => nextPage((context) =>
+                                      VideoPage(data: state.elementAt(i))),
+                                  title: state.elementAt(i).name,
+                                  imageUrl: state.elementAt(i).avatar,
+                                  content: state.elementAt(i).summary,
+                                  time: state.elementAt(i).publishedDate,
+                                )),
+                      ),
+                    ],
+                  ),
+                )),
       ));
 }

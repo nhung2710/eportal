@@ -2,6 +2,7 @@ import 'package:eportal/model/api/response/common_new/data/work_search_data_resp
 import 'package:eportal/screen/share/work_search_detail/page/work_search_detail_page.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_elevation.dart';
+import 'package:eportal/widget/dialog/filter_job_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,21 +33,25 @@ class WorkSearchPage extends BasePage {
 class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
   WorkSearchBloc workSearchBloc = WorkSearchBloc();
   WorkSearchRequest request = WorkSearchRequest(obj: WorkSearchDataRequest());
-
+  final filterJobDialogKey = GlobalKey<FilterJobDialogState>();
+  late FilterJobDialog filterJobDialog =
+      FilterJobDialog(key: filterJobDialogKey, data: request.obj);
   TextEditingController textEditingController = TextEditingController();
 
   @override
   void initDataLoading() {
+    request.obj.tuKhoa = textEditingController.text;
+    request.obj.soTrangHienTai = 1;
     workSearchBloc.add(WorkSearchEvent(request: request));
 
     super.initDataLoading();
   }
 
   @override
-  Widget? getEndDrawer(BuildContext context) => FilterDrawer(
-        data: request.obj,
-        key: localKey,
-      );
+  void getMoreData() {
+    request.obj.soTrangHienTai++;
+    workSearchBloc.add(WorkSearchEvent(request: request));
+  }
 
   @override
   Widget pageUI(BuildContext context) => Column(
@@ -58,10 +63,16 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
               controller: textEditingController,
               maxLength: 50,
               textInputAction: TextInputAction.send,
-              onFieldSubmitted: (value) => _findNews(context),
+              onFieldSubmitted: (value) => initDataLoading(),
               icon: Icons.search,
               onTap: () {
-                _findNews(context);
+                initDataLoading();
+              },
+              onTapFilter: () {
+                showDialog(context: context, builder: (_) => filterJobDialog)
+                    .then((value) {
+                  initDataLoading();
+                });
               },
               hintText: "Nội dung tìm kiếm",
             ),
@@ -69,235 +80,224 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
           Expanded(
             child: BlocProvider(
                 create: (_) => workSearchBloc,
-                child: BlocListener<WorkSearchBloc, DataState<List<WorkSearchDataResponse>>>(
-                  listener: (BuildContext context, DataState<List<WorkSearchDataResponse>> state) {},
-                  child: BlocBuilder<WorkSearchBloc, DataState<List<WorkSearchDataResponse>>>(
-                    builder: (BuildContext context, DataState<List<WorkSearchDataResponse>> state) =>
-                        handleDataState<List<WorkSearchDataResponse>>(
+                child: BlocListener<WorkSearchBloc,
+                    DataMoreState<WorkSearchDataResponse>>(
+                  listener: (BuildContext context,
+                      DataMoreState<WorkSearchDataResponse> state) {},
+                  child: BlocBuilder<WorkSearchBloc,
+                      DataMoreState<WorkSearchDataResponse>>(
+                    builder: (BuildContext context,
+                            DataMoreState<WorkSearchDataResponse> state) =>
+                        handleDataMoreState<WorkSearchDataResponse>(
                       state,
                       (context, state) => ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: state!.length,
-                              itemBuilder: (context, i) => GestureDetector(
-                                    onTap: () => nextPage(
-                                        (context) => WorkSearchDetailPage(
-                                              workSearchDataResponse:
-                                                  state!.elementAt(i),
-                                            )),
-                                    child: Card(
-                                      elevation: AppElevation.sizeOfNormal,
-                                      color: AppColor.colorOfApp,
-                                      shadowColor: AppColor.colorOfIcon,
-                                      borderOnForeground: false,
-                                      margin: const EdgeInsets.all(5),
-                                      shape: const RoundedRectangleBorder(
-                                          side: BorderSide(
-                                              color: AppColor.colorOfDrawer,
-                                              width: 0.2),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5))),
-                                      child: Container(
-                                        padding: const EdgeInsets.all(10),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Text(
-                                                state!
-                                                    .elementAt(i)
-                                                    .title
-                                                    .supportHtml(),
-                                                style: AppTextStyle.title
-                                                    .copyWith(
-                                                        overflow: TextOverflow
-                                                            .visible,
-                                                        color: AppColor
-                                                            .colorOfIcon),
-                                              ),
-                                            ),
-                                            const Divider(
-                                              height: 1,
-                                              color: AppColor.colorOfDrawer,
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        "Ngành nghề",
-                                                        style: AppTextStyle
-                                                            .title
-                                                            .copyWith(
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .visible),
-                                                      )),
-                                                  const VerticalDivider(
-                                                    thickness: 2,
-                                                    width: 5,
-                                                    color: Colors.transparent,
-                                                  ),
-                                                  Expanded(
-                                                      flex: 3,
-                                                      child: Text(
-                                                        state!
-                                                            .elementAt(i)
-                                                            .description
-                                                            .supportHtml(),
-                                                        maxLines: 3,
-                                                        style: AppTextStyle
-                                                            .title
-                                                            .copyWith(
-                                                                color: AppColor
-                                                                    .colorOfIcon),
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                            const Divider(
-                                              height: 1,
-                                              color: AppColor.colorOfDrawer,
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        "Tuổi",
-                                                        style: AppTextStyle
-                                                            .title
-                                                            .copyWith(
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .visible),
-                                                      )),
-                                                  const VerticalDivider(
-                                                    thickness: 2,
-                                                    width: 5,
-                                                    color: Colors.transparent,
-                                                  ),
-                                                  Expanded(
-                                                      flex: 3,
-                                                      child: Text(
-                                                        state!
-                                                            .elementAt(i)
-                                                            .ages
-                                                            .supportHtml(),
-                                                        maxLines: 3,
-                                                        style: AppTextStyle
-                                                            .title
-                                                            .copyWith(
-                                                                color: AppColor
-                                                                    .colorOfIcon),
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                            const Divider(
-                                              height: 1,
-                                              color: AppColor.colorOfDrawer,
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        "Thời gian làm",
-                                                        style: AppTextStyle
-                                                            .title
-                                                            .copyWith(
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .visible),
-                                                      )),
-                                                  const VerticalDivider(
-                                                    thickness: 2,
-                                                    width: 5,
-                                                    color: Colors.transparent,
-                                                  ),
-                                                  Expanded(
-                                                      flex: 3,
-                                                      child: Text(
-                                                        state!
-                                                            .elementAt(i)
-                                                            .workTime
-                                                            .supportHtml(),
-                                                        maxLines: 3,
-                                                        style: AppTextStyle
-                                                            .title
-                                                            .copyWith(
-                                                                color: AppColor
-                                                                    .colorOfIcon),
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                            const Divider(
-                                              height: 1,
-                                              color: AppColor.colorOfDrawer,
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        "Yêu cầu",
-                                                        style: AppTextStyle
-                                                            .title
-                                                            .copyWith(
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .visible),
-                                                      )),
-                                                  const VerticalDivider(
-                                                    thickness: 2,
-                                                    width: 5,
-                                                    color: Colors.transparent,
-                                                  ),
-                                                  Expanded(
-                                                      flex: 3,
-                                                      child: Text(
-                                                        state!
-                                                            .elementAt(i)
-                                                            .requirement
-                                                            .supportHtml(),
-                                                        maxLines: 3,
-                                                        style: AppTextStyle
-                                                            .title
-                                                            .copyWith(
-                                                                color: AppColor
-                                                                    .colorOfIcon),
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
+                          shrinkWrap: true,
+                          controller: scrollController,
+                          itemCount: state!.length,
+                          itemBuilder: (context, i) => GestureDetector(
+                                onTap: () =>
+                                    nextPage((context) => WorkSearchDetailPage(
+                                          workSearchDataResponse:
+                                              state!.elementAt(i),
+                                        )),
+                                child: Card(
+                                  elevation: AppElevation.sizeOfNormal,
+                                  color: AppColor.colorOfApp,
+                                  shadowColor: AppColor.colorOfIcon,
+                                  borderOnForeground: false,
+                                  margin: const EdgeInsets.all(5),
+                                  shape: const RoundedRectangleBorder(
+                                      side: BorderSide(
+                                          color: AppColor.colorOfDrawer,
+                                          width: 0.2),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(5))),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Text(
+                                            state!
+                                                .elementAt(i)
+                                                .title
+                                                .supportHtml(),
+                                            style: AppTextStyle.title.copyWith(
+                                                overflow: TextOverflow.visible,
+                                                color: AppColor.colorOfIcon),
+                                          ),
                                         ),
-                                      ),
+                                        const Divider(
+                                          height: 1,
+                                          color: AppColor.colorOfDrawer,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Expanded(
+                                                  flex: 1,
+                                                  child: Text(
+                                                    "Ngành nghề",
+                                                    style: AppTextStyle.title
+                                                        .copyWith(
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .visible),
+                                                  )),
+                                              const VerticalDivider(
+                                                thickness: 2,
+                                                width: 5,
+                                                color: Colors.transparent,
+                                              ),
+                                              Expanded(
+                                                  flex: 3,
+                                                  child: Text(
+                                                    state!
+                                                        .elementAt(i)
+                                                        .description
+                                                        .supportHtml(),
+                                                    maxLines: 3,
+                                                    style: AppTextStyle.title
+                                                        .copyWith(
+                                                            color: AppColor
+                                                                .colorOfIcon),
+                                                  )),
+                                            ],
+                                          ),
+                                        ),
+                                        const Divider(
+                                          height: 1,
+                                          color: AppColor.colorOfDrawer,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Expanded(
+                                                  flex: 1,
+                                                  child: Text(
+                                                    "Tuổi",
+                                                    style: AppTextStyle.title
+                                                        .copyWith(
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .visible),
+                                                  )),
+                                              const VerticalDivider(
+                                                thickness: 2,
+                                                width: 5,
+                                                color: Colors.transparent,
+                                              ),
+                                              Expanded(
+                                                  flex: 3,
+                                                  child: Text(
+                                                    state!
+                                                        .elementAt(i)
+                                                        .ages
+                                                        .supportHtml(),
+                                                    maxLines: 3,
+                                                    style: AppTextStyle.title
+                                                        .copyWith(
+                                                            color: AppColor
+                                                                .colorOfIcon),
+                                                  )),
+                                            ],
+                                          ),
+                                        ),
+                                        const Divider(
+                                          height: 1,
+                                          color: AppColor.colorOfDrawer,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Expanded(
+                                                  flex: 1,
+                                                  child: Text(
+                                                    "Thời gian làm",
+                                                    style: AppTextStyle.title
+                                                        .copyWith(
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .visible),
+                                                  )),
+                                              const VerticalDivider(
+                                                thickness: 2,
+                                                width: 5,
+                                                color: Colors.transparent,
+                                              ),
+                                              Expanded(
+                                                  flex: 3,
+                                                  child: Text(
+                                                    state!
+                                                        .elementAt(i)
+                                                        .workTime
+                                                        .supportHtml(),
+                                                    maxLines: 3,
+                                                    style: AppTextStyle.title
+                                                        .copyWith(
+                                                            color: AppColor
+                                                                .colorOfIcon),
+                                                  )),
+                                            ],
+                                          ),
+                                        ),
+                                        const Divider(
+                                          height: 1,
+                                          color: AppColor.colorOfDrawer,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Expanded(
+                                                  flex: 1,
+                                                  child: Text(
+                                                    "Yêu cầu",
+                                                    style: AppTextStyle.title
+                                                        .copyWith(
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .visible),
+                                                  )),
+                                              const VerticalDivider(
+                                                thickness: 2,
+                                                width: 5,
+                                                color: Colors.transparent,
+                                              ),
+                                              Expanded(
+                                                  flex: 3,
+                                                  child: Text(
+                                                    state!
+                                                        .elementAt(i)
+                                                        .requirement
+                                                        .supportHtml(),
+                                                    maxLines: 3,
+                                                    style: AppTextStyle.title
+                                                        .copyWith(
+                                                            color: AppColor
+                                                                .colorOfIcon),
+                                                  )),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  )),
+                                  ),
+                                ),
+                              )),
                     ),
                   ),
                 )),
@@ -310,11 +310,4 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
 
   @override
   String getPageTitle(BuildContext context) => "Tìm kiếm";
-
-  void _findNews(BuildContext context) {
-    if (isValid()) {
-      request.obj.tuKhoa = textEditingController.text;
-      workSearchBloc.add(WorkSearchEvent(request: request));
-    }
-  }
 }

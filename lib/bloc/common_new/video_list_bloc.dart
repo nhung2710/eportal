@@ -11,35 +11,39 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../model/api/response/common_new/data/video_list_data_response.dart';
 
-
-class VideoListBloc extends Bloc<BaseEvent, DataMoreState<VideoListDataResponse>> {
-  VideoListBloc()
-      : super(const DataMoreState<VideoListDataResponse>()) {
-    final VideoListRepository apiRepository =
-    VideoListRepository();
+class VideoListBloc
+    extends Bloc<BaseEvent, DataMoreState<VideoListDataResponse>> {
+  VideoListBloc() : super(const DataMoreState<VideoListDataResponse>()) {
+    final VideoListRepository apiRepository = VideoListRepository();
 
     on<VideoListEvent>((event, emit) async {
       try {
-        if(state.hasReachedMax)return;
-        if(state.status == DataBlocStatus.init || event.request.obj.soTrangHienTai == 1) {
+        if (state.hasReachedMax && event.request.obj.soTrangHienTai != 1)
+          return;
+        if (state.status == DataBlocStatus.init ||
+            event.request.obj.soTrangHienTai == 1) {
           emit(state.copyWith(status: DataBlocStatus.loading));
         }
-        final response =
-        await apiRepository.getVideoList(event.request);
+        final response = await apiRepository.getVideoList(event.request);
         if (event.request.obj.soTrangHienTai == 1) {
           emit(state.copyWith(
               data: response.data,
               hasReachedMax: response.data.isEmpty,
-              status: response.data.isEmpty ? DataBlocStatus.notfound: DataBlocStatus.success));
-        }
-        else{
+              status: response.data.isEmpty
+                  ? DataBlocStatus.notfound
+                  : DataBlocStatus.success));
+        } else {
           emit(state.copyWith(
               data: state.data..addAll(response.data),
-              hasReachedMax: response.data.isEmpty,
+              hasReachedMax:
+                  response.data.length < event.request.obj.soBanGhiTrenTrang,
               status: DataBlocStatus.success));
         }
       } on Exception catch (e) {
-        emit(state.copyWith(errorMessage: e.toString(),status: DataBlocStatus.success,hasReachedMax: true));
+        emit(state.copyWith(
+            errorMessage: e.toString(),
+            status: DataBlocStatus.success,
+            hasReachedMax: true));
       }
     });
   }

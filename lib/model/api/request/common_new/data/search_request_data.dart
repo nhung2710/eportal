@@ -6,8 +6,8 @@ import '../../../../base/base_eportal_xml.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class SearchRequestData extends BaseEportalXml {
-  int? soTrangHienTai;
-  int? soBanGhiTrenTrang;
+  int soTrangHienTai;
+  int soBanGhiTrenTrang;
   String? doanhNghiep;
   String? mucLuong;
   String? kinhNghiem;

@@ -243,9 +243,9 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
       scrollController!.animateTo(scrollController!.position.maxScrollExtent,
           duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
 
-
-  Widget handleDataState<T>(DataState<T> state, BlocWidgetBuilder<T?> builder,{Widget? initWidget}){
-    switch(state.status){
+  Widget handleDataState<T>(DataState<T> state, BlocWidgetBuilder<T?> builder,
+      {Widget? initWidget}) {
+    switch (state.status) {
       case DataBlocStatus.init:
         return initWidget ?? Container();
       case DataBlocStatus.loading:
@@ -253,13 +253,16 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
       case DataBlocStatus.notfound:
         return buildNotFoundData(context);
       case DataBlocStatus.error:
-        return  buildScreenError(state.errorMessage);
+        return buildScreenError(state.errorMessage);
       case DataBlocStatus.success:
         return builder(context, state.data);
     }
   }
-  Widget handleDataMoreState<T>(DataMoreState<T> state, BlocWidgetBuilder<List<T>> builder,{Widget? initWidget}){
-    switch(state.status){
+
+  Widget handleDataMoreState<T>(
+      DataMoreState<T> state, BlocWidgetBuilder<List<T>> builder,
+      {Widget? initWidget}) {
+    switch (state.status) {
       case DataBlocStatus.init:
         return initWidget ?? Container();
       case DataBlocStatus.loading:
@@ -267,29 +270,30 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
       case DataBlocStatus.notfound:
         return buildNotFoundData(context);
       case DataBlocStatus.error:
-        return  buildScreenError(state.errorMessage);
+        return buildScreenError(state.errorMessage);
       case DataBlocStatus.success:
         return builder(context, state.data);
     }
   }
 
-
-  void handlerActionState<T>(DataState<T> state , CallbackListener<T> callback) {
-    switch(state.status){
+  void handlerActionState<T>(DataState<T> state, CallbackListener<T> callback) {
+    switch (state.status) {
       case DataBlocStatus.init:
         break;
       case DataBlocStatus.loading:
         break;
       case DataBlocStatus.notfound:
+        stopLoading();
         break;
       case DataBlocStatus.error:
+        stopLoading();
         showCenterError(state.errorMessage);
         break;
       case DataBlocStatus.success:
+        stopLoading();
         return callback(state.data);
     }
   }
-
 
   Widget buildScreenLoading() => Center(
         child: Container(

@@ -19,6 +19,7 @@ import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/common_new/data/faq_add_question_data_request.dart';
 import '../../../../model/api/request/common_new/faq_add_question_request.dart';
 import '../../../../model/api/response/common_new/data/faq_add_question_data_response.dart';
+import '../../../../widget/default_button/default_button.dart';
 
 //
 // Created by BlackRose on 21/11/2023.
@@ -50,10 +51,11 @@ class _AnswerAndQuestionAddPageState
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
         create: (_) => faqAddQuestionBloc,
-        child: BlocListener<FaqAddQuestionBloc, DataState<FaqAddQuestionDataResponse>>(
-          listener: (BuildContext context, DataState<FaqAddQuestionDataResponse> state) {
-            handlerActionState<FaqAddQuestionDataResponse>(state,
-                (obj) async {
+        child: BlocListener<FaqAddQuestionBloc,
+            DataState<FaqAddQuestionDataResponse>>(
+          listener: (BuildContext context,
+              DataState<FaqAddQuestionDataResponse> state) {
+            handlerActionState<FaqAddQuestionDataResponse>(state, (obj) async {
               showCenterMessage("Bạn đã gửi câu hỏi thành công")
                   .then((value) => backPage());
             });
@@ -135,15 +137,8 @@ class _AnswerAndQuestionAddPageState
                 ),
                 Container(
                     margin: const EdgeInsets.only(top: 10, bottom: 10),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColor.colorOfIcon),
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        child: Text('Gửi',
-                            style: AppTextStyle.titlePage
-                                .copyWith(color: Colors.white)),
-                      ),
+                    child: DefaultButton(
+                      text: 'Gửi',
                       onPressed: () => _send(context),
                     )),
               ],

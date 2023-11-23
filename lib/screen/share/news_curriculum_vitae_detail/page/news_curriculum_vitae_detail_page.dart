@@ -45,6 +45,19 @@ class _NewsCurriculumVitaeDetailPageState
               children: [
                 Padding(
                   padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    widget.homeJobUserListDataResponse.title.supportHtml(),
+                    style: AppTextStyle.title.copyWith(
+                        overflow: TextOverflow.visible,
+                        color: AppColor.colorOfIcon),
+                  ),
+                ),
+                const Divider(
+                  height: 1,
+                  color: AppColor.colorOfDrawer,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -64,7 +77,7 @@ class _NewsCurriculumVitaeDetailPageState
                           flex: 3,
                           child: Text(
                             widget.homeJobUserListDataResponse.education
-                                .replaceWhenNullOrWhiteSpace(),
+                                .supportHtml(),
                             overflow: TextOverflow.visible,
                             style: AppTextStyle.title
                                 .copyWith(color: AppColor.colorOfIcon),
@@ -97,7 +110,40 @@ class _NewsCurriculumVitaeDetailPageState
                           flex: 3,
                           child: Text(
                             widget.homeJobUserListDataResponse.careerGoals
-                                .replaceWhenNullOrWhiteSpace(),
+                                .supportHtml(),
+                            overflow: TextOverflow.visible,
+                            style: AppTextStyle.title
+                                .copyWith(color: AppColor.colorOfIcon),
+                          )),
+                    ],
+                  ),
+                ),
+                const Divider(
+                  height: 1,
+                  color: AppColor.colorOfDrawer,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                          flex: 1,
+                          child: Text(
+                            "Kỹ năng",
+                            style: AppTextStyle.title
+                                .copyWith(overflow: TextOverflow.visible),
+                          )),
+                      const VerticalDivider(
+                        thickness: 2,
+                        width: 5,
+                        color: Colors.transparent,
+                      ),
+                      Expanded(
+                          flex: 3,
+                          child: Text(
+                            widget.homeJobUserListDataResponse.skillsForte
+                                .supportHtml(),
                             overflow: TextOverflow.visible,
                             style: AppTextStyle.title
                                 .copyWith(color: AppColor.colorOfIcon),
@@ -130,7 +176,7 @@ class _NewsCurriculumVitaeDetailPageState
                           flex: 3,
                           child: Text(
                             widget.homeJobUserListDataResponse.workExperience
-                                .replaceWhenNullOrWhiteSpace(),
+                                .supportHtml(),
                             overflow: TextOverflow.visible,
                             style: AppTextStyle.title
                                 .copyWith(color: AppColor.colorOfIcon),

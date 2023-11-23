@@ -36,6 +36,28 @@ extension StringNullExtension on String? {
     return "${ApplicationApiConstant.BASE_URI_MEDIA}/$this";
   }
 
+  String convertUrlToYoutubeId({bool trimWhitespaces = true}) {
+    String url = this.replaceWhenNullOrWhiteSpace();
+    if (!url.contains("http") && (url.length == 11)) return url;
+    if (trimWhitespaces) url = url.trim();
+    for (var exp in [
+      RegExp(
+          r"^https:\/\/(?:www\.|m\.)?youtube\.com\/watch\?v=([_\-a-zA-Z0-9]{11}).*$"),
+      RegExp(
+          r"^https:\/\/(?:music\.)?youtube\.com\/watch\?v=([_\-a-zA-Z0-9]{11}).*$"),
+      RegExp(
+          r"^https:\/\/(?:www\.|m\.)?youtube\.com\/shorts\/([_\-a-zA-Z0-9]{11}).*$"),
+      RegExp(
+          r"^https:\/\/(?:www\.|m\.)?youtube(?:-nocookie)?\.com\/embed\/([_\-a-zA-Z0-9]{11}).*$"),
+      RegExp(r"^https:\/\/youtu\.be\/([_\-a-zA-Z0-9]{11}).*$")
+    ]) {
+      Match? match = exp.firstMatch(url);
+      if (match != null && match.groupCount >= 1)
+        return match.group(1).replaceWhenNullOrWhiteSpace();
+    }
+    return url;
+  }
+
   String addLine(int number) {
     return replaceWhenNullOrWhiteSpace() +
         List.generate(number, (index) => "\n").join("");
@@ -124,5 +146,27 @@ extension StringExtension on String {
   String formatDateTimeApi() {
     return (parseDateTime()?.toFormatDateTime(format: "dd/MM/yyyy HH:mm"))
         .replaceWhenNullOrWhiteSpace();
+  }
+
+  String convertUrlToYoutubeId({bool trimWhitespaces = true}) {
+    String url = replaceWhenNullOrWhiteSpace();
+    if (!url.contains("http") && (url.length == 11)) return url;
+    if (trimWhitespaces) url = url.trim();
+    for (var exp in [
+      RegExp(
+          r"^https:\/\/(?:www\.|m\.)?youtube\.com\/watch\?v=([_\-a-zA-Z0-9]{11}).*$"),
+      RegExp(
+          r"^https:\/\/(?:music\.)?youtube\.com\/watch\?v=([_\-a-zA-Z0-9]{11}).*$"),
+      RegExp(
+          r"^https:\/\/(?:www\.|m\.)?youtube\.com\/shorts\/([_\-a-zA-Z0-9]{11}).*$"),
+      RegExp(
+          r"^https:\/\/(?:www\.|m\.)?youtube(?:-nocookie)?\.com\/embed\/([_\-a-zA-Z0-9]{11}).*$"),
+      RegExp(r"^https:\/\/youtu\.be\/([_\-a-zA-Z0-9]{11}).*$")
+    ]) {
+      Match? match = exp.firstMatch(url);
+      if (match != null && match.groupCount >= 1)
+        return match.group(1).replaceWhenNullOrWhiteSpace();
+    }
+    return url;
   }
 }

@@ -1,3 +1,6 @@
+import 'package:eportal/style/app_color.dart';
+import 'package:eportal/style/app_text_style.dart';
+import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -131,11 +134,8 @@ class _ProfileAddPageState extends BasePageState<ProfileAddPage> {
           ),
           Container(
               margin: const EdgeInsets.only(top: 10),
-              child: ElevatedButton(
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  child: const Text('Tạo'),
-                ),
+              child: DefaultButton(
+                text: 'Tạo',
                 onPressed: () => _changeUserInfo(context),
               )),
         ],

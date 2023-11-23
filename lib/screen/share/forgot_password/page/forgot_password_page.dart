@@ -1,5 +1,6 @@
 import 'package:eportal/screen/share/sign_up/page/sign_up_page.dart';
 import 'package:eportal/widget/base/base_page.dart';
+import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../style/app_color.dart';
@@ -71,13 +72,8 @@ class _ForgotPasswordPageState extends BasePageState<ForgotPasswordPage> {
           ),
           Container(
               margin: const EdgeInsets.only(top: 10),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColor.colorOfIcon),
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  child: const Text('Quên mật khẩu'),
-                ),
+              child: DefaultButton(
+                text: 'Quên mật khẩu',
                 onPressed: () => _signUp(context),
               )),
         ],

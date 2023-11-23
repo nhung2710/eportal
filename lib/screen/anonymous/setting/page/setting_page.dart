@@ -19,10 +19,10 @@ class SettingPage extends BasePage {
   const SettingPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _SettingPageState();
+  State<StatefulWidget> createState() => SettingPageState();
 }
 
-class _SettingPageState extends BasePageStateActive<SettingPage> {
+class SettingPageState extends BasePageStateActive<SettingPage> {
   var actions = {
     "Biểu đồ": [
       SettingPageModel(

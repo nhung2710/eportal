@@ -16,6 +16,7 @@ class SearchInput extends StatefulWidget {
   final TextInputAction? textInputAction;
   final IconData? icon;
   final GestureTapCallback? onTap;
+  final GestureTapCallback? onTapFilter;
   final int? maxLength;
 
   const SearchInput({
@@ -26,6 +27,7 @@ class SearchInput extends StatefulWidget {
     this.hintText,
     this.icon,
     this.onTap,
+    this.onTapFilter,
     this.maxLength = 50,
     this.textInputAction,
   });
@@ -58,16 +60,34 @@ class _SearchInputState extends State<SearchInput> {
               size: AppSizeIcon.sizeOfNormal,
             ),
           ),
-          suffixIcon: GestureDetector(
-            onTap: widget.onTap,
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8),
-              child: const Icon(
-                Icons.send,
-                color: AppColor.colorOfIcon,
-                size: AppSizeIcon.sizeOfNormal,
+          suffixIcon: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              GestureDetector(
+                onTap: widget.onTap,
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  child: const Icon(
+                    Icons.send,
+                    color: AppColor.colorOfIcon,
+                    size: AppSizeIcon.sizeOfNormal,
+                  ),
+                ),
               ),
-            ),
+              widget.onTapFilter == null
+                  ? Container()
+                  : GestureDetector(
+                      onTap: widget.onTapFilter,
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 8),
+                        child: const Icon(
+                          Icons.filter_alt_sharp,
+                          color: AppColor.colorOfIcon,
+                          size: AppSizeIcon.sizeOfNormal,
+                        ),
+                      ),
+                    ),
+            ],
           ),
           suffixIconConstraints: const BoxConstraints(
             minWidth: 25,

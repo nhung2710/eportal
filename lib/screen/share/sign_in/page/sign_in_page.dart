@@ -11,6 +11,7 @@ import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
+import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,25 +71,24 @@ class _SignInPageState extends BasePageState<SignInPage> {
       child: BlocListener<DangNhapBloc, DataState<DangNhapDataResponse>>(
         listener: (context, state) {
           handlerActionState<DangNhapDataResponse>(state, (obj) {
-              GlobalApplication()
-                  .signIn(obj, nameController.text,
-                      passwordController.text)
-                  .then((value) {
-                switch (GlobalApplication().UserRoleType) {
-                  case RoleType.users:
-                    nextPageWithoutBack((context) => const worker.HomePage());
-                    break;
-                  case RoleType.bussiness:
-                    nextPageWithoutBack((context) => const employer.HomePage());
-                    break;
-                  case RoleType.cms:
-                    nextPageWithoutBack((context) => const admin.HomePage());
-                    break;
-                  case RoleType.anonymous:
-                    // TODO: Handle this case.
-                    break;
-                }
-              });
+            GlobalApplication()
+                .signIn(obj, nameController.text, passwordController.text)
+                .then((value) {
+              switch (GlobalApplication().UserRoleType) {
+                case RoleType.users:
+                  nextPageWithoutBack((context) => const worker.HomePage());
+                  break;
+                case RoleType.bussiness:
+                  nextPageWithoutBack((context) => const employer.HomePage());
+                  break;
+                case RoleType.cms:
+                  nextPageWithoutBack((context) => const admin.HomePage());
+                  break;
+                case RoleType.anonymous:
+                  // TODO: Handle this case.
+                  break;
+              }
+            });
           });
         },
         child: Center(
@@ -136,16 +136,8 @@ class _SignInPageState extends BasePageState<SignInPage> {
               ),
               Container(
                   margin: const EdgeInsets.only(top: 10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColor.colorOfIcon),
-                    child: Container(
-                        padding: const EdgeInsets.all(10),
-                        child: Text(
-                          'Đăng nhập',
-                          style: AppTextStyle.titlePage
-                              .copyWith(color: Colors.white),
-                        )),
+                  child: DefaultButton(
+                    text: 'Đăng nhập',
                     onPressed: () => _signIn(context),
                   )),
               Container(

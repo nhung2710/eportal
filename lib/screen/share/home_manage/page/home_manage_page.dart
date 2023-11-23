@@ -1,7 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:eportal/bloc/common_new/home_business_list_bloc.dart';
+import 'package:eportal/event/common_new/home_business_list_event.dart';
+import 'package:eportal/model/api/request/common_new/home_business_list_request.dart';
+import 'package:eportal/model/api/response/common_new/data/home_business_list_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/home_slide_list_data_response.dart';
 import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
 import 'package:eportal/style/app_elevation.dart';
+import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
 import 'package:flutter/material.dart';
@@ -34,16 +39,22 @@ class HomeManagePage extends BasePage {
   const HomeManagePage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _HomeManagePageState();
+  State<StatefulWidget> createState() => HomeManagePageState();
 }
 
-class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
+class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
   HomeSlideListBloc homeSlideListBloc = HomeSlideListBloc();
+
+  HomeBusinessListBloc homeBusinessListBloc = HomeBusinessListBloc();
 
   @override
   void initDataLoading() {
     homeSlideListBloc.add(HomeSlideListEvent(
         request: HomeSlideListRequest(
+            obj: CommonNewDataRequest(
+                top: ApplicationConstant.NUMBER_FULL_ITEM))));
+    homeBusinessListBloc.add(HomeBusinessListEvent(
+        request: HomeBusinessListRequest(
             obj: CommonNewDataRequest(
                 top: ApplicationConstant.NUMBER_FULL_ITEM))));
     super.initDataLoading();
@@ -76,22 +87,27 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                 margin: const EdgeInsets.only(top: 0),
                 child: BlocProvider(
                     create: (_) => homeSlideListBloc,
-                    child: BlocListener<HomeSlideListBloc, DataState<List<HomeSlideListDataResponse>>>(
-                      listener: (BuildContext context, DataState<List<HomeSlideListDataResponse>> state) {},
-                      child: BlocBuilder<HomeSlideListBloc, DataState<List<HomeSlideListDataResponse>>>(
-                        builder: (BuildContext context, DataState<List<HomeSlideListDataResponse>> state) =>
+                    child: BlocListener<HomeSlideListBloc,
+                        DataState<List<HomeSlideListDataResponse>>>(
+                      listener: (BuildContext context,
+                          DataState<List<HomeSlideListDataResponse>> state) {},
+                      child: BlocBuilder<HomeSlideListBloc,
+                          DataState<List<HomeSlideListDataResponse>>>(
+                        builder: (BuildContext context,
+                                DataState<List<HomeSlideListDataResponse>>
+                                    state) =>
                             handleDataState<List<HomeSlideListDataResponse>>(
                           state,
                           (context, state) => CarouselSlider(
                             options: CarouselOptions(
-                              aspectRatio: 2,
+                              aspectRatio: 16 / 9,
                               viewportFraction: 1,
                               animateToClosest: true,
                               initialPage: 0,
                               enableInfiniteScroll: true,
                               reverse: false,
                               autoPlay: true,
-                              autoPlayInterval: const Duration(seconds: 3),
+                              autoPlayInterval: const Duration(seconds: 10),
                               autoPlayAnimationDuration:
                                   const Duration(seconds: 2),
                               autoPlayCurve: Curves.fastEaseInToSlowEaseOut,
@@ -167,16 +183,16 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                         )),
                   ),
                   CustomButtonIcon(
-                    title: "Hồ sơ",
+                    title: "Hồ sơ ứng viên",
                     iconData: Icons.people,
                     onTap: () =>
                         nextPage((context) => NewsCurriculumVitaePage()),
                   ),
-                  CustomButtonIcon(
+                  /*CustomButtonIcon(
                     title: "Doanh nghiệp",
                     iconData: Icons.business_sharp,
                     onTap: () => nextPage((context) => NewsEnterprisePage()),
-                  ),
+                  ),*/
                   CustomButtonIcon(
                     title: "Văn bản pháp luật",
                     iconData: Icons.folder_copy,
@@ -185,6 +201,105 @@ class _HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                 ],
               ),
             ),
+            Container(
+                margin: const EdgeInsets.only(top: 50),
+                child: BlocProvider(
+                    create: (_) => homeBusinessListBloc,
+                    child: BlocListener<HomeBusinessListBloc,
+                        DataState<List<HomeBusinessListDataResponse>>>(
+                      listener: (BuildContext context,
+                          DataState<List<HomeBusinessListDataResponse>>
+                              state) {},
+                      child: BlocBuilder<HomeBusinessListBloc,
+                          DataState<List<HomeBusinessListDataResponse>>>(
+                        builder: (BuildContext context,
+                                DataState<List<HomeBusinessListDataResponse>>
+                                    state) =>
+                            handleDataState<List<HomeBusinessListDataResponse>>(
+                          state,
+                          (context, state) => CarouselSlider(
+                            options: CarouselOptions(
+                              aspectRatio: 1.4,
+                              viewportFraction: 0.8,
+                              animateToClosest: true,
+                              initialPage: 0,
+                              enableInfiniteScroll: true,
+                              reverse: false,
+                              autoPlay: true,
+                              autoPlayInterval: const Duration(seconds: 5),
+                              autoPlayAnimationDuration:
+                                  const Duration(seconds: 2),
+                              autoPlayCurve: Curves.fastEaseInToSlowEaseOut,
+                              enlargeCenterPage: true,
+                              enlargeFactor: 0.5,
+                              enlargeStrategy: CenterPageEnlargeStrategy.zoom,
+                              scrollDirection: Axis.horizontal,
+                            ),
+                            items: state!.map((item) {
+                              return Builder(
+                                builder: (BuildContext context) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: GestureDetector(
+                                      onTap: () => nextPage(
+                                          (context) => EmptyExamplePage(
+                                                isHasAppBar: true,
+                                              )),
+                                      child: Card(
+                                        elevation: AppElevation.sizeOfNormal,
+                                        margin: EdgeInsets.zero,
+                                        color: AppColor.colorOfApp,
+                                        shadowColor: AppColor.colorOfIcon,
+                                        borderOnForeground: false,
+                                        shape: const RoundedRectangleBorder(
+                                            side: BorderSide(
+                                                color: AppColor.colorOfDrawer,
+                                                width: 0.1),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5))),
+                                        child: ClipRRect(
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(5.0)),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Expanded(
+                                                  child: ImageLoading(
+                                                      imageUrl: item.logo
+                                                          .getImageUrl(),
+                                                      imageBuilder: (context,
+                                                          imageProvider) {
+                                                        return Image(
+                                                          image: imageProvider,
+                                                          fit: BoxFit.fill,
+                                                        );
+                                                      }),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Text(
+                                                    item.businessVn
+                                                        .supportHtml(),
+                                                    maxLines: 1,
+                                                    textAlign: TextAlign.right,
+                                                    style: AppTextStyle
+                                                        .normalChild1,
+                                                  ),
+                                                )
+                                              ],
+                                            )),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+                    ))),
           ],
         ),
       );

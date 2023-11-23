@@ -78,27 +78,24 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
           Expanded(
             child: BlocProvider(
                 create: (_) => newsSearchBloc,
-                child: BlocListener<NewsSearchBloc, DataState<List<NewsSearchDataResponse>>>(
-                  listener: (BuildContext context, DataState<List<NewsSearchDataResponse>> state) {},
-                  child: BlocBuilder<NewsSearchBloc, DataState<List<NewsSearchDataResponse>>>(
-                    builder: (BuildContext context, DataState<List<NewsSearchDataResponse>> state) =>
+                child: BlocListener<NewsSearchBloc,
+                    DataState<List<NewsSearchDataResponse>>>(
+                  listener: (BuildContext context,
+                      DataState<List<NewsSearchDataResponse>> state) {},
+                  child: BlocBuilder<NewsSearchBloc,
+                      DataState<List<NewsSearchDataResponse>>>(
+                    builder: (BuildContext context,
+                            DataState<List<NewsSearchDataResponse>> state) =>
                         handleDataState<List<NewsSearchDataResponse>>(
                       state,
-                      (context, state) => Column(
-                        children: [
-                          ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: state!.length,
-                              itemBuilder: (context, i) => NewsWidget(
-                                    title:
-                                        state!.elementAt(i).title,
-                                    imageUrl: state!.elementAt(i)
-                                        .imagePath,
-                                    content: state!.elementAt(i)
-                                        .summary,
-                                  )),
-                        ],
-                      ),
+                      (context, state) => ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: state!.length,
+                          itemBuilder: (context, i) => NewsWidget(
+                                title: state!.elementAt(i).title,
+                                imageUrl: state!.elementAt(i).imagePath,
+                                content: state!.elementAt(i).summary,
+                              )),
                     ),
                   ),
                 )),

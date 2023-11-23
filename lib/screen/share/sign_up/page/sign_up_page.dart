@@ -7,7 +7,9 @@ import 'package:eportal/model/api/response/common_new/dang_ky_response.dart';
 import 'package:eportal/model/api/response/common_new/data/dang_ky_data_response.dart';
 import 'package:eportal/screen/share/sign_in/page/sign_in_page.dart';
 import 'package:eportal/state/base/base_state.dart';
+import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
+import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,6 +42,7 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
   int? role = 0;
 
   DangKyBloc dangKyBloc = DangKyBloc();
+
   @override
   String getPageTitle(BuildContext context) => "Đăng ký tài khoản";
 
@@ -48,16 +51,21 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
 
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
-    create: (_) => dangKyBloc,
-    child: BlocListener<DangKyBloc, DataState<DangKyDataResponse>>(
-      listener: (BuildContext context, DataState<DangKyDataResponse> state) {
-          handlerActionState<DangKyDataResponse>(state, (obj) async {
-            await GlobalApplication().Preferences?.setString(ApplicationConstant.REGISTER_USER_NAME, obj!.userName.replaceWhenNullOrWhiteSpace());
-            await GlobalApplication().Preferences?.setString(ApplicationConstant.REGISTER_USER_PASSWORD,passwordController.text);
-            nextPageWithoutBack((context) => const SignInPage());
-          });
-      },
-      child: ListView(
+        create: (_) => dangKyBloc,
+        child: BlocListener<DangKyBloc, DataState<DangKyDataResponse>>(
+          listener:
+              (BuildContext context, DataState<DangKyDataResponse> state) {
+            handlerActionState<DangKyDataResponse>(state, (obj) async {
+              await GlobalApplication().Preferences?.setString(
+                  ApplicationConstant.REGISTER_USER_NAME,
+                  obj!.userName.replaceWhenNullOrWhiteSpace());
+              await GlobalApplication().Preferences?.setString(
+                  ApplicationConstant.REGISTER_USER_PASSWORD,
+                  passwordController.text);
+              nextPageWithoutBack((context) => const SignInPage());
+            });
+          },
+          child: ListView(
             children: <Widget>[
               Container(
                 margin: const EdgeInsets.only(top: 30),
@@ -206,71 +214,15 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
               ),
               Container(
                   margin: const EdgeInsets.only(top: 10, bottom: 10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColor.colorOfIcon),
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      child: const Text('Đăng ký'),
-                    ),
+                  child: DefaultButton(
+                    text: 'Đăng ký',
                     onPressed: () => _registerAccount(context),
                   )),
             ],
           ),
-    ),
-  );
+        ),
+      );
 
-  /*
-  @override
-  Widget pageUI(BuildContext context) => Center(
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: double.infinity,
-          color: Colors.transparent,
-          child: Image.asset(
-            'assets/images/Logo.jpg',
-            alignment: Alignment.center,
-            fit: BoxFit.contain,
-            height: 125,
-            width: 125,
-          ),
-        ),
-        Container(
-            margin: const EdgeInsets.only(top: 10),
-            width: double.infinity,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColor.colorOfIcon),
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                child: const Text('Bạn là người lao động tìm việc làm?'),
-              ),
-              onPressed: () =>
-                  nextPage((context) => const SignUpWorkerPage()),
-            )),
-        Container(
-            margin: const EdgeInsets.only(top: 10, bottom: 10),
-            width: double.infinity,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColor.colorOfIcon),
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                child: const Text('Bạn là doanh nghiệp cần tuyển dụng?'),
-              ),
-              onPressed: () =>
-                  nextPage((context) => const SignUpEmployerPage()),
-            )),
-        Container(
-          width: double.infinity,
-          color: Colors.transparent,
-          height: 125,
-        ),
-      ],
-    ),
-  );*/
   _registerAccount(BuildContext context) {
     if (isValid()) {
       startLoading();

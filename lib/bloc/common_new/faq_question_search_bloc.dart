@@ -11,36 +11,43 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../model/api/response/common_new/data/faq_question_search_data_response.dart';
 
-class FaqQuestionSearchBloc extends Bloc<BaseEvent, DataMoreState<FaqQuestionSearchDataResponse>> {
+class FaqQuestionSearchBloc
+    extends Bloc<BaseEvent, DataMoreState<FaqQuestionSearchDataResponse>> {
   FaqQuestionSearchBloc()
       : super(const DataMoreState<FaqQuestionSearchDataResponse>()) {
     final FaqQuestionSearchRepository apiRepository =
-    FaqQuestionSearchRepository();
+        FaqQuestionSearchRepository();
 
     on<FaqQuestionSearchEvent>((event, emit) async {
       try {
-        if(state.hasReachedMax)return;
-        if(state.status == DataBlocStatus.init || event.request.obj.soTrangHienTai == 1) {
+        if (state.hasReachedMax && event.request.obj.soTrangHienTai != 1)
+          return;
+        if (state.status == DataBlocStatus.init ||
+            event.request.obj.soTrangHienTai == 1) {
           emit(state.copyWith(status: DataBlocStatus.loading));
         }
         final response =
-        await apiRepository.getFaqQuestionSearch(event.request);
+            await apiRepository.getFaqQuestionSearch(event.request);
         if (event.request.obj.soTrangHienTai == 1) {
-                    emit(state.copyWith(
-                            data: response.data,
-                            hasReachedMax: response.data.isEmpty,
-                            status: response.data.isEmpty ? DataBlocStatus.notfound: DataBlocStatus.success));
-        }
-        else{
+          emit(state.copyWith(
+              data: response.data,
+              hasReachedMax: response.data.isEmpty,
+              status: response.data.isEmpty
+                  ? DataBlocStatus.notfound
+                  : DataBlocStatus.success));
+        } else {
           emit(state.copyWith(
               data: state.data..addAll(response.data),
-              hasReachedMax: response.data.isEmpty,
+              hasReachedMax:
+                  response.data.length < event.request.obj.soBanGhiTrenTrang,
               status: DataBlocStatus.success));
         }
       } on Exception catch (e) {
-        emit(state.copyWith(errorMessage: e.toString(),status: DataBlocStatus.success,hasReachedMax: true));
+        emit(state.copyWith(
+            errorMessage: e.toString(),
+            status: DataBlocStatus.success,
+            hasReachedMax: true));
       }
     });
   }
 }
-

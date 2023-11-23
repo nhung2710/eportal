@@ -24,10 +24,10 @@ class AnswerAndQuestionPage extends BasePage {
   const AnswerAndQuestionPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _AnswerAndQuestionPageState();
+  State<StatefulWidget> createState() => AnswerAndQuestionPageState();
 }
 
-class _AnswerAndQuestionPageState
+class AnswerAndQuestionPageState
     extends BasePageStateActive<AnswerAndQuestionPage> {
   FaqQuestionSearchBloc faqQuestionSearchBloc = FaqQuestionSearchBloc();
   FaqQuestionSearchDataRequest request = FaqQuestionSearchDataRequest();
@@ -72,29 +72,30 @@ class _AnswerAndQuestionPageState
             DataMoreState<FaqQuestionSearchDataResponse>>(
           listener: (BuildContext context, state) {},
           child: BlocBuilder<FaqQuestionSearchBloc,
-              DataMoreState<FaqQuestionSearchDataResponse>>(
-            builder: (BuildContext context,
-                DataMoreState<FaqQuestionSearchDataResponse> state) => handleDataMoreState(state, (context, state) => Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    controller: scrollController,
-                    itemCount: state.length,
-                    itemBuilder: (BuildContext context, int index) =>
-                        AnswerAndQuestionItem(
-                          data: state.elementAt(index),
-                          index: index,
-                          onTap: () {},
-                        ),
-                  ),
-                ),
-                              ],
-                            ))
-            )
-                     ,
-          ),
-
+                  DataMoreState<FaqQuestionSearchDataResponse>>(
+              builder: (BuildContext context,
+                      DataMoreState<FaqQuestionSearchDataResponse> state) =>
+                  handleDataMoreState(
+                      state,
+                      (context, state) => Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  controller: scrollController,
+                                  itemCount: state.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) =>
+                                          AnswerAndQuestionItem(
+                                    data: state.elementAt(index),
+                                    index: index,
+                                    onTap: () {},
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ))),
+        ),
       );
 }

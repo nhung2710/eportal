@@ -10,29 +10,29 @@ import '../../event/base/base_event.dart';
 import '../../event/common_new/danh_sach_doanh_nghiep_event.dart';
 import '../../repository/common_new/danh_sach_doanh_nghiep_repository.dart';
 import '../../state/base/base_state.dart';
-class DanhSachDoanhNghiepBloc extends Bloc<BaseEvent, DataState<List<DanhSachDoanhNghiepDataResponse>>> {
-  DanhSachDoanhNghiepBloc() : super(const DataState<List<DanhSachDoanhNghiepDataResponse>>()) {
+
+class DanhSachDoanhNghiepBloc
+    extends Bloc<BaseEvent, DataState<List<DanhSachDoanhNghiepDataResponse>>> {
+  DanhSachDoanhNghiepBloc()
+      : super(const DataState<List<DanhSachDoanhNghiepDataResponse>>()) {
     final DanhSachDoanhNghiepRepository apiRepository =
-    DanhSachDoanhNghiepRepository();
+        DanhSachDoanhNghiepRepository();
 
     on<DanhSachDoanhNghiepEvent>((event, emit) async {
       try {
         emit(state.copyWith(status: DataBlocStatus.loading));
         final response =
-        await apiRepository.getDanhSachDoanhNghiep(event.request);
+            await apiRepository.getDanhSachDoanhNghiep(event.request);
         if (response.status != 2) {
-          emit(state.copyWith(errorMessage: response.message,status: DataBlocStatus.error));
+          emit(state.copyWith(
+              errorMessage: response.message, status: DataBlocStatus.error));
+        } else {
+          emit(state.copyWith(
+              data: response.data, status: DataBlocStatus.success));
         }
-        else{
-          if(response.data.isEmpty) {
-            emit(state.copyWith(status: DataBlocStatus.notfound));
-          } else {
-            emit(state.copyWith(data: response.data,status: DataBlocStatus.success));
-          }
-        }
-
       } on Exception catch (e) {
-        emit(state.copyWith(errorMessage: e.toString(),status: DataBlocStatus.error));
+        emit(state.copyWith(
+            errorMessage: e.toString(), status: DataBlocStatus.error));
       }
     });
   }

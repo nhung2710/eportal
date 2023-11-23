@@ -3,6 +3,7 @@ import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../extension/string_extension.dart';
 import '../../../../widget/video/eportal_video_widget.dart';
@@ -22,6 +23,18 @@ class VideoPage extends BasePage {
 
 class _VideoPageState extends BasePageState<VideoPage> {
   @override
+  void initDataLoading() {
+    // TODO: implement initDataLoading
+    super.initDataLoading();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget pageUI(BuildContext context) => SingleChildScrollView(
         child: Column(
           children: [
@@ -37,7 +50,7 @@ class _VideoPageState extends BasePageState<VideoPage> {
                   : widget.data.mediaUrl.getImageUrl(),
               youtubeId:
                   widget.data.isYoutube == true ? widget.data.mediaUrl : null,
-            )
+            ),
           ],
         ),
       );
