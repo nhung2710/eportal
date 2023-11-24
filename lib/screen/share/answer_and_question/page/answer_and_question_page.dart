@@ -38,16 +38,20 @@ class AnswerAndQuestionPageState
   @override
   void getMoreData() {
     request.soTrangHienTai++;
-    faqQuestionSearchBloc.add(FaqQuestionSearchEvent(
-        request: FaqQuestionSearchRequest(obj: request)));
+    callApi();
   }
 
   @override
   void initDataLoading() {
     request.soTrangHienTai = 1;
+    callApi();
+    super.initDataLoading();
+  }
+
+  @override
+  void callApi() {
     faqQuestionSearchBloc.add(FaqQuestionSearchEvent(
         request: FaqQuestionSearchRequest(obj: request)));
-    super.initDataLoading();
   }
 
   @override
@@ -59,8 +63,7 @@ class AnswerAndQuestionPageState
             color: Colors.white,
           ),
           onPressed: () {
-            loadDataDemo().then((value) =>
-                nextPage((context) => const AnswerAndQuestionAddPage()));
+            nextPage((context) => const AnswerAndQuestionAddPage());
           },
         ),
       ]);

@@ -143,9 +143,7 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
 
   _changeUserInfo(BuildContext context) {
     if (isValid()) {
-      loadDataDemo().then((value) {
-        showCenterMessage("Sửa hồ sơ thành công").then((value) => backPage());
-      });
+      showCenterMessage("Sửa hồ sơ thành công").then((value) => backPage());
     }
   }
 

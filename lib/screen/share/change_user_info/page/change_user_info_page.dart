@@ -144,10 +144,8 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
 
   _changeUserInfo(BuildContext context) {
     if (isValid()) {
-      loadDataDemo().then((value) {
-        showCenterMessage("Thay đổi thông tin thành công")
-            .then((value) => backPage());
-      });
+      showCenterMessage("Thay đổi thông tin thành công")
+          .then((value) => backPage());
     }
   }
 

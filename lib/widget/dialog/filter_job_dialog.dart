@@ -42,13 +42,14 @@ import '../default_button/default_button.dart';
 class FilterJobDialog extends BasePage {
   SearchRequestData data;
 
+  final VoidCallback onPressed;
   DanhSachTinhTpDataResponse? danhSachTinhTpDataResponse;
   DanhSachQuanHuyenDataResponse? danhSachQuanHuyenDataResponse;
   DanhSachDoanhNghiepDataResponse? danhSachDoanhNghiepDataResponse;
   DanhSachKinhNghiemDataResponse? danhSachKinhNghiemDataResponse;
   DanhSachMucLuongDataResponse? danhSachMucLuongDataResponse;
 
-  FilterJobDialog({super.key, required this.data}) {}
+  FilterJobDialog({super.key, required this.data, required this.onPressed});
 
   @override
   State<StatefulWidget> createState() => FilterJobDialogState();
@@ -204,9 +205,30 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
               Container(
                   margin: const EdgeInsets.only(top: 10),
                   width: double.infinity,
-                  child: DefaultButton(
-                    text: 'Tìm kiếm',
-                    onPressed: () => Navigator.of(context).pop(),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: DefaultButton(
+                          text: 'Tìm kiếm',
+                          onPressed: () {
+                            widget.onPressed();
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                      ),
+                      Expanded(
+                        child: DefaultButton(
+                          text: 'Hủy',
+                          backgroundColor: Colors.redAccent,
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ),
+                    ],
                   )),
             ],
           ),
@@ -226,8 +248,8 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
       onChanged: (DanhSachTinhTpDataResponse? data) {
         if (widget.danhSachTinhTpDataResponse != data) {
           widget.danhSachTinhTpDataResponse = data;
-          widget.data.tinhTp = data?.regionalID ?? 0;
-          widget.data.quanHuyen = 0;
+          widget.data.tinhTp = data?.regionalID;
+          widget.data.quanHuyen = null;
           widget.data.doanhNghiep = null;
           widget.danhSachQuanHuyenDataResponse = null;
           widget.danhSachDoanhNghiepDataResponse = null;

@@ -2,7 +2,9 @@ import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
+import 'package:eportal/widget/text_icon/text_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../extension/string_extension.dart';
 import '../../../../model/api/response/common_new/data/home_job_user_list_data_response.dart';
@@ -43,146 +45,44 @@ class _NewsCurriculumVitaeDetailPageState
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text(
-                    widget.homeJobUserListDataResponse.title.supportHtml(),
-                    style: AppTextStyle.title.copyWith(
-                        overflow: TextOverflow.visible,
-                        color: AppColor.colorOfIcon),
-                  ),
+                TextIcon(
+                  text: widget.homeJobUserListDataResponse.title.supportHtml(),
+                  icon: FontAwesomeIcons.tags,
+                  textStyle: AppTextStyle.title
+                      .copyWith(color: Colors.black, fontSize: 12),
+                  isHasBorder: false,
                 ),
-                const Divider(
-                  height: 1,
-                  color: AppColor.colorOfDrawer,
+                TextIcon(
+                  text: widget.homeJobUserListDataResponse.education
+                      .supportHtml(),
+                  icon: FontAwesomeIcons.graduationCap,
+                  textStyle: AppTextStyle.title
+                      .copyWith(color: Colors.black, fontSize: 12),
+                  isHasBorder: false,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                          flex: 1,
-                          child: Text(
-                            "Trình độ học vấn",
-                            style: AppTextStyle.title
-                                .copyWith(overflow: TextOverflow.visible),
-                          )),
-                      const VerticalDivider(
-                        thickness: 2,
-                        width: 5,
-                        color: Colors.transparent,
-                      ),
-                      Expanded(
-                          flex: 3,
-                          child: Text(
-                            widget.homeJobUserListDataResponse.education
-                                .supportHtml(),
-                            overflow: TextOverflow.visible,
-                            style: AppTextStyle.title
-                                .copyWith(color: AppColor.colorOfIcon),
-                          )),
-                    ],
-                  ),
+                TextIcon(
+                  text: widget.homeJobUserListDataResponse.careerGoals
+                      .supportHtml(),
+                  icon: FontAwesomeIcons.clockRotateLeft,
+                  textStyle: AppTextStyle.title
+                      .copyWith(color: Colors.black, fontSize: 12),
+                  isHasBorder: false,
                 ),
-                const Divider(
-                  height: 1,
-                  color: AppColor.colorOfDrawer,
+                TextIcon(
+                  text: widget.homeJobUserListDataResponse.skillsForte
+                      .supportHtml(),
+                  icon: FontAwesomeIcons.globe,
+                  textStyle: AppTextStyle.title
+                      .copyWith(color: Colors.black, fontSize: 12),
+                  isHasBorder: false,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                          flex: 1,
-                          child: Text(
-                            "Kinh nghiệm làm việc",
-                            style: AppTextStyle.title
-                                .copyWith(overflow: TextOverflow.visible),
-                          )),
-                      const VerticalDivider(
-                        thickness: 2,
-                        width: 5,
-                        color: Colors.transparent,
-                      ),
-                      Expanded(
-                          flex: 3,
-                          child: Text(
-                            widget.homeJobUserListDataResponse.careerGoals
-                                .supportHtml(),
-                            overflow: TextOverflow.visible,
-                            style: AppTextStyle.title
-                                .copyWith(color: AppColor.colorOfIcon),
-                          )),
-                    ],
-                  ),
-                ),
-                const Divider(
-                  height: 1,
-                  color: AppColor.colorOfDrawer,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                          flex: 1,
-                          child: Text(
-                            "Kỹ năng",
-                            style: AppTextStyle.title
-                                .copyWith(overflow: TextOverflow.visible),
-                          )),
-                      const VerticalDivider(
-                        thickness: 2,
-                        width: 5,
-                        color: Colors.transparent,
-                      ),
-                      Expanded(
-                          flex: 3,
-                          child: Text(
-                            widget.homeJobUserListDataResponse.skillsForte
-                                .supportHtml(),
-                            overflow: TextOverflow.visible,
-                            style: AppTextStyle.title
-                                .copyWith(color: AppColor.colorOfIcon),
-                          )),
-                    ],
-                  ),
-                ),
-                const Divider(
-                  height: 1,
-                  color: AppColor.colorOfDrawer,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                          flex: 1,
-                          child: Text(
-                            "Mục tiêu",
-                            style: AppTextStyle.title
-                                .copyWith(overflow: TextOverflow.visible),
-                          )),
-                      const VerticalDivider(
-                        thickness: 2,
-                        width: 5,
-                        color: Colors.transparent,
-                      ),
-                      Expanded(
-                          flex: 3,
-                          child: Text(
-                            widget.homeJobUserListDataResponse.workExperience
-                                .supportHtml(),
-                            overflow: TextOverflow.visible,
-                            style: AppTextStyle.title
-                                .copyWith(color: AppColor.colorOfIcon),
-                          )),
-                    ],
-                  ),
+                TextIcon(
+                  text: widget.homeJobUserListDataResponse.workExperience
+                      .supportHtml(),
+                  icon: FontAwesomeIcons.bullseye,
+                  textStyle: AppTextStyle.title
+                      .copyWith(color: AppColor.colorOfIcon, fontSize: 14),
+                  isHasBorder: false,
                 ),
               ],
             ),

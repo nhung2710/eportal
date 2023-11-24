@@ -1,53 +1,52 @@
-import 'package:eportal/model/api/response/common_new/data/work_search_data_response.dart';
-import 'package:eportal/screen/share/work_search_detail/page/work_search_detail_page.dart';
+import 'package:eportal/bloc/common_new/job_user_search_bloc.dart';
+import 'package:eportal/event/common_new/job_user_search_event.dart';
+import 'package:eportal/model/api/request/common_new/data/job_user_search_data_request.dart';
+import 'package:eportal/model/api/request/common_new/job_user_search_request.dart';
+import 'package:eportal/model/api/response/common_new/data/job_user_search_data_response.dart';
+import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_elevation.dart';
+import 'package:eportal/style/app_text_style.dart';
+import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
+import 'package:eportal/widget/input/search_input.dart';
+import 'package:eportal/widget/show_full_info/show_full_info.dart';
 import 'package:eportal/widget/text_icon/text_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../bloc/common_new/work_search_bloc.dart';
-import '../../../../event/common_new/work_search_event.dart';
 import '../../../../extension/string_extension.dart';
-import '../../../../model/api/request/common_new/data/work_search_data_request.dart';
-import '../../../../model/api/request/common_new/work_search_request.dart';
-import '../../../../model/api/response/common_new/work_search_response.dart';
-import '../../../../state/base/base_state.dart';
-import '../../../../style/app_text_style.dart';
-import '../../../../widget/base/base_page.dart';
-import '../../../../widget/input/search_input.dart';
-import '../../../../widget/show_full_info/show_full_info.dart';
 
 //
-// Created by BlackRose on 13/11/2023.
+// Created by BlackRose on 24/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class WorkSearchPage extends BasePage {
-  const WorkSearchPage({super.key});
+class NewsCurriculumVitaeSearchPage extends BasePage {
+  const NewsCurriculumVitaeSearchPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _WorkSearchPageState();
+  State<StatefulWidget> createState() => _NewsCurriculumVitaeSearchPageState();
 }
 
-class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
-  WorkSearchBloc workSearchBloc = WorkSearchBloc();
-  WorkSearchRequest request = WorkSearchRequest(obj: WorkSearchDataRequest());
+class _NewsCurriculumVitaeSearchPageState
+    extends BasePageState<NewsCurriculumVitaeSearchPage> {
+  JobUserSearchBloc jobUserSearchBloc = JobUserSearchBloc();
+  JobUserSearchRequest request =
+      JobUserSearchRequest(obj: JobUserSearchDataRequest());
   final filterJobDialogKey = GlobalKey<FilterJobDialogState>();
   late FilterJobDialog filterJobDialog = FilterJobDialog(
-    key: filterJobDialogKey,
-    data: request.obj,
-    onPressed: () => initDataLoading(),
-  );
+      key: filterJobDialogKey,
+      data: request.obj,
+      onPressed: () => initDataLoading());
   TextEditingController textEditingController = TextEditingController();
 
   @override
   void initDataLoading() {
     request.obj.tuKhoa = textEditingController.text;
     request.obj.soTrangHienTai = 1;
-    callApi();
+    jobUserSearchBloc.add(JobUserSearchEvent(request: request));
 
     super.initDataLoading();
   }
@@ -55,12 +54,7 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
   @override
   void getMoreData() {
     request.obj.soTrangHienTai++;
-    callApi();
-  }
-
-  @override
-  void callApi() {
-    workSearchBloc.add(WorkSearchEvent(request: request));
+    jobUserSearchBloc.add(JobUserSearchEvent(request: request));
   }
 
   @override
@@ -86,27 +80,23 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
           ),
           Expanded(
             child: BlocProvider(
-                create: (_) => workSearchBloc,
-                child: BlocListener<WorkSearchBloc,
-                    DataPageState<WorkSearchDataResponse>>(
+                create: (_) => jobUserSearchBloc,
+                child: BlocListener<JobUserSearchBloc,
+                    DataPageState<JobUserSearchDataResponse>>(
                   listener: (BuildContext context,
-                      DataPageState<WorkSearchDataResponse> state) {},
-                  child: BlocBuilder<WorkSearchBloc,
-                      DataPageState<WorkSearchDataResponse>>(
+                      DataPageState<JobUserSearchDataResponse> state) {},
+                  child: BlocBuilder<JobUserSearchBloc,
+                      DataPageState<JobUserSearchDataResponse>>(
                     builder: (BuildContext context,
-                            DataPageState<WorkSearchDataResponse> state) =>
-                        handleDataPageState<WorkSearchDataResponse>(
+                            DataPageState<JobUserSearchDataResponse> state) =>
+                        handleDataPageState<JobUserSearchDataResponse>(
                       state,
                       (context, state) => ListView.builder(
                           shrinkWrap: true,
                           controller: scrollController,
                           itemCount: state.length,
                           itemBuilder: (context, i) => GestureDetector(
-                                onTap: () =>
-                                    nextPage((context) => WorkSearchDetailPage(
-                                          workSearchDataResponse:
-                                              state.elementAt(i),
-                                        )),
+                                onTap: () => {},
                                 child: Card(
                                   elevation: AppElevation.sizeOfNormal,
                                   color: AppColor.colorOfApp,
@@ -145,25 +135,11 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
                                         TextIcon(
                                           text: state
                                               .elementAt(i)
-                                              .description
+                                              .education
                                               .supportHtml(),
-                                          overflow: TextOverflow.ellipsis,
-                                          icon: FontAwesomeIcons.briefcase,
+                                          icon: FontAwesomeIcons.graduationCap,
                                           maxLines: 3,
-                                          textStyle: AppTextStyle.title
-                                              .copyWith(
-                                                  color: Colors.black,
-                                                  fontSize: 12),
-                                          isHasBorder: false,
-                                        ),
-                                        TextIcon(
                                           overflow: TextOverflow.ellipsis,
-                                          text: state
-                                              .elementAt(i)
-                                              .ages
-                                              .supportHtml(),
-                                          maxLines: 3,
-                                          icon: FontAwesomeIcons.child,
                                           textStyle: AppTextStyle.title
                                               .copyWith(
                                                   color: Colors.black,
@@ -173,11 +149,12 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
                                         TextIcon(
                                           text: state
                                               .elementAt(i)
-                                              .workTime
+                                              .careerGoals
                                               .supportHtml(),
-                                          overflow: TextOverflow.ellipsis,
-                                          icon: FontAwesomeIcons.businessTime,
+                                          icon:
+                                              FontAwesomeIcons.clockRotateLeft,
                                           maxLines: 3,
+                                          overflow: TextOverflow.ellipsis,
                                           textStyle: AppTextStyle.title
                                               .copyWith(
                                                   color: Colors.black,
@@ -185,8 +162,25 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
                                           isHasBorder: false,
                                         ),
                                         TextIcon(
-                                          text: state.elementAt(i).benefit,
-                                          icon: FontAwesomeIcons.thumbsUp,
+                                          text: state
+                                              .elementAt(i)
+                                              .skillsForte
+                                              .supportHtml(),
+                                          icon: FontAwesomeIcons.globe,
+                                          maxLines: 3,
+                                          overflow: TextOverflow.ellipsis,
+                                          textStyle: AppTextStyle.title
+                                              .copyWith(
+                                                  color: Colors.black,
+                                                  fontSize: 12),
+                                          isHasBorder: false,
+                                        ),
+                                        TextIcon(
+                                          text: state
+                                              .elementAt(i)
+                                              .workExperience
+                                              .supportHtml(),
+                                          icon: FontAwesomeIcons.bullseye,
                                           maxLines: 3,
                                           overflow: TextOverflow.ellipsis,
                                           textStyle: AppTextStyle.title
@@ -197,7 +191,7 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
                                         ),
                                         ShowFullInfo(
                                           text: "Xem chi tiết",
-                                        )
+                                        ),
                                       ],
                                     ),
                                   ),

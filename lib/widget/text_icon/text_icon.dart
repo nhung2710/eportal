@@ -27,7 +27,7 @@ class TextIcon extends StatelessWidget {
     this.text,
     this.overflow = TextOverflow.visible,
     this.isHasBorder = true,
-    this.padding = 5,
+    this.padding = 2,
     this.maxLines,
   });
 
@@ -48,12 +48,10 @@ class TextIcon extends StatelessWidget {
   Widget _buildItem(BuildContext context) => Container(
         padding: EdgeInsets.all(padding),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Align(
-              alignment: Alignment.topLeft,
+              alignment: Alignment.centerLeft,
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Icon(

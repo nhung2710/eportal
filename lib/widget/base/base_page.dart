@@ -81,6 +81,8 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
     super.initState();
   }
 
+  void callApi() {}
+
   void initDataLoading() {}
 
   @override
@@ -219,14 +221,6 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
           automaticallyImplyLeading: getAutomaticallyImplyLeading(context),
         )
       : null;
-
-  Future<void> loadDataDemo() {
-    startLoading();
-    return Future.delayed(const Duration(milliseconds: 200)).then((value) {
-      stopLoading();
-      return value;
-    });
-  }
 
   bool getAutomaticallyImplyLeading(BuildContext context) => true;
 

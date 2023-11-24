@@ -4,7 +4,7 @@ import 'package:eportal/model/base/base_eportal_request.dart';
 import 'data/job_user_search_data_request.dart';
 
 class JobUserSearchRequest
-    extends BaseEportalRequest<JobUserSearchDataRequest> {
+    extends BasePageEportalRequest<JobUserSearchDataRequest> {
   JobUserSearchRequest({required super.obj});
 
   @override

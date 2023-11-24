@@ -13,7 +13,7 @@ import '../../event/common_new/job_user_search_event.dart';
 import '../../repository/common_new/job_user_search_repository.dart';
 import '../../state/base/base_state.dart';
 
-class JobUserSearchBloc extends BaseMultiBloc<JobUserSearchDataResponse,
+class JobUserSearchBloc extends BasePageBloc<JobUserSearchDataResponse,
     JobUserSearchRepository, JobUserSearchEvent, JobUserSearchResponse> {
   @override
   Future<JobUserSearchResponse> callApiResult(

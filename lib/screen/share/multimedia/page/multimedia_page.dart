@@ -34,14 +34,18 @@ class MultimediaPageState extends BasePageStateActive<MultimediaPage> {
   @override
   void getMoreData() {
     request.soTrangHienTai++;
+    callApi();
+  }
+
+  @override
+  void callApi() {
     videoListBloc.add(VideoListEvent(request: VideoListRequest(obj: request)));
   }
 
   @override
   void initDataLoading() {
-    request = VideoListDataRequest();
     request.soTrangHienTai = 1;
-    videoListBloc.add(VideoListEvent(request: VideoListRequest(obj: request)));
+    callApi();
     super.initDataLoading();
   }
 

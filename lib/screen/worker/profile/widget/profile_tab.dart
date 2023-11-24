@@ -31,8 +31,7 @@ class _ProfileTabState extends BasePageStateActive<ProfileTab> {
         ActionButton(
           icon: const Icon(Icons.add, color: Colors.white),
           onPressed: () {
-            loadDataDemo()
-                .then((value) => nextPage((context) => const ProfileAddPage()));
+            nextPage((context) => const ProfileAddPage());
           },
         ),
       ]);
@@ -45,8 +44,7 @@ class _ProfileTabState extends BasePageStateActive<ProfileTab> {
             itemCount: Random().nextInt(10) + 1,
             itemBuilder: (context, index) => GestureDetector(
                   onTap: () {
-                    loadDataDemo().then((value) =>
-                        nextPage((context) => const ProfileEditPage()));
+                    nextPage((context) => const ProfileAddPage());
                   },
                   child: Card(
                     elevation: AppElevation.sizeOfNormal,

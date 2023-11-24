@@ -5,6 +5,6 @@
 import '../../model/api/request/common_new/job_user_search_request.dart';
 import '../base/base_event.dart';
 
-class JobUserSearchEvent extends BaseMultiEvent<JobUserSearchRequest> {
+class JobUserSearchEvent extends BasePageEvent<JobUserSearchRequest> {
   const JobUserSearchEvent({required super.request});
 }

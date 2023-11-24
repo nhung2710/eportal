@@ -86,6 +86,7 @@ class BaseAdapterApi {
             cacheApi.timeout! >= DateTime.now().millisecondsSinceEpoch) {
           responseSoapBody = cacheApi.body.replaceWhenNullOrWhiteSpace();
           isUseCache = !responseSoapBody.isNullOrWhiteSpace();
+          log('body: ${responseSoapBody}');
         }
       }
     }

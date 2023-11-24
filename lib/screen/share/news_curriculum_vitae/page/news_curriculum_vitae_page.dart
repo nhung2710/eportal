@@ -1,17 +1,21 @@
+import 'package:eportal/model/api/request/common_new/data/home_job_user_list_data_request.dart';
 import 'package:eportal/model/api/response/common_new/data/home_job_user_list_data_response.dart';
+import 'package:eportal/screen/share/news_curriculum_vitae_search/page/news_curriculum_vitae_search_page.dart';
 import 'package:eportal/screen/share/work_search/page/work_search_page.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
+import 'package:eportal/widget/show_full_info/show_full_info.dart';
+import 'package:eportal/widget/text_icon/text_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../bloc/common_new/home_job_user_list_bloc.dart';
 import '../../../../constant/application_constant.dart';
 import '../../../../event/common_new/home_job_user_list_event.dart';
 import '../../../../extension/string_extension.dart';
-import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
 import '../../../../model/api/request/common_new/home_job_user_list_request.dart';
 import '../../../../model/api/response/common_new/home_job_user_list_response.dart';
 import '../../../../state/base/base_state.dart';
@@ -24,7 +28,7 @@ import '../../news_curriculum_vitae_detail/page/news_curriculum_vitae_detail_pag
 //
 
 class NewsCurriculumVitaePage extends BasePage {
-  NewsCurriculumVitaePage({super.key});
+  const NewsCurriculumVitaePage({super.key});
 
   @override
   State<StatefulWidget> createState() => _NewsCurriculumVitaePageState();
@@ -36,11 +40,14 @@ class _NewsCurriculumVitaePageState
 
   @override
   void initDataLoading() {
-    homeJobUserListBloc.add(HomeJobUserListEvent(
-        request: HomeJobUserListRequest(
-            obj: CommonNewDataRequest(
-                top: ApplicationConstant.NUMBER_FULL_ITEM))));
+    callApi();
     super.initDataLoading();
+  }
+
+  @override
+  void callApi() {
+    homeJobUserListBloc.add(HomeJobUserListEvent(
+        request: HomeJobUserListRequest(obj: HomeJobUserListDataRequest())));
   }
 
   @override
@@ -51,7 +58,8 @@ class _NewsCurriculumVitaePageState
               Icons.search,
               color: Colors.white,
             ),
-            onPressed: () => nextPage((context) => const WorkSearchPage()),
+            onPressed: () =>
+                nextPage((context) => const NewsCurriculumVitaeSearchPage()),
           ),
         ],
       );
@@ -75,8 +83,7 @@ class _NewsCurriculumVitaePageState
                 itemBuilder: (context, i) => GestureDetector(
                       onTap: () =>
                           nextPage((context) => NewsCurriculumVitaeDetailPage(
-                                homeJobUserListDataResponse:
-                                    state!.elementAt(i),
+                                homeJobUserListDataResponse: state.elementAt(i),
                               )),
                       child: Card(
                         elevation: AppElevation.sizeOfNormal,
@@ -95,119 +102,63 @@ class _NewsCurriculumVitaePageState
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Text(
-                                  state!.elementAt(i).title.supportHtml(),
-                                  style: AppTextStyle.title.copyWith(
-                                      overflow: TextOverflow.visible,
-                                      color: AppColor.colorOfIcon),
-                                ),
+                              TextIcon(
+                                text: state.elementAt(i).title.supportHtml(),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 3,
+                                icon: FontAwesomeIcons.tags,
+                                textStyle: AppTextStyle.title.copyWith(
+                                    color: Colors.black, fontSize: 12),
+                                isHasBorder: false,
                               ),
-                              const Divider(
-                                height: 1,
-                                color: AppColor.colorOfDrawer,
+                              TextIcon(
+                                text:
+                                    state.elementAt(i).education.supportHtml(),
+                                icon: FontAwesomeIcons.graduationCap,
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                textStyle: AppTextStyle.title.copyWith(
+                                    color: Colors.black, fontSize: 12),
+                                isHasBorder: false,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                        flex: 1,
-                                        child: Text(
-                                          "Trình độ học vấn",
-                                          style: AppTextStyle.title.copyWith(
-                                              overflow: TextOverflow.visible),
-                                        )),
-                                    const VerticalDivider(
-                                      thickness: 2,
-                                      width: 5,
-                                      color: Colors.transparent,
-                                    ),
-                                    Expanded(
-                                        flex: 3,
-                                        child: Text(
-                                          state!
-                                              .elementAt(i)
-                                              .education
-                                              .supportHtml(),
-                                          maxLines: 3,
-                                          style: AppTextStyle.title.copyWith(
-                                              color: AppColor.colorOfIcon),
-                                        )),
-                                  ],
-                                ),
+                              TextIcon(
+                                text: state
+                                    .elementAt(i)
+                                    .careerGoals
+                                    .supportHtml(),
+                                icon: FontAwesomeIcons.clockRotateLeft,
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                textStyle: AppTextStyle.title.copyWith(
+                                    color: Colors.black, fontSize: 12),
+                                isHasBorder: false,
                               ),
-                              const Divider(
-                                height: 1,
-                                color: AppColor.colorOfDrawer,
+                              TextIcon(
+                                text: state
+                                    .elementAt(i)
+                                    .skillsForte
+                                    .supportHtml(),
+                                icon: FontAwesomeIcons.globe,
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                textStyle: AppTextStyle.title.copyWith(
+                                    color: Colors.black, fontSize: 12),
+                                isHasBorder: false,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                        flex: 1,
-                                        child: Text(
-                                          "Kinh nghiệm làm việc",
-                                          style: AppTextStyle.title.copyWith(
-                                              overflow: TextOverflow.visible),
-                                        )),
-                                    const VerticalDivider(
-                                      thickness: 2,
-                                      width: 5,
-                                      color: Colors.transparent,
-                                    ),
-                                    Expanded(
-                                        flex: 3,
-                                        child: Text(
-                                          state!
-                                              .elementAt(i)
-                                              .careerGoals
-                                              .supportHtml(),
-                                          maxLines: 3,
-                                          style: AppTextStyle.title.copyWith(
-                                              color: AppColor.colorOfIcon),
-                                        )),
-                                  ],
-                                ),
+                              TextIcon(
+                                text: state
+                                    .elementAt(i)
+                                    .workExperience
+                                    .supportHtml(),
+                                icon: FontAwesomeIcons.bullseye,
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                textStyle: AppTextStyle.title.copyWith(
+                                    color: AppColor.colorOfIcon, fontSize: 14),
+                                isHasBorder: false,
                               ),
-                              const Divider(
-                                height: 1,
-                                color: AppColor.colorOfDrawer,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                        flex: 1,
-                                        child: Text(
-                                          "Mục tiêu",
-                                          style: AppTextStyle.title.copyWith(
-                                              overflow: TextOverflow.visible),
-                                        )),
-                                    const VerticalDivider(
-                                      thickness: 2,
-                                      width: 5,
-                                      color: Colors.transparent,
-                                    ),
-                                    Expanded(
-                                        flex: 3,
-                                        child: Text(
-                                          state!
-                                              .elementAt(i)
-                                              .workExperience
-                                              .supportHtml(),
-                                          maxLines: 3,
-                                          style: AppTextStyle.title.copyWith(
-                                              color: AppColor.colorOfIcon),
-                                        )),
-                                  ],
-                                ),
+                              ShowFullInfo(
+                                text: "Xem chi tiết",
                               ),
                             ],
                           ),

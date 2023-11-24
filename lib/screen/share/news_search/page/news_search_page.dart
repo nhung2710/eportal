@@ -35,15 +35,20 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
   @override
   void initDataLoading() {
     request.obj.soTrangHienTai = 1;
-    newsSearchBloc.add(NewsSearchEvent(request: request));
+    callApi();
     super.initDataLoading();
   }
 
   @override
   void getMoreData() {
     request.obj.soTrangHienTai++;
-    newsSearchBloc.add(NewsSearchEvent(request: request));
+    callApi();
     super.getMoreData();
+  }
+
+  @override
+  void callApi() {
+    newsSearchBloc.add(NewsSearchEvent(request: request));
   }
 
   @override

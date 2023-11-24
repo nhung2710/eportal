@@ -32,8 +32,7 @@ class _ReferrerTabState extends BasePageStateActive<ReferrerTab> {
         ActionButton(
           icon: const Icon(Icons.add, color: Colors.white),
           onPressed: () {
-            loadDataDemo().then(
-                (value) => nextPage((context) => const ReferrerAddPage()));
+            nextPage((context) => const ReferrerAddPage());
           },
         ),
       ]);
@@ -46,8 +45,7 @@ class _ReferrerTabState extends BasePageStateActive<ReferrerTab> {
             itemCount: Random().nextInt(10) + 1,
             itemBuilder: (context, index) => GestureDetector(
                   onTap: () {
-                    loadDataDemo().then((value) =>
-                        nextPage((context) => const ReferrerEditPage()));
+                    nextPage((context) => const ReferrerEditPage());
                   },
                   child: Card(
                     elevation: AppElevation.sizeOfNormal,

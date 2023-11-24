@@ -78,8 +78,7 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
             color: Colors.white,
           ),
           onPressed: () {
-            loadDataDemo()
-                .then((value) => nextPage((context) => const ChatBotPage()));
+            nextPage((context) => const ChatBotPage());
           },
         ),
       ]);

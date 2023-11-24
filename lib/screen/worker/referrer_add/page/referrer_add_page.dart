@@ -141,10 +141,8 @@ class _ReferrerAddPageState extends BasePageState<ReferrerAddPage> {
 
   _changeUserInfo(BuildContext context) {
     if (isValid()) {
-      loadDataDemo().then((value) {
-        showCenterMessage("Thêm người tham khảo thành công")
-            .then((value) => backPage());
-      });
+      showCenterMessage("Thêm người tham khảo thành công")
+          .then((value) => backPage());
     }
   }
 

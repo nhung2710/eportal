@@ -141,10 +141,8 @@ class _ReferrerEditPageState extends BasePageState<ReferrerEditPage> {
 
   _changeUserInfo(BuildContext context) {
     if (isValid()) {
-      loadDataDemo().then((value) {
-        showCenterMessage("Sửa người tham khảo thành công")
-            .then((value) => backPage());
-      });
+      showCenterMessage("Sửa người tham khảo thành công")
+          .then((value) => backPage());
     }
   }
 

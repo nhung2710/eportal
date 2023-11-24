@@ -143,9 +143,7 @@ class _ProfileAddPageState extends BasePageState<ProfileAddPage> {
 
   _changeUserInfo(BuildContext context) {
     if (isValid()) {
-      loadDataDemo().then((value) {
-        showCenterMessage("Thêm hồ sơ thành công").then((value) => backPage());
-      });
+      showCenterMessage("Thêm hồ sơ thành công").then((value) => backPage());
     }
   }
 

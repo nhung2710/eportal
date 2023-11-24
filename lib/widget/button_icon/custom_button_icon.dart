@@ -1,6 +1,7 @@
 import 'package:eportal/style/app_elevation.dart';
 import 'package:flutter/material.dart';
 
+import '../../extension/string_extension.dart';
 import '../../style/app_color.dart';
 import '../../style/app_text_style.dart';
 
@@ -11,13 +12,13 @@ import '../../style/app_text_style.dart';
 class CustomButtonIcon extends StatelessWidget {
   GestureTapCallback? onTap;
   IconData? iconData;
-  String? title;
+  String title;
 
   CustomButtonIcon({
     super.key,
     this.onTap,
     this.iconData,
-    this.title,
+    required this.title,
   });
 
   @override
@@ -51,7 +52,7 @@ class CustomButtonIcon extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: Text(
-                    title ?? "Call",
+                    title.addLine(2),
                     textAlign: TextAlign.center,
                     style: AppTextStyle.titleChild2
                         .copyWith(color: AppColor.colorOfIcon),

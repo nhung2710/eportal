@@ -91,10 +91,8 @@ class _ChangePasswordPageState extends BasePageState<ChangePasswordPage> {
 
   _changePassword(BuildContext context) {
     if (isValid()) {
-      loadDataDemo().then((value) {
-        showCenterMessage("Mật khẩu bạn thay đổi thành công")
-            .then((value) => backPage());
-      });
+      showCenterMessage("Mật khẩu bạn thay đổi thành công")
+          .then((value) => backPage());
     }
   }
 }

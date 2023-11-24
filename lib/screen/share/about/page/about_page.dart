@@ -38,8 +38,7 @@ class _AboutPageState extends BasePageState<AboutPage> {
   Color currentBackgroundColor(BuildContext context) => Colors.white;
 
   @override
-  Widget pageUI(BuildContext context) => SingleChildScrollView(
-          child: BlocProvider(
+  Widget pageUI(BuildContext context) => BlocProvider(
         create: (_) => gioiThieuTrungTamBloc,
         child: BlocListener<GioiThieuTrungTamBloc, DataSingleState<String>>(
             listener: (BuildContext context, DataSingleState<String> state) {},
@@ -47,18 +46,20 @@ class _AboutPageState extends BasePageState<AboutPage> {
               builder: (BuildContext context, DataSingleState<String> state) =>
                   handleDataSingleState<String>(
                 state,
-                (context, state) => Container(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Html(
-                    data: state.replaceWhenNullOrWhiteSpace(),
-                    style: {
-                      '#': Style(
-                        fontSize: FontSize(16),
-                      ),
-                    },
+                (context, state) => SingleChildScrollView(
+                  child: Container(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Html(
+                      data: state.replaceWhenNullOrWhiteSpace(),
+                      style: {
+                        '#': Style(
+                          fontSize: FontSize(16),
+                        ),
+                      },
+                    ),
                   ),
                 ),
               ),
             )),
-      ));
+      );
 }

@@ -81,11 +81,9 @@ class _ForgotPasswordPageState extends BasePageState<ForgotPasswordPage> {
 
   _signUp(BuildContext context) {
     if (isValid()) {
-      loadDataDemo().then((value) {
-        showCenterMessage(
-                "Hệ thống đã gửi mật khẩu mới về email của bạn vui lòng kiểm tra lại")
-            .then((value) => nextPage((context) => const SignUpPage()));
-      });
+      showCenterMessage(
+              "Hệ thống đã gửi mật khẩu mới về email của bạn vui lòng kiểm tra lại")
+          .then((value) => nextPage((context) => const SignUpPage()));
     }
   }
 }

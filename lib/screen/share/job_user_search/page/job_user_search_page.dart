@@ -70,14 +70,14 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
             child: BlocProvider(
                 create: (_) => jobUserSearchBloc,
                 child: BlocListener<JobUserSearchBloc,
-                    DataMultiState<JobUserSearchDataResponse>>(
+                    DataPageState<JobUserSearchDataResponse>>(
                   listener: (BuildContext context,
-                      DataMultiState<JobUserSearchDataResponse> state) {},
+                      DataPageState<JobUserSearchDataResponse> state) {},
                   child: BlocBuilder<JobUserSearchBloc,
-                      DataMultiState<JobUserSearchDataResponse>>(
+                      DataPageState<JobUserSearchDataResponse>>(
                     builder: (BuildContext context,
-                            DataMultiState<JobUserSearchDataResponse> state) =>
-                        handleDataMultiState<JobUserSearchDataResponse>(
+                            DataPageState<JobUserSearchDataResponse> state) =>
+                        handleDataPageState<JobUserSearchDataResponse>(
                       state,
                       (context, state) => ListView.builder(
                           shrinkWrap: true,
