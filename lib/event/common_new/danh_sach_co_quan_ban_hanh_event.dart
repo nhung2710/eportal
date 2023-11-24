@@ -7,6 +7,6 @@ import 'package:eportal/model/api/request/common_new/danh_sach_co_quan_ban_hanh_
 //
 
 class DanhSachCoQuanBanHanhEvent
-    extends BaseEvent<DanhSachCoQuanBanHanhRequest> {
+    extends BaseMultiEvent<DanhSachCoQuanBanHanhRequest> {
   const DanhSachCoQuanBanHanhEvent({required super.request});
 }

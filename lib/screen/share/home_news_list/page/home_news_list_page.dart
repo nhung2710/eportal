@@ -51,69 +51,65 @@ class _HomeNewsListPageState extends BasePageStateActive<HomeNewsListPage> {
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => homeNewsListCommonBloc,
-      child: BlocListener<HomeNewsListBloc, DataState<List<HomeNewsListDataResponse>>>(
-        listener: (BuildContext context, DataState<List<HomeNewsListDataResponse>> state) {},
-        child: BlocBuilder<HomeNewsListBloc, DataState<List<HomeNewsListDataResponse>>>(
-          builder: (BuildContext context, DataState<List<HomeNewsListDataResponse>> state) =>
-              handleDataState<List<HomeNewsListDataResponse>>(
+      child: BlocListener<HomeNewsListBloc,
+          DataMultiState<HomeNewsListDataResponse>>(
+        listener: (BuildContext context,
+            DataMultiState<HomeNewsListDataResponse> state) {},
+        child: BlocBuilder<HomeNewsListBloc,
+            DataMultiState<HomeNewsListDataResponse>>(
+          builder: (BuildContext context,
+                  DataMultiState<HomeNewsListDataResponse> state) =>
+              handleDataMultiState<HomeNewsListDataResponse>(
             state,
-            (context, state) => Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: state!.length,
-                      itemBuilder: (context, i) => GestureDetector(
-                            onTap: () => nextPage((context) => EmptyExamplePage(
-                                  isHasAppBar: true,
+            (context, state) => ListView.builder(
+                shrinkWrap: true,
+                itemCount: state.length,
+                itemBuilder: (context, i) => GestureDetector(
+                      onTap: () => nextPage((context) => EmptyExamplePage(
+                            isHasAppBar: true,
+                          )),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.white,
+                        ),
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.only(top: 5),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                                width: 80,
+                                child: ImageLoading(
+                                  imageUrl: state!
+                                      .elementAt(i)
+                                      .imagePath
+                                      .getImageUrl(),
+                                  imageBuilder: (BuildContext context,
+                                      ImageProvider<Object> imageProvider) {
+                                    return ClipRRect(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      child: Image(
+                                        image: imageProvider,
+                                        fit: BoxFit.fill,
+                                      ),
+                                    );
+                                  },
                                 )),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Colors.white,
-                              ),
-                              padding: const EdgeInsets.all(10),
-                              margin: const EdgeInsets.only(top: 5),
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                      width: 80,
-                                      child: ImageLoading(
-                                        imageUrl: state!
-                                            .elementAt(i)
-                                            .imagePath
-                                            .getImageUrl(),
-                                        imageBuilder: (BuildContext context,
-                                            ImageProvider<Object>
-                                                imageProvider) {
-                                          return ClipRRect(
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(5.0)),
-                                            child: Image(
-                                              image: imageProvider,
-                                              fit: BoxFit.fill,
-                                            ),
-                                          );
-                                        },
-                                      )),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Text(
-                                      (state!.elementAt(i).title).supportHtml(),
-                                      style: AppTextStyle.title.copyWith(
-                                          color: AppColor.colorOfText,
-                                          overflow: TextOverflow.visible,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ],
+                            Expanded(
+                              flex: 1,
+                              child: Text(
+                                (state!.elementAt(i).title).supportHtml(),
+                                style: AppTextStyle.title.copyWith(
+                                    color: AppColor.colorOfText,
+                                    overflow: TextOverflow.visible,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
-                          )),
-                ),
-              ],
-            ),
+                          ],
+                        ),
+                      ),
+                    )),
           ),
         ),
       ));

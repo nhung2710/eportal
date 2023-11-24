@@ -7,11 +7,10 @@ import 'package:eportal/model/api/response/common_new/data/home_business_list_da
 
 import '../../../base/base_eportal_response.dart';
 
-class HomeBusinessListResponse extends BaseEportalResponse {
-  List<HomeBusinessListDataResponse> data;
-
-  HomeBusinessListResponse({required this.data, required status, required message})
-      : super(status: status, message: message);
+class HomeBusinessListResponse
+    extends BaseMultiEportalResponse<HomeBusinessListDataResponse> {
+  HomeBusinessListResponse(
+      {required super.data, required super.status, required super.message});
 
   factory HomeBusinessListResponse.fromJson(Map<String, dynamic> json) {
     List<HomeBusinessListDataResponse> data = <HomeBusinessListDataResponse>[];

@@ -6,11 +6,10 @@ import 'data/home_slide_list_data_response.dart';
 // Created by BlackRose on 11/6/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class HomeSlideListResponse extends BaseEportalResponse {
-  List<HomeSlideListDataResponse> data;
-
-  HomeSlideListResponse({required this.data, required status, required message})
-      : super(status: status, message: message);
+class HomeSlideListResponse
+    extends BaseMultiEportalResponse<HomeSlideListDataResponse> {
+  HomeSlideListResponse(
+      {required super.data, required super.status, required super.message});
 
   factory HomeSlideListResponse.fromJson(Map<String, dynamic> json) {
     List<HomeSlideListDataResponse> data = <HomeSlideListDataResponse>[];

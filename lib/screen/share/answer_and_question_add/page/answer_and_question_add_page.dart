@@ -52,10 +52,11 @@ class _AnswerAndQuestionAddPageState
   Widget pageUI(BuildContext context) => BlocProvider(
         create: (_) => faqAddQuestionBloc,
         child: BlocListener<FaqAddQuestionBloc,
-            DataState<FaqAddQuestionDataResponse>>(
+            DataSingleState<FaqAddQuestionDataResponse>>(
           listener: (BuildContext context,
-              DataState<FaqAddQuestionDataResponse> state) {
-            handlerActionState<FaqAddQuestionDataResponse>(state, (obj) async {
+              DataSingleState<FaqAddQuestionDataResponse> state) {
+            handlerActionDataSingleState<FaqAddQuestionDataResponse>(state,
+                (obj) async {
               showCenterMessage("Bạn đã gửi câu hỏi thành công")
                   .then((value) => backPage());
             });

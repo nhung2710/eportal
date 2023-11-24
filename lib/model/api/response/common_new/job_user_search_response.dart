@@ -7,11 +7,10 @@ import 'dart:convert';
 import 'package:eportal/model/api/response/common_new/data/job_user_search_data_response.dart';
 import 'package:eportal/model/base/base_eportal_response.dart';
 
-class JobUserSearchResponse extends BaseEportalResponse {
-  List<JobUserSearchDataResponse> data;
-
-  JobUserSearchResponse({required this.data, required status, required message})
-      : super(status: status, message: message);
+class JobUserSearchResponse
+    extends BaseMultiEportalResponse<JobUserSearchDataResponse> {
+  JobUserSearchResponse(
+      {required super.data, required super.status, required super.message});
 
   factory JobUserSearchResponse.fromJson(Map<String, dynamic> json) {
     List<JobUserSearchDataResponse> data = <JobUserSearchDataResponse>[];
@@ -22,10 +21,5 @@ class JobUserSearchResponse extends BaseEportalResponse {
     }
     return JobUserSearchResponse(
         data: data, status: json["status"], message: json["message"]);
-  }
-
-  @override
-  String toString() {
-    return json.encode(data);
   }
 }

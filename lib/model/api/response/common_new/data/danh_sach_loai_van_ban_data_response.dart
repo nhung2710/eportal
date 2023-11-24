@@ -1,9 +1,9 @@
-
-
 //
 // Created by BlackRose on 21/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class DanhSachLoaiVanBanDataResponse {
+import 'package:eportal/model/base/base_eportal_data_response.dart';
+
+class DanhSachLoaiVanBanDataResponse extends BaseEportalDataResponse {
   DanhSachLoaiVanBanDataResponse.fromJson(Map<String, dynamic> json) {}
 }

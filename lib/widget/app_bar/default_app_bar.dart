@@ -47,7 +47,7 @@ class DefaultAppBar {
           ],
         ),
         actions: [
-          GlobalApplication().IsLogin
+          GlobalApplication().isLogin
               ? IconButton(
                   onPressed: () {
                     GlobalApplication().signOut().then((value) =>

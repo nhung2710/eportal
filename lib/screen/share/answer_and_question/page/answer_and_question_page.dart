@@ -69,13 +69,13 @@ class AnswerAndQuestionPageState
   Widget pageUI(BuildContext context) => BlocProvider(
         create: (_) => faqQuestionSearchBloc,
         child: BlocListener<FaqQuestionSearchBloc,
-            DataMoreState<FaqQuestionSearchDataResponse>>(
+            DataPageState<FaqQuestionSearchDataResponse>>(
           listener: (BuildContext context, state) {},
           child: BlocBuilder<FaqQuestionSearchBloc,
-                  DataMoreState<FaqQuestionSearchDataResponse>>(
+                  DataPageState<FaqQuestionSearchDataResponse>>(
               builder: (BuildContext context,
-                      DataMoreState<FaqQuestionSearchDataResponse> state) =>
-                  handleDataMoreState(
+                      DataPageState<FaqQuestionSearchDataResponse> state) =>
+                  handleDataPageState(
                       state,
                       (context, state) => Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

@@ -94,15 +94,15 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                 child: BlocProvider(
                     create: (_) => homeSlideListBloc,
                     child: BlocListener<HomeSlideListBloc,
-                        DataState<List<HomeSlideListDataResponse>>>(
+                        DataMultiState<HomeSlideListDataResponse>>(
                       listener: (BuildContext context,
-                          DataState<List<HomeSlideListDataResponse>> state) {},
+                          DataMultiState<HomeSlideListDataResponse> state) {},
                       child: BlocBuilder<HomeSlideListBloc,
-                          DataState<List<HomeSlideListDataResponse>>>(
+                          DataMultiState<HomeSlideListDataResponse>>(
                         builder: (BuildContext context,
-                                DataState<List<HomeSlideListDataResponse>>
+                                DataMultiState<HomeSlideListDataResponse>
                                     state) =>
-                            handleDataState<List<HomeSlideListDataResponse>>(
+                            handleDataMultiState<HomeSlideListDataResponse>(
                           state,
                           (context, state) => CarouselSlider(
                             options: CarouselOptions(
@@ -212,17 +212,16 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                 child: BlocProvider(
                     create: (_) => homeAdvertiseListBloc,
                     child: BlocListener<HomeAdvertiseListBloc,
-                        DataState<List<HomeAdvertiseListDataResponse>>>(
+                        DataMultiState<HomeAdvertiseListDataResponse>>(
                       listener: (BuildContext context,
-                          DataState<List<HomeAdvertiseListDataResponse>>
+                          DataMultiState<HomeAdvertiseListDataResponse>
                               state) {},
                       child: BlocBuilder<HomeAdvertiseListBloc,
-                          DataState<List<HomeAdvertiseListDataResponse>>>(
+                          DataMultiState<HomeAdvertiseListDataResponse>>(
                         builder: (BuildContext context,
-                                DataState<List<HomeAdvertiseListDataResponse>>
+                                DataMultiState<HomeAdvertiseListDataResponse>
                                     state) =>
-                            handleDataState<
-                                List<HomeAdvertiseListDataResponse>>(
+                            handleDataMultiState<HomeAdvertiseListDataResponse>(
                           state,
                           (context, state) => CarouselSlider(
                             options: CarouselOptions(
@@ -311,16 +310,16 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                 child: BlocProvider(
                     create: (_) => homeBusinessListBloc,
                     child: BlocListener<HomeBusinessListBloc,
-                        DataState<List<HomeBusinessListDataResponse>>>(
+                        DataMultiState<HomeBusinessListDataResponse>>(
                       listener: (BuildContext context,
-                          DataState<List<HomeBusinessListDataResponse>>
+                          DataMultiState<HomeBusinessListDataResponse>
                               state) {},
                       child: BlocBuilder<HomeBusinessListBloc,
-                          DataState<List<HomeBusinessListDataResponse>>>(
+                          DataMultiState<HomeBusinessListDataResponse>>(
                         builder: (BuildContext context,
-                                DataState<List<HomeBusinessListDataResponse>>
+                                DataMultiState<HomeBusinessListDataResponse>
                                     state) =>
-                            handleDataState<List<HomeBusinessListDataResponse>>(
+                            handleDataMultiState<HomeBusinessListDataResponse>(
                           state,
                           (context, state) => CarouselSlider(
                             options: CarouselOptions(

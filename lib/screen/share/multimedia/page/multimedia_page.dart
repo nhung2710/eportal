@@ -51,13 +51,13 @@ class MultimediaPageState extends BasePageStateActive<MultimediaPage> {
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => videoListBloc,
-      child: BlocListener<VideoListBloc, DataMoreState<VideoListDataResponse>>(
+      child: BlocListener<VideoListBloc, DataPageState<VideoListDataResponse>>(
         listener: (BuildContext context,
-            DataMoreState<VideoListDataResponse> state) {},
-        child: BlocBuilder<VideoListBloc, DataMoreState<VideoListDataResponse>>(
+            DataPageState<VideoListDataResponse> state) {},
+        child: BlocBuilder<VideoListBloc, DataPageState<VideoListDataResponse>>(
             builder: (BuildContext context,
-                    DataMoreState<VideoListDataResponse> state) =>
-                handleDataMoreState(
+                    DataPageState<VideoListDataResponse> state) =>
+                handleDataPageState(
                   state,
                   (context, state) => Column(
                     children: [

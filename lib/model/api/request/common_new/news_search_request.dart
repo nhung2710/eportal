@@ -3,7 +3,7 @@ import 'package:eportal/model/base/base_eportal_request.dart';
 
 import 'data/news_search_data_request.dart';
 
-class NewsSearchRequest extends BaseEportalRequest<NewsSearchDataRequest> {
+class NewsSearchRequest extends BasePageEportalRequest<NewsSearchDataRequest> {
   NewsSearchRequest({required super.obj});
 
   @override

@@ -34,8 +34,16 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
 
   @override
   void initDataLoading() {
+    request.obj.soTrangHienTai = 1;
     newsSearchBloc.add(NewsSearchEvent(request: request));
     super.initDataLoading();
+  }
+
+  @override
+  void getMoreData() {
+    request.obj.soTrangHienTai++;
+    newsSearchBloc.add(NewsSearchEvent(request: request));
+    super.getMoreData();
   }
 
   @override
@@ -79,22 +87,23 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
             child: BlocProvider(
                 create: (_) => newsSearchBloc,
                 child: BlocListener<NewsSearchBloc,
-                    DataState<List<NewsSearchDataResponse>>>(
+                    DataPageState<NewsSearchDataResponse>>(
                   listener: (BuildContext context,
-                      DataState<List<NewsSearchDataResponse>> state) {},
+                      DataPageState<NewsSearchDataResponse> state) {},
                   child: BlocBuilder<NewsSearchBloc,
-                      DataState<List<NewsSearchDataResponse>>>(
+                      DataPageState<NewsSearchDataResponse>>(
                     builder: (BuildContext context,
-                            DataState<List<NewsSearchDataResponse>> state) =>
-                        handleDataState<List<NewsSearchDataResponse>>(
+                            DataPageState<NewsSearchDataResponse> state) =>
+                        handleDataPageState<NewsSearchDataResponse>(
                       state,
                       (context, state) => ListView.builder(
+                          controller: scrollController,
                           shrinkWrap: true,
-                          itemCount: state!.length,
+                          itemCount: state.length,
                           itemBuilder: (context, i) => NewsWidget(
-                                title: state!.elementAt(i).title,
-                                imageUrl: state!.elementAt(i).imagePath,
-                                content: state!.elementAt(i).summary,
+                                title: state.elementAt(i).title,
+                                imageUrl: state.elementAt(i).imagePath,
+                                content: state.elementAt(i).summary,
                               )),
                     ),
                   ),

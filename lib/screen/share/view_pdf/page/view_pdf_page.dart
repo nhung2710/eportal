@@ -10,6 +10,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
+import '../../../../application/global_application.dart';
 import '../../../../extension/string_extension.dart';
 
 //
@@ -46,19 +47,22 @@ class _ViewPdfPageState extends BasePageState<ViewPdfPage> {
   Widget pageUI(BuildContext context) => FutureBuilder(
         future: path,
         builder: (BuildContext context, AsyncSnapshot<File?> snapshot) {
-          if (snapshot.data == null) {
-            return buildNotFoundData(context);
+          if (snapshot.hasData) {
+            if (snapshot.data == null) {
+              return buildNotFoundData(context);
+            } else {
+              return SfPdfViewer.file(snapshot.data!);
+            }
           } else {
-            return SfPdfViewer.file(snapshot.data!);
+            return buildScreenLoading(context);
           }
         },
       );
 
   Future<File?> downloadFilePdf() async {
     try {
-      final dir = await getApplicationDocumentsDirectory();
       String fileName = "${md5.convert(utf8.encode(widget.url))}.pdf";
-      final fullDirPath = '${dir.path}/download/pdf';
+      final fullDirPath = '${GlobalApplication().dirPath}/download/pdf';
       final fullPath = '$fullDirPath/$fileName';
       Directory directory = Directory(fullDirPath);
       if (!await directory.exists()) {

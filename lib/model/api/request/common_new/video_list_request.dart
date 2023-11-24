@@ -7,7 +7,7 @@ import 'package:eportal/model/base/base_eportal_request.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class VideoListRequest extends BaseEportalRequest<VideoListDataRequest> {
+class VideoListRequest extends BasePageEportalRequest<VideoListDataRequest> {
   VideoListRequest({required super.obj});
 
   @override

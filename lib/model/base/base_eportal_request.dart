@@ -28,3 +28,18 @@ abstract class BaseEportalRequest<T extends BaseEportalXml> {
 
   Uri getUri() => Uri.parse(getStringUri());
 }
+
+abstract class BaseSingleEportalRequest<T extends BaseSingleEportalXml>
+    extends BaseEportalRequest<T> {
+  BaseSingleEportalRequest({required super.obj});
+}
+
+abstract class BaseMultiEportalRequest<T extends BaseMultiEportalXml>
+    extends BaseEportalRequest<T> {
+  BaseMultiEportalRequest({required super.obj});
+}
+
+abstract class BasePageEportalRequest<T extends BasePageEportalXml>
+    extends BaseEportalRequest<T> {
+  BasePageEportalRequest({required super.obj});
+}

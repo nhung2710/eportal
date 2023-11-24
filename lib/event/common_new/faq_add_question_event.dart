@@ -6,6 +6,6 @@ import 'package:eportal/model/api/request/common_new/faq_add_question_request.da
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class FaqAddQuestionEvent extends BaseEvent<FaqAddQuestionRequest> {
+class FaqAddQuestionEvent extends BaseSingleEvent<FaqAddQuestionRequest> {
   const FaqAddQuestionEvent({required super.request});
 }

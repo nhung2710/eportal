@@ -41,27 +41,28 @@ class _NewsLegalDocumentPageState extends BasePageState<NewsLegalDocumentPage> {
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => homeDocumentListBloc,
-      child: BlocListener<HomeDocumentListBloc, DataState<List<HomeDocumentListDataResponse>>>(
-        listener: (BuildContext context, DataState<List<HomeDocumentListDataResponse>> state) {},
-        child: BlocBuilder<HomeDocumentListBloc, DataState<List<HomeDocumentListDataResponse>>>(
-          builder: (BuildContext context, DataState<List<HomeDocumentListDataResponse>> state) =>
-              handleDataState<List<HomeDocumentListDataResponse>>(
+      child: BlocListener<HomeDocumentListBloc,
+          DataMultiState<HomeDocumentListDataResponse>>(
+        listener: (BuildContext context,
+            DataMultiState<HomeDocumentListDataResponse> state) {},
+        child: BlocBuilder<HomeDocumentListBloc,
+            DataMultiState<HomeDocumentListDataResponse>>(
+          builder: (BuildContext context,
+                  DataMultiState<HomeDocumentListDataResponse> state) =>
+              handleDataMultiState<HomeDocumentListDataResponse>(
             state,
-            (context, state) =>  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: state!.length,
-                    itemBuilder: (context, i) => NewsWidget(
-                          onTap: () => nextPage((context) => ViewPdfPage(
-                                url: state!
-                                    .elementAt(i)
-                                    .fileSource
-                                    .getImageUrl(),
-                              )),
-                          title: state!.elementAt(i).documentName,
-                          isHasImage: false,
-                          content: state!.elementAt(i).contents,
-                          time: state!.elementAt(i).effectDate,
-                        )),
+            (context, state) => ListView.builder(
+                shrinkWrap: true,
+                itemCount: state.length,
+                itemBuilder: (context, i) => NewsWidget(
+                      onTap: () => nextPage((context) => ViewPdfPage(
+                            url: state.elementAt(i).fileSource.getImageUrl(),
+                          )),
+                      title: state.elementAt(i).documentName,
+                      isHasImage: false,
+                      content: state.elementAt(i).contents,
+                      time: state.elementAt(i).effectDate,
+                    )),
           ),
         ),
       ));

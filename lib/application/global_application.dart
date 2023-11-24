@@ -7,24 +7,25 @@ import 'package:eportal/enum/role_type.dart';
 
 class GlobalApplication {
   static final GlobalApplication _instance = GlobalApplication._internal();
-  String UserName = ApplicationConstant.EMPTY;
-  String UserNameSaved = ApplicationConstant.EMPTY;
-  String UserPasswordSaved = ApplicationConstant.EMPTY;
-  String FullName = ApplicationConstant.EMPTY;
-  String UserPassword = ApplicationConstant.EMPTY;
-  String UserId = ApplicationConstant.EMPTY;
-  RoleType UserRoleType = RoleType.anonymous;
-  SharedPreferences? Preferences;
+  String userName = ApplicationConstant.EMPTY;
+  String userNameSaved = ApplicationConstant.EMPTY;
+  String userPasswordSaved = ApplicationConstant.EMPTY;
+  String fullName = ApplicationConstant.EMPTY;
+  String userPassword = ApplicationConstant.EMPTY;
+  String userId = ApplicationConstant.EMPTY;
+  String dirPath = ApplicationConstant.EMPTY;
+  RoleType roleType = RoleType.anonymous;
+  SharedPreferences? preferences;
 
   factory GlobalApplication() {
     return _instance;
   }
 
-  bool get IsLogin => UserRoleType != RoleType.anonymous;
+  bool get isLogin => roleType != RoleType.anonymous;
 
   String getStringOneTimePreferences(String key) {
-    var value = (Preferences?.getString(key)).replaceWhenNullOrEmpty();
-    Preferences?.remove(key);
+    var value = (preferences?.getString(key)).replaceWhenNullOrEmpty();
+    preferences?.remove(key);
     return value;
   }
 
@@ -49,32 +50,37 @@ class GlobalApplication {
   Future<void> signIn(
       DangNhapDataResponse? data, String userName, String password) async {
     if (data != null) {
-      UserRoleType = data.roleType;
-      if (UserRoleType != RoleType.anonymous) {
-        FullName = data.userName.replaceWhenNullOrWhiteSpace();
-        UserName = userName;
-        UserNameSaved = userName;
-        UserId = data.userID.replaceWhenNullOrWhiteSpace();
-        UserPassword = password;
-        UserPasswordSaved = password;
-        await Preferences?.setString(ApplicationConstant.USER_NAME, UserName);
-        await Preferences?.setString(
-            ApplicationConstant.USER_PASSWORD, UserPassword);
-        await Preferences?.setBool(ApplicationConstant.AUTO_LOGIN, true);
+      roleType = data.roleType;
+      if (roleType != RoleType.anonymous) {
+        fullName = data.userName.replaceWhenNullOrWhiteSpace();
+        userName = userName;
+        userNameSaved = userName;
+        userId = data.userID.replaceWhenNullOrWhiteSpace();
+        userPassword = password;
+        userPasswordSaved = password;
+        return Future.wait([
+          preferences!.setString(ApplicationConstant.USER_NAME, userName),
+          preferences!.setString(ApplicationConstant.USER_PASSWORD, password),
+          preferences!.setBool(ApplicationConstant.AUTO_LOGIN, true),
+        ]).then((value) => {});
       }
     }
   }
 
   Future<void> signOut() async {
-    FullName = "bạn";
-    UserName = ApplicationConstant.EMPTY;
-    UserPassword = ApplicationConstant.EMPTY;
-    UserId = ApplicationConstant.EMPTY;
-    await Preferences?.setBool(ApplicationConstant.AUTO_LOGIN, false);
+    fullName = "bạn";
+    userName = ApplicationConstant.EMPTY;
+    userPassword = ApplicationConstant.EMPTY;
+    userId = ApplicationConstant.EMPTY;
+    if (preferences != null) {
+      return preferences!
+          .setBool(ApplicationConstant.AUTO_LOGIN, false)
+          .then((value) => {});
+    }
   }
 
   String helloUser() {
-    return "Chào $FullName";
+    return "Chào $fullName";
   }
 
   GlobalApplication._internal() {

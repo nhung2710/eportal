@@ -52,31 +52,26 @@ class _NewsRecruitmentState extends BasePageStateActive<NewsRecruitment> {
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => homeWorksListCommonBloc,
-      child: BlocListener<HomeWorksListBloc, DataState<List<HomeWorksListDataResponse>>>(
-        listener: (BuildContext context, DataState<List<HomeWorksListDataResponse>> state) {},
-        child: BlocBuilder<HomeWorksListBloc, DataState<List<HomeWorksListDataResponse>>>(
-          builder: (BuildContext context, DataState<List<HomeWorksListDataResponse>> state) =>
-              handleDataState<List<HomeWorksListDataResponse>>(
+      child: BlocListener<HomeWorksListBloc,
+          DataMultiState<HomeWorksListDataResponse>>(
+        listener: (BuildContext context,
+            DataMultiState<HomeWorksListDataResponse> state) {},
+        child: BlocBuilder<HomeWorksListBloc,
+            DataMultiState<HomeWorksListDataResponse>>(
+          builder: (BuildContext context,
+                  DataMultiState<HomeWorksListDataResponse> state) =>
+              handleDataMultiState<HomeWorksListDataResponse>(
             state,
-            (context, state) => (state!.length ?? 0) == 0
-                ? buildNotFoundData(context)
-                : Column(
-                    children: [
-                      Expanded(
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: state!.length,
-                            itemBuilder: (context, i) => NewsWidget(
-                                  onTap: () =>
-                                      nextPage((context) => EmptyExamplePage(
-                                            isHasAppBar: true,
-                                          )),
-                                  title: state!.elementAt(i).title,
-                                  imageUrl: state!.elementAt(i).imageURL,
-                                )),
-                      ),
-                    ],
-                  ),
+            (context, state) => ListView.builder(
+                shrinkWrap: true,
+                itemCount: state.length,
+                itemBuilder: (context, i) => NewsWidget(
+                      onTap: () => nextPage((context) => EmptyExamplePage(
+                            isHasAppBar: true,
+                          )),
+                      title: state.elementAt(i).title,
+                      imageUrl: state.elementAt(i).imageURL,
+                    )),
           ),
         ),
       ));

@@ -3,37 +3,25 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 import 'package:bloc/bloc.dart';
+import 'package:eportal/bloc/base/base_bloc.dart';
 import 'package:eportal/enum/data_bloc_status.dart';
+import 'package:eportal/model/api/response/common_new/ten_tinh_tp_response.dart';
 
 import '../../event/base/base_event.dart';
 import '../../event/common_new/ten_tinh_tp_event.dart';
 import '../../repository/common_new/ten_tinh_tp_repository.dart';
 import '../../state/base/base_state.dart';
 
-class TenTinhTpBloc extends Bloc<BaseEvent, DataState<String>> {
-  TenTinhTpBloc() : super(const DataState<String>()) {
-    final TenTinhTpRepository apiRepository =
-    TenTinhTpRepository();
+class TenTinhTpBloc extends BaseSingleBloc<String, TenTinhTpRepository,
+    TenTinhTpEvent, TenTinhTpResponse> {
+  @override
+  Future<TenTinhTpResponse> callApiResult(
+          TenTinhTpRepository apiRepository, TenTinhTpEvent event) =>
+      apiRepository.getTenTinhTp(event.request);
 
-    on<TenTinhTpEvent>((event, emit) async {
-      try {
-        emit(state.copyWith(status: DataBlocStatus.loading));
-        final response =
-        await apiRepository.getTenTinhTp(event.request);
-        if (response.status != 2) {
-          emit(state.copyWith(errorMessage: response.message,status: DataBlocStatus.error));
-        }
-        else{
-          if(response.data.isEmpty) {
-            emit(state.copyWith(status: DataBlocStatus.notfound));
-          } else {
-            emit(state.copyWith(data: response.data,status: DataBlocStatus.success));
-          }
-        }
+  @override
+  String? getFailMessage(TenTinhTpResponse response) => null;
 
-      } on Exception catch (e) {
-        emit(state.copyWith(errorMessage: e.toString(),status: DataBlocStatus.error));
-      }
-    });
-  }
+  @override
+  TenTinhTpRepository getRepository() => TenTinhTpRepository();
 }

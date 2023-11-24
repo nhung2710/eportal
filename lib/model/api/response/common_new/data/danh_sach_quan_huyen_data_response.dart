@@ -1,10 +1,12 @@
+import 'package:eportal/model/base/base_eportal_data_response.dart';
+
 import '../../../../../extension/string_extension.dart';
 
 //
 // Created by BlackRose on 13/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class DanhSachQuanHuyenDataResponse {
+class DanhSachQuanHuyenDataResponse extends BaseEportalDataResponse {
   String? deletedDate;
   int? areaID;
   int? total;

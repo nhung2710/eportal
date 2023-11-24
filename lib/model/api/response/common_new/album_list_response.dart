@@ -5,11 +5,10 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 // Created by BlackRose on 21/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class AlbumListResponse extends BaseEportalResponse {
-  List<AlbumListDataResponse> data;
-
-  AlbumListResponse({required this.data, required status, required message})
-      : super(status: status, message: message);
+class AlbumListResponse
+    extends BaseMultiEportalResponse<AlbumListDataResponse> {
+  AlbumListResponse(
+      {required super.data, required super.status, required super.message});
 
   factory AlbumListResponse.fromJson(Map<String, dynamic> json) {
     List<AlbumListDataResponse> data = <AlbumListDataResponse>[];

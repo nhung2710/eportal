@@ -5,9 +5,7 @@ import '../../../../base/base_eportal_xml.dart';
 // Created by BlackRose on 15/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class SearchRequestData extends BaseEportalXml {
-  int soTrangHienTai;
-  int soBanGhiTrenTrang;
+class SearchRequestData extends BasePageEportalXml {
   String? doanhNghiep;
   String? mucLuong;
   String? kinhNghiem;
@@ -20,8 +18,8 @@ class SearchRequestData extends BaseEportalXml {
       this.kinhNghiem,
       this.tinhTp,
       this.quanHuyen,
-      this.soTrangHienTai = 1,
-      this.soBanGhiTrenTrang = ApplicationConstant.NUMBER_PREVIEW_ITEM});
+      super.soTrangHienTai,
+      super.soBanGhiTrenTrang});
 
   @override
   StringBuffer toXml() {
@@ -31,8 +29,6 @@ class SearchRequestData extends BaseEportalXml {
     buffer.write(createXml(kinhNghiem, "kinhNghiem"));
     buffer.write(createXml(tinhTp ?? 0, "tinhTp"));
     buffer.write(createXml(quanHuyen ?? 0, "quanHuyen"));
-    buffer.write(createXml(soTrangHienTai, "soTrangHienTai"));
-    buffer.write(createXml(soBanGhiTrenTrang, "soBanGhiTrenTrang"));
     return buffer;
   }
 }

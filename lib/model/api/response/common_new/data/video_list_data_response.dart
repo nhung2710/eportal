@@ -3,7 +3,11 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class VideoListDataResponse {
+import 'package:eportal/model/base/base_eportal_data_response.dart';
+
+import '../../../../base/base_eportal_response.dart';
+
+class VideoListDataResponse extends BaseEportalDataResponse {
   String? categoryName;
   int? total;
   int? id;

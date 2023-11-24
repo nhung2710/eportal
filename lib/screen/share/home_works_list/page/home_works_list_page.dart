@@ -57,41 +57,39 @@ class _HomeWorksListPageState extends BasePageStateActive<HomeWorksListPage> {
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => homeWorksListCommonBloc,
-      child: BlocListener<HomeWorksListBloc, DataState<List<HomeWorksListDataResponse>>>(
-        listener: (BuildContext context, DataState<List<HomeWorksListDataResponse>> state) {},
-        child: BlocBuilder<HomeWorksListBloc, DataState<List<HomeWorksListDataResponse>>>(
-          builder: (BuildContext context, DataState<List<HomeWorksListDataResponse>> state) =>
-              handleDataState<List<HomeWorksListDataResponse>>(
+      child: BlocListener<HomeWorksListBloc,
+          DataMultiState<HomeWorksListDataResponse>>(
+        listener: (BuildContext context,
+            DataMultiState<HomeWorksListDataResponse> state) {},
+        child: BlocBuilder<HomeWorksListBloc,
+            DataMultiState<HomeWorksListDataResponse>>(
+          builder: (BuildContext context,
+                  DataMultiState<HomeWorksListDataResponse> state) =>
+              handleDataMultiState<HomeWorksListDataResponse>(
             state,
-            (context, state) => Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: state!.length ,
-                      itemBuilder: (context, i) => GestureDetector(
-                            onTap: () => nextPage((context) => EmptyExamplePage(
-                                  isHasAppBar: true,
-                                )),
-                            child: Container(
-                              margin: const EdgeInsets.only(top: 5),
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Colors.white,
-                              ),
-                              child: Text(
-                                "${(state!.elementAt(i).title)?.supportHtml()}",
-                                style: AppTextStyle.title.copyWith(
-                                    overflow: TextOverflow.visible,
-                                    color: AppColor.colorOfText,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
+            (context, state) => ListView.builder(
+                shrinkWrap: true,
+                itemCount: state.length,
+                itemBuilder: (context, i) => GestureDetector(
+                      onTap: () => nextPage((context) => EmptyExamplePage(
+                            isHasAppBar: true,
                           )),
-                ),
-              ],
-            ),
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 5),
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.white,
+                        ),
+                        child: Text(
+                          "${(state.elementAt(i).title)?.supportHtml()}",
+                          style: AppTextStyle.title.copyWith(
+                              overflow: TextOverflow.visible,
+                              color: AppColor.colorOfText,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    )),
           ),
         ),
       ));

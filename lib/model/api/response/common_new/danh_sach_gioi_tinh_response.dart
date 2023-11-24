@@ -6,11 +6,10 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 
 import 'data/danh_sach_gioi_tinh_data_response.dart';
 
-class DanhSachGioiTinhResponse extends BaseEportalResponse {
-  List<DanhSachGioiTinhDataResponse> data;
-
-  DanhSachGioiTinhResponse({required this.data, required status, required message})
-      : super(status: status, message: message);
+class DanhSachGioiTinhResponse
+    extends BaseMultiEportalResponse<DanhSachGioiTinhDataResponse> {
+  DanhSachGioiTinhResponse(
+      {required super.data, required super.status, required super.message});
 
   factory DanhSachGioiTinhResponse.fromJson(Map<String, dynamic> json) {
     List<DanhSachGioiTinhDataResponse> data = <DanhSachGioiTinhDataResponse>[];

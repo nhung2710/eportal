@@ -3,7 +3,9 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 import 'package:bloc/bloc.dart';
+import 'package:eportal/bloc/base/base_bloc.dart';
 import 'package:eportal/enum/data_bloc_status.dart';
+import 'package:eportal/model/api/response/common_new/danh_sach_muc_luong_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_muc_luong_data_response.dart';
 
 import '../../event/base/base_event.dart';
@@ -11,26 +13,20 @@ import '../../event/common_new/danh_sach_muc_luong_event.dart';
 import '../../repository/common_new/danh_sach_muc_luong_repository.dart';
 import '../../state/base/base_state.dart';
 
-class DanhSachMucLuongBloc extends Bloc<BaseEvent, DataState<List<DanhSachMucLuongDataResponse>>> {
-  DanhSachMucLuongBloc() : super(const DataState<List<DanhSachMucLuongDataResponse>>()) {
-    final DanhSachMucLuongRepository apiRepository =
-    DanhSachMucLuongRepository();
+class DanhSachMucLuongBloc extends BaseMultiBloc<
+    DanhSachMucLuongDataResponse,
+    DanhSachMucLuongRepository,
+    DanhSachMucLuongEvent,
+    DanhSachMucLuongResponse> {
+  @override
+  Future<DanhSachMucLuongResponse> callApiResult(
+          DanhSachMucLuongRepository apiRepository,
+          DanhSachMucLuongEvent event) =>
+      apiRepository.getDanhSachMucLuong(event.request);
 
-    on<DanhSachMucLuongEvent>((event, emit) async {
-      try {
-        emit(state.copyWith(status: DataBlocStatus.loading));
-        final response =
-        await apiRepository.getDanhSachMucLuong(event.request);
-        if (response.status != 2) {
-          emit(state.copyWith(errorMessage: response.message,status: DataBlocStatus.error));
-        }
-        else{
-          emit(state.copyWith(data: response.data,status: DataBlocStatus.success));
-        }
+  @override
+  String? getFailMessage(DanhSachMucLuongResponse response) => null;
 
-      } on Exception catch (e) {
-        emit(state.copyWith(errorMessage: e.toString(),status: DataBlocStatus.error));
-      }
-    });
-  }
+  @override
+  DanhSachMucLuongRepository getRepository() => DanhSachMucLuongRepository();
 }

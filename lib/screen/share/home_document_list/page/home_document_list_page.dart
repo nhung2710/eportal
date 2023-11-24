@@ -48,80 +48,70 @@ class _HomeDocumentListPageState
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => homeDocumentListBloc,
-      child: BlocListener<HomeDocumentListBloc, DataState<List<HomeDocumentListDataResponse>>>(
-        listener: (BuildContext context, DataState<List<HomeDocumentListDataResponse>> state) {},
-        child: BlocBuilder<HomeDocumentListBloc, DataState<List<HomeDocumentListDataResponse>>>(
-          builder: (BuildContext context, DataState<List<HomeDocumentListDataResponse>> state) =>
-              handleDataState<List<HomeDocumentListDataResponse>>(
+      child: BlocListener<HomeDocumentListBloc,
+          DataMultiState<HomeDocumentListDataResponse>>(
+        listener: (BuildContext context,
+            DataMultiState<HomeDocumentListDataResponse> state) {},
+        child: BlocBuilder<HomeDocumentListBloc,
+            DataMultiState<HomeDocumentListDataResponse>>(
+          builder: (BuildContext context,
+                  DataMultiState<HomeDocumentListDataResponse> state) =>
+              handleDataMultiState<HomeDocumentListDataResponse>(
             state,
-            (context, state) => Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: state!.length,
-                      itemBuilder: (context, i) => GestureDetector(
-                            onTap: () => nextPage((context) => EmptyExamplePage(
-                                  isHasAppBar: true,
+            (context, state) => ListView.builder(
+                shrinkWrap: true,
+                itemCount: state.length,
+                itemBuilder: (context, i) => GestureDetector(
+                      onTap: () => nextPage((context) => EmptyExamplePage(
+                            isHasAppBar: true,
+                          )),
+                      child: Container(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                flex: 1,
+                                child: ImageLoading(
+                                  imageUrl: state
+                                      .elementAt(i)
+                                      .fileSource
+                                      .getImageUrl(),
+                                  imageBuilder: (BuildContext context,
+                                      ImageProvider<Object> imageProvider) {
+                                    return ClipRRect(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      child: Image(
+                                        image: imageProvider,
+                                        fit: BoxFit.fill,
+                                      ),
+                                    );
+                                  },
                                 )),
-                            child: Container(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Row(
+                            Expanded(
+                              flex: 4,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(
-                                      flex: 1,
-                                      child: ImageLoading(
-                                        imageUrl: state!
-                                            .elementAt(i)
-                                            .fileSource
-                                            .getImageUrl(),
-                                        imageBuilder: (BuildContext context,
-                                            ImageProvider<Object>
-                                                imageProvider) {
-                                          return ClipRRect(
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(5.0)),
-                                            child: Image(
-                                              image: imageProvider,
-                                              fit: BoxFit.fill,
-                                            ),
-                                          );
-                                        },
-                                      )),
-                                  Expanded(
-                                    flex: 4,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          (state!.elementAt(i)
-                                                  .documentName)
-                                              .supportHtml(),
-                                          style: AppTextStyle.titlePage
-                                              .copyWith(
-                                                  overflow:
-                                                      TextOverflow.visible),
-                                        ),
-                                        Text(
-                                          (state!.elementAt(i).contents)
-                                              .supportHtml(),
-                                          style: AppTextStyle.titleHintPage
-                                              .copyWith(
-                                                  overflow:
-                                                      TextOverflow.visible),
-                                        ),
-                                      ],
-                                    ),
+                                  Text(
+                                    (state!.elementAt(i).documentName)
+                                        .supportHtml(),
+                                    style: AppTextStyle.titlePage.copyWith(
+                                        overflow: TextOverflow.visible),
+                                  ),
+                                  Text(
+                                    (state!.elementAt(i).contents)
+                                        .supportHtml(),
+                                    style: AppTextStyle.titleHintPage.copyWith(
+                                        overflow: TextOverflow.visible),
                                   ),
                                 ],
                               ),
                             ),
-                          )),
-                ),
-              ],
-            ),
+                          ],
+                        ),
+                      ),
+                    )),
           ),
         ),
       ));

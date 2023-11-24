@@ -5,14 +5,12 @@
 import 'package:eportal/model/api/response/common_new/data/danh_sach_trinh_do_data_response.dart';
 import 'package:eportal/model/base/base_eportal_response.dart';
 
-class DanhSachTrinhDoResponse extends BaseEportalResponse {
-  List<DanhSachTrinhDoDataResponse> data;
-
-  DanhSachTrinhDoResponse({required this.data, required status, required message})
-      : super(status: status, message: message);
+class DanhSachTrinhDoResponse
+    extends BaseMultiEportalResponse<DanhSachTrinhDoDataResponse> {
+  DanhSachTrinhDoResponse(
+      {required super.data, required super.status, required super.message});
 
   factory DanhSachTrinhDoResponse.fromJson(Map<String, dynamic> json) {
-
     List<DanhSachTrinhDoDataResponse> data = <DanhSachTrinhDoDataResponse>[];
     if (json['data'] != null) {
       json['data'].forEach((v) {

@@ -41,11 +41,11 @@ class _AboutPageState extends BasePageState<AboutPage> {
   Widget pageUI(BuildContext context) => SingleChildScrollView(
           child: BlocProvider(
         create: (_) => gioiThieuTrungTamBloc,
-        child: BlocListener<GioiThieuTrungTamBloc, DataState<String>>(
-            listener: (BuildContext context, DataState<String> state) {},
-            child: BlocBuilder<GioiThieuTrungTamBloc, DataState<String>>(
-              builder: (BuildContext context, DataState<String> state) =>
-                  handleDataState<String>(
+        child: BlocListener<GioiThieuTrungTamBloc, DataSingleState<String>>(
+            listener: (BuildContext context, DataSingleState<String> state) {},
+            child: BlocBuilder<GioiThieuTrungTamBloc, DataSingleState<String>>(
+              builder: (BuildContext context, DataSingleState<String> state) =>
+                  handleDataSingleState<String>(
                 state,
                 (context, state) => Container(
                   padding: const EdgeInsets.only(top: 10),

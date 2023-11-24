@@ -1,10 +1,10 @@
-
-
 //
 // Created by BlackRose on 20/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class HomeWorksListDataResponse {
+import 'package:eportal/model/base/base_eportal_data_response.dart';
+
+class HomeWorksListDataResponse extends BaseEportalDataResponse {
   String? imageURL;
   Null? parentID;
   int? gtvl;

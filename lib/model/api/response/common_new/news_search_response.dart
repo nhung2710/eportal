@@ -7,11 +7,10 @@ import 'dart:convert';
 import 'package:eportal/model/api/response/common_new/data/news_search_data_response.dart';
 import 'package:eportal/model/base/base_eportal_response.dart';
 
-class NewsSearchResponse extends BaseEportalResponse {
-  List<NewsSearchDataResponse> data;
-
-  NewsSearchResponse({required this.data, required status, required message})
-      : super(status: status, message: message);
+class NewsSearchResponse
+    extends BasePageEportalResponse<NewsSearchDataResponse> {
+  NewsSearchResponse(
+      {required super.data, required super.status, required super.message});
 
   factory NewsSearchResponse.fromJson(Map<String, dynamic> json) {
     List<NewsSearchDataResponse> data = <NewsSearchDataResponse>[];
@@ -22,10 +21,5 @@ class NewsSearchResponse extends BaseEportalResponse {
     }
     return NewsSearchResponse(
         data: data, status: json["status"], message: json["message"]);
-  }
-
-  @override
-  String toString() {
-    return json.encode(data);
   }
 }

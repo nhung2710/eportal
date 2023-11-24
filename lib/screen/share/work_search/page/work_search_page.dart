@@ -17,7 +17,6 @@ import '../../../../model/api/response/common_new/work_search_response.dart';
 import '../../../../state/base/base_state.dart';
 import '../../../../style/app_text_style.dart';
 import '../../../../widget/base/base_page.dart';
-import '../../../../widget/drawer/filter_drawer.dart';
 import '../../../../widget/input/search_input.dart';
 import '../../../../widget/show_full_info/show_full_info.dart';
 
@@ -84,24 +83,24 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
             child: BlocProvider(
                 create: (_) => workSearchBloc,
                 child: BlocListener<WorkSearchBloc,
-                    DataMoreState<WorkSearchDataResponse>>(
+                    DataPageState<WorkSearchDataResponse>>(
                   listener: (BuildContext context,
-                      DataMoreState<WorkSearchDataResponse> state) {},
+                      DataPageState<WorkSearchDataResponse> state) {},
                   child: BlocBuilder<WorkSearchBloc,
-                      DataMoreState<WorkSearchDataResponse>>(
+                      DataPageState<WorkSearchDataResponse>>(
                     builder: (BuildContext context,
-                            DataMoreState<WorkSearchDataResponse> state) =>
-                        handleDataMoreState<WorkSearchDataResponse>(
+                            DataPageState<WorkSearchDataResponse> state) =>
+                        handleDataPageState<WorkSearchDataResponse>(
                       state,
                       (context, state) => ListView.builder(
                           shrinkWrap: true,
                           controller: scrollController,
-                          itemCount: state!.length,
+                          itemCount: state.length,
                           itemBuilder: (context, i) => GestureDetector(
                                 onTap: () =>
                                     nextPage((context) => WorkSearchDetailPage(
                                           workSearchDataResponse:
-                                              state!.elementAt(i),
+                                              state.elementAt(i),
                                         )),
                                 child: Card(
                                   elevation: AppElevation.sizeOfNormal,

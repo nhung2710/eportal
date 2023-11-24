@@ -29,6 +29,7 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   DialogRoute? loaddingDialog;
   ScrollController? scrollController;
+  bool isScrollMore = true;
 
   @override
   void dispose() {
@@ -41,17 +42,40 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
   void _onScroll() {
     final maxScroll = scrollController!.position.maxScrollExtent;
     final currentScroll = scrollController!.offset;
-    if (currentScroll >= (maxScroll * 0.7)) {
+    if (currentScroll >= (maxScroll * 0.8) && isScrollMore) {
+      stopScrollMore();
       getMoreData();
     }
+  }
+
+  void startScrollMore() {
+    isScrollMore = true;
+  }
+
+  void stopScrollMore() {
+    isScrollMore = false;
   }
 
   void getMoreData() {}
 
   @override
   void initState() {
+    startScrollMore();
     scrollController = ScrollController();
     scrollController!.addListener(_onScroll);
+    simpleDialog = SimpleDialog(
+      elevation: 0.0,
+      backgroundColor: Colors.transparent,
+      // can change this to your prefered color
+      children: <Widget>[
+        Center(
+          child: SizedBox(
+            height: 100,
+            child: buildScreenLoading(context),
+          ),
+        )
+      ],
+    );
     initDataLoading();
     // TODO: implement initState
     super.initState();
@@ -101,23 +125,14 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
     FocusManager.instance.primaryFocus?.unfocus();
   }
 
+  late SimpleDialog simpleDialog;
+
   Future<void> startLoading() async {
     hiddenKeyboard();
     loaddingDialog = DialogRoute(
         context: context,
         barrierDismissible: false,
-        builder: (BuildContext context) {
-          return const SimpleDialog(
-            elevation: 0.0,
-            backgroundColor: Colors.transparent,
-            // can change this to your prefered color
-            children: <Widget>[
-              Center(
-                child: CircularProgressIndicator(),
-              )
-            ],
-          );
-        });
+        builder: (BuildContext context) => simpleDialog);
     if (loaddingDialog != null) {
       Navigator.of(context).push(loaddingDialog!);
     }
@@ -243,13 +258,14 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
       scrollController!.animateTo(scrollController!.position.maxScrollExtent,
           duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
 
-  Widget handleDataState<T>(DataState<T> state, BlocWidgetBuilder<T?> builder,
+  Widget handleDataSingleState<T>(
+      DataSingleState<T> state, BlocWidgetBuilder<T?> builder,
       {Widget? initWidget}) {
     switch (state.status) {
       case DataBlocStatus.init:
         return initWidget ?? Container();
       case DataBlocStatus.loading:
-        return buildScreenLoading();
+        return buildScreenLoading(context);
       case DataBlocStatus.notfound:
         return buildNotFoundData(context);
       case DataBlocStatus.error:
@@ -259,14 +275,14 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
     }
   }
 
-  Widget handleDataMoreState<T>(
-      DataMoreState<T> state, BlocWidgetBuilder<List<T>> builder,
+  Widget handleDataMultiState<T>(
+      DataMultiState<T> state, BlocWidgetBuilder<List<T>> builder,
       {Widget? initWidget}) {
     switch (state.status) {
       case DataBlocStatus.init:
         return initWidget ?? Container();
       case DataBlocStatus.loading:
-        return buildScreenLoading();
+        return buildScreenLoading(context);
       case DataBlocStatus.notfound:
         return buildNotFoundData(context);
       case DataBlocStatus.error:
@@ -276,11 +292,35 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
     }
   }
 
-  void handlerActionState<T>(DataState<T> state, CallbackListener<T> callback) {
+  Widget handleDataPageState<T>(
+      DataPageState<T> state, BlocWidgetBuilder<List<T>> builder,
+      {Widget? initWidget}) {
+    switch (state.status) {
+      case DataBlocStatus.init:
+        return initWidget ?? Container();
+      case DataBlocStatus.loading:
+        return buildScreenLoading(context);
+      case DataBlocStatus.notfound:
+        return buildNotFoundData(context);
+      case DataBlocStatus.error:
+        return buildScreenError(state.errorMessage);
+      case DataBlocStatus.success:
+        {
+          if (!state.hasReachedMax) {
+            startScrollMore();
+          }
+          return builder(context, state.data);
+        }
+    }
+  }
+
+  void handlerActionDataSingleState<T>(
+      DataSingleState<T> state, CallbackListener<T> callback) {
     switch (state.status) {
       case DataBlocStatus.init:
         break;
       case DataBlocStatus.loading:
+        startLoading();
         break;
       case DataBlocStatus.notfound:
         stopLoading();
@@ -295,10 +335,8 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
     }
   }
 
-  Widget buildScreenLoading() => Center(
-        child: Container(
-            height: 100,
-            child: const Center(child: CircularProgressIndicator())),
+  Widget buildScreenLoading(BuildContext buildContext) => Center(
+        child: Image.asset("assets/images/loading.gif"),
       );
 
   Widget buildScreenError(String error) => Container(

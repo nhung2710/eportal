@@ -6,6 +6,6 @@ import 'package:eportal/model/api/request/common_new/document_list_request.dart'
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class DocumentListEvent extends BaseEvent<DocumentListRequest> {
+class DocumentListEvent extends BaseMultiEvent<DocumentListRequest> {
   const DocumentListEvent({required super.request});
 }

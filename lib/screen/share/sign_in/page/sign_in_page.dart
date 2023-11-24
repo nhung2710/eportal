@@ -57,10 +57,10 @@ class _SignInPageState extends BasePageState<SignInPage> {
   void initDataLoading() {
     nameController.text = GlobalApplication()
         .getStringOneTimePreferences(ApplicationConstant.REGISTER_USER_NAME)
-        .replaceWhenNullOrWhiteSpace(GlobalApplication().UserNameSaved);
+        .replaceWhenNullOrWhiteSpace(GlobalApplication().userNameSaved);
     passwordController.text = GlobalApplication()
         .getStringOneTimePreferences(ApplicationConstant.REGISTER_USER_PASSWORD)
-        .replaceWhenNullOrWhiteSpace(GlobalApplication().UserPasswordSaved);
+        .replaceWhenNullOrWhiteSpace(GlobalApplication().userPasswordSaved);
     super.initDataLoading();
   }
 
@@ -68,13 +68,13 @@ class _SignInPageState extends BasePageState<SignInPage> {
   Widget pageUI(BuildContext context) {
     return BlocProvider(
       create: (_) => dangNhapBloc,
-      child: BlocListener<DangNhapBloc, DataState<DangNhapDataResponse>>(
+      child: BlocListener<DangNhapBloc, DataSingleState<DangNhapDataResponse>>(
         listener: (context, state) {
-          handlerActionState<DangNhapDataResponse>(state, (obj) {
+          handlerActionDataSingleState<DangNhapDataResponse>(state, (obj) {
             GlobalApplication()
                 .signIn(obj, nameController.text, passwordController.text)
                 .then((value) {
-              switch (GlobalApplication().UserRoleType) {
+              switch (GlobalApplication().roleType) {
                 case RoleType.users:
                   nextPageWithoutBack((context) => const worker.HomePage());
                   break;

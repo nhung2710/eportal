@@ -1,10 +1,10 @@
-
-
 //
 // Created by BlackRose on 14/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class HomeSlideListDataResponse {
+import 'package:eportal/model/base/base_eportal_data_response.dart';
+
+class HomeSlideListDataResponse extends BaseEportalDataResponse {
   int? total;
   int? id;
   String? tieuDe;

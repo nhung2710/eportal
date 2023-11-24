@@ -45,6 +45,7 @@ class BaseAdapterApi {
   };
 
   Future<Map<String, dynamic>> callApiAsync(BaseEportalRequest request) async {
+    await Future.delayed(const Duration(milliseconds: 200));
     Uri uri = Uri();
     if (!request.getQuery().isNullOrWhiteSpace()) {
       uri = Uri.parse("${request.getBaseUri()}${request.getQuery()}");
@@ -78,7 +79,7 @@ class BaseAdapterApi {
     var valueTimeCache = request.getTimeCache();
     bool isUseCache = false;
     if (valueTimeCache > 0) {
-      var valueCache = GlobalApplication().Preferences?.getString(keyCache);
+      var valueCache = GlobalApplication().preferences!.getString(keyCache);
       if (!valueCache.isNullOrWhiteSpace()) {
         var cacheApi = CacheApi.fromJson(json.decode(valueCache!));
         if (cacheApi.timeout != null &&
@@ -100,7 +101,7 @@ class BaseAdapterApi {
       for (var item in elements) {
         var jsonValue = item.innerText;
         if (valueTimeCache > 0 && !isUseCache) {
-          await GlobalApplication().Preferences?.setString(
+          await GlobalApplication().preferences!.setString(
               keyCache,
               json.encode(CacheApi(
                       body: responseSoapBody,

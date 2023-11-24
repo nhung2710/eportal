@@ -1,9 +1,9 @@
-
-
 //
 // Created by BlackRose on 13/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class DanhSachGioiTinhDataResponse {
+import 'package:eportal/model/base/base_eportal_data_response.dart';
+
+class DanhSachGioiTinhDataResponse extends BaseEportalDataResponse {
   DanhSachGioiTinhDataResponse.fromJson(Map<String, dynamic> json) {}
 }

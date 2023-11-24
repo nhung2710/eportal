@@ -3,7 +3,9 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 import 'package:bloc/bloc.dart';
+import 'package:eportal/bloc/base/base_bloc.dart';
 import 'package:eportal/enum/data_bloc_status.dart';
+import 'package:eportal/model/api/response/common_new/danh_sach_doanh_nghiep_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_doanh_nghiep_data_response.dart';
 
 import '../../event/base/base_event.dart';
@@ -11,29 +13,21 @@ import '../../event/common_new/danh_sach_doanh_nghiep_event.dart';
 import '../../repository/common_new/danh_sach_doanh_nghiep_repository.dart';
 import '../../state/base/base_state.dart';
 
-class DanhSachDoanhNghiepBloc
-    extends Bloc<BaseEvent, DataState<List<DanhSachDoanhNghiepDataResponse>>> {
-  DanhSachDoanhNghiepBloc()
-      : super(const DataState<List<DanhSachDoanhNghiepDataResponse>>()) {
-    final DanhSachDoanhNghiepRepository apiRepository =
-        DanhSachDoanhNghiepRepository();
+class DanhSachDoanhNghiepBloc extends BaseMultiBloc<
+    DanhSachDoanhNghiepDataResponse,
+    DanhSachDoanhNghiepRepository,
+    DanhSachDoanhNghiepEvent,
+    DanhSachDoanhNghiepResponse> {
+  @override
+  Future<DanhSachDoanhNghiepResponse> callApiResult(
+          DanhSachDoanhNghiepRepository apiRepository,
+          DanhSachDoanhNghiepEvent event) =>
+      apiRepository.getDanhSachDoanhNghiep(event.request);
 
-    on<DanhSachDoanhNghiepEvent>((event, emit) async {
-      try {
-        emit(state.copyWith(status: DataBlocStatus.loading));
-        final response =
-            await apiRepository.getDanhSachDoanhNghiep(event.request);
-        if (response.status != 2) {
-          emit(state.copyWith(
-              errorMessage: response.message, status: DataBlocStatus.error));
-        } else {
-          emit(state.copyWith(
-              data: response.data, status: DataBlocStatus.success));
-        }
-      } on Exception catch (e) {
-        emit(state.copyWith(
-            errorMessage: e.toString(), status: DataBlocStatus.error));
-      }
-    });
-  }
+  @override
+  String? getFailMessage(DanhSachDoanhNghiepResponse response) => null;
+
+  @override
+  DanhSachDoanhNghiepRepository getRepository() =>
+      DanhSachDoanhNghiepRepository();
 }

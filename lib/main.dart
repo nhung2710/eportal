@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -17,10 +18,10 @@ import 'style/app_theme.dart';
 
 Future<bool> checkAppRunFirstTime() async {
   bool? isFirstRunApp = GlobalApplication()
-      .Preferences
+      .preferences
       ?.getBool(ApplicationConstant.FIRST_TIME_OPEN_APP);
   await GlobalApplication()
-      .Preferences
+      .preferences
       ?.setBool(ApplicationConstant.FIRST_TIME_OPEN_APP, false);
   return isFirstRunApp ?? true;
 }
@@ -52,19 +53,26 @@ Future<void> main() async {
     systemNavigationBarDividerColor: Colors.transparent,
     systemNavigationBarIconBrightness: Brightness.light,
   ));
-  GlobalApplication().Preferences = await SharedPreferences.getInstance();
-  GlobalApplication().UserNameSaved = (GlobalApplication()
-          .Preferences
-          ?.getString(ApplicationConstant.USER_NAME))
-      .replaceWhenNullOrWhiteSpace();
-  GlobalApplication().UserPasswordSaved = (GlobalApplication()
-          .Preferences
-          ?.getString(ApplicationConstant.USER_PASSWORD))
-      .replaceWhenNullOrWhiteSpace();
-  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown
+  Future.wait([
+    SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown
+    ]),
+    getApplicationDocumentsDirectory()
+        .then((value) => GlobalApplication().dirPath = value.path),
+    SharedPreferences.getInstance()
+        .then((value) => GlobalApplication().preferences = value)
   ])
+      .then((value) {
+        GlobalApplication().userNameSaved = (GlobalApplication()
+                .preferences!
+                .getString(ApplicationConstant.USER_NAME))
+            .replaceWhenNullOrWhiteSpace();
+        GlobalApplication().userPasswordSaved = (GlobalApplication()
+                .preferences!
+                .getString(ApplicationConstant.USER_PASSWORD))
+            .replaceWhenNullOrWhiteSpace();
+      })
       .then((_) => checkAppRunFirstTime())
       .then((isFirstRunApp) => runApp(MyApp(isFirstRunApp: false)));
 }

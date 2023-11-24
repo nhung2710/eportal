@@ -3,33 +3,28 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 import 'package:bloc/bloc.dart';
+import 'package:eportal/bloc/base/base_bloc.dart';
 import 'package:eportal/enum/data_bloc_status.dart';
+import 'package:eportal/event/common_new/home_works_list_event.dart';
+import 'package:eportal/model/api/response/common_new/data/home_works_list_data_response.dart';
+import 'package:eportal/model/api/response/common_new/home_works_list_response.dart';
+import 'package:eportal/repository/common_new/home_works_list_repository.dart';
 
 import '../../event/base/base_event.dart';
 import '../../event/common_new/job_user_detail_event.dart';
 import '../../repository/common_new/job_user_detail_repository.dart';
 import '../../state/base/base_state.dart';
 
-class JobUserDetailBloc extends Bloc<BaseEvent, DataState<String>> {
-  JobUserDetailBloc() : super(const DataState<String>()) {
-    final JobUserDetailRepository apiRepository =
-    JobUserDetailRepository();
+class HomeWorksListBloc extends BaseMultiBloc<HomeWorksListDataResponse,
+    HomeWorksListRepository, HomeWorksListEvent, HomeWorksListResponse> {
+  @override
+  Future<HomeWorksListResponse> callApiResult(
+          HomeWorksListRepository apiRepository, HomeWorksListEvent event) =>
+      apiRepository.getHomeWorksList(event.request);
 
-    on<JobUserDetailEvent>((event, emit) async {
-      try {
-        emit(state.copyWith(status: DataBlocStatus.loading));
-        final response =
-        await apiRepository.getJobUserDetail(event.request);
-        if (response.status != 2) {
-          emit(state.copyWith(errorMessage: response.message,status: DataBlocStatus.error));
-        }
-        else{
-          emit(state.copyWith(data: response.data,status: DataBlocStatus.success));
-        }
+  @override
+  String? getFailMessage(HomeWorksListResponse response) => null;
 
-      } on Exception catch (e) {
-        emit(state.copyWith(errorMessage: e.toString(),status: DataBlocStatus.error));
-      }
-    });
-  }
+  @override
+  HomeWorksListRepository getRepository() => HomeWorksListRepository();
 }

@@ -6,6 +6,6 @@ import 'package:flutter/material.dart';
 // Created by BlackRose on 23/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class HomeAdvertiseListEvent extends BaseEvent<HomeAdvertiseListRequest> {
+class HomeAdvertiseListEvent extends BaseMultiEvent<HomeAdvertiseListRequest> {
   const HomeAdvertiseListEvent({required super.request});
 }

@@ -40,28 +40,26 @@ class _NewsEnterprisePageState extends BasePageState<NewsEnterprisePage> {
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => homeBusinessListBloc,
       child: BlocListener<HomeBusinessListBloc,
-          DataState<List<HomeBusinessListDataResponse>>>(
+          DataMultiState<HomeBusinessListDataResponse>>(
         listener: (BuildContext context,
-            DataState<List<HomeBusinessListDataResponse>> state) {},
+            DataMultiState<HomeBusinessListDataResponse> state) {},
         child: BlocBuilder<HomeBusinessListBloc,
-            DataState<List<HomeBusinessListDataResponse>>>(
+            DataMultiState<HomeBusinessListDataResponse>>(
           builder: (BuildContext context,
-                  DataState<List<HomeBusinessListDataResponse>> state) =>
-              handleDataState<List<HomeBusinessListDataResponse>>(
+                  DataMultiState<HomeBusinessListDataResponse> state) =>
+              handleDataMultiState<HomeBusinessListDataResponse>(
             state,
-            (context, state) => (state!.length ?? 0) == 0
-                ? buildNotFoundData(context)
-                : ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: state!.length,
-                    itemBuilder: (context, i) => NewsWidget(
-                          onTap: () => nextPage((context) => EmptyExamplePage(
-                                isHasAppBar: true,
-                              )),
-                          title: state!.elementAt(i).businessVn,
-                          imageUrl: state!.elementAt(i).logo,
-                          content: state!.elementAt(i).email,
-                        )),
+            (context, state) => ListView.builder(
+                shrinkWrap: true,
+                itemCount: state.length,
+                itemBuilder: (context, i) => NewsWidget(
+                      onTap: () => nextPage((context) => EmptyExamplePage(
+                            isHasAppBar: true,
+                          )),
+                      title: state.elementAt(i).businessVn,
+                      imageUrl: state.elementAt(i).logo,
+                      content: state.elementAt(i).email,
+                    )),
           ),
         ),
       ));

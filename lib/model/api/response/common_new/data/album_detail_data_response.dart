@@ -1,11 +1,9 @@
-
-
 //
 // Created by BlackRose on 21/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class AlbumDetailDataResponse {
+import 'package:eportal/model/base/base_eportal_data_response.dart';
 
+class AlbumDetailDataResponse extends BaseEportalDataResponse {
   AlbumDetailDataResponse.fromJson(Map<String, dynamic> json) {}
-
 }

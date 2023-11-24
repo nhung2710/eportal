@@ -12,7 +12,6 @@ import '../../../../model/api/response/common_new/job_user_search_response.dart'
 import '../../../../state/base/base_state.dart';
 import '../../../../style/app_text_style.dart';
 import '../../../../widget/base/base_page.dart';
-import '../../../../widget/drawer/filter_drawer.dart';
 import '../../empty_example/page/empty_example_page.dart';
 
 //
@@ -38,12 +37,6 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
     jobUserSearchBloc.add(JobUserSearchEvent(request: request));
     super.initDataLoading();
   }
-
-  @override
-  Widget? getEndDrawer(BuildContext context) => FilterDrawer(
-        data: request.obj,
-        key: localKey,
-      );
 
   @override
   Widget pageUI(BuildContext context) => Column(
@@ -76,57 +69,47 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
           Expanded(
             child: BlocProvider(
                 create: (_) => jobUserSearchBloc,
-                child: BlocListener<JobUserSearchBloc, DataState<List<JobUserSearchDataResponse>>>(
-                  listener: (BuildContext context, DataState<List<JobUserSearchDataResponse>> state) {},
-                  child: BlocBuilder<JobUserSearchBloc, DataState<List<JobUserSearchDataResponse>>>(
-                    builder: (BuildContext context, DataState<List<JobUserSearchDataResponse>> state) =>
-                        handleDataState<List<JobUserSearchDataResponse>>(
+                child: BlocListener<JobUserSearchBloc,
+                    DataMultiState<JobUserSearchDataResponse>>(
+                  listener: (BuildContext context,
+                      DataMultiState<JobUserSearchDataResponse> state) {},
+                  child: BlocBuilder<JobUserSearchBloc,
+                      DataMultiState<JobUserSearchDataResponse>>(
+                    builder: (BuildContext context,
+                            DataMultiState<JobUserSearchDataResponse> state) =>
+                        handleDataMultiState<JobUserSearchDataResponse>(
                       state,
-                      (context, state) => Column(
-                        children: [
-                          Container(
-                            child: Text(state.toString()),
-                          ),
-                          Expanded(
-                            child: ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: state!.length ,
-                                itemBuilder: (context, i) => GestureDetector(
-                                      onTap: () => nextPage(
-                                          (context) => EmptyExamplePage(
-                                                isHasAppBar: true,
-                                              )),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          color: Colors.white,
-                                        ),
-                                        padding: const EdgeInsets.all(10),
-                                        margin: const EdgeInsets.only(top: 5),
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              flex: 1,
-                                              child: Text(
-                                                "1",
-                                                style: AppTextStyle.title
-                                                    .copyWith(
-                                                        color: AppColor
-                                                            .colorOfIcon,
-                                                        overflow: TextOverflow
-                                                            .visible,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                              ),
-                                            ),
-                                          ],
+                      (context, state) => ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: state.length,
+                          itemBuilder: (context, i) => GestureDetector(
+                                onTap: () =>
+                                    nextPage((context) => EmptyExamplePage(
+                                          isHasAppBar: true,
+                                        )),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.white,
+                                  ),
+                                  padding: const EdgeInsets.all(10),
+                                  margin: const EdgeInsets.only(top: 5),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Text(
+                                          "1",
+                                          style: AppTextStyle.title.copyWith(
+                                              color: AppColor.colorOfIcon,
+                                              overflow: TextOverflow.visible,
+                                              fontWeight: FontWeight.bold),
                                         ),
                                       ),
-                                    )),
-                          ),
-                        ],
-                      ),
+                                    ],
+                                  ),
+                                ),
+                              )),
                     ),
                   ),
                 )),

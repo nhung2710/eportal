@@ -112,21 +112,16 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
                 child: BlocProvider(
                     create: (_) => danhSachTinhTpBloc,
                     child: BlocListener<DanhSachTinhTpBloc,
-                        DataState<List<DanhSachTinhTpDataResponse>>>(
+                        DataMultiState<DanhSachTinhTpDataResponse>>(
                       listener: (BuildContext context,
-                          DataState<List<DanhSachTinhTpDataResponse>> state) {},
+                          DataMultiState<DanhSachTinhTpDataResponse> state) {},
                       child: BlocBuilder<DanhSachTinhTpBloc,
-                          DataState<List<DanhSachTinhTpDataResponse>>>(
+                          DataMultiState<DanhSachTinhTpDataResponse>>(
                         builder: (BuildContext context,
-                                DataState<List<DanhSachTinhTpDataResponse>>
+                                DataMultiState<DanhSachTinhTpDataResponse>
                                     state) =>
-                            handleDataState<List<DanhSachTinhTpDataResponse>>(
-                                state,
-                                (context, state) =>
-                                    _buildViewSearchDanhSachTinhTp(
-                                        context, state ?? []),
-                                initWidget: _buildViewSearchDanhSachTinhTp(
-                                    context, [])),
+                            _buildViewSearchDanhSachTinhTp(
+                                context, state.data ?? []),
                       ),
                     )),
               ),
@@ -135,23 +130,17 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
                 child: BlocProvider(
                     create: (_) => danhSachQuanHuyenBloc,
                     child: BlocListener<DanhSachQuanHuyenBloc,
-                        DataState<List<DanhSachQuanHuyenDataResponse>>>(
+                        DataMultiState<DanhSachQuanHuyenDataResponse>>(
                       listener: (BuildContext context,
-                          DataState<List<DanhSachQuanHuyenDataResponse>>
+                          DataMultiState<DanhSachQuanHuyenDataResponse>
                               state) {},
                       child: BlocBuilder<DanhSachQuanHuyenBloc,
-                          DataState<List<DanhSachQuanHuyenDataResponse>>>(
+                          DataMultiState<DanhSachQuanHuyenDataResponse>>(
                         builder: (BuildContext context,
-                                DataState<List<DanhSachQuanHuyenDataResponse>>
+                                DataMultiState<DanhSachQuanHuyenDataResponse>
                                     state) =>
-                            handleDataState<
-                                    List<DanhSachQuanHuyenDataResponse>>(
-                                state,
-                                (context, state) =>
-                                    _buildViewSearchDanhSachQuanHuyen(
-                                        context, state ?? []),
-                                initWidget: _buildViewSearchDanhSachQuanHuyen(
-                                    context, [])),
+                            _buildViewSearchDanhSachQuanHuyen(
+                                context, state.data ?? []),
                       ),
                     )),
               ),
@@ -160,23 +149,17 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
                 child: BlocProvider(
                     create: (_) => danhSachDoanhNghiepBloc,
                     child: BlocListener<DanhSachDoanhNghiepBloc,
-                        DataState<List<DanhSachDoanhNghiepDataResponse>>>(
+                        DataMultiState<DanhSachDoanhNghiepDataResponse>>(
                       listener: (BuildContext context,
-                          DataState<List<DanhSachDoanhNghiepDataResponse>>
+                          DataMultiState<DanhSachDoanhNghiepDataResponse>
                               state) {},
                       child: BlocBuilder<DanhSachDoanhNghiepBloc,
-                          DataState<List<DanhSachDoanhNghiepDataResponse>>>(
+                          DataMultiState<DanhSachDoanhNghiepDataResponse>>(
                         builder: (BuildContext context,
-                                DataState<List<DanhSachDoanhNghiepDataResponse>>
+                                DataMultiState<DanhSachDoanhNghiepDataResponse>
                                     state) =>
-                            handleDataState<
-                                    List<DanhSachDoanhNghiepDataResponse>>(
-                                state,
-                                (context, state) =>
-                                    _buildViewSearchDanhSachDoanhNghiep(
-                                        context, state ?? []),
-                                initWidget: _buildViewSearchDanhSachDoanhNghiep(
-                                    context, [])),
+                            _buildViewSearchDanhSachDoanhNghiep(
+                                context, state.data ?? []),
                       ),
                     )),
               ),
@@ -185,49 +168,38 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
                 child: BlocProvider(
                     create: (_) => danhSachMucLuongBloc,
                     child: BlocListener<DanhSachMucLuongBloc,
-                        DataState<List<DanhSachMucLuongDataResponse>>>(
+                        DataMultiState<DanhSachMucLuongDataResponse>>(
                       listener: (BuildContext context,
-                          DataState<List<DanhSachMucLuongDataResponse>>
+                          DataMultiState<DanhSachMucLuongDataResponse>
                               state) {},
                       child: BlocBuilder<DanhSachMucLuongBloc,
-                          DataState<List<DanhSachMucLuongDataResponse>>>(
+                          DataMultiState<DanhSachMucLuongDataResponse>>(
                         builder: (BuildContext context,
-                                DataState<List<DanhSachMucLuongDataResponse>>
+                                DataMultiState<DanhSachMucLuongDataResponse>
                                     state) =>
-                            handleDataState<List<DanhSachMucLuongDataResponse>>(
-                                state,
-                                (context, state) =>
-                                    _buildViewSearchDanhSachMucLuong(
-                                        context, state ?? []),
-                                initWidget: _buildViewSearchDanhSachMucLuong(
-                                    context, [])),
+                            _buildViewSearchDanhSachMucLuong(
+                                context, state.data),
                       ),
                     )),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 10),
                 child: BlocProvider(
-                    create: (_) => danhSachKinhNghiemBloc,
-                    child: BlocListener<DanhSachKinhNghiemBloc,
-                        DataState<List<DanhSachKinhNghiemDataResponse>>>(
-                      listener: (BuildContext context,
-                          DataState<List<DanhSachKinhNghiemDataResponse>>
-                              state) {},
-                      child: BlocBuilder<DanhSachKinhNghiemBloc,
-                          DataState<List<DanhSachKinhNghiemDataResponse>>>(
+                  create: (_) => danhSachKinhNghiemBloc,
+                  child: BlocListener<DanhSachKinhNghiemBloc,
+                      DataMultiState<DanhSachKinhNghiemDataResponse>>(
+                    listener: (BuildContext context,
+                        DataMultiState<DanhSachKinhNghiemDataResponse>
+                            state) {},
+                    child: BlocBuilder<DanhSachKinhNghiemBloc,
+                            DataMultiState<DanhSachKinhNghiemDataResponse>>(
                         builder: (BuildContext context,
-                                DataState<List<DanhSachKinhNghiemDataResponse>>
+                                DataMultiState<DanhSachKinhNghiemDataResponse>
                                     state) =>
-                            handleDataState<
-                                    List<DanhSachKinhNghiemDataResponse>>(
-                                state,
-                                (context, state) =>
-                                    _buildViewSearchDanhSachKinhNghiem(
-                                        context, state ?? []),
-                                initWidget: _buildViewSearchDanhSachKinhNghiem(
-                                    context, [])),
-                      ),
-                    )),
+                            _buildViewSearchDanhSachKinhNghiem(
+                                context, state.data)),
+                  ),
+                ),
               ),
               Container(
                   margin: const EdgeInsets.only(top: 10),

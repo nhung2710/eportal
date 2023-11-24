@@ -7,6 +7,6 @@ import 'package:eportal/model/api/request/common_new/danh_sach_linh_vuc_van_ban_
 //
 
 class DanhSachLinhVucVanBanEvent
-    extends BaseEvent<DanhSachLinhVucVanBanRequest> {
+    extends BaseMultiEvent<DanhSachLinhVucVanBanRequest> {
   const DanhSachLinhVucVanBanEvent({required super.request});
 }

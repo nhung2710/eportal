@@ -6,6 +6,6 @@ import 'package:eportal/model/api/request/common_new/dang_ky_request.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class DangKyEvent extends BaseEvent<DangKyRequest> {
+class DangKyEvent extends BaseSingleEvent<DangKyRequest> {
   const DangKyEvent({required super.request});
 }

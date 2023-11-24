@@ -52,14 +52,15 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
         create: (_) => dangKyBloc,
-        child: BlocListener<DangKyBloc, DataState<DangKyDataResponse>>(
-          listener:
-              (BuildContext context, DataState<DangKyDataResponse> state) {
-            handlerActionState<DangKyDataResponse>(state, (obj) async {
-              await GlobalApplication().Preferences?.setString(
+        child: BlocListener<DangKyBloc, DataSingleState<DangKyDataResponse>>(
+          listener: (BuildContext context,
+              DataSingleState<DangKyDataResponse> state) {
+            handlerActionDataSingleState<DangKyDataResponse>(state,
+                (obj) async {
+              await GlobalApplication().preferences?.setString(
                   ApplicationConstant.REGISTER_USER_NAME,
                   obj!.userName.replaceWhenNullOrWhiteSpace());
-              await GlobalApplication().Preferences?.setString(
+              await GlobalApplication().preferences?.setString(
                   ApplicationConstant.REGISTER_USER_PASSWORD,
                   passwordController.text);
               nextPageWithoutBack((context) => const SignInPage());

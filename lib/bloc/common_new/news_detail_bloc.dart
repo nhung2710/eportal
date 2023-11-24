@@ -3,37 +3,25 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 import 'package:bloc/bloc.dart';
+import 'package:eportal/bloc/base/base_bloc.dart';
 import 'package:eportal/enum/data_bloc_status.dart';
+import 'package:eportal/model/api/response/common_new/news_detail_response.dart';
 
 import '../../event/base/base_event.dart';
 import '../../event/common_new/news_detail_event.dart';
 import '../../repository/common_new/news_detail_repository.dart';
 import '../../state/base/base_state.dart';
 
-class NewsDetailBloc extends Bloc<BaseEvent, DataState<String>> {
-  NewsDetailBloc() : super(const DataState<String>()) {
-    final NewsDetailRepository apiRepository =
-    NewsDetailRepository();
+class NewsDetailBloc extends BaseSingleBloc<String, NewsDetailRepository,
+    NewsDetailEvent, NewsDetailResponse> {
+  @override
+  Future<NewsDetailResponse> callApiResult(
+          NewsDetailRepository apiRepository, NewsDetailEvent event) =>
+      apiRepository.getNewsDetail(event.request);
 
-    on<NewsDetailEvent>((event, emit) async {
-      try {
-        emit(state.copyWith(status: DataBlocStatus.loading));
-        final response =
-        await apiRepository.getNewsDetail(event.request);
-        if (response.status != 2) {
-          emit(state.copyWith(errorMessage: response.message,status: DataBlocStatus.error));
-        }
-        else{
-          if(response.data.isEmpty) {
-            emit(state.copyWith(status: DataBlocStatus.notfound));
-          } else {
-            emit(state.copyWith(data: response.data,status: DataBlocStatus.success));
-          }
-        }
+  @override
+  String? getFailMessage(NewsDetailResponse response) => null;
 
-      } on Exception catch (e) {
-        emit(state.copyWith(errorMessage: e.toString(),status: DataBlocStatus.error));
-      }
-    });
-  }
+  @override
+  NewsDetailRepository getRepository() => NewsDetailRepository();
 }

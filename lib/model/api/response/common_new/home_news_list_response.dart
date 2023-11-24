@@ -6,11 +6,10 @@ import 'data/home_news_list_data_response.dart';
 // Created by BlackRose on 11/6/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class HomeNewsListResponse extends BaseEportalResponse {
-  List<HomeNewsListDataResponse> data;
-
-  HomeNewsListResponse({required this.data, required status, required message})
-      : super(status: status, message: message);
+class HomeNewsListResponse
+    extends BaseMultiEportalResponse<HomeNewsListDataResponse> {
+  HomeNewsListResponse(
+      {required super.data, required super.status, required super.message});
 
   factory HomeNewsListResponse.fromJson(Map<String, dynamic> json) {
     List<HomeNewsListDataResponse> data = <HomeNewsListDataResponse>[];

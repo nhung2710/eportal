@@ -2,7 +2,9 @@
 // Created by BlackRose on 13/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class WorkSearchDataResponse {
+import '../../../../base/base_eportal_data_response.dart';
+
+class WorkSearchDataResponse extends BaseEportalDataResponse {
   String? imageURL;
   String? parentID;
   int? gtvl;

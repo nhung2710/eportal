@@ -8,7 +8,7 @@ import 'package:eportal/model/base/base_eportal_request.dart';
 //
 
 class FaqQuestionSearchRequest
-    extends BaseEportalRequest<FaqQuestionSearchDataRequest> {
+    extends BasePageEportalRequest<FaqQuestionSearchDataRequest> {
   FaqQuestionSearchRequest({required super.obj});
 
   @override

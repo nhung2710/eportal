@@ -6,6 +6,6 @@ import 'package:eportal/model/api/request/common_new/album_detail_request.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class AlbumDetailEvent extends BaseEvent<AlbumDetailRequest> {
+class AlbumDetailEvent extends BaseMultiEvent<AlbumDetailRequest> {
   const AlbumDetailEvent({required super.request});
 }

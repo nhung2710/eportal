@@ -6,16 +6,16 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class FaqAddQuestionResponse extends BaseEportalResponse {
-  FaqAddQuestionDataResponse data;
-
+class FaqAddQuestionResponse
+    extends BaseSingleEportalResponse<FaqAddQuestionDataResponse> {
   FaqAddQuestionResponse(
-      {required this.data, required status, required message})
-      : super(status: status, message: message);
+      {required super.data, required super.status, required super.message});
 
   factory FaqAddQuestionResponse.fromJson(Map<String, dynamic> json) {
     return FaqAddQuestionResponse(
-        data: FaqAddQuestionDataResponse.fromJson(json['data']),
+        data: json['data'] == null
+            ? null
+            : FaqAddQuestionDataResponse.fromJson(json['data']),
         status: json["status"],
         message: json["message"]);
   }

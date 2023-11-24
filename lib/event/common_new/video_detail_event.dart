@@ -6,6 +6,6 @@ import 'package:eportal/model/api/request/common_new/video_detail_request.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class VideoDetailEvent extends BaseEvent<VideoDetailRequest> {
+class VideoDetailEvent extends BaseSingleEvent<VideoDetailRequest> {
   const VideoDetailEvent({required super.request});
 }

@@ -5,11 +5,10 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 // Created by BlackRose on 21/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class DocumentListResponse extends BaseEportalResponse {
-  List<DocumentListDataResponse> data;
-
-  DocumentListResponse({required this.data, required status, required message})
-      : super(status: status, message: message);
+class DocumentListResponse
+    extends BaseMultiEportalResponse<DocumentListDataResponse> {
+  DocumentListResponse(
+      {required super.data, required super.status, required super.message});
 
   factory DocumentListResponse.fromJson(Map<String, dynamic> json) {
     List<DocumentListDataResponse> data = <DocumentListDataResponse>[];

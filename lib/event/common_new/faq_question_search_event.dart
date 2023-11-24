@@ -6,6 +6,6 @@ import 'package:eportal/model/api/request/common_new/faq_question_search_request
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class FaqQuestionSearchEvent extends BaseEvent<FaqQuestionSearchRequest> {
+class FaqQuestionSearchEvent extends BasePageEvent<FaqQuestionSearchRequest> {
   const FaqQuestionSearchEvent({required super.request});
 }

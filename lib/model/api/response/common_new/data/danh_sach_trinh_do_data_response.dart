@@ -1,10 +1,11 @@
+import 'package:eportal/model/base/base_eportal_data_response.dart';
 import 'package:flutter/material.dart';
 
 //
 // Created by BlackRose on 23/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class DanhSachTrinhDoDataResponse {
+class DanhSachTrinhDoDataResponse extends BaseEportalDataResponse {
   int? idSend;
   int? total;
   int? educationID;
@@ -20,17 +21,17 @@ class DanhSachTrinhDoDataResponse {
 
   DanhSachTrinhDoDataResponse(
       {this.idSend,
-        this.total,
-        this.educationID,
-        this.educationCode,
-        this.educationName,
-        this.educationDes,
-        this.createdDate,
-        this.createdUser,
-        this.updatedDate,
-        this.updatedUser,
-        this.isActive,
-        this.isOrder});
+      this.total,
+      this.educationID,
+      this.educationCode,
+      this.educationName,
+      this.educationDes,
+      this.createdDate,
+      this.createdUser,
+      this.updatedDate,
+      this.updatedUser,
+      this.isActive,
+      this.isOrder});
 
   DanhSachTrinhDoDataResponse.fromJson(Map<String, dynamic> json) {
     idSend = json['idSend'];

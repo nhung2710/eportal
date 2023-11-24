@@ -5,11 +5,10 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 // Created by BlackRose on 21/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class VideoDetailResponse extends BaseEportalResponse {
-  List<VideoDetailDataResponse> data;
-
-  VideoDetailResponse({required this.data, required status, required message})
-      : super(status: status, message: message);
+class VideoDetailResponse
+    extends BaseSingleEportalResponse<List<VideoDetailDataResponse>> {
+  VideoDetailResponse(
+      {required super.data, required super.status, required super.message});
 
   factory VideoDetailResponse.fromJson(Map<String, dynamic> json) {
     List<VideoDetailDataResponse> data = <VideoDetailDataResponse>[];

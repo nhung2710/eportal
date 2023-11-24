@@ -48,14 +48,14 @@ class _HomeBusinessListPageState
   Widget pageUI(BuildContext context) => BlocProvider(
       create: (_) => homeBusinessListBloc,
       child: BlocListener<HomeBusinessListBloc,
-          DataState<List<HomeBusinessListDataResponse>>>(
+          DataMultiState<HomeBusinessListDataResponse>>(
         listener: (BuildContext context,
-            DataState<List<HomeBusinessListDataResponse>> state) {},
+            DataMultiState<HomeBusinessListDataResponse> state) {},
         child: BlocBuilder<HomeBusinessListBloc,
-            DataState<List<HomeBusinessListDataResponse>>>(
+            DataMultiState<HomeBusinessListDataResponse>>(
           builder: (BuildContext context,
-                  DataState<List<HomeBusinessListDataResponse>> state) =>
-              handleDataState<List<HomeBusinessListDataResponse>>(
+                  DataMultiState<HomeBusinessListDataResponse> state) =>
+              handleDataMultiState<HomeBusinessListDataResponse>(
             state,
             (context, state) => Column(
               children: [
