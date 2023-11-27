@@ -4,15 +4,21 @@
 //
 
 import 'package:eportal/enum/role_type.dart';
+import 'package:eportal/model/base/base_eportal_data_response.dart';
 
-class DangNhapDataResponse {
+class DangNhapDataResponse extends BaseEportalDataResponse {
   String? userID;
   String? userName;
   String? message;
   String? role;
   RoleType roleType = RoleType.anonymous;
 
-  DangNhapDataResponse({this.userID, this.userName, this.message, this.role,this.roleType = RoleType.anonymous});
+  DangNhapDataResponse(
+      {this.userID,
+      this.userName,
+      this.message,
+      this.role,
+      this.roleType = RoleType.anonymous});
 
   DangNhapDataResponse.fromJson(Map<String, dynamic> json) {
     userID = json['userID'];

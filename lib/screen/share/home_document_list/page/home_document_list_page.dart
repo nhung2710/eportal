@@ -1,4 +1,6 @@
 import 'package:eportal/model/api/response/common_new/data/home_document_list_data_response.dart';
+import 'package:eportal/screen/share/document_list_search/page/document_list_search_page.dart';
+import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,6 +37,20 @@ class _HomeDocumentListPageState
   String getPageTitle(BuildContext context) {
     return "Văn bản pháp luật";
   }
+
+  @override
+  Widget? getFloatingActionButton(BuildContext context) => ExpandableFab(
+        children: [
+          ActionButton(
+            icon: const Icon(
+              Icons.search,
+              color: Colors.white,
+            ),
+            onPressed: () =>
+                nextPage((context) => const DocumentListSearchPage()),
+          ),
+        ],
+      );
 
   @override
   void initDataLoading() {

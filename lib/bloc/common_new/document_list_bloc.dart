@@ -12,7 +12,7 @@ import 'package:eportal/repository/common_new/document_list_repository.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DocumentListBloc extends BaseMultiBloc<DocumentListDataResponse,
+class DocumentListBloc extends BasePageBloc<DocumentListDataResponse,
     DocumentListRepository, DocumentListEvent, DocumentListResponse> {
   @override
   Future<DocumentListResponse> callApiResult(

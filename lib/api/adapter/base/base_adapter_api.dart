@@ -45,7 +45,7 @@ class BaseAdapterApi {
   };
 
   Future<Map<String, dynamic>> callApiAsync(BaseEportalRequest request) async {
-    await Future.delayed(const Duration(milliseconds: 200));
+    //await Future.delayed(const Duration(milliseconds: 200));
     Uri uri = Uri();
     if (!request.getQuery().isNullOrWhiteSpace()) {
       uri = Uri.parse("${request.getBaseUri()}${request.getQuery()}");

@@ -6,7 +6,7 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class DocumentListResponse
-    extends BaseMultiEportalResponse<DocumentListDataResponse> {
+    extends BasePageEportalResponse<DocumentListDataResponse> {
   DocumentListResponse(
       {required super.data, required super.status, required super.message});
 

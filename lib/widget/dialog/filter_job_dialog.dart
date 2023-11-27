@@ -203,15 +203,15 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
                 ),
               ),
               Container(
-                  margin: const EdgeInsets.only(top: 10),
+                  margin: const EdgeInsets.only(top: 20),
                   width: double.infinity,
                   child: Row(
                     children: [
                       Expanded(
                         child: DefaultButton(
-                          text: 'Tìm kiếm',
+                          text: 'Hủy',
+                          backgroundColor: Colors.redAccent,
                           onPressed: () {
-                            widget.onPressed();
                             Navigator.of(context).pop();
                           },
                         ),
@@ -221,9 +221,9 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
                       ),
                       Expanded(
                         child: DefaultButton(
-                          text: 'Hủy',
-                          backgroundColor: Colors.redAccent,
+                          text: 'Tìm kiếm',
                           onPressed: () {
+                            widget.onPressed();
                             Navigator.of(context).pop();
                           },
                         ),

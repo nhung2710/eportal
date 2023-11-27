@@ -52,4 +52,6 @@ class ApplicationApiConstant {
   static const API_COMMON_NEW_OP_ALBUM_DETAIL = "AlbumDetail";
   static const API_COMMON_NEW_OP_DANG_NHAP = "DangNhap";
   static const API_COMMON_NEW_OP_DANG_KY = "DangKy";
+  static const API_COMMON_NEW_OP_DANH_SACH_CHUYEN_MUC = "DanhSachChuyenMuc";
+
 }

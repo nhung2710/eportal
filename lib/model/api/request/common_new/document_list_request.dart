@@ -7,7 +7,8 @@ import 'package:eportal/model/base/base_eportal_request.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class DocumentListRequest extends BaseEportalRequest<DocumentListDataRequest> {
+class DocumentListRequest
+    extends BasePageEportalRequest<DocumentListDataRequest> {
   DocumentListRequest({required super.obj});
 
   @override

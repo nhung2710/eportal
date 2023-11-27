@@ -1,10 +1,10 @@
-
-
 //
 // Created by BlackRose on 21/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class DangKyDataResponse {
+import 'package:eportal/model/base/base_eportal_data_response.dart';
+
+class DangKyDataResponse extends BaseEportalDataResponse {
   String? userID;
   String? userName;
   String? message;
@@ -13,12 +13,10 @@ class DangKyDataResponse {
   DangKyDataResponse({this.userID, this.userName, this.message, this.role});
 
   DangKyDataResponse.fromJson(Map<String, dynamic> json) {
-
     userID = json['userID'];
     userName = json['userName'];
     message = json['message'];
     role = json['role'];
-
   }
 
   Map<String, dynamic> toJson() {

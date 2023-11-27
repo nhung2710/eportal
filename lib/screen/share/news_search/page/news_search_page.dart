@@ -1,6 +1,8 @@
 import 'package:eportal/model/api/response/common_new/data/news_search_data_response.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_size_icon.dart';
+import 'package:eportal/widget/dialog/filter_news_dialog.dart';
+import 'package:eportal/widget/input/search_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,6 +34,13 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
       NewsSearchRequest(obj: NewsSearchDataRequest(tuKhoa: ""));
   TextEditingController textEditingController = TextEditingController();
 
+  final filterNewsDialogKey = GlobalKey<FilterNewsDialogState>();
+  late FilterNewsDialog filterNewsDialog = FilterNewsDialog(
+    key: filterNewsDialogKey,
+    data: request.obj,
+    onPressed: () => initDataLoading(),
+  );
+
   @override
   void initDataLoading() {
     request.obj.soTrangHienTai = 1;
@@ -57,35 +66,19 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
           Container(
             margin: const EdgeInsets.only(bottom: 5, top: 5),
             color: Colors.white,
-            child: TextFormField(
+            child: SearchInput(
               controller: textEditingController,
-              maxLength: 100,
+              maxLength: 50,
               textInputAction: TextInputAction.send,
-              onFieldSubmitted: (value) => _findNews(context),
-              decoration: InputDecoration(
-                isDense: true,
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5.0),
-                  ),
-                ),
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                suffixIcon: IconButton(
-                  icon: const Icon(
-                    Icons.send,
-                    color: AppColor.colorOfIcon,
-                    size: AppSizeIcon.sizeOfNormal,
-                  ),
-                  padding: EdgeInsets.zero,
-                  onPressed: () {
-                    _findNews(context);
-                  },
-                ),
-                hintText: 'Tìm kiếm',
-                counterText: "",
-              ),
-              style: AppTextStyle.normal,
+              onFieldSubmitted: (value) => initDataLoading(),
+              icon: Icons.search,
+              onTap: () {
+                initDataLoading();
+              },
+              onTapFilter: () {
+                showDialog(context: context, builder: (_) => filterNewsDialog);
+              },
+              hintText: "Nội dung tìm kiếm",
             ),
           ),
           Expanded(
