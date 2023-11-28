@@ -1,4 +1,3 @@
-import 'package:eportal/style/app_color.dart';
 import 'package:eportal/widget/full_data_item/full_data_item.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -7,19 +6,18 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // Created by BlackRose on 28/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class DocumentItem extends StatelessWidget {
+
+class AnswerAndQuestionItem extends StatelessWidget {
   final bool isShowFull;
   final GestureTapCallback? onTap;
-  final String? title;
-  final String? noCode;
-  final String? date;
+  final String? question;
+  final String? answer;
 
-  DocumentItem({
+  const AnswerAndQuestionItem({
     this.onTap,
     this.isShowFull = false,
-    this.title,
-    this.noCode,
-    this.date,
+    this.question,
+    this.answer,
   });
 
   @override
@@ -27,14 +25,12 @@ class DocumentItem extends StatelessWidget {
         onTap: onTap,
         isShowFull: isShowFull,
         dataItems: [
-          DataItem(text: title, icon: FontAwesomeIcons.tags, isShowFull: true),
           DataItem(
-              text: noCode, icon: FontAwesomeIcons.hashtag, isShowFull: true),
+              text: question,
+              icon: FontAwesomeIcons.question,
+              isShowFull: true),
           DataItem(
-            text: date,
-            icon: FontAwesomeIcons.calendarPlus,
-            isShowFull: true,
-          ),
+              text: answer, icon: FontAwesomeIcons.reply, isShowFull: true),
         ],
       );
 }

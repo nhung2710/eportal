@@ -1,10 +1,10 @@
 import 'package:eportal/model/api/response/common_new/data/faq_question_search_data_response.dart';
-import 'package:eportal/screen/share/answer_and_question/widget/answer_and_question_item.dart';
 import 'package:eportal/screen/share/answer_and_question_add/page/answer_and_question_add_page.dart';
 import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
+import 'package:eportal/widget/full_data_item/answer_and_question_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -91,8 +91,12 @@ class AnswerAndQuestionPageState
                                   itemBuilder:
                                       (BuildContext context, int index) =>
                                           AnswerAndQuestionItem(
-                                    data: state.elementAt(index),
-                                    index: index,
+                                    isShowFull: true,
+                                    answer: state
+                                        .elementAt(index)
+                                        .answerOb
+                                        ?.contents,
+                                    question: state.elementAt(index).contents,
                                     onTap: () {},
                                   ),
                                 ),

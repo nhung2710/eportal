@@ -1,9 +1,14 @@
+import 'package:eportal/screen/share/sign_up/page/sign_up_page.dart';
 import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
+import 'package:eportal/widget/default_button/default_button.dart';
+import 'package:eportal/widget/input/capcha_input.dart';
+import 'package:eportal/widget/input/field_input.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../extension/string_extension.dart';
 import '../../../../style/app_color.dart';
 
 //
@@ -18,274 +23,104 @@ class ContractPage extends BasePage {
 }
 
 class _ContractPageState extends BasePageState<ContractPage> {
-  TextEditingController textEditingController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController contentController = TextEditingController();
 
   @override
   String getPageTitle(BuildContext context) => "Liên hệ";
 
   @override
-  Widget pageUI(BuildContext context) => Card(
-        elevation: AppElevation.sizeOfNormal,
-        color: AppColor.colorOfApp,
-        shadowColor: AppColor.colorOfIcon,
-        borderOnForeground: false,
-        margin: const EdgeInsets.all(5),
-        shape: const RoundedRectangleBorder(
-            side: BorderSide(color: AppColor.colorOfDrawer, width: 0.2),
-            borderRadius: BorderRadius.all(Radius.circular(5))),
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                        flex: 1,
-                        child: Text(
-                          "Tên công ty",
-                          style: AppTextStyle.title
-                              .copyWith(overflow: TextOverflow.visible),
-                        )),
-                    const VerticalDivider(
-                      thickness: 2,
-                      width: 5,
-                      color: Colors.transparent,
-                    ),
-                    Expanded(
-                        flex: 3,
-                        child: GestureDetector(
-                          onTap: () => _launchHotline("02963831123"),
-                          child: Text(
-                            "TRUNG TÂM DỊCH VỤ VIỆC LÀM TỈNH HÒA BÌNH",
-                            textAlign: TextAlign.end,
-                            style: AppTextStyle.title.copyWith(
-                                overflow: TextOverflow.visible,
-                                color: AppColor.colorOfIcon),
-                          ),
-                        )),
-                  ],
-                ),
-              ),
-              const Divider(
-                height: 1,
-                color: AppColor.colorOfDrawer,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                        flex: 1,
-                        child: Text(
-                          "Địa chỉ",
-                          style: AppTextStyle.title
-                              .copyWith(overflow: TextOverflow.visible),
-                        )),
-                    Expanded(
-                        flex: 3,
-                        child: GestureDetector(
-                          onTap: () => _launchHotline("02963831123"),
-                          child: Text(
-                            "570 đường Trần Hưng Đạo, Hòa Bình, Vietnam",
-                            textAlign: TextAlign.end,
-                            style: AppTextStyle.title.copyWith(
-                                overflow: TextOverflow.visible,
-                                color: AppColor.colorOfIcon),
-                          ),
-                        )),
-                  ],
-                ),
-              ),
-              const Divider(
-                height: 1,
-                color: AppColor.colorOfDrawer,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                        flex: 1,
-                        child: Text(
-                          "Số điện thoại",
-                          style: AppTextStyle.title
-                              .copyWith(overflow: TextOverflow.visible),
-                        )),
-                    Expanded(
-                        flex: 3,
-                        child: GestureDetector(
-                          onTap: () => _launchHotline("0943305444"),
-                          child: Text(
-                            "094 330 54 44",
-                            textAlign: TextAlign.end,
-                            style: AppTextStyle.title.copyWith(
-                                overflow: TextOverflow.visible,
-                                color: AppColor.colorOfIcon),
-                          ),
-                        )),
-                  ],
-                ),
-              ),
-              const Divider(
-                height: 1,
-                color: AppColor.colorOfDrawer,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                        flex: 1,
-                        child: Text(
-                          "Email",
-                          style: AppTextStyle.title
-                              .copyWith(overflow: TextOverflow.visible),
-                        )),
-                    Expanded(
-                        flex: 3,
-                        child: GestureDetector(
-                          onTap: () =>
-                              _launchEmail("vieclamhoabinh.media@gmail.com"),
-                          child: Text(
-                            "vieclamhoabinh.media@gmail.com",
-                            textAlign: TextAlign.end,
-                            style: AppTextStyle.title.copyWith(
-                                overflow: TextOverflow.visible,
-                                color: AppColor.colorOfIcon),
-                          ),
-                        )),
-                  ],
-                ),
-              ),
-              const Divider(
-                height: 1,
-                color: AppColor.colorOfDrawer,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                        flex: 1,
-                        child: Text(
-                          "Website",
-                          style: AppTextStyle.title
-                              .copyWith(overflow: TextOverflow.visible),
-                        )),
-                    Expanded(
-                        flex: 3,
-                        child: GestureDetector(
-                          onTap: () => _launchWeb("www.eportal.top"),
-                          child: Text(
-                            "www.eportal.top",
-                            textAlign: TextAlign.end,
-                            style: AppTextStyle.title.copyWith(
-                                overflow: TextOverflow.visible,
-                                color: AppColor.colorOfIcon),
-                          ),
-                        )),
-                  ],
-                ),
-              ),
-              const Divider(
-                height: 1,
-                color: AppColor.colorOfDrawer,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                        flex: 1,
-                        child: Text(
-                          "Facebook",
-                          style: AppTextStyle.title
-                              .copyWith(overflow: TextOverflow.visible),
-                        )),
-                    Expanded(
-                        flex: 3,
-                        child: GestureDetector(
-                          onTap: () => _launchEmail(
-                              "Trung tâm Dịch vụ việc làm Hòa Bình"),
-                          child: Text(
-                            "Trung tâm Dịch vụ việc làm Hòa Bình",
-                            textAlign: TextAlign.end,
-                            style: AppTextStyle.title.copyWith(
-                                overflow: TextOverflow.visible,
-                                color: AppColor.colorOfIcon),
-                          ),
-                        )),
-                  ],
-                ),
-              ),
-              const Divider(
-                height: 1,
-                color: AppColor.colorOfDrawer,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                        flex: 1,
-                        child: Text(
-                          "Zalo",
-                          style: AppTextStyle.title
-                              .copyWith(overflow: TextOverflow.visible),
-                        )),
-                    Expanded(
-                        flex: 3,
-                        child: GestureDetector(
-                          onTap: () => _launchEmail(
-                              "Trung tâm Dịch vụ việc làm Hòa Bình"),
-                          child: Text(
-                            textAlign: TextAlign.end,
-                            "Trung tâm Dịch vụ việc làm Hòa Bình",
-                            style: AppTextStyle.title.copyWith(
-                                overflow: TextOverflow.visible,
-                                color: AppColor.colorOfIcon),
-                          ),
-                        )),
-                  ],
-                ),
-              ),
-            ],
+  Widget pageUI(BuildContext context) => ListView(
+        children: <Widget>[
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: FieldInput(
+              controller: usernameController,
+              maxLength: 50,
+              textInputAction: TextInputAction.next,
+              validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Tên của bạn không được để trống';
+                }
+                return null;
+              },
+              hintText: 'Tên của bạn',
+              icon: Icons.person,
+            ),
           ),
-        ),
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: FieldInput(
+              controller: emailController,
+              maxLength: 50,
+              textInputAction: TextInputAction.next,
+              hintText: 'Địa chỉ thư điện tử',
+              validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Địa chỉ thư điện tử không được để trống';
+                }
+                return null;
+              },
+              icon: Icons.email,
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: FieldInput(
+              controller: phoneController,
+              textInputAction: TextInputAction.next,
+              validator: (text) {
+                if (text.isNullOrWhiteSpace()) {
+                  return 'Số điện thoại không được để trống';
+                }
+                return null;
+              },
+              icon: Icons.smartphone,
+              hintText: "Điện thoại",
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: FieldInput(
+              controller: contentController,
+              textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.multiline,
+              maxLength: 500,
+              minLines: 10,
+              maxLines: 20,
+              validator: (text) {
+                if (text.isNullOrWhiteSpace()) {
+                  return 'Nội dung không được để trống';
+                }
+                return null;
+              },
+              icon: Icons.description,
+              hintText: "Nội dung",
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: CapchaInput(
+              textInputAction: TextInputAction.done,
+              onFieldSubmitted: (value) => _signUp(context),
+            ),
+          ),
+          Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: DefaultButton(
+                text: 'Quên mật khẩu',
+                onPressed: () => _signUp(context),
+              )),
+        ],
       );
 
-  void _launchHotline(String hotline) {
-    launchUrl(Uri(scheme: 'tel', path: hotline));
-  }
-
-  void _launchEmail(String email) {
-    launchUrl(
-        Uri(scheme: 'mailto', path: '${email}subject=Yêu cầu hỗ trợ&body='));
-  }
-
-  void _launchWeb(String website) {
-    launchUrl(Uri.parse(website));
+  _signUp(BuildContext context) {
+    if (isValid()) {
+      showCenterMessage(
+              "Hệ thống đã gửi mật khẩu mới về email của bạn vui lòng kiểm tra lại")
+          .then((value) => backPage());
+    }
   }
 }

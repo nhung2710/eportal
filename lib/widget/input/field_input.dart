@@ -20,7 +20,7 @@ class FieldInput extends StatefulWidget {
   final int? maxLines;
   final TextInputType? keyboardType;
 
-  final FocusNode? focusNode;
+  FocusNode? focusNode;
 
   FieldInput({
     super.key,
@@ -42,10 +42,24 @@ class FieldInput extends StatefulWidget {
 }
 
 class _FieldInputState extends State<FieldInput> {
+  bool isShowIcon = false;
+
   @override
   void initState() {
+    isShowIcon = widget.focusNode?.hasFocus ?? false;
     widget.controller = widget.controller ?? TextEditingController();
+    widget.focusNode = widget.focusNode ?? FocusNode();
+    widget.focusNode?.addListener(() {
+      setState(() {
+        isShowIcon = widget.focusNode?.hasFocus ?? false;
+      });
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -80,21 +94,26 @@ class _FieldInputState extends State<FieldInput> {
               size: AppSizeIcon.sizeOfNormal,
             ),
           ),
-          suffixIcon: GestureDetector(
-            onTap: () {
-              setState(() {
-                widget.controller?.clear();
-              });
-            },
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8),
-              child: const Icon(
-                Icons.clear,
-                color: AppColor.colorOfDrawer,
-                size: AppSizeIcon.sizeOfNormal,
-              ),
-            ),
-          ),
+          suffixIcon: isShowIcon
+              ? GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      widget.controller?.clear();
+                    });
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                    child: const Icon(
+                      Icons.clear,
+                      color: AppColor.colorOfDrawer,
+                      size: AppSizeIcon.sizeOfNormal,
+                    ),
+                  ),
+                )
+              : const SizedBox(
+                  width: 25,
+                  height: 25,
+                ),
           suffixIconConstraints: const BoxConstraints(
             minWidth: 25,
             minHeight: 25,

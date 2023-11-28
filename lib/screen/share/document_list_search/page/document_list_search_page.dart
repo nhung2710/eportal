@@ -114,10 +114,11 @@ class _DocumentListSearchPageState
                                           .getImageUrl(),
                                     )),
                                 title: state.elementAt(i).documentName,
-                                docUnitName: state.elementAt(i).docUnitName,
-                                contents: state.elementAt(i).contents,
                                 noCode: state.elementAt(i).noCode,
-                                signerName: state.elementAt(i).signerName,
+                                date: state
+                                    .elementAt(i)
+                                    .effectDate
+                                    .formatDateTimeApi(),
                                 isShowFull: true,
                               )),
                     ),

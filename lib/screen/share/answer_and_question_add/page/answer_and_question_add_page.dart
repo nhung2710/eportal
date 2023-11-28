@@ -1,7 +1,6 @@
 import 'package:eportal/application/global_application.dart';
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/model/api/response/common_new/faq_add_question_response.dart';
-import 'package:eportal/screen/share/answer_and_question/widget/answer_and_question_item.dart';
 import 'package:eportal/screen/share/sign_in/page/sign_in_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';

@@ -2,6 +2,7 @@ import 'package:eportal/model/api/response/common_new/data/home_document_list_da
 import 'package:eportal/screen/share/document_list_search/page/document_list_search_page.dart';
 import 'package:eportal/screen/share/view_pdf/page/view_pdf_page.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
+import 'package:eportal/widget/full_data_item/document_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -70,14 +71,14 @@ class _NewsLegalDocumentPageState extends BasePageState<NewsLegalDocumentPage> {
             (context, state) => ListView.builder(
                 shrinkWrap: true,
                 itemCount: state.length,
-                itemBuilder: (context, i) => NewsWidget(
+                itemBuilder: (context, i) => DocumentItem(
                       onTap: () => nextPage((context) => ViewPdfPage(
                             url: state.elementAt(i).fileSource.getImageUrl(),
                           )),
                       title: state.elementAt(i).documentName,
-                      isHasImage: false,
-                      content: state.elementAt(i).contents,
-                      time: state.elementAt(i).effectDate,
+                      noCode: state.elementAt(i).noCode,
+                      date: state.elementAt(i).effectDate.formatDateTimeApi(),
+                      isShowFull: true,
                     )),
           ),
         ),
