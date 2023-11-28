@@ -3,6 +3,7 @@ import 'package:eportal/event/common_new/document_list_event.dart';
 import 'package:eportal/model/api/request/common_new/data/document_list_data_request.dart';
 import 'package:eportal/model/api/request/common_new/document_list_request.dart';
 import 'package:eportal/model/api/response/common_new/data/document_list_data_response.dart';
+import 'package:eportal/screen/share/view_pdf/page/view_pdf_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_elevation.dart';
@@ -10,6 +11,7 @@ import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/dialog/filter_document_dialog.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
+import 'package:eportal/widget/full_data_item/document_item.dart';
 import 'package:eportal/widget/input/search_input.dart';
 import 'package:eportal/widget/show_full_info/show_full_info.dart';
 import 'package:eportal/widget/text_icon/text_icon.dart';
@@ -18,6 +20,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../extension/string_extension.dart';
+import '../../../../widget/full_data_item/full_data_item.dart';
 
 //
 // Created by BlackRose on 27/11/2023.
@@ -103,103 +106,19 @@ class _DocumentListSearchPageState
                           shrinkWrap: true,
                           controller: scrollController,
                           itemCount: state.length,
-                          itemBuilder: (context, i) => GestureDetector(
-                                onTap: () => {},
-                                child: Card(
-                                  elevation: AppElevation.sizeOfNormal,
-                                  color: AppColor.colorOfApp,
-                                  shadowColor: AppColor.colorOfIcon,
-                                  borderOnForeground: false,
-                                  margin: const EdgeInsets.all(5),
-                                  shape: const RoundedRectangleBorder(
-                                      side: BorderSide(
-                                          color: AppColor.colorOfDrawer,
-                                          width: 0.2),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(5))),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        TextIcon(
-                                          text: state
-                                              .elementAt(i)
-                                              .documentName
-                                              .supportHtml(),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 3,
-                                          icon: FontAwesomeIcons.tags,
-                                          textStyle: AppTextStyle.title
-                                              .copyWith(
-                                                  color: Colors.black,
-                                                  fontSize: 12),
-                                          isHasBorder: false,
-                                        ),
-                                        TextIcon(
-                                          text: state
-                                              .elementAt(i)
-                                              .docUnitName
-                                              .supportHtml(),
-                                          overflow: TextOverflow.ellipsis,
-                                          icon: FontAwesomeIcons.briefcase,
-                                          maxLines: 3,
-                                          textStyle: AppTextStyle.title
-                                              .copyWith(
-                                                  color: Colors.black,
-                                                  fontSize: 12),
-                                          isHasBorder: false,
-                                        ),
-                                        TextIcon(
-                                          overflow: TextOverflow.ellipsis,
-                                          text: state
-                                              .elementAt(i)
-                                              .contents
-                                              .supportHtml(),
-                                          maxLines: 3,
-                                          icon: FontAwesomeIcons.child,
-                                          textStyle: AppTextStyle.title
-                                              .copyWith(
-                                                  color: Colors.black,
-                                                  fontSize: 12),
-                                          isHasBorder: false,
-                                        ),
-                                        TextIcon(
-                                          text: state
-                                              .elementAt(i)
-                                              .noCode
-                                              .supportHtml(),
-                                          overflow: TextOverflow.ellipsis,
-                                          icon: FontAwesomeIcons.businessTime,
-                                          maxLines: 3,
-                                          textStyle: AppTextStyle.title
-                                              .copyWith(
-                                                  color: Colors.black,
-                                                  fontSize: 12),
-                                          isHasBorder: false,
-                                        ),
-                                        TextIcon(
-                                          text: state.elementAt(i).signerName,
-                                          icon: FontAwesomeIcons.thumbsUp,
-                                          maxLines: 3,
-                                          overflow: TextOverflow.ellipsis,
-                                          textStyle: AppTextStyle.title
-                                              .copyWith(
-                                                  color: AppColor.colorOfIcon,
-                                                  fontSize: 14),
-                                          isHasBorder: false,
-                                        ),
-                                        ShowFullInfo(
-                                          text: "Xem chi tiết",
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                          itemBuilder: (context, i) => DocumentItem(
+                                onTap: () => nextPage((context) => ViewPdfPage(
+                                      url: state
+                                          .elementAt(i)
+                                          .fileSource
+                                          .getImageUrl(),
+                                    )),
+                                title: state.elementAt(i).documentName,
+                                docUnitName: state.elementAt(i).docUnitName,
+                                contents: state.elementAt(i).contents,
+                                noCode: state.elementAt(i).noCode,
+                                signerName: state.elementAt(i).signerName,
+                                isShowFull: true,
                               )),
                     ),
                   ),

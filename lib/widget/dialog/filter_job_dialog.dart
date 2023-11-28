@@ -66,6 +66,11 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
 
   @override
   void initState() {
+    super.initState();
+  }
+
+  @override
+  void initDataLoading() {
     danhSachTinhTpBloc = DanhSachTinhTpBloc();
     danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
     danhSachDoanhNghiepBloc = DanhSachDoanhNghiepBloc();
@@ -73,6 +78,12 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
     danhSachKinhNghiemBloc = DanhSachKinhNghiemBloc();
     danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
     danhSachTrinhDoBloc = DanhSachTrinhDoBloc();
+    callApi();
+    super.initDataLoading();
+  }
+
+  @override
+  void callApi() {
     danhSachTinhTpBloc.add(DanhSachTinhTpEvent(
         request: DanhSachTinhTpRequest(obj: CommonNewDataRequest())));
     if (widget.danhSachTinhTpDataResponse != null) {
@@ -92,7 +103,7 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
         request: DanhSachMucLuongRequest(obj: CommonNewDataRequest())));
     danhSachKinhNghiemBloc.add(DanhSachKinhNghiemEvent(
         request: DanhSachKinhNghiemRequest(obj: CommonNewDataRequest())));
-    super.initState();
+    super.callApi();
   }
 
   @override

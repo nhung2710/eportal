@@ -280,7 +280,7 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
       case DataBlocStatus.notfound:
         return buildNotFoundData(context);
       case DataBlocStatus.error:
-        return buildScreenError(state.errorMessage);
+        return buildNotFoundData(context);
       case DataBlocStatus.success:
         return builder(context, state.data);
     }

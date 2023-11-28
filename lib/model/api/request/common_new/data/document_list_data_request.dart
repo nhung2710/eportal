@@ -6,18 +6,18 @@ import 'package:eportal/model/base/base_eportal_xml.dart';
 //
 class DocumentListDataRequest extends BasePageEportalXml {
   String tuKhoa;
-  String linhVucVanBan;
-  String loaiVanBan;
-  String coQuanBanHanh;
-  int nhomVanBan;
+  String? linhVucVanBan;
+  String? loaiVanBan;
+  String? coQuanBanHanh;
+  int? nhomVanBan;
 
   DocumentListDataRequest(
       {super.soTrangHienTai,
       super.soBanGhiTrenTrang,
       this.tuKhoa = "",
-      this.linhVucVanBan = "",
-      this.loaiVanBan = "",
-      this.coQuanBanHanh = "",
+      this.linhVucVanBan,
+      this.loaiVanBan,
+      this.coQuanBanHanh,
       this.nhomVanBan = 0});
 
   @override
