@@ -1,10 +1,11 @@
+import 'package:eportal/model/base/base_eportal_data_response.dart';
+import 'package:flutter/material.dart';
+
 //
-// Created by BlackRose on 13/11/2023.
+// Created by BlackRose on 28/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-import '../../../../base/base_eportal_data_response.dart';
-
-class WorkSearchDataResponse extends BaseEportalDataResponse {
+class WorkDetailDataResponse extends BaseEportalDataResponse {
   String? imageURL;
   String? tenTinhTP;
   String? hanNopHoSo;
@@ -68,7 +69,7 @@ class WorkSearchDataResponse extends BaseEportalDataResponse {
   String? updatedUser;
   int? portalID;
 
-  WorkSearchDataResponse(
+  WorkDetailDataResponse(
       {this.imageURL,
       this.tenTinhTP,
       this.hanNopHoSo,
@@ -132,7 +133,7 @@ class WorkSearchDataResponse extends BaseEportalDataResponse {
       this.updatedUser,
       this.portalID});
 
-  WorkSearchDataResponse.fromJson(Map<String, dynamic> json) {
+  WorkDetailDataResponse.fromJson(Map<String, dynamic> json) {
     imageURL = json['imageURL'];
     tenTinhTP = json['tenTinhTP'];
     hanNopHoSo = json['hanNopHoSo'];

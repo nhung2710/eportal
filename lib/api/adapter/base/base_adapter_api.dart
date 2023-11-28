@@ -117,7 +117,8 @@ class BaseAdapterApi {
       if (faultStringElements.isNotEmpty) {
         var result = <String, dynamic>{};
         result["status"] = 0;
-        result["message"] = faultStringElements.first.innerText;
+        result["message"] = "Có lỗi xảy ra vui lòng thử lại sau";
+        //result["message"] = faultStringElements.first.innerText;
         return result;
       }
     }

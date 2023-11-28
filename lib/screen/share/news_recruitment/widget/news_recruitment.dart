@@ -12,6 +12,7 @@ import '../../../../state/base/base_state.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/news/news_widget.dart';
 import '../../empty_example/page/empty_example_page.dart';
+import '../../work_search_detail/page/work_search_detail_page.dart';
 
 //
 // Created by BlackRose on 16/11/2023.
@@ -66,8 +67,8 @@ class _NewsRecruitmentState extends BasePageStateActive<NewsRecruitment> {
                 shrinkWrap: true,
                 itemCount: state.length,
                 itemBuilder: (context, i) => NewsWidget(
-                      onTap: () => nextPage((context) => EmptyExamplePage(
-                            isHasAppBar: true,
+                      onTap: () => nextPage((context) => WorkSearchDetailPage(
+                            id: state.elementAt(i).id,
                           )),
                       title: state.elementAt(i).title,
                       imageUrl: state.elementAt(i).imageURL,

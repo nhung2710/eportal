@@ -3,6 +3,7 @@ import 'package:eportal/screen/share/work_search_detail/page/work_search_detail_
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
+import 'package:eportal/widget/full_data_item/work_item.dart';
 import 'package:eportal/widget/text_icon/text_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -101,107 +102,20 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
                           shrinkWrap: true,
                           controller: scrollController,
                           itemCount: state.length,
-                          itemBuilder: (context, i) => GestureDetector(
+                          itemBuilder: (context, i) => WorkItem(
                                 onTap: () =>
                                     nextPage((context) => WorkSearchDetailPage(
-                                          workSearchDataResponse:
-                                              state.elementAt(i),
+                                          id: state.elementAt(i).id,
                                         )),
-                                child: Card(
-                                  elevation: AppElevation.sizeOfNormal,
-                                  color: AppColor.colorOfApp,
-                                  shadowColor: AppColor.colorOfIcon,
-                                  borderOnForeground: false,
-                                  margin: const EdgeInsets.all(5),
-                                  shape: const RoundedRectangleBorder(
-                                      side: BorderSide(
-                                          color: AppColor.colorOfDrawer,
-                                          width: 0.2),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(5))),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        TextIcon(
-                                          text: state
-                                              .elementAt(i)
-                                              .title
-                                              .supportHtml(),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 3,
-                                          icon: FontAwesomeIcons.tags,
-                                          textStyle: AppTextStyle.title
-                                              .copyWith(
-                                                  color: Colors.black,
-                                                  fontSize: 12),
-                                          isHasBorder: false,
-                                        ),
-                                        TextIcon(
-                                          text: state
-                                              .elementAt(i)
-                                              .description
-                                              .supportHtml(),
-                                          overflow: TextOverflow.ellipsis,
-                                          icon: FontAwesomeIcons.briefcase,
-                                          maxLines: 3,
-                                          textStyle: AppTextStyle.title
-                                              .copyWith(
-                                                  color: Colors.black,
-                                                  fontSize: 12),
-                                          isHasBorder: false,
-                                        ),
-                                        TextIcon(
-                                          overflow: TextOverflow.ellipsis,
-                                          text: state
-                                              .elementAt(i)
-                                              .ages
-                                              .supportHtml(),
-                                          maxLines: 3,
-                                          icon: FontAwesomeIcons.child,
-                                          textStyle: AppTextStyle.title
-                                              .copyWith(
-                                                  color: Colors.black,
-                                                  fontSize: 12),
-                                          isHasBorder: false,
-                                        ),
-                                        TextIcon(
-                                          text: state
-                                              .elementAt(i)
-                                              .workTime
-                                              .supportHtml(),
-                                          overflow: TextOverflow.ellipsis,
-                                          icon: FontAwesomeIcons.businessTime,
-                                          maxLines: 3,
-                                          textStyle: AppTextStyle.title
-                                              .copyWith(
-                                                  color: Colors.black,
-                                                  fontSize: 12),
-                                          isHasBorder: false,
-                                        ),
-                                        TextIcon(
-                                          text: state.elementAt(i).benefit,
-                                          icon: FontAwesomeIcons.thumbsUp,
-                                          maxLines: 3,
-                                          overflow: TextOverflow.ellipsis,
-                                          textStyle: AppTextStyle.title
-                                              .copyWith(
-                                                  color: AppColor.colorOfIcon,
-                                                  fontSize: 14),
-                                          isHasBorder: false,
-                                        ),
-                                        ShowFullInfo(
-                                          text: "Xem chi tiết",
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                                title: state.elementAt(i).title,
+                                ages: state.elementAt(i).ages,
+                                benefit: state.elementAt(i).benefit,
+                                workTime: state.elementAt(i).workTime,
+                                tenTinhTP: state.elementAt(i).tenTinhTP,
+                                soNamKinhNghiem:
+                                    state.elementAt(i).soNamKinhNghiem,
+                                hanNopHoSo: state.elementAt(i).hanNopHoSo,
+                                description: state.elementAt(i).description,
                               )),
                     ),
                   ),
@@ -214,5 +128,5 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
   getBottomNavigationBar(BuildContext context) => null;
 
   @override
-  String getPageTitle(BuildContext context) => "Tìm kiếm";
+  String getPageTitle(BuildContext context) => "Tìm kiếm tuyển dụng";
 }

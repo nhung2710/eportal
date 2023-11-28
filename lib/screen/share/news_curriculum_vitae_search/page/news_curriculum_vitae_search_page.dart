@@ -3,12 +3,14 @@ import 'package:eportal/event/common_new/job_user_search_event.dart';
 import 'package:eportal/model/api/request/common_new/data/job_user_search_data_request.dart';
 import 'package:eportal/model/api/request/common_new/job_user_search_request.dart';
 import 'package:eportal/model/api/response/common_new/data/job_user_search_data_response.dart';
+import 'package:eportal/screen/share/news_curriculum_vitae_detail/page/news_curriculum_vitae_detail_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
+import 'package:eportal/widget/full_data_item/curriculum_vitae_item.dart';
 import 'package:eportal/widget/input/search_input.dart';
 import 'package:eportal/widget/show_full_info/show_full_info.dart';
 import 'package:eportal/widget/text_icon/text_icon.dart';
@@ -95,107 +97,17 @@ class _NewsCurriculumVitaeSearchPageState
                           shrinkWrap: true,
                           controller: scrollController,
                           itemCount: state.length,
-                          itemBuilder: (context, i) => GestureDetector(
-                                onTap: () => {},
-                                child: Card(
-                                  elevation: AppElevation.sizeOfNormal,
-                                  color: AppColor.colorOfApp,
-                                  shadowColor: AppColor.colorOfIcon,
-                                  borderOnForeground: false,
-                                  margin: const EdgeInsets.all(5),
-                                  shape: const RoundedRectangleBorder(
-                                      side: BorderSide(
-                                          color: AppColor.colorOfDrawer,
-                                          width: 0.2),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(5))),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        TextIcon(
-                                          text: state
-                                              .elementAt(i)
-                                              .title
-                                              .supportHtml(),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 3,
-                                          icon: FontAwesomeIcons.tags,
-                                          textStyle: AppTextStyle.title
-                                              .copyWith(
-                                                  color: Colors.black,
-                                                  fontSize: 12),
-                                          isHasBorder: false,
-                                        ),
-                                        TextIcon(
-                                          text: state
-                                              .elementAt(i)
-                                              .education
-                                              .supportHtml(),
-                                          icon: FontAwesomeIcons.graduationCap,
-                                          maxLines: 3,
-                                          overflow: TextOverflow.ellipsis,
-                                          textStyle: AppTextStyle.title
-                                              .copyWith(
-                                                  color: Colors.black,
-                                                  fontSize: 12),
-                                          isHasBorder: false,
-                                        ),
-                                        TextIcon(
-                                          text: state
-                                              .elementAt(i)
-                                              .careerGoals
-                                              .supportHtml(),
-                                          icon:
-                                              FontAwesomeIcons.clockRotateLeft,
-                                          maxLines: 3,
-                                          overflow: TextOverflow.ellipsis,
-                                          textStyle: AppTextStyle.title
-                                              .copyWith(
-                                                  color: Colors.black,
-                                                  fontSize: 12),
-                                          isHasBorder: false,
-                                        ),
-                                        TextIcon(
-                                          text: state
-                                              .elementAt(i)
-                                              .skillsForte
-                                              .supportHtml(),
-                                          icon: FontAwesomeIcons.globe,
-                                          maxLines: 3,
-                                          overflow: TextOverflow.ellipsis,
-                                          textStyle: AppTextStyle.title
-                                              .copyWith(
-                                                  color: Colors.black,
-                                                  fontSize: 12),
-                                          isHasBorder: false,
-                                        ),
-                                        TextIcon(
-                                          text: state
-                                              .elementAt(i)
-                                              .workExperience
-                                              .supportHtml(),
-                                          icon: FontAwesomeIcons.bullseye,
-                                          maxLines: 3,
-                                          overflow: TextOverflow.ellipsis,
-                                          textStyle: AppTextStyle.title
-                                              .copyWith(
-                                                  color: AppColor.colorOfIcon,
-                                                  fontSize: 14),
-                                          isHasBorder: false,
-                                        ),
-                                        ShowFullInfo(
-                                          text: "Xem chi tiết",
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                          itemBuilder: (context, i) => CurriculumVitaeItem(
+                                onTap: () => nextPage(
+                                    (context) => NewsCurriculumVitaeDetailPage(
+                                          id: state.elementAt(i).id,
+                                        )),
+                                title: state.elementAt(i).title,
+                                education: state.elementAt(i).education,
+                                careerGoals: state.elementAt(i).careerGoals,
+                                skillsForte: state.elementAt(i).skillsForte,
+                                workExperience:
+                                    state.elementAt(i).workExperience,
                               )),
                     ),
                   ),
@@ -208,5 +120,5 @@ class _NewsCurriculumVitaeSearchPageState
   getBottomNavigationBar(BuildContext context) => null;
 
   @override
-  String getPageTitle(BuildContext context) => "Tìm kiếm";
+  String getPageTitle(BuildContext context) => "Tìm kiếm hồ sơ ứng viên";
 }

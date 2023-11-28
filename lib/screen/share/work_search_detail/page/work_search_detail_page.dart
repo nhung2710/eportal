@@ -1,10 +1,19 @@
+import 'package:eportal/bloc/common_new/work_detail_bloc.dart';
+import 'package:eportal/event/common_new/work_detail_event.dart';
+import 'package:eportal/model/api/request/common_new/data/work_detail_data_request.dart';
+import 'package:eportal/model/api/request/common_new/work_detail_request.dart';
+import 'package:eportal/model/api/response/common_new/data/job_user_detail_data_response.dart';
+import 'package:eportal/model/api/response/common_new/data/work_detail_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/work_search_data_response.dart';
+import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/button/phone_button.dart';
+import 'package:eportal/widget/full_data_item/work_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../extension/string_extension.dart';
@@ -17,11 +26,11 @@ import '../../../../widget/text_icon/text_icon.dart';
 //
 
 class WorkSearchDetailPage extends BasePage {
-  WorkSearchDataResponse workSearchDataResponse;
+  int? id;
 
   WorkSearchDetailPage({
     super.key,
-    required this.workSearchDataResponse,
+    this.id,
   });
 
   @override
@@ -29,95 +38,62 @@ class WorkSearchDetailPage extends BasePage {
 }
 
 class _WorkSearchDetailPageState extends BasePageState<WorkSearchDetailPage> {
+  WorkDetailBloc workDetailBloc = WorkDetailBloc();
+
   @override
-  Widget pageUI(BuildContext context) => SingleChildScrollView(
-        child: Column(
-          children: [
-            Card(
-              elevation: AppElevation.sizeOfNormal,
-              color: AppColor.colorOfApp,
-              shadowColor: AppColor.colorOfIcon,
-              borderOnForeground: true,
-              shape: const RoundedRectangleBorder(
-                  side: BorderSide(color: AppColor.colorOfDrawer, width: 0.1),
-                  borderRadius: BorderRadius.all(Radius.circular(5))),
+  void initDataLoading() {
+    callApi();
+    super.initDataLoading();
+  }
+
+  @override
+  void callApi() {
+    workDetailBloc.add(WorkDetailEvent(
+        request:
+            WorkDetailRequest(obj: WorkDetailDataRequest(id: widget.id ?? 0))));
+    super.callApi();
+  }
+
+  @override
+  Widget pageUI(BuildContext context) => BlocProvider(
+      create: (_) => workDetailBloc,
+      child:
+          BlocListener<WorkDetailBloc, DataSingleState<WorkDetailDataResponse>>(
+        listener: (BuildContext context,
+            DataSingleState<WorkDetailDataResponse> state) {},
+        child: BlocBuilder<WorkDetailBloc,
+            DataSingleState<WorkDetailDataResponse>>(
+          builder: (BuildContext context,
+                  DataSingleState<WorkDetailDataResponse> state) =>
+              handleDataSingleState<WorkDetailDataResponse>(
+            state,
+            (context, state) => SingleChildScrollView(
               child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextIcon(
-                    text: widget.workSearchDataResponse.title,
-                    icon: FontAwesomeIcons.tags,
-                    textStyle: AppTextStyle.title
-                        .copyWith(color: Colors.black, fontSize: 12),
-                    isHasBorder: false,
+                  WorkItem(
+                    title: state?.title,
+                    ages: state?.ages,
+                    benefit: state?.benefit,
+                    workTime: state?.workTime,
+                    tenTinhTP: state?.tenTinhTP,
+                    soNamKinhNghiem: state?.soNamKinhNghiem,
+                    hanNopHoSo: state?.hanNopHoSo,
+                    description: state?.description,
+                    requirement: state?.requirement,
+                    requirementsProfile: state?.requirementsProfile,
+                    contactUser: state?.contactUser,
+                    contactAddress: state?.contactAddress,
+                    isShowFull: true,
                   ),
-                  TextIcon(
-                    text: widget.workSearchDataResponse.description,
-                    icon: FontAwesomeIcons.briefcase,
-                    textStyle: AppTextStyle.title
-                        .copyWith(color: Colors.black, fontSize: 12),
-                    isHasBorder: false,
-                  ),
-                  TextIcon(
-                    text: widget.workSearchDataResponse.ages,
-                    icon: FontAwesomeIcons.child,
-                    textStyle: AppTextStyle.title
-                        .copyWith(color: Colors.black, fontSize: 12),
-                    isHasBorder: false,
-                  ),
-                  TextIcon(
-                    text: widget.workSearchDataResponse.workTime,
-                    icon: FontAwesomeIcons.businessTime,
-                    textStyle: AppTextStyle.title
-                        .copyWith(color: Colors.black, fontSize: 12),
-                    isHasBorder: false,
-                  ),
-                  TextIcon(
-                    text: widget.workSearchDataResponse.requirement,
-                    icon: FontAwesomeIcons.bookmark,
-                    textStyle: AppTextStyle.title
-                        .copyWith(color: Colors.red, fontSize: 16),
-                    isHasBorder: false,
-                  ),
-                  TextIcon(
-                    text: widget.workSearchDataResponse.requirementsProfile,
-                    icon: FontAwesomeIcons.folderPlus,
-                    textStyle: AppTextStyle.title
-                        .copyWith(color: Colors.black, fontSize: 12),
-                    isHasBorder: false,
-                  ),
-                  TextIcon(
-                    text: widget.workSearchDataResponse.benefit,
-                    icon: FontAwesomeIcons.thumbsUp,
-                    textStyle: AppTextStyle.title
-                        .copyWith(color: Colors.blue, fontSize: 16),
-                    isHasBorder: false,
-                  ),
-                  TextIcon(
-                    text: widget.workSearchDataResponse.contactUser,
-                    icon: FontAwesomeIcons.addressBook,
-                    textStyle: AppTextStyle.title
-                        .copyWith(color: Colors.black, fontSize: 12),
-                    isHasBorder: false,
-                  ),
-                  TextIcon(
-                    text: widget.workSearchDataResponse.contactAddress,
-                    icon: FontAwesomeIcons.locationDot,
-                    textStyle: AppTextStyle.title
-                        .copyWith(color: Colors.black, fontSize: 12),
-                    isHasBorder: false,
-                  ),
+                  PhoneButton(phone: state?.contactMobile),
+                  EmailButton(email: state?.contactEmail),
                 ],
               ),
             ),
-            PhoneButton(phone: widget.workSearchDataResponse.contactMobile),
-            EmailButton(email: widget.workSearchDataResponse.contactEmail),
-          ],
+          ),
         ),
-      );
+      ));
 
   @override
-  String getPageTitle(BuildContext context) => "Chi tiết";
+  String getPageTitle(BuildContext context) => "Chi tiết  tuyển dụng";
 }

@@ -37,8 +37,6 @@ class _ViewPdfPageState extends BasePageState<ViewPdfPage> {
   @override
   void initDataLoading() {
     widget.url = widget.url.getImageUrl();
-    widget.url =
-        'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf';
     path = downloadFilePdf();
     super.initDataLoading();
   }
@@ -61,6 +59,33 @@ class _ViewPdfPageState extends BasePageState<ViewPdfPage> {
 
   Future<File?> downloadFilePdf() async {
     try {
+      String fileName = "${md5.convert(utf8.encode(widget.url))}.pdf";
+      final fullDirPath = '${GlobalApplication().dirPath}/download/pdf';
+      final fullPath = '$fullDirPath/$fileName';
+      Directory directory = Directory(fullDirPath);
+      if (!await directory.exists()) {
+        await directory.create(recursive: true);
+      }
+      File file = File(fullPath);
+      if (await file.exists()) return file;
+      var request = await HttpClient().getUrl(Uri.parse(widget.url));
+      var response = await request.close();
+      if (response.statusCode != 200) {
+        return downloadFilePdfDefault();
+      }
+      var bytes = await consolidateHttpClientResponseBytes(response);
+      await file.writeAsBytes(bytes);
+      return file;
+    } on Exception catch (e) {
+      print(e);
+      return downloadFilePdfDefault();
+    }
+  }
+
+  Future<File?> downloadFilePdfDefault() async {
+    try {
+      widget.url =
+          'https://cartographicperspectives.org/index.php/journal/article/download/cp13-full/pdf/4742';
       String fileName = "${md5.convert(utf8.encode(widget.url))}.pdf";
       final fullDirPath = '${GlobalApplication().dirPath}/download/pdf';
       final fullPath = '$fullDirPath/$fileName';

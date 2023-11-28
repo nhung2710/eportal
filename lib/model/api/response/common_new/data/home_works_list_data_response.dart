@@ -6,7 +6,10 @@ import 'package:eportal/model/base/base_eportal_data_response.dart';
 
 class HomeWorksListDataResponse extends BaseEportalDataResponse {
   String? imageURL;
-  Null? parentID;
+  String? tenTinhTP;
+  String? hanNopHoSo;
+  String? soNamKinhNghiem;
+  String? parentID;
   int? gtvl;
   int? id;
   String? ages;
@@ -67,6 +70,9 @@ class HomeWorksListDataResponse extends BaseEportalDataResponse {
 
   HomeWorksListDataResponse(
       {this.imageURL,
+      this.tenTinhTP,
+      this.hanNopHoSo,
+      this.soNamKinhNghiem,
       this.parentID,
       this.gtvl,
       this.id,
@@ -128,6 +134,9 @@ class HomeWorksListDataResponse extends BaseEportalDataResponse {
 
   HomeWorksListDataResponse.fromJson(Map<String, dynamic> json) {
     imageURL = json['imageURL'];
+    tenTinhTP = json['tenTinhTP'];
+    hanNopHoSo = json['hanNopHoSo'];
+    soNamKinhNghiem = json['soNamKinhNghiem'];
     parentID = json['parent_ID'];
     gtvl = json['gtvl'];
     id = json['id'];
@@ -191,6 +200,9 @@ class HomeWorksListDataResponse extends BaseEportalDataResponse {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['imageURL'] = this.imageURL;
+    data['tenTinhTP'] = this.tenTinhTP;
+    data['hanNopHoSo'] = this.hanNopHoSo;
+    data['soNamKinhNghiem'] = this.soNamKinhNghiem;
     data['parent_ID'] = this.parentID;
     data['gtvl'] = this.gtvl;
     data['id'] = this.id;

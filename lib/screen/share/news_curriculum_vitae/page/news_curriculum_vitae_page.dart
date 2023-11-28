@@ -6,6 +6,7 @@ import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
+import 'package:eportal/widget/full_data_item/curriculum_vitae_item.dart';
 import 'package:eportal/widget/show_full_info/show_full_info.dart';
 import 'package:eportal/widget/text_icon/text_icon.dart';
 import 'package:flutter/material.dart';
@@ -79,91 +80,17 @@ class _NewsCurriculumVitaePageState
             state,
             (context, state) => ListView.builder(
                 shrinkWrap: true,
-                itemCount: state!.length,
-                itemBuilder: (context, i) => GestureDetector(
+                itemCount: state.length,
+                itemBuilder: (context, i) => CurriculumVitaeItem(
                       onTap: () =>
                           nextPage((context) => NewsCurriculumVitaeDetailPage(
-                                homeJobUserListDataResponse: state.elementAt(i),
+                                id: state.elementAt(i).id,
                               )),
-                      child: Card(
-                        elevation: AppElevation.sizeOfNormal,
-                        color: AppColor.colorOfApp,
-                        shadowColor: AppColor.colorOfIcon,
-                        borderOnForeground: false,
-                        margin: const EdgeInsets.all(5),
-                        shape: const RoundedRectangleBorder(
-                            side: BorderSide(
-                                color: AppColor.colorOfDrawer, width: 0.2),
-                            borderRadius: BorderRadius.all(Radius.circular(5))),
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TextIcon(
-                                text: state.elementAt(i).title.supportHtml(),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 3,
-                                icon: FontAwesomeIcons.tags,
-                                textStyle: AppTextStyle.title.copyWith(
-                                    color: Colors.black, fontSize: 12),
-                                isHasBorder: false,
-                              ),
-                              TextIcon(
-                                text:
-                                    state.elementAt(i).education.supportHtml(),
-                                icon: FontAwesomeIcons.graduationCap,
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                textStyle: AppTextStyle.title.copyWith(
-                                    color: Colors.black, fontSize: 12),
-                                isHasBorder: false,
-                              ),
-                              TextIcon(
-                                text: state
-                                    .elementAt(i)
-                                    .careerGoals
-                                    .supportHtml(),
-                                icon: FontAwesomeIcons.clockRotateLeft,
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                textStyle: AppTextStyle.title.copyWith(
-                                    color: Colors.black, fontSize: 12),
-                                isHasBorder: false,
-                              ),
-                              TextIcon(
-                                text: state
-                                    .elementAt(i)
-                                    .skillsForte
-                                    .supportHtml(),
-                                icon: FontAwesomeIcons.globe,
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                textStyle: AppTextStyle.title.copyWith(
-                                    color: Colors.black, fontSize: 12),
-                                isHasBorder: false,
-                              ),
-                              TextIcon(
-                                text: state
-                                    .elementAt(i)
-                                    .workExperience
-                                    .supportHtml(),
-                                icon: FontAwesomeIcons.bullseye,
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                textStyle: AppTextStyle.title.copyWith(
-                                    color: AppColor.colorOfIcon, fontSize: 14),
-                                isHasBorder: false,
-                              ),
-                              ShowFullInfo(
-                                text: "Xem chi tiết",
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      title: state.elementAt(i).title,
+                      education: state.elementAt(i).education,
+                      careerGoals: state.elementAt(i).careerGoals,
+                      skillsForte: state.elementAt(i).skillsForte,
+                      workExperience: state.elementAt(i).workExperience,
                     )),
           ),
         ),
