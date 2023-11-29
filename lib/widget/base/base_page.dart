@@ -42,7 +42,7 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
   void _onScroll() {
     final maxScroll = scrollController!.position.maxScrollExtent;
     final currentScroll = scrollController!.offset;
-    if (currentScroll >= (maxScroll * 0.8) && isScrollMore) {
+    if (currentScroll >= (maxScroll * 0.5) && isScrollMore) {
       stopScrollMore();
       getMoreData();
     }

@@ -1,4 +1,5 @@
 import 'package:eportal/model/api/response/common_new/data/home_news_list_data_response.dart';
+import 'package:eportal/screen/share/news_detail/page/news_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -72,8 +73,8 @@ class _NewsPageState extends BasePageState<NewsPage> {
                 shrinkWrap: true,
                 itemCount: state.length,
                 itemBuilder: (context, i) => NewsWidget(
-                      onTap: () => nextPage((context) => EmptyExamplePage(
-                            isHasAppBar: true,
+                      onTap: () => nextPage((context) => NewsDetailPage(
+                            id: state.elementAt(i).newId,
                           )),
                       title: state.elementAt(i).title,
                       imageUrl: state.elementAt(i).imagePath,

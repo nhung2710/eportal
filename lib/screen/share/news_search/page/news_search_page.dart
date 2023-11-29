@@ -1,4 +1,5 @@
 import 'package:eportal/model/api/response/common_new/data/news_search_data_response.dart';
+import 'package:eportal/screen/share/news_detail/page/news_detail_page.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_size_icon.dart';
 import 'package:eportal/widget/dialog/filter_news_dialog.dart';
@@ -44,6 +45,7 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
   @override
   void initDataLoading() {
     request.obj.soTrangHienTai = 1;
+    request.obj.tuKhoa = textEditingController.text;
     callApi();
     super.initDataLoading();
   }
@@ -98,10 +100,16 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
                           controller: scrollController,
                           shrinkWrap: true,
                           itemCount: state.length,
-                          itemBuilder: (context, i) => NewsWidget(
-                                title: state.elementAt(i).title,
-                                imageUrl: state.elementAt(i).imagePath,
-                                content: state.elementAt(i).summary,
+                          itemBuilder: (context, i) => GestureDetector(
+                                onTap: () =>
+                                    nextPage((context) => NewsDetailPage(
+                                          id: state.elementAt(i).newId,
+                                        )),
+                                child: NewsWidget(
+                                  title: state.elementAt(i).title,
+                                  imageUrl: state.elementAt(i).imagePath,
+                                  content: state.elementAt(i).summary,
+                                ),
                               )),
                     ),
                   ),

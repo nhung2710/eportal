@@ -5,8 +5,7 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 // Created by BlackRose on 21/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class AlbumListResponse
-    extends BaseMultiEportalResponse<AlbumListDataResponse> {
+class AlbumListResponse extends BasePageEportalResponse<AlbumListDataResponse> {
   AlbumListResponse(
       {required super.data, required super.status, required super.message});
 

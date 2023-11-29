@@ -82,8 +82,5 @@ class _NewsRecruitmentPageState extends BasePageState<NewsRecruitmentPage> {
       );
 
   @override
-  getBottomNavigationBar(BuildContext context) => null;
-
-  @override
   String getPageTitle(BuildContext context) => "Tuyển dụng";
 }

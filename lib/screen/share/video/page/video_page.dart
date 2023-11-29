@@ -23,16 +23,7 @@ class VideoPage extends BasePage {
 
 class _VideoPageState extends BasePageState<VideoPage> {
   @override
-  void initDataLoading() {
-    // TODO: implement initDataLoading
-    super.initDataLoading();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
+  String getPageTitle(BuildContext context) => "Xem video";
 
   @override
   Widget pageUI(BuildContext context) => SingleChildScrollView(

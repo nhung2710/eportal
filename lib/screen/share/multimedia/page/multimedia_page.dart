@@ -2,8 +2,12 @@ import 'package:eportal/bloc/common_new/video_list_bloc.dart';
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/model/api/response/common_new/video_list_response.dart';
 import 'package:eportal/screen/share/empty_example/page/empty_example_page.dart';
+import 'package:eportal/screen/share/media_image_manage/page/media_image_manage_page.dart';
+import 'package:eportal/screen/share/media_video_manage/page/media_video_manage_page.dart';
 import 'package:eportal/screen/share/video/page/video_page.dart';
 import 'package:eportal/state/base/base_state.dart';
+import 'package:eportal/style/app_color.dart';
+import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/image/image_loading.dart';
 import 'package:eportal/widget/news/news_widget.dart';
@@ -28,59 +32,42 @@ class MultimediaPage extends BasePage {
 }
 
 class MultimediaPageState extends BasePageStateActive<MultimediaPage> {
-  VideoListBloc videoListBloc = VideoListBloc();
-  VideoListDataRequest request = VideoListDataRequest();
-
-  @override
-  void getMoreData() {
-    request.soTrangHienTai++;
-    callApi();
-  }
-
-  @override
-  void callApi() {
-    videoListBloc.add(VideoListEvent(request: VideoListRequest(obj: request)));
-  }
-
-  @override
-  void initDataLoading() {
-    request.soTrangHienTai = 1;
-    callApi();
-    super.initDataLoading();
-  }
-
   @override
   bool isHasAppBar(BuildContext context) => false;
 
   @override
-  Widget pageUI(BuildContext context) => BlocProvider(
-      create: (_) => videoListBloc,
-      child: BlocListener<VideoListBloc, DataPageState<VideoListDataResponse>>(
-        listener: (BuildContext context,
-            DataPageState<VideoListDataResponse> state) {},
-        child: BlocBuilder<VideoListBloc, DataPageState<VideoListDataResponse>>(
-            builder: (BuildContext context,
-                    DataPageState<VideoListDataResponse> state) =>
-                handleDataPageState(
-                  state,
-                  (context, state) => Column(
-                    children: [
-                      Expanded(
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            controller: scrollController,
-                            itemCount: state.length,
-                            itemBuilder: (context, i) => NewsWidget(
-                                  onTap: () => nextPage((context) =>
-                                      VideoPage(data: state.elementAt(i))),
-                                  title: state.elementAt(i).name,
-                                  imageUrl: state.elementAt(i).avatar,
-                                  content: state.elementAt(i).summary,
-                                  time: state.elementAt(i).publishedDate,
-                                )),
-                      ),
-                    ],
-                  ),
-                )),
-      ));
+  Widget pageUI(BuildContext context) => DefaultTabController(
+        key: localKey,
+        length: 2,
+        child: Column(
+          children: [
+            const TabBar(
+              indicatorColor: AppColor.colorOfIcon,
+              labelColor: AppColor.colorOfIcon,
+              labelStyle: AppTextStyle.title,
+              indicatorWeight: 2,
+              tabs: [
+                Tab(
+                  text: "Video",
+                ),
+                Tab(
+                  text: "Album",
+                ),
+              ],
+            ),
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.only(top: 5),
+                child: const TabBarView(
+                  physics: NeverScrollableScrollPhysics(),
+                  children: [
+                    MediaVideoManagePage(),
+                    MediaImageManagePage(),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      );
 }

@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class NewsDetailDataResponse extends BaseEportalDataResponse {
+  String? tenTinhTP;
+  String? ngayDangTin;
+  String? soNamKinhNghiem;
   String? categoryParentName;
   String? categoryName;
   int? total;
@@ -63,7 +66,10 @@ class NewsDetailDataResponse extends BaseEportalDataResponse {
   bool? sendView;
 
   NewsDetailDataResponse(
-      {this.categoryParentName,
+      {this.tenTinhTP,
+      this.ngayDangTin,
+      this.soNamKinhNghiem,
+      this.categoryParentName,
       this.categoryName,
       this.total,
       this.newDay,
@@ -120,6 +126,9 @@ class NewsDetailDataResponse extends BaseEportalDataResponse {
       this.sendView});
 
   NewsDetailDataResponse.fromJson(Map<String, dynamic> json) {
+    tenTinhTP = json['tenTinhTP'];
+    ngayDangTin = json['ngayDangTin'];
+    soNamKinhNghiem = json['soNamKinhNghiem'];
     categoryParentName = json['categoryParentName'];
     categoryName = json['categoryName'];
     total = json['total'];
@@ -179,6 +188,9 @@ class NewsDetailDataResponse extends BaseEportalDataResponse {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['tenTinhTP'] = this.tenTinhTP;
+    data['ngayDangTin'] = this.ngayDangTin;
+    data['soNamKinhNghiem'] = this.soNamKinhNghiem;
     data['categoryParentName'] = this.categoryParentName;
     data['categoryName'] = this.categoryName;
     data['total'] = this.total;

@@ -74,7 +74,7 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
       ExpandableFab(children: [
         ActionButton(
           icon: const Icon(
-            Icons.chat,
+            Icons.support_agent,
             color: Colors.white,
           ),
           onPressed: () {

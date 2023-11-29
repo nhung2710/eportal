@@ -1,5 +1,6 @@
 import 'package:eportal/model/api/response/common_new/data/faq_question_search_data_response.dart';
 import 'package:eportal/screen/share/answer_and_question_add/page/answer_and_question_add_page.dart';
+import 'package:eportal/screen/share/answer_and_question_search/page/answer_and_question_search_page.dart';
 import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
@@ -55,18 +56,38 @@ class AnswerAndQuestionPageState
   }
 
   @override
-  Widget? getFloatingActionButton(BuildContext context) =>
-      ExpandableFab(children: [
-        ActionButton(
-          icon: const Icon(
-            Icons.add,
-            color: Colors.white,
+  Widget? getFloatingActionButton(BuildContext context) => ExpandableFab(
+        initNumberGroup: 3,
+        children: [
+          ActionButton(
+            icon: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              nextPage((context) => const AnswerAndQuestionAddPage());
+            },
           ),
-          onPressed: () {
-            nextPage((context) => const AnswerAndQuestionAddPage());
-          },
-        ),
-      ]);
+          ActionButton(
+            icon: const Icon(
+              Icons.search,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              nextPage((context) => const AnswerAndQuestionSearchPage());
+            },
+          ),
+          ActionButton(
+            icon: const Icon(
+              Icons.support_agent,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              nextPage((context) => const ChatBotPage());
+            },
+          ),
+        ],
+      );
 
   @override
   Widget pageUI(BuildContext context) => BlocProvider(

@@ -7,7 +7,7 @@ import 'package:eportal/model/base/base_eportal_request.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class AlbumListRequest extends BaseEportalRequest<AlbumListDataRequest> {
+class AlbumListRequest extends BasePageEportalRequest<AlbumListDataRequest> {
   AlbumListRequest({required super.obj});
 
   @override

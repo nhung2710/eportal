@@ -12,7 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Created by BlackRose on 21/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class AlbumListBloc extends BaseMultiBloc<AlbumListDataResponse,
+class AlbumListBloc extends BasePageBloc<AlbumListDataResponse,
     AlbumListRepository, AlbumListEvent, AlbumListResponse> {
   @override
   Future<AlbumListResponse> callApiResult(
