@@ -6,6 +6,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../default_button/default_button.dart';
+
 //
 // Created by BlackRose on 29/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -52,12 +54,46 @@ class _ChangeAvatarState extends State<ChangeAvatar> {
         widget.changed(base64Image);
       }
     } else {
-      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-      if (image != null) {
-        path = image.path;
-        setState(() {});
-        String base64Image = base64Encode(await image.readAsBytes());
-        widget.changed(base64Image);
+      bool? isCamera = await showDialog(
+        context: context,
+        builder: (context) => Dialog(
+          insetPadding: const EdgeInsets.all(10),
+          child: Container(
+            color: Colors.white,
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                DefaultButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(true);
+                  },
+                  text: 'Máy ảnh',
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                DefaultButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(false);
+                  },
+                  text: 'Thư viện ảnh',
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+      if (isCamera != null) {
+        final XFile? image = await picker.pickImage(
+            source:
+                isCamera == true ? ImageSource.camera : ImageSource.gallery);
+        if (image != null) {
+          path = image.path;
+          setState(() {});
+          String base64Image = base64Encode(await image.readAsBytes());
+          widget.changed(base64Image);
+        }
       }
     }
   }
