@@ -1,4 +1,3 @@
-import 'package:eportal/screen/employer/manage_curriculum_vitae/page/manage_curriculum_vitae_page.dart';
 import 'package:eportal/screen/employer/setting/page/setting_page.dart';
 import 'package:eportal/screen/share/notification/page/notification_page.dart';
 import 'package:eportal/style/app_color.dart';
@@ -61,17 +60,6 @@ class _HomePageState extends BasePageStateActive<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.folder_copy,
-              color: AppColor.colorOfHintText,
-            ),
-            label: "Hồ sơ",
-            activeIcon: Icon(
-              Icons.folder_copy,
-              color: AppColor.colorOfIcon,
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
               Icons.notifications,
               color: AppColor.colorOfHintText,
             ),
@@ -110,7 +98,6 @@ class _HomePageState extends BasePageStateActive<HomePage> {
         },
         children: const <Widget>[
           HomeManagePage(),
-          ManageCurriculumVitaePage(),
           NotificationPage(),
           SettingPage(),
         ],

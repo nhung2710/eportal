@@ -70,28 +70,34 @@ abstract class BaseMultiBloc<T extends BaseEportalDataResponse, R,
 
     on<E>((event, emit) async {
       try {
-        emit(state.copyWith(status: DataBlocStatus.loading));
+        emit(state.copyWith(data: [], status: DataBlocStatus.loading));
         final response = await callApiResult(apiRepository, event);
         if (response.status != 2) {
           emit(state.copyWith(
-              errorMessage: response.message, status: DataBlocStatus.error));
+              data: [],
+              errorMessage: response.message,
+              status: DataBlocStatus.error));
         } else {
           String? failMessage = getFailMessage(response);
           if (failMessage.isNullOrWhiteSpace()) {
             if (response.data.isEmpty) {
-              emit(state.copyWith(status: DataBlocStatus.notfound));
+              emit(state.copyWith(data: [], status: DataBlocStatus.notfound));
             } else {
               emit(state.copyWith(
                   data: response.data, status: DataBlocStatus.success));
             }
           } else {
             emit(state.copyWith(
-                errorMessage: failMessage, status: DataBlocStatus.error));
+                data: [],
+                errorMessage: failMessage,
+                status: DataBlocStatus.error));
           }
         }
       } on Exception catch (e) {
         emit(state.copyWith(
-            errorMessage: e.toString(), status: DataBlocStatus.error));
+            data: [],
+            errorMessage: e.toString(),
+            status: DataBlocStatus.error));
       }
     });
   }

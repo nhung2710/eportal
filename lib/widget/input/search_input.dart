@@ -1,4 +1,5 @@
 import 'package:eportal/style/app_size_icon.dart';
+import 'package:eportal/style/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 import '../../style/app_color.dart';
@@ -42,6 +43,7 @@ class _SearchInputState extends State<SearchInput> {
         obscureText: false,
         controller: widget.controller,
         maxLength: widget.maxLength,
+        style: AppTextStyle.title,
         textInputAction: widget.textInputAction,
         validator: widget.validator,
         onFieldSubmitted: widget.onFieldSubmitted,

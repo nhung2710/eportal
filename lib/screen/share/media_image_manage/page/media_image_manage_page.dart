@@ -5,10 +5,15 @@ import 'package:eportal/model/api/request/common_new/data/album_list_data_reques
 import 'package:eportal/model/api/response/common_new/data/album_list_data_response.dart';
 import 'package:eportal/screen/share/video/page/video_page.dart';
 import 'package:eportal/state/base/base_state.dart';
+import 'package:eportal/style/app_color.dart';
+import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/news/news_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../extension/string_extension.dart';
+import '../../../../widget/image/image_loading.dart';
 
 //
 // Created by BlackRose on 29/11/2023.
@@ -66,7 +71,39 @@ class MediaImageManagePageState
                             shrinkWrap: true,
                             controller: scrollController,
                             itemCount: state.length,
-                            itemBuilder: (context, i) => const NewsWidget()),
+                            itemBuilder: (context, i) => AspectRatio(
+                                  aspectRatio: 16 / 9,
+                                  child: Card(
+                                    elevation: AppElevation.sizeOfNormal,
+                                    color: AppColor.colorOfApp,
+                                    shadowColor: AppColor.colorOfIcon,
+                                    borderOnForeground: false,
+                                    margin: const EdgeInsets.all(5),
+                                    shape: const RoundedRectangleBorder(
+                                        side: BorderSide(
+                                            color: AppColor.colorOfDrawer,
+                                            width: 0.2),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5))),
+                                    child: ImageLoading(
+                                      imageUrl: state
+                                          .elementAt(i)
+                                          .avatar
+                                          .getImageUrl(),
+                                      imageBuilder: (BuildContext context,
+                                          ImageProvider<Object> imageProvider) {
+                                        return ClipRRect(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(5.0)),
+                                          child: Image(
+                                            image: imageProvider,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                )),
                       ),
                     ],
                   ),

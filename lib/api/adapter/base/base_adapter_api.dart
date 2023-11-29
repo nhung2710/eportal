@@ -78,6 +78,7 @@ class BaseAdapterApi {
         "${md5.convert(utf8.encode(requestBody))}|${md5.convert(utf8.encode(uri.toString()))}";
     var valueTimeCache = request.getTimeCache();
     bool isUseCache = false;
+    valueTimeCache = 0;
     if (valueTimeCache > 0) {
       var valueCache = GlobalApplication().preferences!.getString(keyCache);
       if (!valueCache.isNullOrWhiteSpace()) {
@@ -113,19 +114,9 @@ class BaseAdapterApi {
         }
         return json.decode(jsonValue);
       }
-      var faultStringElements = xmlResponse.findAllElements("faultstring");
-      if (faultStringElements.isNotEmpty) {
-        var result = <String, dynamic>{};
-        result["status"] = 0;
-        result["message"] = "Có lỗi xảy ra vui lòng thử lại sau";
-        //result["message"] = faultStringElements.first.innerText;
-        return result;
-      }
     }
-    var result = <String, dynamic>{};
-    result["status"] = 0;
-    result["message"] = "Có lỗi xảy ra vui lòng thử lại sau";
-    return result;
+    return json
+        .decode('{"status":0,"message":"Có lỗi xảy ra vui lòng thử lại sau"}');
   }
 
   Future<String> _callWebServiceAsync(

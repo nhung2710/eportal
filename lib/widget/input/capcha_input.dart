@@ -55,6 +55,7 @@ class _CapchaInputState extends State<CapchaInput> {
         obscureText: false,
         controller: widget.controller,
         maxLength: widget.maxLength,
+        style: AppTextStyle.title,
         textInputAction: widget.textInputAction,
         inputFormatters: [UpperCaseTextFormatter()],
         validator: (text) {

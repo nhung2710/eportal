@@ -63,6 +63,8 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
   late DanhSachKinhNghiemBloc danhSachKinhNghiemBloc;
   late DanhSachGioiTinhBloc danhSachGioiTinhBloc;
   late DanhSachTrinhDoBloc danhSachTrinhDoBloc;
+  final _danhSachQuanHuyenKey = GlobalKey<DropdownSearchState>();
+  final _danhSachDoanhNghiepKey = GlobalKey<DropdownSearchState>();
 
   @override
   void initState() {
@@ -264,6 +266,8 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
           widget.data.doanhNghiep = null;
           widget.danhSachQuanHuyenDataResponse = null;
           widget.danhSachDoanhNghiepDataResponse = null;
+          _danhSachQuanHuyenKey.currentState?.clear();
+          _danhSachDoanhNghiepKey.currentState?.clear();
           danhSachQuanHuyenBloc.add(DanhSachQuanHuyenEvent(
               request: DanhSachQuanHuyenRequest(
                   obj: DanhSachQuanHuyenDataRequest(
@@ -285,6 +289,7 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
       BuildContext context, List<DanhSachQuanHuyenDataResponse> list) {
     return DropdownSearch<DanhSachQuanHuyenDataResponse>(
       popupProps: _buildPopupProps(context),
+      key: _danhSachQuanHuyenKey,
       clearButtonProps: _buildClearButtonProps(),
       filterFn: (data, filter) => data.filter(filter),
       selectedItem: widget.danhSachQuanHuyenDataResponse,
@@ -297,6 +302,7 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
           widget.data.quanHuyen = data?.regionalID;
           widget.data.doanhNghiep = null;
           widget.danhSachDoanhNghiepDataResponse = null;
+          _danhSachDoanhNghiepKey.currentState?.clear();
           danhSachDoanhNghiepBloc.add(DanhSachDoanhNghiepEvent(
               request: DanhSachDoanhNghiepRequest(
                   obj: DanhSachDoanhNghiepDataRequest(
@@ -313,6 +319,7 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
       BuildContext context, List<DanhSachDoanhNghiepDataResponse> list) {
     return DropdownSearch<DanhSachDoanhNghiepDataResponse>(
       popupProps: _buildPopupProps(context),
+      key: _danhSachDoanhNghiepKey,
       clearButtonProps: _buildClearButtonProps(),
       filterFn: (data, filter) => data.filter(filter),
       selectedItem: widget.danhSachDoanhNghiepDataResponse,

@@ -286,6 +286,24 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
     }
   }
 
+  Widget handleSelectDataMultiState<T>(
+    DataMultiState<T> state,
+    BlocWidgetBuilder<List<T>> builder,
+  ) {
+    switch (state.status) {
+      case DataBlocStatus.init:
+        return buildSelectLoading(context);
+      case DataBlocStatus.loading:
+        return buildSelectLoading(context);
+      case DataBlocStatus.notfound:
+        return buildSelectLoading(context);
+      case DataBlocStatus.error:
+        return buildSelectLoading(context);
+      case DataBlocStatus.success:
+        return builder(context, state.data);
+    }
+  }
+
   Widget handleDataPageState<T>(
       DataPageState<T> state, BlocWidgetBuilder<List<T>> builder,
       {Widget? initWidget}) {
@@ -346,6 +364,14 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
 
   Widget buildImplement(BuildContext buildContext) => Center(
         child: Image.asset("assets/images/Implement.jpg"),
+      );
+
+  Widget buildSelectLoading(BuildContext context) => const SizedBox(
+        height: 25,
+        child: CircularProgressIndicator(
+          color: AppColor.colorOfIcon,
+          strokeWidth: 5,
+        ),
       );
 }
 
