@@ -11,6 +11,7 @@ import 'package:eportal/model/api/response/common_new/data/danh_sach_co_quan_ban
 import 'package:eportal/model/api/response/common_new/data/danh_sach_linh_vuc_van_ban_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_loai_van_ban_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_tinh_tp_data_response.dart';
+import 'package:eportal/model/base/base_eportal_data_response.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
@@ -31,18 +32,12 @@ import '../../model/api/request/common_new/data/danh_sach_linh_vuc_van_ban_data_
 // Created by BlackRose on 27/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class GroupTypeDocument {
+class GroupTypeDocument extends BaseEportalDataResponse {
   String name;
-  String search = "";
   int id;
 
   GroupTypeDocument({required this.id, required this.name}) {
     search = name.getValueSearch();
-  }
-
-  bool filter(String filter) {
-    return filter.isNullOrWhiteSpace() ||
-        search.contains(filter.getValueSearch());
   }
 }
 
@@ -222,13 +217,11 @@ class FilterDocumentDialogState extends BaseScreenState<FilterDocumentDialog> {
           BuildContext context, String title) =>
       DropDownDecoratorProps(
         dropdownSearchDecoration: InputDecoration(
-            labelText: title,
+            //labelText: title,
             hintText: "Vui lòng chọn ${title.toLowerCase()}",
-            labelStyle:
-                AppTextStyle.titlePage.copyWith(color: AppColor.colorOfIcon),
-            hintStyle:
-                AppTextStyle.title.copyWith(color: AppColor.colorOfHintText)),
-        baseStyle: AppTextStyle.titlePage.copyWith(color: AppColor.colorOfIcon),
+            labelStyle: AppTextStyle.title,
+            hintStyle: AppTextStyle.titleHintPage),
+        baseStyle: AppTextStyle.title,
       );
 
   ClearButtonProps _buildClearButtonProps() => const ClearButtonProps(

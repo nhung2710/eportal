@@ -13,6 +13,7 @@ class GlobalApplication {
   String fullName = ApplicationConstant.EMPTY;
   String userPassword = ApplicationConstant.EMPTY;
   String userId = ApplicationConstant.EMPTY;
+  String userRole = ApplicationConstant.EMPTY;
   String dirPath = ApplicationConstant.EMPTY;
   RoleType roleType = RoleType.anonymous;
   SharedPreferences? preferences;
@@ -52,6 +53,7 @@ class GlobalApplication {
     if (data != null) {
       roleType = data.roleType;
       if (roleType != RoleType.anonymous) {
+        userRole = data.role.replaceWhenNullOrWhiteSpace();
         fullName = data.userName.replaceWhenNullOrWhiteSpace();
         userName = userName;
         userNameSaved = userName;
@@ -72,6 +74,7 @@ class GlobalApplication {
     userName = ApplicationConstant.EMPTY;
     userPassword = ApplicationConstant.EMPTY;
     userId = ApplicationConstant.EMPTY;
+    userRole = ApplicationConstant.EMPTY;
     if (preferences != null) {
       return preferences!
           .setBool(ApplicationConstant.AUTO_LOGIN, false)

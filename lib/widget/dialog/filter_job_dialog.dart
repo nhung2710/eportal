@@ -394,13 +394,11 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
           BuildContext context, String title) =>
       DropDownDecoratorProps(
         dropdownSearchDecoration: InputDecoration(
-            labelText: title,
+            //labelText: title,
             hintText: "Vui lòng chọn ${title.toLowerCase()}",
-            labelStyle:
-                AppTextStyle.titlePage.copyWith(color: AppColor.colorOfIcon),
-            hintStyle:
-                AppTextStyle.title.copyWith(color: AppColor.colorOfHintText)),
-        baseStyle: AppTextStyle.titlePage.copyWith(color: AppColor.colorOfIcon),
+            labelStyle: AppTextStyle.title,
+            hintStyle: AppTextStyle.titleHintPage),
+        baseStyle: AppTextStyle.title,
       );
 
   ClearButtonProps _buildClearButtonProps() => const ClearButtonProps(

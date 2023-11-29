@@ -16,7 +16,6 @@ class DanhSachLinhVucVanBanDataResponse extends BaseEportalDataResponse {
   String? updatedBy;
   String? updateName;
   int? portalID;
-  String search = "";
 
   DanhSachLinhVucVanBanDataResponse(
       {this.total,
@@ -57,10 +56,5 @@ class DanhSachLinhVucVanBanDataResponse extends BaseEportalDataResponse {
     data['updateName'] = this.updateName;
     data['portalID'] = this.portalID;
     return data;
-  }
-
-  bool filter(String filter) {
-    return filter.isNullOrWhiteSpace() ||
-        search.contains(filter.getValueSearch());
   }
 }

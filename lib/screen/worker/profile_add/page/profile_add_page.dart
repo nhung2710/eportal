@@ -24,6 +24,9 @@ import 'package:eportal/model/api/response/common_new/data/danh_sach_kinh_nghiem
 import 'package:eportal/model/api/response/common_new/data/danh_sach_muc_luong_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_quan_huyen_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_tinh_tp_data_response.dart';
+import 'package:eportal/screen/share/media_image_manage/page/media_image_manage_page.dart';
+import 'package:eportal/screen/share/media_video_manage/page/media_video_manage_page.dart';
+import 'package:eportal/screen/worker/profile_add/tab/profile_add_basic_tab.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
@@ -38,6 +41,11 @@ import '../../../../extension/dateTime_extension.dart';
 import '../../../../extension/string_extension.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/input/field_input.dart';
+import '../tab/profile_add_career_goals_tab.dart';
+import '../tab/profile_add_field_skills_tab.dart';
+import '../tab/profile_add_general_tab.dart';
+import '../tab/profile_add_level_tab.dart';
+import '../tab/profile_add_work_experience_tab.dart';
 
 //
 // Created by BlackRose on 20/11/2023.
@@ -47,677 +55,88 @@ import '../../../../widget/input/field_input.dart';
 class ProfileAddPage extends BasePage {
   ProfileAddPage({super.key});
 
-  DanhSachTinhTpDataResponse? danhSachTinhTpDataResponse;
-  DanhSachQuanHuyenDataResponse? danhSachQuanHuyenDataResponse;
-  DanhSachKinhNghiemDataResponse? danhSachKinhNghiemDataResponse;
-  DanhSachMucLuongDataResponse? danhSachMucLuongDataResponse;
-
   @override
   State<StatefulWidget> createState() => _ProfileAddPageState();
 }
 
 class _ProfileAddPageState extends BasePageState<ProfileAddPage> {
-  TextEditingController titleController = TextEditingController();
-  TextEditingController fromDateController = TextEditingController();
-  TextEditingController toDateController = TextEditingController();
-  TextEditingController educationController = TextEditingController();
-  TextEditingController experienceController = TextEditingController();
-  TextEditingController objectiveController = TextEditingController();
-  TextEditingController skillController = TextEditingController();
-  var fromDateFocusNode = FocusNode();
-  var toDateFocusNode = FocusNode();
-  DateTime fromDate = DateTime.now();
-  DateTime toDate = DateTime.now();
-
-  final _danhSachQuanHuyenKey = GlobalKey<DropdownSearchState>();
-
-  late DanhSachTinhTpBloc danhSachTinhTpBloc;
-  late DanhSachQuanHuyenBloc danhSachQuanHuyenBloc;
-  late DanhSachMucLuongBloc danhSachMucLuongBloc;
-  late DanhSachKinhNghiemBloc danhSachKinhNghiemBloc;
-  late DanhSachGioiTinhBloc danhSachGioiTinhBloc;
-  late DanhSachTrinhDoBloc danhSachTrinhDoBloc;
-  String? industry;
-  String? positionCurrent;
-  String? positionFuture;
-  String? education;
-  String? need;
-  List<String> industrys = [
-    "Bán hàng",
-    "Bán hàng kỹ thuật",
-    "Bán lẻ/Bán sỉ",
-    "Bảo hiểm",
-    "Bất động sản",
-    "Biên phiên dịch",
-    "Chứng khoán",
-    "Cơ khí",
-    "Công nghệ cao",
-    "Dầu khí",
-    "Dệt may/Da giày",
-    "Dịch vụ khách hàng",
-    "Dược phẩm/Công nghệ sinh học",
-    "Giáo dục/Đào tạo",
-    "Hàng cao cấp",
-    "Hàng không/Du lịch/Khách sạn",
-    "Hành chính/Thư ký",
-    "Hóa học/Hóa sinh",
-    "Hoạch định/Dự án",
-    "Internet/Media online",
-    "IT- Phần mềm",
-    "IT- Phần cứng/Mạng",
-    "Kế toán",
-    "Kho vận",
-    "Kiểm toán",
-    "Kiến trúc/Thiết kế nội thất",
-    "Marketing",
-    "Môi trường/Xử lý chất thải",
-    "Mỹ thuật/Thiết kế",
-    "Ngân hàng",
-    "Nhân sự",
-    "Nông nghiệp/Lâm nghiệp",
-    "Ô tô",
-    "Oversea job",
-    "Pháp lý",
-    "Phi chính phủ/Phi lợi nhuận",
-    "QC/QA",
-    "Quảng cáo/Khuyến mại",
-    "Sản phẩm công nghiệp",
-    "Sản xuất",
-    "Tài chính/Đầu tư",
-    "Thời trang",
-    "Thời vụ/Hợp đồng ngắn hạn",
-    "Thực phẩm &amp; Đồ uống",
-    "Truyền hình/Truyền thông/Báo trí",
-    "Tư vấn",
-    "Vận chuyển/Giao nhận",
-    "Vật tư/Cung vận",
-    "Viễn thông",
-    "Xây dựng",
-    "Xuất nhập khẩu",
-    "Y tế/Chăm sóc sức khỏe",
-    "Điện/Điện tử",
-    "Khác"
-  ];
-  List<String> needs = [
-    "Chưa có nhu cầu tìm việc",
-    "Đang có việc làm",
-    "Muốn tìm việc mới",
-    "Đang tìm việc và sẵn sàng cho công việc mới",
-  ];
-  List<String> positions = [
-    "Chuyên viên",
-    "Trưởng phòng",
-    "Trưởng nhóm",
-    "Công nhân",
-    "Nhân viên",
-    "Hiệu trưởng",
-    "Phó hiệu trưởng",
-    "Trưởng khoa",
-    "Phó trưởng khoa",
-    "Giáo viên",
-  ];
-  List<String> educations = [
-    "Tiến sĩ",
-    "Thạc sĩ",
-    "Đại học",
-    "Cao đẳng",
-    "Trung cấp",
-    "Sơ cấp",
-    "Phổ thông",
-  ];
-
-  @override
-  void initDataLoading() {
-    fromDateFocusNode.addListener(() {
-      if (fromDateFocusNode.hasFocus) {
-        fromDateFocusNode.unfocus();
-        openFromDateDateTimePicker();
-      }
-    });
-    toDateFocusNode.addListener(() {
-      if (toDateFocusNode.hasFocus) {
-        toDateFocusNode.unfocus();
-        openToDateDateTimePicker();
-      }
-    });
-    danhSachTinhTpBloc = DanhSachTinhTpBloc();
-    danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
-    danhSachMucLuongBloc = DanhSachMucLuongBloc();
-    danhSachKinhNghiemBloc = DanhSachKinhNghiemBloc();
-    danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
-    danhSachTrinhDoBloc = DanhSachTrinhDoBloc();
-    callApi();
-    // TODO: implement initDataLoading
-    super.initDataLoading();
-  }
-
-  @override
-  void callApi() {
-    danhSachTinhTpBloc.add(DanhSachTinhTpEvent(
-        request: DanhSachTinhTpRequest(obj: CommonNewDataRequest())));
-
-    danhSachMucLuongBloc.add(DanhSachMucLuongEvent(
-        request: DanhSachMucLuongRequest(obj: CommonNewDataRequest())));
-    danhSachKinhNghiemBloc.add(DanhSachKinhNghiemEvent(
-        request: DanhSachKinhNghiemRequest(obj: CommonNewDataRequest())));
-    super.callApi();
-  }
-
   @override
   String getPageTitle(BuildContext context) => "Tạo hồ sơ";
 
   @override
-  Color currentBackgroundColor(BuildContext context) => Colors.white;
-
-  @override
-  Widget pageUI(BuildContext context) => ListView(
-        children: <Widget>[
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: titleController,
-              maxLength: 100,
-              textInputAction: TextInputAction.next,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Tiêu đề không được để trống';
-                }
-                return null;
-              },
-              hintText: 'Tiêu đề',
-              icon: FontAwesomeIcons.tags,
+  Widget pageUI(BuildContext context) => DefaultTabController(
+        key: localKey,
+        length: 6,
+        child: Column(
+          children: [
+            TabBar(
+              indicatorColor: AppColor.colorOfIcon,
+              labelColor: AppColor.colorOfIcon,
+              indicatorSize: TabBarIndicatorSize.tab,
+              indicatorPadding: EdgeInsets.zero,
+              padding: EdgeInsets.zero,
+              tabAlignment: TabAlignment.start,
+              isScrollable: true,
+              labelStyle:
+                  AppTextStyle.title.copyWith(overflow: TextOverflow.visible),
+              indicatorWeight: 2,
+              tabs: const [
+                Tab(
+                  text: "Thông tin hồ sơ",
+                ),
+                Tab(
+                  text: "Thông tin chung",
+                ),
+                Tab(
+                  text: "Trình độ học vấn",
+                ),
+                Tab(
+                  text: "Kinh nghiệm làm việc",
+                ),
+                Tab(
+                  text: "Mục tiêu nghề nghiệp",
+                ),
+                Tab(
+                  text: "Kỹ năng sở trường",
+                ),
+              ],
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: fromDateController,
-              focusNode: fromDateFocusNode,
-              maxLength: 100,
-              textInputAction: TextInputAction.next,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Ngày đăng không được để trống';
-                }
-                return null;
-              },
-              hintText: 'Ngày đăng',
-              icon: FontAwesomeIcons.calendar,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: toDateController,
-              focusNode: toDateFocusNode,
-              maxLength: 100,
-              textInputAction: TextInputAction.next,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Ngày hết hạn không được để trống';
-                }
-                return null;
-              },
-              hintText: 'Ngày hết hạn',
-              icon: FontAwesomeIcons.calendar,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-                create: (_) => danhSachMucLuongBloc,
-                child: BlocListener<DanhSachMucLuongBloc,
-                    DataMultiState<DanhSachMucLuongDataResponse>>(
-                  listener: (BuildContext context,
-                      DataMultiState<DanhSachMucLuongDataResponse> state) {},
-                  child: BlocBuilder<DanhSachMucLuongBloc,
-                      DataMultiState<DanhSachMucLuongDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachMucLuongDataResponse>
-                                state) =>
-                        _buildViewSearchIndustry(context, industrys),
-                  ),
-                )),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-                create: (_) => danhSachTinhTpBloc,
-                child: BlocListener<DanhSachTinhTpBloc,
-                    DataMultiState<DanhSachTinhTpDataResponse>>(
-                  listener: (BuildContext context,
-                      DataMultiState<DanhSachTinhTpDataResponse> state) {},
-                  child: BlocBuilder<DanhSachTinhTpBloc,
-                      DataMultiState<DanhSachTinhTpDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachTinhTpDataResponse> state) =>
-                        _buildViewSearchDanhSachTinhTp(
-                            context, state.data ?? []),
-                  ),
-                )),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-                create: (_) => danhSachQuanHuyenBloc,
-                child: BlocListener<DanhSachQuanHuyenBloc,
-                    DataMultiState<DanhSachQuanHuyenDataResponse>>(
-                  listener: (BuildContext context,
-                      DataMultiState<DanhSachQuanHuyenDataResponse> state) {},
-                  child: BlocBuilder<DanhSachQuanHuyenBloc,
-                      DataMultiState<DanhSachQuanHuyenDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachQuanHuyenDataResponse>
-                                state) =>
-                        _buildViewSearchDanhSachQuanHuyen(
-                            context, state.data ?? []),
-                  ),
-                )),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-                create: (_) => danhSachMucLuongBloc,
-                child: BlocListener<DanhSachMucLuongBloc,
-                    DataMultiState<DanhSachMucLuongDataResponse>>(
-                  listener: (BuildContext context,
-                      DataMultiState<DanhSachMucLuongDataResponse> state) {},
-                  child: BlocBuilder<DanhSachMucLuongBloc,
-                      DataMultiState<DanhSachMucLuongDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachMucLuongDataResponse>
-                                state) =>
-                        _buildViewSearchPositionFuture(context, positions),
-                  ),
-                )),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-                create: (_) => danhSachMucLuongBloc,
-                child: BlocListener<DanhSachMucLuongBloc,
-                    DataMultiState<DanhSachMucLuongDataResponse>>(
-                  listener: (BuildContext context,
-                      DataMultiState<DanhSachMucLuongDataResponse> state) {},
-                  child: BlocBuilder<DanhSachMucLuongBloc,
-                      DataMultiState<DanhSachMucLuongDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachMucLuongDataResponse>
-                                state) =>
-                        _buildViewSearchPositionCurrent(context, positions),
-                  ),
-                )),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-              create: (_) => danhSachKinhNghiemBloc,
-              child: BlocListener<DanhSachKinhNghiemBloc,
-                  DataMultiState<DanhSachKinhNghiemDataResponse>>(
-                listener: (BuildContext context,
-                    DataMultiState<DanhSachKinhNghiemDataResponse> state) {},
-                child: BlocBuilder<DanhSachKinhNghiemBloc,
-                        DataMultiState<DanhSachKinhNghiemDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachKinhNghiemDataResponse>
-                                state) =>
-                        _buildViewSearchDanhSachKinhNghiem(
-                            context, state.data)),
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.only(top: 5),
+                child: TabBarView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    ProfileAddBasicTab(),
+                    ProfileAddGeneralTab(),
+                    const ProfileAddLevelTab(),
+                    const ProfileAddWorkExperienceTab(),
+                    ProfileAddCareerGoalsTab(),
+                    ProfileAddFieldSkillsTab(),
+                  ],
+                ),
               ),
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-                create: (_) => danhSachMucLuongBloc,
-                child: BlocListener<DanhSachMucLuongBloc,
-                    DataMultiState<DanhSachMucLuongDataResponse>>(
-                  listener: (BuildContext context,
-                      DataMultiState<DanhSachMucLuongDataResponse> state) {},
-                  child: BlocBuilder<DanhSachMucLuongBloc,
-                      DataMultiState<DanhSachMucLuongDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachMucLuongDataResponse>
-                                state) =>
-                        _buildViewSearchEducation(context, educations),
-                  ),
-                )),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-                create: (_) => danhSachMucLuongBloc,
-                child: BlocListener<DanhSachMucLuongBloc,
-                    DataMultiState<DanhSachMucLuongDataResponse>>(
-                  listener: (BuildContext context,
-                      DataMultiState<DanhSachMucLuongDataResponse> state) {},
-                  child: BlocBuilder<DanhSachMucLuongBloc,
-                      DataMultiState<DanhSachMucLuongDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachMucLuongDataResponse>
-                                state) =>
-                        _buildViewSearchDanhSachMucLuong(context, state.data),
-                  ),
-                )),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-                create: (_) => danhSachMucLuongBloc,
-                child: BlocListener<DanhSachMucLuongBloc,
-                    DataMultiState<DanhSachMucLuongDataResponse>>(
-                  listener: (BuildContext context,
-                      DataMultiState<DanhSachMucLuongDataResponse> state) {},
-                  child: BlocBuilder<DanhSachMucLuongBloc,
-                      DataMultiState<DanhSachMucLuongDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachMucLuongDataResponse>
-                                state) =>
-                        _buildViewSearchNeed(context, needs),
-                  ),
-                )),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: educationController,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.multiline,
-              maxLength: 500,
-              minLines: 10,
-              maxLines: 20,
-              icon: Icons.description,
-              hintText: "Trình độ học vấn",
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: educationController,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.multiline,
-              maxLength: 500,
-              minLines: 10,
-              maxLines: 20,
-              icon: Icons.description,
-              hintText: "Kinh nghiệm làm việc",
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: objectiveController,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.multiline,
-              maxLength: 500,
-              minLines: 10,
-              maxLines: 20,
-              icon: Icons.description,
-              hintText: "Mục tiêu nghề nghiệp",
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: skillController,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.multiline,
-              maxLength: 500,
-              minLines: 10,
-              maxLines: 20,
-              icon: Icons.description,
-              hintText: "Kỹ năng sở trường",
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: CapchaInput(
-              textInputAction: TextInputAction.done,
-              onFieldSubmitted: (value) => _send(context),
-            ),
-          ),
-          Container(
+            Container(
               margin: const EdgeInsets.only(top: 10),
-              child: DefaultButton(
-                text: 'Tạo',
-                onPressed: () => _send(context),
-              )),
-        ],
+              child: CapchaInput(
+                textInputAction: TextInputAction.done,
+                onFieldSubmitted: (value) => _send(context),
+              ),
+            ),
+            Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: DefaultButton(
+                  text: 'Tạo',
+                  onPressed: () => _send(context),
+                )),
+          ],
+        ),
       );
 
   _send(BuildContext context) {
     if (isValid()) {
       showCenterMessage("Thêm hồ sơ thành công").then((value) => backPage());
     }
-  }
-
-  PopupProps<T> _buildPopupProps<T>(BuildContext context) => PopupProps.dialog(
-      showSearchBox: true,
-      emptyBuilder: (context, searchEntry) => const Center(
-          child: Text('Không có dữ liệu',
-              style: TextStyle(color: AppColor.colorOfIcon))),
-      searchFieldProps: const TextFieldProps(
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          contentPadding: EdgeInsets.all(10),
-          hintText: "Tìm kiếm...",
-        ),
-      ));
-
-  DropDownDecoratorProps _buildDropDownDecoratorProps(
-          BuildContext context, String title) =>
-      DropDownDecoratorProps(
-        dropdownSearchDecoration: InputDecoration(
-            //labelText: title,
-            hintText: "Vui lòng chọn ${title.toLowerCase()}",
-            labelStyle: AppTextStyle.title,
-            hintStyle: AppTextStyle.titleHintPage),
-        baseStyle: AppTextStyle.title,
-      );
-
-  ClearButtonProps _buildClearButtonProps() => const ClearButtonProps(
-      isVisible: true,
-      padding: EdgeInsets.zero,
-      color: AppColor.colorOfHintText);
-
-  Future<DateTime?> openDateTimePicker(DateTime initialDate) async {
-    return showDatePicker(
-        context: context,
-        initialDate: initialDate,
-        builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.dark(useMaterial3: false),
-            child: child!,
-          );
-        },
-        confirmText: "Chọn ngày",
-        cancelText: "Hủy",
-        keyboardType: TextInputType.datetime,
-        firstDate: DateTime(1900),
-        lastDate: DateTime.now());
-  }
-
-  Future<void> openFromDateDateTimePicker() async {
-    var pickDate = await openDateTimePicker(fromDate);
-    if (pickDate != null) {
-      fromDate = pickDate;
-      fromDateController.text = fromDate.toFormatDateTime(format: 'dd/MM/yyyy');
-    }
-  }
-
-  Future<void> openToDateDateTimePicker() async {
-    var pickDate = await openDateTimePicker(toDate);
-    if (pickDate != null) {
-      toDate = pickDate;
-      toDateController.text = toDate.toFormatDateTime(format: 'dd/MM/yyyy');
-    }
-  }
-
-  Widget _buildViewSearchDanhSachTinhTp(
-      BuildContext context, List<DanhSachTinhTpDataResponse> list) {
-    return DropdownSearch<DanhSachTinhTpDataResponse>(
-      popupProps: _buildPopupProps(context),
-      selectedItem: widget.danhSachTinhTpDataResponse,
-      clearButtonProps: _buildClearButtonProps(),
-      filterFn: (data, filter) => data.filter(filter),
-      asyncItems: (String filter) => Future.value(list),
-      itemAsString: (DanhSachTinhTpDataResponse u) =>
-          u.regionalName.replaceWhenNullOrWhiteSpace(),
-      onChanged: (DanhSachTinhTpDataResponse? data) {
-        if (widget.danhSachTinhTpDataResponse != data) {
-          widget.danhSachTinhTpDataResponse = data;
-          widget.danhSachQuanHuyenDataResponse = null;
-          _danhSachQuanHuyenKey.currentState?.clear();
-          danhSachQuanHuyenBloc.add(DanhSachQuanHuyenEvent(
-              request: DanhSachQuanHuyenRequest(
-                  obj:
-                      DanhSachQuanHuyenDataRequest(tinhTp: data?.regionalID))));
-        }
-      },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Tình thành phố"),
-    );
-  }
-
-  Widget _buildViewSearchDanhSachQuanHuyen(
-      BuildContext context, List<DanhSachQuanHuyenDataResponse> list) {
-    return DropdownSearch<DanhSachQuanHuyenDataResponse>(
-      popupProps: _buildPopupProps(context),
-      key: _danhSachQuanHuyenKey,
-      clearButtonProps: _buildClearButtonProps(),
-      filterFn: (data, filter) => data.filter(filter),
-      selectedItem: widget.danhSachQuanHuyenDataResponse,
-      asyncItems: (String filter) => Future.value(list),
-      itemAsString: (DanhSachQuanHuyenDataResponse u) =>
-          u.regionalName.supportHtml(),
-      onChanged: (DanhSachQuanHuyenDataResponse? data) {
-        if (widget.danhSachQuanHuyenDataResponse != data) {
-          widget.danhSachQuanHuyenDataResponse = data;
-        }
-      },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Quận huyện"),
-    );
-  }
-
-  Widget _buildViewSearchDanhSachKinhNghiem(
-      BuildContext context, List<DanhSachKinhNghiemDataResponse> list) {
-    return DropdownSearch<DanhSachKinhNghiemDataResponse>(
-      popupProps: _buildPopupProps(context),
-      clearButtonProps: _buildClearButtonProps(),
-      filterFn: (data, filter) => data.filter(filter),
-      selectedItem: widget.danhSachKinhNghiemDataResponse,
-      asyncItems: (String filter) => Future.value(list),
-      itemAsString: (DanhSachKinhNghiemDataResponse u) =>
-          u.experienceName.supportHtml(),
-      onChanged: (DanhSachKinhNghiemDataResponse? data) {
-        if (widget.danhSachKinhNghiemDataResponse != data) {
-          widget.danhSachKinhNghiemDataResponse = data;
-        }
-      },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Kinh nghiệm"),
-    );
-  }
-
-  Widget _buildViewSearchDanhSachMucLuong(
-      BuildContext context, List<DanhSachMucLuongDataResponse> list) {
-    return DropdownSearch<DanhSachMucLuongDataResponse>(
-      popupProps: _buildPopupProps(context),
-      clearButtonProps: _buildClearButtonProps(),
-      filterFn: (data, filter) => data.filter(filter),
-      selectedItem: widget.danhSachMucLuongDataResponse,
-      asyncItems: (String filter) => Future.value(list),
-      itemAsString: (DanhSachMucLuongDataResponse u) =>
-          u.salaryName.supportHtml(),
-      onChanged: (DanhSachMucLuongDataResponse? data) {
-        if (widget.danhSachMucLuongDataResponse != data) {
-          widget.danhSachMucLuongDataResponse = data;
-        }
-      },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Mức lương"),
-    );
-  }
-
-  Widget _buildViewSearchIndustry(BuildContext context, List<String> list) {
-    return DropdownSearch<String>(
-      popupProps: _buildPopupProps(context),
-      clearButtonProps: _buildClearButtonProps(),
-      selectedItem: industry,
-      asyncItems: (String filter) => Future.value(list),
-      onChanged: (String? data) {
-        if (widget.danhSachMucLuongDataResponse != data) {
-          industry = data;
-        }
-      },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Ngành nghề"),
-    );
-  }
-
-  Widget _buildViewSearchPositionFuture(
-      BuildContext context, List<String> list) {
-    return DropdownSearch<String>(
-      popupProps: _buildPopupProps(context),
-      clearButtonProps: _buildClearButtonProps(),
-      selectedItem: positionFuture,
-      asyncItems: (String filter) => Future.value(list),
-      onChanged: (String? data) {
-        if (widget.danhSachMucLuongDataResponse != data) {
-          industry = data;
-        }
-      },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Chức vụ mong muốn"),
-    );
-  }
-
-  Widget _buildViewSearchPositionCurrent(
-      BuildContext context, List<String> list) {
-    return DropdownSearch<String>(
-      popupProps: _buildPopupProps(context),
-      clearButtonProps: _buildClearButtonProps(),
-      selectedItem: positionCurrent,
-      asyncItems: (String filter) => Future.value(list),
-      onChanged: (String? data) {
-        if (widget.danhSachMucLuongDataResponse != data) {
-          industry = data;
-        }
-      },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Chức vụ hiện tại"),
-    );
-  }
-
-  Widget _buildViewSearchNeed(BuildContext context, List<String> list) {
-    return DropdownSearch<String>(
-      popupProps: _buildPopupProps(context),
-      clearButtonProps: _buildClearButtonProps(),
-      selectedItem: need,
-      asyncItems: (String filter) => Future.value(list),
-      onChanged: (String? data) {
-        if (widget.danhSachMucLuongDataResponse != data) {
-          industry = data;
-        }
-      },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Nhu cầu làm việc"),
-    );
-  }
-
-  Widget _buildViewSearchEducation(BuildContext context, List<String> list) {
-    return DropdownSearch<String>(
-      popupProps: _buildPopupProps(context),
-      clearButtonProps: _buildClearButtonProps(),
-      selectedItem: education,
-      asyncItems: (String filter) => Future.value(list),
-      onChanged: (String? data) {
-        if (widget.danhSachMucLuongDataResponse != data) {
-          industry = data;
-        }
-      },
-      dropdownDecoratorProps: _buildDropDownDecoratorProps(context, "Trình độ"),
-    );
   }
 }

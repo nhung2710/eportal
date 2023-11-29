@@ -18,7 +18,6 @@ class DanhSachCoQuanBanHanhDataResponse extends BaseEportalDataResponse {
   String? updatedBy;
   String? updateName;
   int? portalID;
-  String search = "";
 
   DanhSachCoQuanBanHanhDataResponse(
       {this.total,
@@ -60,10 +59,5 @@ class DanhSachCoQuanBanHanhDataResponse extends BaseEportalDataResponse {
     data['updateName'] = this.updateName;
     data['portalID'] = this.portalID;
     return data;
-  }
-
-  bool filter(String filter) {
-    return filter.isNullOrWhiteSpace() ||
-        search.contains(filter.getValueSearch());
   }
 }

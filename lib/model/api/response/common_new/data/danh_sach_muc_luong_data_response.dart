@@ -19,7 +19,6 @@ class DanhSachMucLuongDataResponse extends BaseEportalDataResponse {
   String? userName;
   String? updatedBy;
   String? userUpdate;
-  String search = "";
 
   DanhSachMucLuongDataResponse(
       {this.idSend,
@@ -66,10 +65,5 @@ class DanhSachMucLuongDataResponse extends BaseEportalDataResponse {
     data['updatedBy'] = this.updatedBy;
     data['userUpdate'] = this.userUpdate;
     return data;
-  }
-
-  bool filter(String filter) {
-    return filter.isNullOrWhiteSpace() ||
-        search.contains(filter.getValueSearch());
   }
 }

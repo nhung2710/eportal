@@ -47,7 +47,6 @@ class DanhSachDoanhNghiepDataResponse extends BaseEportalDataResponse {
   String? approvalUser;
   String? approvalDate;
   int? portalId;
-  String search = "";
 
   DanhSachDoanhNghiepDataResponse(
       {this.id,
@@ -178,10 +177,5 @@ class DanhSachDoanhNghiepDataResponse extends BaseEportalDataResponse {
     data['approvalDate'] = this.approvalDate;
     data['portalId'] = this.portalId;
     return data;
-  }
-
-  bool filter(String filter) {
-    return filter.isNullOrWhiteSpace() ||
-        search.contains(filter.getValueSearch());
   }
 }

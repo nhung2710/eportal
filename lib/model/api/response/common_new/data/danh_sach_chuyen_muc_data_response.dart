@@ -23,7 +23,6 @@ class DanhSachChuyenMucDataResponse extends BaseEportalDataResponse {
   String? languageId;
   bool? sendView;
   String? tabPath;
-  String search = "";
 
   DanhSachChuyenMucDataResponse(
       {this.total,
@@ -79,10 +78,5 @@ class DanhSachChuyenMucDataResponse extends BaseEportalDataResponse {
     data['sendView'] = this.sendView;
     data['tabPath'] = this.tabPath;
     return data;
-  }
-
-  bool filter(String filter) {
-    return filter.isNullOrWhiteSpace() ||
-        search.contains(filter.getValueSearch());
   }
 }

@@ -21,7 +21,6 @@ class DanhSachQuanHuyenDataResponse extends BaseEportalDataResponse {
   String? updatedUser;
   bool? isActive;
   int? isOrder;
-  String search = "";
 
   DanhSachQuanHuyenDataResponse(
       {this.deletedDate,
@@ -74,10 +73,5 @@ class DanhSachQuanHuyenDataResponse extends BaseEportalDataResponse {
     data['isActive'] = this.isActive;
     data['isOrder'] = this.isOrder;
     return data;
-  }
-
-  bool filter(String filter) {
-    return filter.isNullOrWhiteSpace() ||
-        search.contains(filter.getValueSearch());
   }
 }
