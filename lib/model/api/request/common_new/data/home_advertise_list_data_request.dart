@@ -1,5 +1,4 @@
 import 'package:eportal/model/base/base_eportal_xml.dart';
-import 'package:flutter/material.dart';
 
 import '../../../../../constant/application_constant.dart';
 

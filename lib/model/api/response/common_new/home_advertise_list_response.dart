@@ -1,6 +1,5 @@
 import 'package:eportal/model/api/response/common_new/data/home_advertise_list_data_response.dart';
 import 'package:eportal/model/base/base_eportal_response.dart';
-import 'package:flutter/material.dart';
 
 //
 // Created by BlackRose on 23/11/2023.

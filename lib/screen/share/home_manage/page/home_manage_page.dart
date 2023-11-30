@@ -20,12 +20,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../bloc/common_new/home_slide_list_bloc.dart';
-import '../../../../constant/application_constant.dart';
 import '../../../../event/common_new/home_slide_list_event.dart';
 import '../../../../extension/string_extension.dart';
-import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
 import '../../../../model/api/request/common_new/home_slide_list_request.dart';
-import '../../../../model/api/response/common_new/home_slide_list_response.dart';
 import '../../../../state/base/base_state.dart';
 import '../../../../style/app_color.dart';
 import '../../../../widget/button_icon/custom_button_icon.dart';
@@ -33,7 +30,6 @@ import '../../../../widget/image/image_loading.dart';
 import '../../empty_example/page/empty_example_page.dart';
 import '../../news/page/news_page.dart';
 import '../../news_curriculum_vitae/page/news_curriculum_vitae_page.dart';
-import '../../news_enterprise/page/news_enterprise_page.dart';
 import '../../news_legal_document/page/news_legal_document_page.dart';
 import '../../news_recruitment/page/news_recruitment_page.dart';
 

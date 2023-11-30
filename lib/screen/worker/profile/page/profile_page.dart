@@ -4,16 +4,12 @@ import 'package:eportal/model/api/request/common_new/data/work_search_data_reque
 import 'package:eportal/model/api/request/common_new/work_search_request.dart';
 import 'package:eportal/screen/worker/profile_add/page/profile_add_page.dart';
 import 'package:eportal/screen/worker/profile_edit/page/profile_edit_page.dart';
-import 'package:eportal/style/app_elevation.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
 import 'package:eportal/widget/full_data_item/profile_item.dart';
 import 'package:eportal/widget/input/search_input.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../style/app_color.dart';
 
 //
 // Created by BlackRose on 11/9/2023.

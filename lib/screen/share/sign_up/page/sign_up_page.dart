@@ -3,11 +3,9 @@ import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/event/common_new/dang_ky_event.dart';
 import 'package:eportal/model/api/request/common_new/dang_ky_request.dart';
 import 'package:eportal/model/api/request/common_new/data/dang_ky_data_request.dart';
-import 'package:eportal/model/api/response/common_new/dang_ky_response.dart';
 import 'package:eportal/model/api/response/common_new/data/dang_ky_data_response.dart';
 import 'package:eportal/screen/share/sign_in/page/sign_in_page.dart';
 import 'package:eportal/state/base/base_state.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:flutter/material.dart';
@@ -69,12 +67,18 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
           child: ListView(
             children: <Widget>[
               Container(
-                margin: const EdgeInsets.only(top: 30),
-                child: Image.asset(
-                  'assets/images/Logo.jpg',
-                  alignment: Alignment.center,
-                  height: 125,
-                  width: 125,
+                margin: const EdgeInsets.only(top: 30, bottom: 20),
+                padding: const EdgeInsets.only(top: 10),
+                child: SizedBox(
+                  height: 150,
+                  child: AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: Image.asset(
+                      'assets/images/logoapp.png',
+                      alignment: Alignment.center,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
                 ),
               ),
               RadioListTile(

@@ -85,9 +85,10 @@ dev_dependencies:
   flutter_launcher_icons: "^0.13.1"
 
 flutter_launcher_icons:
-  image_path: "assets/images/logoapp.jpg"
+  image_path: "assets/images/logoapp.png"
   android: true # can specify file name here e.g. "ic_launcher"
   ios: true # can specify file name here e.g. "My-Launcher-Icon"
+  remove_alpha_ios: true
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -107,7 +108,7 @@ flutter:
   assets:
     - assets/images/Logo.jpg
     - assets/images/Logo.png
-    - assets/images/logoapp.jpg
+    - assets/images/logoapp.png
     - assets/images/404.png
     - assets/images/ErrorImage.png
     - assets/images/NotFoundData.jpg
@@ -147,8 +148,8 @@ flutter:
   #dart run flutter_native_splash:create
 flutter_native_splash:
   color: "#ffffff"
-  image: assets/images/logoapp.jpg
+  image: assets/images/logoapp.png
   android_12:
-    image: assets/images/logoapp.jpg
+    image: assets/images/logoapp.png
   android: true
   ios: true

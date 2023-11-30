@@ -7,8 +7,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../default_button/default_button.dart';
-
 //
 // Created by BlackRose on 29/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -30,15 +28,9 @@ class _ChangeAvatarState extends State<ChangeAvatar> {
   Widget build(BuildContext context) => GestureDetector(
         onTap: () => selectImage(),
         child: path == null
-            ? ImageLoading(
-                imageUrl: 'https://via.placeholder.com/100',
-                imageBuilder: (context, imageProvider) {
-                  // you can access to imageProvider
-                  return CircleAvatar(
-                    // or any widget that use imageProvider like (PhotoView)
-                    backgroundImage: imageProvider,
-                  );
-                })
+            ? const CircleAvatar(
+                backgroundImage: AssetImage("assets/images/logoapp.png"),
+              )
             : CircleAvatar(
                 backgroundImage: FileImage(File(path!)),
               ),

@@ -6,9 +6,6 @@ import 'package:eportal/model/api/response/common_new/data/news_detail_data_resp
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
-import 'package:eportal/widget/button/email_button.dart';
-import 'package:eportal/widget/button/phone_button.dart';
-import 'package:eportal/widget/full_data_item/work_item.dart';
 import 'package:eportal/widget/image/image_loading.dart';
 import 'package:eportal/widget/text_icon/text_icon.dart';
 import 'package:flutter/material.dart';

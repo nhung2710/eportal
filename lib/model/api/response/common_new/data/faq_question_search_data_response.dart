@@ -5,8 +5,6 @@
 
 import 'package:eportal/model/base/base_eportal_data_response.dart';
 
-import '../../../../base/base_eportal_response.dart';
-
 class FaqQuestionSearchDataResponse extends BaseEportalDataResponse {
   FaqQuestionSearchAnswerDataResponse? answerOb;
   int? total;

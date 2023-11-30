@@ -1,5 +1,4 @@
 import 'package:eportal/widget/base/base_page.dart';
-import 'package:eportal/widget/video/eportal_video_widget.dart';
 import 'package:flutter/material.dart';
 
 //

@@ -1,5 +1,3 @@
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:flutter/material.dart';
 

@@ -3,12 +3,10 @@ import 'package:eportal/event/common_new/album_list_event.dart';
 import 'package:eportal/model/api/request/common_new/album_list_request.dart';
 import 'package:eportal/model/api/request/common_new/data/album_list_data_request.dart';
 import 'package:eportal/model/api/response/common_new/data/album_list_data_response.dart';
-import 'package:eportal/screen/share/video/page/video_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/widget/base/base_page.dart';
-import 'package:eportal/widget/news/news_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

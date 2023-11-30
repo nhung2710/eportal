@@ -5,6 +5,8 @@
 import 'package:eportal/model/api/response/common_new/data/job_user_detail_data_response.dart';
 import 'package:eportal/model/base/base_eportal_response.dart';
 
+import '../../../../extension/map_json_extension.dart';
+
 class JobUserDetailResponse
     extends BaseSingleEportalResponse<JobUserDetailDataResponse> {
   JobUserDetailResponse(
@@ -12,9 +14,8 @@ class JobUserDetailResponse
 
   factory JobUserDetailResponse.fromJson(Map<String, dynamic> json) {
     return JobUserDetailResponse(
-        data: json["data"] == null
-            ? null
-            : JobUserDetailDataResponse.fromJson(json["data"]),
+        data: json.toObjectJson(
+            mapJson: (v) => JobUserDetailDataResponse.fromJson(v)),
         status: json["status"],
         message: json["message"]);
   }

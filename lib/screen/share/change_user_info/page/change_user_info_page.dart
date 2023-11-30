@@ -5,7 +5,7 @@ import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/change_avatar/change_avatar.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
-import 'package:eportal/widget/image/image_loading.dart';
+import 'package:eportal/widget/select/select_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -38,6 +38,7 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
   TextEditingController addressController = TextEditingController();
   TextEditingController idCardController = TextEditingController();
   DanhSachGioiTinhBloc danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
+
   DanhSachGioiTinhDataResponse? danhSachGioiTinhDataResponse;
   var focusNode = FocusNode();
   DateTime birthDay = DateTime.now();
@@ -76,7 +77,7 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
           Container(
             margin: const EdgeInsets.only(top: 10),
             child: AspectRatio(
-                aspectRatio: 2,
+                aspectRatio: 16 / 9,
                 child: ChangeAvatar(
                   changed: (String value) {},
                 )),
@@ -166,6 +167,23 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
           Container(
             margin: const EdgeInsets.only(top: 10),
             child: FieldInput(
+              controller: idCardController,
+              maxLength: 12,
+              textInputAction: TextInputAction.done,
+              validator: (text) {
+                if (text.isNullOrWhiteSpace()) {
+                  return 'Căn cước công dân không được để trống';
+                }
+                return null;
+              },
+              onFieldSubmitted: (value) => _changeUserInfo(context),
+              hintText: 'Căn cước công dân',
+              icon: Icons.credit_card_sharp,
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: FieldInput(
               controller: addressController,
               maxLength: 50,
               textInputAction: TextInputAction.done,
@@ -214,49 +232,16 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
 
   Widget _buildViewSearchDanhSachGioiTinh(
       BuildContext context, List<DanhSachGioiTinhDataResponse> list) {
-    return DropdownSearch<DanhSachGioiTinhDataResponse>(
-      popupProps: _buildPopupProps(context),
-      clearButtonProps: _buildClearButtonProps(),
-      filterFn: (data, filter) => data.filter(filter),
+    return SelectItem<DanhSachGioiTinhDataResponse>(
       selectedItem: danhSachGioiTinhDataResponse,
-      asyncItems: (String filter) => Future.value(list),
+      list: list,
       itemAsString: (DanhSachGioiTinhDataResponse u) => u.name.supportHtml(),
       onChanged: (DanhSachGioiTinhDataResponse? data) {
         if (danhSachGioiTinhDataResponse != data) {
           danhSachGioiTinhDataResponse = data;
         }
       },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Giới tính"),
+      title: 'Giới tính',
     );
   }
-
-  PopupProps<T> _buildPopupProps<T>(BuildContext context) => PopupProps.dialog(
-      showSearchBox: true,
-      emptyBuilder: (context, searchEntry) => const Center(
-          child: Text('Không có dữ liệu',
-              style: TextStyle(color: AppColor.colorOfIcon))),
-      searchFieldProps: const TextFieldProps(
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          contentPadding: EdgeInsets.all(10),
-          hintText: "Tìm kiếm...",
-        ),
-      ));
-
-  DropDownDecoratorProps _buildDropDownDecoratorProps(
-          BuildContext context, String title) =>
-      DropDownDecoratorProps(
-        dropdownSearchDecoration: InputDecoration(
-            //labelText: title,
-            hintText: "Vui lòng chọn ${title.toLowerCase()}",
-            labelStyle: AppTextStyle.title,
-            hintStyle: AppTextStyle.titleHintPage),
-        baseStyle: AppTextStyle.title,
-      );
-
-  ClearButtonProps _buildClearButtonProps() => const ClearButtonProps(
-      isVisible: true,
-      padding: EdgeInsets.zero,
-      color: AppColor.colorOfHintText);
 }

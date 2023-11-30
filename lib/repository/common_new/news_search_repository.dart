@@ -5,11 +5,11 @@
 import 'package:eportal/api/adapter/base/base_adapter_api.dart';
 import 'package:eportal/model/api/request/common_new/news_search_request.dart';
 import 'package:eportal/model/api/response/common_new/news_search_response.dart';
+import 'package:eportal/repository/base/base_repository.dart';
 
-class NewsSearchRepository {
-  Future<NewsSearchResponse> getNewsSearch(NewsSearchRequest request) {
-    return BaseAdapterApi()
-        .callApiAsync(request)
-        .then((value) => NewsSearchResponse.fromJson(value));
-  }
+class NewsSearchRepository
+    extends BaseRepository<NewsSearchRequest, NewsSearchResponse> {
+  @override
+  NewsSearchResponse mapJsonToObject(Map<String, dynamic> value) =>
+      NewsSearchResponse.fromJson(value);
 }

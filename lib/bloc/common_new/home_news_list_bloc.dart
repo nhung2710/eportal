@@ -1,12 +1,8 @@
-import 'package:bloc/bloc.dart';
 import 'package:eportal/bloc/base/base_bloc.dart';
-import 'package:eportal/enum/data_bloc_status.dart';
-import 'package:eportal/event/base/base_event.dart';
 import 'package:eportal/event/common_new/home_news_list_event.dart';
 import 'package:eportal/model/api/response/common_new/data/home_news_list_data_response.dart';
 import 'package:eportal/model/api/response/common_new/home_news_list_response.dart';
 import 'package:eportal/repository/common_new/home_news_list_repository.dart';
-import 'package:eportal/state/base/base_state.dart';
 
 //
 // Created by BlackRose on 11/9/2023.
@@ -17,7 +13,7 @@ class HomeNewsListBloc extends BaseMultiBloc<HomeNewsListDataResponse,
   @override
   Future<HomeNewsListResponse> callApiResult(
           HomeNewsListRepository apiRepository, HomeNewsListEvent event) =>
-      apiRepository.getHomeNewsList(event.request);
+      apiRepository.get(event.request);
 
   @override
   String? getFailMessage(HomeNewsListResponse response) => null;

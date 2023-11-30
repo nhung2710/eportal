@@ -1,5 +1,4 @@
 import 'job_user_search_data_request.dart';
-import 'news_search_data_request.dart';
 
 //
 // Created by BlackRose on 13/11/2023.

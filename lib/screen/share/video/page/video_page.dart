@@ -3,7 +3,6 @@ import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../../../extension/string_extension.dart';
 import '../../../../widget/video/eportal_video_widget.dart';

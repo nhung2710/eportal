@@ -1,6 +1,5 @@
 import 'package:eportal/api/constant/application_api_constant.dart';
 import 'package:eportal/model/base/base_eportal_request.dart';
-import 'package:flutter/material.dart';
 
 import 'data/home_advertise_list_data_request.dart';
 

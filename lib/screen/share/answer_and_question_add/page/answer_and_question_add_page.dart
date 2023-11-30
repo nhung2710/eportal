@@ -1,14 +1,7 @@
-import 'package:eportal/application/global_application.dart';
-import 'package:eportal/constant/application_constant.dart';
-import 'package:eportal/model/api/response/common_new/faq_add_question_response.dart';
-import 'package:eportal/screen/share/sign_in/page/sign_in_page.dart';
 import 'package:eportal/state/base/base_state.dart';
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/input/capcha_input.dart';
 import 'package:eportal/widget/input/field_input.dart';
-import 'package:eportal/widget/input/password_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

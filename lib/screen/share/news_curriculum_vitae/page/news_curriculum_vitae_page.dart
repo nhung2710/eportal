@@ -1,24 +1,14 @@
 import 'package:eportal/model/api/request/common_new/data/home_job_user_list_data_request.dart';
 import 'package:eportal/model/api/response/common_new/data/home_job_user_list_data_response.dart';
 import 'package:eportal/screen/share/news_curriculum_vitae_search/page/news_curriculum_vitae_search_page.dart';
-import 'package:eportal/screen/share/work_search/page/work_search_page.dart';
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_elevation.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
 import 'package:eportal/widget/full_data_item/curriculum_vitae_item.dart';
-import 'package:eportal/widget/show_full_info/show_full_info.dart';
-import 'package:eportal/widget/text_icon/text_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../bloc/common_new/home_job_user_list_bloc.dart';
-import '../../../../constant/application_constant.dart';
 import '../../../../event/common_new/home_job_user_list_event.dart';
-import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/common_new/home_job_user_list_request.dart';
-import '../../../../model/api/response/common_new/home_job_user_list_response.dart';
 import '../../../../state/base/base_state.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../news_curriculum_vitae_detail/page/news_curriculum_vitae_detail_page.dart';

@@ -3,7 +3,6 @@ import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../style/app_color.dart';
 import '../../../../widget/input/capcha_input.dart';
 import '../../../../widget/input/field_input.dart';
 

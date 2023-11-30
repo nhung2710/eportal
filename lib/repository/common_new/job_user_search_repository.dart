@@ -5,11 +5,11 @@
 import 'package:eportal/api/adapter/base/base_adapter_api.dart';
 import 'package:eportal/model/api/request/common_new/job_user_search_request.dart';
 import 'package:eportal/model/api/response/common_new/job_user_search_response.dart';
+import 'package:eportal/repository/base/base_repository.dart';
 
-class JobUserSearchRepository {
-  Future<JobUserSearchResponse> getJobUserSearch(JobUserSearchRequest request) {
-    return BaseAdapterApi()
-        .callApiAsync(request)
-        .then((value) => JobUserSearchResponse.fromJson(value));
-  }
+class JobUserSearchRepository
+    extends BaseRepository<JobUserSearchRequest, JobUserSearchResponse> {
+  @override
+  JobUserSearchResponse mapJsonToObject(Map<String, dynamic> value) =>
+      JobUserSearchResponse.fromJson(value);
 }

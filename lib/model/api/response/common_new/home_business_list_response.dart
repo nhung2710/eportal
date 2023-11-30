@@ -5,6 +5,7 @@
 
 import 'package:eportal/model/api/response/common_new/data/home_business_list_data_response.dart';
 
+import '../../../../extension/map_json_extension.dart';
 import '../../../base/base_eportal_response.dart';
 
 class HomeBusinessListResponse
@@ -13,13 +14,10 @@ class HomeBusinessListResponse
       {required super.data, required super.status, required super.message});
 
   factory HomeBusinessListResponse.fromJson(Map<String, dynamic> json) {
-    List<HomeBusinessListDataResponse> data = <HomeBusinessListDataResponse>[];
-    if (json['data'] != null) {
-      json['data'].forEach((v) {
-        data.add(HomeBusinessListDataResponse.fromJson(v));
-      });
-    }
     return HomeBusinessListResponse(
-        data: data, status: json["status"], message: json["message"]);
+        data: json.toListObjectJson(
+            mapJson: (v) => HomeBusinessListDataResponse.fromJson(v)),
+        status: json["status"],
+        message: json["message"]);
   }
 }

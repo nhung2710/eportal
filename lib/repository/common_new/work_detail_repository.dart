@@ -5,11 +5,11 @@
 import 'package:eportal/api/adapter/base/base_adapter_api.dart';
 import 'package:eportal/model/api/request/common_new/work_detail_request.dart';
 import 'package:eportal/model/api/response/common_new/work_detail_response.dart';
+import 'package:eportal/repository/base/base_repository.dart';
 
-class WorkDetailRepository {
-  Future<WorkDetailResponse> getWorkDetail(WorkDetailRequest request) {
-    return BaseAdapterApi()
-        .callApiAsync(request)
-        .then((value) => WorkDetailResponse.fromJson(value));
-  }
+class WorkDetailRepository
+    extends BaseRepository<WorkDetailRequest, WorkDetailResponse> {
+  @override
+  WorkDetailResponse mapJsonToObject(Map<String, dynamic> value) =>
+      WorkDetailResponse.fromJson(value);
 }

@@ -28,6 +28,7 @@ import 'package:eportal/model/api/response/common_new/data/danh_sach_tinh_tp_dat
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
+import 'package:eportal/widget/select/select_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -63,8 +64,8 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
   late DanhSachKinhNghiemBloc danhSachKinhNghiemBloc;
   late DanhSachGioiTinhBloc danhSachGioiTinhBloc;
   late DanhSachTrinhDoBloc danhSachTrinhDoBloc;
-  final _danhSachQuanHuyenKey = GlobalKey<DropdownSearchState>();
-  final _danhSachDoanhNghiepKey = GlobalKey<DropdownSearchState>();
+  final _danhSachQuanHuyenKey = GlobalKey<SelectItemState>();
+  final _danhSachDoanhNghiepKey = GlobalKey<SelectItemState>();
 
   @override
   void initState() {
@@ -250,12 +251,9 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
 
   Widget _buildViewSearchDanhSachTinhTp(
       BuildContext context, List<DanhSachTinhTpDataResponse> list) {
-    return DropdownSearch<DanhSachTinhTpDataResponse>(
-      popupProps: _buildPopupProps(context),
+    return SelectItem<DanhSachTinhTpDataResponse>(
       selectedItem: widget.danhSachTinhTpDataResponse,
-      clearButtonProps: _buildClearButtonProps(),
-      filterFn: (data, filter) => data.filter(filter),
-      asyncItems: (String filter) => Future.value(list),
+      list: list,
       itemAsString: (DanhSachTinhTpDataResponse u) =>
           u.regionalName.replaceWhenNullOrWhiteSpace(),
       onChanged: (DanhSachTinhTpDataResponse? data) {
@@ -280,20 +278,16 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
                       quanHuyen: widget.data.quanHuyen))));
         }
       },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Tình thành phố"),
+      title: "Tình thành phố",
     );
   }
 
   Widget _buildViewSearchDanhSachQuanHuyen(
       BuildContext context, List<DanhSachQuanHuyenDataResponse> list) {
-    return DropdownSearch<DanhSachQuanHuyenDataResponse>(
-      popupProps: _buildPopupProps(context),
+    return SelectItem<DanhSachQuanHuyenDataResponse>(
       key: _danhSachQuanHuyenKey,
-      clearButtonProps: _buildClearButtonProps(),
-      filterFn: (data, filter) => data.filter(filter),
+      list: list,
       selectedItem: widget.danhSachQuanHuyenDataResponse,
-      asyncItems: (String filter) => Future.value(list),
       itemAsString: (DanhSachQuanHuyenDataResponse u) =>
           u.regionalName.supportHtml(),
       onChanged: (DanhSachQuanHuyenDataResponse? data) {
@@ -310,20 +304,16 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
                       quanHuyen: widget.data.quanHuyen))));
         }
       },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Quận huyện"),
+      title: "Quận huyện",
     );
   }
 
   Widget _buildViewSearchDanhSachDoanhNghiep(
       BuildContext context, List<DanhSachDoanhNghiepDataResponse> list) {
-    return DropdownSearch<DanhSachDoanhNghiepDataResponse>(
-      popupProps: _buildPopupProps(context),
+    return SelectItem<DanhSachDoanhNghiepDataResponse>(
       key: _danhSachDoanhNghiepKey,
-      clearButtonProps: _buildClearButtonProps(),
-      filterFn: (data, filter) => data.filter(filter),
+      list: list,
       selectedItem: widget.danhSachDoanhNghiepDataResponse,
-      asyncItems: (String filter) => Future.value(list),
       itemAsString: (DanhSachDoanhNghiepDataResponse u) =>
           u.businessVn.supportHtml(),
       onChanged: (DanhSachDoanhNghiepDataResponse? data) {
@@ -332,18 +322,15 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
           widget.data.doanhNghiep = data?.doanhNghiepID;
         }
       },
-      dropdownDecoratorProps: _buildDropDownDecoratorProps(context, "Công ty"),
+      title: "Công ty",
     );
   }
 
   Widget _buildViewSearchDanhSachKinhNghiem(
       BuildContext context, List<DanhSachKinhNghiemDataResponse> list) {
-    return DropdownSearch<DanhSachKinhNghiemDataResponse>(
-      popupProps: _buildPopupProps(context),
-      clearButtonProps: _buildClearButtonProps(),
-      filterFn: (data, filter) => data.filter(filter),
+    return SelectItem<DanhSachKinhNghiemDataResponse>(
+      list: list,
       selectedItem: widget.danhSachKinhNghiemDataResponse,
-      asyncItems: (String filter) => Future.value(list),
       itemAsString: (DanhSachKinhNghiemDataResponse u) =>
           u.experienceName.supportHtml(),
       onChanged: (DanhSachKinhNghiemDataResponse? data) {
@@ -352,19 +339,15 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
           widget.data.kinhNghiem = data?.experienceID;
         }
       },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Kinh nghiệm"),
+      title: "Kinh nghiệm",
     );
   }
 
   Widget _buildViewSearchDanhSachMucLuong(
       BuildContext context, List<DanhSachMucLuongDataResponse> list) {
-    return DropdownSearch<DanhSachMucLuongDataResponse>(
-      popupProps: _buildPopupProps(context),
-      clearButtonProps: _buildClearButtonProps(),
-      filterFn: (data, filter) => data.filter(filter),
+    return SelectItem<DanhSachMucLuongDataResponse>(
+      list: list,
       selectedItem: widget.danhSachMucLuongDataResponse,
-      asyncItems: (String filter) => Future.value(list),
       itemAsString: (DanhSachMucLuongDataResponse u) =>
           u.salaryName.supportHtml(),
       onChanged: (DanhSachMucLuongDataResponse? data) {
@@ -372,37 +355,7 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
           widget.danhSachMucLuongDataResponse = data;
         }
       },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Mức lương"),
+      title: "Mức lương",
     );
   }
-
-  PopupProps<T> _buildPopupProps<T>(BuildContext context) => PopupProps.dialog(
-      showSearchBox: true,
-      emptyBuilder: (context, searchEntry) => const Center(
-          child: Text('Không có dữ liệu',
-              style: TextStyle(color: AppColor.colorOfIcon))),
-      searchFieldProps: const TextFieldProps(
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          contentPadding: EdgeInsets.all(10),
-          hintText: "Tìm kiếm...",
-        ),
-      ));
-
-  DropDownDecoratorProps _buildDropDownDecoratorProps(
-          BuildContext context, String title) =>
-      DropDownDecoratorProps(
-        dropdownSearchDecoration: InputDecoration(
-            //labelText: title,
-            hintText: "Vui lòng chọn ${title.toLowerCase()}",
-            labelStyle: AppTextStyle.title,
-            hintStyle: AppTextStyle.titleHintPage),
-        baseStyle: AppTextStyle.title,
-      );
-
-  ClearButtonProps _buildClearButtonProps() => const ClearButtonProps(
-      isVisible: true,
-      padding: EdgeInsets.zero,
-      color: AppColor.colorOfHintText);
 }

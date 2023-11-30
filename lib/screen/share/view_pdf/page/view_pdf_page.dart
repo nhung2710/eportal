@@ -5,9 +5,6 @@ import 'package:crypto/crypto.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
-
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../../../../application/global_application.dart';

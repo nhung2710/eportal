@@ -1,5 +1,6 @@
 import 'package:eportal/model/base/base_eportal_response.dart';
 
+import '../../../../extension/map_json_extension.dart';
 import 'data/home_slide_list_data_response.dart';
 
 //
@@ -12,13 +13,10 @@ class HomeSlideListResponse
       {required super.data, required super.status, required super.message});
 
   factory HomeSlideListResponse.fromJson(Map<String, dynamic> json) {
-    List<HomeSlideListDataResponse> data = <HomeSlideListDataResponse>[];
-    if (json['data'] != null) {
-      json['data'].forEach((v) {
-        data.add(HomeSlideListDataResponse.fromJson(v));
-      });
-    }
     return HomeSlideListResponse(
-        data: data, status: json["status"], message: json["message"]);
+        data: json.toListObjectJson(
+            mapJson: (v) => HomeSlideListDataResponse.fromJson(v)),
+        status: json["status"],
+        message: json["message"]);
   }
 }

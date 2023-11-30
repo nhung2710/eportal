@@ -8,12 +8,10 @@ import '../../../../constant/application_constant.dart';
 import '../../../../event/common_new/home_news_list_event.dart';
 import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
 import '../../../../model/api/request/common_new/home_news_list_request.dart';
-import '../../../../model/api/response/common_new/home_news_list_response.dart';
 import '../../../../state/base/base_state.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/expandable_fab/expandable_fab.dart';
 import '../../../../widget/news/news_widget.dart';
-import '../../empty_example/page/empty_example_page.dart';
 import '../../news_search/page/news_search_page.dart';
 
 //

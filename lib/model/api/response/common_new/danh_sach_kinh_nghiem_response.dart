@@ -4,6 +4,7 @@
 //
 import 'package:eportal/model/base/base_eportal_response.dart';
 
+import '../../../../extension/map_json_extension.dart';
 import 'data/danh_sach_kinh_nghiem_data_response.dart';
 
 class DanhSachKinhNghiemResponse
@@ -12,14 +13,10 @@ class DanhSachKinhNghiemResponse
       {required super.data, required super.status, required super.message});
 
   factory DanhSachKinhNghiemResponse.fromJson(Map<String, dynamic> json) {
-    List<DanhSachKinhNghiemDataResponse> data =
-        <DanhSachKinhNghiemDataResponse>[];
-    if (json['data'] != null) {
-      json['data'].forEach((v) {
-        data.add(DanhSachKinhNghiemDataResponse.fromJson(v));
-      });
-    }
     return DanhSachKinhNghiemResponse(
-        data: data, status: json["status"], message: json["message"]);
+        data: json.toListObjectJson(
+            mapJson: (v) => DanhSachKinhNghiemDataResponse.fromJson(v)),
+        status: json["status"],
+        message: json["message"]);
   }
 }

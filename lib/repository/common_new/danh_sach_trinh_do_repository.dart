@@ -5,12 +5,11 @@
 import 'package:eportal/api/adapter/base/base_adapter_api.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_trinh_do_request.dart';
 import 'package:eportal/model/api/response/common_new/danh_sach_trinh_do_response.dart';
+import 'package:eportal/repository/base/base_repository.dart';
 
-class DanhSachTrinhDoRepository {
-  Future<DanhSachTrinhDoResponse> getDanhSachTrinhDo(
-      DanhSachTrinhDoRequest request) {
-    return BaseAdapterApi()
-        .callApiAsync(request)
-        .then((value) => DanhSachTrinhDoResponse.fromJson(value));
-  }
+class DanhSachTrinhDoRepository
+    extends BaseRepository<DanhSachTrinhDoRequest, DanhSachTrinhDoResponse> {
+  @override
+  DanhSachTrinhDoResponse mapJsonToObject(Map<String, dynamic> value) =>
+      DanhSachTrinhDoResponse.fromJson(value);
 }

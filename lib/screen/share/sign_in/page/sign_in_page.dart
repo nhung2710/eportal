@@ -3,11 +3,11 @@ import 'package:eportal/bloc/common_new/dang_nhap_bloc.dart';
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/enum/role_type.dart';
 import 'package:eportal/screen/admin/home/home_page.dart' as admin;
-import 'package:eportal/screen/employer/home/home_page.dart' as employer;
-import 'package:eportal/screen/worker//home/home_page.dart' as worker;
 import 'package:eportal/screen/anonymous/home/home_page.dart' as anonymous;
+import 'package:eportal/screen/employer/home/home_page.dart' as employer;
 import 'package:eportal/screen/share/forgot_password/page/forgot_password_page.dart';
 import 'package:eportal/screen/share/sign_up/page/sign_up_page.dart';
+import 'package:eportal/screen/worker//home/home_page.dart' as worker;
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
@@ -17,12 +17,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../bloc/common_new/dang_nhap_bloc.dart';
 import '../../../../event/common_new/dang_nhap_event.dart';
 import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/common_new/dang_nhap_request.dart';
 import '../../../../model/api/request/common_new/data/dang_nhap_data_request.dart';
-import '../../../../model/api/response/common_new/dang_nhap_response.dart';
 import '../../../../model/api/response/common_new/data/dang_nhap_data_response.dart';
 import '../../../../widget/input/field_input.dart';
 import '../../../../widget/input/password_input.dart';
@@ -96,16 +94,16 @@ class _SignInPageState extends BasePageState<SignInPage> {
             shrinkWrap: true,
             children: <Widget>[
               Container(
-                margin: const EdgeInsets.only(top: 30),
+                margin: const EdgeInsets.only(top: 30, bottom: 20),
                 padding: const EdgeInsets.only(top: 10),
                 child: SizedBox(
                   height: 150,
                   child: AspectRatio(
                     aspectRatio: 16 / 9,
                     child: Image.asset(
-                      'assets/images/Logo.jpg',
+                      'assets/images/logoapp.png',
                       alignment: Alignment.center,
-                      fit: BoxFit.fill,
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),

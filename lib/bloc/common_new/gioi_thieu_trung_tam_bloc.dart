@@ -1,13 +1,7 @@
 import 'package:eportal/bloc/base/base_bloc.dart';
-import 'package:eportal/enum/data_bloc_status.dart';
-import 'package:eportal/event/base/base_event.dart';
 import 'package:eportal/event/common_new/gioi_thieu_trung_tam_event.dart';
 import 'package:eportal/model/api/response/common_new/gioi_thieu_trung_tam_response.dart';
 import 'package:eportal/repository/common_new/gioi_thieu_trung_tam_repository.dart';
-import 'package:eportal/state/base/base_state.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../extension/string_extension.dart';
 
 //
 // Created by BlackRose on 11/10/2023.
@@ -23,7 +17,7 @@ class GioiThieuTrungTamBloc extends BaseSingleBloc<
   Future<GioiThieuTrungTamResponse> callApiResult(
           GioiThieuTrungTamRepository apiRepository,
           GioiThieuTrungTamEvent event) =>
-      apiRepository.getGioiThieuTrungTam(event.request);
+      apiRepository.get(event.request);
 
   @override
   String? getFailMessage(GioiThieuTrungTamResponse response) => null;

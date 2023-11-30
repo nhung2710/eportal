@@ -1,6 +1,5 @@
 import 'package:eportal/event/base/base_event.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_chuyen_muc_request.dart';
-import 'package:flutter/material.dart';
 
 //
 // Created by BlackRose on 27/11/2023.

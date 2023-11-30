@@ -7,19 +7,16 @@ import 'package:eportal/event/common_new/dang_nhap_event.dart';
 import 'package:eportal/model/api/request/common_new/dang_nhap_request.dart';
 import 'package:eportal/model/api/request/common_new/data/dang_nhap_data_request.dart';
 import 'package:eportal/model/api/response/common_new/data/dang_nhap_data_response.dart';
-import 'package:eportal/screen/share/forgot_password/page/forgot_password_page.dart';
-import 'package:eportal/screen/share/sign_up/page/sign_up_page.dart';
+import 'package:eportal/screen/admin/home/home_page.dart' as admin;
+import 'package:eportal/screen/anonymous/home/home_page.dart' as anonymous;
+import 'package:eportal/screen/employer/home/home_page.dart' as employer;
+import 'package:eportal/screen/worker//home/home_page.dart' as worker;
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/widget/base/base_page.dart';
-import 'package:eportal/widget/input/field_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:eportal/screen/admin/home/home_page.dart' as admin;
-import 'package:eportal/screen/employer/home/home_page.dart' as employer;
-import 'package:eportal/screen/worker//home/home_page.dart' as worker;
-import 'package:eportal/screen/anonymous/home/home_page.dart' as anonymous;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -86,15 +83,15 @@ class _SplashPageState extends BasePageState<SplashPage>
               Expanded(
                 child: Center(
                   child: Container(
-                    margin: const EdgeInsets.only(top: 30),
+                    margin: const EdgeInsets.only(top: 30, bottom: 20),
                     child: SizedBox(
                       height: 150,
                       child: AspectRatio(
                         aspectRatio: 16 / 9,
                         child: Image.asset(
-                          'assets/images/Logo.jpg',
+                          'assets/images/logoapp.png',
                           alignment: Alignment.center,
-                          fit: BoxFit.fill,
+                          fit: BoxFit.contain,
                         ),
                       ),
                     ),
@@ -105,7 +102,7 @@ class _SplashPageState extends BasePageState<SplashPage>
                   margin: const EdgeInsets.only(top: 10),
                   child: Text(
                     "Đang tải dữ liệu ${(currentData * 100).toInt()}%",
-                    style: AppTextStyle.titlePage
+                    style: AppTextStyle.title
                         .copyWith(color: AppColor.colorOfIcon),
                   )),
               Container(

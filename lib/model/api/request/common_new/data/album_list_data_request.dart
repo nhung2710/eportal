@@ -1,5 +1,3 @@
-import 'package:eportal/model/base/base_eportal_xml.dart';
-
 import 'video_list_data_request.dart';
 
 //

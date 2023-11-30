@@ -5,11 +5,11 @@
 import 'package:eportal/api/adapter/base/base_adapter_api.dart';
 import 'package:eportal/model/api/request/common_new/ten_tinh_tp_request.dart';
 import 'package:eportal/model/api/response/common_new/ten_tinh_tp_response.dart';
+import 'package:eportal/repository/base/base_repository.dart';
 
-class TenTinhTpRepository {
-  Future<TenTinhTpResponse> getTenTinhTp(TenTinhTpRequest request) {
-    return BaseAdapterApi()
-        .callApiAsync(request)
-        .then((value) => TenTinhTpResponse.fromJson(value));
-  }
+class TenTinhTpRepository
+    extends BaseRepository<TenTinhTpRequest, TenTinhTpResponse> {
+  @override
+  TenTinhTpResponse mapJsonToObject(Map<String, dynamic> value) =>
+      TenTinhTpResponse.fromJson(value);
 }

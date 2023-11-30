@@ -2,7 +2,6 @@ import 'package:eportal/model/api/response/common_new/data/faq_question_search_d
 import 'package:eportal/screen/share/answer_and_question_add/page/answer_and_question_add_page.dart';
 import 'package:eportal/screen/share/answer_and_question_search/page/answer_and_question_search_page.dart';
 import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
 import 'package:eportal/widget/full_data_item/answer_and_question_item.dart';
@@ -13,7 +12,6 @@ import '../../../../bloc/common_new/faq_question_search_bloc.dart';
 import '../../../../event/common_new/faq_question_search_event.dart';
 import '../../../../model/api/request/common_new/data/faq_question_search_data_request.dart';
 import '../../../../model/api/request/common_new/faq_question_search_request.dart';
-import '../../../../model/api/response/common_new/faq_question_search_response.dart';
 import '../../../../state/base/base_state.dart';
 
 //

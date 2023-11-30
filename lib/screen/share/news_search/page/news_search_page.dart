@@ -1,7 +1,5 @@
 import 'package:eportal/model/api/response/common_new/data/news_search_data_response.dart';
 import 'package:eportal/screen/share/news_detail/page/news_detail_page.dart';
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_size_icon.dart';
 import 'package:eportal/widget/dialog/filter_news_dialog.dart';
 import 'package:eportal/widget/input/search_input.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +9,7 @@ import '../../../../bloc/common_new/news_search_bloc.dart';
 import '../../../../event/common_new/news_search_event.dart';
 import '../../../../model/api/request/common_new/data/news_search_data_request.dart';
 import '../../../../model/api/request/common_new/news_search_request.dart';
-import '../../../../model/api/response/common_new/news_search_response.dart';
 import '../../../../state/base/base_state.dart';
-import '../../../../style/app_text_style.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/news/news_widget.dart';
 

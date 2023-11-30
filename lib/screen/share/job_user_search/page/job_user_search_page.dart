@@ -8,7 +8,6 @@ import '../../../../bloc/common_new/job_user_search_bloc.dart';
 import '../../../../event/common_new/job_user_search_event.dart';
 import '../../../../model/api/request/common_new/data/job_user_search_data_request.dart';
 import '../../../../model/api/request/common_new/job_user_search_request.dart';
-import '../../../../model/api/response/common_new/job_user_search_response.dart';
 import '../../../../state/base/base_state.dart';
 import '../../../../style/app_text_style.dart';
 import '../../../../widget/base/base_page.dart';

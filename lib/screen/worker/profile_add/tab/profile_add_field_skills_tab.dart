@@ -1,25 +1,20 @@
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:eportal/bloc/common_new/danh_sach_doanh_nghiep_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_gioi_tinh_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_kinh_nghiem_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_muc_luong_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_quan_huyen_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_tinh_tp_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_trinh_do_bloc.dart';
-import 'package:eportal/event/common_new/danh_sach_doanh_nghiep_event.dart';
 import 'package:eportal/event/common_new/danh_sach_kinh_nghiem_event.dart';
 import 'package:eportal/event/common_new/danh_sach_muc_luong_event.dart';
 import 'package:eportal/event/common_new/danh_sach_quan_huyen_event.dart';
 import 'package:eportal/event/common_new/danh_sach_tinh_tp_event.dart';
-import 'package:eportal/model/api/request/common_new/danh_sach_doanh_nghiep_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_kinh_nghiem_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_muc_luong_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_quan_huyen_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_tinh_tp_request.dart';
 import 'package:eportal/model/api/request/common_new/data/common_new_data_request.dart';
-import 'package:eportal/model/api/request/common_new/data/danh_sach_doanh_nghiep_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_quan_huyen_data_request.dart';
-import 'package:eportal/model/api/response/common_new/data/danh_sach_doanh_nghiep_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_kinh_nghiem_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_muc_luong_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_quan_huyen_data_response.dart';
@@ -29,10 +24,10 @@ import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:eportal/widget/input/capcha_input.dart';
+import 'package:eportal/widget/select/select_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../extension/dateTime_extension.dart';
 import '../../../../extension/string_extension.dart';
@@ -70,7 +65,7 @@ class _ProfileAddFieldSkillsTabState
   DateTime fromDate = DateTime.now();
   DateTime toDate = DateTime.now();
 
-  final _danhSachQuanHuyenKey = GlobalKey<DropdownSearchState>();
+  final _danhSachQuanHuyenKey = GlobalKey<SelectItemState>();
 
   late DanhSachTinhTpBloc danhSachTinhTpBloc;
   late DanhSachQuanHuyenBloc danhSachQuanHuyenBloc;
@@ -492,35 +487,6 @@ class _ProfileAddFieldSkillsTabState
     }
   }
 
-  PopupProps<T> _buildPopupProps<T>(BuildContext context) => PopupProps.dialog(
-      showSearchBox: true,
-      emptyBuilder: (context, searchEntry) => const Center(
-          child: Text('Không có dữ liệu',
-              style: TextStyle(color: AppColor.colorOfIcon))),
-      searchFieldProps: const TextFieldProps(
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          contentPadding: EdgeInsets.all(10),
-          hintText: "Tìm kiếm...",
-        ),
-      ));
-
-  DropDownDecoratorProps _buildDropDownDecoratorProps(
-          BuildContext context, String title) =>
-      DropDownDecoratorProps(
-        dropdownSearchDecoration: InputDecoration(
-            //labelText: title,
-            hintText: "Vui lòng chọn ${title.toLowerCase()}",
-            labelStyle: AppTextStyle.title,
-            hintStyle: AppTextStyle.titleHintPage),
-        baseStyle: AppTextStyle.title,
-      );
-
-  ClearButtonProps _buildClearButtonProps() => const ClearButtonProps(
-      isVisible: true,
-      padding: EdgeInsets.zero,
-      color: AppColor.colorOfHintText);
-
   Future<DateTime?> openDateTimePicker(DateTime initialDate) async {
     return showDatePicker(
         context: context,
@@ -556,12 +522,9 @@ class _ProfileAddFieldSkillsTabState
 
   Widget _buildViewSearchDanhSachTinhTp(
       BuildContext context, List<DanhSachTinhTpDataResponse> list) {
-    return DropdownSearch<DanhSachTinhTpDataResponse>(
-      popupProps: _buildPopupProps(context),
+    return SelectItem<DanhSachTinhTpDataResponse>(
       selectedItem: widget.danhSachTinhTpDataResponse,
-      clearButtonProps: _buildClearButtonProps(),
-      filterFn: (data, filter) => data.filter(filter),
-      asyncItems: (String filter) => Future.value(list),
+      list: list,
       itemAsString: (DanhSachTinhTpDataResponse u) =>
           u.regionalName.replaceWhenNullOrWhiteSpace(),
       onChanged: (DanhSachTinhTpDataResponse? data) {
@@ -575,20 +538,16 @@ class _ProfileAddFieldSkillsTabState
                       DanhSachQuanHuyenDataRequest(tinhTp: data?.regionalID))));
         }
       },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Tình thành phố"),
+      title: 'Tình thành phố',
     );
   }
 
   Widget _buildViewSearchDanhSachQuanHuyen(
       BuildContext context, List<DanhSachQuanHuyenDataResponse> list) {
-    return DropdownSearch<DanhSachQuanHuyenDataResponse>(
-      popupProps: _buildPopupProps(context),
+    return SelectItem<DanhSachQuanHuyenDataResponse>(
       key: _danhSachQuanHuyenKey,
-      clearButtonProps: _buildClearButtonProps(),
-      filterFn: (data, filter) => data.filter(filter),
       selectedItem: widget.danhSachQuanHuyenDataResponse,
-      asyncItems: (String filter) => Future.value(list),
+      list: list,
       itemAsString: (DanhSachQuanHuyenDataResponse u) =>
           u.regionalName.supportHtml(),
       onChanged: (DanhSachQuanHuyenDataResponse? data) {
@@ -596,19 +555,14 @@ class _ProfileAddFieldSkillsTabState
           widget.danhSachQuanHuyenDataResponse = data;
         }
       },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Quận huyện"),
+      title: 'Quận huyện',
     );
   }
 
   Widget _buildViewSearchDanhSachKinhNghiem(
       BuildContext context, List<DanhSachKinhNghiemDataResponse> list) {
-    return DropdownSearch<DanhSachKinhNghiemDataResponse>(
-      popupProps: _buildPopupProps(context),
-      clearButtonProps: _buildClearButtonProps(),
-      filterFn: (data, filter) => data.filter(filter),
+    return SelectItem<DanhSachKinhNghiemDataResponse>(
       selectedItem: widget.danhSachKinhNghiemDataResponse,
-      asyncItems: (String filter) => Future.value(list),
       itemAsString: (DanhSachKinhNghiemDataResponse u) =>
           u.experienceName.supportHtml(),
       onChanged: (DanhSachKinhNghiemDataResponse? data) {
@@ -616,19 +570,15 @@ class _ProfileAddFieldSkillsTabState
           widget.danhSachKinhNghiemDataResponse = data;
         }
       },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Kinh nghiệm"),
+      list: list,
+      title: 'Kinh nghiệm',
     );
   }
 
   Widget _buildViewSearchDanhSachMucLuong(
       BuildContext context, List<DanhSachMucLuongDataResponse> list) {
-    return DropdownSearch<DanhSachMucLuongDataResponse>(
-      popupProps: _buildPopupProps(context),
-      clearButtonProps: _buildClearButtonProps(),
-      filterFn: (data, filter) => data.filter(filter),
+    return SelectItem<DanhSachMucLuongDataResponse>(
       selectedItem: widget.danhSachMucLuongDataResponse,
-      asyncItems: (String filter) => Future.value(list),
       itemAsString: (DanhSachMucLuongDataResponse u) =>
           u.salaryName.supportHtml(),
       onChanged: (DanhSachMucLuongDataResponse? data) {
@@ -636,89 +586,75 @@ class _ProfileAddFieldSkillsTabState
           widget.danhSachMucLuongDataResponse = data;
         }
       },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Mức lương"),
+      list: list,
+      title: 'Mức lương',
     );
   }
 
   Widget _buildViewSearchIndustry(BuildContext context, List<String> list) {
-    return DropdownSearch<String>(
-      popupProps: _buildPopupProps(context),
-      clearButtonProps: _buildClearButtonProps(),
+    return SelectItemNormal<String>(
       selectedItem: industry,
-      asyncItems: (String filter) => Future.value(list),
       onChanged: (String? data) {
         if (widget.danhSachMucLuongDataResponse != data) {
           industry = data;
         }
       },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Ngành nghề"),
+      list: list,
+      title: 'Ngành nghề',
     );
   }
 
   Widget _buildViewSearchPositionFuture(
       BuildContext context, List<String> list) {
-    return DropdownSearch<String>(
-      popupProps: _buildPopupProps(context),
-      clearButtonProps: _buildClearButtonProps(),
+    return SelectItemNormal<String>(
       selectedItem: positionFuture,
-      asyncItems: (String filter) => Future.value(list),
       onChanged: (String? data) {
         if (widget.danhSachMucLuongDataResponse != data) {
           industry = data;
         }
       },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Chức vụ mong muốn"),
+      list: list,
+      title: 'Chức vụ mong muốn',
     );
   }
 
   Widget _buildViewSearchPositionCurrent(
       BuildContext context, List<String> list) {
-    return DropdownSearch<String>(
-      popupProps: _buildPopupProps(context),
-      clearButtonProps: _buildClearButtonProps(),
+    return SelectItemNormal<String>(
       selectedItem: positionCurrent,
-      asyncItems: (String filter) => Future.value(list),
       onChanged: (String? data) {
         if (widget.danhSachMucLuongDataResponse != data) {
           industry = data;
         }
       },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Chức vụ hiện tại"),
+      list: list,
+      title: 'Chức vụ hiện tại',
     );
   }
 
   Widget _buildViewSearchNeed(BuildContext context, List<String> list) {
-    return DropdownSearch<String>(
-      popupProps: _buildPopupProps(context),
-      clearButtonProps: _buildClearButtonProps(),
+    return SelectItemNormal<String>(
       selectedItem: need,
-      asyncItems: (String filter) => Future.value(list),
       onChanged: (String? data) {
         if (widget.danhSachMucLuongDataResponse != data) {
           industry = data;
         }
       },
-      dropdownDecoratorProps:
-          _buildDropDownDecoratorProps(context, "Nhu cầu làm việc"),
+      list: list,
+      title: 'Nhu cầu làm việc',
     );
   }
 
   Widget _buildViewSearchEducation(BuildContext context, List<String> list) {
-    return DropdownSearch<String>(
-      popupProps: _buildPopupProps(context),
-      clearButtonProps: _buildClearButtonProps(),
+    return SelectItemNormal<String>(
       selectedItem: education,
-      asyncItems: (String filter) => Future.value(list),
       onChanged: (String? data) {
         if (widget.danhSachMucLuongDataResponse != data) {
           industry = data;
         }
       },
-      dropdownDecoratorProps: _buildDropDownDecoratorProps(context, "Trình độ"),
+      list: list,
+      title: 'Trình độ',
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:eportal/style/app_color.dart';
 import 'package:eportal/widget/full_data_item/full_data_item.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

@@ -1,12 +1,8 @@
 import 'package:eportal/bloc/base/base_bloc.dart';
-import 'package:eportal/enum/data_bloc_status.dart';
-import 'package:eportal/event/base/base_event.dart';
 import 'package:eportal/event/common_new/dang_nhap_event.dart';
 import 'package:eportal/model/api/response/common_new/dang_nhap_response.dart';
 import 'package:eportal/model/api/response/common_new/data/dang_nhap_data_response.dart';
 import 'package:eportal/repository/common_new/dang_nhap_repository.dart';
-import 'package:eportal/state/base/base_state.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../extension/string_extension.dart';
 
@@ -19,7 +15,7 @@ class DangNhapBloc extends BaseSingleBloc<DangNhapDataResponse,
   @override
   Future<DangNhapResponse> callApiResult(
           DangNhapRepository apiRepository, DangNhapEvent event) =>
-      apiRepository.getDangNhap(event.request);
+      apiRepository.get(event.request);
 
   @override
   String? getFailMessage(DangNhapResponse response) =>

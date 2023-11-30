@@ -5,12 +5,11 @@
 import 'package:eportal/api/adapter/base/base_adapter_api.dart';
 import 'package:eportal/model/api/request/common_new/home_business_list_request.dart';
 import 'package:eportal/model/api/response/common_new/home_business_list_response.dart';
+import 'package:eportal/repository/base/base_repository.dart';
 
-class HomeBusinessListRepository {
-  Future<HomeBusinessListResponse> getHomeBusinessList(
-      HomeBusinessListRequest request) {
-    return BaseAdapterApi()
-        .callApiAsync(request)
-        .then((value) => HomeBusinessListResponse.fromJson(value));
-  }
+class HomeBusinessListRepository
+    extends BaseRepository<HomeBusinessListRequest, HomeBusinessListResponse> {
+  @override
+  HomeBusinessListResponse mapJsonToObject(Map<String, dynamic> value) =>
+      HomeBusinessListResponse.fromJson(value);
 }

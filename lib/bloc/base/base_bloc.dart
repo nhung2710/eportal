@@ -1,13 +1,9 @@
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/enum/data_bloc_status.dart';
 import 'package:eportal/event/base/base_event.dart';
-import 'package:eportal/event/common_new/faq_question_search_event.dart';
-import 'package:eportal/model/api/response/common_new/data/album_detail_data_response.dart';
-import 'package:eportal/model/api/response/common_new/data/faq_question_search_data_response.dart';
 import 'package:eportal/model/base/base_eportal_data_response.dart';
-import 'package:eportal/model/base/base_eportal_request.dart';
 import 'package:eportal/model/base/base_eportal_response.dart';
-import 'package:eportal/repository/common_new/faq_question_search_repository.dart';
+import 'package:eportal/repository/base/base_repository.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,8 +15,8 @@ import '../../extension/string_extension.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-abstract class BaseSingleBloc<T, R, E extends BaseSingleEvent,
-        RP extends BaseSingleEportalResponse>
+abstract class BaseSingleBloc<T, R extends BaseRepository,
+        E extends BaseSingleEvent, RP extends BaseSingleEportalResponse>
     extends Bloc<BaseSingleEvent, DataSingleState<T>> {
   BaseSingleBloc() : super(DataSingleState<T>()) {
     final R apiRepository = getRepository();
@@ -62,8 +58,11 @@ abstract class BaseSingleBloc<T, R, E extends BaseSingleEvent,
       message.replaceWhenNullOrWhiteSpace(ApplicationConstant.SYSTEM_ERROR);
 }
 
-abstract class BaseMultiBloc<T extends BaseEportalDataResponse, R,
-        E extends BaseMultiEvent, RP extends BaseMultiEportalResponse<T>>
+abstract class BaseMultiBloc<
+        T extends BaseEportalDataResponse,
+        R extends BaseRepository,
+        E extends BaseMultiEvent,
+        RP extends BaseMultiEportalResponse<T>>
     extends Bloc<BaseMultiEvent, DataMultiState<T>> {
   BaseMultiBloc() : super(DataMultiState<T>()) {
     final R apiRepository = getRepository();
@@ -115,8 +114,11 @@ abstract class BaseMultiBloc<T extends BaseEportalDataResponse, R,
       message.replaceWhenNullOrWhiteSpace(ApplicationConstant.SYSTEM_ERROR);
 }
 
-abstract class BasePageBloc<T extends BaseEportalDataResponse, R,
-        E extends BasePageEvent, RP extends BasePageEportalResponse<T>>
+abstract class BasePageBloc<
+        T extends BaseEportalDataResponse,
+        R extends BaseRepository,
+        E extends BasePageEvent,
+        RP extends BasePageEportalResponse<T>>
     extends Bloc<BasePageEvent, DataPageState<T>> {
   BasePageBloc() : super(DataPageState<T>()) {
     final R apiRepository = getRepository();

@@ -2,23 +2,15 @@ import 'package:eportal/bloc/common_new/work_detail_bloc.dart';
 import 'package:eportal/event/common_new/work_detail_event.dart';
 import 'package:eportal/model/api/request/common_new/data/work_detail_data_request.dart';
 import 'package:eportal/model/api/request/common_new/work_detail_request.dart';
-import 'package:eportal/model/api/response/common_new/data/job_user_detail_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/work_detail_data_response.dart';
-import 'package:eportal/model/api/response/common_new/data/work_search_data_response.dart';
 import 'package:eportal/state/base/base_state.dart';
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_elevation.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/button/phone_button.dart';
 import 'package:eportal/widget/full_data_item/work_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../extension/string_extension.dart';
 import '../../../../widget/button/email_button.dart';
-import '../../../../widget/text_icon/text_icon.dart';
 
 //
 // Created by BlackRose on 21/11/2023.

@@ -1,13 +1,7 @@
 import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_elevation.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/full_data_item/full_data_item.dart';
-import 'package:eportal/widget/show_full_info/show_full_info.dart';
-import 'package:eportal/widget/text_icon/text_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../../extension/string_extension.dart';
 
 //
 // Created by BlackRose on 28/11/2023.

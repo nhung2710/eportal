@@ -12,10 +12,8 @@ import '../../../../event/common_new/home_document_list_event.dart';
 import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
 import '../../../../model/api/request/common_new/home_document_list_request.dart';
-import '../../../../model/api/response/common_new/home_document_list_response.dart';
 import '../../../../state/base/base_state.dart';
 import '../../../../widget/base/base_page.dart';
-import '../../../../widget/news/news_widget.dart';
 
 //
 // Created by BlackRose on 16/11/2023.
