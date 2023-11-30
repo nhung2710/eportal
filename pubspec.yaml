@@ -82,7 +82,12 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  flutter_launcher_icons: "^0.13.1"
 
+flutter_launcher_icons:
+  image_path: "assets/images/logoapp.jpg"
+  android: true # can specify file name here e.g. "ic_launcher"
+  ios: true # can specify file name here e.g. "My-Launcher-Icon"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -102,6 +107,7 @@ flutter:
   assets:
     - assets/images/Logo.jpg
     - assets/images/Logo.png
+    - assets/images/logoapp.jpg
     - assets/images/404.png
     - assets/images/ErrorImage.png
     - assets/images/NotFoundData.jpg
@@ -137,11 +143,12 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-
+  #flutter pub run flutter_launcher_icons
+  #dart run flutter_native_splash:create
 flutter_native_splash:
   color: "#ffffff"
-  image: assets/images/Logo.jpg
+  image: assets/images/logoapp.jpg
   android_12:
-    image: assets/images/Logo.jpg
+    image: assets/images/logoapp.jpg
   android: true
   ios: true

@@ -36,10 +36,12 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  TextEditingController idCardController = TextEditingController();
   DanhSachGioiTinhBloc danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
   DanhSachGioiTinhDataResponse? danhSachGioiTinhDataResponse;
   var focusNode = FocusNode();
   DateTime birthDay = DateTime.now();
+  String? gioitinh = "0";
 
   @override
   void initDataLoading() {
@@ -71,6 +73,14 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
   @override
   Widget pageUI(BuildContext context) => ListView(
         children: <Widget>[
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: AspectRatio(
+                aspectRatio: 2,
+                child: ChangeAvatar(
+                  changed: (String value) {},
+                )),
+          ),
           Container(
             margin: const EdgeInsets.only(top: 10),
             child: FieldInput(
@@ -122,6 +132,22 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
+            child: FieldInput(
+                controller: phoneController,
+                keyboardType: TextInputType.number,
+                maxLength: 50,
+                textInputAction: TextInputAction.next,
+                validator: (text) {
+                  if (text.isNullOrWhiteSpace()) {
+                    return 'Điện thoại không được để trống';
+                  }
+                  return null;
+                },
+                hintText: 'Điện thoại',
+                icon: Icons.phone),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 10),
             child: BlocProvider(
               create: (_) => danhSachGioiTinhBloc,
               child: BlocListener<DanhSachGioiTinhBloc,
@@ -140,22 +166,6 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
           Container(
             margin: const EdgeInsets.only(top: 10),
             child: FieldInput(
-                controller: phoneController,
-                keyboardType: TextInputType.number,
-                maxLength: 50,
-                textInputAction: TextInputAction.next,
-                validator: (text) {
-                  if (text.isNullOrWhiteSpace()) {
-                    return 'Điện thoại không được để trống';
-                  }
-                  return null;
-                },
-                hintText: 'Điện thoại',
-                icon: Icons.phone),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
               controller: addressController,
               maxLength: 50,
               textInputAction: TextInputAction.done,
@@ -168,17 +178,6 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
               onFieldSubmitted: (value) => _changeUserInfo(context),
               hintText: 'Địa chỉ',
               icon: Icons.home,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: GestureDetector(
-              child: SizedBox(
-                  width: 120,
-                  height: 120,
-                  child: ChangeAvatar(
-                    changed: (String value) {},
-                  )),
             ),
           ),
           Container(

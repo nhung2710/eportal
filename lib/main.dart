@@ -13,18 +13,9 @@ import 'constant/application_constant.dart';
 import 'extension/string_extension.dart';
 import 'screen/anonymous/home/home_page.dart';
 import 'screen/share/onboarding/page/onboarding_page.dart';
+import 'screen/share/splash/page/splash_page.dart';
 import 'style/app_color.dart';
 import 'style/app_theme.dart';
-
-Future<bool> checkAppRunFirstTime() async {
-  bool? isFirstRunApp = GlobalApplication()
-      .preferences
-      ?.getBool(ApplicationConstant.FIRST_TIME_OPEN_APP);
-  await GlobalApplication()
-      .preferences
-      ?.setBool(ApplicationConstant.FIRST_TIME_OPEN_APP, false);
-  return isFirstRunApp ?? true;
-}
 
 Future<void> main() async {
   //ErrorWidget.builder = (FlutterErrorDetails details) => Container();
@@ -53,36 +44,14 @@ Future<void> main() async {
     systemNavigationBarDividerColor: Colors.transparent,
     systemNavigationBarIconBrightness: Brightness.light,
   ));
-  Future.wait([
-    SystemChrome.setPreferredOrientations(<DeviceOrientation>[
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown
-    ]),
-    getApplicationDocumentsDirectory()
-        .then((value) => GlobalApplication().dirPath = value.path),
-    SharedPreferences.getInstance()
-        .then((value) => GlobalApplication().preferences = value)
-  ])
-      .then((value) {
-        GlobalApplication().userNameSaved = (GlobalApplication()
-                .preferences!
-                .getString(ApplicationConstant.USER_NAME))
-            .replaceWhenNullOrWhiteSpace();
-        GlobalApplication().userPasswordSaved = (GlobalApplication()
-                .preferences!
-                .getString(ApplicationConstant.USER_PASSWORD))
-            .replaceWhenNullOrWhiteSpace();
-      })
-      .then((_) => checkAppRunFirstTime())
-      .then((isFirstRunApp) => runApp(MyApp(isFirstRunApp: false)));
+  runApp(MyApp());
 }
 
 // ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   final PageStorageBucket _bucket = PageStorageBucket();
-  bool isFirstRunApp;
 
-  MyApp({super.key, required this.isFirstRunApp});
+  MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -112,12 +81,13 @@ class MyApp extends StatelessWidget {
       home: PageStorage(
         key: key,
         bucket: _bucket,
-        child: isFirstRunApp ? const OnboardingPage() : const HomePage(),
+        child: const SplashPage(),
         //child: isFirstRunApp ? const HomePage() : const HomePage(),
       ),
       builder: (context, child) {
         return MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          data: MediaQuery.of(context)
+              .copyWith(textScaler: TextScaler.linear(1.1)),
           child: child!,
         );
       },

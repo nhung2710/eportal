@@ -4,9 +4,10 @@ import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/enum/role_type.dart';
 import 'package:eportal/screen/admin/home/home_page.dart' as admin;
 import 'package:eportal/screen/employer/home/home_page.dart' as employer;
+import 'package:eportal/screen/worker//home/home_page.dart' as worker;
+import 'package:eportal/screen/anonymous/home/home_page.dart' as anonymous;
 import 'package:eportal/screen/share/forgot_password/page/forgot_password_page.dart';
 import 'package:eportal/screen/share/sign_up/page/sign_up_page.dart';
-import 'package:eportal/screen/worker//home/home_page.dart' as worker;
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
@@ -25,7 +26,6 @@ import '../../../../model/api/response/common_new/dang_nhap_response.dart';
 import '../../../../model/api/response/common_new/data/dang_nhap_data_response.dart';
 import '../../../../widget/input/field_input.dart';
 import '../../../../widget/input/password_input.dart';
-import '../../../anonymous/home/home_page.dart' as anonymous;
 
 //
 // Created by BlackRose on 11/7/2023.
@@ -97,11 +97,17 @@ class _SignInPageState extends BasePageState<SignInPage> {
             children: <Widget>[
               Container(
                 margin: const EdgeInsets.only(top: 30),
-                child: Image.asset(
-                  'assets/images/Logo.jpg',
-                  alignment: Alignment.center,
-                  height: 125,
-                  width: 125,
+                padding: const EdgeInsets.only(top: 10),
+                child: SizedBox(
+                  height: 150,
+                  child: AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: Image.asset(
+                      'assets/images/Logo.jpg',
+                      alignment: Alignment.center,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                 ),
               ),
               Container(
@@ -191,7 +197,6 @@ class _SignInPageState extends BasePageState<SignInPage> {
 
   _signIn(BuildContext context) {
     if (isValid()) {
-      startLoading();
       dangNhapBloc.add(DangNhapEvent(
           request: DangNhapRequest(
               obj: DangNhapDataRequest(

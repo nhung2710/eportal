@@ -226,7 +226,6 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
 
   _registerAccount(BuildContext context) {
     if (isValid()) {
-      startLoading();
       dangKyBloc.add(DangKyEvent(
           request: DangKyRequest(
               obj: DangKyDataRequest(

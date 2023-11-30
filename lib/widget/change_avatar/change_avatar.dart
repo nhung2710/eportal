@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:eportal/widget/dialog/choose_image_file_dialog.dart';
 import 'package:eportal/widget/image/image_loading.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -44,47 +45,24 @@ class _ChangeAvatarState extends State<ChangeAvatar> {
       );
 
   selectImage() async {
-    if (Platform.isWindows) {
-      FilePickerResult? result = await FilePicker.platform
-          .pickFiles(type: FileType.image, withData: true);
-      if (result?.files.first.path != null) {
-        path = result!.files.first.path;
-        setState(() {});
-        String base64Image = base64Encode(result.files.first.bytes!);
-        widget.changed(base64Image);
-      }
-    } else {
-      bool? isCamera = await showDialog(
-        context: context,
-        builder: (context) => Dialog(
-          insetPadding: const EdgeInsets.all(10),
-          child: Container(
-            color: Colors.white,
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                DefaultButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                  },
-                  text: 'Máy ảnh',
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                DefaultButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(false);
-                  },
-                  text: 'Thư viện ảnh',
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-      if (isCamera != null) {
+    bool? isCamera = await showDialog(
+      context: context,
+      builder: (context) => const Dialog(
+        insetPadding: EdgeInsets.zero,
+        child: ChooseImageFileDialog(),
+      ),
+    );
+    if (isCamera != null) {
+      if (Platform.isWindows) {
+        FilePickerResult? result = await FilePicker.platform
+            .pickFiles(type: FileType.image, withData: true);
+        if (result?.files.first.path != null) {
+          path = result!.files.first.path;
+          setState(() {});
+          String base64Image = base64Encode(result.files.first.bytes!);
+          widget.changed(base64Image);
+        }
+      } else {
         final XFile? image = await picker.pickImage(
             source:
                 isCamera == true ? ImageSource.camera : ImageSource.gallery);

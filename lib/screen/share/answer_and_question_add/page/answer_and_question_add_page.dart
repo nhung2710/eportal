@@ -149,7 +149,6 @@ class _AnswerAndQuestionAddPageState
 
   _send(BuildContext context) {
     if (isValid()) {
-      startLoading();
       faqAddQuestionBloc.add(FaqAddQuestionEvent(
           request: FaqAddQuestionRequest(
               obj: FaqAddQuestionDataRequest(
