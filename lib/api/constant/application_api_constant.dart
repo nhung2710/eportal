@@ -58,4 +58,8 @@ class ApplicationApiConstant {
   static const API_COMMON_NEW_OP_USER_UPDATE = "UserUpdate";
   static const API_COMMON_NEW_OP_JOB_USER_ADD = "JobUserAdd";
   static const API_COMMON_NEW_OP_JOB_USER_UPDATE = "JobUserUpdate";
+  static const API_COMMON_NEW_OP_DANH_SACH_CHUC_VU = "DanhSachChucVu";
+  static const API_COMMON_NEW_OP_DANH_SACH_NHU_CAU_VIEC_LAM =
+      "DanhSachNhuCauViecLam";
+  static const API_COMMON_NEW_OP_DANH_SACH_NGANH_NGHE = "DanhSachNganhNghe";
 }
