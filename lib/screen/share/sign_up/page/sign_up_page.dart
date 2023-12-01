@@ -5,9 +5,12 @@ import 'package:eportal/model/api/request/common_new/dang_ky_request.dart';
 import 'package:eportal/model/api/request/common_new/data/dang_ky_data_request.dart';
 import 'package:eportal/model/api/response/common_new/data/dang_ky_data_response.dart';
 import 'package:eportal/screen/share/sign_in/page/sign_in_page.dart';
+import 'package:eportal/screen/share/terms_of_use/page/terms_of_use_page.dart';
 import 'package:eportal/state/base/base_state.dart';
+import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,6 +20,7 @@ import '../../../../style/app_color.dart';
 import '../../../../widget/input/capcha_input.dart';
 import '../../../../widget/input/field_input.dart';
 import '../../../../widget/input/password_input.dart';
+import '../../policy/page/policy_page.dart';
 
 //
 // Created by BlackRose on 11/7/2023.
@@ -208,6 +212,38 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
                   },
                   onFieldSubmitted: (value) => _registerAccount(context),
                   hintText: "Mật khẩu xác nhận",
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: Center(
+                  child: RichText(
+                    text: TextSpan(
+                      style: AppTextStyle.titleAppbarPage.copyWith(
+                          color: Colors.black, fontWeight: FontWeight.normal),
+                      children: <TextSpan>[
+                        const TextSpan(text: 'Tôi đã đọc và đồng ý với\t'),
+                        TextSpan(
+                            text: 'quy định ',
+                            style: AppTextStyle.titleAppbarPage.copyWith(
+                                color: AppColor.colorOfIcon,
+                                decoration: TextDecoration.underline),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => nextPage(
+                                  (context) => const TermsOfUsePage())),
+                        const TextSpan(text: '\tvà\t'),
+                        TextSpan(
+                            text: 'chính sách',
+                            style: AppTextStyle.titleAppbarPage.copyWith(
+                                color: AppColor.colorOfIcon,
+                                decoration: TextDecoration.underline),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () =>
+                                  nextPage((context) => const PolicyPage())),
+                        const TextSpan(text: '\tnày?'),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Container(

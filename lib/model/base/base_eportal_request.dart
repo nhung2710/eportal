@@ -7,7 +7,7 @@ abstract class BaseEportalRequest<T extends BaseEportalXml> {
 
   BaseEportalRequest({required this.obj});
 
-  bool isAuthentication() => true;
+  bool isAuthentication() => false;
 
   String getDefaultNameSpace() => 'xmlns="http://tempuri.org/"';
 

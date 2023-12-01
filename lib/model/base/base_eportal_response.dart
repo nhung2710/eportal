@@ -1,10 +1,14 @@
+import 'package:eportal/api/constant/application_api_constant.dart';
 import 'package:eportal/model/base/base_eportal_data_response.dart';
 
 class BaseEportalResponse {
   int status = 0;
   String message = "Có lỗi xảy ra vui lòng thử lại sau";
+  bool isSuccess = false;
 
-  BaseEportalResponse({required this.status, required this.message});
+  BaseEportalResponse({required this.status, required this.message}) {
+    isSuccess = status == ApplicationApiConstant.API_SUCCESS_CODE;
+  }
 
   factory BaseEportalResponse.fromJson(Map<String, dynamic> json) {
     return BaseEportalResponse(

@@ -260,7 +260,7 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
         return initWidget ?? Container();
       case DataBlocStatus.loading:
         return buildScreenLoading(context);
-      case DataBlocStatus.notfound:
+      case DataBlocStatus.notFoundData:
         return buildNotFoundData(context);
       case DataBlocStatus.error:
         return buildScreenError(state.errorMessage);
@@ -277,7 +277,7 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
         return initWidget ?? Container();
       case DataBlocStatus.loading:
         return buildScreenLoading(context);
-      case DataBlocStatus.notfound:
+      case DataBlocStatus.notFoundData:
         return buildNotFoundData(context);
       case DataBlocStatus.error:
         return buildNotFoundData(context);
@@ -295,7 +295,7 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
         return buildSelectLoading(context);
       case DataBlocStatus.loading:
         return buildSelectLoading(context);
-      case DataBlocStatus.notfound:
+      case DataBlocStatus.notFoundData:
         return buildSelectLoading(context);
       case DataBlocStatus.error:
         return buildSelectLoading(context);
@@ -312,7 +312,7 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
         return initWidget ?? Container();
       case DataBlocStatus.loading:
         return buildScreenLoading(context);
-      case DataBlocStatus.notfound:
+      case DataBlocStatus.notFoundData:
         return buildNotFoundData(context);
       case DataBlocStatus.error:
         return buildScreenError(state.errorMessage);
@@ -334,7 +334,7 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
       case DataBlocStatus.loading:
         startLoading();
         break;
-      case DataBlocStatus.notfound:
+      case DataBlocStatus.notFoundData:
         stopLoading();
         break;
       case DataBlocStatus.error:

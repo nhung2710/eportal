@@ -12,4 +12,7 @@ class UserUpdateRequest extends BaseEportalRequest<UserUpdateDataRequest> {
 
   @override
   String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_USER_UPDATE;
+
+  @override
+  bool isAuthentication() => true;
 }

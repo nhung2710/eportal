@@ -11,10 +11,14 @@ import 'package:flutter/material.dart';
 class SettingPageModel {
   IconData icon;
   String title;
+  GestureTapCallback? onTap;
   WidgetBuilder builder;
 
   SettingPageModel(
-      {required this.icon, required this.title, required this.builder});
+      {required this.icon,
+      required this.title,
+      required this.builder,
+      this.onTap});
 }
 
 class SettingItemViewer extends StatelessWidget {

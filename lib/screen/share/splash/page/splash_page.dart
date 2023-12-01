@@ -17,6 +17,7 @@ import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -66,7 +67,7 @@ class _SplashPageState extends BasePageState<SplashPage>
               break;
             case DataBlocStatus.loading:
               break;
-            case DataBlocStatus.notfound:
+            case DataBlocStatus.notFoundData:
               _skipPage(context);
               break;
             case DataBlocStatus.error:
@@ -144,40 +145,41 @@ class _SplashPageState extends BasePageState<SplashPage>
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown
       ]).then((value) => addPercent(0.15)),
-      getApplicationDocumentsDirectory().then((value) {
-        GlobalApplication().dirPath = value.path;
-        addPercent(0.15);
-      }),
-      SharedPreferences.getInstance().then((value) {
-        GlobalApplication().preferences = value;
-        addPercent(0.15);
-      })
+      getApplicationDocumentsDirectory()
+          .then((value) => GlobalApplication().dirPath = value.path)
+          .then((value) => addPercent(0.15)),
+      PackageInfo.fromPlatform()
+          .then((value) => GlobalApplication().packageInfo = value)
+          .then((value) => addPercent(0.15)),
+      SharedPreferences.getInstance()
+          .then((value) => GlobalApplication().preferences = value)
+          .then((value) => addPercent(0.15))
+          .then((value) {
+        GlobalApplication().userNameSaved = (GlobalApplication()
+                .preferences!
+                .getString(ApplicationConstant.USER_NAME))
+            .replaceWhenNullOrWhiteSpace();
+        GlobalApplication().userPasswordSaved = (GlobalApplication()
+                .preferences!
+                .getString(ApplicationConstant.USER_PASSWORD))
+            .replaceWhenNullOrWhiteSpace();
+      }).then((value) => addPercent(0.15))
     ])
-        .then((value) {
-          GlobalApplication().userNameSaved = (GlobalApplication()
-                  .preferences!
-                  .getString(ApplicationConstant.USER_NAME))
-              .replaceWhenNullOrWhiteSpace();
-          GlobalApplication().userPasswordSaved = (GlobalApplication()
-                  .preferences!
-                  .getString(ApplicationConstant.USER_PASSWORD))
-              .replaceWhenNullOrWhiteSpace();
-          addPercent(0.15);
-        })
         .then((_) => checkAppRunFirstTime())
+        .then((value) => Future.delayed(const Duration(minutes: 0)))
         .then((isFirstRunApp) {
-          addPercent(0.15);
-          if (GlobalApplication().userNameSaved.isNullOrWhiteSpace() ||
-              GlobalApplication().userPasswordSaved.isNullOrWhiteSpace()) {
-            _skipPage(context);
-          } else {
-            dangNhapBloc.add(DangNhapEvent(
-                request: DangNhapRequest(
-                    obj: DangNhapDataRequest(
-                        userName: GlobalApplication().userNameSaved,
-                        passWord: GlobalApplication().userPasswordSaved))));
-          }
-        });
+      var a = GlobalApplication();
+      if (GlobalApplication().userNameSaved.isNullOrWhiteSpace() ||
+          GlobalApplication().userPasswordSaved.isNullOrWhiteSpace()) {
+        _skipPage(context);
+      } else {
+        dangNhapBloc.add(DangNhapEvent(
+            request: DangNhapRequest(
+                obj: DangNhapDataRequest(
+                    userName: GlobalApplication().userNameSaved,
+                    passWord: GlobalApplication().userPasswordSaved))));
+      }
+    });
   }
 
   Future<bool> checkAppRunFirstTime() async {

@@ -72,6 +72,8 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^23.2.4
   image_picker: ^1.0.4
   file_picker: ^6.1.1
+  share_plus: ^7.2.1
+  package_info_plus: ^5.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -118,6 +120,7 @@ flutter:
     - assets/images/Implement.jpg
     - assets/texts/about.txt
     - assets/texts/policy.txt
+    - assets/texts/termsOfUse.txt
     - assets/images/loading.gif
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

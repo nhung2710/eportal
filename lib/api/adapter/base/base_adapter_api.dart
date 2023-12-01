@@ -57,14 +57,28 @@ class BaseAdapterApi {
     stringBuffer.write('<soap:Envelope ${getMapXml()}>');
     stringBuffer.write('<soap:Header>');
     stringBuffer.write('<AuthHeader xmlns="http://tempuri.org/">');
-    stringBuffer.write(
-        '<userLogin>${ApplicationApiConstant.BASE_AUTH_HEADER_USER_LOGIN}</userLogin>');
-    stringBuffer.write(
-        '<password>${ApplicationApiConstant.BASE_AUTH_HEADER_PASSWORD}</password>');
+
+    if (request.isAuthentication()) {
+      if (!GlobalApplication().userId.isNullOrWhiteSpace()) {
+        stringBuffer.write('<userId>${GlobalApplication().userId}</userId>');
+        stringBuffer
+            .write('<userRole>${GlobalApplication().userRole}</userRole>');
+      } else {
+        stringBuffer.write(
+            '<userLogin>${ApplicationApiConstant.BASE_AUTH_HEADER_USER_LOGIN}</userLogin>');
+        stringBuffer.write(
+            '<password>${ApplicationApiConstant.BASE_AUTH_HEADER_PASSWORD}</password>');
+      }
+    } else {
+      stringBuffer.write(
+          '<userLogin>${ApplicationApiConstant.BASE_AUTH_HEADER_USER_LOGIN}</userLogin>');
+      stringBuffer.write(
+          '<password>${ApplicationApiConstant.BASE_AUTH_HEADER_PASSWORD}</password>');
+    }
     stringBuffer.write('</AuthHeader>');
     stringBuffer.write('</soap:Header>');
-    if (request.isAuthentication()) {}
     stringBuffer.write('<soap:Body>');
+
     stringBuffer.write(
         '<${request.getTagXmlRequest()} ${request.getDefaultNameSpace()}>');
     stringBuffer.write('${request.obj.toXml()}');

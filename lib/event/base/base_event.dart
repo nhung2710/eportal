@@ -14,21 +14,12 @@ abstract class BaseSingleEvent<T extends BaseEportalRequest> extends Equatable {
   List<Object> get props => [];
 }
 
-abstract class BaseMultiEvent<T extends BaseEportalRequest> extends Equatable {
-  final T request;
-
-  const BaseMultiEvent({required this.request});
-
-  @override
-  List<Object> get props => [];
+abstract class BaseMultiEvent<T extends BaseEportalRequest>
+    extends BaseSingleEvent<T> {
+  const BaseMultiEvent({required super.request});
 }
 
 abstract class BasePageEvent<T extends BasePageEportalRequest>
-    extends Equatable {
-  final T request;
-
-  const BasePageEvent({required this.request});
-
-  @override
-  List<Object> get props => [];
+    extends BaseSingleEvent<T> {
+  const BasePageEvent({required super.request});
 }

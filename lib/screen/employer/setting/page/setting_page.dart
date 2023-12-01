@@ -1,10 +1,13 @@
+import 'package:eportal/application/global_application.dart';
 import 'package:eportal/screen/share/about/page/about_page.dart';
 import 'package:eportal/screen/share/contact/page/contract_page.dart';
 import 'package:eportal/screen/share/policy/page/policy_page.dart';
 import 'package:eportal/screen/share/support/page/support_page.dart';
+import 'package:eportal/screen/share/terms_of_use/page/terms_of_use_page.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/list_viewer/custom_list_viewer.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../widget/list_viewer/setting_item_viewer.dart';
 import '../../../share/change_password/page/change_password_page.dart';
@@ -76,6 +79,15 @@ class _SettingPageState extends BasePageState<SettingPage> {
       SettingPageModel(
           icon: Icons.policy,
           title: "Chính sách",
+          builder: (context) => const PolicyPage()),
+      SettingPageModel(
+          icon: Icons.rule,
+          title: "Quy định",
+          builder: (context) => const TermsOfUsePage()),
+      SettingPageModel(
+          icon: Icons.share,
+          title: "Chia sẻ",
+          onTap: () => GlobalApplication().shareApp(),
           builder: (context) => const PolicyPage())
     ]
   };
@@ -91,7 +103,7 @@ class _SettingPageState extends BasePageState<SettingPage> {
                   children: e.value
                       .map((e) => CustomItemViewer(
                           currrent: SettingItemViewer(
-                              onTap: () => nextPage(e.builder),
+                              onTap: e.onTap ?? () => nextPage(e.builder),
                               settingPageModel: e)))
                       .toList()))
               .toList(),

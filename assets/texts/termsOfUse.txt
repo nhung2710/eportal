@@ -1,0 +1,171 @@
+<div class="box box_list_works">
+        <h2 class="title_text_line">Thỏa Thuận Sử Dụng</h2>
+        <p class="bm-title">
+            Đồng ý chấp Thuận Điều Khoản &amp; Điều Kiện
+        </p>
+        <p>
+            Vui lòng đọc kỹ các Điều Khoản &amp; Điều Kiện này trước khi truy nhập và sử dụng dịch vụ trên website đăng tuyển dụng vieclamhoabinh.gov.vn (sau đây gọi là "Website  TTDVVL Hòa Bình") của Trung tâm dịch vụ việc làm Hòa Bình (sau đây gọi là "Trung tâm"). Bằng việc chấp thuận Điều Khoản &amp; Điều Kiện này, bạn đồng ý bị ràng buộc bởi các quy định về sử dụng Dịch vụ trên Website  TTDVVL Hòa Bình. Nếu bạn có bất kỳ câu hỏi nào về bản thỏa thuận này, vui lòng liên hệ chúng tôi qua email vieclamhoabinh@gmail.com.
+        </p>
+        <p class="bm-title">
+            Dịch Vụ Của Chúng Tôi
+        </p>
+        <p>
+            vieclamhoabinh.gov.vn là một trang Web trên mạng Internet được thiết kế cho phép những người sử dụng đăng thông báo tuyển dụng và/hoặc xem các công việc do những người sử dụng khác đăng lên, hoặc tương tác với những người sử dụng khác. vieclamhoabinh.gov.vn do Trung tâm dịch vụ việc làm Hòa Bình, sở hữu và điều hành. Website TTDVVL Hòa Bình chứa và có thể chứa các thông tin, tin tức, các ý kiến, văn bản, đồ hoạ, các liên kết, sản phẩm nghệ thuật điện tử, hình ảnh động, âm thanh, video, phần mềm, tranh ảnh, âm nhạc, tiếng động và các nội dung, dữ liệu khác (gọi chung là "nội dung") được định dạng, tổ chức và thu thập dưới nhiều hình thức khác nhau mà người sử dụng có thể truy nhập tới được, gồm các thư mục, cơ sở dữ liệu và các vùng trên website của TTDVVL Hòa Bình mà người sử dụng có thể thay đổi được, chẳng hạn như đăng quảng cáo tuyển dụng, tải lên các tệp đa phương tiện, đăng ký các hồ sơ người sử dụng và tạo các hồ sơ tự thông báo ("vùng tương tác").
+        </p>
+        <p>
+            Để có thể sử dụng đầy đủ tiện ích dịch vụ trên Website , bạn cần phải đăng ký tạo lập một tài khoản sử dụng và cung cấp Website TTDVVL Hòa Bình một số thông tin cá nhân nhất định bao gồm mà không giới hạn bởi địa chỉ email để phục vụ cho việc liên lạc giao tiếp giữa bạn và Website TTDVVL Hòa Bình cũng như những người sử dụng khác sau này. Bằng việc đăng ký này, bạn đồng ý nhận các Thư thông báo, các thư điện tử hoặc các hình thức truyền thông khác về các sản phẩm và dịch vụ của Website TTDVVL Hòa Bình. Bất cứ khi nào bạn không mong muốn nhận các thư điện tử này nữa, thì bạn hãy thông báo cho Website TTDVVL Hòa Bình bằng cách chọn chức năng hủy đăng ký có sẵn trên Website TTDVVL Hòa Bình hoặc tại bên dưới của các thư điện tử của Website TTDVVL Hòa Bình. Các thông tin cá nhân của bạn sẽ được bảo quản và xử lý một cách bảo mật theo Chính Sách Bảo Mật của Website TTDVVL Hòa Bình.
+        </p>
+        <p>
+            Website TTDVVL Hòa Bình bảo lưu quyền thay đổi các dịch vụ, sản phẩm, biểu giá và phương thức tính giá và các thay đổi khác của Website TTDVVL Hòa Bình từng thời gian mà không phải thông báo trước cho người sử dụng nếu thấy phù hợp.
+        </p>
+        <p>
+            TTDVVL Hòa Bình bảo lưu quyền từ chối cung cấp dịch vụ cho các cá nhân, tổ chức, mà theo quy định của pháp luật hoặc theo toàn quyền đánh giá của TTDVVL Hòa Bình:
+        </p>
+        <p>
+            1. Có hoạt động kinh doanh cùng lĩnh vực, Ngành nghề với TTDVVL Hòa Bình, bao gồm nhưng không giới hạn, các hoạt động kinh doanh dịch vụ việc làm thông qua website, ứng dụng thương mại điện tử bán hàng và/hoặc website, ứng dụng cung cấp dịch vụ thương mại điện tử (sàn giao dịch thương mại điện tử); và/hoặc
+        </p>
+        <p>
+            2. Vận hành, quản lý website, ứng dụng liên quan đến tuyển dụng, dịch vụ việc làm tương tự nền tảng website, ứng dụng của TTDVVL Hòa Bình nhằm mục đích kinh doanh, thu lợi nhuận; và/hoặc
+        </p>
+        <p>
+            3. Cung cấp các sản phẩm, dịch vụ mang tính chất cạnh tranh với các dịch vụ hiện có của TTDVVL Hòa Bình.
+        </p>
+        <p>
+            Trường hợp, TTDVVL Hòa Bình đã cung cấp dịch vụ cho bạn và/hoặc công ty bạn nhưng sau đó phát hiện ra bạn và/hoặc công ty bạn thuộc một trong các đối tượng mà TTDVVL Hòa Bình từ chối cung cấp dịch vụ nêu trên, thì tùy theo quyết định của TTDVVL Hòa Bình sẽ tiến hành:
+        </p>
+        <p>
+            1. Chấm dứt cung cấp dịch vụ và thông báo cho Khách hàng,
+        </p>
+        <p>
+            2. Gỡ bỏ toàn bộ tin đăng tuyển (nếu có),
+        </p>
+        <p>
+            3. Gỡ bỏ, vô hiệu hóa tài khoản sử dụng Website TTDVVL Hòa Bình nếu xét thấy cần thiết
+        </p>
+        <p>
+            4. Hoàn trả lại khoản tiền mà bạn đã thanh toán (nếu có) tương ứng với khối lượng dịch vụ mà TTDVVL Hòa Bình chưa cung cấp và/hoặc bạn chưa kích hoạt sử dụng.
+        </p>
+        <p class="bm-title">
+            Dịch Vụ Đặt Mua Và Thanh Toán
+        </p>
+        <p>
+            1. Bạn có thể mua một hoặc nhiều dịch vụ có sẵn trong Danh sách Dịch vụ của TTDVVL Hòa Bình thông qua Đơn đặt hàng và/hoặc Hợp đồng Dịch vụ.
+        </p>
+        <p>
+            Nếu dịch vụ Khách hàng mua là Dịch vụ Đăng tuyển:
+        </p>
+        <p>
+            a) Vị trí đăng tuyển sẽ được đăng trên Website TTDVVL Hòa Bình trong 30 (ba mươi) ngày kể từ ngày kích hoạt. Tiêu đề công việc không được thay đổi sau khi vị trí đăng tuyển đã được kích hoạt đăng trên Webiste TTDVVL Hòa Bình.
+        </p>
+        <p>
+            b) Mỗi vị trí đăng tuyển chỉ được bao gồm 01 (một) tiêu đề đăng tuyển cùng 01 (một) mô tả công việc và yêu cầu công việc.
+        </p>
+        <p>
+            2. Dịch vụ của TTDVVL Hòa Bình là dịch vụ trả trước hoặc trả sau bằng tiền mặt, chuyển khoản hoặc thẻ tín dụng. Danh sách các loại thẻ tín dụng được chấp thuận sẽ được công bố trên Website TTDVVL Hòa Bình. Phí Dịch vụ phải được thanh toán chậm nhất vào Ngày thanh toán quy định trên Đơn đặt hàng. Các Dịch vụ đặt mua sẽ được kích hoạt trong vòng 3 ngày làm việc kể từ ngày Khách hàng thanh toán Phí Dịch vụ.
+        </p>
+
+        <p>
+            Nếu quá Ngày thanh toán mà Khách hàng vẫn chưa thực hiện thanh toán Phí Dịch vụ, thì Công ty có quyền tạm ngưng cung cấp dịch vụ cho đến khi việc thanh toán được thực hiện đầy đủ.
+        </p>
+
+        <p class="bm-title">
+            Điều Khoản Về Sử Dụng Dịch Vụ
+        </p>
+        <p>
+            1. Sau khi bạn đã thanh toán Phí Dịch vụ và/hoặc kích hoạt các Dịch vụ đã đặt mua, chúng tôi sẽ không chấp nhận bất kỳ yêu cầu tạm ngưng hoặc hủy bỏ các Dịch vụ đã đặt mua, hoặc hoàn Phí Dịch vụ, hoặc thay đổi dịch vụ.
+
+        </p>
+        <p>
+            2. Bạn sẽ tự tạo một tài khoản với mật khẩu để sử dụng dịch vụ trên Website TTDVVL Hòa Bình.
+
+        </p>
+        <p>
+            3. Bạn được quyền đăng tải nội dung thông tin đăng tuyển của mình và/hoặc đường dẫn trên Website TTDVVL Hòa Bình đến nội dung thông tin tuyển dụng tại trang web của mình và hoàn toàn chịu trách nhiệm về tính chính xác và hợp pháp của các nội dung này.
+
+        </p>
+        <p>
+            4. Bạn phải kích hoạt Dịch vụ đã mua trong thời hạn sử dụng. Khi hết thời hạn sử dụng, bất kỳ Dịch vụ đã mua nhưng chưa được kích hoạt sẽ không còn giá trị sử dụng.
+
+        </p>
+        <p>
+            5. Trường hợp do lỗi cố ý của chúng tôi mà sau 7 (bảy) ngày làm việc kể từ ngày bạn có thông báo nhắc nhở bằng văn bản về vi phạm mà chúng tôi vẫn chưa tiến hành khắc phục sai phạm này, chúng tôi sẽ hoàn trả cho bạn Phí Dịch vụ tương ứng với Dịch vụ chưa sử dụng theo Đơn đặt hàng/Hợp đồng Dịch vụ mà chúng tôi không cung cấp theo đúng thỏa thuận giữa hai bên.
+
+        </p>
+        <p>
+            6. Bạn cũng có các lựa chọn liên quan tới các cookie. Bằng cách thay đổi các ưu tiên trình duyệt của mình, bạn có thể chọn chấp nhận tất cả các cookie, hay được thông báo khi một cookie được thiết lập, hoặc loại bỏ tất cả các cookie. Nếu bạn chọn loại bỏ tất cả các cookie, bạn sẽ không thể dùng các dịch vụ của Website TTDVVL Hòa Bình có yêu cầu đăng ký sử dụng. Những dịch vụ này bao gồm việc nhận dạng các công việc mới đã được đăng lên từ lần ghé thăm cuối cùng, tự đăng nhập và tính năng kiểm tra danh sách. Bạn vẫn có thể dùng hầu hết các tính năng của website tuyển dụng TTDVVL Hòa Bình ngay cả khi bạn không chấp nhận các cookie.
+        </p>
+
+        <p class="bm-title">
+            Quyền Và Trách Nhiệm Của Người Sử Dụng
+        </p>
+        <p>
+            Truy cập Website vieclamhoabinh.gov.vn. Bạn có trách nhiệm tự cung cấp tất cả phần cứng, phần mềm, số điện thoại hoặc các thiết bị liên lạc khác và/hoặc dịch vụ kết nối tới Internet và truy cập Website vieclamhoabinh.gov.vn, đồng thời có trách nhiệm trả mọi khoản phí truy cập Internet, phí điện thoại hoặc các khoản phí khác phát sinh trong quá trình kết nối Internet và truy cập Website TTDVVL Hòa Bình.
+        </p>
+        <p>
+            Đạo đức người sử dụng. Khi sử dụng Dịch vụ của TTDVVL Hòa Bình và truy cập vào Website TTDVVL Hòa Bình, bạn nhận thức đầy đủ các điều cấm sau:
+        </p>
+        <p>
+            1. Chống Nhà nước Cộng hoà xã hội chủ nghĩa Việt Nam, phá hoại khối đoàn kết toàn dân, tuyên truyền, xuyên tạc, kích động hoặc cung cấp thông chống phá Nhà nước Việt Nam;
+        </p>
+        <p>
+            2. Kích động bạo lực, tuyên truyền chiến tranh xâm lược, gây hận thù giữa các dân tộc và nhân dân các nước, kích động dâm ô, đồi trụy, tội ác, tệ nạn xã hội, mê tín dị đoan, phá hoại thuần phong mỹ tục của dân tộc;
+        </p>
+        <p>
+            3. Tiết lộ bí mật nhà nước, bí mật quân sự, an ninh, kinh tế, đối ngoại và những bí mật khác đã được pháp luật quy định;
+        </p>
+        <p>
+            4. Xuyên tạc, vu khống, xúc phạm uy tín của tổ chức, danh dự, nhân phẩm, uy tín của công dân;
+        </p>
+        <p>
+            5. Quảng cáo, tuyên truyền hàng hoá, dịch vụ thuộc danh mục cấm đã được pháp luật quy định;
+        </p>
+        <p>
+            6. Đề cập đến các vấn đề chính trị và tôn giáo;
+        </p>
+        <p>
+            7. Sử dụng các từ ngữ vô văn hóa vi phạm truyền thống đạo đức của Việt Nam;
+        </p>
+        <p>
+            8. Hạn chế hoặc ngăn cản người sử dụng khác sử dụng và hưởng các tính năng tương tác;
+        </p>
+        <p>
+            9. Gửi hoặc chuyển các thông tin bất hợp pháp, đe doạ, lạm dụng, bôi nhọ, nói xấu, khiêu dâm, phi thẩm mỹ, xúc phạm hoặc bất kỳ loại thông tin không đứng đắn nào, bao gồm nhưng không hạn chế việc truyền bá tin tức góp phần hay khuyến khích hành vi phạm tội, gây ra trách nhiệm pháp lý dân sự hoặc vi phạm pháp luật đia phương, liêng bang, quốc gia hoặc quốc tế;
+        </p>
+        <p>
+            10. Gửi hay chuyển các thông tin, phần mềm, hoặc các tài liệu khác bất kỳ, vi phạm hoặc xâm phạm các quyền của những người khác, trong đó bao gồm cả tài liệu xâm phạm đến quyền riêng tư hoặc công khai, hoặc tài liệu được bảo vệ bản quyền, tên thương mại hoặc quyền sở hữu khác, hoặc các sản phẩm phái sinh mà không được sự cho phép của người chủ sở hữu hoặc người có quyền hợp pháp;
+        </p>
+        <p>
+            11. Gửi hoặc chuyển thông tin, phần mềm hoặc tài liệu bất kỳ có chứa virus hoặc một thành phần gây hại khác;
+        </p>
+        <p>
+            12. Thay đổi, làm hư hại hoặc xóa nội dung bất kỳ hoặc các phương tiện khác mà không phải là nội dung thuộc sở hữu của bạn, hoặc gây trợ ngại cho những người khác truy cập đến Website TTDVVL Hòa Bình;
+        </p>
+        <p>
+            13. Phá vỡ luồng thông tin bình thường trong một vùng tương tác;
+        </p>
+        <p>
+            14. Tuyên bố có liên hệ với hay phát ngôn cho một doanh nghiệp, hiệp hội, thể chế hay tổ chức nào khác mà bạn không được uỷ quyền tuyên bố mối liên hệ đó;
+        </p>
+        <p>
+            15. Sử dụng Website TTDVVL Hòa Bình cho những mục đích phi pháp, bao gồm nhưng không giới hạn hành vi vi phạm một quy tắc, chính sách hay hướng dẫn sử dụng nào của nhà cung cấp dịch vụ Internet cho bạn hay các dịch vụ trực tuyến.
+        </p>
+        <p class="bm-title">
+            Quyền Sở Hữu Trí Tuệ
+        </p>
+        <p>
+            Nội dung Website nghề nghiệp vieclamhoabinh.gov.vn. Bạn thừa nhận, Website TTDVVL Hòa Bình  cho phép truy cập đến Nội dung được bảo vệ bản quyền, tên thương mại và các quyền sở hữu khác (kể cả quyền sở hữu trí tuệ) ("Quyền Sở hữu Trí tuệ"), và thừa nhận các quyền sở hữu trí tuệ đó là hợp lệ và được bảo vệ trên mọi phương tiện truyền thông hiện có và sau này, trừ những điểm nêu rõ ràng dưới đây, việc sử dụng nội dung của bạn sẽ được quản lý theo các luật bản quyền và các luật sở hữu trí tuệ hiện hành khác.
+        </p>
+        <p>
+            Bạn đồng ý và thừa nhận rằng tất cả các nội dung trên Website TTDVVL Hòa Bình  bao gồm nhưng không giới hạn bởi các sơ yếu lý lịch sẽ thuộc quyền sở hữu trí tuệ duy nhất của Website TTDVVL Hòa Bình và bạn không được quyền thay đổi, sao chép, mô phỏng, truyền, phân phối, công bố, tạo ra các sản phẩm phái sinh, hiển thị hoặc chuyển giao, hoặc khai thác nhằm mục đích thương mại bất kỳ phần nào của nội dung, toàn bộ hay từng phần. Tuy nhiên, bạn có thể (i) tạo một bản sao dưới dạng số hoặc hình thức khác để phần cứng và phần mềm máy tính của bạn có thể truy cập và xem được nội dung, (ii) in một bản sao của từng đoạn nội dung, (iii) tạo và phân phối một số lượng hợp lý các bản sao nội dung, toàn bộ hay từng phần, ở dạng bản in hoặc bản điện tử để dùng nội bộ.
+        </p>
+        <p>
+            Bất kỳ bản sao nội dung được phép nào cũng phải được tái tạo ở dạng không thể biến đổi được các thông tri bất kỳ chứa trong nội dung, chẳng hạn như tất cả các thông tri về Quyền Sở hữu Trí tuệ, và các nguồn thông tin ban đầu cho "website nghề nghiệp vieclamhoabinh.gov.vn" và địa chỉ mạng (URL) của nó. Bạn sẽ không có bất kỳ Quyền Sở hữu Trí tuệ nào qua việc tải xuống hoặc in nội dung. Bất kể các bản sao hoặc việc sử dụng trái phép nào đối với nội dung nào cho mục đích thương mại sẽ bị coi là vi phạm và bị xử lý theo quy định có liên quan của pháp luật và các điều khoản quy định tại bản thỏa thuận này.
+        </p>
+        <p>
+            Nội dung do Người sử dụng cung cấp. Bạn chỉ có thể tải lên vùng tương tác bất kỳ hoặc truyền, gửi, công bố, mô phỏng hoặc phân phối trên hoặc thông qua Website TTDVVL Hòa Bình phần nội dung, không phụ thuộc vào bất kỳ Quyền Sở hữu Trí tuệ nào, hoặc nội dung mà người giữ Quyền Sở hữu Trí tuệ có sự ủy quyền rõ ràng về việc phân tán trên Internet và trên Website TTDVVL Hòa Bình mà không có hạn chế gì. Mọi nội dung được đưa ra với sự đồng ý của người sở hữu bản quyền không phải là bạn phải kèm theo câu như "do [tên người chủ sở hữu] sở hữu bản quyền; được dùng theo ủy quyền". Với việc đưa nội dung lên vùng tương tác bất kỳ, bạn tự động chấp nhận và/hoặc cam đoan rằng, chủ sở hữu của nội dung đó, hoặc là bạn, hoặc là nhóm thứ ba, đã cho Website TTDVVL Hòa Bình quyền và giấy phép không phải trả tiền bản quyền, lâu dài, không thay đổi, không loại trừ, không hạn chế để sử dụng, mô phỏng, thay đổi, sửa lại, công bố, dịch thuật, tạo các sản phẩm phái sinh, cấp phép con, phân phối, thực hiện và hiển thị nội dung đó, toàn phần hay từng phần, khắp thế giới và/hoặc kết hợp nó với các công việc khác ở dạng bất kỳ, qua các phương tiện truyền thông hoặc công nghệ hiện tại hay sẽ phát triển sau này theo điều khoản đầy đủ của Quyền Sở hữu Trí tuệ bất kỳ trong nội dung đó. Bạn cũng cho phép Website TTDVVL Hòa Bình cấp giấy phép con cho bên thứ ba quyền không hạn chế để thực hiện bất kỳ quyền nào ở trên với nội dung đó. Bạn cũng cho phép Website TTDVVL Hòa Bình dùng tên và logo công ty vì các mục đích tiếp thị.
+        </p>
+        <p class="bm-title">Tuân Thủ Và Xử Lý Vi Phạm</p>
+        <p>
+            Bạn phải tuân thủ đúng các quy định tại Đơn đặt hàng, Hợp đồng Dịch vụ, bản Điều khoản &amp; Điều kiện này như là điều kiện tiên quyết cho việc sử dụng Dịch vụ. Trường hợp bạn vi phạm bất kỳ quy định nêu tại Đơn đặt hàng, Hợp đồng Dịch vụ và bản Điều Kiện &amp; Điều Khoản này, thì chúng tôi có quyền gỡ bỏ mọi đăng tuyển, nội dung hoặc đường dẫn của bạn và chấm dứt việc cung cấp dịch vụ mà không phải trả lại Phí Dịch vụ hoặc số tiền dịch vụ mà bạn đã thanh toán nhưng chưa sử dụng hết. Đồng thời, chúng tôi có quyền buộc bạn bồi thường thiệt hại hoặc mất mát phát sinh từ vi phạm của bạn.
+        </p>
+    </div>

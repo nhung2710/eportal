@@ -6,20 +6,20 @@ import 'package:flutter_html/flutter_html.dart';
 import '../../../../extension/string_extension.dart';
 
 //
-// Created by BlackRose on 11/7/2023.
+// Created by BlackRose on 01/12/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class PolicyPage extends BasePage {
-  const PolicyPage({super.key});
+class TermsOfUsePage extends BasePage {
+  const TermsOfUsePage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _PolicyPageState();
+  State<StatefulWidget> createState() => _TermsOfUsePageState();
 }
 
-class _PolicyPageState extends BasePageState<PolicyPage> {
+class _TermsOfUsePageState extends BasePageState<TermsOfUsePage> {
   @override
-  String getPageTitle(BuildContext context) => "Chính sách bảo mật";
+  String getPageTitle(BuildContext context) => "Quy định sử dụng";
   late Future<String> _content;
 
   @override
@@ -46,7 +46,7 @@ class _PolicyPageState extends BasePageState<PolicyPage> {
 
   Future<String> getContent() async {
     try {
-      return await rootBundle.loadString('assets/texts/policy.txt');
+      return await rootBundle.loadString('assets/texts/termsOfUse.txt');
     } catch (e) {
       // If encountering an error, return 0.
       print(e);

@@ -80,7 +80,8 @@ abstract class BaseMultiBloc<
           String? failMessage = getFailMessage(response);
           if (failMessage.isNullOrWhiteSpace()) {
             if (response.data.isEmpty) {
-              emit(state.copyWith(data: [], status: DataBlocStatus.notfound));
+              emit(state
+                  .copyWith(data: [], status: DataBlocStatus.notFoundData));
             } else {
               emit(state.copyWith(
                   data: response.data, status: DataBlocStatus.success));
@@ -141,7 +142,7 @@ abstract class BasePageBloc<
               data: responseData,
               hasReachedMax: hasReachedMax,
               status: responseData.isEmpty
-                  ? DataBlocStatus.notfound
+                  ? DataBlocStatus.notFoundData
                   : DataBlocStatus.success));
         } else {
           emit(state.copyWith(

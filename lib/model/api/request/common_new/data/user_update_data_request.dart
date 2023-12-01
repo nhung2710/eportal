@@ -10,10 +10,20 @@ class UserUpdateDataRequest extends BaseSingleEportalXml {
   String? email;
   String? dienThoai;
   String? ngaySinh;
-  int? gioiTinh;
+  String? gioiTinh;
   String? cmnd;
   String? diaChi;
   String? anhDaiDien;
+
+  UserUpdateDataRequest(
+      {this.hoTen,
+      this.email,
+      this.dienThoai,
+      this.ngaySinh,
+      this.gioiTinh,
+      this.cmnd,
+      this.diaChi,
+      this.anhDaiDien});
 
   @override
   StringBuffer toXml() {
