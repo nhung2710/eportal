@@ -28,6 +28,18 @@ class GlobalApplication {
     return _instance;
   }
 
+  String createXml(Object? value, String tag) {
+    var buffer = StringBuffer();
+    buffer.write('<$tag><![CDATA[');
+    if (value != null) {
+      buffer.write(value);
+    } else {
+      buffer.write(ApplicationConstant.EMPTY);
+    }
+    buffer.write(']]></$tag>');
+    return buffer.toString();
+  }
+
   bool get isLogin => roleType != RoleType.anonymous;
 
   String getStringOneTimePreferences(String key) {

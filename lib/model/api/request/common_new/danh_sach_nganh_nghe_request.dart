@@ -15,5 +15,5 @@ class DanhSachNganhNgheRequest
 
   @override
   String getQuery() =>
-      ApplicationApiConstant.API_COMMON_NEW_OP_DANH_SACH_CHUYEN_MUC;
+      ApplicationApiConstant.API_COMMON_NEW_OP_DANH_SACH_NGANH_NGHE;
 }

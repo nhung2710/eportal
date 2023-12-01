@@ -25,8 +25,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../bloc/common_new/danh_sach_nganh_nghe_bloc.dart';
+import '../../../../event/common_new/danh_sach_nganh_nghe_event.dart';
 import '../../../../extension/dateTime_extension.dart';
 import '../../../../extension/string_extension.dart';
+import '../../../../model/api/request/common_new/danh_sach_nganh_nghe_request.dart';
+import '../../../../model/api/request/common_new/data/danh_sach_nganh_nghe_data_request.dart';
+import '../../../../model/api/response/common_new/data/danh_sach_nganh_nghe_data_response.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/input/date_input.dart';
 import '../../../../widget/input/field_input.dart';
@@ -41,8 +46,7 @@ class ProfileAddBasicTab extends BasePage {
 
   DanhSachTinhTpDataResponse? danhSachTinhTpDataResponse;
   DanhSachQuanHuyenDataResponse? danhSachQuanHuyenDataResponse;
-  DanhSachKinhNghiemDataResponse? danhSachKinhNghiemDataResponse;
-  DanhSachMucLuongDataResponse? danhSachMucLuongDataResponse;
+  DanhSachNganhNgheDataResponse? danhSachNganhNgheDataResponse;
 
   @override
   State<StatefulWidget> createState() => ProfileAddBasicTabState();
@@ -58,111 +62,16 @@ class ProfileAddBasicTabState
   TextEditingController objectiveController = TextEditingController();
   TextEditingController skillController = TextEditingController();
 
-  final _danhSachQuanHuyenKey = GlobalKey<DropdownSearchState>();
-
+  final _danhSachQuanHuyenKey = GlobalKey<SelectItemNormalState>();
+  late DanhSachNganhNgheBloc danhSachNganhNgheBloc;
   late DanhSachTinhTpBloc danhSachTinhTpBloc;
   late DanhSachQuanHuyenBloc danhSachQuanHuyenBloc;
-  late DanhSachMucLuongBloc danhSachMucLuongBloc;
-  late DanhSachKinhNghiemBloc danhSachKinhNghiemBloc;
-  late DanhSachGioiTinhBloc danhSachGioiTinhBloc;
-  late DanhSachTrinhDoBloc danhSachTrinhDoBloc;
-  String? industry;
-  String? positionCurrent;
-  String? positionFuture;
-  String? education;
-  String? need;
-  List<String> industrys = [
-    "Bán hàng",
-    "Bán hàng kỹ thuật",
-    "Bán lẻ/Bán sỉ",
-    "Bảo hiểm",
-    "Bất động sản",
-    "Biên phiên dịch",
-    "Chứng khoán",
-    "Cơ khí",
-    "Công nghệ cao",
-    "Dầu khí",
-    "Dệt may/Da giày",
-    "Dịch vụ khách hàng",
-    "Dược phẩm/Công nghệ sinh học",
-    "Giáo dục/Đào tạo",
-    "Hàng cao cấp",
-    "Hàng không/Du lịch/Khách sạn",
-    "Hành chính/Thư ký",
-    "Hóa học/Hóa sinh",
-    "Hoạch định/Dự án",
-    "Internet/Media online",
-    "IT- Phần mềm",
-    "IT- Phần cứng/Mạng",
-    "Kế toán",
-    "Kho vận",
-    "Kiểm toán",
-    "Kiến trúc/Thiết kế nội thất",
-    "Marketing",
-    "Môi trường/Xử lý chất thải",
-    "Mỹ thuật/Thiết kế",
-    "Ngân hàng",
-    "Nhân sự",
-    "Nông nghiệp/Lâm nghiệp",
-    "Ô tô",
-    "Oversea job",
-    "Pháp lý",
-    "Phi chính phủ/Phi lợi nhuận",
-    "QC/QA",
-    "Quảng cáo/Khuyến mại",
-    "Sản phẩm công nghiệp",
-    "Sản xuất",
-    "Tài chính/Đầu tư",
-    "Thời trang",
-    "Thời vụ/Hợp đồng ngắn hạn",
-    "Thực phẩm &amp; Đồ uống",
-    "Truyền hình/Truyền thông/Báo trí",
-    "Tư vấn",
-    "Vận chuyển/Giao nhận",
-    "Vật tư/Cung vận",
-    "Viễn thông",
-    "Xây dựng",
-    "Xuất nhập khẩu",
-    "Y tế/Chăm sóc sức khỏe",
-    "Điện/Điện tử",
-    "Khác"
-  ];
-  List<String> needs = [
-    "Chưa có nhu cầu tìm việc",
-    "Đang có việc làm",
-    "Muốn tìm việc mới",
-    "Đang tìm việc và sẵn sàng cho công việc mới",
-  ];
-  List<String> positions = [
-    "Chuyên viên",
-    "Trưởng phòng",
-    "Trưởng nhóm",
-    "Công nhân",
-    "Nhân viên",
-    "Hiệu trưởng",
-    "Phó hiệu trưởng",
-    "Trưởng khoa",
-    "Phó trưởng khoa",
-    "Giáo viên",
-  ];
-  List<String> educations = [
-    "Tiến sĩ",
-    "Thạc sĩ",
-    "Đại học",
-    "Cao đẳng",
-    "Trung cấp",
-    "Sơ cấp",
-    "Phổ thông",
-  ];
 
   @override
   void initDataLoading() {
     danhSachTinhTpBloc = DanhSachTinhTpBloc();
     danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
-    danhSachMucLuongBloc = DanhSachMucLuongBloc();
-    danhSachKinhNghiemBloc = DanhSachKinhNghiemBloc();
-    danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
-    danhSachTrinhDoBloc = DanhSachTrinhDoBloc();
+    danhSachNganhNgheBloc = DanhSachNganhNgheBloc();
     callApi();
     // TODO: implement initDataLoading
     super.initDataLoading();
@@ -172,11 +81,15 @@ class ProfileAddBasicTabState
   void callApi() {
     danhSachTinhTpBloc.add(DanhSachTinhTpEvent(
         request: DanhSachTinhTpRequest(obj: CommonNewDataRequest())));
-
-    danhSachMucLuongBloc.add(DanhSachMucLuongEvent(
-        request: DanhSachMucLuongRequest(obj: CommonNewDataRequest())));
-    danhSachKinhNghiemBloc.add(DanhSachKinhNghiemEvent(
-        request: DanhSachKinhNghiemRequest(obj: CommonNewDataRequest())));
+    if (widget.danhSachTinhTpDataResponse != null) {
+      danhSachQuanHuyenBloc.add(DanhSachQuanHuyenEvent(
+          request: DanhSachQuanHuyenRequest(
+              obj: DanhSachQuanHuyenDataRequest(
+                  tinhTp: widget.danhSachTinhTpDataResponse!.regionalID))));
+    }
+    danhSachNganhNgheBloc.add(DanhSachNganhNgheEvent(
+        request:
+            DanhSachNganhNgheRequest(obj: DanhSachNganhNgheDataRequest())));
     super.callApi();
   }
 
@@ -235,17 +148,18 @@ class ProfileAddBasicTabState
           Container(
             margin: const EdgeInsets.only(top: 10),
             child: BlocProvider(
-                create: (_) => danhSachMucLuongBloc,
-                child: BlocListener<DanhSachMucLuongBloc,
-                    DataMultiState<DanhSachMucLuongDataResponse>>(
+                create: (_) => danhSachNganhNgheBloc,
+                child: BlocListener<DanhSachNganhNgheBloc,
+                    DataMultiState<DanhSachNganhNgheDataResponse>>(
                   listener: (BuildContext context,
-                      DataMultiState<DanhSachMucLuongDataResponse> state) {},
-                  child: BlocBuilder<DanhSachMucLuongBloc,
-                      DataMultiState<DanhSachMucLuongDataResponse>>(
+                      DataMultiState<DanhSachNganhNgheDataResponse> state) {},
+                  child: BlocBuilder<DanhSachNganhNgheBloc,
+                      DataMultiState<DanhSachNganhNgheDataResponse>>(
                     builder: (BuildContext context,
-                            DataMultiState<DanhSachMucLuongDataResponse>
+                            DataMultiState<DanhSachNganhNgheDataResponse>
                                 state) =>
-                        _buildViewSearchIndustry(context, industrys),
+                        _buildViewSearchDanhSachNganhNghe(
+                            context, state.data ?? []),
                   ),
                 )),
           ),
@@ -326,15 +240,18 @@ class ProfileAddBasicTabState
     );
   }
 
-  Widget _buildViewSearchIndustry(BuildContext context, List<String> list) {
-    return SelectItemNormal<String>(
-      selectedItem: industry,
-      onChanged: (String? data) {
-        if (widget.danhSachMucLuongDataResponse != data) {
-          industry = data;
+  Widget _buildViewSearchDanhSachNganhNghe(
+      BuildContext context, List<DanhSachNganhNgheDataResponse> list) {
+    return SelectItem<DanhSachNganhNgheDataResponse>(
+      selectedItem: widget.danhSachNganhNgheDataResponse,
+      list: list,
+      itemAsString: (DanhSachNganhNgheDataResponse u) =>
+          u.careerName.supportHtml(),
+      onChanged: (DanhSachNganhNgheDataResponse? data) {
+        if (widget.danhSachNganhNgheDataResponse != data) {
+          widget.danhSachNganhNgheDataResponse = data;
         }
       },
-      list: list,
       title: 'Ngành nghề',
     );
   }

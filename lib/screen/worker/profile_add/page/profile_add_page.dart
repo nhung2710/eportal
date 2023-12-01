@@ -5,6 +5,10 @@ import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:eportal/widget/input/capcha_input.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../bloc/common_new/job_user_add_bloc.dart';
+import '../../../../event/common_new/job_user_add_event.dart';
+import '../../../../model/api/request/common_new/data/job_user_add_data_request.dart';
+import '../../../../model/api/request/common_new/job_user_add_request.dart';
 import '../../../../widget/base/base_page.dart';
 import '../tab/profile_add_career_goals_tab.dart';
 import '../tab/profile_add_field_skills_tab.dart';
@@ -39,13 +43,15 @@ class _ProfileAddPageState extends BasePageState<ProfileAddPage>
       GlobalKey<ProfileAddCareerGoalsTabState>();
   GlobalKey<ProfileAddFieldSkillsTabState> keyProfileAddFieldSkillsTabState =
       GlobalKey<ProfileAddFieldSkillsTabState>();
-
+  late JobUserAddBloc jobUserAddBloc;
   late TabController _tabController;
 
   @override
   void initDataLoading() {
+    jobUserAddBloc = JobUserAddBloc();
     // TODO: implement initDataLoading
-    _tabController = TabController(vsync: this, length: 6);
+    _tabController = TabController(
+        vsync: this, length: 6, animationDuration: const Duration(seconds: 0));
     super.initDataLoading();
   }
 
@@ -143,6 +149,35 @@ class _ProfileAddPageState extends BasePageState<ProfileAddPage>
   }
 
   _send(BuildContext context) {
+    if (_validBeforeSend(context)) {
+      jobUserAddBloc.add(JobUserAddEvent(
+          request: JobUserAddRequest(
+              obj: JobUserAddDataRequest(
+        tieuDe: keyProfileAddBasicTabState.currentState?.titleController.text,
+        ngayDangTu:
+            keyProfileAddBasicTabState.currentState?.fromDateController.text,
+        ngayDangDen:
+            keyProfileAddBasicTabState.currentState?.toDateController.text,
+        tinhTp: keyProfileAddBasicTabState
+            .currentState?.widget.danhSachTinhTpDataResponse?.regionalID,
+        quanHuyen: keyProfileAddBasicTabState
+            .currentState?.widget.danhSachQuanHuyenDataResponse?.regionalID,
+        nganhNghe: keyProfileAddBasicTabState
+            .currentState?.widget.danhSachNganhNgheDataResponse?.careerID,
+        chucVuHienTai: keyProfileAddGeneralTabState
+            .currentState?.widget.danhSachChucVuDataResponseHienTai?.positionID,
+        chucVuMongMuon: keyProfileAddGeneralTabState.currentState?.widget
+            .danhSachChucVuDataResponseMongMuon?.positionID,
+        mucLuong: keyProfileAddGeneralTabState
+            .currentState?.widget.danhSachMucLuongDataResponse?.salaryID,
+        kinhNghiemLV: keyProfileAddGeneralTabState
+            .currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
+      ))));
+      showCenterMessage("Thêm hồ sơ thành công").then((value) => backPage());
+    }
+  }
+
+  bool _validBeforeSend(BuildContext context) {
     if (_validPage(context, keyProfileAddBasicTabState.currentState, 0)) {
       if (_validPage(context, keyProfileAddGeneralTabState.currentState, 1)) {
         if (_validPage(context, keyProfileAddLevelTabState.currentState, 2)) {
@@ -153,8 +188,7 @@ class _ProfileAddPageState extends BasePageState<ProfileAddPage>
               if (_validPage(
                   context, keyProfileAddFieldSkillsTabState.currentState, 5)) {
                 if (isValid()) {
-                  showCenterMessage("Thêm hồ sơ thành công")
-                      .then((value) => backPage());
+                  return true;
                 }
               }
             }
@@ -162,5 +196,6 @@ class _ProfileAddPageState extends BasePageState<ProfileAddPage>
         }
       }
     }
+    return false;
   }
 }

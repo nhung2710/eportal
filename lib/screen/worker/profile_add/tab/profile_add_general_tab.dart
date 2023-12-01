@@ -4,24 +4,34 @@ import 'package:eportal/bloc/common_new/danh_sach_muc_luong_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_quan_huyen_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_tinh_tp_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_trinh_do_bloc.dart';
+import 'package:eportal/event/common_new/danh_sach_chuc_vu_event.dart';
 import 'package:eportal/event/common_new/danh_sach_kinh_nghiem_event.dart';
 import 'package:eportal/event/common_new/danh_sach_muc_luong_event.dart';
 import 'package:eportal/event/common_new/danh_sach_tinh_tp_event.dart';
+import 'package:eportal/model/api/request/common_new/danh_sach_chuc_vu_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_kinh_nghiem_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_muc_luong_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_tinh_tp_request.dart';
 import 'package:eportal/model/api/request/common_new/data/common_new_data_request.dart';
+import 'package:eportal/model/api/request/common_new/data/danh_sach_chuc_vu_data_request.dart';
+import 'package:eportal/model/api/response/common_new/danh_sach_chuc_vu_response.dart';
+import 'package:eportal/model/api/response/common_new/data/danh_sach_chuc_vu_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_kinh_nghiem_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_muc_luong_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_quan_huyen_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_tinh_tp_data_response.dart';
+import 'package:eportal/model/api/response/common_new/data/danh_sach_trinh_do_data_response.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/select/select_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../bloc/common_new/danh_sach_chuc_vu_bloc.dart';
+import '../../../../event/common_new/danh_sach_trinh_do_event.dart';
 import '../../../../extension/dateTime_extension.dart';
 import '../../../../extension/string_extension.dart';
+import '../../../../model/api/request/common_new/danh_sach_trinh_do_request.dart';
+import '../../../../model/api/request/common_new/data/danh_sach_trinh_do_data_request.dart';
 import '../../../../widget/base/base_page.dart';
 
 //
@@ -32,10 +42,11 @@ import '../../../../widget/base/base_page.dart';
 class ProfileAddGeneralTab extends BasePage {
   ProfileAddGeneralTab({super.key});
 
-  DanhSachTinhTpDataResponse? danhSachTinhTpDataResponse;
-  DanhSachQuanHuyenDataResponse? danhSachQuanHuyenDataResponse;
   DanhSachKinhNghiemDataResponse? danhSachKinhNghiemDataResponse;
   DanhSachMucLuongDataResponse? danhSachMucLuongDataResponse;
+  DanhSachChucVuDataResponse? danhSachChucVuDataResponseHienTai;
+  DanhSachChucVuDataResponse? danhSachChucVuDataResponseMongMuon;
+  DanhSachTrinhDoDataResponse? danhSachTrinhDoDataResponse;
 
   @override
   State<StatefulWidget> createState() => ProfileAddGeneralTabState();
@@ -43,115 +54,15 @@ class ProfileAddGeneralTab extends BasePage {
 
 class ProfileAddGeneralTabState
     extends BaseScreenStateActive<ProfileAddGeneralTab> {
-  TextEditingController titleController = TextEditingController();
-  TextEditingController fromDateController = TextEditingController();
-  TextEditingController toDateController = TextEditingController();
-  TextEditingController educationController = TextEditingController();
-  TextEditingController experienceController = TextEditingController();
-  TextEditingController objectiveController = TextEditingController();
-  TextEditingController skillController = TextEditingController();
-
-  final _danhSachQuanHuyenKey = GlobalKey<SelectItemState>();
-
-  late DanhSachTinhTpBloc danhSachTinhTpBloc;
-  late DanhSachQuanHuyenBloc danhSachQuanHuyenBloc;
   late DanhSachMucLuongBloc danhSachMucLuongBloc;
   late DanhSachKinhNghiemBloc danhSachKinhNghiemBloc;
   late DanhSachGioiTinhBloc danhSachGioiTinhBloc;
   late DanhSachTrinhDoBloc danhSachTrinhDoBloc;
-  String? industry;
-  String? positionCurrent;
-  String? positionFuture;
-  String? education;
-  String? need;
-  List<String> industrys = [
-    "Bán hàng",
-    "Bán hàng kỹ thuật",
-    "Bán lẻ/Bán sỉ",
-    "Bảo hiểm",
-    "Bất động sản",
-    "Biên phiên dịch",
-    "Chứng khoán",
-    "Cơ khí",
-    "Công nghệ cao",
-    "Dầu khí",
-    "Dệt may/Da giày",
-    "Dịch vụ khách hàng",
-    "Dược phẩm/Công nghệ sinh học",
-    "Giáo dục/Đào tạo",
-    "Hàng cao cấp",
-    "Hàng không/Du lịch/Khách sạn",
-    "Hành chính/Thư ký",
-    "Hóa học/Hóa sinh",
-    "Hoạch định/Dự án",
-    "Internet/Media online",
-    "IT- Phần mềm",
-    "IT- Phần cứng/Mạng",
-    "Kế toán",
-    "Kho vận",
-    "Kiểm toán",
-    "Kiến trúc/Thiết kế nội thất",
-    "Marketing",
-    "Môi trường/Xử lý chất thải",
-    "Mỹ thuật/Thiết kế",
-    "Ngân hàng",
-    "Nhân sự",
-    "Nông nghiệp/Lâm nghiệp",
-    "Ô tô",
-    "Oversea job",
-    "Pháp lý",
-    "Phi chính phủ/Phi lợi nhuận",
-    "QC/QA",
-    "Quảng cáo/Khuyến mại",
-    "Sản phẩm công nghiệp",
-    "Sản xuất",
-    "Tài chính/Đầu tư",
-    "Thời trang",
-    "Thời vụ/Hợp đồng ngắn hạn",
-    "Thực phẩm &amp; Đồ uống",
-    "Truyền hình/Truyền thông/Báo trí",
-    "Tư vấn",
-    "Vận chuyển/Giao nhận",
-    "Vật tư/Cung vận",
-    "Viễn thông",
-    "Xây dựng",
-    "Xuất nhập khẩu",
-    "Y tế/Chăm sóc sức khỏe",
-    "Điện/Điện tử",
-    "Khác"
-  ];
-  List<String> needs = [
-    "Chưa có nhu cầu tìm việc",
-    "Đang có việc làm",
-    "Muốn tìm việc mới",
-    "Đang tìm việc và sẵn sàng cho công việc mới",
-  ];
-  List<String> positions = [
-    "Chuyên viên",
-    "Trưởng phòng",
-    "Trưởng nhóm",
-    "Công nhân",
-    "Nhân viên",
-    "Hiệu trưởng",
-    "Phó hiệu trưởng",
-    "Trưởng khoa",
-    "Phó trưởng khoa",
-    "Giáo viên",
-  ];
-  List<String> educations = [
-    "Tiến sĩ",
-    "Thạc sĩ",
-    "Đại học",
-    "Cao đẳng",
-    "Trung cấp",
-    "Sơ cấp",
-    "Phổ thông",
-  ];
+  late DanhSachChucVuBloc danhSachChucVuBloc;
 
   @override
   void initDataLoading() {
-    danhSachTinhTpBloc = DanhSachTinhTpBloc();
-    danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
+    danhSachChucVuBloc = DanhSachChucVuBloc();
     danhSachMucLuongBloc = DanhSachMucLuongBloc();
     danhSachKinhNghiemBloc = DanhSachKinhNghiemBloc();
     danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
@@ -163,9 +74,10 @@ class ProfileAddGeneralTabState
 
   @override
   void callApi() {
-    danhSachTinhTpBloc.add(DanhSachTinhTpEvent(
-        request: DanhSachTinhTpRequest(obj: CommonNewDataRequest())));
-
+    danhSachChucVuBloc.add(DanhSachChucVuEvent(
+        request: DanhSachChucVuRequest(obj: DanhSachChucVuDataRequest())));
+    danhSachTrinhDoBloc.add(DanhSachTrinhDoEvent(
+        request: DanhSachTrinhDoRequest(obj: DanhSachTrinhDoDataRequest())));
     danhSachMucLuongBloc.add(DanhSachMucLuongEvent(
         request: DanhSachMucLuongRequest(obj: CommonNewDataRequest())));
     danhSachKinhNghiemBloc.add(DanhSachKinhNghiemEvent(
@@ -185,34 +97,34 @@ class ProfileAddGeneralTabState
           Container(
             margin: const EdgeInsets.only(top: 10),
             child: BlocProvider(
-                create: (_) => danhSachMucLuongBloc,
-                child: BlocListener<DanhSachMucLuongBloc,
-                    DataMultiState<DanhSachMucLuongDataResponse>>(
+                create: (_) => danhSachChucVuBloc,
+                child: BlocListener<DanhSachChucVuBloc,
+                    DataMultiState<DanhSachChucVuDataResponse>>(
                   listener: (BuildContext context,
-                      DataMultiState<DanhSachMucLuongDataResponse> state) {},
-                  child: BlocBuilder<DanhSachMucLuongBloc,
-                      DataMultiState<DanhSachMucLuongDataResponse>>(
+                      DataMultiState<DanhSachChucVuDataResponse> state) {},
+                  child: BlocBuilder<DanhSachChucVuBloc,
+                      DataMultiState<DanhSachChucVuDataResponse>>(
                     builder: (BuildContext context,
-                            DataMultiState<DanhSachMucLuongDataResponse>
-                                state) =>
-                        _buildViewSearchPositionFuture(context, positions),
+                            DataMultiState<DanhSachChucVuDataResponse> state) =>
+                        _buildViewSearchDanhSachChucVuHienTai(
+                            context, state.data ?? []),
                   ),
                 )),
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
             child: BlocProvider(
-                create: (_) => danhSachMucLuongBloc,
-                child: BlocListener<DanhSachMucLuongBloc,
-                    DataMultiState<DanhSachMucLuongDataResponse>>(
+                create: (_) => danhSachChucVuBloc,
+                child: BlocListener<DanhSachChucVuBloc,
+                    DataMultiState<DanhSachChucVuDataResponse>>(
                   listener: (BuildContext context,
-                      DataMultiState<DanhSachMucLuongDataResponse> state) {},
-                  child: BlocBuilder<DanhSachMucLuongBloc,
-                      DataMultiState<DanhSachMucLuongDataResponse>>(
+                      DataMultiState<DanhSachChucVuDataResponse> state) {},
+                  child: BlocBuilder<DanhSachChucVuBloc,
+                      DataMultiState<DanhSachChucVuDataResponse>>(
                     builder: (BuildContext context,
-                            DataMultiState<DanhSachMucLuongDataResponse>
-                                state) =>
-                        _buildViewSearchPositionCurrent(context, positions),
+                            DataMultiState<DanhSachChucVuDataResponse> state) =>
+                        _buildViewSearchDanhSachChucVuMongMuon(
+                            context, state.data ?? []),
                   ),
                 )),
           ),
@@ -237,17 +149,18 @@ class ProfileAddGeneralTabState
           Container(
             margin: const EdgeInsets.only(top: 10),
             child: BlocProvider(
-                create: (_) => danhSachMucLuongBloc,
-                child: BlocListener<DanhSachMucLuongBloc,
-                    DataMultiState<DanhSachMucLuongDataResponse>>(
+                create: (_) => danhSachTrinhDoBloc,
+                child: BlocListener<DanhSachTrinhDoBloc,
+                    DataMultiState<DanhSachTrinhDoDataResponse>>(
                   listener: (BuildContext context,
-                      DataMultiState<DanhSachMucLuongDataResponse> state) {},
-                  child: BlocBuilder<DanhSachMucLuongBloc,
-                      DataMultiState<DanhSachMucLuongDataResponse>>(
+                      DataMultiState<DanhSachTrinhDoDataResponse> state) {},
+                  child: BlocBuilder<DanhSachTrinhDoBloc,
+                      DataMultiState<DanhSachTrinhDoDataResponse>>(
                     builder: (BuildContext context,
-                            DataMultiState<DanhSachMucLuongDataResponse>
+                            DataMultiState<DanhSachTrinhDoDataResponse>
                                 state) =>
-                        _buildViewSearchEducation(context, educations),
+                        _buildViewSearchDanhSachTrinhDo(
+                            context, state.data ?? []),
                   ),
                 )),
           ),
@@ -303,41 +216,48 @@ class ProfileAddGeneralTabState
     );
   }
 
-  Widget _buildViewSearchPositionFuture(
-      BuildContext context, List<String> list) {
-    return SelectItemNormal<String>(
-      selectedItem: positionFuture,
+  Widget _buildViewSearchDanhSachChucVuMongMuon(
+      BuildContext context, List<DanhSachChucVuDataResponse> list) {
+    return SelectItemNormal<DanhSachChucVuDataResponse>(
+      selectedItem: widget.danhSachChucVuDataResponseMongMuon,
       list: list,
-      onChanged: (String? data) {
-        if (widget.danhSachMucLuongDataResponse != data) {
-          industry = data;
+      itemAsString: (DanhSachChucVuDataResponse u) =>
+          u.positionName.supportHtml(),
+      onChanged: (DanhSachChucVuDataResponse? data) {
+        if (widget.danhSachChucVuDataResponseMongMuon != data) {
+          widget.danhSachChucVuDataResponseMongMuon = data;
         }
       },
       title: 'Chức vụ mong muốn',
     );
   }
 
-  Widget _buildViewSearchPositionCurrent(
-      BuildContext context, List<String> list) {
-    return SelectItemNormal<String>(
-      selectedItem: positionCurrent,
+  Widget _buildViewSearchDanhSachChucVuHienTai(
+      BuildContext context, List<DanhSachChucVuDataResponse> list) {
+    return SelectItemNormal<DanhSachChucVuDataResponse>(
+      selectedItem: widget.danhSachChucVuDataResponseHienTai,
       list: list,
-      onChanged: (String? data) {
-        if (widget.danhSachMucLuongDataResponse != data) {
-          industry = data;
+      itemAsString: (DanhSachChucVuDataResponse u) =>
+          u.positionName.supportHtml(),
+      onChanged: (DanhSachChucVuDataResponse? data) {
+        if (widget.danhSachChucVuDataResponseHienTai != data) {
+          widget.danhSachChucVuDataResponseHienTai = data;
         }
       },
       title: "Chức vụ hiện tại",
     );
   }
 
-  Widget _buildViewSearchEducation(BuildContext context, List<String> list) {
-    return SelectItemNormal<String>(
-      selectedItem: education,
+  Widget _buildViewSearchDanhSachTrinhDo(
+      BuildContext context, List<DanhSachTrinhDoDataResponse> list) {
+    return SelectItemNormal<DanhSachTrinhDoDataResponse>(
+      selectedItem: widget.danhSachTrinhDoDataResponse,
       list: list,
-      onChanged: (String? data) {
-        if (widget.danhSachMucLuongDataResponse != data) {
-          industry = data;
+      itemAsString: (DanhSachTrinhDoDataResponse u) =>
+          u.educationName.supportHtml(),
+      onChanged: (DanhSachTrinhDoDataResponse? data) {
+        if (widget.danhSachTrinhDoDataResponse != data) {
+          widget.danhSachTrinhDoDataResponse = data;
         }
       },
       title: "Trình độ",

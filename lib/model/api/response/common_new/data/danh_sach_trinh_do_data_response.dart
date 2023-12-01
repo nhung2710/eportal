@@ -1,5 +1,7 @@
 import 'package:eportal/model/base/base_eportal_data_response.dart';
 
+import '../../../../../extension/string_extension.dart';
+
 //
 // Created by BlackRose on 23/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -45,6 +47,7 @@ class DanhSachTrinhDoDataResponse extends BaseEportalDataResponse {
     updatedUser = json['updatedUser'];
     isActive = json['isActive'];
     isOrder = json['isOrder'];
+    search = educationName.getValueSearch();
   }
 
   Map<String, dynamic> toJson() {

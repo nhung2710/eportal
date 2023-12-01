@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 //
 class SelectItem<T extends BaseEportalDataResponse>
     extends SelectItemNormal<T> {
-  SelectItem(
+  const SelectItem(
       {super.key,
       super.selectedItem,
       required super.list,

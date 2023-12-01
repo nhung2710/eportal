@@ -12,5 +12,5 @@ class JobUserUpdateRequest
   JobUserUpdateRequest({required super.obj});
 
   @override
-  String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_DANG_KY;
+  String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_JOB_USER_UPDATE;
 }

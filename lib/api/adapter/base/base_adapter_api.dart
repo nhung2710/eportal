@@ -60,25 +60,25 @@ class BaseAdapterApi {
 
     if (request.isAuthentication()) {
       if (!GlobalApplication().userId.isNullOrWhiteSpace()) {
-        stringBuffer.write('<userId>${GlobalApplication().userId}</userId>');
-        stringBuffer
-            .write('<userRole>${GlobalApplication().userRole}</userRole>');
+        stringBuffer.write(GlobalApplication()
+            .createXml(GlobalApplication().userId, "userId"));
+        stringBuffer.write(GlobalApplication()
+            .createXml(GlobalApplication().userRole, "userRole"));
       } else {
-        stringBuffer.write(
-            '<userLogin>${ApplicationApiConstant.BASE_AUTH_HEADER_USER_LOGIN}</userLogin>');
-        stringBuffer.write(
-            '<password>${ApplicationApiConstant.BASE_AUTH_HEADER_PASSWORD}</password>');
+        stringBuffer.write(GlobalApplication().createXml(
+            ApplicationApiConstant.BASE_AUTH_HEADER_USER_LOGIN, "userLogin"));
+        stringBuffer.write(GlobalApplication().createXml(
+            ApplicationApiConstant.BASE_AUTH_HEADER_PASSWORD, "password"));
       }
     } else {
-      stringBuffer.write(
-          '<userLogin>${ApplicationApiConstant.BASE_AUTH_HEADER_USER_LOGIN}</userLogin>');
-      stringBuffer.write(
-          '<password>${ApplicationApiConstant.BASE_AUTH_HEADER_PASSWORD}</password>');
+      stringBuffer.write(GlobalApplication().createXml(
+          ApplicationApiConstant.BASE_AUTH_HEADER_USER_LOGIN, "userLogin"));
+      stringBuffer.write(GlobalApplication().createXml(
+          ApplicationApiConstant.BASE_AUTH_HEADER_PASSWORD, "password"));
     }
     stringBuffer.write('</AuthHeader>');
     stringBuffer.write('</soap:Header>');
     stringBuffer.write('<soap:Body>');
-
     stringBuffer.write(
         '<${request.getTagXmlRequest()} ${request.getDefaultNameSpace()}>');
     stringBuffer.write('${request.obj.toXml()}');

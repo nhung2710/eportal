@@ -1,3 +1,6 @@
+import 'package:eportal/api/adapter/base/base_adapter_api.dart';
+import 'package:eportal/application/global_application.dart';
+
 import '../../constant/application_constant.dart';
 
 class BaseEportalXml {
@@ -7,15 +10,7 @@ class BaseEportalXml {
   }
 
   String createXml(Object? value, String tag) {
-    var buffer = StringBuffer();
-    buffer.write('<$tag>');
-    if (value != null) {
-      buffer.write(value);
-    } else {
-      buffer.write(ApplicationConstant.EMPTY);
-    }
-    buffer.write('</$tag>');
-    return buffer.toString();
+    return GlobalApplication().createXml(value, tag);
   }
 }
 
