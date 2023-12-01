@@ -24,84 +24,143 @@ class ProfileAddPage extends BasePage {
   State<StatefulWidget> createState() => _ProfileAddPageState();
 }
 
-class _ProfileAddPageState extends BasePageState<ProfileAddPage> {
+class _ProfileAddPageState extends BasePageState<ProfileAddPage>
+    with SingleTickerProviderStateMixin {
+  GlobalKey<ProfileAddBasicTabState> keyProfileAddBasicTabState =
+      GlobalKey<ProfileAddBasicTabState>();
+  GlobalKey<ProfileAddGeneralTabState> keyProfileAddGeneralTabState =
+      GlobalKey<ProfileAddGeneralTabState>();
+  GlobalKey<ProfileAddLevelTabState> keyProfileAddLevelTabState =
+      GlobalKey<ProfileAddLevelTabState>();
+  GlobalKey<ProfileAddWorkExperienceTabState>
+      keyProfileAddWorkExperienceTabState =
+      GlobalKey<ProfileAddWorkExperienceTabState>();
+  GlobalKey<ProfileAddCareerGoalsTabState> keyProfileAddCareerGoalsTabState =
+      GlobalKey<ProfileAddCareerGoalsTabState>();
+  GlobalKey<ProfileAddFieldSkillsTabState> keyProfileAddFieldSkillsTabState =
+      GlobalKey<ProfileAddFieldSkillsTabState>();
+
+  late TabController _tabController;
+
+  @override
+  void initDataLoading() {
+    // TODO: implement initDataLoading
+    _tabController = TabController(vsync: this, length: 6);
+    super.initDataLoading();
+  }
+
   @override
   String getPageTitle(BuildContext context) => "Tạo hồ sơ";
 
   @override
-  Widget pageUI(BuildContext context) => DefaultTabController(
-        key: localKey,
-        length: 6,
-        child: Column(
-          children: [
-            TabBar(
-              indicatorColor: AppColor.colorOfIcon,
-              labelColor: AppColor.colorOfIcon,
-              indicatorSize: TabBarIndicatorSize.tab,
-              indicatorPadding: EdgeInsets.zero,
-              padding: EdgeInsets.zero,
-              tabAlignment: TabAlignment.start,
-              isScrollable: true,
-              labelStyle:
-                  AppTextStyle.title.copyWith(overflow: TextOverflow.visible),
-              indicatorWeight: 2,
-              tabs: const [
-                Tab(
-                  text: "Thông tin hồ sơ",
-                ),
-                Tab(
-                  text: "Thông tin chung",
-                ),
-                Tab(
-                  text: "Trình độ học vấn",
-                ),
-                Tab(
-                  text: "Kinh nghiệm làm việc",
-                ),
-                Tab(
-                  text: "Mục tiêu nghề nghiệp",
-                ),
-                Tab(
-                  text: "Kỹ năng sở trường",
-                ),
-              ],
-            ),
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.only(top: 5),
-                child: TabBarView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    ProfileAddBasicTab(),
-                    ProfileAddGeneralTab(),
-                    const ProfileAddLevelTab(),
-                    const ProfileAddWorkExperienceTab(),
-                    ProfileAddCareerGoalsTab(),
-                    ProfileAddFieldSkillsTab(),
-                  ],
-                ),
+  Widget pageUI(BuildContext context) => Column(
+        children: [
+          TabBar(
+            controller: _tabController,
+            indicatorColor: AppColor.colorOfIcon,
+            labelColor: AppColor.colorOfIcon,
+            indicatorSize: TabBarIndicatorSize.tab,
+            indicatorPadding: EdgeInsets.zero,
+            padding: EdgeInsets.zero,
+            tabAlignment: TabAlignment.start,
+            isScrollable: true,
+            labelStyle:
+                AppTextStyle.title.copyWith(overflow: TextOverflow.visible),
+            indicatorWeight: 2,
+            tabs: const [
+              Tab(
+                text: "Thông tin hồ sơ",
+              ),
+              Tab(
+                text: "Thông tin chung",
+              ),
+              Tab(
+                text: "Trình độ học vấn",
+              ),
+              Tab(
+                text: "Kinh nghiệm làm việc",
+              ),
+              Tab(
+                text: "Mục tiêu nghề nghiệp",
+              ),
+              Tab(
+                text: "Kỹ năng sở trường",
+              ),
+            ],
+          ),
+          Expanded(
+            child: Container(
+              margin: const EdgeInsets.only(top: 5),
+              child: TabBarView(
+                controller: _tabController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  ProfileAddBasicTab(
+                    key: keyProfileAddBasicTabState,
+                  ),
+                  ProfileAddGeneralTab(
+                    key: keyProfileAddGeneralTabState,
+                  ),
+                  ProfileAddLevelTab(
+                    key: keyProfileAddLevelTabState,
+                  ),
+                  ProfileAddWorkExperienceTab(
+                    key: keyProfileAddWorkExperienceTabState,
+                  ),
+                  ProfileAddCareerGoalsTab(
+                    key: keyProfileAddCareerGoalsTabState,
+                  ),
+                  ProfileAddFieldSkillsTab(
+                    key: keyProfileAddFieldSkillsTabState,
+                  ),
+                ],
               ),
             ),
-            Container(
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: CapchaInput(
+              textInputAction: TextInputAction.done,
+              onFieldSubmitted: (value) => _send(context),
+            ),
+          ),
+          Container(
               margin: const EdgeInsets.only(top: 10),
-              child: CapchaInput(
-                textInputAction: TextInputAction.done,
-                onFieldSubmitted: (value) => _send(context),
-              ),
-            ),
-            Container(
-                margin: const EdgeInsets.only(top: 10),
-                child: DefaultButton(
-                  text: 'Tạo',
-                  onPressed: () => _send(context),
-                )),
-          ],
-        ),
+              child: DefaultButton(
+                text: 'Tạo',
+                onPressed: () => _send(context),
+              )),
+        ],
       );
 
+  _validPage(BuildContext context, BasePageState? state, int page) {
+    if (state?.isValid() == true) {
+      return true;
+    } else {
+      _tabController.animateTo(page);
+      return false;
+    }
+  }
+
   _send(BuildContext context) {
-    if (isValid()) {
-      showCenterMessage("Thêm hồ sơ thành công").then((value) => backPage());
+    if (_validPage(context, keyProfileAddBasicTabState.currentState, 0)) {
+      if (_validPage(context, keyProfileAddGeneralTabState.currentState, 1)) {
+        if (_validPage(context, keyProfileAddLevelTabState.currentState, 2)) {
+          if (_validPage(
+              context, keyProfileAddWorkExperienceTabState.currentState, 3)) {
+            if (_validPage(
+                context, keyProfileAddCareerGoalsTabState.currentState, 4)) {
+              if (_validPage(
+                  context, keyProfileAddFieldSkillsTabState.currentState, 5)) {
+                if (isValid()) {
+                  showCenterMessage("Thêm hồ sơ thành công")
+                      .then((value) => backPage());
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

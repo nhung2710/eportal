@@ -1,13 +1,13 @@
 import 'dart:io';
 
+import 'package:eportal/enum/role_type.dart';
 import 'package:eportal/model/api/response/common_new/data/dang_nhap_data_response.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+
 import '../constant/application_constant.dart';
 import '../extension/string_extension.dart';
-import 'package:eportal/enum/role_type.dart';
 
 class GlobalApplication {
   static final GlobalApplication _instance = GlobalApplication._internal();

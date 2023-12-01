@@ -1,4 +1,3 @@
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:eportal/bloc/common_new/danh_sach_gioi_tinh_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_kinh_nghiem_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_muc_luong_bloc.dart';
@@ -20,10 +19,9 @@ import 'package:eportal/model/api/response/common_new/data/danh_sach_muc_luong_d
 import 'package:eportal/model/api/response/common_new/data/danh_sach_quan_huyen_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_tinh_tp_data_response.dart';
 import 'package:eportal/state/base/base_state.dart';
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:eportal/widget/input/capcha_input.dart';
+import 'package:eportal/widget/input/date_input.dart';
 import 'package:eportal/widget/select/select_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,10 +57,6 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
   TextEditingController experienceController = TextEditingController();
   TextEditingController objectiveController = TextEditingController();
   TextEditingController skillController = TextEditingController();
-  var fromDateFocusNode = FocusNode();
-  var toDateFocusNode = FocusNode();
-  DateTime fromDate = DateTime.now();
-  DateTime toDate = DateTime.now();
 
   final _danhSachQuanHuyenKey = GlobalKey<SelectItemNormalState>();
 
@@ -163,18 +157,6 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
 
   @override
   void initDataLoading() {
-    fromDateFocusNode.addListener(() {
-      if (fromDateFocusNode.hasFocus) {
-        fromDateFocusNode.unfocus();
-        openFromDateDateTimePicker();
-      }
-    });
-    toDateFocusNode.addListener(() {
-      if (toDateFocusNode.hasFocus) {
-        toDateFocusNode.unfocus();
-        openToDateDateTimePicker();
-      }
-    });
     danhSachTinhTpBloc = DanhSachTinhTpBloc();
     danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
     danhSachMucLuongBloc = DanhSachMucLuongBloc();
@@ -205,8 +187,7 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
   Color currentBackgroundColor(BuildContext context) => Colors.white;
 
   @override
-  Widget pageUI(BuildContext context) =>
-      ListView(
+  Widget pageUI(BuildContext context) => ListView(
         children: <Widget>[
           Container(
             margin: const EdgeInsets.only(top: 10),
@@ -226,10 +207,8 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
+            child: DateInput(
               controller: fromDateController,
-              focusNode: fromDateFocusNode,
-              maxLength: 100,
               textInputAction: TextInputAction.next,
               validator: (text) {
                 if (text == null || text.isEmpty) {
@@ -238,15 +217,12 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
                 return null;
               },
               hintText: 'Ngày đăng',
-              icon: FontAwesomeIcons.calendar,
             ),
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
+            child: DateInput(
               controller: toDateController,
-              focusNode: toDateFocusNode,
-              maxLength: 100,
               textInputAction: TextInputAction.next,
               validator: (text) {
                 if (text == null || text.isEmpty) {
@@ -255,7 +231,6 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
                 return null;
               },
               hintText: 'Ngày hết hạn',
-              icon: FontAwesomeIcons.calendar,
             ),
           ),
           Container(
@@ -269,8 +244,8 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
                   child: BlocBuilder<DanhSachMucLuongBloc,
                       DataMultiState<DanhSachMucLuongDataResponse>>(
                     builder: (BuildContext context,
-                        DataMultiState<DanhSachMucLuongDataResponse>
-                        state) =>
+                            DataMultiState<DanhSachMucLuongDataResponse>
+                                state) =>
                         _buildViewSearchIndustry(context, industrys),
                   ),
                 )),
@@ -286,7 +261,7 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
                   child: BlocBuilder<DanhSachTinhTpBloc,
                       DataMultiState<DanhSachTinhTpDataResponse>>(
                     builder: (BuildContext context,
-                        DataMultiState<DanhSachTinhTpDataResponse> state) =>
+                            DataMultiState<DanhSachTinhTpDataResponse> state) =>
                         _buildViewSearchDanhSachTinhTp(
                             context, state.data ?? []),
                   ),
@@ -303,8 +278,8 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
                   child: BlocBuilder<DanhSachQuanHuyenBloc,
                       DataMultiState<DanhSachQuanHuyenDataResponse>>(
                     builder: (BuildContext context,
-                        DataMultiState<DanhSachQuanHuyenDataResponse>
-                        state) =>
+                            DataMultiState<DanhSachQuanHuyenDataResponse>
+                                state) =>
                         _buildViewSearchDanhSachQuanHuyen(
                             context, state.data ?? []),
                   ),
@@ -321,8 +296,8 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
                   child: BlocBuilder<DanhSachMucLuongBloc,
                       DataMultiState<DanhSachMucLuongDataResponse>>(
                     builder: (BuildContext context,
-                        DataMultiState<DanhSachMucLuongDataResponse>
-                        state) =>
+                            DataMultiState<DanhSachMucLuongDataResponse>
+                                state) =>
                         _buildViewSearchPositionFuture(context, positions),
                   ),
                 )),
@@ -338,8 +313,8 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
                   child: BlocBuilder<DanhSachMucLuongBloc,
                       DataMultiState<DanhSachMucLuongDataResponse>>(
                     builder: (BuildContext context,
-                        DataMultiState<DanhSachMucLuongDataResponse>
-                        state) =>
+                            DataMultiState<DanhSachMucLuongDataResponse>
+                                state) =>
                         _buildViewSearchPositionCurrent(context, positions),
                   ),
                 )),
@@ -353,10 +328,10 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
                 listener: (BuildContext context,
                     DataMultiState<DanhSachKinhNghiemDataResponse> state) {},
                 child: BlocBuilder<DanhSachKinhNghiemBloc,
-                    DataMultiState<DanhSachKinhNghiemDataResponse>>(
+                        DataMultiState<DanhSachKinhNghiemDataResponse>>(
                     builder: (BuildContext context,
-                        DataMultiState<DanhSachKinhNghiemDataResponse>
-                        state) =>
+                            DataMultiState<DanhSachKinhNghiemDataResponse>
+                                state) =>
                         _buildViewSearchDanhSachKinhNghiem(
                             context, state.data)),
               ),
@@ -373,8 +348,8 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
                   child: BlocBuilder<DanhSachMucLuongBloc,
                       DataMultiState<DanhSachMucLuongDataResponse>>(
                     builder: (BuildContext context,
-                        DataMultiState<DanhSachMucLuongDataResponse>
-                        state) =>
+                            DataMultiState<DanhSachMucLuongDataResponse>
+                                state) =>
                         _buildViewSearchEducation(context, educations),
                   ),
                 )),
@@ -390,8 +365,8 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
                   child: BlocBuilder<DanhSachMucLuongBloc,
                       DataMultiState<DanhSachMucLuongDataResponse>>(
                     builder: (BuildContext context,
-                        DataMultiState<DanhSachMucLuongDataResponse>
-                        state) =>
+                            DataMultiState<DanhSachMucLuongDataResponse>
+                                state) =>
                         _buildViewSearchDanhSachMucLuong(context, state.data),
                   ),
                 )),
@@ -407,8 +382,8 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
                   child: BlocBuilder<DanhSachMucLuongBloc,
                       DataMultiState<DanhSachMucLuongDataResponse>>(
                     builder: (BuildContext context,
-                        DataMultiState<DanhSachMucLuongDataResponse>
-                        state) =>
+                            DataMultiState<DanhSachMucLuongDataResponse>
+                                state) =>
                         _buildViewSearchNeed(context, needs),
                   ),
                 )),
@@ -487,45 +462,10 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
     }
   }
 
-  Future<DateTime?> openDateTimePicker(DateTime initialDate) async {
-    return showDatePicker(
-        context: context,
-        initialDate: initialDate,
-        builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.dark(useMaterial3: false),
-            child: child!,
-          );
-        },
-        confirmText: "Chọn ngày",
-        cancelText: "Hủy",
-        keyboardType: TextInputType.datetime,
-        firstDate: DateTime(1900),
-        lastDate: DateTime.now());
-  }
-
-  Future<void> openFromDateDateTimePicker() async {
-    var pickDate = await openDateTimePicker(fromDate);
-    if (pickDate != null) {
-      fromDate = pickDate;
-      fromDateController.text = fromDate.toFormatDateTime(format: 'dd/MM/yyyy');
-    }
-  }
-
-  Future<void> openToDateDateTimePicker() async {
-    var pickDate = await openDateTimePicker(toDate);
-    if (pickDate != null) {
-      toDate = pickDate;
-      toDateController.text = toDate.toFormatDateTime(format: 'dd/MM/yyyy');
-    }
-  }
-
-  Widget _buildViewSearchDanhSachTinhTp(BuildContext context,
-      List<DanhSachTinhTpDataResponse> list) {
+  Widget _buildViewSearchDanhSachTinhTp(
+      BuildContext context, List<DanhSachTinhTpDataResponse> list) {
     return SelectItem<DanhSachTinhTpDataResponse>(
-
       selectedItem: widget.danhSachTinhTpDataResponse,
-
       list: list,
       itemAsString: (DanhSachTinhTpDataResponse u) =>
           u.regionalName.replaceWhenNullOrWhiteSpace(),
@@ -537,19 +477,17 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
           danhSachQuanHuyenBloc.add(DanhSachQuanHuyenEvent(
               request: DanhSachQuanHuyenRequest(
                   obj:
-                  DanhSachQuanHuyenDataRequest(tinhTp: data?.regionalID))));
+                      DanhSachQuanHuyenDataRequest(tinhTp: data?.regionalID))));
         }
       },
       title: "Tình thành phố",
     );
   }
 
-  Widget _buildViewSearchDanhSachQuanHuyen(BuildContext context,
-      List<DanhSachQuanHuyenDataResponse> list) {
+  Widget _buildViewSearchDanhSachQuanHuyen(
+      BuildContext context, List<DanhSachQuanHuyenDataResponse> list) {
     return SelectItem<DanhSachQuanHuyenDataResponse>(
-
       key: _danhSachQuanHuyenKey,
-
       selectedItem: widget.danhSachQuanHuyenDataResponse,
       list: list,
       itemAsString: (DanhSachQuanHuyenDataResponse u) =>
@@ -563,11 +501,9 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
     );
   }
 
-  Widget _buildViewSearchDanhSachKinhNghiem(BuildContext context,
-      List<DanhSachKinhNghiemDataResponse> list) {
+  Widget _buildViewSearchDanhSachKinhNghiem(
+      BuildContext context, List<DanhSachKinhNghiemDataResponse> list) {
     return SelectItem<DanhSachKinhNghiemDataResponse>(
-
-
       selectedItem: widget.danhSachKinhNghiemDataResponse,
       list: list,
       itemAsString: (DanhSachKinhNghiemDataResponse u) =>
@@ -581,11 +517,9 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
     );
   }
 
-  Widget _buildViewSearchDanhSachMucLuong(BuildContext context,
-      List<DanhSachMucLuongDataResponse> list) {
+  Widget _buildViewSearchDanhSachMucLuong(
+      BuildContext context, List<DanhSachMucLuongDataResponse> list) {
     return SelectItem<DanhSachMucLuongDataResponse>(
-
-
       selectedItem: widget.danhSachMucLuongDataResponse,
       list: list,
       itemAsString: (DanhSachMucLuongDataResponse u) =>
@@ -601,8 +535,6 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
 
   Widget _buildViewSearchIndustry(BuildContext context, List<String> list) {
     return SelectItemNormal<String>(
-
-
       selectedItem: industry,
       list: list,
       onChanged: (String? data) {
@@ -614,11 +546,9 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
     );
   }
 
-  Widget _buildViewSearchPositionFuture(BuildContext context,
-      List<String> list) {
+  Widget _buildViewSearchPositionFuture(
+      BuildContext context, List<String> list) {
     return SelectItemNormal<String>(
-
-
       selectedItem: positionFuture,
       list: list,
       onChanged: (String? data) {
@@ -630,11 +560,9 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
     );
   }
 
-  Widget _buildViewSearchPositionCurrent(BuildContext context,
-      List<String> list) {
+  Widget _buildViewSearchPositionCurrent(
+      BuildContext context, List<String> list) {
     return SelectItemNormal<String>(
-
-
       selectedItem: positionCurrent,
       list: list,
       onChanged: (String? data) {
@@ -642,15 +570,12 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
           industry = data;
         }
       },
-
       title: "Chức vụ hiện tại",
     );
   }
 
   Widget _buildViewSearchNeed(BuildContext context, List<String> list) {
     return SelectItemNormal<String>(
-
-
       selectedItem: need,
       list: list,
       onChanged: (String? data) {
@@ -664,7 +589,6 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
 
   Widget _buildViewSearchEducation(BuildContext context, List<String> list) {
     return SelectItemNormal<String>(
-
       selectedItem: education,
       list: list,
       onChanged: (String? data) {

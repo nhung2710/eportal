@@ -14,7 +14,6 @@ import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/list_viewer/custom_list_viewer.dart';
 import 'package:eportal/widget/list_viewer/setting_item_viewer.dart';
 import 'package:flutter/material.dart';
-import 'package:share_plus/share_plus.dart';
 
 //
 // Created by BlackRose on 11/7/2023.

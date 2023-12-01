@@ -12,10 +12,10 @@ class ProfileAddLevelTab extends BasePage {
   const ProfileAddLevelTab({super.key});
 
   @override
-  State<StatefulWidget> createState() => _ProfileAddLevelTabState();
+  State<StatefulWidget> createState() => ProfileAddLevelTabState();
 }
 
-class _ProfileAddLevelTabState
+class ProfileAddLevelTabState
     extends BaseScreenStateActive<ProfileAddLevelTab> {
   TextEditingController educationController = TextEditingController();
 

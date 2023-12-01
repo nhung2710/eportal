@@ -6,7 +6,6 @@ import 'package:eportal/screen/share/support/page/support_page.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/list_viewer/custom_list_viewer.dart';
 import 'package:flutter/material.dart';
-import 'package:share_plus/share_plus.dart';
 
 import '../../../../widget/list_viewer/setting_item_viewer.dart';
 import '../../../share/chart_economically_active/page/chart_economically_active_page.dart';

@@ -1,6 +1,5 @@
 import 'package:eportal/model/api/response/common_new/data/job_user_update_data_response.dart';
 import 'package:eportal/model/base/base_eportal_response.dart';
-import 'package:flutter/material.dart';
 
 import '../../../../extension/map_json_extension.dart';
 

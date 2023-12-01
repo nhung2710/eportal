@@ -1,4 +1,3 @@
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:eportal/event/common_new/danh_sach_co_quan_ban_hanh_event.dart';
 import 'package:eportal/event/common_new/danh_sach_loai_van_ban_event.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_co_quan_ban_hanh_request.dart';
@@ -11,8 +10,6 @@ import 'package:eportal/model/api/response/common_new/data/danh_sach_linh_vuc_va
 import 'package:eportal/model/api/response/common_new/data/danh_sach_loai_van_ban_data_response.dart';
 import 'package:eportal/model/base/base_eportal_data_response.dart';
 import 'package:eportal/state/base/base_state.dart';
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:eportal/widget/select/select_item.dart';

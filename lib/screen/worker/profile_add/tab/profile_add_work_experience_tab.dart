@@ -12,10 +12,10 @@ class ProfileAddWorkExperienceTab extends BasePage {
   const ProfileAddWorkExperienceTab({super.key});
 
   @override
-  State<StatefulWidget> createState() => _ProfileAddWorkExperienceTabState();
+  State<StatefulWidget> createState() => ProfileAddWorkExperienceTabState();
 }
 
-class _ProfileAddWorkExperienceTabState
+class ProfileAddWorkExperienceTabState
     extends BaseScreenStateActive<ProfileAddWorkExperienceTab> {
   TextEditingController experienceController = TextEditingController();
 

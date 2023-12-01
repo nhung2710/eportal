@@ -1,4 +1,3 @@
-import 'package:eportal/api/adapter/base/base_adapter_api.dart';
 import 'package:eportal/model/api/request/common_new/gioi_thieu_trung_tam_request.dart';
 import 'package:eportal/model/api/response/common_new/gioi_thieu_trung_tam_response.dart';
 import 'package:eportal/repository/base/base_repository.dart';

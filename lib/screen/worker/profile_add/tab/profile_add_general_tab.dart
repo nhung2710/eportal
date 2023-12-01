@@ -1,4 +1,3 @@
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:eportal/bloc/common_new/danh_sach_gioi_tinh_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_kinh_nghiem_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_muc_luong_bloc.dart';
@@ -17,8 +16,6 @@ import 'package:eportal/model/api/response/common_new/data/danh_sach_muc_luong_d
 import 'package:eportal/model/api/response/common_new/data/danh_sach_quan_huyen_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_tinh_tp_data_response.dart';
 import 'package:eportal/state/base/base_state.dart';
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/select/select_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,10 +38,10 @@ class ProfileAddGeneralTab extends BasePage {
   DanhSachMucLuongDataResponse? danhSachMucLuongDataResponse;
 
   @override
-  State<StatefulWidget> createState() => _ProfileAddGeneralTabState();
+  State<StatefulWidget> createState() => ProfileAddGeneralTabState();
 }
 
-class _ProfileAddGeneralTabState
+class ProfileAddGeneralTabState
     extends BaseScreenStateActive<ProfileAddGeneralTab> {
   TextEditingController titleController = TextEditingController();
   TextEditingController fromDateController = TextEditingController();
@@ -53,10 +50,6 @@ class _ProfileAddGeneralTabState
   TextEditingController experienceController = TextEditingController();
   TextEditingController objectiveController = TextEditingController();
   TextEditingController skillController = TextEditingController();
-  var fromDateFocusNode = FocusNode();
-  var toDateFocusNode = FocusNode();
-  DateTime fromDate = DateTime.now();
-  DateTime toDate = DateTime.now();
 
   final _danhSachQuanHuyenKey = GlobalKey<SelectItemState>();
 
@@ -157,18 +150,6 @@ class _ProfileAddGeneralTabState
 
   @override
   void initDataLoading() {
-    fromDateFocusNode.addListener(() {
-      if (fromDateFocusNode.hasFocus) {
-        fromDateFocusNode.unfocus();
-        openFromDateDateTimePicker();
-      }
-    });
-    toDateFocusNode.addListener(() {
-      if (toDateFocusNode.hasFocus) {
-        toDateFocusNode.unfocus();
-        openToDateDateTimePicker();
-      }
-    });
     danhSachTinhTpBloc = DanhSachTinhTpBloc();
     danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
     danhSachMucLuongBloc = DanhSachMucLuongBloc();
@@ -289,39 +270,6 @@ class _ProfileAddGeneralTabState
           ),
         ],
       );
-
-  Future<DateTime?> openDateTimePicker(DateTime initialDate) async {
-    return showDatePicker(
-        context: context,
-        initialDate: initialDate,
-        builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.dark(useMaterial3: false),
-            child: child!,
-          );
-        },
-        confirmText: "Chọn ngày",
-        cancelText: "Hủy",
-        keyboardType: TextInputType.datetime,
-        firstDate: DateTime(1900),
-        lastDate: DateTime.now());
-  }
-
-  Future<void> openFromDateDateTimePicker() async {
-    var pickDate = await openDateTimePicker(fromDate);
-    if (pickDate != null) {
-      fromDate = pickDate;
-      fromDateController.text = fromDate.toFormatDateTime(format: 'dd/MM/yyyy');
-    }
-  }
-
-  Future<void> openToDateDateTimePicker() async {
-    var pickDate = await openDateTimePicker(toDate);
-    if (pickDate != null) {
-      toDate = pickDate;
-      toDateController.text = toDate.toFormatDateTime(format: 'dd/MM/yyyy');
-    }
-  }
 
   Widget _buildViewSearchDanhSachKinhNghiem(
       BuildContext context, List<DanhSachKinhNghiemDataResponse> list) {

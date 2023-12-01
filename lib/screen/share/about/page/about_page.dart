@@ -3,7 +3,6 @@ import 'package:eportal/event/common_new/gioi_thieu_trung_tam_event.dart';
 import 'package:eportal/extension/string_extension.dart';
 import 'package:eportal/model/api/request/common_new/data/common_new_data_request.dart';
 import 'package:eportal/model/api/request/common_new/gioi_thieu_trung_tam_request.dart';
-import 'package:eportal/model/api/response/common_new/gioi_thieu_trung_tam_response.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';

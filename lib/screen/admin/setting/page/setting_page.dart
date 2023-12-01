@@ -7,7 +7,6 @@ import 'package:eportal/screen/share/terms_of_use/page/terms_of_use_page.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/list_viewer/custom_list_viewer.dart';
 import 'package:flutter/material.dart';
-import 'package:share_plus/share_plus.dart';
 
 import '../../../../widget/list_viewer/setting_item_viewer.dart';
 import '../../../share/change_password/page/change_password_page.dart';

@@ -1,11 +1,8 @@
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:eportal/event/common_new/danh_sach_chuyen_muc_event.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_chuyen_muc_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_chuyen_muc_data_request.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_chuyen_muc_data_response.dart';
 import 'package:eportal/state/base/base_state.dart';
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:eportal/widget/select/select_item.dart';

@@ -1,6 +1,4 @@
-import '../../application/global_application.dart';
 import '../../constant/application_constant.dart';
-import '../../extension/string_extension.dart';
 
 class BaseEportalXml {
   StringBuffer toXml() {

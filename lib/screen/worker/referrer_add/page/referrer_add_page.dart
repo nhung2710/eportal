@@ -1,4 +1,5 @@
 import 'package:eportal/widget/default_button/default_button.dart';
+import 'package:eportal/widget/input/date_input.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -23,18 +24,9 @@ class _ReferrerAddPageState extends BasePageState<ReferrerAddPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
-  var focusNode = FocusNode();
-  DateTime birthDay = DateTime.now();
 
   @override
   void initDataLoading() {
-    focusNode.addListener(() {
-      print(focusNode.hasFocus);
-      if (focusNode.hasFocus) {
-        focusNode.unfocus();
-        openDateTimePicker();
-      }
-    });
     // TODO: implement initDataLoading
     super.initDataLoading();
   }
@@ -66,11 +58,9 @@ class _ReferrerAddPageState extends BasePageState<ReferrerAddPage> {
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
+            child: DateInput(
               controller: birthDayController,
-              maxLength: 50,
               textInputAction: TextInputAction.next,
-              focusNode: focusNode,
               validator: (text) {
                 if (text == null || text.isEmpty) {
                   return 'Ngày tháng năm sinh không được để trống';
@@ -78,7 +68,6 @@ class _ReferrerAddPageState extends BasePageState<ReferrerAddPage> {
                 return null;
               },
               hintText: 'Năm sinh',
-              icon: Icons.date_range,
             ),
           ),
           Container(
@@ -143,21 +132,6 @@ class _ReferrerAddPageState extends BasePageState<ReferrerAddPage> {
     if (isValid()) {
       showCenterMessage("Thêm người tham khảo thành công")
           .then((value) => backPage());
-    }
-  }
-
-  Future<void> openDateTimePicker() async {
-    DateTime? pickerDate = await showDatePicker(
-        context: context,
-        initialDate: birthDay,
-        confirmText: "Chọn ngày",
-        cancelText: "Hủy",
-        keyboardType: TextInputType.datetime,
-        firstDate: DateTime(1900),
-        lastDate: DateTime.now());
-    if (pickerDate != null) {
-      birthDay = pickerDate;
-      birthDayController.text = DateFormat('dd/MM/yyyy').format(pickerDate);
     }
   }
 }

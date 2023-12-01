@@ -1,11 +1,9 @@
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_gioi_tinh_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/user_update_data_response.dart';
 import 'package:eportal/state/base/base_state.dart';
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/change_avatar/change_avatar.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
+import 'package:eportal/widget/input/date_input.dart';
 import 'package:eportal/widget/select/select_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,18 +44,10 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
   UserUpdateDataRequest dataRequest = UserUpdateDataRequest();
   DanhSachGioiTinhDataResponse? danhSachGioiTinhDataResponse;
   UserUpdateBloc userUpdateBloc = UserUpdateBloc();
-  var focusNode = FocusNode();
-  DateTime birthDay = DateTime.now();
   String? gioitinh = "0";
 
   @override
   void initDataLoading() {
-    focusNode.addListener(() {
-      if (focusNode.hasFocus) {
-        focusNode.unfocus();
-        openDateTimePicker();
-      }
-    });
     userUpdateBloc = UserUpdateBloc();
     dataRequest = UserUpdateDataRequest();
     danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
@@ -121,11 +111,9 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
               ),
               Container(
                 margin: const EdgeInsets.only(top: 10),
-                child: FieldInput(
+                child: DateInput(
                   controller: birthDayController,
-                  maxLength: 50,
                   textInputAction: TextInputAction.next,
-                  focusNode: focusNode,
                   validator: (text) {
                     if (text.isNullOrWhiteSpace()) {
                       return 'Ngày tháng năm sinh không được để trống';
@@ -133,7 +121,6 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
                     return null;
                   },
                   hintText: 'Năm sinh',
-                  icon: Icons.date_range,
                 ),
               ),
               Container(
@@ -241,22 +228,6 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
       dataRequest.hoTen = fullNameController.text;
       userUpdateBloc
           .add(UserUpdateEvent(request: UserUpdateRequest(obj: dataRequest)));
-    }
-  }
-
-  Future<void> openDateTimePicker() async {
-    DateTime? pickerDate = await showDatePicker(
-        context: context,
-        initialDate: birthDay,
-        confirmText: "Chọn ngày",
-        cancelText: "Hủy",
-        keyboardType: TextInputType.datetime,
-        firstDate: DateTime(1900),
-        lastDate: DateTime.now());
-    if (pickerDate != null) {
-      birthDay = pickerDate;
-      birthDayController.text =
-          pickerDate.toFormatDateTime(format: 'dd/MM/yyyy');
     }
   }
 
