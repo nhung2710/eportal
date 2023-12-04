@@ -37,6 +37,10 @@ class _SettingPageState extends BasePageState<SettingPage> {
           icon: Icons.password_sharp,
           title: "Đổi mật khẩu",
           builder: (context) => const ChangePasswordPage()),
+      SettingPageModel(
+          icon: Icons.change_circle_outlined,
+          title: "Đổi thông tin doanh nghiệp",
+          builder: (context) => const ChangeUserInfoPage()),
     ],
     "Thông tin": [
       SettingPageModel(

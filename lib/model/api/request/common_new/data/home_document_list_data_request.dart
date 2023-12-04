@@ -14,7 +14,6 @@ class HomeDocumentListDataRequest extends BaseMultiEportalXml {
     // TODO: implement toXml
     var buffer = super.toXml();
     buffer.write(createXml(flag, "flag"));
-    buffer.write(createXml(top, "top"));
     return buffer;
   }
 }

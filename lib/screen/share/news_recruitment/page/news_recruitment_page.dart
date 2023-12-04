@@ -21,51 +21,64 @@ class NewsRecruitmentPage extends BasePage {
   State<StatefulWidget> createState() => _NewsRecruitmentPageState();
 }
 
-class _NewsRecruitmentPageState extends BasePageState<NewsRecruitmentPage> {
+class _NewsRecruitmentPageState extends BasePageState<NewsRecruitmentPage>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
   @override
-  Widget pageUI(BuildContext context) => DefaultTabController(
-        key: localKey,
-        length: 3,
-        child: Column(
-          children: [
-            const TabBar(
-              indicatorColor: AppColor.colorOfIcon,
-              labelColor: AppColor.colorOfIcon,
-              labelStyle: AppTextStyle.title,
-              indicatorWeight: 2,
-              tabs: [
-                Tab(
-                  text: "Tốt nhất",
-                ),
-                Tab(
-                  text: "Mới nhất",
-                ),
-                Tab(
-                  text: "Lương cao",
-                ),
-              ],
-            ),
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.only(top: 5),
-                child: TabBarView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    NewsRecruitment(
-                      flag: 0,
-                    ),
-                    NewsRecruitment(
-                      flag: 1,
-                    ),
-                    NewsRecruitment(
-                      flag: 2,
-                    ),
-                  ],
-                ),
+  void initDataLoading() {
+    // TODO: implement initDataLoading
+    _tabController = TabController(
+        vsync: this, length: 3, animationDuration: const Duration(seconds: 0));
+    super.initDataLoading();
+  }
+
+  @override
+  Widget pageUI(BuildContext context) => Column(
+        children: [
+          TabBar(
+            controller: _tabController,
+            indicatorColor: AppColor.colorOfIcon,
+            labelColor: AppColor.colorOfIcon,
+            indicatorSize: TabBarIndicatorSize.tab,
+            indicatorPadding: EdgeInsets.zero,
+            padding: EdgeInsets.zero,
+            labelStyle:
+                AppTextStyle.title.copyWith(overflow: TextOverflow.visible),
+            indicatorWeight: 2,
+            tabs: const [
+              Tab(
+                text: "Tốt nhất",
               ),
-            )
-          ],
-        ),
+              Tab(
+                text: "Mới nhất",
+              ),
+              Tab(
+                text: "Lương cao",
+              ),
+            ],
+          ),
+          Expanded(
+            child: Container(
+              margin: const EdgeInsets.only(top: 5),
+              child: TabBarView(
+                controller: _tabController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  NewsRecruitment(
+                    flag: 0,
+                  ),
+                  NewsRecruitment(
+                    flag: 1,
+                  ),
+                  NewsRecruitment(
+                    flag: 2,
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
       );
 
   @override

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../bloc/common_new/home_works_list_bloc.dart';
 import '../../../../constant/application_constant.dart';
 import '../../../../event/common_new/home_works_list_event.dart';
+import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
 import '../../../../model/api/request/common_new/data/home_works_list_data_request.dart';
 import '../../../../model/api/request/common_new/home_works_list_request.dart';
@@ -36,7 +37,8 @@ class _NewsRecruitmentState extends BasePageStateActive<NewsRecruitment> {
   @override
   void initDataLoading() {
     homeWorksListCommonBloc.add(HomeWorksListEvent(
-        request: HomeWorksListRequest(obj: HomeWorksListDataRequest())));
+        request: HomeWorksListRequest(
+            obj: HomeWorksListDataRequest(flag: widget.flag))));
     super.initDataLoading();
   }
 
@@ -68,6 +70,7 @@ class _NewsRecruitmentState extends BasePageStateActive<NewsRecruitment> {
                           )),
                       title: state.elementAt(i).title,
                       imageUrl: state.elementAt(i).imageURL,
+                      time: state.elementAt(i).expiredDate.formatDateTimeApi(),
                     )),
           ),
         ),

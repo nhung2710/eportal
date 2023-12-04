@@ -116,7 +116,7 @@ class NewsWidget extends StatelessWidget {
                           child: Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              time.formatDateTimeApi().addLine(1),
+                              time.addLine(1),
                               maxLines: 1,
                               textAlign: TextAlign.right,
                               style: AppTextStyle.normalChild1,

@@ -85,7 +85,7 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage>
   }
 
   @override
-  String getPageTitle(BuildContext context) => "Tạo hồ sơ";
+  String getPageTitle(BuildContext context) => "Sửa hồ sơ";
 
   @override
   Widget pageUI(BuildContext context) => BlocProvider(

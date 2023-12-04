@@ -5,7 +5,10 @@ import 'package:eportal/widget/app_bar/default_app_bar.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../share/empty_example/page/empty_example_page.dart';
 import '../../share/home_manage/page/home_manage_page.dart';
+import '../candidate_profile/page/candidate_profile_page.dart';
+import '../job_advertisement/page/job_advertisement_page.dart';
 
 //
 // Created by BlackRose on 11/7/2023.
@@ -60,12 +63,23 @@ class _HomePageState extends BasePageStateActive<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.notifications,
+              Icons.newspaper,
               color: AppColor.colorOfHintText,
             ),
-            label: "Thông báo",
+            label: "Tin tuyển dụng",
             activeIcon: Icon(
-              Icons.notifications,
+              Icons.newspaper,
+              color: AppColor.colorOfIcon,
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.groups,
+              color: AppColor.colorOfHintText,
+            ),
+            label: "Hồ sơ ứng viên",
+            activeIcon: Icon(
+              Icons.groups,
               color: AppColor.colorOfIcon,
             ),
           ),
@@ -98,7 +112,8 @@ class _HomePageState extends BasePageStateActive<HomePage> {
         },
         children: const <Widget>[
           HomeManagePage(),
-          NotificationPage(),
+          JobAdvertisementPage(),
+          CandidateProfilePage(),
           SettingPage(),
         ],
       );

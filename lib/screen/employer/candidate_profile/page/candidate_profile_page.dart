@@ -1,27 +1,24 @@
-import 'package:eportal/screen/worker/list_of_job/page/list_of_job_page.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../share/empty_example/page/empty_example_page.dart';
-import '../../list_of_job_applied/page/list_of_job_applied_page.dart';
-import '../../list_of_job_saved/page/list_of_job_saved_page.dart';
 
 //
 // Created by BlackRose on 04/12/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class JobPage extends BasePage {
-  const JobPage({super.key});
+class CandidateProfilePage extends BasePage {
+  const CandidateProfilePage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _JobPageState();
+  State<StatefulWidget> createState() => _CandidateProfilePageState();
 }
 
-class _JobPageState extends BasePageStateActive<JobPage>
+class _CandidateProfilePageState
+    extends BasePageStateActive<CandidateProfilePage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -69,10 +66,10 @@ class _JobPageState extends BasePageStateActive<JobPage>
               child: TabBarView(
                 controller: _tabController,
                 physics: const NeverScrollableScrollPhysics(),
-                children: const [
-                  ListOfJobPage(),
-                  ListOfJobAppliedPage(),
-                  ListOfJobSavedPage(),
+                children: [
+                  EmptyExamplePage(isHasAppBar: false),
+                  EmptyExamplePage(isHasAppBar: false),
+                  EmptyExamplePage(isHasAppBar: false),
                 ],
               ),
             ),
