@@ -14,6 +14,7 @@ class GlobalApplication {
   String userName = ApplicationConstant.EMPTY;
   String userNameSaved = ApplicationConstant.EMPTY;
   String userPasswordSaved = ApplicationConstant.EMPTY;
+  bool isFirstRunApp = false;
   String fullName = ApplicationConstant.EMPTY;
   String userPassword = ApplicationConstant.EMPTY;
   String userId = ApplicationConstant.EMPTY;
@@ -93,6 +94,7 @@ class GlobalApplication {
     userPassword = ApplicationConstant.EMPTY;
     userId = ApplicationConstant.EMPTY;
     userRole = ApplicationConstant.EMPTY;
+    roleType = RoleType.anonymous;
     if (preferences != null) {
       return preferences!
           .setBool(ApplicationConstant.AUTO_LOGIN, false)

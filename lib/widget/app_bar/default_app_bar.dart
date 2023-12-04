@@ -4,6 +4,7 @@ import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/image/image_loading.dart';
 import 'package:flutter/material.dart';
 
+import '../../screen/share/change_user_info/page/change_user_info_page.dart';
 import '../../style/app_color.dart';
 
 //
@@ -18,15 +19,32 @@ class DefaultAppBar {
             SizedBox(
                 width: 40,
                 height: 40,
-                child: ImageLoading(
-                    imageUrl: 'https://via.placeholder.com/100',
-                    imageBuilder: (context, imageProvider) {
-                      // you can access to imageProvider
-                      return CircleAvatar(
-                        // or any widget that use imageProvider like (PhotoView)
-                        backgroundImage: imageProvider,
-                      );
-                    })),
+                child: GestureDetector(
+                  onTap: () {
+                    if (GlobalApplication().isLogin) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const ChangeUserInfoPage()));
+                    }
+                  },
+                  child: GlobalApplication().isLogin
+                      ? ImageLoading(
+                          imageUrl: 'https://via.placeholder.com/10a0',
+                          imageError: "assets/images/logoapp.png",
+                          imageBuilder: (context, imageProvider) {
+                            // you can access to imageProvider
+                            return CircleAvatar(
+                              // or any widget that use imageProvider like (PhotoView)
+                              backgroundImage: imageProvider,
+                            );
+                          })
+                      : const CircleAvatar(
+                          backgroundImage:
+                              AssetImage("assets/images/logoapp.png"),
+                        ),
+                )),
             Expanded(
                 child: Container(
               padding: const EdgeInsets.all(10),

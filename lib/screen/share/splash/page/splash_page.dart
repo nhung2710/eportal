@@ -5,8 +5,23 @@ import 'package:eportal/enum/data_bloc_status.dart';
 import 'package:eportal/enum/role_type.dart';
 import 'package:eportal/event/common_new/dang_nhap_event.dart';
 import 'package:eportal/model/api/request/common_new/dang_nhap_request.dart';
+import 'package:eportal/model/api/request/common_new/danh_sach_gioi_tinh_request.dart';
+import 'package:eportal/model/api/request/common_new/danh_sach_muc_luong_request.dart';
+import 'package:eportal/model/api/request/common_new/danh_sach_nhu_cau_viec_lam_request.dart';
+import 'package:eportal/model/api/request/common_new/danh_sach_tinh_tp_request.dart';
 import 'package:eportal/model/api/request/common_new/data/dang_nhap_data_request.dart';
+import 'package:eportal/model/api/request/common_new/data/danh_sach_gioi_tinh_data_request.dart';
+import 'package:eportal/model/api/request/common_new/data/danh_sach_nhu_cau_viec_lam_data_request.dart';
+import 'package:eportal/model/api/request/common_new/data/danh_sach_tinh_tp_data_request.dart';
 import 'package:eportal/model/api/response/common_new/data/dang_nhap_data_response.dart';
+import 'package:eportal/repository/common_new/danh_sach_chuyen_muc_repository.dart';
+import 'package:eportal/repository/common_new/danh_sach_co_quan_ban_hanh_repository.dart';
+import 'package:eportal/repository/common_new/danh_sach_doanh_nghiep_repository.dart';
+import 'package:eportal/repository/common_new/danh_sach_linh_vuc_van_ban_repository.dart';
+import 'package:eportal/repository/common_new/danh_sach_loai_van_ban_repository.dart';
+import 'package:eportal/repository/common_new/danh_sach_muc_luong_repository.dart';
+import 'package:eportal/repository/common_new/danh_sach_quan_huyen_repository.dart';
+import 'package:eportal/repository/common_new/danh_sach_trinh_do_repository.dart';
 import 'package:eportal/screen/admin/home/home_page.dart' as admin;
 import 'package:eportal/screen/anonymous/home/home_page.dart' as anonymous;
 import 'package:eportal/screen/employer/home/home_page.dart' as employer;
@@ -21,7 +36,29 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../bloc/common_new/danh_sach_tinh_tp_bloc.dart';
 import '../../../../extension/string_extension.dart';
+import '../../../../model/api/request/common_new/danh_sach_chuyen_muc_request.dart';
+import '../../../../model/api/request/common_new/danh_sach_co_quan_ban_hanh_request.dart';
+import '../../../../model/api/request/common_new/danh_sach_doanh_nghiep_request.dart';
+import '../../../../model/api/request/common_new/danh_sach_kinh_nghiem_request.dart';
+import '../../../../model/api/request/common_new/danh_sach_linh_vuc_van_ban_request.dart';
+import '../../../../model/api/request/common_new/danh_sach_loai_van_ban_request.dart';
+import '../../../../model/api/request/common_new/danh_sach_quan_huyen_request.dart';
+import '../../../../model/api/request/common_new/danh_sach_trinh_do_request.dart';
+import '../../../../model/api/request/common_new/data/danh_sach_chuyen_muc_data_request.dart';
+import '../../../../model/api/request/common_new/data/danh_sach_co_quan_ban_hanh_data_request.dart';
+import '../../../../model/api/request/common_new/data/danh_sach_doanh_nghiep_data_request.dart';
+import '../../../../model/api/request/common_new/data/danh_sach_kinh_nghiem_data_request.dart';
+import '../../../../model/api/request/common_new/data/danh_sach_linh_vuc_van_ban_data_request.dart';
+import '../../../../model/api/request/common_new/data/danh_sach_loai_van_ban_data_request.dart';
+import '../../../../model/api/request/common_new/data/danh_sach_muc_luong_data_request.dart';
+import '../../../../model/api/request/common_new/data/danh_sach_quan_huyen_data_request.dart';
+import '../../../../model/api/request/common_new/data/danh_sach_trinh_do_data_request.dart';
+import '../../../../repository/common_new/danh_sach_gioi_tinh_repository.dart';
+import '../../../../repository/common_new/danh_sach_kinh_nghiem_repository.dart';
+import '../../../../repository/common_new/danh_sach_nhu_cau_viec_lam_repository.dart';
+import '../../../../repository/common_new/danh_sach_tinh_tp_repository.dart';
 import '../../../../style/app_text_style.dart';
 
 //
@@ -52,7 +89,7 @@ class _SplashPageState extends BasePageState<SplashPage>
 
   @override
   void initDataLoading() {
-    loaddingDataDefault();
+    loadingDataDefault();
     super.initDataLoading();
   }
 
@@ -139,36 +176,86 @@ class _SplashPageState extends BasePageState<SplashPage>
     });
   }
 
-  Future<void> loaddingDataDefault() {
-    return Future.wait([
+  Future<void> loadProcess(double percent, Iterable<Future> futures) {
+    return Future.wait(futures).then((value) => addPercent(percent));
+  }
+
+  Future<bool> checkAppRunFirstTime() async {
+    bool? isFirstRunApp = GlobalApplication()
+        .preferences
+        ?.getBool(ApplicationConstant.FIRST_TIME_OPEN_APP);
+    await GlobalApplication()
+        .preferences
+        ?.setBool(ApplicationConstant.FIRST_TIME_OPEN_APP, false);
+    return isFirstRunApp ?? true;
+  }
+
+  Future<void> loadApplicationSetting() {
+    return loadProcess(0.20, [
       SystemChrome.setPreferredOrientations(<DeviceOrientation>[
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown
-      ]).then((value) => addPercent(0.15)),
+      ]),
       getApplicationDocumentsDirectory()
-          .then((value) => GlobalApplication().dirPath = value.path)
-          .then((value) => addPercent(0.15)),
+          .then((value) => GlobalApplication().dirPath = value.path),
       PackageInfo.fromPlatform()
-          .then((value) => GlobalApplication().packageInfo = value)
-          .then((value) => addPercent(0.15)),
+          .then((value) => GlobalApplication().packageInfo = value),
       SharedPreferences.getInstance()
           .then((value) => GlobalApplication().preferences = value)
-          .then((value) => addPercent(0.15))
-          .then((value) {
-        GlobalApplication().userNameSaved = (GlobalApplication()
-                .preferences!
-                .getString(ApplicationConstant.USER_NAME))
-            .replaceWhenNullOrWhiteSpace();
-        GlobalApplication().userPasswordSaved = (GlobalApplication()
-                .preferences!
-                .getString(ApplicationConstant.USER_PASSWORD))
-            .replaceWhenNullOrWhiteSpace();
-      }).then((value) => addPercent(0.15))
-    ])
-        .then((_) => checkAppRunFirstTime())
-        .then((value) => Future.delayed(const Duration(minutes: 0)))
-        .then((isFirstRunApp) {
-      var a = GlobalApplication();
+    ]);
+  }
+
+  Future<void> loadApplicationConfig() {
+    return loadProcess(0.70, [
+      Future(() => GlobalApplication().userNameSaved = (GlobalApplication()
+              .preferences!
+              .getString(ApplicationConstant.USER_NAME))
+          .replaceWhenNullOrWhiteSpace()),
+      Future(() => GlobalApplication().userPasswordSaved = (GlobalApplication()
+              .preferences!
+              .getString(ApplicationConstant.USER_PASSWORD))
+          .replaceWhenNullOrWhiteSpace()),
+      checkAppRunFirstTime()
+          .then((value) => GlobalApplication().isFirstRunApp = value),
+      callApiDanhSach(),
+    ]);
+  }
+
+  Future<void> callApiDanhSach() {
+    return Future.wait([
+      DanhSachKinhNghiemRepository()
+          .get(DanhSachKinhNghiemRequest(obj: DanhSachKinhNghiemDataRequest())),
+      DanhSachMucLuongRepository()
+          .get(DanhSachMucLuongRequest(obj: DanhSachMucLuongDataRequest())),
+      DanhSachTinhTpRepository()
+          .get(DanhSachTinhTpRequest(obj: DanhSachTinhTpDataRequest())),
+      DanhSachGioiTinhRepository()
+          .get(DanhSachGioiTinhRequest(obj: DanhSachGioiTinhDataRequest())),
+      DanhSachNhuCauViecLamRepository().get(DanhSachNhuCauViecLamRequest(
+          obj: DanhSachNhuCauViecLamDataRequest())),
+      DanhSachMucLuongRepository()
+          .get(DanhSachMucLuongRequest(obj: DanhSachMucLuongDataRequest())),
+      DanhSachKinhNghiemRepository()
+          .get(DanhSachKinhNghiemRequest(obj: DanhSachKinhNghiemDataRequest())),
+      DanhSachGioiTinhRepository()
+          .get(DanhSachGioiTinhRequest(obj: DanhSachGioiTinhDataRequest())),
+      DanhSachTrinhDoRepository()
+          .get(DanhSachTrinhDoRequest(obj: DanhSachTrinhDoDataRequest())),
+      DanhSachLoaiVanBanRepository()
+          .get(DanhSachLoaiVanBanRequest(obj: DanhSachLoaiVanBanDataRequest())),
+      DanhSachCoQuanBanHanhRepository().get(DanhSachCoQuanBanHanhRequest(
+          obj: DanhSachCoQuanBanHanhDataRequest())),
+      DanhSachChuyenMucRepository()
+          .get(DanhSachChuyenMucRequest(obj: DanhSachChuyenMucDataRequest())),
+      DanhSachLinhVucVanBanRepository().get(DanhSachLinhVucVanBanRequest(
+          obj: DanhSachLinhVucVanBanDataRequest())),
+    ]);
+  }
+
+  Future<void> loadingDataDefault() {
+    return loadApplicationSetting()
+        .then((value) => loadApplicationConfig())
+        .then((value) {
       if (GlobalApplication().userNameSaved.isNullOrWhiteSpace() ||
           GlobalApplication().userPasswordSaved.isNullOrWhiteSpace()) {
         _skipPage(context);
@@ -180,17 +267,6 @@ class _SplashPageState extends BasePageState<SplashPage>
                     passWord: GlobalApplication().userPasswordSaved))));
       }
     });
-  }
-
-  Future<bool> checkAppRunFirstTime() async {
-    bool? isFirstRunApp = GlobalApplication()
-        .preferences
-        ?.getBool(ApplicationConstant.FIRST_TIME_OPEN_APP);
-    await GlobalApplication()
-        .preferences
-        ?.setBool(ApplicationConstant.FIRST_TIME_OPEN_APP, false);
-    addPercent(0.15);
-    return isFirstRunApp ?? true;
   }
 
   void handlerActionDataLogin(DangNhapDataResponse? data) {

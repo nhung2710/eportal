@@ -2,6 +2,7 @@ import 'package:eportal/screen/share/answer_and_question/page/answer_and_questio
 import 'package:eportal/screen/share/home_manage/page/home_manage_page.dart';
 import 'package:eportal/screen/share/multimedia/page/multimedia_page.dart';
 import 'package:eportal/screen/share/notification/page/notification_page.dart';
+import 'package:eportal/screen/worker/job/page/job_page.dart';
 import 'package:eportal/screen/worker/profile/page/profile_page.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/widget/app_bar/default_app_bar.dart';
@@ -77,6 +78,17 @@ class _HomePageState extends BasePageStateActive<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
+              Icons.work,
+              color: AppColor.colorOfHintText,
+            ),
+            label: "Việc làm",
+            activeIcon: Icon(
+              Icons.work,
+              color: AppColor.colorOfIcon,
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
               Icons.question_mark,
               color: AppColor.colorOfHintText,
             ),
@@ -94,17 +106,6 @@ class _HomePageState extends BasePageStateActive<HomePage> {
             label: "Đa phương tiện",
             activeIcon: Icon(
               Icons.perm_media,
-              color: AppColor.colorOfIcon,
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.notifications,
-              color: AppColor.colorOfHintText,
-            ),
-            label: "Thông báo",
-            activeIcon: Icon(
-              Icons.notifications,
               color: AppColor.colorOfIcon,
             ),
           ),
@@ -138,9 +139,9 @@ class _HomePageState extends BasePageStateActive<HomePage> {
         children: const <Widget>[
           HomeManagePage(),
           ProfilePage(),
+          JobPage(),
           AnswerAndQuestionPage(),
           MultimediaPage(),
-          NotificationPage(),
           SettingPage(),
         ],
       );
