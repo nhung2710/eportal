@@ -1,4 +1,5 @@
 import 'package:eportal/application/global_application.dart';
+import 'package:eportal/screen/employer/change_business_info/page/change_business_info_page.dart';
 import 'package:eportal/screen/share/about/page/about_page.dart';
 import 'package:eportal/screen/share/contact/page/contract_page.dart';
 import 'package:eportal/screen/share/policy/page/policy_page.dart';
@@ -26,27 +27,17 @@ class SettingPage extends BasePage {
   State<StatefulWidget> createState() => _SettingPageState();
 }
 
-class _SettingPageState extends BasePageState<SettingPage> {
-  var actions = {
+class _SettingPageState extends BasePageStateActive<SettingPage> {
+  final actions = {
     "Thông tin": [
       SettingPageModel(
-          icon: Icons.change_circle_outlined,
-          title: "Đổi thông tin",
-          builder: (context) => const ChangeUserInfoPage()),
-      SettingPageModel(
-          icon: Icons.password_sharp,
-          title: "Đổi mật khẩu",
-          builder: (context) => const ChangePasswordPage()),
-      SettingPageModel(
-          icon: Icons.change_circle_outlined,
+          icon: Icons.change_circle_sharp,
           title: "Đổi thông tin doanh nghiệp",
-          builder: (context) => const ChangeUserInfoPage()),
-    ],
-    "Thông tin": [
+          builder: (context) => ChangeBusinessInfoPage()),
       SettingPageModel(
           icon: Icons.change_circle_outlined,
           title: "Đổi thông tin",
-          builder: (context) => const ChangePasswordPage()),
+          builder: (context) => const ChangeUserInfoPage()),
       SettingPageModel(
           icon: Icons.password_sharp,
           title: "Đổi mật khẩu",

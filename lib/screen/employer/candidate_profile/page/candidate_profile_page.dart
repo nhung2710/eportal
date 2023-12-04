@@ -26,7 +26,7 @@ class _CandidateProfilePageState
   void initDataLoading() {
     // TODO: implement initDataLoading
     _tabController = TabController(
-        vsync: this, length: 3, animationDuration: const Duration(seconds: 0));
+        vsync: this, length: 4, animationDuration: const Duration(seconds: 0));
     super.initDataLoading();
   }
 
@@ -50,13 +50,16 @@ class _CandidateProfilePageState
             indicatorWeight: 2,
             tabs: const [
               Tab(
-                text: "Danh sách việc làm",
+                text: "Danh sách hồ sơ ứng viên",
               ),
               Tab(
-                text: "Việc làm đã ứng tuyển",
+                text: "Hồ sơ đã ứng tuyển",
               ),
               Tab(
-                text: "Việc làm đã lưu lại",
+                text: "Hồ sơ ứng viên đã lưu",
+              ),
+              Tab(
+                text: "Hồ sơ ứng viên đã mời",
               ),
             ],
           ),
@@ -67,6 +70,7 @@ class _CandidateProfilePageState
                 controller: _tabController,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
+                  EmptyExamplePage(isHasAppBar: false),
                   EmptyExamplePage(isHasAppBar: false),
                   EmptyExamplePage(isHasAppBar: false),
                   EmptyExamplePage(isHasAppBar: false),

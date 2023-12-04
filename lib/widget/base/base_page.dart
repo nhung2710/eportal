@@ -23,7 +23,8 @@ class BasePage extends StatefulWidget {
   State<StatefulWidget> createState() => BasePageState<BasePage>();
 }
 
-class BasePageState<T extends StatefulWidget> extends State<T> {
+class BasePageState<T extends StatefulWidget> extends State<T>
+    with WidgetsBindingObserver {
   GlobalKey<State<T>> localKey = GlobalKey<State<T>>();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -36,6 +37,7 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
     scrollController?.removeListener(_onScroll);
     scrollController?.dispose();
     scrollController = null;
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
@@ -56,10 +58,32 @@ class BasePageState<T extends StatefulWidget> extends State<T> {
     isScrollMore = false;
   }
 
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        print("$runtimeType app in resumed");
+        break;
+      case AppLifecycleState.inactive:
+        print("$runtimeType app in inactive");
+        break;
+      case AppLifecycleState.paused:
+        print("$runtimeType app in paused");
+        break;
+      case AppLifecycleState.detached:
+        print("$runtimeType app in detached");
+        break;
+      case AppLifecycleState.hidden:
+        print("$runtimeType app in hidden");
+        break;
+    }
+  }
+
   void getMoreData() {}
 
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     startScrollMore();
     scrollController = ScrollController();
     scrollController!.addListener(_onScroll);

@@ -15,6 +15,7 @@ class GlobalApplication {
   String userNameSaved = ApplicationConstant.EMPTY;
   String userPasswordSaved = ApplicationConstant.EMPTY;
   bool isFirstRunApp = false;
+  bool isAutoLogin = false;
   String fullName = ApplicationConstant.EMPTY;
   String userPassword = ApplicationConstant.EMPTY;
   String userId = ApplicationConstant.EMPTY;
@@ -79,10 +80,11 @@ class GlobalApplication {
         userId = data.userID.replaceWhenNullOrWhiteSpace();
         userPassword = password;
         userPasswordSaved = password;
+        isAutoLogin = true;
         return Future.wait([
           preferences!.setString(ApplicationConstant.USER_NAME, userName),
           preferences!.setString(ApplicationConstant.USER_PASSWORD, password),
-          preferences!.setBool(ApplicationConstant.AUTO_LOGIN, true),
+          preferences!.setBool(ApplicationConstant.AUTO_LOGIN, isAutoLogin),
         ]).then((value) => {});
       }
     }
@@ -95,9 +97,10 @@ class GlobalApplication {
     userId = ApplicationConstant.EMPTY;
     userRole = ApplicationConstant.EMPTY;
     roleType = RoleType.anonymous;
+    isAutoLogin = false;
     if (preferences != null) {
       return preferences!
-          .setBool(ApplicationConstant.AUTO_LOGIN, false)
+          .setBool(ApplicationConstant.AUTO_LOGIN, isAutoLogin)
           .then((value) => {});
     }
   }

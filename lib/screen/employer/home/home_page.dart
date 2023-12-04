@@ -1,5 +1,3 @@
-import 'package:eportal/screen/employer/setting/page/setting_page.dart';
-import 'package:eportal/screen/share/notification/page/notification_page.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/widget/app_bar/default_app_bar.dart';
 import 'package:eportal/widget/base/base_page.dart';
@@ -9,6 +7,7 @@ import '../../share/empty_example/page/empty_example_page.dart';
 import '../../share/home_manage/page/home_manage_page.dart';
 import '../candidate_profile/page/candidate_profile_page.dart';
 import '../job_advertisement/page/job_advertisement_page.dart';
+import '../setting/page/setting_page.dart';
 
 //
 // Created by BlackRose on 11/7/2023.

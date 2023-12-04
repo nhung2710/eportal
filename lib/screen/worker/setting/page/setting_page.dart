@@ -27,7 +27,7 @@ class SettingPage extends BasePage {
 }
 
 class _SettingPageState extends BasePageState<SettingPage> {
-  var actions = {
+  final actions = {
     "Thông tin": [
       SettingPageModel(
           icon: Icons.change_circle_outlined,

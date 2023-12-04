@@ -211,6 +211,10 @@ class _SplashPageState extends BasePageState<SplashPage>
               .preferences!
               .getString(ApplicationConstant.USER_NAME))
           .replaceWhenNullOrWhiteSpace()),
+      Future(() => GlobalApplication().isAutoLogin = (GlobalApplication()
+              .preferences!
+              .getBool(ApplicationConstant.AUTO_LOGIN)) ??
+          false),
       Future(() => GlobalApplication().userPasswordSaved = (GlobalApplication()
               .preferences!
               .getString(ApplicationConstant.USER_PASSWORD))
@@ -256,7 +260,8 @@ class _SplashPageState extends BasePageState<SplashPage>
     return loadApplicationSetting()
         .then((value) => loadApplicationConfig())
         .then((value) {
-      if (GlobalApplication().userNameSaved.isNullOrWhiteSpace() ||
+      if (!GlobalApplication().isAutoLogin ||
+          GlobalApplication().userNameSaved.isNullOrWhiteSpace() ||
           GlobalApplication().userPasswordSaved.isNullOrWhiteSpace()) {
         _skipPage(context);
       } else {

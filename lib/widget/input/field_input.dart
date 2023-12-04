@@ -1,5 +1,6 @@
 import 'package:eportal/style/app_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../style/app_color.dart';
 import '../../style/app_size_icon.dart';
@@ -20,7 +21,7 @@ class FieldInput extends StatefulWidget {
   final int? minLines;
   final int? maxLines;
   final TextInputType? keyboardType;
-
+  final List<TextInputFormatter>? inputFormatters;
   FocusNode? focusNode;
 
   FieldInput({
@@ -35,6 +36,7 @@ class FieldInput extends StatefulWidget {
     this.minLines,
     this.maxLines,
     this.maxLength = 50,
+    this.inputFormatters,
     this.textInputAction,
   });
 
@@ -68,8 +70,7 @@ class _FieldInputState extends State<FieldInput> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      TextFormField(
+  Widget build(BuildContext context) => TextFormField(
         obscureText: false,
         controller: widget.controller,
         maxLength: widget.maxLength,
@@ -78,6 +79,7 @@ class _FieldInputState extends State<FieldInput> {
         focusNode: widget.focusNode,
         minLines: widget.minLines,
         maxLines: widget.maxLines,
+        inputFormatters: widget.inputFormatters,
         keyboardType: widget.keyboardType,
         style: AppTextStyle.title,
         onFieldSubmitted: widget.onFieldSubmitted,
@@ -85,7 +87,7 @@ class _FieldInputState extends State<FieldInput> {
           hintText: widget.hintText,
           focusedBorder: OutlineInputBorder(
             borderSide:
-            const BorderSide(color: AppColor.colorOfIcon, width: 2.0),
+                const BorderSide(color: AppColor.colorOfIcon, width: 2.0),
             borderRadius: BorderRadius.circular(5.0),
           ),
           isDense: true,
@@ -103,24 +105,24 @@ class _FieldInputState extends State<FieldInput> {
           ),
           suffixIcon: isShowIcon
               ? GestureDetector(
-            onTap: () {
-              setState(() {
-                widget.controller?.clear();
-              });
-            },
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8),
-              child: const Icon(
-                Icons.clear,
-                color: AppColor.colorOfDrawer,
-                size: AppSizeIcon.sizeOfNormal,
-              ),
-            ),
-          )
+                  onTap: () {
+                    setState(() {
+                      widget.controller?.clear();
+                    });
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                    child: const Icon(
+                      Icons.clear,
+                      color: AppColor.colorOfDrawer,
+                      size: AppSizeIcon.sizeOfNormal,
+                    ),
+                  ),
+                )
               : const SizedBox(
-            width: 25,
-            height: 25,
-          ),
+                  width: 25,
+                  height: 25,
+                ),
           suffixIconConstraints: const BoxConstraints(
             minWidth: 25,
             minHeight: 25,

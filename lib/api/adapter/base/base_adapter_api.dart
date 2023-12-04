@@ -31,6 +31,7 @@ class CacheApi {
 
 class BaseAdapterApi {
   static final BaseAdapterApi _instance = BaseAdapterApi._internal();
+  bool isNeedLogApi = false;
 
   factory BaseAdapterApi() {
     return _instance;
@@ -101,7 +102,9 @@ class BaseAdapterApi {
             cacheApi.timeout! >= DateTime.now().millisecondsSinceEpoch) {
           responseSoapBody = cacheApi.body.replaceWhenNullOrWhiteSpace();
           isUseCache = !responseSoapBody.isNullOrWhiteSpace();
-          log('body: ${responseSoapBody}');
+          if (isNeedLogApi) {
+            log('body: $responseSoapBody');
+          }
         }
       }
     }
@@ -111,8 +114,9 @@ class BaseAdapterApi {
     }
     if (!responseSoapBody.isNullOrWhiteSpace()) {
       final xmlResponse = XmlDocument.parse(responseSoapBody);
-
-      log('getTagXml: ${request.getTagXmlResponse()}');
+      if (isNeedLogApi) {
+        log('getTagXml: ${request.getTagXmlResponse()}');
+      }
       var elements = xmlResponse.findAllElements(request.getTagXmlResponse());
       for (var item in elements) {
         var jsonValue = item.innerText;
@@ -136,8 +140,12 @@ class BaseAdapterApi {
   Future<String> _callWebServiceAsync(
       Uri uri, String request, String contentType) async {
     try {
-      log('data: $request');
-      log('uri: $uri');
+      if (isNeedLogApi) {
+        log('data: $request');
+      }
+      if (isNeedLogApi) {
+        log('uri: $uri');
+      }
       var responseSoap = await post(
         uri,
         headers: {
@@ -145,7 +153,9 @@ class BaseAdapterApi {
         },
         body: request,
       ).timeout(const Duration(seconds: 60));
-      log('body: ${responseSoap.body}');
+      if (isNeedLogApi) {
+        log('body: ${responseSoap.body}');
+      }
       return responseSoap.body;
     } on Exception catch (ex) {
       log(ex.toString());
