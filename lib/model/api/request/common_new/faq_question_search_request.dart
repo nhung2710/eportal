@@ -12,7 +12,7 @@ class FaqQuestionSearchRequest
   FaqQuestionSearchRequest({required super.obj});
 
   @override
-  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_DEFAULT;
+  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_LOW_DEFAULT;
 
   @override
   String getQuery() =>

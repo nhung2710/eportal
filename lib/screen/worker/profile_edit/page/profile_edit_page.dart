@@ -4,21 +4,34 @@ import 'package:eportal/bloc/common_new/danh_sach_muc_luong_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_quan_huyen_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_tinh_tp_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_trinh_do_bloc.dart';
+import 'package:eportal/bloc/common_new/job_user_update_bloc.dart';
 import 'package:eportal/event/common_new/danh_sach_kinh_nghiem_event.dart';
 import 'package:eportal/event/common_new/danh_sach_muc_luong_event.dart';
 import 'package:eportal/event/common_new/danh_sach_quan_huyen_event.dart';
 import 'package:eportal/event/common_new/danh_sach_tinh_tp_event.dart';
+import 'package:eportal/event/common_new/job_user_update_event.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_kinh_nghiem_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_muc_luong_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_quan_huyen_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_tinh_tp_request.dart';
 import 'package:eportal/model/api/request/common_new/data/common_new_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_quan_huyen_data_request.dart';
+import 'package:eportal/model/api/request/common_new/data/job_user_update_data_request.dart';
+import 'package:eportal/model/api/request/common_new/job_user_update_request.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_kinh_nghiem_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_muc_luong_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_quan_huyen_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_tinh_tp_data_response.dart';
+import 'package:eportal/model/api/response/common_new/data/job_user_update_data_response.dart';
+import 'package:eportal/screen/worker/profile_edit/tab/profile_edit_basic_tab.dart';
+import 'package:eportal/screen/worker/profile_edit/tab/profile_edit_career_goals_tab.dart';
+import 'package:eportal/screen/worker/profile_edit/tab/profile_edit_field_skills_tab.dart';
+import 'package:eportal/screen/worker/profile_edit/tab/profile_edit_general_tab.dart';
+import 'package:eportal/screen/worker/profile_edit/tab/profile_edit_level_tab.dart';
+import 'package:eportal/screen/worker/profile_edit/tab/profile_edit_work_experience_tab.dart';
 import 'package:eportal/state/base/base_state.dart';
+import 'package:eportal/style/app_color.dart';
+import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:eportal/widget/input/capcha_input.dart';
 import 'package:eportal/widget/input/date_input.dart';
@@ -40,563 +53,194 @@ import '../../../../widget/input/field_input.dart';
 class ProfileEditPage extends BasePage {
   ProfileEditPage({super.key});
 
-  DanhSachTinhTpDataResponse? danhSachTinhTpDataResponse;
-  DanhSachQuanHuyenDataResponse? danhSachQuanHuyenDataResponse;
-  DanhSachKinhNghiemDataResponse? danhSachKinhNghiemDataResponse;
-  DanhSachMucLuongDataResponse? danhSachMucLuongDataResponse;
-
   @override
   State<StatefulWidget> createState() => _ProfileEditPageState();
 }
 
-class _ProfileEditPageState extends BasePageState<ProfileEditPage> {
-  TextEditingController titleController = TextEditingController();
-  TextEditingController fromDateController = TextEditingController();
-  TextEditingController toDateController = TextEditingController();
-  TextEditingController educationController = TextEditingController();
-  TextEditingController experienceController = TextEditingController();
-  TextEditingController objectiveController = TextEditingController();
-  TextEditingController skillController = TextEditingController();
-
-  final _danhSachQuanHuyenKey = GlobalKey<SelectItemNormalState>();
-
-  late DanhSachTinhTpBloc danhSachTinhTpBloc;
-  late DanhSachQuanHuyenBloc danhSachQuanHuyenBloc;
-  late DanhSachMucLuongBloc danhSachMucLuongBloc;
-  late DanhSachKinhNghiemBloc danhSachKinhNghiemBloc;
-  late DanhSachGioiTinhBloc danhSachGioiTinhBloc;
-  late DanhSachTrinhDoBloc danhSachTrinhDoBloc;
-  String? industry;
-  String? positionCurrent;
-  String? positionFuture;
-  String? education;
-  String? need;
-  List<String> industrys = [
-    "Bán hàng",
-    "Bán hàng kỹ thuật",
-    "Bán lẻ/Bán sỉ",
-    "Bảo hiểm",
-    "Bất động sản",
-    "Biên phiên dịch",
-    "Chứng khoán",
-    "Cơ khí",
-    "Công nghệ cao",
-    "Dầu khí",
-    "Dệt may/Da giày",
-    "Dịch vụ khách hàng",
-    "Dược phẩm/Công nghệ sinh học",
-    "Giáo dục/Đào tạo",
-    "Hàng cao cấp",
-    "Hàng không/Du lịch/Khách sạn",
-    "Hành chính/Thư ký",
-    "Hóa học/Hóa sinh",
-    "Hoạch định/Dự án",
-    "Internet/Media online",
-    "IT- Phần mềm",
-    "IT- Phần cứng/Mạng",
-    "Kế toán",
-    "Kho vận",
-    "Kiểm toán",
-    "Kiến trúc/Thiết kế nội thất",
-    "Marketing",
-    "Môi trường/Xử lý chất thải",
-    "Mỹ thuật/Thiết kế",
-    "Ngân hàng",
-    "Nhân sự",
-    "Nông nghiệp/Lâm nghiệp",
-    "Ô tô",
-    "Oversea job",
-    "Pháp lý",
-    "Phi chính phủ/Phi lợi nhuận",
-    "QC/QA",
-    "Quảng cáo/Khuyến mại",
-    "Sản phẩm công nghiệp",
-    "Sản xuất",
-    "Tài chính/Đầu tư",
-    "Thời trang",
-    "Thời vụ/Hợp đồng ngắn hạn",
-    "Thực phẩm &amp; Đồ uống",
-    "Truyền hình/Truyền thông/Báo trí",
-    "Tư vấn",
-    "Vận chuyển/Giao nhận",
-    "Vật tư/Cung vận",
-    "Viễn thông",
-    "Xây dựng",
-    "Xuất nhập khẩu",
-    "Y tế/Chăm sóc sức khỏe",
-    "Điện/Điện tử",
-    "Khác"
-  ];
-  List<String> needs = [
-    "Chưa có nhu cầu tìm việc",
-    "Đang có việc làm",
-    "Muốn tìm việc mới",
-    "Đang tìm việc và sẵn sàng cho công việc mới",
-  ];
-  List<String> positions = [
-    "Chuyên viên",
-    "Trưởng phòng",
-    "Trưởng nhóm",
-    "Công nhân",
-    "Nhân viên",
-    "Hiệu trưởng",
-    "Phó hiệu trưởng",
-    "Trưởng khoa",
-    "Phó trưởng khoa",
-    "Giáo viên",
-  ];
-  List<String> educations = [
-    "Tiến sĩ",
-    "Thạc sĩ",
-    "Đại học",
-    "Cao đẳng",
-    "Trung cấp",
-    "Sơ cấp",
-    "Phổ thông",
-  ];
+class _ProfileEditPageState extends BasePageState<ProfileEditPage>
+    with SingleTickerProviderStateMixin {
+  GlobalKey<ProfileEditBasicTabState> keyProfileEditBasicTabState =
+      GlobalKey<ProfileEditBasicTabState>();
+  GlobalKey<ProfileEditGeneralTabState> keyProfileEditGeneralTabState =
+      GlobalKey<ProfileEditGeneralTabState>();
+  GlobalKey<ProfileEditLevelTabState> keyProfileEditLevelTabState =
+      GlobalKey<ProfileEditLevelTabState>();
+  GlobalKey<ProfileEditWorkExperienceTabState>
+      keyProfileEditWorkExperienceTabState =
+      GlobalKey<ProfileEditWorkExperienceTabState>();
+  GlobalKey<ProfileEditCareerGoalsTabState> keyProfileEditCareerGoalsTabState =
+      GlobalKey<ProfileEditCareerGoalsTabState>();
+  GlobalKey<ProfileEditFieldSkillsTabState> keyProfileEditFieldSkillsTabState =
+      GlobalKey<ProfileEditFieldSkillsTabState>();
+  late JobUserUpdateBloc jobUserUpdateBloc;
+  late TabController _tabController;
 
   @override
   void initDataLoading() {
-    danhSachTinhTpBloc = DanhSachTinhTpBloc();
-    danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
-    danhSachMucLuongBloc = DanhSachMucLuongBloc();
-    danhSachKinhNghiemBloc = DanhSachKinhNghiemBloc();
-    danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
-    danhSachTrinhDoBloc = DanhSachTrinhDoBloc();
-    callApi();
+    jobUserUpdateBloc = JobUserUpdateBloc();
     // TODO: implement initDataLoading
+    _tabController = TabController(
+        vsync: this, length: 6, animationDuration: const Duration(seconds: 0));
     super.initDataLoading();
   }
 
   @override
-  void callApi() {
-    danhSachTinhTpBloc.add(DanhSachTinhTpEvent(
-        request: DanhSachTinhTpRequest(obj: CommonNewDataRequest())));
-
-    danhSachMucLuongBloc.add(DanhSachMucLuongEvent(
-        request: DanhSachMucLuongRequest(obj: CommonNewDataRequest())));
-    danhSachKinhNghiemBloc.add(DanhSachKinhNghiemEvent(
-        request: DanhSachKinhNghiemRequest(obj: CommonNewDataRequest())));
-    super.callApi();
-  }
+  String getPageTitle(BuildContext context) => "Tạo hồ sơ";
 
   @override
-  String getPageTitle(BuildContext context) => "Sửa hồ sơ";
-
-  @override
-  Color currentBackgroundColor(BuildContext context) => Colors.white;
-
-  @override
-  Widget pageUI(BuildContext context) => ListView(
-        children: <Widget>[
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: titleController,
-              maxLength: 100,
-              textInputAction: TextInputAction.next,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Tiêu đề không được để trống';
-                }
-                return null;
-              },
-              hintText: 'Tiêu đề',
-              icon: FontAwesomeIcons.tags,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: DateInput(
-              controller: fromDateController,
-              textInputAction: TextInputAction.next,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Ngày đăng không được để trống';
-                }
-                return null;
-              },
-              hintText: 'Ngày đăng',
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: DateInput(
-              controller: toDateController,
-              textInputAction: TextInputAction.next,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Ngày hết hạn không được để trống';
-                }
-                return null;
-              },
-              hintText: 'Ngày hết hạn',
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-                create: (_) => danhSachMucLuongBloc,
-                child: BlocListener<DanhSachMucLuongBloc,
-                    DataMultiState<DanhSachMucLuongDataResponse>>(
-                  listener: (BuildContext context,
-                      DataMultiState<DanhSachMucLuongDataResponse> state) {},
-                  child: BlocBuilder<DanhSachMucLuongBloc,
-                      DataMultiState<DanhSachMucLuongDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachMucLuongDataResponse>
-                                state) =>
-                        _buildViewSearchIndustry(context, industrys),
+  Widget pageUI(BuildContext context) => BlocProvider(
+        create: (_) => jobUserUpdateBloc,
+        child: BlocListener<JobUserUpdateBloc,
+            DataSingleState<JobUserUpdateDataResponse>>(
+          listener: (BuildContext context,
+              DataSingleState<JobUserUpdateDataResponse> state) {
+            handlerActionDataSingleState<JobUserUpdateDataResponse>(state,
+                (obj) {
+              showCenterMessage("Sửa hồ sơ thành công")
+                  .then((value) => backPage());
+            });
+          },
+          child: Column(
+            children: [
+              TabBar(
+                controller: _tabController,
+                indicatorColor: AppColor.colorOfIcon,
+                labelColor: AppColor.colorOfIcon,
+                indicatorSize: TabBarIndicatorSize.tab,
+                indicatorPadding: EdgeInsets.zero,
+                padding: EdgeInsets.zero,
+                tabAlignment: TabAlignment.start,
+                isScrollable: true,
+                labelStyle:
+                    AppTextStyle.title.copyWith(overflow: TextOverflow.visible),
+                indicatorWeight: 2,
+                tabs: const [
+                  Tab(
+                    text: "Thông tin hồ sơ",
                   ),
-                )),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-                create: (_) => danhSachTinhTpBloc,
-                child: BlocListener<DanhSachTinhTpBloc,
-                    DataMultiState<DanhSachTinhTpDataResponse>>(
-                  listener: (BuildContext context,
-                      DataMultiState<DanhSachTinhTpDataResponse> state) {},
-                  child: BlocBuilder<DanhSachTinhTpBloc,
-                      DataMultiState<DanhSachTinhTpDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachTinhTpDataResponse> state) =>
-                        _buildViewSearchDanhSachTinhTp(
-                            context, state.data ?? []),
+                  Tab(
+                    text: "Thông tin chung",
                   ),
-                )),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-                create: (_) => danhSachQuanHuyenBloc,
-                child: BlocListener<DanhSachQuanHuyenBloc,
-                    DataMultiState<DanhSachQuanHuyenDataResponse>>(
-                  listener: (BuildContext context,
-                      DataMultiState<DanhSachQuanHuyenDataResponse> state) {},
-                  child: BlocBuilder<DanhSachQuanHuyenBloc,
-                      DataMultiState<DanhSachQuanHuyenDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachQuanHuyenDataResponse>
-                                state) =>
-                        _buildViewSearchDanhSachQuanHuyen(
-                            context, state.data ?? []),
+                  Tab(
+                    text: "Trình độ học vấn",
                   ),
-                )),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-                create: (_) => danhSachMucLuongBloc,
-                child: BlocListener<DanhSachMucLuongBloc,
-                    DataMultiState<DanhSachMucLuongDataResponse>>(
-                  listener: (BuildContext context,
-                      DataMultiState<DanhSachMucLuongDataResponse> state) {},
-                  child: BlocBuilder<DanhSachMucLuongBloc,
-                      DataMultiState<DanhSachMucLuongDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachMucLuongDataResponse>
-                                state) =>
-                        _buildViewSearchPositionFuture(context, positions),
+                  Tab(
+                    text: "Kinh nghiệm làm việc",
                   ),
-                )),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-                create: (_) => danhSachMucLuongBloc,
-                child: BlocListener<DanhSachMucLuongBloc,
-                    DataMultiState<DanhSachMucLuongDataResponse>>(
-                  listener: (BuildContext context,
-                      DataMultiState<DanhSachMucLuongDataResponse> state) {},
-                  child: BlocBuilder<DanhSachMucLuongBloc,
-                      DataMultiState<DanhSachMucLuongDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachMucLuongDataResponse>
-                                state) =>
-                        _buildViewSearchPositionCurrent(context, positions),
+                  Tab(
+                    text: "Mục tiêu nghề nghiệp",
                   ),
-                )),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-              create: (_) => danhSachKinhNghiemBloc,
-              child: BlocListener<DanhSachKinhNghiemBloc,
-                  DataMultiState<DanhSachKinhNghiemDataResponse>>(
-                listener: (BuildContext context,
-                    DataMultiState<DanhSachKinhNghiemDataResponse> state) {},
-                child: BlocBuilder<DanhSachKinhNghiemBloc,
-                        DataMultiState<DanhSachKinhNghiemDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachKinhNghiemDataResponse>
-                                state) =>
-                        _buildViewSearchDanhSachKinhNghiem(
-                            context, state.data)),
+                  Tab(
+                    text: "Kỹ năng sở trường",
+                  ),
+                ],
               ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-                create: (_) => danhSachMucLuongBloc,
-                child: BlocListener<DanhSachMucLuongBloc,
-                    DataMultiState<DanhSachMucLuongDataResponse>>(
-                  listener: (BuildContext context,
-                      DataMultiState<DanhSachMucLuongDataResponse> state) {},
-                  child: BlocBuilder<DanhSachMucLuongBloc,
-                      DataMultiState<DanhSachMucLuongDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachMucLuongDataResponse>
-                                state) =>
-                        _buildViewSearchEducation(context, educations),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 5),
+                  child: TabBarView(
+                    controller: _tabController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      ProfileEditBasicTab(
+                        key: keyProfileEditBasicTabState,
+                      ),
+                      ProfileEditGeneralTab(
+                        key: keyProfileEditGeneralTabState,
+                      ),
+                      ProfileEditLevelTab(
+                        key: keyProfileEditLevelTabState,
+                      ),
+                      ProfileEditWorkExperienceTab(
+                        key: keyProfileEditWorkExperienceTabState,
+                      ),
+                      ProfileEditCareerGoalsTab(
+                        key: keyProfileEditCareerGoalsTabState,
+                      ),
+                      ProfileEditFieldSkillsTab(
+                        key: keyProfileEditFieldSkillsTabState,
+                      ),
+                    ],
                   ),
-                )),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: CapchaInput(
+                  textInputAction: TextInputAction.done,
+                  onFieldSubmitted: (value) => _send(context),
+                ),
+              ),
+              Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  child: DefaultButton(
+                    text: 'Tạo',
+                    onPressed: () => _send(context),
+                  )),
+            ],
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-                create: (_) => danhSachMucLuongBloc,
-                child: BlocListener<DanhSachMucLuongBloc,
-                    DataMultiState<DanhSachMucLuongDataResponse>>(
-                  listener: (BuildContext context,
-                      DataMultiState<DanhSachMucLuongDataResponse> state) {},
-                  child: BlocBuilder<DanhSachMucLuongBloc,
-                      DataMultiState<DanhSachMucLuongDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachMucLuongDataResponse>
-                                state) =>
-                        _buildViewSearchDanhSachMucLuong(context, state.data),
-                  ),
-                )),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-                create: (_) => danhSachMucLuongBloc,
-                child: BlocListener<DanhSachMucLuongBloc,
-                    DataMultiState<DanhSachMucLuongDataResponse>>(
-                  listener: (BuildContext context,
-                      DataMultiState<DanhSachMucLuongDataResponse> state) {},
-                  child: BlocBuilder<DanhSachMucLuongBloc,
-                      DataMultiState<DanhSachMucLuongDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachMucLuongDataResponse>
-                                state) =>
-                        _buildViewSearchNeed(context, needs),
-                  ),
-                )),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: educationController,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.multiline,
-              maxLength: 500,
-              minLines: 10,
-              maxLines: 20,
-              icon: Icons.description,
-              hintText: "Trình độ học vấn",
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: educationController,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.multiline,
-              maxLength: 500,
-              minLines: 10,
-              maxLines: 20,
-              icon: Icons.description,
-              hintText: "Kinh nghiệm làm việc",
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: objectiveController,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.multiline,
-              maxLength: 500,
-              minLines: 10,
-              maxLines: 20,
-              icon: Icons.description,
-              hintText: "Mục tiêu nghề nghiệp",
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: skillController,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.multiline,
-              maxLength: 500,
-              minLines: 10,
-              maxLines: 20,
-              icon: Icons.description,
-              hintText: "Kỹ năng sở trường",
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: CapchaInput(
-              textInputAction: TextInputAction.done,
-              onFieldSubmitted: (value) => _send(context),
-            ),
-          ),
-          Container(
-              margin: const EdgeInsets.only(top: 10),
-              child: DefaultButton(
-                text: 'Tạo',
-                onPressed: () => _send(context),
-              )),
-        ],
+        ),
       );
 
-  _send(BuildContext context) {
-    if (isValid()) {
-      showCenterMessage("Thêm hồ sơ thành công").then((value) => backPage());
+  _validPage(BuildContext context, BasePageState? state, int page) {
+    if (state?.isValid() == true) {
+      return true;
+    } else {
+      _tabController.animateTo(page);
+      return false;
     }
   }
 
-  Widget _buildViewSearchDanhSachTinhTp(
-      BuildContext context, List<DanhSachTinhTpDataResponse> list) {
-    return SelectItem<DanhSachTinhTpDataResponse>(
-      selectedItem: widget.danhSachTinhTpDataResponse,
-      list: list,
-      itemAsString: (DanhSachTinhTpDataResponse u) =>
-          u.regionalName.replaceWhenNullOrWhiteSpace(),
-      onChanged: (DanhSachTinhTpDataResponse? data) {
-        if (widget.danhSachTinhTpDataResponse != data) {
-          widget.danhSachTinhTpDataResponse = data;
-          widget.danhSachQuanHuyenDataResponse = null;
-          _danhSachQuanHuyenKey.currentState?.clear();
-          danhSachQuanHuyenBloc.add(DanhSachQuanHuyenEvent(
-              request: DanhSachQuanHuyenRequest(
-                  obj:
-                      DanhSachQuanHuyenDataRequest(tinhTp: data?.regionalID))));
-        }
-      },
-      title: "Tình thành phố",
-    );
+  _send(BuildContext context) {
+    if (_validBeforeSend(context)) {
+      jobUserUpdateBloc.add(JobUserUpdateEvent(
+          request: JobUserUpdateRequest(
+              obj: JobUserUpdateDataRequest(
+                  tieuDe: keyProfileEditBasicTabState
+                      .currentState?.titleController.text,
+                  ngayDangTu: keyProfileEditBasicTabState
+                      .currentState?.fromDateController.text,
+                  ngayDangDen: keyProfileEditBasicTabState
+                      .currentState?.toDateController.text,
+                  tinhTp: keyProfileEditBasicTabState.currentState?.widget
+                      .danhSachTinhTpDataResponse?.regionalID,
+                  quanHuyen: keyProfileEditBasicTabState.currentState?.widget
+                      .danhSachQuanHuyenDataResponse?.regionalID,
+                  nganhNghe: keyProfileEditBasicTabState.currentState?.widget
+                      .danhSachNganhNgheDataResponse?.careerID,
+                  chucVuHienTai: keyProfileEditGeneralTabState.currentState
+                      ?.widget.danhSachChucVuDataResponseHienTai?.positionID,
+                  chucVuMongMuon: keyProfileEditGeneralTabState.currentState?.widget.danhSachChucVuDataResponseMongMuon?.positionID,
+                  mucLuong: keyProfileEditGeneralTabState.currentState?.widget.danhSachMucLuongDataResponse?.salaryID,
+                  soNamKinhNghiem: keyProfileEditGeneralTabState.currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
+                  trinhDo: keyProfileEditGeneralTabState.currentState?.widget.danhSachTrinhDoDataResponse?.educationID,
+                  nhuCau: (keyProfileEditGeneralTabState.currentState?.widget.danhSachNhuCauViecLamDataResponse?.careerID).replaceWhenNullOrWhiteSpace("0120720169190368"),
+                  kyNang: keyProfileEditFieldSkillsTabState.currentState?.skillController.text,
+                  kinhNghiemLV: keyProfileEditWorkExperienceTabState.currentState?.experienceController.text,
+                  mucTieu: keyProfileEditCareerGoalsTabState.currentState?.objectiveController.text,
+                  trinhDoHocVan: keyProfileEditLevelTabState.currentState?.educationController.text))));
+    }
   }
 
-  Widget _buildViewSearchDanhSachQuanHuyen(
-      BuildContext context, List<DanhSachQuanHuyenDataResponse> list) {
-    return SelectItem<DanhSachQuanHuyenDataResponse>(
-      key: _danhSachQuanHuyenKey,
-      selectedItem: widget.danhSachQuanHuyenDataResponse,
-      list: list,
-      itemAsString: (DanhSachQuanHuyenDataResponse u) =>
-          u.regionalName.supportHtml(),
-      onChanged: (DanhSachQuanHuyenDataResponse? data) {
-        if (widget.danhSachQuanHuyenDataResponse != data) {
-          widget.danhSachQuanHuyenDataResponse = data;
+  bool _validBeforeSend(BuildContext context) {
+    if (_validPage(context, keyProfileEditBasicTabState.currentState, 0)) {
+      if (_validPage(context, keyProfileEditGeneralTabState.currentState, 1)) {
+        if (_validPage(context, keyProfileEditLevelTabState.currentState, 2)) {
+          if (_validPage(
+              context, keyProfileEditWorkExperienceTabState.currentState, 3)) {
+            if (_validPage(
+                context, keyProfileEditCareerGoalsTabState.currentState, 4)) {
+              if (_validPage(
+                  context, keyProfileEditFieldSkillsTabState.currentState, 5)) {
+                if (isValid()) {
+                  return true;
+                }
+              }
+            }
+          }
         }
-      },
-      title: "Quận huyện",
-    );
-  }
-
-  Widget _buildViewSearchDanhSachKinhNghiem(
-      BuildContext context, List<DanhSachKinhNghiemDataResponse> list) {
-    return SelectItem<DanhSachKinhNghiemDataResponse>(
-      selectedItem: widget.danhSachKinhNghiemDataResponse,
-      list: list,
-      itemAsString: (DanhSachKinhNghiemDataResponse u) =>
-          u.experienceName.supportHtml(),
-      onChanged: (DanhSachKinhNghiemDataResponse? data) {
-        if (widget.danhSachKinhNghiemDataResponse != data) {
-          widget.danhSachKinhNghiemDataResponse = data;
-        }
-      },
-      title: "Kinh nghiệm",
-    );
-  }
-
-  Widget _buildViewSearchDanhSachMucLuong(
-      BuildContext context, List<DanhSachMucLuongDataResponse> list) {
-    return SelectItem<DanhSachMucLuongDataResponse>(
-      selectedItem: widget.danhSachMucLuongDataResponse,
-      list: list,
-      itemAsString: (DanhSachMucLuongDataResponse u) =>
-          u.salaryName.supportHtml(),
-      onChanged: (DanhSachMucLuongDataResponse? data) {
-        if (widget.danhSachMucLuongDataResponse != data) {
-          widget.danhSachMucLuongDataResponse = data;
-        }
-      },
-      title: "Mức lương",
-    );
-  }
-
-  Widget _buildViewSearchIndustry(BuildContext context, List<String> list) {
-    return SelectItemNormal<String>(
-      selectedItem: industry,
-      list: list,
-      onChanged: (String? data) {
-        if (widget.danhSachMucLuongDataResponse != data) {
-          industry = data;
-        }
-      },
-      title: "Ngành nghề",
-    );
-  }
-
-  Widget _buildViewSearchPositionFuture(
-      BuildContext context, List<String> list) {
-    return SelectItemNormal<String>(
-      selectedItem: positionFuture,
-      list: list,
-      onChanged: (String? data) {
-        if (widget.danhSachMucLuongDataResponse != data) {
-          industry = data;
-        }
-      },
-      title: "Chức vụ mong muốn",
-    );
-  }
-
-  Widget _buildViewSearchPositionCurrent(
-      BuildContext context, List<String> list) {
-    return SelectItemNormal<String>(
-      selectedItem: positionCurrent,
-      list: list,
-      onChanged: (String? data) {
-        if (widget.danhSachMucLuongDataResponse != data) {
-          industry = data;
-        }
-      },
-      title: "Chức vụ hiện tại",
-    );
-  }
-
-  Widget _buildViewSearchNeed(BuildContext context, List<String> list) {
-    return SelectItemNormal<String>(
-      selectedItem: need,
-      list: list,
-      onChanged: (String? data) {
-        if (widget.danhSachMucLuongDataResponse != data) {
-          industry = data;
-        }
-      },
-      title: "Nhu cầu làm việc",
-    );
-  }
-
-  Widget _buildViewSearchEducation(BuildContext context, List<String> list) {
-    return SelectItemNormal<String>(
-      selectedItem: education,
-      list: list,
-      onChanged: (String? data) {
-        if (widget.danhSachMucLuongDataResponse != data) {
-          industry = data;
-        }
-      },
-      title: "Trình độ",
-    );
+      }
+    }
+    return false;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:eportal/model/api/request/common_new/data/home_news_list_data_request.dart';
 import 'package:eportal/model/api/response/common_new/data/home_news_list_data_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,9 +42,9 @@ class _HomeNewsListPageState extends BasePageStateActive<HomeNewsListPage> {
   void initDataLoading() {
     homeNewsListCommonBloc.add(HomeNewsListEvent(
         request: HomeNewsListRequest(
-            obj: CommonNewDataRequest(
-                flag: widget.flag,
-                top: ApplicationConstant.NUMBER_FULL_ITEM))));
+            obj: HomeNewsListDataRequest(
+      flag: widget.flag,
+    ))));
     super.initDataLoading();
   }
 

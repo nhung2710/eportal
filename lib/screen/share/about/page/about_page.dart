@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 
+import '../../../../model/api/request/common_new/data/gioi_thieu_trung_tam_data_request.dart';
+
 //
 // Created by BlackRose on 11/7/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -26,7 +28,8 @@ class _AboutPageState extends BasePageState<AboutPage> {
   @override
   void initDataLoading() {
     gioiThieuTrungTamBloc.add(GioiThieuTrungTamEvent(
-        request: GioiThieuTrungTamRequest(obj: CommonNewDataRequest(top: 1))));
+        request: GioiThieuTrungTamRequest(
+            obj: GioiThieuTrungTamDataRequest(top: 1))));
     super.initDataLoading();
   }
 

@@ -1,12 +1,16 @@
+import 'package:eportal/model/api/response/common_new/data/job_user_add_data_response.dart';
 import 'package:eportal/screen/worker/profile_add/tab/profile_add_basic_tab.dart';
+import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:eportal/widget/input/capcha_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../bloc/common_new/job_user_add_bloc.dart';
 import '../../../../event/common_new/job_user_add_event.dart';
+import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/common_new/data/job_user_add_data_request.dart';
 import '../../../../model/api/request/common_new/job_user_add_request.dart';
 import '../../../../widget/base/base_page.dart';
@@ -59,84 +63,97 @@ class _ProfileAddPageState extends BasePageState<ProfileAddPage>
   String getPageTitle(BuildContext context) => "Tạo hồ sơ";
 
   @override
-  Widget pageUI(BuildContext context) => Column(
-        children: [
-          TabBar(
-            controller: _tabController,
-            indicatorColor: AppColor.colorOfIcon,
-            labelColor: AppColor.colorOfIcon,
-            indicatorSize: TabBarIndicatorSize.tab,
-            indicatorPadding: EdgeInsets.zero,
-            padding: EdgeInsets.zero,
-            tabAlignment: TabAlignment.start,
-            isScrollable: true,
-            labelStyle:
-                AppTextStyle.title.copyWith(overflow: TextOverflow.visible),
-            indicatorWeight: 2,
-            tabs: const [
-              Tab(
-                text: "Thông tin hồ sơ",
-              ),
-              Tab(
-                text: "Thông tin chung",
-              ),
-              Tab(
-                text: "Trình độ học vấn",
-              ),
-              Tab(
-                text: "Kinh nghiệm làm việc",
-              ),
-              Tab(
-                text: "Mục tiêu nghề nghiệp",
-              ),
-              Tab(
-                text: "Kỹ năng sở trường",
-              ),
-            ],
-          ),
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.only(top: 5),
-              child: TabBarView(
+  Widget pageUI(BuildContext context) => BlocProvider(
+        create: (_) => jobUserAddBloc,
+        child: BlocListener<JobUserAddBloc,
+            DataSingleState<JobUserAddDataResponse>>(
+          listener: (BuildContext context,
+              DataSingleState<JobUserAddDataResponse> state) {
+            handlerActionDataSingleState<JobUserAddDataResponse>(state, (obj) {
+              showCenterMessage("Tạo hồ sơ thành công")
+                  .then((value) => backPage());
+            });
+          },
+          child: Column(
+            children: [
+              TabBar(
                 controller: _tabController,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  ProfileAddBasicTab(
-                    key: keyProfileAddBasicTabState,
+                indicatorColor: AppColor.colorOfIcon,
+                labelColor: AppColor.colorOfIcon,
+                indicatorSize: TabBarIndicatorSize.tab,
+                indicatorPadding: EdgeInsets.zero,
+                padding: EdgeInsets.zero,
+                tabAlignment: TabAlignment.start,
+                isScrollable: true,
+                labelStyle:
+                    AppTextStyle.title.copyWith(overflow: TextOverflow.visible),
+                indicatorWeight: 2,
+                tabs: const [
+                  Tab(
+                    text: "Thông tin hồ sơ",
                   ),
-                  ProfileAddGeneralTab(
-                    key: keyProfileAddGeneralTabState,
+                  Tab(
+                    text: "Thông tin chung",
                   ),
-                  ProfileAddLevelTab(
-                    key: keyProfileAddLevelTabState,
+                  Tab(
+                    text: "Trình độ học vấn",
                   ),
-                  ProfileAddWorkExperienceTab(
-                    key: keyProfileAddWorkExperienceTabState,
+                  Tab(
+                    text: "Kinh nghiệm làm việc",
                   ),
-                  ProfileAddCareerGoalsTab(
-                    key: keyProfileAddCareerGoalsTabState,
+                  Tab(
+                    text: "Mục tiêu nghề nghiệp",
                   ),
-                  ProfileAddFieldSkillsTab(
-                    key: keyProfileAddFieldSkillsTabState,
+                  Tab(
+                    text: "Kỹ năng sở trường",
                   ),
                 ],
               ),
-            ),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 5),
+                  child: TabBarView(
+                    controller: _tabController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      ProfileAddBasicTab(
+                        key: keyProfileAddBasicTabState,
+                      ),
+                      ProfileAddGeneralTab(
+                        key: keyProfileAddGeneralTabState,
+                      ),
+                      ProfileAddLevelTab(
+                        key: keyProfileAddLevelTabState,
+                      ),
+                      ProfileAddWorkExperienceTab(
+                        key: keyProfileAddWorkExperienceTabState,
+                      ),
+                      ProfileAddCareerGoalsTab(
+                        key: keyProfileAddCareerGoalsTabState,
+                      ),
+                      ProfileAddFieldSkillsTab(
+                        key: keyProfileAddFieldSkillsTabState,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: CapchaInput(
+                  textInputAction: TextInputAction.done,
+                  onFieldSubmitted: (value) => _send(context),
+                ),
+              ),
+              Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  child: DefaultButton(
+                    text: 'Tạo',
+                    onPressed: () => _send(context),
+                  )),
+            ],
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: CapchaInput(
-              textInputAction: TextInputAction.done,
-              onFieldSubmitted: (value) => _send(context),
-            ),
-          ),
-          Container(
-              margin: const EdgeInsets.only(top: 10),
-              child: DefaultButton(
-                text: 'Tạo',
-                onPressed: () => _send(context),
-              )),
-        ],
+        ),
       );
 
   _validPage(BuildContext context, BasePageState? state, int page) {
@@ -153,27 +170,29 @@ class _ProfileAddPageState extends BasePageState<ProfileAddPage>
       jobUserAddBloc.add(JobUserAddEvent(
           request: JobUserAddRequest(
               obj: JobUserAddDataRequest(
-        tieuDe: keyProfileAddBasicTabState.currentState?.titleController.text,
-        ngayDangTu:
-            keyProfileAddBasicTabState.currentState?.fromDateController.text,
-        ngayDangDen:
-            keyProfileAddBasicTabState.currentState?.toDateController.text,
-        tinhTp: keyProfileAddBasicTabState
-            .currentState?.widget.danhSachTinhTpDataResponse?.regionalID,
-        quanHuyen: keyProfileAddBasicTabState
-            .currentState?.widget.danhSachQuanHuyenDataResponse?.regionalID,
-        nganhNghe: keyProfileAddBasicTabState
-            .currentState?.widget.danhSachNganhNgheDataResponse?.careerID,
-        chucVuHienTai: keyProfileAddGeneralTabState
-            .currentState?.widget.danhSachChucVuDataResponseHienTai?.positionID,
-        chucVuMongMuon: keyProfileAddGeneralTabState.currentState?.widget
-            .danhSachChucVuDataResponseMongMuon?.positionID,
-        mucLuong: keyProfileAddGeneralTabState
-            .currentState?.widget.danhSachMucLuongDataResponse?.salaryID,
-        kinhNghiemLV: keyProfileAddGeneralTabState
-            .currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
-      ))));
-      showCenterMessage("Thêm hồ sơ thành công").then((value) => backPage());
+                  tieuDe: keyProfileAddBasicTabState
+                      .currentState?.titleController.text,
+                  ngayDangTu: keyProfileAddBasicTabState
+                      .currentState?.fromDateController.text,
+                  ngayDangDen: keyProfileAddBasicTabState
+                      .currentState?.toDateController.text,
+                  tinhTp: keyProfileAddBasicTabState.currentState?.widget
+                      .danhSachTinhTpDataResponse?.regionalID,
+                  quanHuyen: keyProfileAddBasicTabState.currentState?.widget
+                      .danhSachQuanHuyenDataResponse?.regionalID,
+                  nganhNghe: keyProfileAddBasicTabState.currentState?.widget
+                      .danhSachNganhNgheDataResponse?.careerID,
+                  chucVuHienTai: keyProfileAddGeneralTabState.currentState
+                      ?.widget.danhSachChucVuDataResponseHienTai?.positionID,
+                  chucVuMongMuon: keyProfileAddGeneralTabState.currentState?.widget.danhSachChucVuDataResponseMongMuon?.positionID,
+                  mucLuong: keyProfileAddGeneralTabState.currentState?.widget.danhSachMucLuongDataResponse?.salaryID,
+                  soNamKinhNghiem: keyProfileAddGeneralTabState.currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
+                  trinhDo: keyProfileAddGeneralTabState.currentState?.widget.danhSachTrinhDoDataResponse?.educationID,
+                  nhuCau: (keyProfileAddGeneralTabState.currentState?.widget.danhSachNhuCauViecLamDataResponse?.careerID).replaceWhenNullOrWhiteSpace("0120720169190368"),
+                  kyNang: keyProfileAddFieldSkillsTabState.currentState?.skillController.text,
+                  kinhNghiemLV: keyProfileAddWorkExperienceTabState.currentState?.experienceController.text,
+                  mucTieu: keyProfileAddCareerGoalsTabState.currentState?.objectiveController.text,
+                  trinhDoHocVan: keyProfileAddLevelTabState.currentState?.educationController.text))));
     }
   }
 

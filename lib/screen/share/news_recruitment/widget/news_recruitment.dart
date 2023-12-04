@@ -6,6 +6,7 @@ import '../../../../bloc/common_new/home_works_list_bloc.dart';
 import '../../../../constant/application_constant.dart';
 import '../../../../event/common_new/home_works_list_event.dart';
 import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
+import '../../../../model/api/request/common_new/data/home_works_list_data_request.dart';
 import '../../../../model/api/request/common_new/home_works_list_request.dart';
 import '../../../../state/base/base_state.dart';
 import '../../../../widget/base/base_page.dart';
@@ -35,10 +36,7 @@ class _NewsRecruitmentState extends BasePageStateActive<NewsRecruitment> {
   @override
   void initDataLoading() {
     homeWorksListCommonBloc.add(HomeWorksListEvent(
-        request: HomeWorksListRequest(
-            obj: CommonNewDataRequest(
-                flag: widget.flag,
-                top: ApplicationConstant.NUMBER_FULL_ITEM))));
+        request: HomeWorksListRequest(obj: HomeWorksListDataRequest())));
     super.initDataLoading();
   }
 

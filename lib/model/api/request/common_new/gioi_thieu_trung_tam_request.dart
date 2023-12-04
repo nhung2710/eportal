@@ -1,5 +1,6 @@
 import 'package:eportal/api/constant/application_api_constant.dart';
 import 'package:eportal/model/api/request/common_new/data/common_new_data_request.dart';
+import 'package:eportal/model/api/request/common_new/data/gioi_thieu_trung_tam_data_request.dart';
 import 'package:eportal/model/base/base_eportal_request.dart';
 
 //
@@ -7,7 +8,7 @@ import 'package:eportal/model/base/base_eportal_request.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class GioiThieuTrungTamRequest
-    extends BaseEportalRequest<CommonNewDataRequest> {
+    extends BaseEportalRequest<GioiThieuTrungTamDataRequest> {
   GioiThieuTrungTamRequest({required super.obj});
 
   @override

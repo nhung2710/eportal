@@ -17,7 +17,10 @@ import 'package:eportal/model/api/request/common_new/danh_sach_quan_huyen_reques
 import 'package:eportal/model/api/request/common_new/danh_sach_tinh_tp_request.dart';
 import 'package:eportal/model/api/request/common_new/data/common_new_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_doanh_nghiep_data_request.dart';
+import 'package:eportal/model/api/request/common_new/data/danh_sach_kinh_nghiem_data_request.dart';
+import 'package:eportal/model/api/request/common_new/data/danh_sach_muc_luong_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_quan_huyen_data_request.dart';
+import 'package:eportal/model/api/request/common_new/data/danh_sach_tinh_tp_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/search_request_data.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_doanh_nghiep_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_kinh_nghiem_data_response.dart';
@@ -85,7 +88,7 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
   @override
   void callApi() {
     danhSachTinhTpBloc.add(DanhSachTinhTpEvent(
-        request: DanhSachTinhTpRequest(obj: CommonNewDataRequest())));
+        request: DanhSachTinhTpRequest(obj: DanhSachTinhTpDataRequest())));
     if (widget.danhSachTinhTpDataResponse != null) {
       danhSachQuanHuyenBloc.add(DanhSachQuanHuyenEvent(
           request: DanhSachQuanHuyenRequest(
@@ -100,9 +103,10 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
     }
 
     danhSachMucLuongBloc.add(DanhSachMucLuongEvent(
-        request: DanhSachMucLuongRequest(obj: CommonNewDataRequest())));
+        request: DanhSachMucLuongRequest(obj: DanhSachMucLuongDataRequest())));
     danhSachKinhNghiemBloc.add(DanhSachKinhNghiemEvent(
-        request: DanhSachKinhNghiemRequest(obj: CommonNewDataRequest())));
+        request:
+            DanhSachKinhNghiemRequest(obj: DanhSachKinhNghiemDataRequest())));
     super.callApi();
   }
 

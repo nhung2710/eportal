@@ -12,9 +12,6 @@ class FaqAddQuestionRequest
   FaqAddQuestionRequest({required super.obj});
 
   @override
-  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_DEFAULT;
-
-  @override
   String getQuery() =>
       ApplicationApiConstant.API_COMMON_NEW_OP_FAQ_ADD_QUESTION;
 }

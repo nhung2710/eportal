@@ -14,7 +14,7 @@ class JobUserAddDataRequest extends BaseEportalXml {
   int? chucVuHienTai;
   int? chucVuMongMuon;
   String? soNamKinhNghiem;
-  String? trinhDo;
+  int? trinhDo;
   String? mucLuong;
   String? nhuCau;
   String? trinhDoHocVan;

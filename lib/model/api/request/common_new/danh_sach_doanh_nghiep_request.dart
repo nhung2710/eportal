@@ -7,7 +7,7 @@ class DanhSachDoanhNghiepRequest
   DanhSachDoanhNghiepRequest({required super.obj});
 
   @override
-  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_DEFAULT;
+  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_MEDIUM_DEFAULT;
 
   @override
   String getQuery() =>

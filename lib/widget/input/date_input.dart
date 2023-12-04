@@ -46,7 +46,7 @@ class _DateInputState extends State<DateInput> {
   @override
   void initState() {
     widget.initialDate = widget.initialDate ?? DateTime.now();
-    widget.lastDate = widget.lastDate ?? DateTime.now();
+    widget.lastDate = widget.lastDate ?? DateTime(DateTime.now().year + 10);
     widget.firstDate = widget.firstDate ?? DateTime(1900);
     widget.controller = widget.controller ?? TextEditingController();
     widget.focusNode = widget.focusNode ?? FocusNode();

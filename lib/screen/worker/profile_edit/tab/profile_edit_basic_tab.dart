@@ -42,19 +42,19 @@ import '../../../../widget/input/field_input.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class ProfileAddBasicTab extends BasePage {
-  ProfileAddBasicTab({super.key});
+class ProfileEditBasicTab extends BasePage {
+  ProfileEditBasicTab({super.key});
 
   DanhSachTinhTpDataResponse? danhSachTinhTpDataResponse;
   DanhSachQuanHuyenDataResponse? danhSachQuanHuyenDataResponse;
   DanhSachNganhNgheDataResponse? danhSachNganhNgheDataResponse;
 
   @override
-  State<StatefulWidget> createState() => ProfileAddBasicTabState();
+  State<StatefulWidget> createState() => ProfileEditBasicTabState();
 }
 
-class ProfileAddBasicTabState
-    extends BaseScreenStateActive<ProfileAddBasicTab> {
+class ProfileEditBasicTabState
+    extends BaseScreenStateActive<ProfileEditBasicTab> {
   TextEditingController titleController = TextEditingController();
   TextEditingController fromDateController = TextEditingController();
   TextEditingController toDateController = TextEditingController();

@@ -7,6 +7,7 @@ import '../../../../bloc/common_new/home_news_list_bloc.dart';
 import '../../../../constant/application_constant.dart';
 import '../../../../event/common_new/home_news_list_event.dart';
 import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
+import '../../../../model/api/request/common_new/data/home_news_list_data_request.dart';
 import '../../../../model/api/request/common_new/home_news_list_request.dart';
 import '../../../../state/base/base_state.dart';
 import '../../../../widget/base/base_page.dart';
@@ -34,10 +35,7 @@ class _NewsPageState extends BasePageState<NewsPage> {
   @override
   void initDataLoading() {
     homeNewsListBloc.add(HomeNewsListEvent(
-        request: HomeNewsListRequest(
-            obj: CommonNewDataRequest(
-                flag: widget.flag,
-                top: ApplicationConstant.NUMBER_PREVIEW_ITEM))));
+        request: HomeNewsListRequest(obj: HomeNewsListDataRequest())));
     super.initDataLoading();
   }
 

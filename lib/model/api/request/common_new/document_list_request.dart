@@ -12,7 +12,7 @@ class DocumentListRequest
   DocumentListRequest({required super.obj});
 
   @override
-  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_DEFAULT;
+  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_LOW_DEFAULT;
 
   @override
   String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_DOCUMENT_LIST;

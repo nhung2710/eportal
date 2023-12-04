@@ -1,3 +1,4 @@
+import 'package:eportal/model/api/request/common_new/data/home_works_list_data_request.dart';
 import 'package:eportal/model/api/response/common_new/data/home_works_list_data_response.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
@@ -47,9 +48,9 @@ class _HomeWorksListPageState extends BasePageStateActive<HomeWorksListPage> {
   void initDataLoading() {
     homeWorksListCommonBloc.add(HomeWorksListEvent(
         request: HomeWorksListRequest(
-            obj: CommonNewDataRequest(
-                flag: widget.flag,
-                top: ApplicationConstant.NUMBER_FULL_ITEM))));
+            obj: HomeWorksListDataRequest(
+      flag: widget.flag,
+    ))));
     super.initDataLoading();
   }
 

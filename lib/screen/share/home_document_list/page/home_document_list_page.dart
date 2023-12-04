@@ -1,3 +1,4 @@
+import 'package:eportal/model/api/request/common_new/data/home_document_list_data_request.dart';
 import 'package:eportal/model/api/response/common_new/data/home_document_list_data_response.dart';
 import 'package:eportal/screen/share/document_list_search/page/document_list_search_page.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
@@ -54,9 +55,7 @@ class _HomeDocumentListPageState
   @override
   void initDataLoading() {
     homeDocumentListBloc.add(HomeDocumentListEvent(
-        request: HomeDocumentListRequest(
-            obj: CommonNewDataRequest(
-                top: ApplicationConstant.NUMBER_FULL_ITEM))));
+        request: HomeDocumentListRequest(obj: HomeDocumentListDataRequest())));
     super.initDataLoading();
   }
 

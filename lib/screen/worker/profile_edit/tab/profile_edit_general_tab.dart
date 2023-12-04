@@ -14,8 +14,6 @@ import 'package:eportal/model/api/request/common_new/danh_sach_muc_luong_request
 import 'package:eportal/model/api/request/common_new/danh_sach_tinh_tp_request.dart';
 import 'package:eportal/model/api/request/common_new/data/common_new_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_chuc_vu_data_request.dart';
-import 'package:eportal/model/api/request/common_new/data/danh_sach_kinh_nghiem_data_request.dart';
-import 'package:eportal/model/api/request/common_new/data/danh_sach_muc_luong_data_request.dart';
 import 'package:eportal/model/api/response/common_new/danh_sach_chuc_vu_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_chuc_vu_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_kinh_nghiem_data_response.dart';
@@ -36,6 +34,8 @@ import '../../../../extension/dateTime_extension.dart';
 import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/common_new/danh_sach_nhu_cau_viec_lam_request.dart';
 import '../../../../model/api/request/common_new/danh_sach_trinh_do_request.dart';
+import '../../../../model/api/request/common_new/data/danh_sach_kinh_nghiem_data_request.dart';
+import '../../../../model/api/request/common_new/data/danh_sach_muc_luong_data_request.dart';
 import '../../../../model/api/request/common_new/data/danh_sach_nhu_cau_viec_lam_data_request.dart';
 import '../../../../model/api/request/common_new/data/danh_sach_trinh_do_data_request.dart';
 import '../../../../model/api/response/common_new/data/danh_sach_nhu_cau_viec_lam_data_response.dart';
@@ -46,8 +46,8 @@ import '../../../../widget/base/base_page.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class ProfileAddGeneralTab extends BasePage {
-  ProfileAddGeneralTab({super.key});
+class ProfileEditGeneralTab extends BasePage {
+  ProfileEditGeneralTab({super.key});
 
   DanhSachKinhNghiemDataResponse? danhSachKinhNghiemDataResponse;
   DanhSachMucLuongDataResponse? danhSachMucLuongDataResponse;
@@ -57,11 +57,11 @@ class ProfileAddGeneralTab extends BasePage {
   DanhSachNhuCauViecLamDataResponse? danhSachNhuCauViecLamDataResponse;
 
   @override
-  State<StatefulWidget> createState() => ProfileAddGeneralTabState();
+  State<StatefulWidget> createState() => ProfileEditGeneralTabState();
 }
 
-class ProfileAddGeneralTabState
-    extends BaseScreenStateActive<ProfileAddGeneralTab> {
+class ProfileEditGeneralTabState
+    extends BaseScreenStateActive<ProfileEditGeneralTab> {
   late DanhSachMucLuongBloc danhSachMucLuongBloc;
   late DanhSachKinhNghiemBloc danhSachKinhNghiemBloc;
   late DanhSachGioiTinhBloc danhSachGioiTinhBloc;
