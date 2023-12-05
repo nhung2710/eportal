@@ -61,7 +61,7 @@ class _JobAdvertisementEditPageState
   }
 
   @override
-  String getPageTitle(BuildContext context) => "Tạo hồ sơ";
+  String getPageTitle(BuildContext context) => "Sửa tin tuyển dụng";
 
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
@@ -71,7 +71,7 @@ class _JobAdvertisementEditPageState
           listener: (BuildContext context,
               DataSingleState<JobUserAddDataResponse> state) {
             handlerActionDataSingleState<JobUserAddDataResponse>(state, (obj) {
-              showCenterMessage("Tạo hồ sơ thành công")
+              showCenterMessage("Sửa tin tuyển dụng thành công")
                   .then((value) => backPage());
             });
           },

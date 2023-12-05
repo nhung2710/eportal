@@ -1,4 +1,4 @@
-import 'package:eportal/screen/worker/list_of_job/page/list_of_job_page.dart';
+import 'package:eportal/screen/worker/job/tab/list_of_job_page.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../share/empty_example/page/empty_example_page.dart';
-import '../../list_of_job_applied/page/list_of_job_applied_page.dart';
-import '../../list_of_job_saved/page/list_of_job_saved_page.dart';
+import '../tab/list_of_job_applied_page.dart';
+import '../tab/list_of_job_saved_page.dart';
 
 //
 // Created by BlackRose on 04/12/2023.

@@ -4,6 +4,10 @@ import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../../share/empty_example/page/empty_example_page.dart';
+import '../tab/list_of_candidate_profile_applied_tab.dart';
+import '../tab/list_of_candidate_profile_invited_tab.dart';
+import '../tab/list_of_candidate_profile_saved_tab.dart';
+import '../tab/list_of_candidate_profile_tab.dart';
 
 //
 // Created by BlackRose on 04/12/2023.
@@ -69,11 +73,11 @@ class _CandidateProfilePageState
               child: TabBarView(
                 controller: _tabController,
                 physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  EmptyExamplePage(isHasAppBar: false),
-                  EmptyExamplePage(isHasAppBar: false),
-                  EmptyExamplePage(isHasAppBar: false),
-                  EmptyExamplePage(isHasAppBar: false),
+                children: const [
+                  ListOfCandidateProfileTab(),
+                  ListOfCandidateProfileAppliedTab(),
+                  ListOfCandidateProfileSavedTab(),
+                  ListOfCandidateProfileInvitedTab(),
                 ],
               ),
             ),

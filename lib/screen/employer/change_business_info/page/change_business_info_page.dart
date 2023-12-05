@@ -158,5 +158,9 @@ class _ChangeBusinessInfoPageState extends BasePageState<ChangeBusinessInfoPage>
     }
   }
 
-  _send(BuildContext context) {}
+  _send(BuildContext context) {
+    if (isValid()) {
+      showCenterMessage("Sửa thông tin thành công").then((value) => backPage());
+    }
+  }
 }
