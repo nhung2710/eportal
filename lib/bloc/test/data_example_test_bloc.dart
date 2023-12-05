@@ -23,7 +23,7 @@ class DataExampleTestBloc extends BaseMultiBloc<DataExampleTestDataResponse,
           DataExampleTestRepository apiRepository,
           DataExampleTestEvent event) =>
       Future.delayed(
-          const Duration(seconds: 10),
+          const Duration(seconds: 2),
           () => DataExampleTestResponse(
               data: List.generate(Random().nextInt(10),
                   (index) => DataExampleTestDataResponse()),

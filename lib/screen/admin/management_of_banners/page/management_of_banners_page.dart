@@ -1,6 +1,7 @@
 import 'package:eportal/bloc/test/data_example_test_bloc.dart';
 import 'package:eportal/model/api/request/common_new/data/work_search_data_request.dart';
 import 'package:eportal/model/api/request/common_new/work_search_request.dart';
+import 'package:eportal/screen/share/empty_example/page/empty_example_page.dart';
 import 'package:eportal/screen/worker/profile_add/page/profile_add_page.dart';
 import 'package:eportal/screen/worker/profile_edit/page/profile_edit_page.dart';
 import 'package:eportal/state/base/base_state.dart';
@@ -65,7 +66,9 @@ class _ManagementOfBannersPageState
         ActionButton(
           icon: const Icon(Icons.add, color: Colors.white),
           onPressed: () {
-            nextPage((context) => ProfileAddPage());
+            nextPage((context) => EmptyExamplePage(
+                  isHasAppBar: true,
+                ));
           },
         ),
       ]);
@@ -92,28 +95,30 @@ class _ManagementOfBannersPageState
             ),
           ),
           Expanded(
-            child: SingleChildScrollView(
-              child: BlocProvider(
-                  create: (_) => dataExampleTestBloc,
-                  child: BlocListener<DataExampleTestBloc,
+            child: BlocProvider(
+                create: (_) => dataExampleTestBloc,
+                child: BlocListener<DataExampleTestBloc,
+                    DataMultiState<DataExampleTestDataResponse>>(
+                  listener: (BuildContext context,
+                      DataMultiState<DataExampleTestDataResponse> state) {
+                    print(state);
+                  },
+                  child: BlocBuilder<DataExampleTestBloc,
                       DataMultiState<DataExampleTestDataResponse>>(
-                    listener: (BuildContext context,
-                        DataMultiState<DataExampleTestDataResponse> state) {
-                      print(state);
-                    },
-                    child: BlocBuilder<DataExampleTestBloc,
-                        DataMultiState<DataExampleTestDataResponse>>(
-                      builder: (BuildContext context,
-                              DataMultiState<DataExampleTestDataResponse>
-                                  state) =>
-                          handleDataMultiState<DataExampleTestDataResponse>(
-                        state,
-                        (context, state) => ListView.builder(
+                    builder: (BuildContext context,
+                            DataMultiState<DataExampleTestDataResponse>
+                                state) =>
+                        handleDataMultiState<DataExampleTestDataResponse>(
+                      state,
+                      (context, state) => SingleChildScrollView(
+                        child: ListView.builder(
                             shrinkWrap: true,
                             itemCount: state.length,
                             itemBuilder: (context, i) => ProfileItem(
                                   onTap: () {
-                                    nextPage((context) => ProfileEditPage());
+                                    nextPage((context) => EmptyExamplePage(
+                                          isHasAppBar: true,
+                                        ));
                                   },
                                   title: "Hồ sơ ${i + 1}",
                                   location: "Hà nội",
@@ -128,8 +133,8 @@ class _ManagementOfBannersPageState
                                 )),
                       ),
                     ),
-                  )),
-            ),
+                  ),
+                )),
           ),
         ],
       );

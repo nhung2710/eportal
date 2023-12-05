@@ -1,15 +1,20 @@
 import 'dart:math';
 
+import 'package:eportal/bloc/test/data_example_test_bloc.dart';
 import 'package:eportal/model/api/request/common_new/data/work_search_data_request.dart';
 import 'package:eportal/model/api/request/common_new/work_search_request.dart';
 import 'package:eportal/screen/worker/profile_add/page/profile_add_page.dart';
 import 'package:eportal/screen/worker/profile_edit/page/profile_edit_page.dart';
+import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
 import 'package:eportal/widget/full_data_item/profile_item.dart';
 import 'package:eportal/widget/input/search_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../share/empty_example/page/empty_example_page.dart';
 
 //
 // Created by BlackRose on 05/12/2023.
@@ -38,13 +43,36 @@ class _ManagementOfNewsPageState
     onPressed: () => initDataLoading(),
   );
 
+  late DataExampleTestBloc dataExampleTestBloc;
+
+  @override
+  void initBloc() {
+    dataExampleTestBloc = DataExampleTestBloc();
+  }
+
+  @override
+  void initDataLoading() {
+    // TODO: implement initDataLoading
+    callApi();
+    super.initDataLoading();
+  }
+
+  @override
+  void callApi() {
+    dataExampleTestBloc.add(DataExampleTestEvent(
+        request: DataExampleTestRequest(obj: DataExampleTestDataRequest())));
+    super.callApi();
+  }
+
   @override
   Widget? getFloatingActionButton(BuildContext context) =>
       ExpandableFab(initNumberGroup: 1, children: [
         ActionButton(
           icon: const Icon(Icons.add, color: Colors.white),
           onPressed: () {
-            nextPage((context) => ProfileAddPage());
+            nextPage((context) => EmptyExamplePage(
+                  isHasAppBar: true,
+                ));
           },
         ),
       ]);
@@ -71,27 +99,46 @@ class _ManagementOfNewsPageState
             ),
           ),
           Expanded(
-            child: SingleChildScrollView(
-              child: ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: Random().nextInt(100) + 1,
-                  itemBuilder: (context, index) => ProfileItem(
-                        onTap: () {
-                          nextPage((context) => ProfileEditPage());
-                        },
-                        title: "Hồ sơ ${index + 1}",
-                        location: "Hà nội",
-                        status: "Chờ duyệt",
-                        experience: "Dưới 1 năm",
-                        salary: "5-7 triệu",
-                        fromDate: "01/11/2023",
-                        toDate: "01/11/2023",
-                        industry: "Bán hàng",
-                        numberView: "2",
-                        isShowFull: true,
-                      )),
-            ),
+            child: BlocProvider(
+                create: (_) => dataExampleTestBloc,
+                child: BlocListener<DataExampleTestBloc,
+                    DataMultiState<DataExampleTestDataResponse>>(
+                  listener: (BuildContext context,
+                      DataMultiState<DataExampleTestDataResponse> state) {
+                    print(state);
+                  },
+                  child: BlocBuilder<DataExampleTestBloc,
+                      DataMultiState<DataExampleTestDataResponse>>(
+                    builder: (BuildContext context,
+                            DataMultiState<DataExampleTestDataResponse>
+                                state) =>
+                        handleDataMultiState<DataExampleTestDataResponse>(
+                      state,
+                      (context, state) => SingleChildScrollView(
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: state.length,
+                            itemBuilder: (context, i) => ProfileItem(
+                                  onTap: () {
+                                    nextPage((context) => EmptyExamplePage(
+                                          isHasAppBar: true,
+                                        ));
+                                  },
+                                  title: "Hồ sơ ${i + 1}",
+                                  location: "Hà nội",
+                                  status: "Chờ duyệt",
+                                  experience: "Dưới 1 năm",
+                                  salary: "5-7 triệu",
+                                  fromDate: "01/11/2023",
+                                  toDate: "01/11/2023",
+                                  industry: "Bán hàng",
+                                  numberView: "2",
+                                  isShowFull: true,
+                                )),
+                      ),
+                    ),
+                  ),
+                )),
           ),
         ],
       );
