@@ -149,6 +149,8 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
   #flutter pub run flutter_launcher_icons
   #dart run flutter_native_splash:create
+  #flutter build windows --release
+  #flutter build apk --release
 flutter_native_splash:
   color: "#ffffff"
   image: assets/images/logoapp.png
