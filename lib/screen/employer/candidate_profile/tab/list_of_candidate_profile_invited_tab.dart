@@ -1,12 +1,19 @@
+import 'package:eportal/bloc/common_new/job_user_search_bloc.dart';
 import 'package:eportal/bloc/common_new/work_search_bloc.dart';
+import 'package:eportal/event/common_new/job_user_search_event.dart';
 import 'package:eportal/event/common_new/work_search_event.dart';
+import 'package:eportal/model/api/request/common_new/data/job_user_search_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/work_search_data_request.dart';
+import 'package:eportal/model/api/request/common_new/job_user_search_request.dart';
 import 'package:eportal/model/api/request/common_new/work_search_request.dart';
+import 'package:eportal/model/api/response/common_new/data/job_user_search_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/work_search_data_response.dart';
+import 'package:eportal/screen/share/news_curriculum_vitae_detail/page/news_curriculum_vitae_detail_page.dart';
 import 'package:eportal/screen/share/work_search_detail/page/work_search_detail_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
+import 'package:eportal/widget/full_data_item/curriculum_vitae_item.dart';
 import 'package:eportal/widget/full_data_item/work_item.dart';
 import 'package:eportal/widget/input/search_input.dart';
 import 'package:flutter/material.dart';
@@ -27,14 +34,14 @@ class ListOfCandidateProfileInvitedTab extends BasePage {
 
 class _ListOfCandidateProfileInvitedTabState
     extends BasePageStateActive<ListOfCandidateProfileInvitedTab> {
-  WorkSearchBloc workSearchBloc = WorkSearchBloc();
-  WorkSearchRequest request = WorkSearchRequest(obj: WorkSearchDataRequest());
+  JobUserSearchBloc jobUserSearchBloc = JobUserSearchBloc();
+  JobUserSearchRequest request =
+      JobUserSearchRequest(obj: JobUserSearchDataRequest());
   final filterJobDialogKey = GlobalKey<FilterJobDialogState>();
   late FilterJobDialog filterJobDialog = FilterJobDialog(
-    key: filterJobDialogKey,
-    data: request.obj,
-    onPressed: () => initDataLoading(),
-  );
+      key: filterJobDialogKey,
+      data: request.obj,
+      onPressed: () => initDataLoading());
   TextEditingController textEditingController = TextEditingController();
 
   @override
@@ -54,7 +61,7 @@ class _ListOfCandidateProfileInvitedTabState
 
   @override
   void callApi() {
-    workSearchBloc.add(WorkSearchEvent(request: request));
+    jobUserSearchBloc.add(JobUserSearchEvent(request: request));
   }
 
   @override
@@ -83,35 +90,32 @@ class _ListOfCandidateProfileInvitedTabState
           ),
           Expanded(
             child: BlocProvider(
-                create: (_) => workSearchBloc,
-                child: BlocListener<WorkSearchBloc,
-                    DataPageState<WorkSearchDataResponse>>(
+                create: (_) => jobUserSearchBloc,
+                child: BlocListener<JobUserSearchBloc,
+                    DataPageState<JobUserSearchDataResponse>>(
                   listener: (BuildContext context,
-                      DataPageState<WorkSearchDataResponse> state) {},
-                  child: BlocBuilder<WorkSearchBloc,
-                      DataPageState<WorkSearchDataResponse>>(
+                      DataPageState<JobUserSearchDataResponse> state) {},
+                  child: BlocBuilder<JobUserSearchBloc,
+                      DataPageState<JobUserSearchDataResponse>>(
                     builder: (BuildContext context,
-                            DataPageState<WorkSearchDataResponse> state) =>
-                        handleDataPageState<WorkSearchDataResponse>(
+                            DataPageState<JobUserSearchDataResponse> state) =>
+                        handleDataPageState<JobUserSearchDataResponse>(
                       state,
                       (context, state) => ListView.builder(
                           shrinkWrap: true,
                           controller: scrollController,
                           itemCount: state.length,
-                          itemBuilder: (context, i) => WorkItem(
-                                onTap: () =>
-                                    nextPage((context) => WorkSearchDetailPage(
+                          itemBuilder: (context, i) => CurriculumVitaeItem(
+                                onTap: () => nextPage(
+                                    (context) => NewsCurriculumVitaeDetailPage(
                                           id: state.elementAt(i).id,
                                         )),
                                 title: state.elementAt(i).title,
-                                ages: state.elementAt(i).ages,
-                                benefit: state.elementAt(i).benefit,
-                                workTime: state.elementAt(i).workTime,
-                                tenTinhTP: state.elementAt(i).tenTinhTP,
-                                soNamKinhNghiem:
-                                    state.elementAt(i).soNamKinhNghiem,
-                                hanNopHoSo: state.elementAt(i).hanNopHoSo,
-                                description: state.elementAt(i).description,
+                                education: state.elementAt(i).education,
+                                careerGoals: state.elementAt(i).careerGoals,
+                                skillsForte: state.elementAt(i).skillsForte,
+                                workExperience:
+                                    state.elementAt(i).workExperience,
                               )),
                     ),
                   ),

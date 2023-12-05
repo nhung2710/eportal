@@ -40,15 +40,19 @@ class _NewsCurriculumVitaeSearchPageState
   void initDataLoading() {
     request.obj.tuKhoa = textEditingController.text;
     request.obj.soTrangHienTai = 1;
-    jobUserSearchBloc.add(JobUserSearchEvent(request: request));
-
+    callApi();
     super.initDataLoading();
+  }
+
+  @override
+  void callApi() {
+    jobUserSearchBloc.add(JobUserSearchEvent(request: request));
   }
 
   @override
   void getMoreData() {
     request.obj.soTrangHienTai++;
-    jobUserSearchBloc.add(JobUserSearchEvent(request: request));
+    callApi();
   }
 
   @override
