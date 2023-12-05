@@ -32,7 +32,12 @@ class _AnswerAndQuestionAddPageState
   TextEditingController phoneController = TextEditingController();
   TextEditingController contentController = TextEditingController();
   bool? isWorker = false;
-  FaqAddQuestionBloc faqAddQuestionBloc = FaqAddQuestionBloc();
+  late FaqAddQuestionBloc faqAddQuestionBloc;
+
+  @override
+  void initBloc() {
+    faqAddQuestionBloc = FaqAddQuestionBloc();
+  }
 
   @override
   String getPageTitle(BuildContext context) => "Gửi câu hỏi";

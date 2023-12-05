@@ -28,7 +28,12 @@ class NewsCurriculumVitaeDetailPage extends BasePage {
 
 class _NewsCurriculumVitaeDetailPageState
     extends BasePageState<NewsCurriculumVitaeDetailPage> {
-  JobUserDetailBloc jobUserDetailBloc = JobUserDetailBloc();
+  late JobUserDetailBloc jobUserDetailBloc;
+
+  @override
+  void initBloc() {
+    jobUserDetailBloc = JobUserDetailBloc();
+  }
 
   @override
   void initDataLoading() {

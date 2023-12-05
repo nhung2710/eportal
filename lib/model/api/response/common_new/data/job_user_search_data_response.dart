@@ -5,7 +5,7 @@
 import 'package:eportal/model/base/base_eportal_data_response.dart';
 
 class JobUserSearchDataResponse extends BaseEportalDataResponse {
-  Null? userAdminText;
+  String? userAdminText;
   bool? isBHTN;
   int? id;
   int? total;

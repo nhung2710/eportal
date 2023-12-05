@@ -1,36 +1,28 @@
 import 'package:eportal/bloc/common_new/danh_sach_gioi_tinh_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_kinh_nghiem_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_muc_luong_bloc.dart';
-import 'package:eportal/bloc/common_new/danh_sach_quan_huyen_bloc.dart';
-import 'package:eportal/bloc/common_new/danh_sach_tinh_tp_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_trinh_do_bloc.dart';
 import 'package:eportal/event/common_new/danh_sach_chuc_vu_event.dart';
 import 'package:eportal/event/common_new/danh_sach_kinh_nghiem_event.dart';
 import 'package:eportal/event/common_new/danh_sach_muc_luong_event.dart';
-import 'package:eportal/event/common_new/danh_sach_tinh_tp_event.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_chuc_vu_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_kinh_nghiem_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_muc_luong_request.dart';
-import 'package:eportal/model/api/request/common_new/danh_sach_tinh_tp_request.dart';
-import 'package:eportal/model/api/request/common_new/data/common_new_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_chuc_vu_data_request.dart';
-import 'package:eportal/model/api/response/common_new/danh_sach_chuc_vu_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_chuc_vu_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_kinh_nghiem_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_muc_luong_data_response.dart';
-import 'package:eportal/model/api/response/common_new/data/danh_sach_quan_huyen_data_response.dart';
-import 'package:eportal/model/api/response/common_new/data/danh_sach_tinh_tp_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_trinh_do_data_response.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/select/select_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../bloc/common_new/danh_sach_chuc_vu_bloc.dart';
 import '../../../../bloc/common_new/danh_sach_nhu_cau_viec_lam_bloc.dart';
 import '../../../../event/common_new/danh_sach_nhu_cau_viec_lam_event.dart';
 import '../../../../event/common_new/danh_sach_trinh_do_event.dart';
-import '../../../../extension/dateTime_extension.dart';
 import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/common_new/danh_sach_nhu_cau_viec_lam_request.dart';
 import '../../../../model/api/request/common_new/danh_sach_trinh_do_request.dart';
@@ -121,7 +113,7 @@ class ProfileEditGeneralTabState
                     builder: (BuildContext context,
                             DataMultiState<DanhSachChucVuDataResponse> state) =>
                         _buildViewSearchDanhSachChucVuHienTai(
-                            context, state.data ?? []),
+                            context, state.data),
                   ),
                 )),
           ),
@@ -138,7 +130,7 @@ class ProfileEditGeneralTabState
                     builder: (BuildContext context,
                             DataMultiState<DanhSachChucVuDataResponse> state) =>
                         _buildViewSearchDanhSachChucVuMongMuon(
-                            context, state.data ?? []),
+                            context, state.data),
                   ),
                 )),
           ),
@@ -173,8 +165,7 @@ class ProfileEditGeneralTabState
                     builder: (BuildContext context,
                             DataMultiState<DanhSachTrinhDoDataResponse>
                                 state) =>
-                        _buildViewSearchDanhSachTrinhDo(
-                            context, state.data ?? []),
+                        _buildViewSearchDanhSachTrinhDo(context, state.data),
                   ),
                 )),
           ),
@@ -220,6 +211,7 @@ class ProfileEditGeneralTabState
   Widget _buildViewSearchDanhSachKinhNghiem(
       BuildContext context, List<DanhSachKinhNghiemDataResponse> list) {
     return SelectItem<DanhSachKinhNghiemDataResponse>(
+      icon: FontAwesomeIcons.buildingColumns,
       selectedItem: widget.danhSachKinhNghiemDataResponse,
       list: list,
       itemAsString: (DanhSachKinhNghiemDataResponse u) =>
@@ -236,6 +228,7 @@ class ProfileEditGeneralTabState
   Widget _buildViewSearchDanhSachMucLuong(
       BuildContext context, List<DanhSachMucLuongDataResponse> list) {
     return SelectItem<DanhSachMucLuongDataResponse>(
+      icon: FontAwesomeIcons.moneyBill,
       selectedItem: widget.danhSachMucLuongDataResponse,
       list: list,
       itemAsString: (DanhSachMucLuongDataResponse u) =>
@@ -252,6 +245,7 @@ class ProfileEditGeneralTabState
   Widget _buildViewSearchDanhSachChucVuMongMuon(
       BuildContext context, List<DanhSachChucVuDataResponse> list) {
     return SelectItemNormal<DanhSachChucVuDataResponse>(
+      icon: FontAwesomeIcons.userTie,
       selectedItem: widget.danhSachChucVuDataResponseMongMuon,
       list: list,
       itemAsString: (DanhSachChucVuDataResponse u) =>
@@ -268,6 +262,7 @@ class ProfileEditGeneralTabState
   Widget _buildViewSearchDanhSachChucVuHienTai(
       BuildContext context, List<DanhSachChucVuDataResponse> list) {
     return SelectItemNormal<DanhSachChucVuDataResponse>(
+      icon: FontAwesomeIcons.userTie,
       selectedItem: widget.danhSachChucVuDataResponseHienTai,
       list: list,
       itemAsString: (DanhSachChucVuDataResponse u) =>
@@ -284,6 +279,7 @@ class ProfileEditGeneralTabState
   Widget _buildViewSearchDanhSachTrinhDo(
       BuildContext context, List<DanhSachTrinhDoDataResponse> list) {
     return SelectItemNormal<DanhSachTrinhDoDataResponse>(
+      icon: FontAwesomeIcons.graduationCap,
       selectedItem: widget.danhSachTrinhDoDataResponse,
       list: list,
       itemAsString: (DanhSachTrinhDoDataResponse u) =>
@@ -300,6 +296,7 @@ class ProfileEditGeneralTabState
   Widget _buildViewSearchDanhSachNhuCauViecLam(
       BuildContext context, List<DanhSachNhuCauViecLamDataResponse> list) {
     return SelectItemNormal<DanhSachNhuCauViecLamDataResponse>(
+      icon: FontAwesomeIcons.handHolding,
       selectedItem: widget.danhSachNhuCauViecLamDataResponse,
       list: list,
       itemAsString: (DanhSachNhuCauViecLamDataResponse u) =>

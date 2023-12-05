@@ -26,7 +26,7 @@ class NewsCurriculumVitaeSearchPage extends BasePage {
 
 class _NewsCurriculumVitaeSearchPageState
     extends BasePageState<NewsCurriculumVitaeSearchPage> {
-  JobUserSearchBloc jobUserSearchBloc = JobUserSearchBloc();
+  late JobUserSearchBloc jobUserSearchBloc;
   JobUserSearchRequest request =
       JobUserSearchRequest(obj: JobUserSearchDataRequest());
   final filterJobDialogKey = GlobalKey<FilterJobDialogState>();
@@ -35,6 +35,11 @@ class _NewsCurriculumVitaeSearchPageState
       data: request.obj,
       onPressed: () => initDataLoading());
   TextEditingController textEditingController = TextEditingController();
+
+  @override
+  void initBloc() {
+    jobUserSearchBloc = JobUserSearchBloc();
+  }
 
   @override
   void initDataLoading() {

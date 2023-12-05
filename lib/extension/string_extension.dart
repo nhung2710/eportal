@@ -112,7 +112,7 @@ extension StringExtension on String {
 
   String getImageUrl() {
     if (isNullOrWhiteSpace()) return ApplicationApiConstant.BASE_URI_MEDIA;
-    if (this!.contains(ApplicationApiConstant.BASE_URI_MEDIA)) return this!;
+    if (contains(ApplicationApiConstant.BASE_URI_MEDIA)) return this;
     return "${ApplicationApiConstant.BASE_URI_MEDIA}/$this";
   }
 

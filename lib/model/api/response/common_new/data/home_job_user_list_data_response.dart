@@ -5,7 +5,7 @@ import 'package:eportal/model/base/base_eportal_data_response.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class HomeJobUserListDataResponse extends BaseEportalDataResponse {
-  Null? userAdminText;
+  String? userAdminText;
   bool? isBHTN;
   int? id;
   int? total;

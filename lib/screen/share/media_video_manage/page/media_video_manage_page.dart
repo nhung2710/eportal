@@ -23,8 +23,13 @@ class MediaVideoManagePage extends BasePage {
 
 class MediaVideoManagePageState
     extends BasePageStateActive<MediaVideoManagePage> {
-  VideoListBloc videoListBloc = VideoListBloc();
+  late VideoListBloc videoListBloc;
   VideoListDataRequest request = VideoListDataRequest();
+
+  @override
+  void initBloc() {
+    videoListBloc = VideoListBloc();
+  }
 
   @override
   void getMoreData() {

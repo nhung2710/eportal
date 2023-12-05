@@ -10,8 +10,8 @@ class DanhSachDoanhNghiepDataResponse extends BaseEportalDataResponse {
   int? id;
   int? status;
   String? careerID;
-  Null? isInvite;
-  Null? userAdmin;
+  String? isInvite;
+  String? userAdmin;
   String? tinhTP;
   String? idSend;
   int? soLuongUngVien;

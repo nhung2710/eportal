@@ -24,8 +24,13 @@ class AnswerAndQuestionSearchPage extends BasePage {
 
 class AnswerAndQuestionSearchPageState
     extends BasePageStateActive<AnswerAndQuestionSearchPage> {
-  FaqQuestionSearchBloc faqQuestionSearchBloc = FaqQuestionSearchBloc();
+  late FaqQuestionSearchBloc faqQuestionSearchBloc;
   FaqQuestionSearchDataRequest request = FaqQuestionSearchDataRequest();
+
+  @override
+  void initBloc() {
+    faqQuestionSearchBloc = FaqQuestionSearchBloc();
+  }
 
   TextEditingController textEditingController = TextEditingController();
 

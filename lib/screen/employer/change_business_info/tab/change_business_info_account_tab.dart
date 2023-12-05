@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/full_data_item/profile_item.dart';
-import 'package:eportal/widget/input/field_input.dart';
 import 'package:flutter/material.dart';
 
 //
@@ -21,17 +20,13 @@ class ChangeBusinessInfoAccountTabState
   TextEditingController educationController = TextEditingController();
 
   @override
-  Widget pageUI(BuildContext context) =>
-      SingleChildScrollView(
+  Widget pageUI(BuildContext context) => SingleChildScrollView(
         child: ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: Random().nextInt(100) + 1,
-            itemBuilder: (context, index) =>
-                ProfileItem(
-                  onTap: () {
-
-                  },
+            itemBuilder: (context, index) => ProfileItem(
+                  onTap: () {},
                   title: "Hồ sơ ${index + 1}",
                   location: "Hà nội",
                   status: "Chờ duyệt",

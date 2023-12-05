@@ -7,12 +7,12 @@ import 'package:eportal/widget/input/date_input.dart';
 import 'package:eportal/widget/select/select_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../bloc/common_new/danh_sach_gioi_tinh_bloc.dart';
 import '../../../../bloc/common_new/user_update_bloc.dart';
 import '../../../../event/common_new/danh_sach_gioi_tinh_event.dart';
 import '../../../../event/common_new/user_update_event.dart';
-import '../../../../extension/datetime_extension.dart';
 import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/common_new/danh_sach_gioi_tinh_request.dart';
 import '../../../../model/api/request/common_new/data/danh_sach_gioi_tinh_data_request.dart';
@@ -40,17 +40,21 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController idCardController = TextEditingController();
-  DanhSachGioiTinhBloc danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
+  late DanhSachGioiTinhBloc danhSachGioiTinhBloc;
   UserUpdateDataRequest dataRequest = UserUpdateDataRequest();
   DanhSachGioiTinhDataResponse? danhSachGioiTinhDataResponse;
-  UserUpdateBloc userUpdateBloc = UserUpdateBloc();
+  late UserUpdateBloc userUpdateBloc;
   String? gioitinh = "0";
 
   @override
-  void initDataLoading() {
+  void initBloc() {
     userUpdateBloc = UserUpdateBloc();
-    dataRequest = UserUpdateDataRequest();
     danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
+  }
+
+  @override
+  void initDataLoading() {
+    dataRequest = UserUpdateDataRequest();
     callApi();
     // TODO: implement initDataLoading
     super.initDataLoading();
@@ -234,6 +238,7 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
   Widget _buildViewSearchDanhSachGioiTinh(
       BuildContext context, List<DanhSachGioiTinhDataResponse> list) {
     return SelectItem<DanhSachGioiTinhDataResponse>(
+      icon: FontAwesomeIcons.genderless,
       selectedItem: danhSachGioiTinhDataResponse,
       list: list,
       itemAsString: (DanhSachGioiTinhDataResponse u) => u.name.supportHtml(),

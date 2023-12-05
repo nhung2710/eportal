@@ -15,7 +15,6 @@ import 'package:eportal/model/api/request/common_new/danh_sach_kinh_nghiem_reque
 import 'package:eportal/model/api/request/common_new/danh_sach_muc_luong_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_quan_huyen_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_tinh_tp_request.dart';
-import 'package:eportal/model/api/request/common_new/data/common_new_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_doanh_nghiep_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_kinh_nghiem_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_muc_luong_data_request.dart';
@@ -31,6 +30,7 @@ import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/select/select_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../extension/string_extension.dart';
 import '../base/base_page.dart';
@@ -136,8 +136,7 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
                         builder: (BuildContext context,
                                 DataMultiState<DanhSachTinhTpDataResponse>
                                     state) =>
-                            _buildViewSearchDanhSachTinhTp(
-                                context, state.data ?? []),
+                            _buildViewSearchDanhSachTinhTp(context, state.data),
                       ),
                     )),
               ),
@@ -156,7 +155,7 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
                                 DataMultiState<DanhSachQuanHuyenDataResponse>
                                     state) =>
                             _buildViewSearchDanhSachQuanHuyen(
-                                context, state.data ?? []),
+                                context, state.data),
                       ),
                     )),
               ),
@@ -175,7 +174,7 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
                                 DataMultiState<DanhSachDoanhNghiepDataResponse>
                                     state) =>
                             _buildViewSearchDanhSachDoanhNghiep(
-                                context, state.data ?? []),
+                                context, state.data),
                       ),
                     )),
               ),
@@ -254,6 +253,7 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
       BuildContext context, List<DanhSachTinhTpDataResponse> list) {
     return SelectItem<DanhSachTinhTpDataResponse>(
       selectedItem: widget.danhSachTinhTpDataResponse,
+      icon: FontAwesomeIcons.city,
       list: list,
       itemAsString: (DanhSachTinhTpDataResponse u) =>
           u.regionalName.replaceWhenNullOrWhiteSpace(),
@@ -287,6 +287,7 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
       BuildContext context, List<DanhSachQuanHuyenDataResponse> list) {
     return SelectItem<DanhSachQuanHuyenDataResponse>(
       key: _danhSachQuanHuyenKey,
+      icon: FontAwesomeIcons.locationArrow,
       list: list,
       selectedItem: widget.danhSachQuanHuyenDataResponse,
       itemAsString: (DanhSachQuanHuyenDataResponse u) =>
@@ -313,6 +314,7 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
       BuildContext context, List<DanhSachDoanhNghiepDataResponse> list) {
     return SelectItem<DanhSachDoanhNghiepDataResponse>(
       key: _danhSachDoanhNghiepKey,
+      icon: FontAwesomeIcons.building,
       list: list,
       selectedItem: widget.danhSachDoanhNghiepDataResponse,
       itemAsString: (DanhSachDoanhNghiepDataResponse u) =>
@@ -331,6 +333,7 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
       BuildContext context, List<DanhSachKinhNghiemDataResponse> list) {
     return SelectItem<DanhSachKinhNghiemDataResponse>(
       list: list,
+      icon: FontAwesomeIcons.chartBar,
       selectedItem: widget.danhSachKinhNghiemDataResponse,
       itemAsString: (DanhSachKinhNghiemDataResponse u) =>
           u.experienceName.supportHtml(),
@@ -348,6 +351,7 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
       BuildContext context, List<DanhSachMucLuongDataResponse> list) {
     return SelectItem<DanhSachMucLuongDataResponse>(
       list: list,
+      icon: FontAwesomeIcons.moneyBill,
       selectedItem: widget.danhSachMucLuongDataResponse,
       itemAsString: (DanhSachMucLuongDataResponse u) =>
           u.salaryName.supportHtml(),

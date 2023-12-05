@@ -37,7 +37,7 @@ class BasePageState<T extends StatefulWidget> extends State<T>
     scrollController?.removeListener(_onScroll);
     scrollController?.dispose();
     scrollController = null;
-    WidgetsBinding.instance.removeObserver(this);
+    //WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
@@ -83,7 +83,7 @@ class BasePageState<T extends StatefulWidget> extends State<T>
 
   @override
   void initState() {
-    WidgetsBinding.instance.addObserver(this);
+    //WidgetsBinding.instance.addObserver(this);
     startScrollMore();
     scrollController = ScrollController();
     scrollController!.addListener(_onScroll);
@@ -100,6 +100,7 @@ class BasePageState<T extends StatefulWidget> extends State<T>
         )
       ],
     );
+    initBloc();
     initDataLoading();
     // TODO: implement initState
     super.initState();
@@ -266,11 +267,15 @@ class BasePageState<T extends StatefulWidget> extends State<T>
 
   void backPage() => Navigator.pop(context);
 
-  void nextPage(WidgetBuilder builder) =>
-      Navigator.push(context, MaterialPageRoute(builder: builder));
+  void nextPage(WidgetBuilder builder) {
+    stopLoading();
+    Navigator.push(context, MaterialPageRoute(builder: builder));
+  }
 
-  void nextPageWithoutBack(WidgetBuilder builder) =>
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: builder));
+  void nextPageWithoutBack(WidgetBuilder builder) {
+    stopLoading();
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: builder));
+  }
 
   Future<void> scrollToEnd() =>
       scrollController!.animateTo(scrollController!.position.maxScrollExtent,
@@ -397,6 +402,8 @@ class BasePageState<T extends StatefulWidget> extends State<T>
           strokeWidth: 5,
         ),
       );
+
+  void initBloc() {}
 }
 
 class BasePageStateActive<T extends StatefulWidget> extends BasePageState<T>

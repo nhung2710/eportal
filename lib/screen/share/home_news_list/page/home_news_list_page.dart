@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../bloc/common_new/home_news_list_bloc.dart';
-import '../../../../constant/application_constant.dart';
 import '../../../../event/common_new/home_news_list_event.dart';
 import '../../../../extension/string_extension.dart';
-import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
 import '../../../../model/api/request/common_new/home_news_list_request.dart';
 import '../../../../state/base/base_state.dart';
 import '../../../../style/app_color.dart';
@@ -31,7 +29,12 @@ class HomeNewsListPage extends BasePage {
 }
 
 class _HomeNewsListPageState extends BasePageStateActive<HomeNewsListPage> {
-  HomeNewsListBloc homeNewsListCommonBloc = HomeNewsListBloc();
+  late HomeNewsListBloc homeNewsListCommonBloc;
+
+  @override
+  void initBloc() {
+    homeNewsListCommonBloc = HomeNewsListBloc();
+  }
 
   @override
   String getPageTitle(BuildContext context) {
@@ -80,7 +83,7 @@ class _HomeNewsListPageState extends BasePageStateActive<HomeNewsListPage> {
                             SizedBox(
                                 width: 80,
                                 child: ImageLoading(
-                                  imageUrl: state!
+                                  imageUrl: state
                                       .elementAt(i)
                                       .imagePath
                                       .getImageUrl(),
@@ -99,7 +102,7 @@ class _HomeNewsListPageState extends BasePageStateActive<HomeNewsListPage> {
                             Expanded(
                               flex: 1,
                               child: Text(
-                                (state!.elementAt(i).title).supportHtml(),
+                                (state.elementAt(i).title).supportHtml(),
                                 style: AppTextStyle.title.copyWith(
                                     color: AppColor.colorOfText,
                                     overflow: TextOverflow.visible,

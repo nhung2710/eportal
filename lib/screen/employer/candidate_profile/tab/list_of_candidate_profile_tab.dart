@@ -1,20 +1,13 @@
 import 'package:eportal/bloc/common_new/job_user_search_bloc.dart';
-import 'package:eportal/bloc/common_new/work_search_bloc.dart';
 import 'package:eportal/event/common_new/job_user_search_event.dart';
-import 'package:eportal/event/common_new/work_search_event.dart';
 import 'package:eportal/model/api/request/common_new/data/job_user_search_data_request.dart';
-import 'package:eportal/model/api/request/common_new/data/work_search_data_request.dart';
 import 'package:eportal/model/api/request/common_new/job_user_search_request.dart';
-import 'package:eportal/model/api/request/common_new/work_search_request.dart';
 import 'package:eportal/model/api/response/common_new/data/job_user_search_data_response.dart';
-import 'package:eportal/model/api/response/common_new/data/work_search_data_response.dart';
 import 'package:eportal/screen/share/news_curriculum_vitae_detail/page/news_curriculum_vitae_detail_page.dart';
-import 'package:eportal/screen/share/work_search_detail/page/work_search_detail_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
 import 'package:eportal/widget/full_data_item/curriculum_vitae_item.dart';
-import 'package:eportal/widget/full_data_item/work_item.dart';
 import 'package:eportal/widget/input/search_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +26,7 @@ class ListOfCandidateProfileTab extends BasePage {
 
 class _ListOfCandidateProfileTabState
     extends BasePageStateActive<ListOfCandidateProfileTab> {
-  JobUserSearchBloc jobUserSearchBloc = JobUserSearchBloc();
+  late JobUserSearchBloc jobUserSearchBloc;
   JobUserSearchRequest request =
       JobUserSearchRequest(obj: JobUserSearchDataRequest());
   final filterJobDialogKey = GlobalKey<FilterJobDialogState>();
@@ -42,6 +35,11 @@ class _ListOfCandidateProfileTabState
       data: request.obj,
       onPressed: () => initDataLoading());
   TextEditingController textEditingController = TextEditingController();
+
+  @override
+  void initBloc() {
+    jobUserSearchBloc = JobUserSearchBloc();
+  }
 
   @override
   void initDataLoading() {

@@ -1,7 +1,6 @@
 import 'package:eportal/screen/share/answer_and_question/page/answer_and_question_page.dart';
 import 'package:eportal/screen/share/home_manage/page/home_manage_page.dart';
 import 'package:eportal/screen/share/multimedia/page/multimedia_page.dart';
-import 'package:eportal/screen/share/notification/page/notification_page.dart';
 import 'package:eportal/screen/worker/job/page/job_page.dart';
 import 'package:eportal/screen/worker/profile/page/profile_page.dart';
 import 'package:eportal/style/app_color.dart';

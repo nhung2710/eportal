@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../bloc/common_new/home_works_list_bloc.dart';
-import '../../../../constant/application_constant.dart';
 import '../../../../event/common_new/home_works_list_event.dart';
 import '../../../../extension/string_extension.dart';
-import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
 import '../../../../model/api/request/common_new/data/home_works_list_data_request.dart';
 import '../../../../model/api/request/common_new/home_works_list_request.dart';
 import '../../../../state/base/base_state.dart';
@@ -29,7 +27,12 @@ class NewsRecruitment extends BasePage {
 }
 
 class _NewsRecruitmentState extends BasePageStateActive<NewsRecruitment> {
-  HomeWorksListBloc homeWorksListCommonBloc = HomeWorksListBloc();
+  late HomeWorksListBloc homeWorksListCommonBloc;
+
+  @override
+  void initBloc() {
+    homeWorksListCommonBloc = HomeWorksListBloc();
+  }
 
   @override
   bool isHasAppBar(BuildContext context) => false;

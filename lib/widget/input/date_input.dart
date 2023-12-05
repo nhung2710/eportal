@@ -100,6 +100,7 @@ class _DateInputState extends State<DateInput> {
         widget.onChangedValue!(widget.controller!.text);
       }
     }
+    return null;
   }
 
   void handleFocus() {

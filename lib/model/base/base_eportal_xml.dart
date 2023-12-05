@@ -1,4 +1,3 @@
-import 'package:eportal/api/adapter/base/base_adapter_api.dart';
 import 'package:eportal/application/global_application.dart';
 
 import '../../constant/application_constant.dart';

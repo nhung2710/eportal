@@ -1,10 +1,6 @@
-import 'package:eportal/bloc/common_new/job_user_search_bloc.dart';
 import 'package:eportal/bloc/common_new/work_search_bloc.dart';
-import 'package:eportal/event/common_new/job_user_search_event.dart';
 import 'package:eportal/event/common_new/work_search_event.dart';
-import 'package:eportal/model/api/request/common_new/data/job_user_search_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/work_search_data_request.dart';
-import 'package:eportal/model/api/request/common_new/job_user_search_request.dart';
 import 'package:eportal/model/api/request/common_new/work_search_request.dart';
 import 'package:eportal/model/api/response/common_new/data/work_search_data_response.dart';
 import 'package:eportal/screen/share/work_search_detail/page/work_search_detail_page.dart';
@@ -30,7 +26,7 @@ class ListOfJobAppliedPage extends BasePage {
 
 class _ListOfJobAppliedPageState
     extends BasePageStateActive<ListOfJobAppliedPage> {
-  WorkSearchBloc workSearchBloc = WorkSearchBloc();
+  late WorkSearchBloc workSearchBloc;
   WorkSearchRequest request = WorkSearchRequest(obj: WorkSearchDataRequest());
   final filterJobDialogKey = GlobalKey<FilterJobDialogState>();
   late FilterJobDialog filterJobDialog = FilterJobDialog(
@@ -39,6 +35,11 @@ class _ListOfJobAppliedPageState
     onPressed: () => initDataLoading(),
   );
   TextEditingController textEditingController = TextEditingController();
+
+  @override
+  void initBloc() {
+    workSearchBloc = WorkSearchBloc();
+  }
 
   @override
   void initDataLoading() {

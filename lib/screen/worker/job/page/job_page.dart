@@ -3,9 +3,7 @@ import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../share/empty_example/page/empty_example_page.dart';
 import '../tab/list_of_job_applied_page.dart';
 import '../tab/list_of_job_saved_page.dart';
 

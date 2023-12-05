@@ -6,10 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../bloc/common_new/home_document_list_bloc.dart';
-import '../../../../constant/application_constant.dart';
 import '../../../../event/common_new/home_document_list_event.dart';
 import '../../../../extension/string_extension.dart';
-import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
 import '../../../../model/api/request/common_new/home_document_list_request.dart';
 import '../../../../state/base/base_state.dart';
 import '../../../../style/app_text_style.dart';
@@ -31,7 +29,12 @@ class HomeDocumentListPage extends BasePage {
 
 class _HomeDocumentListPageState
     extends BasePageStateActive<HomeDocumentListPage> {
-  HomeDocumentListBloc homeDocumentListBloc = HomeDocumentListBloc();
+  late HomeDocumentListBloc homeDocumentListBloc;
+
+  @override
+  void initBloc() {
+    homeDocumentListBloc = HomeDocumentListBloc();
+  }
 
   @override
   String getPageTitle(BuildContext context) {
@@ -108,14 +111,13 @@ class _HomeDocumentListPageState
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    (state!.elementAt(i).documentName)
+                                    (state.elementAt(i).documentName)
                                         .supportHtml(),
                                     style: AppTextStyle.titlePage.copyWith(
                                         overflow: TextOverflow.visible),
                                   ),
                                   Text(
-                                    (state!.elementAt(i).contents)
-                                        .supportHtml(),
+                                    (state.elementAt(i).contents).supportHtml(),
                                     style: AppTextStyle.titleHintPage.copyWith(
                                         overflow: TextOverflow.visible),
                                   ),

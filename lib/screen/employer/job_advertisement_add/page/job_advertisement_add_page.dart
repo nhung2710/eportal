@@ -52,8 +52,12 @@ class _JobAdvertisementAddPageState
   late TabController _tabController;
 
   @override
-  void initDataLoading() {
+  void initBloc() {
     jobUserAddBloc = JobUserAddBloc();
+  }
+
+  @override
+  void initDataLoading() {
     // TODO: implement initDataLoading
     _tabController = TabController(
         vsync: this, length: 6, animationDuration: const Duration(seconds: 0));

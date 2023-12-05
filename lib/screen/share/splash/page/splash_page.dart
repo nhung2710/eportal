@@ -16,11 +16,9 @@ import 'package:eportal/model/api/request/common_new/data/danh_sach_tinh_tp_data
 import 'package:eportal/model/api/response/common_new/data/dang_nhap_data_response.dart';
 import 'package:eportal/repository/common_new/danh_sach_chuyen_muc_repository.dart';
 import 'package:eportal/repository/common_new/danh_sach_co_quan_ban_hanh_repository.dart';
-import 'package:eportal/repository/common_new/danh_sach_doanh_nghiep_repository.dart';
 import 'package:eportal/repository/common_new/danh_sach_linh_vuc_van_ban_repository.dart';
 import 'package:eportal/repository/common_new/danh_sach_loai_van_ban_repository.dart';
 import 'package:eportal/repository/common_new/danh_sach_muc_luong_repository.dart';
-import 'package:eportal/repository/common_new/danh_sach_quan_huyen_repository.dart';
 import 'package:eportal/repository/common_new/danh_sach_trinh_do_repository.dart';
 import 'package:eportal/screen/admin/home/home_page.dart' as admin;
 import 'package:eportal/screen/anonymous/home/home_page.dart' as anonymous;
@@ -36,24 +34,19 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../bloc/common_new/danh_sach_tinh_tp_bloc.dart';
 import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/common_new/danh_sach_chuyen_muc_request.dart';
 import '../../../../model/api/request/common_new/danh_sach_co_quan_ban_hanh_request.dart';
-import '../../../../model/api/request/common_new/danh_sach_doanh_nghiep_request.dart';
 import '../../../../model/api/request/common_new/danh_sach_kinh_nghiem_request.dart';
 import '../../../../model/api/request/common_new/danh_sach_linh_vuc_van_ban_request.dart';
 import '../../../../model/api/request/common_new/danh_sach_loai_van_ban_request.dart';
-import '../../../../model/api/request/common_new/danh_sach_quan_huyen_request.dart';
 import '../../../../model/api/request/common_new/danh_sach_trinh_do_request.dart';
 import '../../../../model/api/request/common_new/data/danh_sach_chuyen_muc_data_request.dart';
 import '../../../../model/api/request/common_new/data/danh_sach_co_quan_ban_hanh_data_request.dart';
-import '../../../../model/api/request/common_new/data/danh_sach_doanh_nghiep_data_request.dart';
 import '../../../../model/api/request/common_new/data/danh_sach_kinh_nghiem_data_request.dart';
 import '../../../../model/api/request/common_new/data/danh_sach_linh_vuc_van_ban_data_request.dart';
 import '../../../../model/api/request/common_new/data/danh_sach_loai_van_ban_data_request.dart';
 import '../../../../model/api/request/common_new/data/danh_sach_muc_luong_data_request.dart';
-import '../../../../model/api/request/common_new/data/danh_sach_quan_huyen_data_request.dart';
 import '../../../../model/api/request/common_new/data/danh_sach_trinh_do_data_request.dart';
 import '../../../../repository/common_new/danh_sach_gioi_tinh_repository.dart';
 import '../../../../repository/common_new/danh_sach_kinh_nghiem_repository.dart';
@@ -75,8 +68,13 @@ class SplashPage extends BasePage {
 
 class _SplashPageState extends BasePageState<SplashPage>
     with TickerProviderStateMixin {
-  DangNhapBloc dangNhapBloc = DangNhapBloc();
+  late DangNhapBloc dangNhapBloc;
   double currentData = 0;
+
+  @override
+  void initBloc() {
+    dangNhapBloc = DangNhapBloc();
+  }
 
   @override
   double currentPadding(BuildContext context) => 10;

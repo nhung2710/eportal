@@ -1,6 +1,5 @@
 import 'package:eportal/model/api/request/common_new/danh_sach_nganh_nghe_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_nganh_nghe_data_request.dart';
-import 'package:eportal/model/api/response/common_new/data/danh_sach_tinh_tp_data_response.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/input/field_input.dart';
@@ -34,8 +33,12 @@ class ChangeBusinessInfoAboutTabState
   late DanhSachNganhNgheBloc danhSachNganhNgheBloc;
 
   @override
-  void initDataLoading() {
+  void initBloc() {
     danhSachNganhNgheBloc = DanhSachNganhNgheBloc();
+  }
+
+  @override
+  void initDataLoading() {
     callApi();
     super.initDataLoading();
   }
@@ -63,8 +66,7 @@ class ChangeBusinessInfoAboutTabState
                     builder: (BuildContext context,
                             DataMultiState<DanhSachNganhNgheDataResponse>
                                 state) =>
-                        _buildViewSearchDanhSachNganhNghe(
-                            context, state.data ?? []),
+                        _buildViewSearchDanhSachNganhNghe(context, state.data),
                   ),
                 )),
           ),
@@ -97,6 +99,7 @@ class ChangeBusinessInfoAboutTabState
   Widget _buildViewSearchDanhSachNganhNghe(
       BuildContext context, List<DanhSachNganhNgheDataResponse> list) {
     return SelectItem<DanhSachNganhNgheDataResponse>(
+      icon: FontAwesomeIcons.tags,
       selectedItem: widget.danhSachNganhNgheDataResponse,
       list: list,
       itemAsString: (DanhSachNganhNgheDataResponse u) =>

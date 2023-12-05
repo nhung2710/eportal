@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../bloc/common_new/home_news_list_bloc.dart';
-import '../../../../constant/application_constant.dart';
 import '../../../../event/common_new/home_news_list_event.dart';
-import '../../../../model/api/request/common_new/data/common_new_data_request.dart';
 import '../../../../model/api/request/common_new/data/home_news_list_data_request.dart';
 import '../../../../model/api/request/common_new/home_news_list_request.dart';
 import '../../../../state/base/base_state.dart';
@@ -30,7 +28,12 @@ class NewsPage extends BasePage {
 }
 
 class _NewsPageState extends BasePageState<NewsPage> {
-  HomeNewsListBloc homeNewsListBloc = HomeNewsListBloc();
+  late HomeNewsListBloc homeNewsListBloc;
+
+  @override
+  void initBloc() {
+    homeNewsListBloc = HomeNewsListBloc();
+  }
 
   @override
   void initDataLoading() {

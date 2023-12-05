@@ -82,6 +82,7 @@ class _FieldInputState extends State<FieldInput> {
         inputFormatters: widget.inputFormatters,
         keyboardType: widget.keyboardType,
         style: AppTextStyle.title,
+        textAlignVertical: TextAlignVertical.top,
         onFieldSubmitted: widget.onFieldSubmitted,
         decoration: InputDecoration(
           hintText: widget.hintText,

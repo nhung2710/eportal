@@ -28,8 +28,13 @@ class AnswerAndQuestionPage extends BasePage {
 
 class AnswerAndQuestionPageState
     extends BasePageStateActive<AnswerAndQuestionPage> {
-  FaqQuestionSearchBloc faqQuestionSearchBloc = FaqQuestionSearchBloc();
+  late FaqQuestionSearchBloc faqQuestionSearchBloc;
   FaqQuestionSearchDataRequest request = FaqQuestionSearchDataRequest();
+
+  @override
+  void initBloc() {
+    faqQuestionSearchBloc = FaqQuestionSearchBloc();
+  }
 
   @override
   bool isHasAppBar(BuildContext context) => false;

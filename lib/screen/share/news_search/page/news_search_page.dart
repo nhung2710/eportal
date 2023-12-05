@@ -26,7 +26,7 @@ class NewsSearchPage extends BasePage {
 }
 
 class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
-  NewsSearchBloc newsSearchBloc = NewsSearchBloc();
+  late NewsSearchBloc newsSearchBloc;
   NewsSearchRequest request =
       NewsSearchRequest(obj: NewsSearchDataRequest(tuKhoa: ""));
   TextEditingController textEditingController = TextEditingController();
@@ -37,6 +37,11 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
     data: request.obj,
     onPressed: () => initDataLoading(),
   );
+
+  @override
+  void initBloc() {
+    newsSearchBloc = NewsSearchBloc();
+  }
 
   @override
   void initDataLoading() {

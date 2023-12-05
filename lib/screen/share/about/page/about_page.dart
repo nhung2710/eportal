@@ -1,7 +1,6 @@
 import 'package:eportal/bloc/common_new/gioi_thieu_trung_tam_bloc.dart';
 import 'package:eportal/event/common_new/gioi_thieu_trung_tam_event.dart';
 import 'package:eportal/extension/string_extension.dart';
-import 'package:eportal/model/api/request/common_new/data/common_new_data_request.dart';
 import 'package:eportal/model/api/request/common_new/gioi_thieu_trung_tam_request.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
@@ -23,7 +22,12 @@ class AboutPage extends BasePage {
 }
 
 class _AboutPageState extends BasePageState<AboutPage> {
-  GioiThieuTrungTamBloc gioiThieuTrungTamBloc = GioiThieuTrungTamBloc();
+  late GioiThieuTrungTamBloc gioiThieuTrungTamBloc;
+
+  @override
+  void initBloc() {
+    gioiThieuTrungTamBloc = GioiThieuTrungTamBloc();
+  }
 
   @override
   void initDataLoading() {

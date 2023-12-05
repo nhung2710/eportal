@@ -27,8 +27,13 @@ class MediaImageManagePage extends BasePage {
 
 class MediaImageManagePageState
     extends BasePageStateActive<MediaImageManagePage> {
-  AlbumListBloc albumListBloc = AlbumListBloc();
+  late AlbumListBloc albumListBloc;
   AlbumListDataRequest request = AlbumListDataRequest();
+
+  @override
+  void initBloc() {
+    albumListBloc = AlbumListBloc();
+  }
 
   @override
   void getMoreData() {

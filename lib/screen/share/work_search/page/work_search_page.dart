@@ -26,7 +26,7 @@ class WorkSearchPage extends BasePage {
 }
 
 class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
-  WorkSearchBloc workSearchBloc = WorkSearchBloc();
+  late WorkSearchBloc workSearchBloc;
   WorkSearchRequest request = WorkSearchRequest(obj: WorkSearchDataRequest());
   final filterJobDialogKey = GlobalKey<FilterJobDialogState>();
   late FilterJobDialog filterJobDialog = FilterJobDialog(
@@ -35,6 +35,11 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
     onPressed: () => initDataLoading(),
   );
   TextEditingController textEditingController = TextEditingController();
+
+  @override
+  void initBloc() {
+    workSearchBloc = WorkSearchBloc();
+  }
 
   @override
   void initDataLoading() {

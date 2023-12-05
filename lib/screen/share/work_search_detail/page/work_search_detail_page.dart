@@ -30,7 +30,12 @@ class WorkSearchDetailPage extends BasePage {
 }
 
 class _WorkSearchDetailPageState extends BasePageState<WorkSearchDetailPage> {
-  WorkDetailBloc workDetailBloc = WorkDetailBloc();
+  late WorkDetailBloc workDetailBloc;
+
+  @override
+  void initBloc() {
+    workDetailBloc = WorkDetailBloc();
+  }
 
   @override
   void initDataLoading() {

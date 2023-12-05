@@ -28,7 +28,13 @@ class DocumentListSearchPage extends BasePage {
 
 class _DocumentListSearchPageState
     extends BasePageState<DocumentListSearchPage> {
-  DocumentListBloc documentListBloc = DocumentListBloc();
+  late DocumentListBloc documentListBloc;
+
+  @override
+  void initBloc() {
+    documentListBloc = DocumentListBloc();
+  }
+
   DocumentListRequest request =
       DocumentListRequest(obj: DocumentListDataRequest());
   final filterJobDialogKey = GlobalKey<FilterDocumentDialogState>();

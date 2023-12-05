@@ -27,7 +27,12 @@ class HomeBusinessListPage extends BasePage {
 
 class _HomeBusinessListPageState
     extends BasePageStateActive<HomeBusinessListPage> {
-  HomeBusinessListBloc homeBusinessListBloc = HomeBusinessListBloc();
+  late HomeBusinessListBloc homeBusinessListBloc;
+
+  @override
+  void initBloc() {
+    homeBusinessListBloc = HomeBusinessListBloc();
+  }
 
   @override
   String getPageTitle(BuildContext context) {
@@ -59,7 +64,7 @@ class _HomeBusinessListPageState
                 Expanded(
                   child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: state!.length,
+                      itemCount: state.length,
                       itemBuilder: (context, i) => GestureDetector(
                             onTap: () => nextPage((context) => EmptyExamplePage(
                                   isHasAppBar: true,
@@ -72,7 +77,7 @@ class _HomeBusinessListPageState
                               padding: const EdgeInsets.all(10),
                               margin: const EdgeInsets.only(top: 5),
                               child: Text(
-                                "${(state!.elementAt(i).businessVn)?.supportHtml()}",
+                                "${(state.elementAt(i).businessVn)?.supportHtml()}",
                                 style: AppTextStyle.title.copyWith(
                                     overflow: TextOverflow.visible,
                                     color: AppColor.colorOfText,

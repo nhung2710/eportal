@@ -43,7 +43,12 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
   TextEditingController confirmController = TextEditingController();
   int? role = 0;
 
-  DangKyBloc dangKyBloc = DangKyBloc();
+  late DangKyBloc dangKyBloc;
+
+  @override
+  void initBloc() {
+    dangKyBloc = DangKyBloc();
+  }
 
   @override
   String getPageTitle(BuildContext context) => "Đăng ký tài khoản";

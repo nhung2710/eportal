@@ -3,7 +3,6 @@ import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
-import '../../../share/empty_example/page/empty_example_page.dart';
 import '../tab/list_of_candidate_profile_applied_tab.dart';
 import '../tab/list_of_candidate_profile_invited_tab.dart';
 import '../tab/list_of_candidate_profile_saved_tab.dart';

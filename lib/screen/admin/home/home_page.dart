@@ -1,11 +1,13 @@
+import 'package:eportal/screen/admin/management_of_news/page/management_of_news_page.dart';
 import 'package:eportal/screen/admin/setting/page/setting_page.dart';
-import 'package:eportal/screen/share/notification/page/notification_page.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/widget/app_bar/default_app_bar.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../share/home_manage/page/home_manage_page.dart';
+import '../management_of_banners/page/management_of_banners_page.dart';
+import '../management_of_event/page/management_of_event_page.dart';
 
 //
 // Created by BlackRose on 11/7/2023.
@@ -61,12 +63,34 @@ class _HomePageState extends BasePageStateActive<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.notifications,
+              Icons.newspaper,
               color: AppColor.colorOfHintText,
             ),
-            label: "Thông báo",
+            label: "Tin bài",
             activeIcon: Icon(
-              Icons.notifications,
+              Icons.newspaper,
+              color: AppColor.colorOfIcon,
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.event,
+              color: AppColor.colorOfHintText,
+            ),
+            label: "Sự kiện",
+            activeIcon: Icon(
+              Icons.event,
+              color: AppColor.colorOfIcon,
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.image,
+              color: AppColor.colorOfHintText,
+            ),
+            label: "Quảng cáo",
+            activeIcon: Icon(
+              Icons.image,
               color: AppColor.colorOfIcon,
             ),
           ),
@@ -99,7 +123,9 @@ class _HomePageState extends BasePageStateActive<HomePage> {
         },
         children: const <Widget>[
           HomeManagePage(),
-          NotificationPage(),
+          ManagementOfNewsPage(),
+          ManagementOfEventPage(),
+          ManagementOfBannersPage(),
           SettingPage(),
         ],
       );

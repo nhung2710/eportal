@@ -26,10 +26,15 @@ class JobUserSearchPage extends BasePage {
 }
 
 class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
-  JobUserSearchBloc jobUserSearchBloc = JobUserSearchBloc();
+  late JobUserSearchBloc jobUserSearchBloc;
   JobUserSearchRequest request =
       JobUserSearchRequest(obj: JobUserSearchDataRequest());
   TextEditingController textEditingController = TextEditingController();
+
+  @override
+  void initBloc() {
+    jobUserSearchBloc = JobUserSearchBloc();
+  }
 
   @override
   void initDataLoading() {

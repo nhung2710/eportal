@@ -1,6 +1,7 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:eportal/model/base/base_eportal_data_response.dart';
 import 'package:eportal/style/app_color.dart';
+import 'package:eportal/style/app_size_icon.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ class SelectItem<T extends BaseEportalDataResponse>
       required super.list,
       required super.title,
       super.itemAsString,
+      required super.icon,
       super.onChanged});
 
   @override
@@ -29,6 +31,7 @@ class SelectItemNormal<T> extends StatefulWidget {
   final ValueChanged<T?>? onChanged;
   final DropdownSearchItemAsString<T>? itemAsString;
   final DropdownSearchFilterFn<T>? filterFn;
+  final IconData? icon;
 
   const SelectItemNormal(
       {super.key,
@@ -37,6 +40,7 @@ class SelectItemNormal<T> extends StatefulWidget {
       required this.title,
       this.itemAsString,
       this.filterFn,
+      required this.icon,
       this.onChanged});
 
   @override
@@ -77,9 +81,27 @@ class SelectItemNormalState<T> extends State<SelectItemNormal<T>> {
           BuildContext context, String title) =>
       DropDownDecoratorProps(
         dropdownSearchDecoration: InputDecoration(
+            isDense: true,
+            prefixIconConstraints: const BoxConstraints(
+              minWidth: 25,
+              minHeight: 25,
+            ),
+            prefixIcon: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 8),
+              child: Icon(
+                widget.icon,
+                color: AppColor.colorOfIcon,
+                size: AppSizeIcon.sizeOfNormal,
+              ),
+            ),
             //labelText: title,
             hintText: "Vui lòng chọn ${title.toLowerCase()}",
             labelStyle: AppTextStyle.title,
+            border: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(5.0),
+              ),
+            ),
             hintStyle: AppTextStyle.titleHintPage),
         baseStyle: AppTextStyle.title,
       );

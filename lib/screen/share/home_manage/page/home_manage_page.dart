@@ -46,9 +46,16 @@ class HomeManagePage extends BasePage {
 }
 
 class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
-  HomeSlideListBloc homeSlideListBloc = HomeSlideListBloc();
-  HomeAdvertiseListBloc homeAdvertiseListBloc = HomeAdvertiseListBloc();
-  HomeBusinessListBloc homeBusinessListBloc = HomeBusinessListBloc();
+  late HomeSlideListBloc homeSlideListBloc;
+  late HomeAdvertiseListBloc homeAdvertiseListBloc;
+  late HomeBusinessListBloc homeBusinessListBloc;
+
+  @override
+  void initBloc() {
+    homeSlideListBloc = HomeSlideListBloc();
+    homeAdvertiseListBloc = HomeAdvertiseListBloc();
+    homeBusinessListBloc = HomeBusinessListBloc();
+  }
 
   @override
   void initDataLoading() {
@@ -117,7 +124,7 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                               enlargeStrategy: CenterPageEnlargeStrategy.zoom,
                               scrollDirection: Axis.horizontal,
                             ),
-                            items: state!.map((item) {
+                            items: state.map((item) {
                               return Builder(
                                 builder: (BuildContext context) {
                                   return GestureDetector(
@@ -236,7 +243,7 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                               enlargeStrategy: CenterPageEnlargeStrategy.zoom,
                               scrollDirection: Axis.horizontal,
                             ),
-                            items: state!.map((item) {
+                            items: state.map((item) {
                               return Builder(
                                 builder: (BuildContext context) {
                                   return Padding(
@@ -334,7 +341,7 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
                               enlargeStrategy: CenterPageEnlargeStrategy.zoom,
                               scrollDirection: Axis.horizontal,
                             ),
-                            items: state!.map((item) {
+                            items: state.map((item) {
                               return Builder(
                                 builder: (BuildContext context) {
                                   return Padding(

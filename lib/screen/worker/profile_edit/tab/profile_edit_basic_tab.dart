@@ -1,23 +1,11 @@
-import 'package:dropdown_search/dropdown_search.dart';
-import 'package:eportal/bloc/common_new/danh_sach_gioi_tinh_bloc.dart';
-import 'package:eportal/bloc/common_new/danh_sach_kinh_nghiem_bloc.dart';
-import 'package:eportal/bloc/common_new/danh_sach_muc_luong_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_quan_huyen_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_tinh_tp_bloc.dart';
-import 'package:eportal/bloc/common_new/danh_sach_trinh_do_bloc.dart';
-import 'package:eportal/event/common_new/danh_sach_kinh_nghiem_event.dart';
-import 'package:eportal/event/common_new/danh_sach_muc_luong_event.dart';
 import 'package:eportal/event/common_new/danh_sach_quan_huyen_event.dart';
 import 'package:eportal/event/common_new/danh_sach_tinh_tp_event.dart';
-import 'package:eportal/model/api/request/common_new/danh_sach_kinh_nghiem_request.dart';
-import 'package:eportal/model/api/request/common_new/danh_sach_muc_luong_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_quan_huyen_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_tinh_tp_request.dart';
-import 'package:eportal/model/api/request/common_new/data/common_new_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_quan_huyen_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_tinh_tp_data_request.dart';
-import 'package:eportal/model/api/response/common_new/data/danh_sach_kinh_nghiem_data_response.dart';
-import 'package:eportal/model/api/response/common_new/data/danh_sach_muc_luong_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_quan_huyen_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_tinh_tp_data_response.dart';
 import 'package:eportal/state/base/base_state.dart';
@@ -28,7 +16,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../bloc/common_new/danh_sach_nganh_nghe_bloc.dart';
 import '../../../../event/common_new/danh_sach_nganh_nghe_event.dart';
-import '../../../../extension/dateTime_extension.dart';
 import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/common_new/danh_sach_nganh_nghe_request.dart';
 import '../../../../model/api/request/common_new/data/danh_sach_nganh_nghe_data_request.dart';
@@ -159,8 +146,7 @@ class ProfileEditBasicTabState
                     builder: (BuildContext context,
                             DataMultiState<DanhSachNganhNgheDataResponse>
                                 state) =>
-                        _buildViewSearchDanhSachNganhNghe(
-                            context, state.data ?? []),
+                        _buildViewSearchDanhSachNganhNghe(context, state.data),
                   ),
                 )),
           ),
@@ -176,8 +162,7 @@ class ProfileEditBasicTabState
                       DataMultiState<DanhSachTinhTpDataResponse>>(
                     builder: (BuildContext context,
                             DataMultiState<DanhSachTinhTpDataResponse> state) =>
-                        _buildViewSearchDanhSachTinhTp(
-                            context, state.data ?? []),
+                        _buildViewSearchDanhSachTinhTp(context, state.data),
                   ),
                 )),
           ),
@@ -194,8 +179,7 @@ class ProfileEditBasicTabState
                     builder: (BuildContext context,
                             DataMultiState<DanhSachQuanHuyenDataResponse>
                                 state) =>
-                        _buildViewSearchDanhSachQuanHuyen(
-                            context, state.data ?? []),
+                        _buildViewSearchDanhSachQuanHuyen(context, state.data),
                   ),
                 )),
           ),
@@ -206,6 +190,7 @@ class ProfileEditBasicTabState
       BuildContext context, List<DanhSachTinhTpDataResponse> list) {
     return SelectItem<DanhSachTinhTpDataResponse>(
       selectedItem: widget.danhSachTinhTpDataResponse,
+      icon: FontAwesomeIcons.city,
       list: list,
       itemAsString: (DanhSachTinhTpDataResponse u) =>
           u.regionalName.replaceWhenNullOrWhiteSpace(),
@@ -227,6 +212,7 @@ class ProfileEditBasicTabState
   Widget _buildViewSearchDanhSachQuanHuyen(
       BuildContext context, List<DanhSachQuanHuyenDataResponse> list) {
     return SelectItem<DanhSachQuanHuyenDataResponse>(
+      icon: FontAwesomeIcons.locationArrow,
       key: _danhSachQuanHuyenKey,
       selectedItem: widget.danhSachQuanHuyenDataResponse,
       list: list,
@@ -244,6 +230,7 @@ class ProfileEditBasicTabState
   Widget _buildViewSearchDanhSachNganhNghe(
       BuildContext context, List<DanhSachNganhNgheDataResponse> list) {
     return SelectItem<DanhSachNganhNgheDataResponse>(
+      icon: FontAwesomeIcons.tag,
       selectedItem: widget.danhSachNganhNgheDataResponse,
       list: list,
       itemAsString: (DanhSachNganhNgheDataResponse u) =>

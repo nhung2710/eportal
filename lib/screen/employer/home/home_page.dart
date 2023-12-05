@@ -3,7 +3,6 @@ import 'package:eportal/widget/app_bar/default_app_bar.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
-import '../../share/empty_example/page/empty_example_page.dart';
 import '../../share/home_manage/page/home_manage_page.dart';
 import '../candidate_profile/page/candidate_profile_page.dart';
 import '../job_advertisement/page/job_advertisement_page.dart';

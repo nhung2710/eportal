@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/default_button/default_button.dart';

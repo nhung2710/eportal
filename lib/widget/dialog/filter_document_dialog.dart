@@ -15,6 +15,7 @@ import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:eportal/widget/select/select_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../bloc/common_new/danh_sach_co_quan_ban_hanh_bloc.dart';
 import '../../bloc/common_new/danh_sach_linh_vuc_van_ban_bloc.dart';
@@ -120,7 +121,7 @@ class FilterDocumentDialogState extends BaseScreenState<FilterDocumentDialog> {
                                         DanhSachLinhVucVanBanDataResponse>
                                     state) =>
                             _buildViewSearchDanhSachLinhVucVanBan(
-                                context, state.data ?? []),
+                                context, state.data),
                       ),
                     )),
               ),
@@ -139,7 +140,7 @@ class FilterDocumentDialogState extends BaseScreenState<FilterDocumentDialog> {
                                 DataMultiState<DanhSachLoaiVanBanDataResponse>
                                     state) =>
                             _buildViewSearchDanhSachLoaiVanBan(
-                                context, state.data ?? []),
+                                context, state.data),
                       ),
                     )),
               ),
@@ -159,7 +160,7 @@ class FilterDocumentDialogState extends BaseScreenState<FilterDocumentDialog> {
                                         DanhSachCoQuanBanHanhDataResponse>
                                     state) =>
                             _buildViewSearchDanhSachCoQuanBanHanh(
-                                context, state.data ?? []),
+                                context, state.data),
                       ),
                     )),
               ),
@@ -200,6 +201,7 @@ class FilterDocumentDialogState extends BaseScreenState<FilterDocumentDialog> {
       BuildContext context, List<DanhSachCoQuanBanHanhDataResponse> list) {
     return SelectItem<DanhSachCoQuanBanHanhDataResponse>(
       selectedItem: widget.danhSachCoQuanBanHanhDataResponse,
+      icon: FontAwesomeIcons.buildingColumns,
       list: list,
       itemAsString: (DanhSachCoQuanBanHanhDataResponse u) =>
           u.docUnitName.replaceWhenNullOrWhiteSpace(),
@@ -217,6 +219,7 @@ class FilterDocumentDialogState extends BaseScreenState<FilterDocumentDialog> {
       BuildContext context, List<DanhSachLinhVucVanBanDataResponse> list) {
     return SelectItem<DanhSachLinhVucVanBanDataResponse>(
       selectedItem: widget.danhSachLinhVucVanBanDataResponse,
+      icon: FontAwesomeIcons.book,
       list: list,
       itemAsString: (DanhSachLinhVucVanBanDataResponse u) =>
           u.docFieldName.replaceWhenNullOrWhiteSpace(),
@@ -234,6 +237,7 @@ class FilterDocumentDialogState extends BaseScreenState<FilterDocumentDialog> {
       BuildContext context, List<DanhSachLoaiVanBanDataResponse> list) {
     return SelectItem<DanhSachLoaiVanBanDataResponse>(
       selectedItem: widget.danhSachLoaiVanBanDataResponse,
+      icon: FontAwesomeIcons.tag,
       list: list,
       itemAsString: (DanhSachLoaiVanBanDataResponse u) =>
           u.docTypeName.replaceWhenNullOrWhiteSpace(),
@@ -251,6 +255,7 @@ class FilterDocumentDialogState extends BaseScreenState<FilterDocumentDialog> {
       BuildContext context, List<GroupTypeDocument> list) {
     return SelectItem<GroupTypeDocument>(
       selectedItem: widget.groupTypeDocument,
+      icon: FontAwesomeIcons.groupArrowsRotate,
       list: list,
       itemAsString: (GroupTypeDocument u) => u.name,
       onChanged: (GroupTypeDocument? data) {

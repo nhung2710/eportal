@@ -24,7 +24,12 @@ class NewsEnterprisePage extends BasePage {
 }
 
 class _NewsEnterprisePageState extends BasePageState<NewsEnterprisePage> {
-  HomeBusinessListBloc homeBusinessListBloc = HomeBusinessListBloc();
+  late HomeBusinessListBloc homeBusinessListBloc;
+
+  @override
+  void initBloc() {
+    homeBusinessListBloc = HomeBusinessListBloc();
+  }
 
   @override
   void initDataLoading() {

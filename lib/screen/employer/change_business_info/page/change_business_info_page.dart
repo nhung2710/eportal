@@ -1,11 +1,5 @@
 import 'package:eportal/model/api/response/common_new/data/job_user_add_data_response.dart';
 import 'package:eportal/screen/employer/change_business_info/tab/change_business_info_general_tab.dart';
-import 'package:eportal/screen/worker/profile_add/tab/profile_add_basic_tab.dart';
-import 'package:eportal/screen/worker/profile_add/tab/profile_add_career_goals_tab.dart';
-import 'package:eportal/screen/worker/profile_add/tab/profile_add_field_skills_tab.dart';
-import 'package:eportal/screen/worker/profile_add/tab/profile_add_general_tab.dart';
-import 'package:eportal/screen/worker/profile_add/tab/profile_add_level_tab.dart';
-import 'package:eportal/screen/worker/profile_add/tab/profile_add_work_experience_tab.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
@@ -15,13 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../bloc/common_new/job_user_add_bloc.dart';
-import '../../../../event/common_new/job_user_add_event.dart';
-import '../../../../extension/string_extension.dart';
-import '../../../../model/api/request/common_new/data/job_user_add_data_request.dart';
-import '../../../../model/api/request/common_new/job_user_add_request.dart';
 import '../../../../widget/base/base_page.dart';
-
-import '../../../../extension/string_extension.dart';
 import '../tab/change_business_info_about_tab.dart';
 import '../tab/change_business_info_account_tab.dart';
 import '../tab/change_business_info_contract_tab.dart';
@@ -56,8 +44,12 @@ class _ChangeBusinessInfoPageState extends BasePageState<ChangeBusinessInfoPage>
   late TabController _tabController;
 
   @override
-  void initDataLoading() {
+  void initBloc() {
     jobUserAddBloc = JobUserAddBloc();
+  }
+
+  @override
+  void initDataLoading() {
     // TODO: implement initDataLoading
     _tabController = TabController(
         vsync: this, length: 6, animationDuration: const Duration(seconds: 0));

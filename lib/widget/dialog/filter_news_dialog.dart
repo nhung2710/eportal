@@ -8,6 +8,7 @@ import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:eportal/widget/select/select_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../bloc/common_new/danh_sach_chuyen_muc_bloc.dart';
 import '../../extension/string_extension.dart';
@@ -75,7 +76,7 @@ class FilterNewsDialogState extends BaseScreenState<FilterNewsDialog> {
                                 DataMultiState<DanhSachChuyenMucDataResponse>
                                     state) =>
                             _buildViewSearchDanhSachChuyenMuc(
-                                context, state.data ?? []),
+                                context, state.data),
                       ),
                     )),
               ),
@@ -115,6 +116,7 @@ class FilterNewsDialogState extends BaseScreenState<FilterNewsDialog> {
   Widget _buildViewSearchDanhSachChuyenMuc(
       BuildContext context, List<DanhSachChuyenMucDataResponse> list) {
     return SelectItem<DanhSachChuyenMucDataResponse>(
+        icon: FontAwesomeIcons.tag,
         selectedItem: widget.danhSachChuyenMucDataResponse,
         list: list,
         itemAsString: (DanhSachChuyenMucDataResponse u) =>

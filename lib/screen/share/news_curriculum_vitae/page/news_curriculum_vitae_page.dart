@@ -27,7 +27,12 @@ class NewsCurriculumVitaePage extends BasePage {
 
 class _NewsCurriculumVitaePageState
     extends BasePageState<NewsCurriculumVitaePage> {
-  HomeJobUserListBloc homeJobUserListBloc = HomeJobUserListBloc();
+  late HomeJobUserListBloc homeJobUserListBloc;
+
+  @override
+  void initBloc() {
+    homeJobUserListBloc = HomeJobUserListBloc();
+  }
 
   @override
   void initDataLoading() {

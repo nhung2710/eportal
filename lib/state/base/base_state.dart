@@ -37,10 +37,12 @@ class DataMultiState<T> extends Equatable {
   final DataBlocStatus status;
   final List<T> data;
   final String errorMessage;
+  final int numberData;
 
-  const DataMultiState(
+  DataMultiState(
       {this.status = DataBlocStatus.init,
       this.data = const [],
+      this.numberData = 0,
       this.errorMessage = ApplicationConstant.EMPTY});
 
   DataMultiState<T> copyWith({
@@ -51,11 +53,12 @@ class DataMultiState<T> extends Equatable {
     return DataMultiState<T>(
         status: status ?? this.status,
         data: data ?? this.data,
+        numberData: ((data ?? this.data)).length,
         errorMessage: errorMessage ?? this.errorMessage);
   }
 
   @override
-  List<Object?> get props => [data, status, errorMessage];
+  List<Object?> get props => [data, status, errorMessage, numberData];
 }
 
 class DataPageState<T> extends Equatable {
@@ -65,7 +68,7 @@ class DataPageState<T> extends Equatable {
   final bool hasReachedMax;
   final int numberData;
 
-  const DataPageState(
+  DataPageState(
       {this.status = DataBlocStatus.init,
       this.data = const [],
       this.numberData = 0,

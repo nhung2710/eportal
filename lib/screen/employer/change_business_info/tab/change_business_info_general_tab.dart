@@ -48,9 +48,13 @@ class ChangeBusinessInfoGeneralTabState
   late DanhSachQuanHuyenBloc danhSachQuanHuyenBloc;
 
   @override
-  void initDataLoading() {
+  void initBloc() {
     danhSachTinhTpBloc = DanhSachTinhTpBloc();
     danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
+  }
+
+  @override
+  void initDataLoading() {
     callApi();
     super.initDataLoading();
   }
@@ -117,8 +121,7 @@ class ChangeBusinessInfoGeneralTabState
                       DataMultiState<DanhSachTinhTpDataResponse>>(
                     builder: (BuildContext context,
                             DataMultiState<DanhSachTinhTpDataResponse> state) =>
-                        _buildViewSearchDanhSachTinhTp(
-                            context, state.data ?? []),
+                        _buildViewSearchDanhSachTinhTp(context, state.data),
                   ),
                 )),
           ),
@@ -135,8 +138,7 @@ class ChangeBusinessInfoGeneralTabState
                     builder: (BuildContext context,
                             DataMultiState<DanhSachQuanHuyenDataResponse>
                                 state) =>
-                        _buildViewSearchDanhSachQuanHuyen(
-                            context, state.data ?? []),
+                        _buildViewSearchDanhSachQuanHuyen(context, state.data),
                   ),
                 )),
           ),
@@ -226,6 +228,7 @@ class ChangeBusinessInfoGeneralTabState
   Widget _buildViewSearchDanhSachTinhTp(
       BuildContext context, List<DanhSachTinhTpDataResponse> list) {
     return SelectItem<DanhSachTinhTpDataResponse>(
+      icon: FontAwesomeIcons.city,
       selectedItem: widget.danhSachTinhTpDataResponse,
       list: list,
       itemAsString: (DanhSachTinhTpDataResponse u) =>
@@ -248,6 +251,7 @@ class ChangeBusinessInfoGeneralTabState
   Widget _buildViewSearchDanhSachQuanHuyen(
       BuildContext context, List<DanhSachQuanHuyenDataResponse> list) {
     return SelectItem<DanhSachQuanHuyenDataResponse>(
+      icon: FontAwesomeIcons.locationArrow,
       key: _danhSachQuanHuyenKey,
       selectedItem: widget.danhSachQuanHuyenDataResponse,
       list: list,

@@ -33,7 +33,12 @@ class NewsDetailPage extends BasePage {
 }
 
 class _NewsDetailPageState extends BasePageState<NewsDetailPage> {
-  NewsDetailBloc newsDetailBloc = NewsDetailBloc();
+  late NewsDetailBloc newsDetailBloc;
+
+  @override
+  void initBloc() {
+    newsDetailBloc = NewsDetailBloc();
+  }
 
   @override
   void initDataLoading() {
