@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_relative_imports
 
-import 'package:eportal/bloc/common_new/job_user_update_bloc.dart';
+import 'package:eportal/bloc/admin/job_user_update_bloc.dart';
 import 'package:eportal/event/common_new/job_user_update_event.dart';
-import 'package:eportal/model/api/request/common_new/data/job_user_update_data_request.dart';
-import 'package:eportal/model/api/request/common_new/job_user_update_request.dart';
-import 'package:eportal/model/api/response/common_new/data/job_user_update_data_response.dart';
+import 'package:eportal/model/api/request/admin/data/job_user_update_data_request.dart';
+import 'package:eportal/model/api/request/admin/job_user_update_request.dart';
+import 'package:eportal/model/api/response/admin/data/job_user_update_data_response.dart';
 import 'package:eportal/screen/worker/profile_edit/tab/profile_edit_basic_tab.dart';
 import 'package:eportal/screen/worker/profile_edit/tab/profile_edit_career_goals_tab.dart';
 import 'package:eportal/screen/worker/profile_edit/tab/profile_edit_field_skills_tab.dart';
@@ -191,7 +191,7 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage>
                   mucLuong: keyProfileEditGeneralTabState.currentState?.widget.danhSachMucLuongDataResponse?.salaryID,
                   soNamKinhNghiem: keyProfileEditGeneralTabState.currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
                   trinhDo: keyProfileEditGeneralTabState.currentState?.widget.danhSachTrinhDoDataResponse?.educationID,
-                  nhuCau: (keyProfileEditGeneralTabState.currentState?.widget.danhSachNhuCauViecLamDataResponse?.careerID).replaceWhenNullOrWhiteSpace("0120720169190368"),
+                  nhuCau: (keyProfileEditGeneralTabState.currentState?.widget.danhSachNhuCauDataResponse?.careerID).replaceWhenNullOrWhiteSpace("0120720169190368"),
                   kyNang: keyProfileEditFieldSkillsTabState.currentState?.skillController.text,
                   kinhNghiemLV: keyProfileEditWorkExperienceTabState.currentState?.experienceController.text,
                   mucTieu: keyProfileEditCareerGoalsTabState.currentState?.objectiveController.text,

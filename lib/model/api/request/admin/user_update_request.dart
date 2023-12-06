@@ -1,5 +1,5 @@
 import 'package:eportal/api/constant/application_api_constant.dart';
-import 'package:eportal/model/api/request/common_new/data/user_update_data_request.dart';
+import 'package:eportal/model/api/request/admin/data/user_update_data_request.dart';
 import 'package:eportal/model/base/base_eportal_request.dart';
 
 //
@@ -14,4 +14,7 @@ class UserUpdateRequest extends BaseEportalRequest<UserUpdateDataRequest> {
 
   @override
   bool isAuthentication() => true;
+
+  @override
+  String getBaseUri() => ApplicationApiConstant.API_ADMIN;
 }

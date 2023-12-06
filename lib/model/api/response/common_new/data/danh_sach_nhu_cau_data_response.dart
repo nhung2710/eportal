@@ -7,7 +7,7 @@ import '../../../../../extension/string_extension.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class DanhSachNhuCauViecLamDataResponse extends BaseEportalDataResponse {
+class DanhSachNhuCauDataResponse extends BaseEportalDataResponse {
   int? id;
   int? total;
   String? careerID;
@@ -21,7 +21,7 @@ class DanhSachNhuCauViecLamDataResponse extends BaseEportalDataResponse {
   String? updatedBy;
   String? userUpdate;
 
-  DanhSachNhuCauViecLamDataResponse(
+  DanhSachNhuCauDataResponse(
       {this.id,
       this.total,
       this.careerID,
@@ -35,7 +35,7 @@ class DanhSachNhuCauViecLamDataResponse extends BaseEportalDataResponse {
       this.updatedBy,
       this.userUpdate});
 
-  DanhSachNhuCauViecLamDataResponse.fromJson(Map<String, dynamic> json) {
+  DanhSachNhuCauDataResponse.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     total = json['total'];
     careerID = json['career_ID'];

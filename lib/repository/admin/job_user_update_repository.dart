@@ -1,5 +1,5 @@
-import 'package:eportal/model/api/request/common_new/job_user_update_request.dart';
-import 'package:eportal/model/api/response/common_new/job_user_update_response.dart';
+import 'package:eportal/model/api/request/admin/job_user_update_request.dart';
+import 'package:eportal/model/api/response/admin/job_user_update_response.dart';
 import 'package:eportal/repository/base/base_repository.dart';
 
 //

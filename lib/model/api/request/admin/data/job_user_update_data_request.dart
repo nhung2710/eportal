@@ -1,4 +1,4 @@
-import 'package:eportal/model/api/request/common_new/data/job_user_add_data_request.dart';
+import 'package:eportal/model/api/request/admin/data/job_user_add_data_request.dart';
 
 //
 // Created by BlackRose on 01/12/2023.

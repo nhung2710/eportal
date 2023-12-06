@@ -1,5 +1,5 @@
 import 'package:eportal/api/constant/application_api_constant.dart';
-import 'package:eportal/model/api/request/common_new/data/job_user_update_data_request.dart';
+import 'package:eportal/model/api/request/admin/data/job_user_update_data_request.dart';
 import 'package:eportal/model/base/base_eportal_request.dart';
 
 //
@@ -13,4 +13,10 @@ class JobUserUpdateRequest
 
   @override
   String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_JOB_USER_UPDATE;
+
+  @override
+  bool isAuthentication() => true;
+
+  @override
+  String getBaseUri() => ApplicationApiConstant.API_ADMIN;
 }

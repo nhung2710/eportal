@@ -1,4 +1,4 @@
-import 'package:eportal/model/api/response/common_new/data/job_user_add_data_response.dart';
+import 'package:eportal/model/api/response/admin/data/job_user_add_data_response.dart';
 import 'package:eportal/screen/worker/profile_add/tab/profile_add_basic_tab.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
@@ -8,11 +8,11 @@ import 'package:eportal/widget/input/capcha_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../bloc/common_new/job_user_add_bloc.dart';
+import '../../../../bloc/admin/job_user_add_bloc.dart';
 import '../../../../event/common_new/job_user_add_event.dart';
 import '../../../../extension/string_extension.dart';
-import '../../../../model/api/request/common_new/data/job_user_add_data_request.dart';
-import '../../../../model/api/request/common_new/job_user_add_request.dart';
+import '../../../../model/api/request/admin/data/job_user_add_data_request.dart';
+import '../../../../model/api/request/admin/job_user_add_request.dart';
 import '../../../../widget/base/base_page.dart';
 import '../tab/profile_add_career_goals_tab.dart';
 import '../tab/profile_add_field_skills_tab.dart';
@@ -192,7 +192,7 @@ class _ProfileAddPageState extends BasePageState<ProfileAddPage>
                   mucLuong: keyProfileAddGeneralTabState.currentState?.widget.danhSachMucLuongDataResponse?.salaryID,
                   soNamKinhNghiem: keyProfileAddGeneralTabState.currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
                   trinhDo: keyProfileAddGeneralTabState.currentState?.widget.danhSachTrinhDoDataResponse?.educationID,
-                  nhuCau: (keyProfileAddGeneralTabState.currentState?.widget.danhSachNhuCauViecLamDataResponse?.careerID).replaceWhenNullOrWhiteSpace("0120720169190368"),
+                  nhuCau: (keyProfileAddGeneralTabState.currentState?.widget.danhSachNhuCauDataResponse?.careerID).replaceWhenNullOrWhiteSpace("0120720169190368"),
                   kyNang: keyProfileAddFieldSkillsTabState.currentState?.skillController.text,
                   kinhNghiemLV: keyProfileAddWorkExperienceTabState.currentState?.experienceController.text,
                   mucTieu: keyProfileAddCareerGoalsTabState.currentState?.objectiveController.text,

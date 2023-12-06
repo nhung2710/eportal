@@ -7,11 +7,11 @@ import 'package:eportal/event/common_new/dang_nhap_event.dart';
 import 'package:eportal/model/api/request/common_new/dang_nhap_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_gioi_tinh_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_muc_luong_request.dart';
-import 'package:eportal/model/api/request/common_new/danh_sach_nhu_cau_viec_lam_request.dart';
+import 'package:eportal/model/api/request/common_new/danh_sach_nhu_cau_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_tinh_tp_request.dart';
 import 'package:eportal/model/api/request/common_new/data/dang_nhap_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_gioi_tinh_data_request.dart';
-import 'package:eportal/model/api/request/common_new/data/danh_sach_nhu_cau_viec_lam_data_request.dart';
+import 'package:eportal/model/api/request/common_new/data/danh_sach_nhu_cau_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_tinh_tp_data_request.dart';
 import 'package:eportal/model/api/response/common_new/data/dang_nhap_data_response.dart';
 import 'package:eportal/repository/common_new/danh_sach_chuyen_muc_repository.dart';
@@ -50,7 +50,7 @@ import '../../../../model/api/request/common_new/data/danh_sach_muc_luong_data_r
 import '../../../../model/api/request/common_new/data/danh_sach_trinh_do_data_request.dart';
 import '../../../../repository/common_new/danh_sach_gioi_tinh_repository.dart';
 import '../../../../repository/common_new/danh_sach_kinh_nghiem_repository.dart';
-import '../../../../repository/common_new/danh_sach_nhu_cau_viec_lam_repository.dart';
+import '../../../../repository/common_new/danh_sach_nhu_cau_repository.dart';
 import '../../../../repository/common_new/danh_sach_tinh_tp_repository.dart';
 import '../../../../style/app_text_style.dart';
 
@@ -233,8 +233,8 @@ class _SplashPageState extends BasePageState<SplashPage>
           .get(DanhSachTinhTpRequest(obj: DanhSachTinhTpDataRequest())),
       DanhSachGioiTinhRepository()
           .get(DanhSachGioiTinhRequest(obj: DanhSachGioiTinhDataRequest())),
-      DanhSachNhuCauViecLamRepository().get(DanhSachNhuCauViecLamRequest(
-          obj: DanhSachNhuCauViecLamDataRequest())),
+      DanhSachNhuCauRepository()
+          .get(DanhSachNhuCauRequest(obj: DanhSachNhuCauDataRequest())),
       DanhSachMucLuongRepository()
           .get(DanhSachMucLuongRequest(obj: DanhSachMucLuongDataRequest())),
       DanhSachKinhNghiemRepository()

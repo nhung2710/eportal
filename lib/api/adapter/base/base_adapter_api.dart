@@ -31,7 +31,7 @@ class CacheApi {
 
 class BaseAdapterApi {
   static final BaseAdapterApi _instance = BaseAdapterApi._internal();
-  bool isNeedLogApi = false;
+  bool isNeedLogApi = true;
 
   factory BaseAdapterApi() {
     return _instance;

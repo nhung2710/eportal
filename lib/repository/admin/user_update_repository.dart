@@ -1,5 +1,5 @@
-import 'package:eportal/model/api/request/common_new/user_update_request.dart';
-import 'package:eportal/model/api/response/common_new/user_update_response.dart';
+import 'package:eportal/model/api/request/admin/user_update_request.dart';
+import 'package:eportal/model/api/response/admin/user_update_response.dart';
 import 'package:eportal/repository/base/base_repository.dart';
 
 //

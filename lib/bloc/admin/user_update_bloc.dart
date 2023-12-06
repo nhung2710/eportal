@@ -1,8 +1,8 @@
 import 'package:eportal/bloc/base/base_bloc.dart';
 import 'package:eportal/event/common_new/user_update_event.dart';
-import 'package:eportal/model/api/response/common_new/data/user_update_data_response.dart';
-import 'package:eportal/model/api/response/common_new/user_update_response.dart';
-import 'package:eportal/repository/common_new/user_update_repository.dart';
+import 'package:eportal/model/api/response/admin/data/user_update_data_response.dart';
+import 'package:eportal/model/api/response/admin/user_update_response.dart';
+import 'package:eportal/repository/admin/user_update_repository.dart';
 
 //
 // Created by BlackRose on 01/12/2023.

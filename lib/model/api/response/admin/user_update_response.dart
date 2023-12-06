@@ -1,4 +1,4 @@
-import 'package:eportal/model/api/response/common_new/data/user_update_data_response.dart';
+import 'package:eportal/model/api/response/admin/data/user_update_data_response.dart';
 import 'package:eportal/model/base/base_eportal_response.dart';
 
 import '../../../../extension/map_json_extension.dart';

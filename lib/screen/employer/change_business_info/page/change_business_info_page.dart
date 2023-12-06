@@ -1,4 +1,4 @@
-import 'package:eportal/model/api/response/common_new/data/job_user_add_data_response.dart';
+import 'package:eportal/model/api/response/admin/data/job_user_add_data_response.dart';
 import 'package:eportal/screen/employer/change_business_info/tab/change_business_info_general_tab.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
@@ -8,7 +8,7 @@ import 'package:eportal/widget/input/capcha_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../bloc/common_new/job_user_add_bloc.dart';
+import '../../../../bloc/admin/job_user_add_bloc.dart';
 import '../../../../widget/base/base_page.dart';
 import '../tab/change_business_info_about_tab.dart';
 import '../tab/change_business_info_account_tab.dart';

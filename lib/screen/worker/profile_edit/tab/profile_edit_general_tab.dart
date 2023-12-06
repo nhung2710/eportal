@@ -20,17 +20,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../bloc/common_new/danh_sach_chuc_vu_bloc.dart';
-import '../../../../bloc/common_new/danh_sach_nhu_cau_viec_lam_bloc.dart';
-import '../../../../event/common_new/danh_sach_nhu_cau_viec_lam_event.dart';
+import '../../../../bloc/common_new/danh_sach_nhu_cau_bloc.dart';
+import '../../../../event/common_new/danh_sach_nhu_cau_event.dart';
 import '../../../../event/common_new/danh_sach_trinh_do_event.dart';
 import '../../../../extension/string_extension.dart';
-import '../../../../model/api/request/common_new/danh_sach_nhu_cau_viec_lam_request.dart';
+import '../../../../model/api/request/common_new/danh_sach_nhu_cau_request.dart';
 import '../../../../model/api/request/common_new/danh_sach_trinh_do_request.dart';
 import '../../../../model/api/request/common_new/data/danh_sach_kinh_nghiem_data_request.dart';
 import '../../../../model/api/request/common_new/data/danh_sach_muc_luong_data_request.dart';
-import '../../../../model/api/request/common_new/data/danh_sach_nhu_cau_viec_lam_data_request.dart';
+import '../../../../model/api/request/common_new/data/danh_sach_nhu_cau_data_request.dart';
 import '../../../../model/api/request/common_new/data/danh_sach_trinh_do_data_request.dart';
-import '../../../../model/api/response/common_new/data/danh_sach_nhu_cau_viec_lam_data_response.dart';
+import '../../../../model/api/response/common_new/data/danh_sach_nhu_cau_data_response.dart';
 import '../../../../widget/base/base_page.dart';
 
 //
@@ -46,7 +46,7 @@ class ProfileEditGeneralTab extends BasePage {
   DanhSachChucVuDataResponse? danhSachChucVuDataResponseHienTai;
   DanhSachChucVuDataResponse? danhSachChucVuDataResponseMongMuon;
   DanhSachTrinhDoDataResponse? danhSachTrinhDoDataResponse;
-  DanhSachNhuCauViecLamDataResponse? danhSachNhuCauViecLamDataResponse;
+  DanhSachNhuCauDataResponse? danhSachNhuCauDataResponse;
 
   @override
   State<StatefulWidget> createState() => ProfileEditGeneralTabState();
@@ -59,7 +59,7 @@ class ProfileEditGeneralTabState
   late DanhSachGioiTinhBloc danhSachGioiTinhBloc;
   late DanhSachTrinhDoBloc danhSachTrinhDoBloc;
   late DanhSachChucVuBloc danhSachChucVuBloc;
-  late DanhSachNhuCauViecLamBloc danhSachNhuCauViecLamBloc;
+  late DanhSachNhuCauBloc danhSachNhuCauBloc;
 
   @override
   void initDataLoading() {
@@ -68,7 +68,7 @@ class ProfileEditGeneralTabState
     danhSachKinhNghiemBloc = DanhSachKinhNghiemBloc();
     danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
     danhSachTrinhDoBloc = DanhSachTrinhDoBloc();
-    danhSachNhuCauViecLamBloc = DanhSachNhuCauViecLamBloc();
+    danhSachNhuCauBloc = DanhSachNhuCauBloc();
     callApi();
     // TODO: implement initDataLoading
     super.initDataLoading();
@@ -85,9 +85,8 @@ class ProfileEditGeneralTabState
     danhSachKinhNghiemBloc.add(DanhSachKinhNghiemEvent(
         request:
             DanhSachKinhNghiemRequest(obj: DanhSachKinhNghiemDataRequest())));
-    danhSachNhuCauViecLamBloc.add(DanhSachNhuCauViecLamEvent(
-        request: DanhSachNhuCauViecLamRequest(
-            obj: DanhSachNhuCauViecLamDataRequest())));
+    danhSachNhuCauBloc.add(DanhSachNhuCauEvent(
+        request: DanhSachNhuCauRequest(obj: DanhSachNhuCauDataRequest())));
     super.callApi();
   }
 
@@ -189,19 +188,16 @@ class ProfileEditGeneralTabState
           Container(
             margin: const EdgeInsets.only(top: 10),
             child: BlocProvider(
-                create: (_) => danhSachNhuCauViecLamBloc,
-                child: BlocListener<DanhSachNhuCauViecLamBloc,
-                    DataMultiState<DanhSachNhuCauViecLamDataResponse>>(
+                create: (_) => danhSachNhuCauBloc,
+                child: BlocListener<DanhSachNhuCauBloc,
+                    DataMultiState<DanhSachNhuCauDataResponse>>(
                   listener: (BuildContext context,
-                      DataMultiState<DanhSachNhuCauViecLamDataResponse>
-                          state) {},
-                  child: BlocBuilder<DanhSachNhuCauViecLamBloc,
-                      DataMultiState<DanhSachNhuCauViecLamDataResponse>>(
+                      DataMultiState<DanhSachNhuCauDataResponse> state) {},
+                  child: BlocBuilder<DanhSachNhuCauBloc,
+                      DataMultiState<DanhSachNhuCauDataResponse>>(
                     builder: (BuildContext context,
-                            DataMultiState<DanhSachNhuCauViecLamDataResponse>
-                                state) =>
-                        _buildViewSearchDanhSachNhuCauViecLam(
-                            context, state.data),
+                            DataMultiState<DanhSachNhuCauDataResponse> state) =>
+                        _buildViewSearchDanhSachNhuCau(context, state.data),
                   ),
                 )),
           ),
@@ -293,17 +289,17 @@ class ProfileEditGeneralTabState
     );
   }
 
-  Widget _buildViewSearchDanhSachNhuCauViecLam(
-      BuildContext context, List<DanhSachNhuCauViecLamDataResponse> list) {
-    return SelectItemNormal<DanhSachNhuCauViecLamDataResponse>(
+  Widget _buildViewSearchDanhSachNhuCau(
+      BuildContext context, List<DanhSachNhuCauDataResponse> list) {
+    return SelectItemNormal<DanhSachNhuCauDataResponse>(
       icon: FontAwesomeIcons.handHolding,
-      selectedItem: widget.danhSachNhuCauViecLamDataResponse,
+      selectedItem: widget.danhSachNhuCauDataResponse,
       list: list,
-      itemAsString: (DanhSachNhuCauViecLamDataResponse u) =>
+      itemAsString: (DanhSachNhuCauDataResponse u) =>
           u.careerName.supportHtml(),
-      onChanged: (DanhSachNhuCauViecLamDataResponse? data) {
+      onChanged: (DanhSachNhuCauDataResponse? data) {
         if (widget.danhSachTrinhDoDataResponse != data) {
-          widget.danhSachNhuCauViecLamDataResponse = data;
+          widget.danhSachNhuCauDataResponse = data;
         }
       },
       title: "Nhu cầu làm việc",
