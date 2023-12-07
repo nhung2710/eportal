@@ -16,5 +16,5 @@ class JobUserAddRequest extends BaseEportalRequest<JobUserAddDataRequest> {
   bool isAuthentication() => true;
 
   @override
-  String getBaseUri() => ApplicationApiConstant.API_ADMIN;
+  String getBaseUri() => ApplicationApiConstant.API_ADMIN_OP;
 }

@@ -193,7 +193,7 @@ class _JobAdvertisementEditPageState
                   mucLuong: keyProfileAddGeneralTabState.currentState?.widget.danhSachMucLuongDataResponse?.salaryID,
                   soNamKinhNghiem: keyProfileAddGeneralTabState.currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
                   trinhDo: keyProfileAddGeneralTabState.currentState?.widget.danhSachTrinhDoDataResponse?.educationID,
-                  nhuCau: (keyProfileAddGeneralTabState.currentState?.widget.danhSachNhuCauDataResponse?.careerID).replaceWhenNullOrWhiteSpace("0120720169190368"),
+                  nhuCau: (keyProfileAddGeneralTabState.currentState?.widget.danhSachNhuCauDataResponse?.docUnitID).replaceWhenNullOrWhiteSpace("0120720169190368"),
                   kyNang: keyProfileAddFieldSkillsTabState.currentState?.skillController.text,
                   kinhNghiemLV: keyProfileAddWorkExperienceTabState.currentState?.experienceController.text,
                   mucTieu: keyProfileAddCareerGoalsTabState.currentState?.objectiveController.text,

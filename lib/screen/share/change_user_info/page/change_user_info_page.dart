@@ -82,7 +82,8 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
               DataSingleState<UserUpdateDataResponse> state) {
             handlerActionDataSingleState<UserUpdateDataResponse>(state,
                 (obj) async {
-              print(obj);
+              showCenterMessage("Thay đổi thông tin tài khoản thành công")
+                  .then((value) => backPage());
             });
           },
           child: ListView(

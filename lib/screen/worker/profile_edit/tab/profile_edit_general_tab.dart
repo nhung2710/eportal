@@ -296,7 +296,7 @@ class ProfileEditGeneralTabState
       selectedItem: widget.danhSachNhuCauDataResponse,
       list: list,
       itemAsString: (DanhSachNhuCauDataResponse u) =>
-          u.careerName.supportHtml(),
+          u.docUnitName.supportHtml(),
       onChanged: (DanhSachNhuCauDataResponse? data) {
         if (widget.danhSachTrinhDoDataResponse != data) {
           widget.danhSachNhuCauDataResponse = data;

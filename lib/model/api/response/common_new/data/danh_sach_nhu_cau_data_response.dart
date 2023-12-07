@@ -8,63 +8,54 @@ import '../../../../../extension/string_extension.dart';
 //
 
 class DanhSachNhuCauDataResponse extends BaseEportalDataResponse {
-  int? id;
   int? total;
-  String? careerID;
-  String? careerName;
-  String? careerCode;
-  String? careerDes;
-  bool? isActive;
+  String? docUnitID;
+  String? docUnitName;
+  String? docUnitDes;
   int? isOrder;
   String? createdBy;
   String? userName;
   String? updatedBy;
-  String? userUpdate;
+  String? updateName;
+  int? portalID;
 
   DanhSachNhuCauDataResponse(
-      {this.id,
-      this.total,
-      this.careerID,
-      this.careerName,
-      this.careerCode,
-      this.careerDes,
-      this.isActive,
+      {this.total,
+      this.docUnitID,
+      this.docUnitName,
+      this.docUnitDes,
       this.isOrder,
       this.createdBy,
       this.userName,
       this.updatedBy,
-      this.userUpdate});
+      this.updateName,
+      this.portalID});
 
   DanhSachNhuCauDataResponse.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
     total = json['total'];
-    careerID = json['career_ID'];
-    careerName = json['career_Name'];
-    careerCode = json['career_Code'];
-    careerDes = json['career_Des'];
-    isActive = json['isActive'];
+    docUnitID = json['docUnit_ID'];
+    docUnitName = json['docUnit_Name'];
+    docUnitDes = json['docUnit_Des'];
     isOrder = json['isOrder'];
     createdBy = json['createdBy'];
     userName = json['userName'];
     updatedBy = json['updatedBy'];
-    userUpdate = json['userUpdate'];
-    search = careerName.getValueSearch();
+    updateName = json['updateName'];
+    portalID = json['portalID'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
     data['total'] = this.total;
-    data['career_ID'] = this.careerID;
-    data['career_Name'] = this.careerName;
-    data['career_Code'] = this.careerCode;
-    data['career_Des'] = this.careerDes;
-    data['isActive'] = this.isActive;
+    data['docUnit_ID'] = this.docUnitID;
+    data['docUnit_Name'] = this.docUnitName;
+    data['docUnit_Des'] = this.docUnitDes;
     data['isOrder'] = this.isOrder;
     data['createdBy'] = this.createdBy;
     data['userName'] = this.userName;
     data['updatedBy'] = this.updatedBy;
-    data['userUpdate'] = this.userUpdate;
+    data['updateName'] = this.updateName;
+    data['portalID'] = this.portalID;
     return data;
   }
 }

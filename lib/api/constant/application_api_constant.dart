@@ -7,6 +7,7 @@ class ApplicationApiConstant {
   static const BASE_API_APP_URI = '$BASE_URI/api/app';
   static const API_COMMON_NEW = '$BASE_API_APP_URI/commonnew.asmx';
   static const API_ADMIN = '$BASE_API_APP_URI/admin.asmx';
+  static const API_ADMIN_OP = '$API_ADMIN?op=';
   static const API_COMMON_NEW_OP = '$API_COMMON_NEW?op=';
 
   static const API_SUCCESS_CODE = 2;
