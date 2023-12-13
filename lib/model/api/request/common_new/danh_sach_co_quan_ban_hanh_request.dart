@@ -12,9 +12,9 @@ class DanhSachCoQuanBanHanhRequest
   DanhSachCoQuanBanHanhRequest({required super.obj});
 
   @override
-  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_DEFAULT;
+  int getTimeCache() => ApplicationApiConstant.kTIME_CACHE_DEFAULT;
 
   @override
   String getQuery() =>
-      ApplicationApiConstant.API_COMMON_NEW_OP_DANH_SACH_CO_QUAN_BAN_HANH;
+      ApplicationApiConstant.kAPI_COMMON_NEW_OP_DANH_SACH_CO_QUAN_BAN_HANH;
 }

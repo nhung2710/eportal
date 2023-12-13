@@ -31,13 +31,13 @@ extension StringNullExtension on String? {
       !isNullOrWhiteSpace() ? this! : replace ?? ApplicationConstant.EMPTY;
 
   String getImageUrl() {
-    if (isNullOrWhiteSpace()) return ApplicationApiConstant.BASE_URI_MEDIA;
-    if (this!.contains(ApplicationApiConstant.BASE_URI_MEDIA)) return this!;
-    return "${ApplicationApiConstant.BASE_URI_MEDIA}/$this";
+    if (isNullOrWhiteSpace()) return ApplicationApiConstant.kBASE_URI_MEDIA;
+    if (this!.contains(ApplicationApiConstant.kBASE_URI_MEDIA)) return this!;
+    return "${ApplicationApiConstant.kBASE_URI_MEDIA}/$this";
   }
 
   String convertUrlToYoutubeId({bool trimWhitespaces = true}) {
-    String url = this.replaceWhenNullOrWhiteSpace();
+    String url = replaceWhenNullOrWhiteSpace();
     if (!url.contains("http") && (url.length == 11)) return url;
     if (trimWhitespaces) url = url.trim();
     for (var exp in [
@@ -63,9 +63,13 @@ extension StringNullExtension on String? {
         List.generate(number, (index) => "\n").join("");
   }
 
-  String supportHtml() => isNullOrWhiteSpace()
-      ? ApplicationConstant.EMPTY
-      : (htmlparser.parse(this).firstChild?.text)
+  String supportHtml() =>
+      isNullOrWhiteSpace()
+          ? ApplicationConstant.EMPTY
+          : (htmlparser
+          .parse(this)
+          .firstChild
+          ?.text)
           .replaceWhenNullOrWhiteSpace()
           .trim();
 
@@ -111,14 +115,18 @@ extension StringExtension on String {
       !isNullOrWhiteSpace() ? this : replace ?? ApplicationConstant.EMPTY;
 
   String getImageUrl() {
-    if (isNullOrWhiteSpace()) return ApplicationApiConstant.BASE_URI_MEDIA;
-    if (contains(ApplicationApiConstant.BASE_URI_MEDIA)) return this;
-    return "${ApplicationApiConstant.BASE_URI_MEDIA}/$this";
+    if (isNullOrWhiteSpace()) return ApplicationApiConstant.kBASE_URI_MEDIA;
+    if (contains(ApplicationApiConstant.kBASE_URI_MEDIA)) return this;
+    return "${ApplicationApiConstant.kBASE_URI_MEDIA}/$this";
   }
 
-  String supportHtml() => isNullOrWhiteSpace()
-      ? ApplicationConstant.EMPTY
-      : (htmlparser.parse(this).firstChild?.text).replaceWhenNullOrWhiteSpace();
+  String supportHtml() =>
+      isNullOrWhiteSpace()
+          ? ApplicationConstant.EMPTY
+          : (htmlparser
+          .parse(this)
+          .firstChild
+          ?.text).replaceWhenNullOrWhiteSpace();
 
   String removeUnicode() {
     var value = replaceWhenNullOrWhiteSpace();

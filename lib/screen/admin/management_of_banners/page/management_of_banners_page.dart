@@ -2,8 +2,6 @@ import 'package:eportal/bloc/test/data_example_test_bloc.dart';
 import 'package:eportal/model/api/request/common_new/data/work_search_data_request.dart';
 import 'package:eportal/model/api/request/common_new/work_search_request.dart';
 import 'package:eportal/screen/share/empty_example/page/empty_example_page.dart';
-import 'package:eportal/screen/worker/profile_add/page/profile_add_page.dart';
-import 'package:eportal/screen/worker/profile_edit/page/profile_edit_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';

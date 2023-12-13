@@ -10,7 +10,6 @@ import 'package:eportal/model/base/base_eportal_request.dart';
 class DangNhapRequest extends BaseEportalRequest<DangNhapDataRequest> {
   DangNhapRequest({required super.obj});
 
-
   @override
-  String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_DANG_NHAP;
+  String getQuery() => ApplicationApiConstant.kAPI_COMMON_NEW_OP_DANG_NHAP;
 }

@@ -54,7 +54,7 @@ class BaseAdapterApi {
       uri = request.getUri();
     }
     StringBuffer stringBuffer =
-        StringBuffer('<?xml version="1.0" encoding="utf-8"?>');
+    StringBuffer('<?xml version="1.0" encoding="utf-8"?>');
     stringBuffer.write('<soap:Envelope ${getMapXml()}>');
     stringBuffer.write('<soap:Header>');
     stringBuffer.write('<AuthHeader xmlns="http://tempuri.org/">');
@@ -67,15 +67,15 @@ class BaseAdapterApi {
             .createXml(GlobalApplication().userRole, "userRole"));
       } else {
         stringBuffer.write(GlobalApplication().createXml(
-            ApplicationApiConstant.BASE_AUTH_HEADER_USER_LOGIN, "userLogin"));
+            ApplicationApiConstant.kBASE_AUTH_HEADER_USER_LOGIN, "userLogin"));
         stringBuffer.write(GlobalApplication().createXml(
-            ApplicationApiConstant.BASE_AUTH_HEADER_PASSWORD, "password"));
+            ApplicationApiConstant.kBASE_AUTH_HEADER_PASSWORD, "password"));
       }
     } else {
       stringBuffer.write(GlobalApplication().createXml(
-          ApplicationApiConstant.BASE_AUTH_HEADER_USER_LOGIN, "userLogin"));
+          ApplicationApiConstant.kBASE_AUTH_HEADER_USER_LOGIN, "userLogin"));
       stringBuffer.write(GlobalApplication().createXml(
-          ApplicationApiConstant.BASE_AUTH_HEADER_PASSWORD, "password"));
+          ApplicationApiConstant.kBASE_AUTH_HEADER_PASSWORD, "password"));
     }
     stringBuffer.write('</AuthHeader>');
     stringBuffer.write('</soap:Header>');
@@ -90,7 +90,8 @@ class BaseAdapterApi {
     String responseSoapBody = ApplicationConstant.EMPTY;
     String requestBody = stringBuffer.toString();
     var keyCache =
-        "${md5.convert(utf8.encode(requestBody))}|${md5.convert(utf8.encode(uri.toString()))}";
+        "${md5.convert(utf8.encode(requestBody))}|${md5.convert(
+        utf8.encode(uri.toString()))}";
     var valueTimeCache = request.getTimeCache();
     bool isUseCache = false;
     valueTimeCache = 0;
@@ -99,7 +100,9 @@ class BaseAdapterApi {
       if (!valueCache.isNullOrWhiteSpace()) {
         var cacheApi = CacheApi.fromJson(json.decode(valueCache!));
         if (cacheApi.timeout != null &&
-            cacheApi.timeout! >= DateTime.now().millisecondsSinceEpoch) {
+            cacheApi.timeout! >= DateTime
+                .now()
+                .millisecondsSinceEpoch) {
           responseSoapBody = cacheApi.body.replaceWhenNullOrWhiteSpace();
           isUseCache = !responseSoapBody.isNullOrWhiteSpace();
           if (isNeedLogApi) {
@@ -124,10 +127,11 @@ class BaseAdapterApi {
           await GlobalApplication().preferences!.setString(
               keyCache,
               json.encode(CacheApi(
-                      body: responseSoapBody,
-                      timeout: DateTime.now()
-                          .add(Duration(seconds: valueTimeCache))
-                          .millisecondsSinceEpoch)
+                  body: responseSoapBody,
+                  timeout: DateTime
+                      .now()
+                      .add(Duration(seconds: valueTimeCache))
+                      .millisecondsSinceEpoch)
                   .toJson()));
         }
         return json.decode(jsonValue);
@@ -137,8 +141,8 @@ class BaseAdapterApi {
         .decode('{"status":0,"message":"Có lỗi xảy ra vui lòng thử lại sau"}');
   }
 
-  Future<String> _callWebServiceAsync(
-      Uri uri, String request, String contentType) async {
+  Future<String> _callWebServiceAsync(Uri uri, String request,
+      String contentType) async {
     try {
       if (isNeedLogApi) {
         log('data: $request');

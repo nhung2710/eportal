@@ -13,5 +13,5 @@ class FaqAddQuestionRequest
 
   @override
   String getQuery() =>
-      ApplicationApiConstant.API_COMMON_NEW_OP_FAQ_ADD_QUESTION;
+      ApplicationApiConstant.kAPI_COMMON_NEW_OP_FAQ_ADD_QUESTION;
 }

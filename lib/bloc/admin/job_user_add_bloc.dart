@@ -1,5 +1,5 @@
 import 'package:eportal/bloc/base/base_bloc.dart';
-import 'package:eportal/event/common_new/job_user_add_event.dart';
+import 'package:eportal/event/admin/job_user_add_event.dart';
 import 'package:eportal/model/api/response/admin/data/job_user_add_data_response.dart';
 import 'package:eportal/model/api/response/admin/job_user_add_response.dart';
 import 'package:eportal/repository/admin/job_user_add_repository.dart';

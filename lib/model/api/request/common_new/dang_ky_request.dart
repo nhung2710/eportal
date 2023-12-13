@@ -10,7 +10,6 @@ import 'package:eportal/model/base/base_eportal_request.dart';
 class DangKyRequest extends BaseEportalRequest<DangKyDataRequest> {
   DangKyRequest({required super.obj});
 
-
   @override
-  String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_DANG_KY;
+  String getQuery() => ApplicationApiConstant.kAPI_COMMON_NEW_OP_DANG_KY;
 }

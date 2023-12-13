@@ -11,9 +11,9 @@ class DanhSachNganhNgheRequest
   DanhSachNganhNgheRequest({required super.obj});
 
   @override
-  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_DEFAULT;
+  int getTimeCache() => ApplicationApiConstant.kTIME_CACHE_DEFAULT;
 
   @override
   String getQuery() =>
-      ApplicationApiConstant.API_COMMON_NEW_OP_DANH_SACH_NGANH_NGHE;
+      ApplicationApiConstant.kAPI_COMMON_NEW_OP_DANH_SACH_NGANH_NGHE;
 }

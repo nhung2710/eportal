@@ -11,9 +11,9 @@ class DanhSachChuyenMucRequest
   DanhSachChuyenMucRequest({required super.obj});
 
   @override
-  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_DEFAULT;
+  int getTimeCache() => ApplicationApiConstant.kTIME_CACHE_DEFAULT;
 
   @override
   String getQuery() =>
-      ApplicationApiConstant.API_COMMON_NEW_OP_DANH_SACH_CHUYEN_MUC;
+      ApplicationApiConstant.kAPI_COMMON_NEW_OP_DANH_SACH_CHUYEN_MUC;
 }

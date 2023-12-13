@@ -1,5 +1,5 @@
-import 'package:eportal/model/api/response/common_new/data/danh_sach_gioi_tinh_data_response.dart';
 import 'package:eportal/model/api/response/admin/data/user_update_data_response.dart';
+import 'package:eportal/model/api/response/common_new/data/danh_sach_gioi_tinh_data_response.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/change_avatar/change_avatar.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
@@ -9,15 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../bloc/common_new/danh_sach_gioi_tinh_bloc.dart';
 import '../../../../bloc/admin/user_update_bloc.dart';
+import '../../../../bloc/common_new/danh_sach_gioi_tinh_bloc.dart';
+import '../../../../event/admin/user_update_event.dart';
 import '../../../../event/common_new/danh_sach_gioi_tinh_event.dart';
-import '../../../../event/common_new/user_update_event.dart';
 import '../../../../extension/string_extension.dart';
-import '../../../../model/api/request/common_new/danh_sach_gioi_tinh_request.dart';
-import '../../../../model/api/request/common_new/data/danh_sach_gioi_tinh_data_request.dart';
 import '../../../../model/api/request/admin/data/user_update_data_request.dart';
 import '../../../../model/api/request/admin/user_update_request.dart';
+import '../../../../model/api/request/common_new/danh_sach_gioi_tinh_request.dart';
+import '../../../../model/api/request/common_new/data/danh_sach_gioi_tinh_data_request.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/input/field_input.dart';
 

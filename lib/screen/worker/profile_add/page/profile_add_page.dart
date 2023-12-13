@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../bloc/admin/job_user_add_bloc.dart';
-import '../../../../event/common_new/job_user_add_event.dart';
+import '../../../../event/admin/job_user_add_event.dart';
 import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/admin/data/job_user_add_data_request.dart';
 import '../../../../model/api/request/admin/job_user_add_request.dart';

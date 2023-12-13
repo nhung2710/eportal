@@ -7,8 +7,9 @@ class HomeSlideListRequest
   HomeSlideListRequest({required super.obj});
 
   @override
-  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_MEDIUM_DEFAULT;
+  int getTimeCache() => ApplicationApiConstant.kTIME_CACHE_MEDIUM_DEFAULT;
 
   @override
-  String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_HOME_SLIDE_LIST;
+  String getQuery() =>
+      ApplicationApiConstant.kAPI_COMMON_NEW_OP_HOME_SLIDE_LIST;
 }

@@ -11,8 +11,8 @@ class AlbumListRequest extends BasePageEportalRequest<AlbumListDataRequest> {
   AlbumListRequest({required super.obj});
 
   @override
-  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_LOW_DEFAULT;
+  int getTimeCache() => ApplicationApiConstant.kTIME_CACHE_LOW_DEFAULT;
 
   @override
-  String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_ALBUM_LIST;
+  String getQuery() => ApplicationApiConstant.kAPI_COMMON_NEW_OP_ALBUM_LIST;
 }

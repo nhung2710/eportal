@@ -7,9 +7,9 @@ class DanhSachTrinhDoRequest
   DanhSachTrinhDoRequest({required super.obj});
 
   @override
-  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_DEFAULT;
+  int getTimeCache() => ApplicationApiConstant.kTIME_CACHE_DEFAULT;
 
   @override
   String getQuery() =>
-      ApplicationApiConstant.API_COMMON_NEW_OP_DANH_SACH_TRINH_DO;
+      ApplicationApiConstant.kAPI_COMMON_NEW_OP_DANH_SACH_TRINH_DO;
 }

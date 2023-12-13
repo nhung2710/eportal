@@ -12,9 +12,9 @@ class DanhSachLoaiVanBanRequest
   DanhSachLoaiVanBanRequest({required super.obj});
 
   @override
-  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_DEFAULT;
+  int getTimeCache() => ApplicationApiConstant.kTIME_CACHE_DEFAULT;
 
   @override
   String getQuery() =>
-      ApplicationApiConstant.API_COMMON_NEW_OP_DANH_SACH_LOAI_VAN_BAN;
+      ApplicationApiConstant.kAPI_COMMON_NEW_OP_DANH_SACH_LOAI_VAN_BAN;
 }

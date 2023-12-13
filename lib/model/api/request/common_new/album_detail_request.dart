@@ -10,8 +10,8 @@ class AlbumDetailRequest extends BaseEportalRequest<AlbumDetailDataRequest> {
   AlbumDetailRequest({required super.obj});
 
   @override
-  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_DEFAULT;
+  int getTimeCache() => ApplicationApiConstant.kTIME_CACHE_DEFAULT;
 
   @override
-  String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_ALBUM_DETAIL;
+  String getQuery() => ApplicationApiConstant.kAPI_COMMON_NEW_OP_ALBUM_DETAIL;
 }

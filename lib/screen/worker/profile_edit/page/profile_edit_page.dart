@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_relative_imports
 
 import 'package:eportal/bloc/admin/job_user_update_bloc.dart';
-import 'package:eportal/event/common_new/job_user_update_event.dart';
+import 'package:eportal/event/admin/job_user_update_event.dart';
 import 'package:eportal/model/api/request/admin/data/job_user_update_data_request.dart';
 import 'package:eportal/model/api/request/admin/job_user_update_request.dart';
 import 'package:eportal/model/api/response/admin/data/job_user_update_data_response.dart';

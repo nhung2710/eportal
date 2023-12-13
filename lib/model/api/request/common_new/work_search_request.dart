@@ -7,8 +7,8 @@ class WorkSearchRequest extends BasePageEportalRequest<WorkSearchDataRequest> {
   WorkSearchRequest({required super.obj});
 
   @override
-  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_MEDIUM_DEFAULT;
+  int getTimeCache() => ApplicationApiConstant.kTIME_CACHE_MEDIUM_DEFAULT;
 
   @override
-  String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_WORK_SEARCH;
+  String getQuery() => ApplicationApiConstant.kAPI_COMMON_NEW_OP_WORK_SEARCH;
 }

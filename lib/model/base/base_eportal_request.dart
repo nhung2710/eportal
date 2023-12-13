@@ -14,13 +14,13 @@ abstract class BaseEportalRequest<T extends BaseEportalXml> {
   String getTagXmlRequest() => getQuery();
 
   String getTagXmlResponse() =>
-      "${getQuery()}${ApplicationApiConstant.API_RESULT}";
+      "${getQuery()}${ApplicationApiConstant.kAPI_RESULT}";
 
   String getStringUri() => ApplicationConstant.EMPTY;
 
   String getQuery() => ApplicationConstant.EMPTY;
 
-  String getBaseUri() => ApplicationApiConstant.API_COMMON_NEW_OP;
+  String getBaseUri() => ApplicationApiConstant.kAPI_COMMON_NEW_OP;
 
   String getContentType() => "text/xml; charset=utf-8";
 

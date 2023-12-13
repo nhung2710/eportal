@@ -12,8 +12,8 @@ class GioiThieuTrungTamRequest
 
   @override
   String getQuery() =>
-      ApplicationApiConstant.API_COMMON_NEW_OP_GIOI_THIEU_TRUNG_TAM;
+      ApplicationApiConstant.kAPI_COMMON_NEW_OP_GIOI_THIEU_TRUNG_TAM;
 
   @override
-  int getTimeCache() => ApplicationApiConstant.TIME_CACHE_DEFAULT;
+  int getTimeCache() => ApplicationApiConstant.kTIME_CACHE_DEFAULT;
 }

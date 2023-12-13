@@ -10,11 +10,11 @@ class UserUpdateRequest extends BaseEportalRequest<UserUpdateDataRequest> {
   UserUpdateRequest({required super.obj});
 
   @override
-  String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_USER_UPDATE;
+  String getQuery() => ApplicationApiConstant.kAPI_ADMIN_OP_USER_UPDATE;
 
   @override
   bool isAuthentication() => true;
 
   @override
-  String getBaseUri() => ApplicationApiConstant.API_ADMIN_OP;
+  String getBaseUri() => ApplicationApiConstant.kAPI_ADMIN_OP;
 }

@@ -12,11 +12,11 @@ class JobUserUpdateRequest
   JobUserUpdateRequest({required super.obj});
 
   @override
-  String getQuery() => ApplicationApiConstant.API_COMMON_NEW_OP_JOB_USER_UPDATE;
+  String getQuery() => ApplicationApiConstant.kAPI_ADMIN_OP_JOB_USER_UPDATE;
 
   @override
   bool isAuthentication() => true;
 
   @override
-  String getBaseUri() => ApplicationApiConstant.API_ADMIN_OP;
+  String getBaseUri() => ApplicationApiConstant.kAPI_ADMIN_OP;
 }
