@@ -7,6 +7,6 @@ import 'package:eportal/model/api/request/admin/job_user_list_by_user_name_reque
 //
 
 class JobUserListByUserNameEvent
-    extends BaseSingleEvent<JobUserListByUserNameRequest> {
+    extends BasePageEvent<JobUserListByUserNameRequest> {
   const JobUserListByUserNameEvent({required super.request});
 }

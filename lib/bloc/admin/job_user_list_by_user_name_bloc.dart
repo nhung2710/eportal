@@ -9,7 +9,7 @@ import 'package:eportal/repository/admin/job_user_list_by_user_name_repository.d
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class JobUserListByUserNameBloc extends BaseSingleBloc<
+class JobUserListByUserNameBloc extends BasePageBloc<
     JobUserListByUserNameDataResponse,
     JobUserListByUserNameRepository,
     JobUserListByUserNameEvent,

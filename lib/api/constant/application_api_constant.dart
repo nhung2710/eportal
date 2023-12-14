@@ -56,6 +56,11 @@ class ApplicationApiConstant {
   static const kAPI_COMMON_NEW_OP_DANH_SACH_CHUC_VU = "DanhSachChucVu";
   static const kAPI_COMMON_NEW_OP_DANH_SACH_NHU_CAU = "DanhSachNhuCau";
   static const kAPI_COMMON_NEW_OP_DANH_SACH_NGANH_NGHE = "DanhSachNganhNghe";
+  static const kAPI_COMMON_NEW_OP_DANH_SACH_VI_TRI_TUYEN_DUNG =
+      "DanhSachViTriTuyenDung";
+  static const kAPI_COMMON_NEW_OP_DANH_SACH_TINH_CHAT_CONG_VIEC =
+      "DanhSachTinhChatCongViec";
+
   static const kAPI_ADMIN_OP_USER_UPDATE = "UserUpdate";
   static const kAPI_ADMIN_OP_JOB_USER_ADD = "JobUserAdd";
   static const kAPI_ADMIN_OP_JOB_USER_UPDATE = "JobUserUpdate";

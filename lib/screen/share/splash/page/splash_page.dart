@@ -8,18 +8,24 @@ import 'package:eportal/model/api/request/common_new/dang_nhap_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_gioi_tinh_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_muc_luong_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_nhu_cau_request.dart';
+import 'package:eportal/model/api/request/common_new/danh_sach_tinh_chat_cong_viec_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_tinh_tp_request.dart';
+import 'package:eportal/model/api/request/common_new/danh_sach_vi_tri_tuyen_dung_request.dart';
 import 'package:eportal/model/api/request/common_new/data/dang_nhap_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_gioi_tinh_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_nhu_cau_data_request.dart';
+import 'package:eportal/model/api/request/common_new/data/danh_sach_tinh_chat_cong_viec_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_tinh_tp_data_request.dart';
+import 'package:eportal/model/api/request/common_new/data/danh_sach_vi_tri_tuyen_dung_data_request.dart';
 import 'package:eportal/model/api/response/common_new/data/dang_nhap_data_response.dart';
 import 'package:eportal/repository/common_new/danh_sach_chuyen_muc_repository.dart';
 import 'package:eportal/repository/common_new/danh_sach_co_quan_ban_hanh_repository.dart';
 import 'package:eportal/repository/common_new/danh_sach_linh_vuc_van_ban_repository.dart';
 import 'package:eportal/repository/common_new/danh_sach_loai_van_ban_repository.dart';
 import 'package:eportal/repository/common_new/danh_sach_muc_luong_repository.dart';
+import 'package:eportal/repository/common_new/danh_sach_tinh_chat_cong_viec_repository.dart';
 import 'package:eportal/repository/common_new/danh_sach_trinh_do_repository.dart';
+import 'package:eportal/repository/common_new/danh_sach_vi_tri_tuyen_dung_repository.dart';
 import 'package:eportal/screen/admin/home/home_page.dart' as admin;
 import 'package:eportal/screen/anonymous/home/home_page.dart' as anonymous;
 import 'package:eportal/screen/employer/home/home_page.dart' as employer;
@@ -251,6 +257,10 @@ class _SplashPageState extends BasePageState<SplashPage>
           .get(DanhSachChuyenMucRequest(obj: DanhSachChuyenMucDataRequest())),
       DanhSachLinhVucVanBanRepository().get(DanhSachLinhVucVanBanRequest(
           obj: DanhSachLinhVucVanBanDataRequest())),
+      DanhSachViTriTuyenDungRepository().get(DanhSachViTriTuyenDungRequest(
+          obj: DanhSachViTriTuyenDungDataRequest())),
+      DanhSachTinhChatCongViecRepository().get(DanhSachTinhChatCongViecRequest(
+          obj: DanhSachTinhChatCongViecDataRequest())),
     ]);
   }
 

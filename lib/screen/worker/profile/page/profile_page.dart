@@ -1,15 +1,24 @@
 import 'dart:math';
 
+import 'package:eportal/bloc/admin/job_user_list_by_user_name_bloc.dart';
 import 'package:eportal/model/api/request/common_new/data/work_search_data_request.dart';
 import 'package:eportal/model/api/request/common_new/work_search_request.dart';
+import 'package:eportal/model/api/response/admin/data/job_user_list_by_user_name_data_response.dart';
 import 'package:eportal/screen/worker/profile_add/page/profile_add_page.dart';
 import 'package:eportal/screen/worker/profile_edit/page/profile_edit_page.dart';
+import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
+import 'package:eportal/widget/full_data_item/answer_and_question_item.dart';
 import 'package:eportal/widget/full_data_item/profile_item.dart';
 import 'package:eportal/widget/input/search_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../event/admin/job_user_list_by_user_name_event.dart';
+import '../../../../model/api/request/admin/data/job_user_list_by_user_name_data_request.dart';
+import '../../../../model/api/request/admin/job_user_list_by_user_name_request.dart';
 
 //
 // Created by BlackRose on 11/9/2023.
@@ -25,17 +34,38 @@ class ProfilePage extends BasePage {
 
 class _ProfilePageState extends BasePageStateActive<ProfilePage> {
   TextEditingController textEditingController = TextEditingController();
+  late JobUserListByUserNameBloc jobUserListByUserNameBloc;
+  JobUserListByUserNameRequest request =
+      JobUserListByUserNameRequest(obj: JobUserListByUserNameDataRequest());
 
-  WorkSearchRequest request = WorkSearchRequest(obj: WorkSearchDataRequest());
+  @override
+  void initBloc() {
+    jobUserListByUserNameBloc = JobUserListByUserNameBloc();
+    super.initBloc();
+  }
+
+  @override
+  void initDataLoading() {
+    request.obj.soTrangHienTai = 1;
+    callApi();
+    super.initDataLoading();
+  }
+
+  @override
+  void callApi() {
+    request.obj.tuKhoa = textEditingController.text;
+    jobUserListByUserNameBloc.add(JobUserListByUserNameEvent(request: request));
+  }
 
   @override
   bool isHasAppBar(BuildContext context) => false;
-  final filterJobDialogKey = GlobalKey<FilterJobDialogState>();
-  late FilterJobDialog filterJobDialog = FilterJobDialog(
-    key: filterJobDialogKey,
-    data: request.obj,
-    onPressed: () => initDataLoading(),
-  );
+
+  @override
+  void getMoreData() {
+    request.obj.soTrangHienTai++;
+    callApi();
+    super.getMoreData();
+  }
 
   @override
   Widget? getFloatingActionButton(BuildContext context) =>
@@ -63,33 +93,44 @@ class _ProfilePageState extends BasePageStateActive<ProfilePage> {
               onTap: () {
                 initDataLoading();
               },
-              onTapFilter: () {
-                showDialog(context: context, builder: (_) => filterJobDialog);
-              },
               hintText: "Nội dung tìm kiếm",
             ),
           ),
           Expanded(
-            child: SingleChildScrollView(
-              child: ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: Random().nextInt(100) + 1,
-                  itemBuilder: (context, index) => ProfileItem(
-                        onTap: () {
-                          nextPage((context) => ProfileEditPage());
-                        },
-                        title: "Hồ sơ ${index + 1}",
-                        location: "Hà nội",
-                        status: "Chờ duyệt",
-                        experience: "Dưới 1 năm",
-                        salary: "5-7 triệu",
-                        fromDate: "01/11/2023",
-                        toDate: "01/11/2023",
-                        industry: "Bán hàng",
-                        numberView: "2",
-                        isShowFull: true,
-                      )),
+            child: BlocProvider(
+              create: (_) => jobUserListByUserNameBloc,
+              child: BlocListener<JobUserListByUserNameBloc,
+                  DataPageState<JobUserListByUserNameDataResponse>>(
+                listener: (BuildContext context, state) {},
+                child: BlocBuilder<JobUserListByUserNameBloc,
+                        DataPageState<JobUserListByUserNameDataResponse>>(
+                    builder: (BuildContext context,
+                            DataPageState<JobUserListByUserNameDataResponse>
+                                state) =>
+                        handleDataPageState(
+                            state,
+                            (context, state) => Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: ListView.builder(
+                                        shrinkWrap: true,
+                                        controller: scrollController,
+                                        itemCount: state.length,
+                                        itemBuilder:
+                                            (BuildContext context, int index) =>
+                                                AnswerAndQuestionItem(
+                                          isShowFull: true,
+                                          answer: state.elementAt(index).search,
+                                          question:
+                                              state.elementAt(index).search,
+                                          onTap: () {},
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ))),
+              ),
             ),
           ),
         ],
