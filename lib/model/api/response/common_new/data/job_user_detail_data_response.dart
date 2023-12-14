@@ -7,8 +7,8 @@ import 'package:eportal/model/base/base_eportal_data_response.dart';
 class JobUserDetailDataResponse extends BaseEportalDataResponse {
   String? userAdminText;
   bool? isBHTN;
-  int? id;
-  int? total;
+  String? id;
+  String? total;
   bool? isPause;
   bool? isTemp;
   String? jobUserID;
@@ -39,9 +39,9 @@ class JobUserDetailDataResponse extends BaseEportalDataResponse {
   String? createdUser;
   String? updatedDate;
   String? updatedUser;
-  int? isView;
-  int? isSend;
-  int? portalID;
+  String? isView;
+  String? isSend;
+  String? portalID;
 
   JobUserDetailDataResponse(
       {this.userAdminText,
@@ -83,43 +83,43 @@ class JobUserDetailDataResponse extends BaseEportalDataResponse {
       this.portalID});
 
   JobUserDetailDataResponse.fromJson(Map<String, dynamic> json) {
-    userAdminText = json['userAdminText'];
+    userAdminText = json['userAdminText']?.toString();
     isBHTN = json['isBHTN'];
-    id = json['id'];
-    total = json['total'];
+    id = json['id']?.toString();
+    total = json['total']?.toString();
     isPause = json['isPause'];
     isTemp = json['isTemp'];
-    jobUserID = json['jobUser_ID'];
-    title = json['title'];
-    careerID = json['career_ID'];
-    currentLevel = json['currentLevel'];
-    levelDesired = json['levelDesired'];
-    tinhTP = json['tinhTP'];
-    quanHuyen = json['quanHuyen'];
-    experienceID = json['experience_ID'];
-    levelID = json['level_ID'];
-    salaryID = json['salary_ID'];
-    needsID = json['needs_ID'];
-    education = json['education'];
-    careerGoals = json['careerGoals'];
-    workExperience = json['workExperience'];
-    skillsForte = json['skillsForte'];
-    userAdmin = json['userAdmin'];
-    startDate = json['startDate'];
-    endDate = json['endDate'];
+    jobUserID = json['jobUser_ID']?.toString();
+    title = json['title']?.toString();
+    careerID = json['career_ID']?.toString();
+    currentLevel = json['currentLevel']?.toString();
+    levelDesired = json['levelDesired']?.toString();
+    tinhTP = json['tinhTP']?.toString();
+    quanHuyen = json['quanHuyen']?.toString();
+    experienceID = json['experience_ID']?.toString();
+    levelID = json['level_ID']?.toString();
+    salaryID = json['salary_ID']?.toString();
+    needsID = json['needs_ID']?.toString();
+    education = json['education']?.toString();
+    careerGoals = json['careerGoals']?.toString();
+    workExperience = json['workExperience']?.toString();
+    skillsForte = json['skillsForte']?.toString();
+    userAdmin = json['userAdmin']?.toString();
+    startDate = json['startDate']?.toString();
+    endDate = json['endDate']?.toString();
     isApproval = json['isApproval'];
-    approvalUser = json['approvalUser'];
-    approvalDate = json['approvalDate'];
+    approvalUser = json['approvalUser']?.toString();
+    approvalDate = json['approvalDate']?.toString();
     isDelete = json['isDelete'];
-    deletedUser = json['deletedUser'];
-    deletedDate = json['deletedDate'];
-    createdDate = json['createdDate'];
-    createdUser = json['createdUser'];
-    updatedDate = json['updatedDate'];
-    updatedUser = json['updatedUser'];
-    isView = json['isView'];
-    isSend = json['isSend'];
-    portalID = json['portalID'];
+    deletedUser = json['deletedUser']?.toString();
+    deletedDate = json['deletedDate']?.toString();
+    createdDate = json['createdDate']?.toString();
+    createdUser = json['createdUser']?.toString();
+    updatedDate = json['updatedDate']?.toString();
+    updatedUser = json['updatedUser']?.toString();
+    isView = json['isView']?.toString();
+    isSend = json['isSend']?.toString();
+    portalID = json['portalID']?.toString();
   }
 
   Map<String, dynamic> toJson() {

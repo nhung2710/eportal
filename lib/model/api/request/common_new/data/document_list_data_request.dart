@@ -9,7 +9,7 @@ class DocumentListDataRequest extends BasePageEportalXml {
   String? linhVucVanBan;
   String? loaiVanBan;
   String? coQuanBanHanh;
-  int? nhomVanBan;
+  String? nhomVanBan;
 
   DocumentListDataRequest(
       {super.soTrangHienTai,
@@ -18,7 +18,7 @@ class DocumentListDataRequest extends BasePageEportalXml {
       this.linhVucVanBan,
       this.loaiVanBan,
       this.coQuanBanHanh,
-      this.nhomVanBan = 0});
+      this.nhomVanBan = "0"});
 
   @override
   StringBuffer toXml() {

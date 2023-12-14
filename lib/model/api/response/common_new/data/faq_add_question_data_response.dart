@@ -4,7 +4,7 @@
 //
 
 class FaqAddQuestionDataResponse {
-  int? total;
+  String? total;
   String? id;
   String? faqid;
   String? name;
@@ -14,9 +14,9 @@ class FaqAddQuestionDataResponse {
   String? email;
   String? phone;
   String? sendDate;
-  int? status;
+  String? status;
   bool? isPublic;
-  int? portalId;
+  String? portalId;
   String? createDate;
   String? createUser;
   String? updateDate;
@@ -44,23 +44,23 @@ class FaqAddQuestionDataResponse {
       this.sendView});
 
   FaqAddQuestionDataResponse.fromJson(Map<String, dynamic> json) {
-    total = json['total'];
-    id = json['id'];
-    faqid = json['faqid'];
-    name = json['name'];
-    contents = json['contents'];
-    fileAttach = json['fileAttach'];
-    adress = json['adress'];
-    email = json['email'];
-    phone = json['phone'];
-    sendDate = json['sendDate'];
-    status = json['status'];
+    total = json['total']?.toString();
+    id = json['id']?.toString();
+    faqid = json['faqid']?.toString();
+    name = json['name']?.toString();
+    contents = json['contents']?.toString();
+    fileAttach = json['fileAttach']?.toString();
+    adress = json['adress']?.toString();
+    email = json['email']?.toString();
+    phone = json['phone']?.toString();
+    sendDate = json['sendDate']?.toString();
+    status = json['status']?.toString();
     isPublic = json['isPublic'];
-    portalId = json['portalId'];
-    createDate = json['createDate'];
-    createUser = json['createUser'];
-    updateDate = json['updateDate'];
-    updateUser = json['updateUser'];
+    portalId = json['portalId']?.toString();
+    createDate = json['createDate']?.toString();
+    createUser = json['createUser']?.toString();
+    updateDate = json['updateDate']?.toString();
+    updateUser = json['updateUser']?.toString();
     sendView = json['sendView'];
   }
 

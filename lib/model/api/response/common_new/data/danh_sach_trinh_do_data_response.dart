@@ -7,9 +7,9 @@ import '../../../../../extension/string_extension.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class DanhSachTrinhDoDataResponse extends BaseEportalDataResponse {
-  int? idSend;
-  int? total;
-  int? educationID;
+  String? idSend;
+  String? total;
+  String? educationID;
   String? educationCode;
   String? educationName;
   String? educationDes;
@@ -18,7 +18,7 @@ class DanhSachTrinhDoDataResponse extends BaseEportalDataResponse {
   String? updatedDate;
   String? updatedUser;
   bool? isActive;
-  int? isOrder;
+  String? isOrder;
 
   DanhSachTrinhDoDataResponse(
       {this.idSend,
@@ -35,18 +35,18 @@ class DanhSachTrinhDoDataResponse extends BaseEportalDataResponse {
       this.isOrder});
 
   DanhSachTrinhDoDataResponse.fromJson(Map<String, dynamic> json) {
-    idSend = json['idSend'];
-    total = json['total'];
-    educationID = json['education_ID'];
-    educationCode = json['education_Code'];
-    educationName = json['education_Name'];
-    educationDes = json['education_Des'];
-    createdDate = json['createdDate'];
-    createdUser = json['createdUser'];
-    updatedDate = json['updatedDate'];
-    updatedUser = json['updatedUser'];
+    idSend = json['idSend']?.toString();
+    total = json['total']?.toString();
+    educationID = json['education_ID']?.toString();
+    educationCode = json['education_Code']?.toString();
+    educationName = json['education_Name']?.toString();
+    educationDes = json['education_Des']?.toString();
+    createdDate = json['createdDate']?.toString();
+    createdUser = json['createdUser']?.toString();
+    updatedDate = json['updatedDate']?.toString();
+    updatedUser = json['updatedUser']?.toString();
     isActive = json['isActive'];
-    isOrder = json['isOrder'];
+    isOrder = json['isOrder']?.toString();
     search = educationName.getValueSearch();
   }
 

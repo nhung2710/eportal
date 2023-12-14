@@ -7,14 +7,14 @@ import '../../../../../extension/string_extension.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class DanhSachKinhNghiemDataResponse extends BaseEportalDataResponse {
-  int? idSend;
-  int? total;
+  String? idSend;
+  String? total;
   String? experienceID;
   String? experienceName;
   String? experienceCode;
   String? experienceDes;
   bool? isActive;
-  int? isOrder;
+  String? isOrder;
   String? createdBy;
   String? userName;
   String? updatedBy;
@@ -35,18 +35,18 @@ class DanhSachKinhNghiemDataResponse extends BaseEportalDataResponse {
       this.userUpdate});
 
   DanhSachKinhNghiemDataResponse.fromJson(Map<String, dynamic> json) {
-    idSend = json['idSend'];
-    total = json['total'];
-    experienceID = json['experience_ID'];
-    experienceName = json['experience_Name'];
-    experienceCode = json['experience_Code'];
-    experienceDes = json['experience_Des'];
+    idSend = json['idSend']?.toString();
+    total = json['total']?.toString();
+    experienceID = json['experience_ID']?.toString();
+    experienceName = json['experience_Name']?.toString();
+    experienceCode = json['experience_Code']?.toString();
+    experienceDes = json['experience_Des']?.toString();
     isActive = json['isActive'];
-    isOrder = json['isOrder'];
-    createdBy = json['createdBy'];
-    userName = json['userName'];
-    updatedBy = json['updatedBy'];
-    userUpdate = json['userUpdate'];
+    isOrder = json['isOrder']?.toString();
+    createdBy = json['createdBy']?.toString();
+    userName = json['userName']?.toString();
+    updatedBy = json['updatedBy']?.toString();
+    userUpdate = json['userUpdate']?.toString();
     search = experienceName.getValueSearch();
   }
 

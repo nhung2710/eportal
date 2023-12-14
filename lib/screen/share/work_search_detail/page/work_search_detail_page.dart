@@ -18,7 +18,7 @@ import '../../../../widget/button/email_button.dart';
 //
 
 class WorkSearchDetailPage extends BasePage {
-  int? id;
+  String? id;
 
   WorkSearchDetailPage({
     super.key,
@@ -46,8 +46,8 @@ class _WorkSearchDetailPageState extends BasePageState<WorkSearchDetailPage> {
   @override
   void callApi() {
     workDetailBloc.add(WorkDetailEvent(
-        request:
-            WorkDetailRequest(obj: WorkDetailDataRequest(id: widget.id ?? 0))));
+        request: WorkDetailRequest(
+            obj: WorkDetailDataRequest(id: widget.id ?? "0"))));
     super.callApi();
   }
 

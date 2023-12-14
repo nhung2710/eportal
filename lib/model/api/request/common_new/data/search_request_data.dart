@@ -8,8 +8,8 @@ class SearchRequestData extends BasePageEportalXml {
   String? doanhNghiep;
   String? mucLuong;
   String? kinhNghiem;
-  int? tinhTp;
-  int? quanHuyen;
+  String? tinhTp;
+  String? quanHuyen;
 
   SearchRequestData(
       {this.doanhNghiep,

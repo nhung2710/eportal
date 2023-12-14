@@ -21,10 +21,10 @@ class DangNhapDataResponse extends BaseEportalDataResponse {
       this.roleType = RoleType.anonymous});
 
   DangNhapDataResponse.fromJson(Map<String, dynamic> json) {
-    userID = json['userID'];
-    userName = json['userName'];
-    message = json['message'];
-    role = json['role'];
+    userID = json['userID']?.toString();
+    userName = json['userName']?.toString();
+    message = json['message']?.toString();
+    role = json['role']?.toString();
     switch (role) {
       case "users":
         roleType = RoleType.users;

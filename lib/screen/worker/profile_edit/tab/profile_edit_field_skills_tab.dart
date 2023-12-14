@@ -1,5 +1,7 @@
+import 'package:eportal/model/api/response/admin/data/job_user_list_by_user_name_data_response.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../extension/string_extension.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/input/field_input.dart';
 
@@ -9,7 +11,9 @@ import '../../../../widget/input/field_input.dart';
 //
 
 class ProfileEditFieldSkillsTab extends BasePage {
-  ProfileEditFieldSkillsTab({super.key});
+  JobUserListByUserNameDataResponse data;
+
+  ProfileEditFieldSkillsTab({super.key, required this.data});
 
   @override
   State<StatefulWidget> createState() => ProfileEditFieldSkillsTabState();
@@ -18,6 +22,13 @@ class ProfileEditFieldSkillsTab extends BasePage {
 class ProfileEditFieldSkillsTabState
     extends BaseScreenStateActive<ProfileEditFieldSkillsTab> {
   TextEditingController skillController = TextEditingController();
+
+  @override
+  void initDataLoading() {
+    skillController.text =
+        widget.data.skillsForte.replaceWhenNullOrWhiteSpace();
+    super.initDataLoading();
+  }
 
   @override
   Widget pageUI(BuildContext context) => ListView(

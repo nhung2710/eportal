@@ -6,16 +6,16 @@ import '../../../../../extension/string_extension.dart';
 import '../../../../base/base_eportal_data_response.dart';
 
 class DanhSachLinhVucVanBanDataResponse extends BaseEportalDataResponse {
-  int? total;
+  String? total;
   String? docFieldID;
   String? docFieldName;
   String? docFieldDes;
-  int? isOrder;
+  String? isOrder;
   String? createdBy;
   String? userName;
   String? updatedBy;
   String? updateName;
-  int? portalID;
+  String? portalID;
 
   DanhSachLinhVucVanBanDataResponse(
       {this.total,
@@ -30,16 +30,16 @@ class DanhSachLinhVucVanBanDataResponse extends BaseEportalDataResponse {
       this.portalID});
 
   DanhSachLinhVucVanBanDataResponse.fromJson(Map<String, dynamic> json) {
-    total = json['total'];
-    docFieldID = json['docField_ID'];
-    docFieldName = json['docField_Name'];
-    docFieldDes = json['docField_Des'];
-    isOrder = json['isOrder'];
-    createdBy = json['createdBy'];
-    userName = json['userName'];
-    updatedBy = json['updatedBy'];
-    updateName = json['updateName'];
-    portalID = json['portalID'];
+    total = json['total']?.toString();
+    docFieldID = json['docField_ID']?.toString();
+    docFieldName = json['docField_Name']?.toString();
+    docFieldDes = json['docField_Des']?.toString();
+    isOrder = json['isOrder']?.toString();
+    createdBy = json['createdBy']?.toString();
+    userName = json['userName']?.toString();
+    updatedBy = json['updatedBy']?.toString();
+    updateName = json['updateName']?.toString();
+    portalID = json['portalID']?.toString();
     search = docFieldName.getValueSearch();
   }
 

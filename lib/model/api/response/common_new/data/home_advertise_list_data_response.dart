@@ -5,10 +5,10 @@ import 'package:eportal/model/base/base_eportal_data_response.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class HomeAdvertiseListDataResponse extends BaseEportalDataResponse {
-  int? total;
+  String? total;
   String? advertiseID;
   String? advertiseName;
-  int? imgType;
+  String? imgType;
   String? images;
   String? isWith;
   String? isHeight;
@@ -18,13 +18,13 @@ class HomeAdvertiseListDataResponse extends BaseEportalDataResponse {
   String? endDate;
   String? isLang;
   bool? isActive;
-  int? isOrder;
+  String? isOrder;
   String? createdBy;
   String? userName;
   String? updatedBy;
   String? userUpdate;
   String? pageLocaID;
-  int? portalID;
+  String? portalID;
   String? categoryID;
   bool? sendView;
 
@@ -53,27 +53,27 @@ class HomeAdvertiseListDataResponse extends BaseEportalDataResponse {
       this.sendView});
 
   HomeAdvertiseListDataResponse.fromJson(Map<String, dynamic> json) {
-    total = json['total'];
-    advertiseID = json['advertise_ID'];
-    advertiseName = json['advertise_Name'];
-    imgType = json['imgType'];
-    images = json['images'];
-    isWith = json['isWith'];
-    isHeight = json['isHeight'];
-    target = json['target'];
-    isURL = json['isURL'];
-    startDate = json['startDate'];
-    endDate = json['endDate'];
-    isLang = json['isLang'];
+    total = json['total']?.toString();
+    advertiseID = json['advertise_ID']?.toString();
+    advertiseName = json['advertise_Name']?.toString();
+    imgType = json['imgType']?.toString();
+    images = json['images']?.toString();
+    isWith = json['isWith']?.toString();
+    isHeight = json['isHeight']?.toString();
+    target = json['target']?.toString();
+    isURL = json['isURL']?.toString();
+    startDate = json['startDate']?.toString();
+    endDate = json['endDate']?.toString();
+    isLang = json['isLang']?.toString();
     isActive = json['isActive'];
-    isOrder = json['isOrder'];
-    createdBy = json['createdBy'];
-    userName = json['userName'];
-    updatedBy = json['updatedBy'];
-    userUpdate = json['userUpdate'];
-    pageLocaID = json['pageLoca_ID'];
-    portalID = json['portalID'];
-    categoryID = json['categoryID'];
+    isOrder = json['isOrder']?.toString();
+    createdBy = json['createdBy']?.toString();
+    userName = json['userName']?.toString();
+    updatedBy = json['updatedBy']?.toString();
+    userUpdate = json['userUpdate']?.toString();
+    pageLocaID = json['pageLoca_ID']?.toString();
+    portalID = json['portalID']?.toString();
+    categoryID = json['categoryID']?.toString();
     sendView = json['sendView'];
   }
 

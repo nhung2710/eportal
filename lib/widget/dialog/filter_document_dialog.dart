@@ -31,7 +31,7 @@ import '../../model/api/request/common_new/data/danh_sach_linh_vuc_van_ban_data_
 //
 class GroupTypeDocument extends BaseEportalDataResponse {
   String name;
-  int id;
+  String id;
 
   GroupTypeDocument({required this.id, required this.name}) {
     search = name.getValueSearch();
@@ -66,8 +66,8 @@ class FilterDocumentDialogState extends BaseScreenState<FilterDocumentDialog> {
   @override
   void initDataLoading() {
     groupTypeDocuments = [
-      GroupTypeDocument(id: 1, name: "Văn bản của Đảng"),
-      GroupTypeDocument(id: 0, name: "Văn bản quy phạm pháp luật")
+      GroupTypeDocument(id: "1", name: "Văn bản của Đảng"),
+      GroupTypeDocument(id: "0", name: "Văn bản quy phạm pháp luật")
     ];
     callApi();
     super.initDataLoading();

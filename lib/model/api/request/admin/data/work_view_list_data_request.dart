@@ -9,8 +9,7 @@ import 'package:eportal/model/base/base_eportal_xml.dart';
 class WorkViewListDataRequest extends BaseEportalXml {
   int? top;
 
-  WorkViewListDataRequest(
-      {this.top = ApplicationConstant.NUMBER_FULL_ITEM});
+  WorkViewListDataRequest({this.top = ApplicationConstant.NUMBER_FULL_ITEM});
 
   @override
   StringBuffer toXml() {

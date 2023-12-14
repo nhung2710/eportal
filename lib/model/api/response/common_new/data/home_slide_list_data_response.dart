@@ -5,13 +5,13 @@
 import 'package:eportal/model/base/base_eportal_data_response.dart';
 
 class HomeSlideListDataResponse extends BaseEportalDataResponse {
-  int? total;
-  int? id;
+  String? total;
+  String? id;
   String? tieuDe;
   String? tieuDePhu;
   String? moTa;
   String? lienKet;
-  int? thuTu;
+  String? thuTu;
   bool? hoatDong;
   String? avatar;
 
@@ -27,15 +27,15 @@ class HomeSlideListDataResponse extends BaseEportalDataResponse {
       this.avatar});
 
   HomeSlideListDataResponse.fromJson(Map<String, dynamic> json) {
-    total = json['total'];
-    id = json['id'];
-    tieuDe = json['tieuDe'];
-    tieuDePhu = json['tieuDePhu'];
-    moTa = json['moTa'];
-    lienKet = json['lienKet'];
-    thuTu = json['thuTu'];
+    total = json['total']?.toString();
+    id = json['id']?.toString();
+    tieuDe = json['tieuDe']?.toString();
+    tieuDePhu = json['tieuDePhu']?.toString();
+    moTa = json['moTa']?.toString();
+    lienKet = json['lienKet']?.toString();
+    thuTu = json['thuTu']?.toString();
     hoatDong = json['hoatDong'];
-    avatar = json['avatar'];
+    avatar = json['avatar']?.toString();
   }
 
   Map<String, dynamic> toJson() {

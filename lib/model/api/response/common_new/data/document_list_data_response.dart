@@ -21,16 +21,16 @@ class DocumentListDataResponse extends BaseEportalDataResponse {
   String? fileName;
   String? fileSource;
   String? isURL;
-  int? isDownload;
+  String? isDownload;
   bool? isActive;
-  int? isOrder;
+  String? isOrder;
   String? createdBy;
   String? userName;
   String? updatedBy;
   String? updateName;
-  int? portalID;
+  String? portalID;
   bool? sendView;
-  int? total;
+  String? total;
 
   DocumentListDataResponse(
       {this.documentID,
@@ -61,32 +61,32 @@ class DocumentListDataResponse extends BaseEportalDataResponse {
       this.total});
 
   DocumentListDataResponse.fromJson(Map<String, dynamic> json) {
-    documentID = json['document_ID'];
-    documentName = json['document_Name'];
-    docTypeID = json['docType_ID'];
-    docFieldID = json['docField_ID'];
-    docGroupID = json['docGroup_ID'];
-    docUnitID = json['docUnit_ID'];
-    docUnitName = json['docUnit_Name'];
-    contents = json['contents'];
-    noCode = json['noCode'];
-    signerName = json['signerName'];
-    promDate = json['promDate'];
-    effectDate = json['effectDate'];
-    endDate = json['endDate'];
-    fileName = json['fileName'];
-    fileSource = json['fileSource'];
-    isURL = json['isURL'];
-    isDownload = json['isDownload'];
+    documentID = json['document_ID']?.toString();
+    documentName = json['document_Name']?.toString();
+    docTypeID = json['docType_ID']?.toString();
+    docFieldID = json['docField_ID']?.toString();
+    docGroupID = json['docGroup_ID']?.toString();
+    docUnitID = json['docUnit_ID']?.toString();
+    docUnitName = json['docUnit_Name']?.toString();
+    contents = json['contents']?.toString();
+    noCode = json['noCode']?.toString();
+    signerName = json['signerName']?.toString();
+    promDate = json['promDate']?.toString();
+    effectDate = json['effectDate']?.toString();
+    endDate = json['endDate']?.toString();
+    fileName = json['fileName']?.toString();
+    fileSource = json['fileSource']?.toString();
+    isURL = json['isURL']?.toString();
+    isDownload = json['isDownload']?.toString();
     isActive = json['isActive'];
-    isOrder = json['isOrder'];
-    createdBy = json['createdBy'];
-    userName = json['userName'];
-    updatedBy = json['updatedBy'];
-    updateName = json['updateName'];
-    portalID = json['portalID'];
+    isOrder = json['isOrder']?.toString();
+    createdBy = json['createdBy']?.toString();
+    userName = json['userName']?.toString();
+    updatedBy = json['updatedBy']?.toString();
+    updateName = json['updateName']?.toString();
+    portalID = json['portalID']?.toString();
     sendView = json['sendView'];
-    total = json['total'];
+    total = json['total']?.toString();
   }
 
   Map<String, dynamic> toJson() {

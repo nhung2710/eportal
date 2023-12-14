@@ -7,18 +7,18 @@ import '../../../../../extension/string_extension.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class DanhSachChuyenMucDataResponse extends BaseEportalDataResponse {
-  int? total;
-  int? categoryID;
+  String? total;
+  String? categoryID;
   String? categoryName;
   String? description;
-  int? tabID;
-  int? tabMobileID;
+  String? tabID;
+  String? tabMobileID;
   bool? isActive;
   String? createDate;
-  int? portalId;
-  int? parentId;
-  int? orderNumber;
-  int? type;
+  String? portalId;
+  String? parentId;
+  String? orderNumber;
+  String? type;
   String? languageId;
   bool? sendView;
   String? tabPath;
@@ -41,21 +41,21 @@ class DanhSachChuyenMucDataResponse extends BaseEportalDataResponse {
       this.tabPath});
 
   DanhSachChuyenMucDataResponse.fromJson(Map<String, dynamic> json) {
-    total = json['total'];
-    categoryID = json['categoryID'];
-    categoryName = json['categoryName'];
-    description = json['description'];
-    tabID = json['tabID'];
-    tabMobileID = json['tabMobileID'];
+    total = json['total']?.toString();
+    categoryID = json['categoryID']?.toString();
+    categoryName = json['categoryName']?.toString();
+    description = json['description']?.toString();
+    tabID = json['tabID']?.toString();
+    tabMobileID = json['tabMobileID']?.toString();
     isActive = json['isActive'];
-    createDate = json['createDate'];
-    portalId = json['portalId'];
-    parentId = json['parentId'];
-    orderNumber = json['orderNumber'];
-    type = json['type'];
-    languageId = json['languageId'];
+    createDate = json['createDate']?.toString();
+    portalId = json['portalId']?.toString();
+    parentId = json['parentId']?.toString();
+    orderNumber = json['orderNumber']?.toString();
+    type = json['type']?.toString();
+    languageId = json['languageId']?.toString();
     sendView = json['sendView'];
-    tabPath = json['tabPath'];
+    tabPath = json['tabPath']?.toString();
     search = categoryName.getValueSearch();
   }
 

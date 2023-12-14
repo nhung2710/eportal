@@ -7,9 +7,9 @@ import '../../../../../extension/string_extension.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class DanhSachChucVuDataResponse extends BaseEportalDataResponse {
-  int? id;
-  int? total;
-  int? positionID;
+  String? id;
+  String? total;
+  String? positionID;
   String? positionCode;
   String? positionName;
   String? positionDes;
@@ -18,7 +18,7 @@ class DanhSachChucVuDataResponse extends BaseEportalDataResponse {
   String? updatedDate;
   String? updatedUser;
   bool? isActive;
-  int? isOrder;
+  String? isOrder;
 
   DanhSachChucVuDataResponse(
       {this.id,
@@ -35,18 +35,18 @@ class DanhSachChucVuDataResponse extends BaseEportalDataResponse {
       this.isOrder});
 
   DanhSachChucVuDataResponse.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    total = json['total'];
-    positionID = json['position_ID'];
-    positionCode = json['position_Code'];
-    positionName = json['position_Name'];
-    positionDes = json['position_Des'];
-    createdDate = json['createdDate'];
-    createdUser = json['createdUser'];
-    updatedDate = json['updatedDate'];
-    updatedUser = json['updatedUser'];
+    id = json['id']?.toString();
+    total = json['total']?.toString();
+    positionID = json['position_ID']?.toString();
+    positionCode = json['position_Code']?.toString();
+    positionName = json['position_Name']?.toString();
+    positionDes = json['position_Des']?.toString();
+    createdDate = json['createdDate']?.toString();
+    createdUser = json['createdUser']?.toString();
+    updatedDate = json['updatedDate']?.toString();
+    updatedUser = json['updatedUser']?.toString();
     isActive = json['isActive'];
-    isOrder = json['isOrder'];
+    isOrder = json['isOrder']?.toString();
     search = positionName.getValueSearch();
   }
 

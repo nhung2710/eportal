@@ -6,7 +6,7 @@ import 'package:eportal/model/base/base_eportal_xml.dart';
 //
 class NewsSearchDataRequest extends BasePageEportalXml {
   String? tuKhoa;
-  int? chuyenMuc;
+  String? chuyenMuc;
 
   NewsSearchDataRequest(
       {this.tuKhoa,

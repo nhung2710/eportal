@@ -7,13 +7,13 @@ import 'package:flutter/material.dart';
 //
 class DanhSachViTriTuyenDungDataResponse extends BaseEportalDataResponse {
   String? parentID;
-  int? total;
+  String? total;
   String? jobPlaceID;
   String? jobPlaceName;
   String? jobPlaceCode;
   String? jobPlaceDes;
   bool? isActive;
-  int? isOrder;
+  String? isOrder;
   String? createdBy;
   String? userName;
   String? updatedBy;
@@ -34,18 +34,18 @@ class DanhSachViTriTuyenDungDataResponse extends BaseEportalDataResponse {
       this.userUpdate});
 
   DanhSachViTriTuyenDungDataResponse.fromJson(Map<String, dynamic> json) {
-    parentID = json['parent_ID'];
-    total = json['total'];
-    jobPlaceID = json['jobPlace_ID'];
-    jobPlaceName = json['jobPlace_Name'];
-    jobPlaceCode = json['jobPlace_Code'];
-    jobPlaceDes = json['jobPlace_Des'];
+    parentID = json['parent_ID']?.toString();
+    total = json['total']?.toString();
+    jobPlaceID = json['jobPlace_ID']?.toString();
+    jobPlaceName = json['jobPlace_Name']?.toString();
+    jobPlaceCode = json['jobPlace_Code']?.toString();
+    jobPlaceDes = json['jobPlace_Des']?.toString();
     isActive = json['isActive'];
-    isOrder = json['isOrder'];
-    createdBy = json['createdBy'];
-    userName = json['userName'];
-    updatedBy = json['updatedBy'];
-    userUpdate = json['userUpdate'];
+    isOrder = json['isOrder']?.toString();
+    createdBy = json['createdBy']?.toString();
+    userName = json['userName']?.toString();
+    updatedBy = json['updatedBy']?.toString();
+    userUpdate = json['userUpdate']?.toString();
   }
 
   Map<String, dynamic> toJson() {

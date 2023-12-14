@@ -118,46 +118,50 @@ class _SplashPageState extends BasePageState<SplashPage>
               return handlerActionDataLogin(state.data);
           }
         },
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Center(
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 30, bottom: 20),
-                    child: SizedBox(
-                      height: 150,
-                      child: AspectRatio(
-                        aspectRatio: 16 / 9,
-                        child: Image.asset(
-                          'assets/images/logoapp.png',
-                          alignment: Alignment.center,
-                          fit: BoxFit.contain,
+        child: Stack(
+          children: [
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Center(
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 30, bottom: 20),
+                        child: SizedBox(
+                          height: 150,
+                          child: AspectRatio(
+                            aspectRatio: 16 / 9,
+                            child: Image.asset(
+                              'assets/images/logoapp.png',
+                              alignment: Alignment.center,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
+                  Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      child: Text(
+                        "Đang tải dữ liệu ${(currentData * 100).toInt()}%",
+                        style: AppTextStyle.title
+                            .copyWith(color: AppColor.colorOfIcon),
+                      )),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    child: LinearProgressIndicator(
+                      minHeight: 15,
+                      color: AppColor.colorOfIcon,
+                      backgroundColor: Colors.grey,
+                      value: currentData,
+                    ),
+                  ),
+                ],
               ),
-              Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  child: Text(
-                    "Đang tải dữ liệu ${(currentData * 100).toInt()}%",
-                    style: AppTextStyle.title
-                        .copyWith(color: AppColor.colorOfIcon),
-                  )),
-              Container(
-                margin: const EdgeInsets.only(top: 10),
-                child: LinearProgressIndicator(
-                  minHeight: 15,
-                  color: AppColor.colorOfIcon,
-                  backgroundColor: Colors.grey,
-                  value: currentData,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -267,6 +271,7 @@ class _SplashPageState extends BasePageState<SplashPage>
   Future<void> loadingDataDefault() {
     return loadApplicationSetting()
         .then((value) => loadApplicationConfig())
+        .then((value) => Future.delayed(const Duration(minutes: 1)))
         .then((value) {
       if (!GlobalApplication().isAutoLogin ||
           GlobalApplication().userNameSaved.isNullOrWhiteSpace() ||

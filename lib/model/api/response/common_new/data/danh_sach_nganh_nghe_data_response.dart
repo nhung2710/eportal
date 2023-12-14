@@ -7,14 +7,14 @@ import '../../../../../extension/string_extension.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class DanhSachNganhNgheDataResponse extends BaseEportalDataResponse {
-  int? id;
-  int? total;
+  String? id;
+  String? total;
   String? careerID;
   String? careerName;
   String? careerCode;
   String? careerDes;
   bool? isActive;
-  int? isOrder;
+  String? isOrder;
   String? createdBy;
   String? userName;
   String? updatedBy;
@@ -35,18 +35,18 @@ class DanhSachNganhNgheDataResponse extends BaseEportalDataResponse {
       this.userUpdate});
 
   DanhSachNganhNgheDataResponse.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    total = json['total'];
-    careerID = json['career_ID'];
-    careerName = json['career_Name'];
-    careerCode = json['career_Code'];
-    careerDes = json['career_Des'];
+    id = json['id']?.toString();
+    total = json['total']?.toString();
+    careerID = json['career_ID']?.toString();
+    careerName = json['career_Name']?.toString();
+    careerCode = json['career_Code']?.toString();
+    careerDes = json['career_Des']?.toString();
     isActive = json['isActive'];
-    isOrder = json['isOrder'];
-    createdBy = json['createdBy'];
-    userName = json['userName'];
-    updatedBy = json['updatedBy'];
-    userUpdate = json['userUpdate'];
+    isOrder = json['isOrder']?.toString();
+    createdBy = json['createdBy']?.toString();
+    userName = json['userName']?.toString();
+    updatedBy = json['updatedBy']?.toString();
+    userUpdate = json['userUpdate']?.toString();
     search = careerName.getValueSearch();
   }
 

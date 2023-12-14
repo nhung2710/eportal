@@ -5,7 +5,7 @@ import '../../../../base/base_eportal_xml.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class DanhSachQuanHuyenDataRequest extends BaseEportalXml {
-  int? tinhTp;
+  String? tinhTp;
 
   DanhSachQuanHuyenDataRequest({this.tinhTp});
 

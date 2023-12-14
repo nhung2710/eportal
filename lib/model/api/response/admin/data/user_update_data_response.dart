@@ -5,7 +5,7 @@ import 'package:eportal/model/base/base_eportal_data_response.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class UserUpdateDataResponse extends BaseEportalDataResponse {
-  int? affiliateID;
+  String? affiliateID;
   String? displayName;
   String? email;
   String? firstName;
@@ -16,16 +16,16 @@ class UserUpdateDataResponse extends BaseEportalDataResponse {
   Membership? membership;
   String? passwordResetToken;
   String? passwordResetExpiration;
-  int? portalID;
+  String? portalID;
   Profile? profile;
   List<String>? roles;
-  int? userID;
+  String? userID;
   String? username;
   String? vanityUrl;
-  int? cacheability;
-  int? createdByUserID;
+  String? cacheability;
+  String? createdByUserID;
   String? createdOnDate;
-  int? lastModifiedByUserID;
+  String? lastModifiedByUserID;
   String? lastModifiedOnDate;
 
   UserUpdateDataResponse(
@@ -53,31 +53,31 @@ class UserUpdateDataResponse extends BaseEportalDataResponse {
       this.lastModifiedOnDate});
 
   UserUpdateDataResponse.fromJson(Map<String, dynamic> json) {
-    affiliateID = json['affiliateID'];
-    displayName = json['displayName'];
-    email = json['email'];
-    firstName = json['firstName'];
+    affiliateID = json['affiliateID']?.toString();
+    displayName = json['displayName']?.toString();
+    email = json['email']?.toString();
+    firstName = json['firstName']?.toString();
     isDeleted = json['isDeleted'];
     isSuperUser = json['isSuperUser'];
-    lastIPAddress = json['lastIPAddress'];
-    lastName = json['lastName'];
+    lastIPAddress = json['lastIPAddress']?.toString();
+    lastName = json['lastName']?.toString();
     membership = json['membership'] != null
         ? new Membership.fromJson(json['membership'])
         : null;
-    passwordResetToken = json['passwordResetToken'];
-    passwordResetExpiration = json['passwordResetExpiration'];
-    portalID = json['portalID'];
+    passwordResetToken = json['passwordResetToken']?.toString();
+    passwordResetExpiration = json['passwordResetExpiration']?.toString();
+    portalID = json['portalID']?.toString();
     profile =
         json['profile'] != null ? new Profile.fromJson(json['profile']) : null;
     roles = json['roles'].cast<String>();
-    userID = json['userID'];
-    username = json['username'];
-    vanityUrl = json['vanityUrl'];
-    cacheability = json['cacheability'];
-    createdByUserID = json['createdByUserID'];
-    createdOnDate = json['createdOnDate'];
-    lastModifiedByUserID = json['lastModifiedByUserID'];
-    lastModifiedOnDate = json['lastModifiedOnDate'];
+    userID = json['userID']?.toString();
+    username = json['username']?.toString();
+    vanityUrl = json['vanityUrl']?.toString();
+    cacheability = json['cacheability']?.toString();
+    createdByUserID = json['createdByUserID']?.toString();
+    createdOnDate = json['createdOnDate']?.toString();
+    lastModifiedByUserID = json['lastModifiedByUserID']?.toString();
+    lastModifiedOnDate = json['lastModifiedOnDate']?.toString();
   }
 
   Map<String, dynamic> toJson() {
@@ -146,13 +146,13 @@ class Membership {
 
   Membership.fromJson(Map<String, dynamic> json) {
     approved = json['approved'];
-    createdDate = json['createdDate'];
+    createdDate = json['createdDate']?.toString();
     isDeleted = json['isDeleted'];
     isOnLine = json['isOnLine'];
-    lastActivityDate = json['lastActivityDate'];
-    lastLockoutDate = json['lastLockoutDate'];
-    lastLoginDate = json['lastLoginDate'];
-    lastPasswordChangeDate = json['lastPasswordChangeDate'];
+    lastActivityDate = json['lastActivityDate']?.toString();
+    lastLockoutDate = json['lastLockoutDate']?.toString();
+    lastLoginDate = json['lastLoginDate']?.toString();
+    lastPasswordChangeDate = json['lastPasswordChangeDate']?.toString();
     lockedOut = json['lockedOut'];
     password = json['password'];
     passwordAnswer = json['passwordAnswer'];
@@ -236,14 +236,14 @@ class Profile {
     city = json['city'];
     country = json['country'];
     fax = json['fax'];
-    firstName = json['firstName'];
-    fullName = json['fullName'];
+    firstName = json['firstName']?.toString();
+    fullName = json['fullName']?.toString();
     im = json['im'];
     isDirty = json['isDirty'];
-    lastName = json['lastName'];
-    photo = json['photo'];
-    photoURL = json['photoURL'];
-    photoURLFile = json['photoURLFile'];
+    lastName = json['lastName']?.toString();
+    photo = json['photo']?.toString();
+    photoURL = json['photoURL']?.toString();
+    photoURLFile = json['photoURLFile']?.toString();
     postalCode = json['postalCode'];
     preferredLocale = json['preferredLocale'];
     preferredTimeZone = json['preferredTimeZone'] != null
@@ -257,8 +257,8 @@ class Profile {
     }
     region = json['region'];
     street = json['street'];
-    telephone = json['telephone'];
-    title = json['title'];
+    telephone = json['telephone']?.toString();
+    title = json['title']?.toString();
     unit = json['unit'];
     website = json['website'];
     biography = json['biography'];
@@ -317,11 +317,11 @@ class PreferredTimeZone {
       this.supportsDaylightSavingTime});
 
   PreferredTimeZone.fromJson(Map<String, dynamic> json) {
-    id = json['Id'];
-    displayName = json['DisplayName'];
-    standardName = json['StandardName'];
-    daylightName = json['DaylightName'];
-    baseUtcOffset = json['BaseUtcOffset'];
+    id = json['Id']?.toString();
+    displayName = json['DisplayName']?.toString();
+    standardName = json['StandardName']?.toString();
+    daylightName = json['DaylightName']?.toString();
+    baseUtcOffset = json['BaseUtcOffset']?.toString();
     adjustmentRules = json['AdjustmentRules'];
     supportsDaylightSavingTime = json['SupportsDaylightSavingTime'];
   }
@@ -340,27 +340,27 @@ class PreferredTimeZone {
 }
 
 class ProfileProperties {
-  int? dataType;
+  String? dataType;
   String? defaultValue;
-  int? defaultVisibility;
+  String? defaultVisibility;
   bool? deleted;
   bool? isDirty;
-  int? length;
-  int? moduleDefId;
-  int? portalId;
+  String? length;
+  String? moduleDefId;
+  String? portalId;
   String? propertyCategory;
-  int? propertyDefinitionId;
+  String? propertyDefinitionId;
   String? propertyName;
   String? propertyValue;
   bool? readOnly;
   bool? required;
   String? validationExpression;
-  int? viewOrder;
+  String? viewOrder;
   bool? visible;
-  int? visibility;
-  int? createdByUserID;
+  String? visibility;
+  String? createdByUserID;
   String? createdOnDate;
-  int? lastModifiedByUserID;
+  String? lastModifiedByUserID;
   String? lastModifiedOnDate;
 
   ProfileProperties(
@@ -388,28 +388,28 @@ class ProfileProperties {
       this.lastModifiedOnDate});
 
   ProfileProperties.fromJson(Map<String, dynamic> json) {
-    dataType = json['dataType'];
-    defaultValue = json['defaultValue'];
-    defaultVisibility = json['defaultVisibility'];
+    dataType = json['dataType']?.toString();
+    defaultValue = json['defaultValue']?.toString();
+    defaultVisibility = json['defaultVisibility']?.toString();
     deleted = json['deleted'];
     isDirty = json['isDirty'];
-    length = json['length'];
-    moduleDefId = json['moduleDefId'];
-    portalId = json['portalId'];
-    propertyCategory = json['propertyCategory'];
-    propertyDefinitionId = json['propertyDefinitionId'];
-    propertyName = json['propertyName'];
-    propertyValue = json['propertyValue'];
+    length = json['length']?.toString();
+    moduleDefId = json['moduleDefId']?.toString();
+    portalId = json['portalId']?.toString();
+    propertyCategory = json['propertyCategory']?.toString();
+    propertyDefinitionId = json['propertyDefinitionId']?.toString();
+    propertyName = json['propertyName']?.toString();
+    propertyValue = json['propertyValue']?.toString();
     readOnly = json['readOnly'];
     required = json['required'];
-    validationExpression = json['validationExpression'];
-    viewOrder = json['viewOrder'];
+    validationExpression = json['validationExpression']?.toString();
+    viewOrder = json['viewOrder']?.toString();
     visible = json['visible'];
-    visibility = json['visibility'];
-    createdByUserID = json['createdByUserID'];
-    createdOnDate = json['createdOnDate'];
-    lastModifiedByUserID = json['lastModifiedByUserID'];
-    lastModifiedOnDate = json['lastModifiedOnDate'];
+    visibility = json['visibility']?.toString();
+    createdByUserID = json['createdByUserID']?.toString();
+    createdOnDate = json['createdOnDate']?.toString();
+    lastModifiedByUserID = json['lastModifiedByUserID']?.toString();
+    lastModifiedOnDate = json['lastModifiedOnDate']?.toString();
   }
 
   Map<String, dynamic> toJson() {

@@ -7,7 +7,7 @@ import 'package:eportal/model/base/base_eportal_data_response.dart';
 
 class FaqQuestionSearchDataResponse extends BaseEportalDataResponse {
   FaqQuestionSearchAnswerDataResponse? answerOb;
-  int? total;
+  String? total;
   String? id;
   String? faqid;
   String? name;
@@ -17,9 +17,9 @@ class FaqQuestionSearchDataResponse extends BaseEportalDataResponse {
   String? email;
   String? phone;
   String? sendDate;
-  int? status;
+  String? status;
   bool? isPublic;
-  int? portalId;
+  String? portalId;
   String? createDate;
   String? createUser;
   String? updateDate;
@@ -51,23 +51,23 @@ class FaqQuestionSearchDataResponse extends BaseEportalDataResponse {
     if (json['answerOb'] != null) {
       answerOb = FaqQuestionSearchAnswerDataResponse.fromJson(json['answerOb']);
     }
-    total = json['total'];
-    id = json['id'];
-    faqid = json['faqid'];
-    name = json['name'];
-    contents = json['contents'];
-    fileAttach = json['fileAttach'];
-    adress = json['adress'];
-    email = json['email'];
-    phone = json['phone'];
-    sendDate = json['sendDate'];
-    status = json['status'];
+    total = json['total']?.toString();
+    id = json['id']?.toString();
+    faqid = json['faqid']?.toString();
+    name = json['name']?.toString();
+    contents = json['contents']?.toString();
+    fileAttach = json['fileAttach']?.toString();
+    adress = json['adress']?.toString();
+    email = json['email']?.toString();
+    phone = json['phone']?.toString();
+    sendDate = json['sendDate']?.toString();
+    status = json['status']?.toString();
     isPublic = json['isPublic'];
-    portalId = json['portalId'];
-    createDate = json['createDate'];
-    createUser = json['createUser'];
-    updateDate = json['updateDate'];
-    updateUser = json['updateUser'];
+    portalId = json['portalId']?.toString();
+    createDate = json['createDate']?.toString();
+    createUser = json['createUser']?.toString();
+    updateDate = json['updateDate']?.toString();
+    updateUser = json['updateUser']?.toString();
     sendView = json['sendView'];
   }
 
@@ -97,7 +97,7 @@ class FaqQuestionSearchDataResponse extends BaseEportalDataResponse {
 }
 
 class FaqQuestionSearchAnswerDataResponse {
-  int? total;
+  String? total;
   String? id;
   String? questionID;
   String? name;
@@ -105,9 +105,9 @@ class FaqQuestionSearchAnswerDataResponse {
   String? contents;
   String? fileAttach;
   String? sendDate;
-  int? status;
+  String? status;
   bool? isPublic;
-  int? portalId;
+  String? portalId;
   String? answerName;
   String? createDate;
   String? createUser;
@@ -135,22 +135,22 @@ class FaqQuestionSearchAnswerDataResponse {
       this.sendView});
 
   FaqQuestionSearchAnswerDataResponse.fromJson(Map<String, dynamic> json) {
-    total = json['total'];
-    id = json['id'];
-    questionID = json['questionID'];
-    name = json['name'];
-    title = json['title'];
-    contents = json['contents'];
-    fileAttach = json['fileAttach'];
-    sendDate = json['sendDate'];
-    status = json['status'];
+    total = json['total']?.toString();
+    id = json['id']?.toString();
+    questionID = json['questionID']?.toString();
+    name = json['name']?.toString();
+    title = json['title']?.toString();
+    contents = json['contents']?.toString();
+    fileAttach = json['fileAttach']?.toString();
+    sendDate = json['sendDate']?.toString();
+    status = json['status']?.toString();
     isPublic = json['isPublic'];
-    portalId = json['portalId'];
-    answerName = json['answerName'];
-    createDate = json['createDate'];
-    createUser = json['createUser'];
-    updateDate = json['updateDate'];
-    updateUser = json['updateUser'];
+    portalId = json['portalId']?.toString();
+    answerName = json['answerName']?.toString();
+    createDate = json['createDate']?.toString();
+    createUser = json['createUser']?.toString();
+    updateDate = json['updateDate']?.toString();
+    updateUser = json['updateUser']?.toString();
     sendView = json['sendView'];
   }
 

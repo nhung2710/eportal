@@ -4,6 +4,7 @@ import 'package:eportal/bloc/admin/job_user_update_bloc.dart';
 import 'package:eportal/event/admin/job_user_update_event.dart';
 import 'package:eportal/model/api/request/admin/data/job_user_update_data_request.dart';
 import 'package:eportal/model/api/request/admin/job_user_update_request.dart';
+import 'package:eportal/model/api/response/admin/data/job_user_list_by_user_name_data_response.dart';
 import 'package:eportal/model/api/response/admin/data/job_user_update_data_response.dart';
 import 'package:eportal/screen/worker/profile_edit/tab/profile_edit_basic_tab.dart';
 import 'package:eportal/screen/worker/profile_edit/tab/profile_edit_career_goals_tab.dart';
@@ -28,7 +29,9 @@ import '../../../../widget/base/base_page.dart';
 //
 
 class ProfileEditPage extends BasePage {
-  ProfileEditPage({super.key});
+  JobUserListByUserNameDataResponse data;
+
+  ProfileEditPage({super.key, required this.data});
 
   @override
   State<StatefulWidget> createState() => _ProfileEditPageState();
@@ -121,21 +124,27 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage>
                     children: [
                       ProfileEditBasicTab(
                         key: keyProfileEditBasicTabState,
+                        data: widget.data,
                       ),
                       ProfileEditGeneralTab(
                         key: keyProfileEditGeneralTabState,
+                        data: widget.data,
                       ),
                       ProfileEditLevelTab(
                         key: keyProfileEditLevelTabState,
+                        data: widget.data,
                       ),
                       ProfileEditWorkExperienceTab(
                         key: keyProfileEditWorkExperienceTabState,
+                        data: widget.data,
                       ),
                       ProfileEditCareerGoalsTab(
                         key: keyProfileEditCareerGoalsTabState,
+                        data: widget.data,
                       ),
                       ProfileEditFieldSkillsTab(
                         key: keyProfileEditFieldSkillsTabState,
+                        data: widget.data,
                       ),
                     ],
                   ),
@@ -151,7 +160,7 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage>
               Container(
                   margin: const EdgeInsets.only(top: 10),
                   child: DefaultButton(
-                    text: 'Tạo',
+                    text: 'Sửa',
                     onPressed: () => _send(context),
                   )),
             ],

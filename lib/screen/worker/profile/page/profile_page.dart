@@ -11,6 +11,7 @@ import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
 import 'package:eportal/widget/full_data_item/answer_and_question_item.dart';
+import 'package:eportal/widget/full_data_item/curriculum_vitae_item.dart';
 import 'package:eportal/widget/full_data_item/profile_item.dart';
 import 'package:eportal/widget/input/search_input.dart';
 import 'package:flutter/material.dart';
@@ -114,19 +115,35 @@ class _ProfilePageState extends BasePageStateActive<ProfilePage> {
                                   children: [
                                     Expanded(
                                       child: ListView.builder(
-                                        shrinkWrap: true,
-                                        controller: scrollController,
-                                        itemCount: state.length,
-                                        itemBuilder:
-                                            (BuildContext context, int index) =>
-                                                AnswerAndQuestionItem(
-                                          isShowFull: true,
-                                          answer: state.elementAt(index).search,
-                                          question:
-                                              state.elementAt(index).search,
-                                          onTap: () {},
-                                        ),
-                                      ),
+                                          shrinkWrap: true,
+                                          controller: scrollController,
+                                          itemCount: state.length,
+                                          itemBuilder: (BuildContext context,
+                                                  int index) =>
+                                              CurriculumVitaeItem(
+                                                onTap: () => nextPage(
+                                                    (context) =>
+                                                        ProfileEditPage(
+                                                          data: state
+                                                              .elementAt(index),
+                                                        )),
+                                                title: state
+                                                    .elementAt(index)
+                                                    .title,
+                                                education: state
+                                                    .elementAt(index)
+                                                    .education,
+                                                careerGoals: state
+                                                    .elementAt(index)
+                                                    .careerGoals,
+                                                skillsForte: state
+                                                    .elementAt(index)
+                                                    .skillsForte,
+                                                workExperience: state
+                                                    .elementAt(index)
+                                                    .workExperience,
+                                                isShowFull: true,
+                                              )),
                                     ),
                                   ],
                                 ))),

@@ -13,10 +13,10 @@ class DangKyDataResponse extends BaseEportalDataResponse {
   DangKyDataResponse({this.userID, this.userName, this.message, this.role});
 
   DangKyDataResponse.fromJson(Map<String, dynamic> json) {
-    userID = json['userID'];
-    userName = json['userName'];
-    message = json['message'];
-    role = json['role'];
+    userID = json['userID']?.toString();
+    userName = json['userName']?.toString();
+    message = json['message']?.toString();
+    role = json['role']?.toString();
   }
 
   Map<String, dynamic> toJson() {

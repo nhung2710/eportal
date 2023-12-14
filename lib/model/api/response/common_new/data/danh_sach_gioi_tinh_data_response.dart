@@ -11,8 +11,8 @@ class DanhSachGioiTinhDataResponse extends BaseEportalDataResponse {
   DanhSachGioiTinhDataResponse({this.name, this.id});
 
   DanhSachGioiTinhDataResponse.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    id = json['id'];
+    name = json['name']?.toString();
+    id = json['id']?.toString();
   }
 
   Map<String, dynamic> toJson() {

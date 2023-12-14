@@ -11,7 +11,15 @@ class DangKyDataRequest extends BaseEportalXml {
   String? soDienThoai;
   String? passWord;
   int? role;
-  DangKyDataRequest({this.hoDem,this.ten,this.email,this.soDienThoai,this.passWord,this.role});
+
+  DangKyDataRequest(
+      {this.hoDem,
+      this.ten,
+      this.email,
+      this.soDienThoai,
+      this.passWord,
+      this.role});
+
   @override
   StringBuffer toXml() {
     // TODO: implement toXml

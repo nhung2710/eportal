@@ -15,7 +15,7 @@ import '../../../../state/base/base_state.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class NewsCurriculumVitaeDetailPage extends BasePage {
-  int? id;
+  String? id;
 
   NewsCurriculumVitaeDetailPage({
     super.key,
@@ -45,7 +45,7 @@ class _NewsCurriculumVitaeDetailPageState
   void callApi() {
     jobUserDetailBloc.add(JobUserDetailEvent(
         request: JobUserDetailRequest(
-            obj: JobUserDetailDataRequest(id: widget.id ?? 0))));
+            obj: JobUserDetailDataRequest(id: widget.id ?? "0"))));
     super.callApi();
   }
 

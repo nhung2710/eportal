@@ -8,19 +8,19 @@ import '../../../../../extension/string_extension.dart';
 //
 class DanhSachTinhTpDataResponse extends BaseEportalDataResponse {
   String? deletedDate;
-  int? areaID;
-  int? total;
-  int? regionalID;
+  String? areaID;
+  String? total;
+  String? regionalID;
   String? regionalCode;
   String? regionalName;
   String? regionalDes;
-  int? parentID;
+  String? parentID;
   String? createdDate;
   String? createdUser;
   String? updatedDate;
   String? updatedUser;
   bool? isActive;
-  int? isOrder;
+  String? isOrder;
 
   DanhSachTinhTpDataResponse(
       {this.deletedDate,
@@ -39,20 +39,20 @@ class DanhSachTinhTpDataResponse extends BaseEportalDataResponse {
       this.isOrder});
 
   DanhSachTinhTpDataResponse.fromJson(Map<String, dynamic> json) {
-    deletedDate = json['deletedDate'];
-    areaID = json['areaID'];
-    total = json['total'];
-    regionalID = json['regional_ID'];
-    regionalCode = json['regional_Code'];
-    regionalName = json['regional_Name'];
-    regionalDes = json['regional_Des'];
-    parentID = json['parent_ID'];
-    createdDate = json['createdDate'];
-    createdUser = json['createdUser'];
-    updatedDate = json['updatedDate'];
-    updatedUser = json['updatedUser'];
+    deletedDate = json['deletedDate']?.toString();
+    areaID = json['areaID']?.toString();
+    total = json['total']?.toString();
+    regionalID = json['regional_ID']?.toString();
+    regionalCode = json['regional_Code']?.toString();
+    regionalName = json['regional_Name']?.toString();
+    regionalDes = json['regional_Des']?.toString();
+    parentID = json['parent_ID']?.toString();
+    createdDate = json['createdDate']?.toString();
+    createdUser = json['createdUser']?.toString();
+    updatedDate = json['updatedDate']?.toString();
+    updatedUser = json['updatedUser']?.toString();
     isActive = json['isActive'];
-    isOrder = json['isOrder'];
+    isOrder = json['isOrder']?.toString();
     search = regionalName.getValueSearch();
   }
 

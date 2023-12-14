@@ -7,19 +7,19 @@ import '../../../../../extension/string_extension.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class DanhSachDoanhNghiepDataResponse extends BaseEportalDataResponse {
-  int? id;
-  int? status;
+  String? id;
+  String? status;
   String? careerID;
   String? isInvite;
   String? userAdmin;
   String? tinhTP;
   String? idSend;
-  int? soLuongUngVien;
-  int? soLuongTuyenDung;
-  int? tinhTrang;
-  int? soBan;
+  String? soLuongUngVien;
+  String? soLuongTuyenDung;
+  String? tinhTrang;
+  String? soBan;
   String? doanhNghiepID;
-  int? total;
+  String? total;
   String? scale;
   String? businessID;
   String? businessVn;
@@ -46,7 +46,7 @@ class DanhSachDoanhNghiepDataResponse extends BaseEportalDataResponse {
   bool? isApproval;
   String? approvalUser;
   String? approvalDate;
-  int? portalId;
+  String? portalId;
 
   DanhSachDoanhNghiepDataResponse(
       {this.id,
@@ -91,46 +91,46 @@ class DanhSachDoanhNghiepDataResponse extends BaseEportalDataResponse {
       this.portalId});
 
   DanhSachDoanhNghiepDataResponse.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    status = json['status'];
-    careerID = json['career_ID'];
-    isInvite = json['isInvite'];
-    userAdmin = json['userAdmin'];
-    tinhTP = json['tinhTP'];
-    idSend = json['idSend'];
-    soLuongUngVien = json['soLuongUngVien'];
-    soLuongTuyenDung = json['soLuongTuyenDung'];
-    tinhTrang = json['tinhTrang'];
-    soBan = json['soBan'];
-    doanhNghiepID = json['doanhNghiep_ID'];
-    total = json['total'];
-    scale = json['scale'];
-    businessID = json['business_ID'];
-    businessVn = json['business_Vn'];
-    businessEn = json['business_En'];
-    businessSort = json['business_Sort'];
-    quanHuyen = json['quanHuyen'];
-    logo = json['logo'];
-    description = json['description'];
-    taxCode = json['taxCode'];
-    mobile = json['mobile'];
-    fax = json['fax'];
-    website = json['website'];
-    email = json['email'];
-    address = json['address'];
-    contactUser = json['contactUser'];
-    contactMobile = json['contactMobile'];
-    contactEmail = json['contactEmail'];
-    createdDate = json['createdDate'];
-    createdUser = json['createdUser'];
-    updatedDate = json['updatedDate'];
-    updatedUser = json['updatedUser'];
+    id = json['id']?.toString();
+    status = json['status']?.toString();
+    careerID = json['career_ID']?.toString();
+    isInvite = json['isInvite']?.toString();
+    userAdmin = json['userAdmin']?.toString();
+    tinhTP = json['tinhTP']?.toString();
+    idSend = json['idSend']?.toString();
+    soLuongUngVien = json['soLuongUngVien']?.toString();
+    soLuongTuyenDung = json['soLuongTuyenDung']?.toString();
+    tinhTrang = json['tinhTrang']?.toString();
+    soBan = json['soBan']?.toString();
+    doanhNghiepID = json['doanhNghiep_ID']?.toString();
+    total = json['total']?.toString();
+    scale = json['scale']?.toString();
+    businessID = json['business_ID']?.toString();
+    businessVn = json['business_Vn']?.toString();
+    businessEn = json['business_En']?.toString();
+    businessSort = json['business_Sort']?.toString();
+    quanHuyen = json['quanHuyen']?.toString();
+    logo = json['logo']?.toString();
+    description = json['description']?.toString();
+    taxCode = json['taxCode']?.toString();
+    mobile = json['mobile']?.toString();
+    fax = json['fax']?.toString();
+    website = json['website']?.toString();
+    email = json['email']?.toString();
+    address = json['address']?.toString();
+    contactUser = json['contactUser']?.toString();
+    contactMobile = json['contactMobile']?.toString();
+    contactEmail = json['contactEmail']?.toString();
+    createdDate = json['createdDate']?.toString();
+    createdUser = json['createdUser']?.toString();
+    updatedDate = json['updatedDate']?.toString();
+    updatedUser = json['updatedUser']?.toString();
     isAdmin = json['isAdmin'];
     isActive = json['isActive'];
     isApproval = json['isApproval'];
-    approvalUser = json['approvalUser'];
-    approvalDate = json['approvalDate'];
-    portalId = json['portalId'];
+    approvalUser = json['approvalUser']?.toString();
+    approvalDate = json['approvalDate']?.toString();
+    portalId = json['portalId']?.toString();
     search = businessVn.getValueSearch();
   }
 

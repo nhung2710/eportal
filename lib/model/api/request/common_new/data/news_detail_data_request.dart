@@ -5,10 +5,9 @@ import '../../../../base/base_eportal_xml.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class NewsDetailDataRequest extends BaseSingleEportalXml {
+  String id;
 
-  int id;
-
-  NewsDetailDataRequest({this.id = 0});
+  NewsDetailDataRequest({this.id = "0"});
 
   @override
   StringBuffer toXml() {

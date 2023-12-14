@@ -21,7 +21,7 @@ import '../../../../extension/string_extension.dart';
 //
 
 class NewsDetailPage extends BasePage {
-  int? id;
+  String? id;
 
   NewsDetailPage({
     super.key,
@@ -49,8 +49,8 @@ class _NewsDetailPageState extends BasePageState<NewsDetailPage> {
   @override
   void callApi() {
     newsDetailBloc.add(NewsDetailEvent(
-        request:
-            NewsDetailRequest(obj: NewsDetailDataRequest(id: widget.id ?? 0))));
+        request: NewsDetailRequest(
+            obj: NewsDetailDataRequest(id: widget.id ?? "0"))));
     super.callApi();
   }
 

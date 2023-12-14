@@ -9,6 +9,7 @@ import 'package:eportal/model/api/request/common_new/danh_sach_chuc_vu_request.d
 import 'package:eportal/model/api/request/common_new/danh_sach_kinh_nghiem_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_muc_luong_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_chuc_vu_data_request.dart';
+import 'package:eportal/model/api/response/admin/data/job_user_list_by_user_name_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_chuc_vu_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_kinh_nghiem_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_muc_luong_data_response.dart';
@@ -39,7 +40,9 @@ import '../../../../widget/base/base_page.dart';
 //
 
 class ProfileEditGeneralTab extends BasePage {
-  ProfileEditGeneralTab({super.key});
+  JobUserListByUserNameDataResponse data;
+
+  ProfileEditGeneralTab({super.key, required this.data});
 
   DanhSachKinhNghiemDataResponse? danhSachKinhNghiemDataResponse;
   DanhSachMucLuongDataResponse? danhSachMucLuongDataResponse;

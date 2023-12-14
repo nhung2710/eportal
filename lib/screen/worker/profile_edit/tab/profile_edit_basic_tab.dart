@@ -6,6 +6,7 @@ import 'package:eportal/model/api/request/common_new/danh_sach_quan_huyen_reques
 import 'package:eportal/model/api/request/common_new/danh_sach_tinh_tp_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_quan_huyen_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_tinh_tp_data_request.dart';
+import 'package:eportal/model/api/response/admin/data/job_user_list_by_user_name_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_quan_huyen_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_tinh_tp_data_response.dart';
 import 'package:eportal/state/base/base_state.dart';
@@ -30,7 +31,9 @@ import '../../../../widget/input/field_input.dart';
 //
 
 class ProfileEditBasicTab extends BasePage {
-  ProfileEditBasicTab({super.key});
+  JobUserListByUserNameDataResponse data;
+
+  ProfileEditBasicTab({super.key, required this.data});
 
   DanhSachTinhTpDataResponse? danhSachTinhTpDataResponse;
   DanhSachQuanHuyenDataResponse? danhSachQuanHuyenDataResponse;
@@ -56,10 +59,19 @@ class ProfileEditBasicTabState
   late DanhSachQuanHuyenBloc danhSachQuanHuyenBloc;
 
   @override
-  void initDataLoading() {
+  void initBloc() {
     danhSachTinhTpBloc = DanhSachTinhTpBloc();
     danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
     danhSachNganhNgheBloc = DanhSachNganhNgheBloc();
+    super.initBloc();
+  }
+
+  @override
+  void initDataLoading() {
+    titleController.text = widget.data.title.replaceWhenNullOrWhiteSpace();
+    fromDateController.text = widget.data.startDate.formatDateTimeApi();
+    toDateController.text = widget.data.endDate.formatDateTimeApi();
+
     callApi();
     // TODO: implement initDataLoading
     super.initDataLoading();
@@ -74,7 +86,15 @@ class ProfileEditBasicTabState
           request: DanhSachQuanHuyenRequest(
               obj: DanhSachQuanHuyenDataRequest(
                   tinhTp: widget.danhSachTinhTpDataResponse!.regionalID))));
+    } else {
+      if (widget.data.tinhTP != null) {
+        danhSachQuanHuyenBloc.add(DanhSachQuanHuyenEvent(
+            request: DanhSachQuanHuyenRequest(
+                obj:
+                    DanhSachQuanHuyenDataRequest(tinhTp: widget.data.tinhTP))));
+      }
     }
+
     danhSachNganhNgheBloc.add(DanhSachNganhNgheEvent(
         request:
             DanhSachNganhNgheRequest(obj: DanhSachNganhNgheDataRequest())));
@@ -188,6 +208,12 @@ class ProfileEditBasicTabState
 
   Widget _buildViewSearchDanhSachTinhTp(
       BuildContext context, List<DanhSachTinhTpDataResponse> list) {
+    if (widget.data.tinhTP != null &&
+        widget.danhSachTinhTpDataResponse == null) {
+      widget.danhSachTinhTpDataResponse = list
+          .where((element) => element.regionalID == widget.data.tinhTP)
+          .firstOrNull;
+    }
     return SelectItem<DanhSachTinhTpDataResponse>(
       selectedItem: widget.danhSachTinhTpDataResponse,
       icon: FontAwesomeIcons.city,
@@ -211,6 +237,12 @@ class ProfileEditBasicTabState
 
   Widget _buildViewSearchDanhSachQuanHuyen(
       BuildContext context, List<DanhSachQuanHuyenDataResponse> list) {
+    if (widget.data.quanHuyen != null &&
+        widget.danhSachQuanHuyenDataResponse == null) {
+      widget.danhSachQuanHuyenDataResponse = list
+          .where((element) => element.regionalID == widget.data.quanHuyen)
+          .firstOrNull;
+    }
     return SelectItem<DanhSachQuanHuyenDataResponse>(
       icon: FontAwesomeIcons.locationArrow,
       key: _danhSachQuanHuyenKey,
@@ -229,6 +261,12 @@ class ProfileEditBasicTabState
 
   Widget _buildViewSearchDanhSachNganhNghe(
       BuildContext context, List<DanhSachNganhNgheDataResponse> list) {
+    if (!widget.data.careerID.isNullOrWhiteSpace() &&
+        widget.danhSachNganhNgheDataResponse == null) {
+      widget.danhSachNganhNgheDataResponse = list
+          .where((element) => element.careerID == widget.data.careerID)
+          .firstOrNull;
+    }
     return SelectItem<DanhSachNganhNgheDataResponse>(
       icon: FontAwesomeIcons.tag,
       selectedItem: widget.danhSachNganhNgheDataResponse,
