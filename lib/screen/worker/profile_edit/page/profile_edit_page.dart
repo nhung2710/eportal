@@ -200,7 +200,7 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage>
                   mucLuong: keyProfileEditGeneralTabState.currentState?.widget.danhSachMucLuongDataResponse?.salaryID,
                   soNamKinhNghiem: keyProfileEditGeneralTabState.currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
                   trinhDo: keyProfileEditGeneralTabState.currentState?.widget.danhSachTrinhDoDataResponse?.educationID,
-                  nhuCau: (keyProfileEditGeneralTabState.currentState?.widget.danhSachNhuCauDataResponse?.docUnitID).replaceWhenNullOrWhiteSpace("0120720169190368"),
+                  nhuCau: keyProfileEditGeneralTabState.currentState?.widget.danhSachNhuCauDataResponse?.needsID,
                   kyNang: keyProfileEditFieldSkillsTabState.currentState?.skillController.text,
                   kinhNghiemLV: keyProfileEditWorkExperienceTabState.currentState?.experienceController.text,
                   mucTieu: keyProfileEditCareerGoalsTabState.currentState?.objectiveController.text,

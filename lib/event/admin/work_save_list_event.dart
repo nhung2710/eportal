@@ -6,6 +6,6 @@ import 'package:eportal/model/api/request/admin/work_save_list_request.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class WorkSaveListEvent extends BaseSingleEvent<WorkSaveListRequest> {
+class WorkSaveListEvent extends BasePageEvent<WorkSaveListRequest> {
   const WorkSaveListEvent({required super.request});
 }

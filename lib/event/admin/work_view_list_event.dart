@@ -6,6 +6,6 @@ import 'package:eportal/model/api/request/admin/work_view_list_request.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class WorkViewListEvent extends BaseSingleEvent<WorkViewListRequest> {
+class WorkViewListEvent extends BasePageEvent<WorkViewListRequest> {
   const WorkViewListEvent({required super.request});
 }

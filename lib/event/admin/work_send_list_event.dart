@@ -6,6 +6,6 @@ import 'package:eportal/model/api/request/admin/work_send_list_request.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class WorkSendListEvent extends BaseSingleEvent<WorkSendListRequest> {
+class WorkSendListEvent extends BasePageEvent<WorkSendListRequest> {
   const WorkSendListEvent({required super.request});
 }

@@ -4,56 +4,63 @@ import 'package:eportal/model/base/base_eportal_data_response.dart';
 // Created by BlackRose on 01/12/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-
 class DanhSachNhuCauDataResponse extends BaseEportalDataResponse {
+  String? idSend;
   String? total;
-  String? docUnitID;
-  String? docUnitName;
-  String? docUnitDes;
+  String? needsID;
+  String? needsName;
+  String? needsCode;
+  String? needsDes;
+  bool? isActive;
   String? isOrder;
   String? createdBy;
   String? userName;
   String? updatedBy;
-  String? updateName;
-  String? portalID;
+  String? userUpdate;
 
   DanhSachNhuCauDataResponse(
-      {this.total,
-      this.docUnitID,
-      this.docUnitName,
-      this.docUnitDes,
+      {this.idSend,
+      this.total,
+      this.needsID,
+      this.needsName,
+      this.needsCode,
+      this.needsDes,
+      this.isActive,
       this.isOrder,
       this.createdBy,
       this.userName,
       this.updatedBy,
-      this.updateName,
-      this.portalID});
+      this.userUpdate});
 
   DanhSachNhuCauDataResponse.fromJson(Map<String, dynamic> json) {
+    idSend = json['idSend']?.toString();
     total = json['total']?.toString();
-    docUnitID = json['docUnit_ID']?.toString();
-    docUnitName = json['docUnit_Name']?.toString();
-    docUnitDes = json['docUnit_Des']?.toString();
+    needsID = json['needs_ID']?.toString();
+    needsName = json['needs_Name']?.toString();
+    needsCode = json['needs_Code']?.toString();
+    needsDes = json['needs_Des']?.toString();
+    isActive = json['isActive'];
     isOrder = json['isOrder']?.toString();
     createdBy = json['createdBy']?.toString();
     userName = json['userName']?.toString();
     updatedBy = json['updatedBy']?.toString();
-    updateName = json['updateName']?.toString();
-    portalID = json['portalID']?.toString();
+    userUpdate = json['userUpdate']?.toString();
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['idSend'] = this.idSend;
     data['total'] = this.total;
-    data['docUnit_ID'] = this.docUnitID;
-    data['docUnit_Name'] = this.docUnitName;
-    data['docUnit_Des'] = this.docUnitDes;
+    data['needs_ID'] = this.needsID;
+    data['needs_Name'] = this.needsName;
+    data['needs_Code'] = this.needsCode;
+    data['needs_Des'] = this.needsDes;
+    data['isActive'] = this.isActive;
     data['isOrder'] = this.isOrder;
     data['createdBy'] = this.createdBy;
     data['userName'] = this.userName;
     data['updatedBy'] = this.updatedBy;
-    data['updateName'] = this.updateName;
-    data['portalID'] = this.portalID;
+    data['userUpdate'] = this.userUpdate;
     return data;
   }
 }

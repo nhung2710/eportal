@@ -8,13 +8,13 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 import '../../../../extension/map_json_extension.dart';
 
 class WorkSendListResponse
-    extends BaseSingleEportalResponse<WorkSendListDataResponse> {
+    extends BasePageEportalResponse<WorkSendListDataResponse> {
   WorkSendListResponse(
       {required super.data, required super.status, required super.message});
 
   factory WorkSendListResponse.fromJson(Map<String, dynamic> json) {
     return WorkSendListResponse(
-        data: json.toObjectJson(
+        data: json.toListObjectJson(
             mapJson: (v) => WorkSendListDataResponse.fromJson(v)),
         status: json["status"],
         message: json["message"]);

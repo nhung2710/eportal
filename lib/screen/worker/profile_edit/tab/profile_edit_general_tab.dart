@@ -209,6 +209,12 @@ class ProfileEditGeneralTabState
 
   Widget _buildViewSearchDanhSachKinhNghiem(
       BuildContext context, List<DanhSachKinhNghiemDataResponse> list) {
+    if (widget.data.experienceID != null &&
+        widget.danhSachKinhNghiemDataResponse == null) {
+      widget.danhSachKinhNghiemDataResponse = list
+          .where((element) => element.experienceID == widget.data.experienceID)
+          .firstOrNull;
+    }
     return SelectItem<DanhSachKinhNghiemDataResponse>(
       icon: FontAwesomeIcons.buildingColumns,
       selectedItem: widget.danhSachKinhNghiemDataResponse,
@@ -294,12 +300,17 @@ class ProfileEditGeneralTabState
 
   Widget _buildViewSearchDanhSachNhuCau(
       BuildContext context, List<DanhSachNhuCauDataResponse> list) {
+    if (widget.data.needsID != null &&
+        widget.danhSachNhuCauDataResponse == null) {
+      widget.danhSachNhuCauDataResponse = list
+          .where((element) => element.needsID == widget.data.needsID)
+          .firstOrNull;
+    }
     return SelectItemNormal<DanhSachNhuCauDataResponse>(
       icon: FontAwesomeIcons.handHolding,
       selectedItem: widget.danhSachNhuCauDataResponse,
       list: list,
-      itemAsString: (DanhSachNhuCauDataResponse u) =>
-          u.docUnitName.supportHtml(),
+      itemAsString: (DanhSachNhuCauDataResponse u) => u.needsName.supportHtml(),
       onChanged: (DanhSachNhuCauDataResponse? data) {
         if (widget.danhSachTrinhDoDataResponse != data) {
           widget.danhSachNhuCauDataResponse = data;

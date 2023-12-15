@@ -295,8 +295,7 @@ class ProfileAddGeneralTabState
       icon: FontAwesomeIcons.handHolding,
       selectedItem: widget.danhSachNhuCauDataResponse,
       list: list,
-      itemAsString: (DanhSachNhuCauDataResponse u) =>
-          u.docUnitName.supportHtml(),
+      itemAsString: (DanhSachNhuCauDataResponse u) => u.needsName.supportHtml(),
       onChanged: (DanhSachNhuCauDataResponse? data) {
         if (widget.danhSachTrinhDoDataResponse != data) {
           widget.danhSachNhuCauDataResponse = data;

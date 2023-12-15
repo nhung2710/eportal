@@ -22,4 +22,10 @@ extension MapJsonExtension on Map<String, dynamic> {
     }
     return result;
   }
+
+  String? toStringJson({String path = "data"}) {
+    var data = this[path];
+    if (data != null) return data?.toString();
+    return null;
+  }
 }

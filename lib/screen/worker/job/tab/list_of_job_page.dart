@@ -1,5 +1,13 @@
+import 'package:eportal/bloc/admin/work_view_list_bloc.dart';
+import 'package:eportal/bloc/admin/work_view_list_bloc.dart';
+import 'package:eportal/bloc/admin/work_view_list_bloc.dart';
+import 'package:eportal/bloc/admin/work_view_list_bloc.dart';
+import 'package:eportal/bloc/admin/work_view_list_bloc.dart';
+import 'package:eportal/bloc/admin/work_view_list_bloc.dart';
 import 'package:eportal/bloc/common_new/work_search_bloc.dart';
 import 'package:eportal/event/common_new/work_search_event.dart';
+import 'package:eportal/model/api/request/admin/data/work_view_list_data_request.dart';
+import 'package:eportal/model/api/request/admin/work_view_list_request.dart';
 import 'package:eportal/model/api/request/common_new/data/work_search_data_request.dart';
 import 'package:eportal/model/api/request/common_new/work_search_request.dart';
 import 'package:eportal/model/api/response/common_new/data/work_search_data_response.dart';
@@ -25,8 +33,9 @@ class ListOfJobPage extends BasePage {
 }
 
 class _ListOfJobPageState extends BasePageStateActive<ListOfJobPage> {
-  late WorkSearchBloc workSearchBloc;
-  WorkSearchRequest request = WorkSearchRequest(obj: WorkSearchDataRequest());
+  late WorkViewListBloc WorkViewListBloc;
+  WorkViewListRequest request =
+      WorkViewListRequest(obj: WorkViewListDataRequest());
   final filterJobDialogKey = GlobalKey<FilterJobDialogState>();
   late FilterJobDialog filterJobDialog = FilterJobDialog(
     key: filterJobDialogKey,
@@ -37,7 +46,7 @@ class _ListOfJobPageState extends BasePageStateActive<ListOfJobPage> {
 
   @override
   void initBloc() {
-    workSearchBloc = WorkSearchBloc();
+    WorkViewListBloc = WorkViewListBloc();
   }
 
   @override
@@ -57,7 +66,7 @@ class _ListOfJobPageState extends BasePageStateActive<ListOfJobPage> {
 
   @override
   void callApi() {
-    workSearchBloc.add(WorkSearchEvent(request: request));
+    WorkViewListBloc.add(WorkViewListEvent(request: request));
   }
 
   @override
@@ -86,24 +95,24 @@ class _ListOfJobPageState extends BasePageStateActive<ListOfJobPage> {
           ),
           Expanded(
             child: BlocProvider(
-                create: (_) => workSearchBloc,
-                child: BlocListener<WorkSearchBloc,
-                    DataPageState<WorkSearchDataResponse>>(
+                create: (_) => WorkViewListBloc,
+                child: BlocListener<WorkViewListBloc,
+                    DataPageState<WorkViewListDataResponse>>(
                   listener: (BuildContext context,
-                      DataPageState<WorkSearchDataResponse> state) {},
-                  child: BlocBuilder<WorkSearchBloc,
-                      DataPageState<WorkSearchDataResponse>>(
+                      DataPageState<WorkViewListDataResponse> state) {},
+                  child: BlocBuilder<WorkViewListBloc,
+                      DataPageState<WorkViewListDataResponse>>(
                     builder: (BuildContext context,
-                            DataPageState<WorkSearchDataResponse> state) =>
-                        handleDataPageState<WorkSearchDataResponse>(
+                            DataPageState<WorkViewListDataResponse> state) =>
+                        handleDataPageState<WorkViewListDataResponse>(
                       state,
                       (context, state) => ListView.builder(
                           shrinkWrap: true,
                           controller: scrollController,
                           itemCount: state.length,
                           itemBuilder: (context, i) => WorkItem(
-                                onTap: () =>
-                                    nextPage((context) => WorkSearchDetailPage(
+                                onTap: () => nextPage(
+                                    (context) => WorkViewListDetailPage(
                                           id: state.elementAt(i).id,
                                         )),
                                 title: state.elementAt(i).title,

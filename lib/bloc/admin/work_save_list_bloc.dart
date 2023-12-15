@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class WorkSaveListBloc extends BaseSingleBloc<WorkSaveListDataResponse,
+class WorkSaveListBloc extends BasePageBloc<WorkSaveListDataResponse,
     WorkSaveListRepository, WorkSaveListEvent, WorkSaveListResponse> {
   @override
   Future<WorkSaveListResponse> callApiResult(

@@ -8,7 +8,7 @@ import 'package:eportal/repository/admin/work_send_list_repository.dart';
 // Created by BlackRose on 13/12/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class WorkSendListBloc extends BaseSingleBloc<WorkSendListDataResponse,
+class WorkSendListBloc extends BasePageBloc<WorkSendListDataResponse,
     WorkSendListRepository, WorkSendListEvent, WorkSendListResponse> {
   @override
   Future<WorkSendListResponse> callApiResult(
