@@ -267,9 +267,9 @@ class BasePageState<T extends StatefulWidget> extends State<T>
 
   void backPage() => Navigator.pop(context);
 
-  void nextPage(WidgetBuilder builder) {
+  Future nextPage(WidgetBuilder builder) {
     stopLoading();
-    Navigator.push(context, MaterialPageRoute(builder: builder));
+    return Navigator.push(context, MaterialPageRoute(builder: builder));
   }
 
   void nextPageWithoutBack(WidgetBuilder builder) {

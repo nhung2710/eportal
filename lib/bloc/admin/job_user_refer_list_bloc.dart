@@ -8,7 +8,7 @@ import 'package:eportal/repository/admin/job_user_refer_list_repository.dart';
 // Created by BlackRose on 13/12/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class JobUserReferListBloc extends BaseSingleBloc<
+class JobUserReferListBloc extends BasePageBloc<
     JobUserReferListDataResponse,
     JobUserReferListRepository,
     JobUserReferListEvent,

@@ -1,8 +1,7 @@
-import 'package:eportal/screen/share/answer_and_question/page/answer_and_question_page.dart';
 import 'package:eportal/screen/share/home_manage/page/home_manage_page.dart';
-import 'package:eportal/screen/share/multimedia/page/multimedia_page.dart';
 import 'package:eportal/screen/worker/job/page/job_page.dart';
 import 'package:eportal/screen/worker/profile/page/profile_page.dart';
+import 'package:eportal/screen/worker/refer/page/refer_page.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/widget/app_bar/default_app_bar.dart';
 import 'package:eportal/widget/base/base_page.dart';
@@ -77,34 +76,23 @@ class _HomePageState extends BasePageStateActive<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
+              Icons.supervised_user_circle,
+              color: AppColor.colorOfHintText,
+            ),
+            label: "Người tham khảo",
+            activeIcon: Icon(
+              Icons.supervised_user_circle,
+              color: AppColor.colorOfIcon,
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
               Icons.work,
               color: AppColor.colorOfHintText,
             ),
             label: "Việc làm",
             activeIcon: Icon(
               Icons.work,
-              color: AppColor.colorOfIcon,
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.question_mark,
-              color: AppColor.colorOfHintText,
-            ),
-            label: "Hỏi đáp",
-            activeIcon: Icon(
-              Icons.question_mark,
-              color: AppColor.colorOfIcon,
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.perm_media,
-              color: AppColor.colorOfHintText,
-            ),
-            label: "Đa phương tiện",
-            activeIcon: Icon(
-              Icons.perm_media,
               color: AppColor.colorOfIcon,
             ),
           ),
@@ -138,9 +126,8 @@ class _HomePageState extends BasePageStateActive<HomePage> {
         children: const <Widget>[
           HomeManagePage(),
           ProfilePage(),
+          ReferPage(),
           JobPage(),
-          AnswerAndQuestionPage(),
-          MultimediaPage(),
           SettingPage(),
         ],
       );

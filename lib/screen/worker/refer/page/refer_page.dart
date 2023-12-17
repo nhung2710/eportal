@@ -1,4 +1,15 @@
+//
+// Created by BlackRose on 12/17/2023.
+// Copyright (c) 2023 Hilo All rights reserved.
+//
+
 import 'package:eportal/bloc/admin/job_user_list_by_user_name_bloc.dart';
+import 'package:eportal/bloc/admin/job_user_refer_list_bloc.dart';
+import 'package:eportal/event/admin/job_user_list_by_user_name_event.dart';
+import 'package:eportal/model/api/request/admin/data/job_user_list_by_user_name_data_request.dart';
+import 'package:eportal/model/api/request/admin/data/job_user_refer_list_data_request.dart';
+import 'package:eportal/model/api/request/admin/job_user_list_by_user_name_request.dart';
+import 'package:eportal/model/api/request/admin/job_user_refer_list_request.dart';
 import 'package:eportal/model/api/response/admin/data/job_user_list_by_user_name_data_response.dart';
 import 'package:eportal/screen/worker/profile_add/page/profile_add_page.dart';
 import 'package:eportal/screen/worker/profile_edit/page/profile_edit_page.dart';
@@ -10,31 +21,22 @@ import 'package:eportal/widget/input/search_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../event/admin/job_user_list_by_user_name_event.dart';
-import '../../../../model/api/request/admin/data/job_user_list_by_user_name_data_request.dart';
-import '../../../../model/api/request/admin/job_user_list_by_user_name_request.dart';
-
-//
-// Created by BlackRose on 11/9/2023.
-// Copyright (c) 2023 Hilo All rights reserved.
-//
-
-class ProfilePage extends BasePage {
-  const ProfilePage({super.key});
+class ReferPage extends BasePage {
+  const ReferPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _ProfilePageState();
+  State<StatefulWidget> createState() => _ReferPageState();
 }
 
-class _ProfilePageState extends BasePageStateActive<ProfilePage> {
+class _ReferPageState extends BasePageStateActive<ReferPage> {
   TextEditingController textEditingController = TextEditingController();
-  late JobUserListByUserNameBloc jobUserListByUserNameBloc;
-  JobUserListByUserNameRequest request =
-      JobUserListByUserNameRequest(obj: JobUserListByUserNameDataRequest());
+  late JobUserReferListBloc jobUserReferListBloc;
+  JobUserReferListRequest request =
+      JobUserReferListRequest(obj: JobUserReferListDataRequest());
 
   @override
   void initBloc() {
-    jobUserListByUserNameBloc = JobUserListByUserNameBloc();
+    jobUserReferListBloc = JobUserReferListBloc();
     super.initBloc();
   }
 
@@ -48,7 +50,7 @@ class _ProfilePageState extends BasePageStateActive<ProfilePage> {
   @override
   void callApi() {
     request.obj.tuKhoa = textEditingController.text;
-    jobUserListByUserNameBloc.add(JobUserListByUserNameEvent(request: request));
+    jobUserReferListBloc.add(JobUserReferListEvent(request: request));
   }
 
   @override
@@ -92,14 +94,14 @@ class _ProfilePageState extends BasePageStateActive<ProfilePage> {
           ),
           Expanded(
             child: BlocProvider(
-              create: (_) => jobUserListByUserNameBloc,
-              child: BlocListener<JobUserListByUserNameBloc,
-                  DataPageState<JobUserListByUserNameDataResponse>>(
+              create: (_) => jobUserReferListBloc,
+              child: BlocListener<JobUserReferListBloc,
+                  DataPageState<JobUserReferListDataResponse>>(
                 listener: (BuildContext context, state) {},
-                child: BlocBuilder<JobUserListByUserNameBloc,
-                        DataPageState<JobUserListByUserNameDataResponse>>(
+                child: BlocBuilder<JobUserReferListBloc,
+                        DataPageState<JobUserReferListDataResponse>>(
                     builder: (BuildContext context,
-                            DataPageState<JobUserListByUserNameDataResponse>
+                            DataPageState<JobUserReferListDataResponse>
                                 state) =>
                         handleDataPageState(
                             state,

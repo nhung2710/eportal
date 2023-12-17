@@ -8,13 +8,13 @@ import '../../../../extension/map_json_extension.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class JobUserUpdateResponse
-    extends BaseSingleEportalResponse<JobUserUpdateDataResponse> {
+    extends BaseSingleEportalResponse<List<JobUserUpdateDataResponse>> {
   JobUserUpdateResponse(
       {required super.data, required super.status, required super.message});
 
   factory JobUserUpdateResponse.fromJson(Map<String, dynamic> json) {
     return JobUserUpdateResponse(
-        data: json.toObjectJson(
+        data: json.toListObjectJson(
             mapJson: (v) => JobUserUpdateDataResponse.fromJson(v)),
         status: json["status"],
         message: json["message"]);

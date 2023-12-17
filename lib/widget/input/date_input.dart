@@ -95,7 +95,7 @@ class _DateInputState extends State<DateInput> {
     if (pickDate != null) {
       widget.initialDate = pickDate;
       widget.controller!.text =
-          initialDate.toFormatDateTime(format: 'dd/MM/yyyy');
+          widget.initialDate!.toFormatDateTime(format: 'dd/MM/yyyy');
       if (widget.onChangedValue != null) {
         widget.onChangedValue!(widget.controller!.text);
       }

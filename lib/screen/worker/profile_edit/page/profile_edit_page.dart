@@ -20,7 +20,6 @@ import 'package:eportal/widget/input/capcha_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../extension/string_extension.dart';
 import '../../../../widget/base/base_page.dart';
 
 //
@@ -71,10 +70,10 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage>
   Widget pageUI(BuildContext context) => BlocProvider(
         create: (_) => jobUserUpdateBloc,
         child: BlocListener<JobUserUpdateBloc,
-            DataSingleState<JobUserUpdateDataResponse>>(
+            DataSingleState<List<JobUserUpdateDataResponse>>>(
           listener: (BuildContext context,
-              DataSingleState<JobUserUpdateDataResponse> state) {
-            handlerActionDataSingleState<JobUserUpdateDataResponse>(state,
+              DataSingleState<List<JobUserUpdateDataResponse>> state) {
+            handlerActionDataSingleState<List<JobUserUpdateDataResponse>>(state,
                 (obj) {
               showCenterMessage("Sửa hồ sơ thành công")
                   .then((value) => backPage());

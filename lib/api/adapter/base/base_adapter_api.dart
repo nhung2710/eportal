@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 import 'package:eportal/api/constant/application_api_constant.dart';
@@ -7,7 +8,6 @@ import 'package:eportal/application/global_application.dart';
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/extension/string_extension.dart';
 import 'package:eportal/model/base/base_eportal_request.dart';
-import 'package:http/http.dart';
 import 'package:xml/xml.dart';
 
 class CacheApi {
@@ -46,121 +46,136 @@ class BaseAdapterApi {
   };
 
   Future<Map<String, dynamic>> callApiAsync(BaseEportalRequest request) async {
+    StringBuffer logApiData = StringBuffer();
     //await Future.delayed(const Duration(milliseconds: 200));
-    Uri uri = Uri();
-    if (!request.getQuery().isNullOrWhiteSpace()) {
-      uri = Uri.parse("${request.getBaseUri()}${request.getQuery()}");
-    } else {
-      uri = request.getUri();
-    }
-    StringBuffer stringBuffer =
-    StringBuffer('<?xml version="1.0" encoding="utf-8"?>');
-    stringBuffer.write('<soap:Envelope ${getMapXml()}>');
-    stringBuffer.write('<soap:Header>');
-    stringBuffer.write('<AuthHeader xmlns="http://tempuri.org/">');
+    try {
+      Uri uri = Uri();
+      if (!request.getQuery().isNullOrWhiteSpace()) {
+        uri = Uri.parse("${request.getBaseUri()}${request.getQuery()}");
+      } else {
+        uri = request.getUri();
+      }
+      StringBuffer stringBuffer =
+          StringBuffer('<?xml version="1.0" encoding="utf-8"?>');
+      stringBuffer.write('<soap:Envelope ${getMapXml()}>');
+      stringBuffer.write('<soap:Header>');
+      stringBuffer.write('<AuthHeader xmlns="http://tempuri.org/">');
 
-    if (request.isAuthentication()) {
-      if (!GlobalApplication().userId.isNullOrWhiteSpace()) {
-        stringBuffer.write(GlobalApplication()
-            .createXml(GlobalApplication().userId, "userId"));
-        stringBuffer.write(GlobalApplication()
-            .createXml(GlobalApplication().userRole, "userRole"));
+      if (request.isAuthentication()) {
+        if (!GlobalApplication().userId.isNullOrWhiteSpace()) {
+          stringBuffer.write(GlobalApplication()
+              .createXml(GlobalApplication().userId, "userId"));
+          stringBuffer.write(GlobalApplication()
+              .createXml(GlobalApplication().userRole, "userRole"));
+        } else {
+          stringBuffer.write(GlobalApplication().createXml(
+              ApplicationApiConstant.kBASE_AUTH_HEADER_USER_LOGIN,
+              "userLogin"));
+          stringBuffer.write(GlobalApplication().createXml(
+              ApplicationApiConstant.kBASE_AUTH_HEADER_PASSWORD, "password"));
+        }
       } else {
         stringBuffer.write(GlobalApplication().createXml(
             ApplicationApiConstant.kBASE_AUTH_HEADER_USER_LOGIN, "userLogin"));
         stringBuffer.write(GlobalApplication().createXml(
             ApplicationApiConstant.kBASE_AUTH_HEADER_PASSWORD, "password"));
       }
-    } else {
-      stringBuffer.write(GlobalApplication().createXml(
-          ApplicationApiConstant.kBASE_AUTH_HEADER_USER_LOGIN, "userLogin"));
-      stringBuffer.write(GlobalApplication().createXml(
-          ApplicationApiConstant.kBASE_AUTH_HEADER_PASSWORD, "password"));
-    }
-    stringBuffer.write('</AuthHeader>');
-    stringBuffer.write('</soap:Header>');
-    stringBuffer.write('<soap:Body>');
-    stringBuffer.write(
-        '<${request.getTagXmlRequest()} ${request.getDefaultNameSpace()}>');
-    stringBuffer.write('${request.obj.toXml()}');
-    stringBuffer.write('</${request.getTagXmlRequest()}>');
-    stringBuffer.write('</soap:Body>');
-    stringBuffer.write('</soap:Envelope>');
+      stringBuffer.write('</AuthHeader>');
+      stringBuffer.write('</soap:Header>');
+      stringBuffer.write('<soap:Body>');
+      stringBuffer.write(
+          '<${request.getTagXmlRequest()} ${request.getDefaultNameSpace()}>');
+      stringBuffer.write('${request.obj.toXml()}');
+      stringBuffer.write('</${request.getTagXmlRequest()}>');
+      stringBuffer.write('</soap:Body>');
+      stringBuffer.write('</soap:Envelope>');
 
-    String responseSoapBody = ApplicationConstant.EMPTY;
-    String requestBody = stringBuffer.toString();
-    var keyCache =
-        "${md5.convert(utf8.encode(requestBody))}|${md5.convert(
-        utf8.encode(uri.toString()))}";
-    var valueTimeCache = request.getTimeCache();
-    bool isUseCache = false;
-    valueTimeCache = 0;
-    if (valueTimeCache > 0) {
-      var valueCache = GlobalApplication().preferences!.getString(keyCache);
-      if (!valueCache.isNullOrWhiteSpace()) {
-        var cacheApi = CacheApi.fromJson(json.decode(valueCache!));
-        if (cacheApi.timeout != null &&
-            cacheApi.timeout! >= DateTime
-                .now()
-                .millisecondsSinceEpoch) {
-          responseSoapBody = cacheApi.body.replaceWhenNullOrWhiteSpace();
-          isUseCache = !responseSoapBody.isNullOrWhiteSpace();
-          if (isNeedLogApi) {
-            log('body: $responseSoapBody');
+      String responseSoapBody = ApplicationConstant.EMPTY;
+      String requestBody = stringBuffer.toString();
+      var keyCache =
+          "${md5.convert(utf8.encode(requestBody))}|${md5.convert(utf8.encode(uri.toString()))}";
+      var valueTimeCache = request.getTimeCache();
+      bool isUseCache = false;
+      valueTimeCache = 0;
+      if (valueTimeCache > 0) {
+        var valueCache = GlobalApplication().preferences!.getString(keyCache);
+        if (!valueCache.isNullOrWhiteSpace()) {
+          var cacheApi = CacheApi.fromJson(json.decode(valueCache!));
+          if (cacheApi.timeout != null &&
+              cacheApi.timeout! >= DateTime.now().millisecondsSinceEpoch) {
+            responseSoapBody = cacheApi.body.replaceWhenNullOrWhiteSpace();
+            isUseCache = !responseSoapBody.isNullOrWhiteSpace();
+            if (isNeedLogApi) {
+              logApiData.writeln('isUseCache: $isUseCache');
+            }
           }
         }
       }
-    }
-    if (responseSoapBody.isNullOrWhiteSpace()) {
-      responseSoapBody = await _callWebServiceAsync(
-          uri, requestBody, request.getContentType());
-    }
-    if (!responseSoapBody.isNullOrWhiteSpace()) {
-      final xmlResponse = XmlDocument.parse(responseSoapBody);
+      if (responseSoapBody.isNullOrWhiteSpace()) {
+        responseSoapBody = await _callWebServiceAsync(
+            uri, requestBody, request.getContentType(), logApiData);
+      }
       if (isNeedLogApi) {
-        log('getTagXml: ${request.getTagXmlResponse()}');
+        logApiData.writeln('body: $responseSoapBody');
       }
-      var elements = xmlResponse.findAllElements(request.getTagXmlResponse());
-      for (var item in elements) {
-        var jsonValue = item.innerText;
-        if (valueTimeCache > 0 && !isUseCache) {
-          await GlobalApplication().preferences!.setString(
-              keyCache,
-              json.encode(CacheApi(
-                  body: responseSoapBody,
-                  timeout: DateTime
-                      .now()
-                      .add(Duration(seconds: valueTimeCache))
-                      .millisecondsSinceEpoch)
-                  .toJson()));
+      if (!responseSoapBody.isNullOrWhiteSpace()) {
+        final xmlResponse = XmlDocument.parse(responseSoapBody);
+        if (isNeedLogApi) {
+          logApiData.writeln('getTagXml: ${request.getTagXmlResponse()}');
         }
-        return json.decode(jsonValue);
+        var elements = xmlResponse.findAllElements(request.getTagXmlResponse());
+        for (var item in elements) {
+          var jsonValue = item.innerText;
+          if (valueTimeCache > 0 && !isUseCache) {
+            await GlobalApplication().preferences!.setString(
+                keyCache,
+                json.encode(CacheApi(
+                        body: responseSoapBody,
+                        timeout: DateTime.now()
+                            .add(Duration(seconds: valueTimeCache))
+                            .millisecondsSinceEpoch)
+                    .toJson()));
+          }
+          return json.decode(jsonValue);
+        }
+      }
+      return json.decode(
+          '{"status":0,"message":"Có lỗi xảy ra vui lòng thử lại sau"}');
+    } finally {
+      if (isNeedLogApi) {
+        log(logApiData.toString());
       }
     }
-    return json
-        .decode('{"status":0,"message":"Có lỗi xảy ra vui lòng thử lại sau"}');
   }
 
-  Future<String> _callWebServiceAsync(Uri uri, String request,
-      String contentType) async {
+  Future<String> _callWebServiceAsync(
+      Uri uri, String request, String contentType, StringBuffer logApiData,
+      {int seconds = 30}) async {
     try {
       if (isNeedLogApi) {
-        log('data: $request');
+        logApiData.writeln('data: $request');
       }
       if (isNeedLogApi) {
-        log('uri: $uri');
+        logApiData.writeln('uri: $uri');
       }
-      var responseSoap = await post(
-        uri,
-        headers: {
-          "Content-Type": contentType,
-        },
-        body: request,
-      ).timeout(const Duration(seconds: 60));
+      HttpClient client = HttpClient();
+      client.badCertificateCallback =
+          ((X509Certificate cert, String host, int port) => true);
+      HttpClientRequest httpClientRequest = await client.postUrl(uri);
+      httpClientRequest.headers.set('Content-Type', contentType);
+      httpClientRequest.add(utf8.encode(request));
+      final stopwatch = Stopwatch()..start();
+      HttpClientResponse httpClientResponse =
+          await httpClientRequest.close().timeout(Duration(seconds: seconds));
+      String responseSoap =
+          await httpClientResponse.transform(utf8.decoder).join();
+      client.close();
+
       if (isNeedLogApi) {
-        log('body: ${responseSoap.body}');
+        logApiData.writeln('timecall: ${stopwatch.elapsedMilliseconds} ms');
+        logApiData.writeln('body: $responseSoap');
       }
-      return responseSoap.body;
+      return responseSoap;
     } on Exception catch (ex) {
       log(ex.toString());
       return "";

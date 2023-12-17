@@ -8,7 +8,7 @@ import 'package:eportal/repository/admin/job_user_update_repository.dart';
 // Created by BlackRose on 01/12/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class JobUserUpdateBloc extends BaseSingleBloc<JobUserUpdateDataResponse,
+class JobUserUpdateBloc extends BaseSingleBloc<List<JobUserUpdateDataResponse>,
     JobUserUpdateRepository, JobUserUpdateEvent, JobUserUpdateResponse> {
   @override
   Future<JobUserUpdateResponse> callApiResult(

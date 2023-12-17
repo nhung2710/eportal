@@ -232,6 +232,12 @@ class ProfileEditGeneralTabState
 
   Widget _buildViewSearchDanhSachMucLuong(
       BuildContext context, List<DanhSachMucLuongDataResponse> list) {
+    if (widget.data.salaryID != null &&
+        widget.danhSachMucLuongDataResponse == null) {
+      widget.danhSachMucLuongDataResponse = list
+          .where((element) => element.salaryID == widget.data.salaryID)
+          .firstOrNull;
+    }
     return SelectItem<DanhSachMucLuongDataResponse>(
       icon: FontAwesomeIcons.moneyBill,
       selectedItem: widget.danhSachMucLuongDataResponse,
@@ -249,6 +255,12 @@ class ProfileEditGeneralTabState
 
   Widget _buildViewSearchDanhSachChucVuMongMuon(
       BuildContext context, List<DanhSachChucVuDataResponse> list) {
+    if (widget.data.levelDesired != null &&
+        widget.danhSachChucVuDataResponseMongMuon == null) {
+      widget.danhSachChucVuDataResponseMongMuon = list
+          .where((element) => element.positionID == widget.data.levelDesired)
+          .firstOrNull;
+    }
     return SelectItemNormal<DanhSachChucVuDataResponse>(
       icon: FontAwesomeIcons.userTie,
       selectedItem: widget.danhSachChucVuDataResponseMongMuon,
@@ -266,6 +278,12 @@ class ProfileEditGeneralTabState
 
   Widget _buildViewSearchDanhSachChucVuHienTai(
       BuildContext context, List<DanhSachChucVuDataResponse> list) {
+    if (widget.data.currentLevel != null &&
+        widget.danhSachChucVuDataResponseHienTai == null) {
+      widget.danhSachChucVuDataResponseHienTai = list
+          .where((element) => element.positionID == widget.data.currentLevel)
+          .firstOrNull;
+    }
     return SelectItemNormal<DanhSachChucVuDataResponse>(
       icon: FontAwesomeIcons.userTie,
       selectedItem: widget.danhSachChucVuDataResponseHienTai,
@@ -283,6 +301,12 @@ class ProfileEditGeneralTabState
 
   Widget _buildViewSearchDanhSachTrinhDo(
       BuildContext context, List<DanhSachTrinhDoDataResponse> list) {
+    if (widget.data.levelID != null &&
+        widget.danhSachTrinhDoDataResponse == null) {
+      widget.danhSachTrinhDoDataResponse = list
+          .where((element) => element.educationID == widget.data.levelID)
+          .firstOrNull;
+    }
     return SelectItemNormal<DanhSachTrinhDoDataResponse>(
       icon: FontAwesomeIcons.graduationCap,
       selectedItem: widget.danhSachTrinhDoDataResponse,

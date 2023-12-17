@@ -265,13 +265,16 @@ class _SplashPageState extends BasePageState<SplashPage>
           obj: DanhSachViTriTuyenDungDataRequest())),
       DanhSachTinhChatCongViecRepository().get(DanhSachTinhChatCongViecRequest(
           obj: DanhSachTinhChatCongViecDataRequest())),
-    ]);
+    ]).then((value) => {}, onError: (ex) {
+      print("Error");
+      print(ex);
+    });
   }
 
   Future<void> loadingDataDefault() {
     return loadApplicationSetting()
         .then((value) => loadApplicationConfig())
-        .then((value) => Future.delayed(const Duration(minutes: 1)))
+        .then((value) => Future.delayed(const Duration(minutes: 0)))
         .then((value) {
       if (!GlobalApplication().isAutoLogin ||
           GlobalApplication().userNameSaved.isNullOrWhiteSpace() ||

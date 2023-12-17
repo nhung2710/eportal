@@ -6,6 +6,6 @@ import 'package:eportal/model/api/request/admin/job_user_refer_list_request.dart
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class JobUserReferListEvent extends BaseSingleEvent<JobUserReferListRequest> {
+class JobUserReferListEvent extends BasePageEvent<JobUserReferListRequest> {
   const JobUserReferListEvent({required super.request});
 }

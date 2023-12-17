@@ -32,13 +32,15 @@ class GlobalApplication {
 
   String createXml(Object? value, String tag) {
     var buffer = StringBuffer();
-    buffer.write('<$tag><![CDATA[');
+    buffer.write('<$tag>');
+    //buffer.write('<![CDATA[');
     if (value != null) {
       buffer.write(value);
     } else {
       buffer.write(ApplicationConstant.EMPTY);
     }
-    buffer.write(']]></$tag>');
+    //buffer.write(']]>');
+    buffer.write('</$tag>');
     return buffer.toString();
   }
 
