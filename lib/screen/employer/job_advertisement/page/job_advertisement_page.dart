@@ -1,7 +1,10 @@
 import 'dart:math';
 
+import 'package:eportal/model/api/request/admin/data/work_search_by_user_name_data_request.dart';
+import 'package:eportal/model/api/request/admin/work_search_by_user_name_request.dart';
 import 'package:eportal/model/api/request/common_new/data/work_search_data_request.dart';
 import 'package:eportal/model/api/request/common_new/work_search_request.dart';
+import 'package:eportal/screen/employer/job_advertisement/dialog/filter_job_advertisement_dialog.dart';
 import 'package:eportal/screen/employer/job_advertisement_add/page/job_advertisement_add_page.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
@@ -10,6 +13,7 @@ import 'package:eportal/widget/full_data_item/profile_item.dart';
 import 'package:eportal/widget/input/search_input.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../bloc/admin/work_search_by_user_name_bloc.dart';
 import '../../job_advertisement_edit/page/job_advertisement_edit_page.dart';
 
 //
@@ -27,13 +31,16 @@ class JobAdvertisementPage extends BasePage {
 class _JobAdvertisementPageState
     extends BasePageStateActive<JobAdvertisementPage> {
   TextEditingController textEditingController = TextEditingController();
-
-  WorkSearchRequest request = WorkSearchRequest(obj: WorkSearchDataRequest());
+  WorkSearchByUserNameBloc workSearchByUserNameBloc =
+      WorkSearchByUserNameBloc();
+  WorkSearchByUserNameRequest request =
+      WorkSearchByUserNameRequest(obj: WorkSearchByUserNameDataRequest());
 
   @override
   bool isHasAppBar(BuildContext context) => false;
   final filterJobDialogKey = GlobalKey<FilterJobDialogState>();
-  late FilterJobDialog filterJobDialog = FilterJobDialog(
+  late FilterJobAdvertisementDialog filterJobAdvertisementDialog =
+      FilterJobAdvertisementDialog(
     key: filterJobDialogKey,
     data: request.obj,
     onPressed: () => initDataLoading(),
@@ -66,7 +73,9 @@ class _JobAdvertisementPageState
                 initDataLoading();
               },
               onTapFilter: () {
-                showDialog(context: context, builder: (_) => filterJobDialog);
+                showDialog(
+                    context: context,
+                    builder: (_) => filterJobAdvertisementDialog);
               },
               hintText: "Nội dung tìm kiếm",
             ),
