@@ -127,6 +127,7 @@ class _CapchaInputState extends State<CapchaInput> {
         code.length,
         (index) =>
             (random.nextInt(5) + 16 + random.nextInt(index + 1)).toDouble());
+    widget.controller?.text = code;
     setState(() {});
   }
 }

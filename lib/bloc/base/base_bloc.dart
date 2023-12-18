@@ -39,6 +39,7 @@ abstract class BaseSingleBloc<T, R extends BaseRepository,
           }
         }
       } on Exception catch (e) {
+        print(e);
         emit(state.copyWith(
             errorMessage: e.toString(), status: DataBlocStatus.error));
       }
@@ -94,6 +95,7 @@ abstract class BaseMultiBloc<
           }
         }
       } on Exception catch (e) {
+        print(e);
         emit(state.copyWith(
             data: const [],
             errorMessage: e.toString(),
@@ -151,6 +153,7 @@ abstract class BasePageBloc<
               status: DataBlocStatus.success));
         }
       } on Exception catch (e) {
+        print(e);
         emit(state.copyWith(
             errorMessage: e.toString(),
             status: DataBlocStatus.success,

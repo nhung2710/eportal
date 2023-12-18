@@ -7,16 +7,15 @@ import 'package:eportal/model/base/base_eportal_xml.dart';
 //
 
 class JobUserReferDeleteDataRequest extends BaseEportalXml {
-  int? top;
+  String? id;
 
-  JobUserReferDeleteDataRequest(
-      {this.top = ApplicationConstant.NUMBER_FULL_ITEM});
+  JobUserReferDeleteDataRequest({this.id});
 
   @override
   StringBuffer toXml() {
     // TODO: implement toXml
     var buffer = super.toXml();
-    buffer.write(createXml(top, "top"));
+    buffer.write(createXml(id, "id"));
     return buffer;
   }
 }

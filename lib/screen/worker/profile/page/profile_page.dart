@@ -1,9 +1,12 @@
 import 'package:eportal/bloc/admin/job_user_list_by_user_name_bloc.dart';
 import 'package:eportal/model/api/response/admin/data/job_user_list_by_user_name_data_response.dart';
+import 'package:eportal/screen/worker/profile/widget/profile_item.dart';
 import 'package:eportal/screen/worker/profile_add/page/profile_add_page.dart';
 import 'package:eportal/screen/worker/profile_edit/page/profile_edit_page.dart';
+import 'package:eportal/screen/worker/refer/page/refer_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
+import 'package:eportal/widget/dialog/choose_action_dialog.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
 import 'package:eportal/widget/full_data_item/curriculum_vitae_item.dart';
 import 'package:eportal/widget/input/search_input.dart';
@@ -113,30 +116,25 @@ class _ProfilePageState extends BasePageStateActive<ProfilePage> {
                                           itemCount: state.length,
                                           itemBuilder: (BuildContext context,
                                                   int index) =>
-                                              CurriculumVitaeItem(
-                                                onTap: () => nextPage(
-                                                    (context) =>
-                                                        ProfileEditPage(
-                                                          data: state
-                                                              .elementAt(index),
-                                                        )).then((value) =>
-                                                    initDataLoading()),
-                                                title: state
-                                                    .elementAt(index)
-                                                    .title,
-                                                education: state
-                                                    .elementAt(index)
-                                                    .education,
-                                                careerGoals: state
-                                                    .elementAt(index)
-                                                    .careerGoals,
-                                                skillsForte: state
-                                                    .elementAt(index)
-                                                    .skillsForte,
-                                                workExperience: state
-                                                    .elementAt(index)
-                                                    .workExperience,
-                                                isShowFull: true,
+                                              ProfileItem(
+                                                onTapReferEdit: () {
+                                                  nextPage((context) =>
+                                                      ReferPage(
+                                                        data: state
+                                                            .elementAt(index),
+                                                      ));
+                                                },
+                                                onTapProfileEdit: () {
+                                                  nextPage((context) =>
+                                                          ProfileEditPage(
+                                                            data:
+                                                                state.elementAt(
+                                                                    index),
+                                                          ))
+                                                      .then((value) =>
+                                                          initDataLoading());
+                                                },
+                                                data: state.elementAt(index),
                                               )),
                                     ),
                                   ],

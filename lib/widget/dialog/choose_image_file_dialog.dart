@@ -1,5 +1,6 @@
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
+import 'package:eportal/widget/dialog/choose_action_dialog.dart';
 import 'package:flutter/material.dart';
 
 import '../../style/app_text_style.dart';
@@ -12,36 +13,13 @@ class ChooseImageFileDialog extends StatelessWidget {
   const ChooseImageFileDialog({super.key});
 
   @override
-  Widget build(BuildContext context) => Container(
-        color: Colors.white,
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              "Bạn muốn chọn ảnh?",
-              style:
-                  AppTextStyle.titlePage.copyWith(color: AppColor.colorOfIcon),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            DefaultButton(
-              onPressed: () {
-                Navigator.of(context).pop(true);
-              },
-              text: 'Máy ảnh',
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            DefaultButton(
-              onPressed: () {
-                Navigator.of(context).pop(false);
-              },
-              text: 'Thư viện ảnh',
-            ),
-          ],
-        ),
+  Widget build(BuildContext context) => ChooseActionDialog(
+        title: "Bạn muốn chọn ảnh?",
+        items: [
+          ChooseActionDialogItem(
+              title: "Máy ảnh", clickAction: () => {}, result: true),
+          ChooseActionDialogItem(
+              title: "Thư viện ảnh", clickAction: () => {}, result: false)
+        ],
       );
 }

@@ -76,17 +76,6 @@ class _HomePageState extends BasePageStateActive<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.supervised_user_circle,
-              color: AppColor.colorOfHintText,
-            ),
-            label: "Người tham khảo",
-            activeIcon: Icon(
-              Icons.supervised_user_circle,
-              color: AppColor.colorOfIcon,
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
               Icons.work,
               color: AppColor.colorOfHintText,
             ),
@@ -126,7 +115,6 @@ class _HomePageState extends BasePageStateActive<HomePage> {
         children: const <Widget>[
           HomeManagePage(),
           ProfilePage(),
-          ReferPage(),
           JobPage(),
           SettingPage(),
         ],

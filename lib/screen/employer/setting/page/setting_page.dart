@@ -43,20 +43,6 @@ class _SettingPageState extends BasePageStateActive<SettingPage> {
           title: "Đổi mật khẩu",
           builder: (context) => const ChangePasswordPage()),
     ],
-    "Biểu đồ": [
-      SettingPageModel(
-          icon: Icons.bar_chart_outlined,
-          title: "Lao động thất nghiệp",
-          builder: (context) => const ChartUnemploymentRatePage()),
-      SettingPageModel(
-          icon: Icons.bar_chart_outlined,
-          title: "Lao động HDKT",
-          builder: (context) => const ChartEconomicallyActivePage()),
-      SettingPageModel(
-          icon: Icons.bar_chart_outlined,
-          title: "Lao động không HDKT",
-          builder: (context) => const ChartEconomicallyInactivePage())
-    ],
     "Hệ thống": [
       SettingPageModel(
           icon: Icons.account_tree,

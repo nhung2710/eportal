@@ -1,15 +1,8 @@
-import 'package:eportal/bloc/admin/work_save_list_bloc.dart';
-import 'package:eportal/bloc/admin/work_save_list_bloc.dart';
-import 'package:eportal/bloc/common_new/work_search_bloc.dart';
-import 'package:eportal/event/admin/work_save_list_event.dart';
-import 'package:eportal/event/common_new/work_search_event.dart';
-import 'package:eportal/model/api/request/admin/data/work_save_list_data_request.dart';
-import 'package:eportal/model/api/request/admin/work_save_list_request.dart';
-import 'package:eportal/model/api/request/common_new/data/work_search_data_request.dart';
-import 'package:eportal/model/api/request/common_new/work_search_request.dart';
-import 'package:eportal/model/api/response/admin/data/work_save_list_data_response.dart';
-import 'package:eportal/model/api/response/common_new/data/work_search_data_response.dart';
-import 'package:eportal/screen/share/work_search_detail/page/work_search_detail_page.dart';
+import 'package:eportal/bloc/admin/work_view_list_bloc.dart';
+import 'package:eportal/event/admin/work_view_list_event.dart';
+import 'package:eportal/model/api/request/admin/data/work_view_list_data_request.dart';
+import 'package:eportal/model/api/request/admin/work_view_list_request.dart';
+import 'package:eportal/model/api/response/admin/data/work_view_list_data_response.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
@@ -23,23 +16,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class ListOfJobSavedPage extends BasePage {
-  const ListOfJobSavedPage({super.key});
+class ListOfJobViewedPage extends BasePage {
+  const ListOfJobViewedPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _ListOfJobSavedPageState();
+  State<StatefulWidget> createState() => _ListOfJobViewedPageState();
 }
 
-class _ListOfJobSavedPageState extends BasePageStateActive<ListOfJobSavedPage> {
-  late WorkSaveListBloc workSaveListBloc;
-  WorkSaveListRequest request =
-      WorkSaveListRequest(obj: WorkSaveListDataRequest());
+class _ListOfJobViewedPageState
+    extends BasePageStateActive<ListOfJobViewedPage> {
+  late WorkViewListBloc workViewListBloc;
+  WorkViewListRequest request =
+      WorkViewListRequest(obj: WorkViewListDataRequest());
   final filterJobDialogKey = GlobalKey<FilterJobDialogState>();
+
   TextEditingController textEditingController = TextEditingController();
 
   @override
   void initBloc() {
-    workSaveListBloc = WorkSaveListBloc();
+    workViewListBloc = WorkViewListBloc();
   }
 
   @override
@@ -59,7 +54,7 @@ class _ListOfJobSavedPageState extends BasePageStateActive<ListOfJobSavedPage> {
 
   @override
   void callApi() {
-    workSaveListBloc.add(WorkSaveListEvent(request: request));
+    workViewListBloc.add(WorkViewListEvent(request: request));
   }
 
   @override
@@ -85,16 +80,16 @@ class _ListOfJobSavedPageState extends BasePageStateActive<ListOfJobSavedPage> {
           ),
           Expanded(
             child: BlocProvider(
-                create: (_) => workSaveListBloc,
-                child: BlocListener<WorkSaveListBloc,
-                    DataPageState<WorkSaveListDataResponse>>(
+                create: (_) => workViewListBloc,
+                child: BlocListener<WorkViewListBloc,
+                    DataPageState<WorkViewListDataResponse>>(
                   listener: (BuildContext context,
-                      DataPageState<WorkSaveListDataResponse> state) {},
-                  child: BlocBuilder<WorkSaveListBloc,
-                      DataPageState<WorkSaveListDataResponse>>(
+                      DataPageState<WorkViewListDataResponse> state) {},
+                  child: BlocBuilder<WorkViewListBloc,
+                      DataPageState<WorkViewListDataResponse>>(
                     builder: (BuildContext context,
-                            DataPageState<WorkSaveListDataResponse> state) =>
-                        handleDataPageState<WorkSaveListDataResponse>(
+                            DataPageState<WorkViewListDataResponse> state) =>
+                        handleDataPageState<WorkViewListDataResponse>(
                       state,
                       (context, state) => ListView.builder(
                           shrinkWrap: true,

@@ -38,54 +38,6 @@ class _SettingPageState extends BasePageState<SettingPage> {
           title: "Đổi mật khẩu",
           builder: (context) => const ChangePasswordPage()),
     ],
-    "Đăng ký": [
-      SettingPageModel(
-          icon: Icons.app_registration,
-          title: "Lịch tư vấn",
-          builder: (context) => EmptyExamplePage(
-                isHasAppBar: true,
-              )),
-      SettingPageModel(
-          icon: Icons.app_registration,
-          title: "Lịch giới thiệu việc làm",
-          builder: (context) => EmptyExamplePage(
-                isHasAppBar: true,
-              )),
-      SettingPageModel(
-          icon: Icons.app_registration,
-          title: "Lấy số thực hiện dịch vụ công",
-          builder: (context) => EmptyExamplePage(
-                isHasAppBar: true,
-              )),
-      SettingPageModel(
-          icon: Icons.app_registration,
-          title: "Hỏi và đáp",
-          builder: (context) => EmptyExamplePage(
-                isHasAppBar: true,
-              )),
-    ],
-    "Lịch sử": [
-      SettingPageModel(
-          icon: Icons.history,
-          title: "Ứng tuyển",
-          builder: (context) => EmptyExamplePage(
-                isHasAppBar: true,
-              )),
-    ],
-    "Biểu đồ": [
-      SettingPageModel(
-          icon: Icons.bar_chart_outlined,
-          title: "Lao động thất nghiệp",
-          builder: (context) => const ChartUnemploymentRatePage()),
-      SettingPageModel(
-          icon: Icons.bar_chart_outlined,
-          title: "Lao động HDKT",
-          builder: (context) => const ChartEconomicallyActivePage()),
-      SettingPageModel(
-          icon: Icons.bar_chart_outlined,
-          title: "Lao động không HDKT",
-          builder: (context) => const ChartEconomicallyInactivePage())
-    ],
     "Hệ thống": [
       SettingPageModel(
           icon: Icons.account_tree,

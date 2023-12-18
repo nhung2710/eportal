@@ -1,4 +1,5 @@
 import 'package:eportal/screen/worker/job/tab/list_of_job_page.dart';
+import 'package:eportal/screen/worker/job/tab/list_of_job_viewed_page.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
@@ -27,7 +28,7 @@ class _JobPageState extends BasePageStateActive<JobPage>
   void initDataLoading() {
     // TODO: implement initDataLoading
     _tabController = TabController(
-        vsync: this, length: 3, animationDuration: const Duration(seconds: 0));
+        vsync: this, length: 4, animationDuration: const Duration(seconds: 0));
     super.initDataLoading();
   }
 
@@ -51,7 +52,10 @@ class _JobPageState extends BasePageStateActive<JobPage>
             indicatorWeight: 2,
             tabs: const [
               Tab(
-                text: "Danh sách việc làm",
+                text: "Danh sách việc làm tuyển dụng",
+              ),
+              Tab(
+                text: "Việc làm đã xem",
               ),
               Tab(
                 text: "Việc làm đã ứng tuyển",
@@ -69,6 +73,7 @@ class _JobPageState extends BasePageStateActive<JobPage>
                 physics: const NeverScrollableScrollPhysics(),
                 children: const [
                   ListOfJobPage(),
+                  ListOfJobViewedPage(),
                   ListOfJobAppliedPage(),
                   ListOfJobSavedPage(),
                 ],

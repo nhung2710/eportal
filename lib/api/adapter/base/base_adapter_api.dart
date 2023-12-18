@@ -55,6 +55,10 @@ class BaseAdapterApi {
       } else {
         uri = request.getUri();
       }
+
+      StringBuffer xmlContent = StringBuffer();
+      StringBuffer xmlAuthentication = StringBuffer();
+
       StringBuffer stringBuffer =
           StringBuffer('<?xml version="1.0" encoding="utf-8"?>');
       stringBuffer.write('<soap:Envelope ${getMapXml()}>');
@@ -63,33 +67,40 @@ class BaseAdapterApi {
 
       if (request.isAuthentication()) {
         if (!GlobalApplication().userId.isNullOrWhiteSpace()) {
-          stringBuffer.write(GlobalApplication()
+          xmlAuthentication.write(GlobalApplication()
               .createXml(GlobalApplication().userId, "userId"));
-          stringBuffer.write(GlobalApplication()
+          xmlAuthentication.write(GlobalApplication()
               .createXml(GlobalApplication().userRole, "userRole"));
         } else {
-          stringBuffer.write(GlobalApplication().createXml(
+          xmlAuthentication.write(GlobalApplication().createXml(
               ApplicationApiConstant.kBASE_AUTH_HEADER_USER_LOGIN,
               "userLogin"));
-          stringBuffer.write(GlobalApplication().createXml(
+          xmlAuthentication.write(GlobalApplication().createXml(
               ApplicationApiConstant.kBASE_AUTH_HEADER_PASSWORD, "password"));
         }
       } else {
-        stringBuffer.write(GlobalApplication().createXml(
+        xmlAuthentication.write(GlobalApplication().createXml(
             ApplicationApiConstant.kBASE_AUTH_HEADER_USER_LOGIN, "userLogin"));
-        stringBuffer.write(GlobalApplication().createXml(
+        xmlAuthentication.write(GlobalApplication().createXml(
             ApplicationApiConstant.kBASE_AUTH_HEADER_PASSWORD, "password"));
       }
+      stringBuffer.write(xmlAuthentication.toString());
       stringBuffer.write('</AuthHeader>');
       stringBuffer.write('</soap:Header>');
       stringBuffer.write('<soap:Body>');
-      stringBuffer.write(
+
+      xmlContent.write(
           '<${request.getTagXmlRequest()} ${request.getDefaultNameSpace()}>');
-      stringBuffer.write('${request.obj.toXml()}');
-      stringBuffer.write('</${request.getTagXmlRequest()}>');
+      xmlContent.write('${request.obj.toXml()}');
+      xmlContent.write('</${request.getTagXmlRequest()}>');
+      stringBuffer.write(xmlContent.toString());
       stringBuffer.write('</soap:Body>');
       stringBuffer.write('</soap:Envelope>');
-
+      if (isNeedLogApi) {
+        logApiData
+            .writeln('xmlAuthentication: ${xmlAuthentication.toString()}');
+        logApiData.writeln('xmlContent: ${xmlContent.toString()}');
+      }
       String responseSoapBody = ApplicationConstant.EMPTY;
       String requestBody = stringBuffer.toString();
       var keyCache =
@@ -107,6 +118,7 @@ class BaseAdapterApi {
             isUseCache = !responseSoapBody.isNullOrWhiteSpace();
             if (isNeedLogApi) {
               logApiData.writeln('isUseCache: $isUseCache');
+              logApiData.writeln('body: $responseSoapBody');
             }
           }
         }
@@ -114,9 +126,6 @@ class BaseAdapterApi {
       if (responseSoapBody.isNullOrWhiteSpace()) {
         responseSoapBody = await _callWebServiceAsync(
             uri, requestBody, request.getContentType(), logApiData);
-      }
-      if (isNeedLogApi) {
-        logApiData.writeln('body: $responseSoapBody');
       }
       if (!responseSoapBody.isNullOrWhiteSpace()) {
         final xmlResponse = XmlDocument.parse(responseSoapBody);
@@ -136,6 +145,9 @@ class BaseAdapterApi {
                             .millisecondsSinceEpoch)
                     .toJson()));
           }
+          if (isNeedLogApi) {
+            logApiData.writeln('json: $jsonValue');
+          }
           return json.decode(jsonValue);
         }
       }
@@ -143,7 +155,7 @@ class BaseAdapterApi {
           '{"status":0,"message":"Có lỗi xảy ra vui lòng thử lại sau"}');
     } finally {
       if (isNeedLogApi) {
-        log(logApiData.toString());
+        print(logApiData.toString());
       }
     }
   }

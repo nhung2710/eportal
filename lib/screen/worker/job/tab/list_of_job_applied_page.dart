@@ -1,7 +1,12 @@
+import 'package:eportal/bloc/admin/work_send_list_bloc.dart';
 import 'package:eportal/bloc/common_new/work_search_bloc.dart';
+import 'package:eportal/event/admin/work_send_list_event.dart';
 import 'package:eportal/event/common_new/work_search_event.dart';
+import 'package:eportal/model/api/request/admin/data/work_send_list_data_request.dart';
+import 'package:eportal/model/api/request/admin/work_send_list_request.dart';
 import 'package:eportal/model/api/request/common_new/data/work_search_data_request.dart';
 import 'package:eportal/model/api/request/common_new/work_search_request.dart';
+import 'package:eportal/model/api/response/admin/data/work_send_list_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/work_search_data_response.dart';
 import 'package:eportal/screen/share/work_search_detail/page/work_search_detail_page.dart';
 import 'package:eportal/state/base/base_state.dart';
@@ -26,19 +31,15 @@ class ListOfJobAppliedPage extends BasePage {
 
 class _ListOfJobAppliedPageState
     extends BasePageStateActive<ListOfJobAppliedPage> {
-  late WorkSearchBloc workSearchBloc;
-  WorkSearchRequest request = WorkSearchRequest(obj: WorkSearchDataRequest());
+  late WorkSendListBloc workSendListBloc;
+  WorkSendListRequest request =
+      WorkSendListRequest(obj: WorkSendListDataRequest());
   final filterJobDialogKey = GlobalKey<FilterJobDialogState>();
-  late FilterJobDialog filterJobDialog = FilterJobDialog(
-    key: filterJobDialogKey,
-    data: request.obj,
-    onPressed: () => initDataLoading(),
-  );
   TextEditingController textEditingController = TextEditingController();
 
   @override
   void initBloc() {
-    workSearchBloc = WorkSearchBloc();
+    workSendListBloc = WorkSendListBloc();
   }
 
   @override
@@ -58,7 +59,7 @@ class _ListOfJobAppliedPageState
 
   @override
   void callApi() {
-    workSearchBloc.add(WorkSearchEvent(request: request));
+    workSendListBloc.add(WorkSendListEvent(request: request));
   }
 
   @override
@@ -79,43 +80,36 @@ class _ListOfJobAppliedPageState
               onTap: () {
                 initDataLoading();
               },
-              onTapFilter: () {
-                showDialog(context: context, builder: (_) => filterJobDialog);
-              },
               hintText: "Nội dung tìm kiếm",
             ),
           ),
           Expanded(
             child: BlocProvider(
-                create: (_) => workSearchBloc,
-                child: BlocListener<WorkSearchBloc,
-                    DataPageState<WorkSearchDataResponse>>(
+                create: (_) => workSendListBloc,
+                child: BlocListener<WorkSendListBloc,
+                    DataPageState<WorkSendListDataResponse>>(
                   listener: (BuildContext context,
-                      DataPageState<WorkSearchDataResponse> state) {},
-                  child: BlocBuilder<WorkSearchBloc,
-                      DataPageState<WorkSearchDataResponse>>(
+                      DataPageState<WorkSendListDataResponse> state) {},
+                  child: BlocBuilder<WorkSendListBloc,
+                      DataPageState<WorkSendListDataResponse>>(
                     builder: (BuildContext context,
-                            DataPageState<WorkSearchDataResponse> state) =>
-                        handleDataPageState<WorkSearchDataResponse>(
+                            DataPageState<WorkSendListDataResponse> state) =>
+                        handleDataPageState<WorkSendListDataResponse>(
                       state,
                       (context, state) => ListView.builder(
                           shrinkWrap: true,
                           controller: scrollController,
                           itemCount: state.length,
                           itemBuilder: (context, i) => WorkItem(
-                                onTap: () =>
-                                    nextPage((context) => WorkSearchDetailPage(
-                                          id: state.elementAt(i).id,
-                                        )),
-                                title: state.elementAt(i).title,
-                                ages: state.elementAt(i).ages,
-                                benefit: state.elementAt(i).benefit,
-                                workTime: state.elementAt(i).workTime,
-                                tenTinhTP: state.elementAt(i).tenTinhTP,
-                                soNamKinhNghiem:
-                                    state.elementAt(i).soNamKinhNghiem,
-                                hanNopHoSo: state.elementAt(i).hanNopHoSo,
-                                description: state.elementAt(i).description,
+                                onTap: () => {},
+                                title: state.elementAt(i).search,
+                                ages: state.elementAt(i).search,
+                                benefit: state.elementAt(i).search,
+                                workTime: state.elementAt(i).search,
+                                tenTinhTP: state.elementAt(i).search,
+                                soNamKinhNghiem: state.elementAt(i).search,
+                                hanNopHoSo: state.elementAt(i).search,
+                                description: state.elementAt(i).search,
                               )),
                     ),
                   ),
