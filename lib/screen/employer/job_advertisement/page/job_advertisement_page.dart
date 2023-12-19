@@ -129,8 +129,8 @@ class _JobAdvertisementPageState
                               itemCount: state.length,
                               itemBuilder: (context, i) => WorkItem(
                                     onTap: () => nextPage(
-                                        (context) => WorkSearchDetailPage(
-                                              id: state.elementAt(i).search,
+                                        (context) => JobAdvertisementEditPage(
+                                              data: state.elementAt(i),
                                             )),
                                     title: state.elementAt(i).search,
                                     ages: state.elementAt(i).search,

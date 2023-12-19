@@ -41,6 +41,7 @@ import 'package:eportal/model/api/request/common_new/data/danh_sach_tinh_tp_data
 import 'package:eportal/model/api/request/common_new/data/danh_sach_trinh_do_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_vi_tri_tuyen_dung_data_request.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_chuc_vu_data_response.dart';
+import 'package:eportal/model/api/response/common_new/data/danh_sach_gioi_tinh_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_kinh_nghiem_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_muc_luong_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_nganh_nghe_data_response.dart';
@@ -62,14 +63,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../bloc/common_new/danh_sach_tinh_chat_cong_viec_bloc.dart';
 import '../../../../bloc/common_new/danh_sach_vi_tri_tuyen_dung_bloc.dart';
 import '../../../../extension/string_extension.dart';
-import '../../../../model/api/response/common_new/data/danh_sach_gioi_tinh_data_response.dart';
 
 //
 // Created by BlackRose on 19/12/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class JobAdvertisementAddGeneralTab extends BasePage {
-  JobAdvertisementAddGeneralTab({super.key});
+class JobAdvertisementEditGeneralTab extends BasePage {
+  JobAdvertisementEditGeneralTab({super.key});
 
   DanhSachKinhNghiemDataResponse? danhSachKinhNghiemDataResponse;
   DanhSachMucLuongDataResponse? danhSachMucLuongDataResponse;
@@ -82,11 +82,11 @@ class JobAdvertisementAddGeneralTab extends BasePage {
   DanhSachGioiTinhDataResponse? danhSachGioiTinhDataResponse;
 
   @override
-  State<StatefulWidget> createState() => JobAdvertisementAddGeneralTabState();
+  State<StatefulWidget> createState() => JobAdvertisementEditGeneralTabState();
 }
 
-class JobAdvertisementAddGeneralTabState
-    extends BaseScreenStateActive<JobAdvertisementAddGeneralTab> {
+class JobAdvertisementEditGeneralTabState
+    extends BaseScreenStateActive<JobAdvertisementEditGeneralTab> {
   TextEditingController titleController = TextEditingController();
   TextEditingController fromDateController = TextEditingController();
   TextEditingController toDateController = TextEditingController();
@@ -381,22 +381,6 @@ class JobAdvertisementAddGeneralTabState
     );
   }
 
-  Widget _buildViewSearchDanhSachGioiTinh(
-      BuildContext context, List<DanhSachGioiTinhDataResponse> list) {
-    return SelectItem<DanhSachGioiTinhDataResponse>(
-      icon: FontAwesomeIcons.timeline,
-      selectedItem: widget.danhSachGioiTinhDataResponse,
-      list: list,
-      itemAsString: (DanhSachGioiTinhDataResponse u) =>
-          u.name.supportHtml(),
-      onChanged: (DanhSachGioiTinhDataResponse? data) {
-        if (widget.danhSachGioiTinhDataResponse != data) {
-          widget.danhSachGioiTinhDataResponse = data;
-        }
-      },
-      title: "Giới tính",
-    );
-  }
   Widget _buildViewSearchDanhSachKinhNghiem(
       BuildContext context, List<DanhSachKinhNghiemDataResponse> list) {
     return SelectItem<DanhSachKinhNghiemDataResponse>(
@@ -496,6 +480,23 @@ class JobAdvertisementAddGeneralTabState
         }
       },
       title: "Vị trí tuyển dụng",
+    );
+  }
+
+  Widget _buildViewSearchDanhSachGioiTinh(
+      BuildContext context, List<DanhSachGioiTinhDataResponse> list) {
+    return SelectItem<DanhSachGioiTinhDataResponse>(
+      icon: FontAwesomeIcons.timeline,
+      selectedItem: widget.danhSachGioiTinhDataResponse,
+      list: list,
+      itemAsString: (DanhSachGioiTinhDataResponse u) =>
+          u.name.supportHtml(),
+      onChanged: (DanhSachGioiTinhDataResponse? data) {
+        if (widget.danhSachGioiTinhDataResponse != data) {
+          widget.danhSachGioiTinhDataResponse = data;
+        }
+      },
+      title: "Giới tính",
     );
   }
 

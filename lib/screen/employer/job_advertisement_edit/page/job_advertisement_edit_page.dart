@@ -1,23 +1,31 @@
-import 'package:eportal/bloc/admin/job_user_add_bloc.dart';
-import 'package:eportal/event/admin/job_user_add_event.dart';
-import 'package:eportal/model/api/request/admin/data/job_user_add_data_request.dart';
-import 'package:eportal/model/api/request/admin/job_user_add_request.dart';
-import 'package:eportal/model/api/response/admin/data/job_user_add_data_response.dart';
-import 'package:eportal/screen/worker/profile_add/tab/profile_add_basic_tab.dart';
-import 'package:eportal/screen/worker/profile_add/tab/profile_add_career_goals_tab.dart';
-import 'package:eportal/screen/worker/profile_add/tab/profile_add_field_skills_tab.dart';
-import 'package:eportal/screen/worker/profile_add/tab/profile_add_general_tab.dart';
-import 'package:eportal/screen/worker/profile_add/tab/profile_add_level_tab.dart';
-import 'package:eportal/screen/worker/profile_add/tab/profile_add_work_experience_tab.dart';
+
+import 'package:eportal/event/admin/work_update_event.dart';
+import 'package:eportal/model/api/request/admin/data/work_update_data_request.dart';
+import 'package:eportal/model/api/request/admin/work_update_request.dart';
+import 'package:eportal/model/api/response/admin/data/work_search_by_user_name_data_response.dart';
+import 'package:eportal/model/api/response/admin/data/work_update_data_response.dart';
+import 'package:eportal/screen/employer/job_advertisement_edit/tab/job_advertisement_edit_basic_tab.dart';
+import 'package:eportal/screen/employer/job_advertisement_edit/tab/job_advertisement_edit_contract_tab.dart';
+import 'package:eportal/screen/employer/job_advertisement_edit/tab/job_advertisement_edit_description_tab.dart';
+import 'package:eportal/screen/employer/job_advertisement_edit/tab/job_advertisement_edit_general_tab.dart';
+import 'package:eportal/screen/worker/profile_Edit/tab/profile_Edit_basic_tab.dart';
+import 'package:eportal/screen/worker/profile_Edit/tab/profile_Edit_career_goals_tab.dart';
+import 'package:eportal/screen/worker/profile_Edit/tab/profile_Edit_field_skills_tab.dart';
+import 'package:eportal/screen/worker/profile_Edit/tab/profile_Edit_general_tab.dart';
+import 'package:eportal/screen/worker/profile_Edit/tab/profile_Edit_level_tab.dart';
+import 'package:eportal/screen/worker/profile_Edit/tab/profile_Edit_work_experience_tab.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:eportal/widget/input/capcha_input.dart';
+import 'package:eportal/widget/tab/custom_tab_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../bloc/admin/work_update_bloc.dart';
+import '../../../../extension/boolean_extension.dart';
 import '../../../../extension/string_extension.dart';
 
 //
@@ -26,41 +34,39 @@ import '../../../../extension/string_extension.dart';
 //
 
 class JobAdvertisementEditPage extends BasePage {
-  JobAdvertisementEditPage({super.key});
+  WorkSearchByUserNameDataResponse data;
+  JobAdvertisementEditPage({super.key,required this.data});
 
   @override
   State<StatefulWidget> createState() => _JobAdvertisementEditPageState();
 }
 
 class _JobAdvertisementEditPageState
-    extends BasePageState<JobAdvertisementEditPage>
-    with SingleTickerProviderStateMixin {
-  GlobalKey<ProfileAddBasicTabState> keyProfileAddBasicTabState =
-      GlobalKey<ProfileAddBasicTabState>();
-  GlobalKey<ProfileAddGeneralTabState> keyProfileAddGeneralTabState =
-      GlobalKey<ProfileAddGeneralTabState>();
-  GlobalKey<ProfileAddLevelTabState> keyProfileAddLevelTabState =
-      GlobalKey<ProfileAddLevelTabState>();
-  GlobalKey<ProfileAddWorkExperienceTabState>
-      keyProfileAddWorkExperienceTabState =
-      GlobalKey<ProfileAddWorkExperienceTabState>();
-  GlobalKey<ProfileAddCareerGoalsTabState> keyProfileAddCareerGoalsTabState =
-      GlobalKey<ProfileAddCareerGoalsTabState>();
-  GlobalKey<ProfileAddFieldSkillsTabState> keyProfileAddFieldSkillsTabState =
-      GlobalKey<ProfileAddFieldSkillsTabState>();
-  late JobUserAddBloc jobUserAddBloc;
-  late TabController _tabController;
+    extends BasePageState<JobAdvertisementEditPage> {
+
+  GlobalKey<CustomTabViewState> keyCustomTabViewState =
+  GlobalKey<CustomTabViewState>();
+  GlobalKey<JobAdvertisementEditBasicTabState>
+  keyJobAdvertisementEditBasicTabState =
+  GlobalKey<JobAdvertisementEditBasicTabState>();
+  GlobalKey<JobAdvertisementEditGeneralTabState>
+  keyJobAdvertisementEditGeneralTabState =
+  GlobalKey<JobAdvertisementEditGeneralTabState>();
+  GlobalKey<JobAdvertisementEditContractTabState>
+  keyJobAdvertisementEditContractTabState =
+  GlobalKey<JobAdvertisementEditContractTabState>();
+  GlobalKey<JobAdvertisementEditDescriptionTabState>
+  keyJobAdvertisementEditDescriptionTabState =
+  GlobalKey<JobAdvertisementEditDescriptionTabState>();
+  late WorkUpdateBloc workUpdateBloc;
 
   @override
   void initBloc() {
-    jobUserAddBloc = JobUserAddBloc();
+    workUpdateBloc = WorkUpdateBloc();
   }
 
   @override
   void initDataLoading() {
-    // TODO: implement initDataLoading
-    _tabController = TabController(
-        vsync: this, length: 6, animationDuration: const Duration(seconds: 0));
     super.initDataLoading();
   }
 
@@ -69,78 +75,35 @@ class _JobAdvertisementEditPageState
 
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
-        create: (_) => jobUserAddBloc,
-        child: BlocListener<JobUserAddBloc,
-            DataSingleState<JobUserAddDataResponse>>(
+        create: (_) => workUpdateBloc,
+        child: BlocListener<WorkUpdateBloc,
+            DataSingleState<WorkUpdateDataResponse>>(
           listener: (BuildContext context,
-              DataSingleState<JobUserAddDataResponse> state) {
-            handlerActionDataSingleState<JobUserAddDataResponse>(state, (obj) {
+              DataSingleState<WorkUpdateDataResponse> state) {
+            handlerActionDataSingleState<WorkUpdateDataResponse>(state, (obj) {
               showCenterMessage("Sửa tin tuyển dụng thành công")
                   .then((value) => backPage());
             });
           },
           child: Column(
             children: [
-              TabBar(
-                controller: _tabController,
-                indicatorColor: AppColor.colorOfIcon,
-                labelColor: AppColor.colorOfIcon,
-                indicatorSize: TabBarIndicatorSize.tab,
-                indicatorPadding: EdgeInsets.zero,
-                padding: EdgeInsets.zero,
-                tabAlignment: TabAlignment.start,
-                isScrollable: true,
-                labelStyle:
-                    AppTextStyle.title.copyWith(overflow: TextOverflow.visible),
-                indicatorWeight: 2,
-                tabs: const [
-                  Tab(
-                    text: "Thông tin hồ sơ",
-                  ),
-                  Tab(
-                    text: "Thông tin chung",
-                  ),
-                  Tab(
-                    text: "Trình độ học vấn",
-                  ),
-                  Tab(
-                    text: "Kinh nghiệm làm việc",
-                  ),
-                  Tab(
-                    text: "Mục tiêu nghề nghiệp",
-                  ),
-                  Tab(
-                    text: "Kỹ năng sở trường",
-                  ),
-                ],
-              ),
               Expanded(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 5),
-                  child: TabBarView(
-                    controller: _tabController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: [
-                      ProfileAddBasicTab(
-                        key: keyProfileAddBasicTabState,
-                      ),
-                      ProfileAddGeneralTab(
-                        key: keyProfileAddGeneralTabState,
-                      ),
-                      ProfileAddLevelTab(
-                        key: keyProfileAddLevelTabState,
-                      ),
-                      ProfileAddWorkExperienceTab(
-                        key: keyProfileAddWorkExperienceTabState,
-                      ),
-                      ProfileAddCareerGoalsTab(
-                        key: keyProfileAddCareerGoalsTabState,
-                      ),
-                      ProfileAddFieldSkillsTab(
-                        key: keyProfileAddFieldSkillsTabState,
-                      ),
-                    ],
-                  ),
+                child: CustomTabView(
+                  key: keyCustomTabViewState,
+                  tabViews: {
+                    "Thông tin tin tuyển dụng việc làm": JobAdvertisementEditBasicTab(
+                      key: keyJobAdvertisementEditBasicTabState,
+                    ),
+                    "Thông tin tuyển dụng": JobAdvertisementEditGeneralTab(
+                      key: keyJobAdvertisementEditGeneralTabState,
+                    ),
+                    "Thông tin yêu cầu": JobAdvertisementEditDescriptionTab(
+                      key: keyJobAdvertisementEditDescriptionTabState,
+                    ),
+                    "Thông tin liên hệ": JobAdvertisementEditContractTab(
+                      key: keyJobAdvertisementEditContractTabState,
+                    ),
+                  },
                 ),
               ),
               Container(
@@ -153,7 +116,7 @@ class _JobAdvertisementEditPageState
               Container(
                   margin: const EdgeInsets.only(top: 10),
                   child: DefaultButton(
-                    text: 'Tạo',
+                    text: 'Sửa',
                     onPressed: () => _send(context),
                   )),
             ],
@@ -161,64 +124,72 @@ class _JobAdvertisementEditPageState
         ),
       );
 
+
   _validPage(BuildContext context, BasePageState? state, int page) {
     if (state?.isValid() == true) {
       return true;
     } else {
-      _tabController.animateTo(page);
+      keyCustomTabViewState.currentState?.nextPage(page);
       return false;
     }
   }
 
   _send(BuildContext context) {
     if (_validBeforeSend(context)) {
-      jobUserAddBloc.add(JobUserAddEvent(
-          request: JobUserAddRequest(
-              obj: JobUserAddDataRequest(
-                  tieuDe: keyProfileAddBasicTabState
-                      .currentState?.titleController.text,
-                  ngayDangTu: keyProfileAddBasicTabState
-                      .currentState?.fromDateController.text,
-                  ngayDangDen: keyProfileAddBasicTabState
-                      .currentState?.toDateController.text,
-                  tinhTp: keyProfileAddBasicTabState.currentState?.widget
-                      .danhSachTinhTpDataResponse?.regionalID,
-                  quanHuyen: keyProfileAddBasicTabState.currentState?.widget
-                      .danhSachQuanHuyenDataResponse?.regionalID,
-                  nganhNghe: keyProfileAddBasicTabState.currentState?.widget
-                      .danhSachNganhNgheDataResponse?.careerID,
-                  chucVuHienTai: keyProfileAddGeneralTabState.currentState
-                      ?.widget.danhSachChucVuDataResponseHienTai?.positionID,
-                  chucVuMongMuon: keyProfileAddGeneralTabState.currentState?.widget.danhSachChucVuDataResponseMongMuon?.positionID,
-                  mucLuong: keyProfileAddGeneralTabState.currentState?.widget.danhSachMucLuongDataResponse?.salaryID,
-                  soNamKinhNghiem: keyProfileAddGeneralTabState.currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
-                  trinhDo: keyProfileAddGeneralTabState.currentState?.widget.danhSachTrinhDoDataResponse?.educationID,
-                  nhuCau: keyProfileAddGeneralTabState.currentState?.widget.danhSachNhuCauDataResponse?.needsID,
-                  kyNang: keyProfileAddFieldSkillsTabState.currentState?.skillController.text,
-                  kinhNghiemLV: keyProfileAddWorkExperienceTabState.currentState?.experienceController.text,
-                  mucTieu: keyProfileAddCareerGoalsTabState.currentState?.objectiveController.text,
-                  trinhDoHocVan: keyProfileAddLevelTabState.currentState?.educationController.text))));
+      workUpdateBloc.add(WorkUpdateEvent(
+          request: WorkUpdateRequest(
+              obj: WorkUpdateDataRequest(
+                work_ID: widget.data.workID,
+                gioiTinh: keyJobAdvertisementEditGeneralTabState.currentState?.widget.danhSachGioiTinhDataResponse?.id,
+                tieuDe: keyJobAdvertisementEditBasicTabState
+                    .currentState?.tieuDeController.text,
+                doTuoi: keyJobAdvertisementEditGeneralTabState
+                    .currentState?.doTuoiController.text,
+                soLuong: keyJobAdvertisementEditGeneralTabState
+                    .currentState?.soLuongController.text,
+                hanNopHoSo: keyJobAdvertisementEditBasicTabState
+                    .currentState?.hanNopHoSoController.text,
+                dangTuNgay: keyJobAdvertisementEditBasicTabState
+                    .currentState?.dangTuNgayController.text,
+                dangDenNgay: keyJobAdvertisementEditBasicTabState
+                    .currentState?.dangDenNgayController.text,
+                tinhTP: keyJobAdvertisementEditBasicTabState.currentState?.widget.danhSachTinhTpDataResponse?.regionalID,
+                tinNoiBat:(keyJobAdvertisementEditBasicTabState.currentState?.widget.tinNoiBat).toInt().toString(),
+                dauThongTinDN:(keyJobAdvertisementEditBasicTabState.currentState?.widget.dauThongTinDN).toInt().toString(),
+                dangGap:(keyJobAdvertisementEditBasicTabState.currentState?.widget.dangGap).toInt().toString(),
+                thoiGianLV: keyJobAdvertisementEditGeneralTabState
+                    .currentState?.thoiGianLVController.text,
+                chucVu:
+                keyJobAdvertisementEditGeneralTabState.currentState?.widget.danhSachChucVuDataResponse?.id,
+                mucLuong: keyJobAdvertisementEditGeneralTabState.currentState?.widget.danhSachMucLuongDataResponse?.salaryID,
+                kinhNghiem: keyJobAdvertisementEditGeneralTabState.currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
+                trinhdoCM: keyJobAdvertisementEditGeneralTabState.currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
+                tinhChatCV: keyJobAdvertisementEditGeneralTabState.currentState?.widget.danhSachTinhChatCongViecDataResponse?.typeOfID,
+                nganhNghe: keyJobAdvertisementEditGeneralTabState.currentState?.widget.danhSachNganhNgheDataResponse?.careerID,
+                viTriTuyenDung: keyJobAdvertisementEditGeneralTabState.currentState?.widget.danhSachViTriTuyenDungDataResponse?.jobPlaceID,
+                mota: keyJobAdvertisementEditDescriptionTabState.currentState?.motaController.text,
+                yeuCauCV: keyJobAdvertisementEditDescriptionTabState.currentState?.yeuCauCVController.text,
+                yeuCauHoSo: keyJobAdvertisementEditDescriptionTabState.currentState?.yeuCauHoSoController.text,
+                quyenLoi: keyJobAdvertisementEditDescriptionTabState.currentState?.quyenLoiController.text,
+                ghiChu: keyJobAdvertisementEditContractTabState.currentState?.ghiChuController.text,
+                tenNguoiLH: keyJobAdvertisementEditContractTabState.currentState?.tenNguoiLHController.text,
+                diaChiNguoiLH:keyJobAdvertisementEditContractTabState.currentState?.tenNguoiLHController.text,
+                dienThoaiNguoiLH:keyJobAdvertisementEditContractTabState.currentState?.dienThoaiNguoiLHController.text,
+                emailNguoiLH:keyJobAdvertisementEditContractTabState.currentState?.emailNguoiLHController.text,
+              ))));
     }
   }
 
   bool _validBeforeSend(BuildContext context) {
-    if (_validPage(context, keyProfileAddBasicTabState.currentState, 0)) {
-      if (_validPage(context, keyProfileAddGeneralTabState.currentState, 1)) {
-        if (_validPage(context, keyProfileAddLevelTabState.currentState, 2)) {
-          if (_validPage(
-              context, keyProfileAddWorkExperienceTabState.currentState, 3)) {
-            if (_validPage(
-                context, keyProfileAddCareerGoalsTabState.currentState, 4)) {
-              if (_validPage(
-                  context, keyProfileAddFieldSkillsTabState.currentState, 5)) {
-                if (isValid()) {
-                  return true;
-                }
-              }
-            }
-          }
-        }
-      }
+    if (_validPage(
+        context, keyJobAdvertisementEditBasicTabState.currentState, 0) &&
+        _validPage(
+            context, keyJobAdvertisementEditGeneralTabState.currentState, 1) &&
+        _validPage(context,
+            keyJobAdvertisementEditDescriptionTabState.currentState, 2) &&
+        _validPage(
+            context, keyJobAdvertisementEditContractTabState.currentState, 3)) {
+      return true;
     }
     return false;
   }
