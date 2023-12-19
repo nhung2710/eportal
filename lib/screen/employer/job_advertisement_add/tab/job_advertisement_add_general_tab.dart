@@ -71,12 +71,10 @@ class JobAdvertisementAddGeneralTab extends BasePage {
   DanhSachMucLuongDataResponse? danhSachMucLuongDataResponse;
   DanhSachChucVuDataResponse? danhSachChucVuDataResponse;
   DanhSachTrinhDoDataResponse? danhSachTrinhDoDataResponse;
-  DanhSachTinhChatCongViecBloc? danhSachTinhChatCongViecBloc;
   DanhSachNhuCauDataResponse? danhSachNhuCauDataResponse;
   DanhSachTinhChatCongViecDataResponse? danhSachTinhChatCongViecDataResponse;
   DanhSachViTriTuyenDungDataResponse? danhSachViTriTuyenDungDataResponse;
   DanhSachNganhNgheDataResponse? danhSachNganhNgheDataResponse;
-  DanhSachTinhTpDataResponse? danhSachTinhTpDataResponse;
 
   @override
   State<StatefulWidget> createState() => JobAdvertisementAddGeneralTabState();
@@ -91,6 +89,9 @@ class JobAdvertisementAddGeneralTabState
   TextEditingController experienceController = TextEditingController();
   TextEditingController objectiveController = TextEditingController();
   TextEditingController skillController = TextEditingController();
+  TextEditingController thoiGianLVController = TextEditingController();
+  TextEditingController soLuongController = TextEditingController();
+  TextEditingController doTuoiController = TextEditingController();
 
   final _danhSachQuanHuyenKey = GlobalKey<SelectItemNormalState>();
 
@@ -100,7 +101,6 @@ class JobAdvertisementAddGeneralTabState
   late DanhSachTrinhDoBloc danhSachTrinhDoBloc;
   late DanhSachChucVuBloc danhSachChucVuBloc;
   late DanhSachNhuCauBloc danhSachNhuCauBloc;
-  late DanhSachTinhTpBloc danhSachTinhTpBloc;
   late DanhSachViTriTuyenDungBloc danhSachViTriTuyenDungBloc;
   late DanhSachNganhNgheBloc danhSachNganhNgheBloc;
   late DanhSachTinhChatCongViecBloc danhSachTinhChatCongViecBloc;
@@ -113,7 +113,6 @@ class JobAdvertisementAddGeneralTabState
     danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
     danhSachTrinhDoBloc = DanhSachTrinhDoBloc();
     danhSachNhuCauBloc = DanhSachNhuCauBloc();
-    danhSachTinhTpBloc = DanhSachTinhTpBloc();
     danhSachViTriTuyenDungBloc = DanhSachViTriTuyenDungBloc();
     danhSachNganhNgheBloc = DanhSachNganhNgheBloc();
     danhSachTinhChatCongViecBloc = DanhSachTinhChatCongViecBloc();
@@ -121,6 +120,9 @@ class JobAdvertisementAddGeneralTabState
 
   @override
   void initDataLoading() {
+    thoiGianLVController.text = "Từ 8h đến 17h hàng ngày";
+    soLuongController.text = "1";
+    doTuoiController.text = "Từ 18 đến 35";
     callApi();
     // TODO: implement initDataLoading
     super.initDataLoading();
@@ -128,8 +130,6 @@ class JobAdvertisementAddGeneralTabState
 
   @override
   void callApi() {
-    danhSachTinhTpBloc.add(DanhSachTinhTpEvent(
-        request: DanhSachTinhTpRequest(obj: DanhSachTinhTpDataRequest())));
     danhSachChucVuBloc.add(DanhSachChucVuEvent(
         request: DanhSachChucVuRequest(obj: DanhSachChucVuDataRequest())));
     danhSachTrinhDoBloc.add(DanhSachTrinhDoEvent(
@@ -163,6 +163,82 @@ class JobAdvertisementAddGeneralTabState
           Container(
             margin: const EdgeInsets.only(top: 10),
             child: BlocProvider(
+                create: (_) => danhSachMucLuongBloc,
+                child: BlocListener<DanhSachMucLuongBloc,
+                    DataMultiState<DanhSachMucLuongDataResponse>>(
+                  listener: (BuildContext context,
+                      DataMultiState<DanhSachMucLuongDataResponse> state) {},
+                  child: BlocBuilder<DanhSachMucLuongBloc,
+                      DataMultiState<DanhSachMucLuongDataResponse>>(
+                    builder: (BuildContext context,
+                        DataMultiState<DanhSachMucLuongDataResponse>
+                        state) =>
+                        _buildViewSearchDanhSachMucLuong(context, state.data),
+                  ),
+                )),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: FieldInput(
+              controller: soLuongController,
+              maxLength: 100,
+              textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.number,
+              validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Số lượng tuyển làm việc không được để trống';
+                }
+                var resultParse = int.tryParse(text);
+                if (resultParse == null || resultParse <= 0) {
+                  return 'Số lượng tuyển làm việc sai định dạng hoặc nhỏ hơn 1';
+                }
+                return null;
+              },
+              hintText: 'Số lượng tuyển',
+              icon: FontAwesomeIcons.listOl,
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: BlocProvider(
+              create: (_) => danhSachKinhNghiemBloc,
+              child: BlocListener<DanhSachKinhNghiemBloc,
+                  DataMultiState<DanhSachKinhNghiemDataResponse>>(
+                listener: (BuildContext context,
+                    DataMultiState<DanhSachKinhNghiemDataResponse> state) {},
+                child: BlocBuilder<DanhSachKinhNghiemBloc,
+                    DataMultiState<DanhSachKinhNghiemDataResponse>>(
+                    builder: (BuildContext context,
+                        DataMultiState<DanhSachKinhNghiemDataResponse>
+                        state) =>
+                        _buildViewSearchDanhSachKinhNghiem(
+                            context, state.data)),
+              ),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: FieldInput(
+              controller: doTuoiController,
+              maxLength: 100,
+              textInputAction: TextInputAction.next,
+              validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Độ tuổi làm việc không được để trống';
+                }
+                var resultParse = int.tryParse(text);
+                if (resultParse == null || resultParse <= 0) {
+                  return 'Độ tuổi làm việc sai định dạng hoặc nhỏ hơn 1';
+                }
+                return null;
+              },
+              hintText: 'Độ tuổi',
+              icon: FontAwesomeIcons.child,
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: BlocProvider(
                 create: (_) => danhSachChucVuBloc,
                 child: BlocListener<DanhSachChucVuBloc,
                     DataMultiState<DanhSachChucVuDataResponse>>(
@@ -175,41 +251,6 @@ class JobAdvertisementAddGeneralTabState
                         _buildViewSearchDanhSachChucVu(context, state.data),
                   ),
                 )),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-                create: (_) => danhSachMucLuongBloc,
-                child: BlocListener<DanhSachMucLuongBloc,
-                    DataMultiState<DanhSachMucLuongDataResponse>>(
-                  listener: (BuildContext context,
-                      DataMultiState<DanhSachMucLuongDataResponse> state) {},
-                  child: BlocBuilder<DanhSachMucLuongBloc,
-                      DataMultiState<DanhSachMucLuongDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachMucLuongDataResponse>
-                                state) =>
-                        _buildViewSearchDanhSachMucLuong(context, state.data),
-                  ),
-                )),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-              create: (_) => danhSachKinhNghiemBloc,
-              child: BlocListener<DanhSachKinhNghiemBloc,
-                  DataMultiState<DanhSachKinhNghiemDataResponse>>(
-                listener: (BuildContext context,
-                    DataMultiState<DanhSachKinhNghiemDataResponse> state) {},
-                child: BlocBuilder<DanhSachKinhNghiemBloc,
-                        DataMultiState<DanhSachKinhNghiemDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachKinhNghiemDataResponse>
-                                state) =>
-                        _buildViewSearchDanhSachKinhNghiem(
-                            context, state.data)),
-              ),
-            ),
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
@@ -285,19 +326,19 @@ class JobAdvertisementAddGeneralTabState
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
-            child: BlocProvider(
-                create: (_) => danhSachTinhTpBloc,
-                child: BlocListener<DanhSachTinhTpBloc,
-                    DataMultiState<DanhSachTinhTpDataResponse>>(
-                  listener: (BuildContext context,
-                      DataMultiState<DanhSachTinhTpDataResponse> state) {},
-                  child: BlocBuilder<DanhSachTinhTpBloc,
-                      DataMultiState<DanhSachTinhTpDataResponse>>(
-                    builder: (BuildContext context,
-                            DataMultiState<DanhSachTinhTpDataResponse> state) =>
-                        _buildViewSearchDanhSachTinhTp(context, state.data),
-                  ),
-                )),
+            child: FieldInput(
+              controller: thoiGianLVController,
+              maxLength: 100,
+              textInputAction: TextInputAction.next,
+              validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Thời gian làm việc không được để trống';
+                }
+                return null;
+              },
+              hintText: 'Thời gian làm việc',
+              icon: FontAwesomeIcons.clock,
+            ),
           ),
         ],
       );
@@ -421,20 +462,4 @@ class JobAdvertisementAddGeneralTabState
     );
   }
 
-  Widget _buildViewSearchDanhSachTinhTp(
-      BuildContext context, List<DanhSachTinhTpDataResponse> list) {
-    return SelectItem<DanhSachTinhTpDataResponse>(
-      icon: FontAwesomeIcons.locationDot,
-      selectedItem: widget.danhSachTinhTpDataResponse,
-      list: list,
-      itemAsString: (DanhSachTinhTpDataResponse u) =>
-          u.regionalName.supportHtml(),
-      onChanged: (DanhSachTinhTpDataResponse? data) {
-        if (widget.danhSachTinhTpDataResponse != data) {
-          widget.danhSachTinhTpDataResponse = data;
-        }
-      },
-      title: "Tình thành phố",
-    );
-  }
 }

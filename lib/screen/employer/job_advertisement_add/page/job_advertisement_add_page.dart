@@ -22,7 +22,11 @@ import 'package:eportal/widget/input/capcha_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../event/admin/work_add_event.dart';
+import '../../../../extension/boolean_extension.dart';
 import '../../../../extension/string_extension.dart';
+import '../../../../model/api/request/admin/data/work_add_data_request.dart';
+import '../../../../model/api/request/admin/work_add_request.dart';
 import '../../../../widget/tab/custom_tab_view.dart';
 import '../tab/job_advertisement_add_basic_tab.dart';
 import '../tab/job_advertisement_add_general_tab.dart';
@@ -86,13 +90,13 @@ class _JobAdvertisementAddPageState
               Expanded(
                 child: CustomTabView(
                   tabViews: {
-                    "Thông tin tuyển dụng": JobAdvertisementAddBasicTab(
+                    "Thông tin tin tuyển dụng việc làm": JobAdvertisementAddBasicTab(
                       key: keyJobAdvertisementAddBasicTabState,
                     ),
-                    "Thông tin chung": JobAdvertisementAddGeneralTab(
+                    "Thông tin tuyển dụng": JobAdvertisementAddGeneralTab(
                       key: keyJobAdvertisementAddGeneralTabState,
                     ),
-                    "Mô tả công việc": JobAdvertisementAddDescriptionTab(
+                    "Thông tin yêu cầu": JobAdvertisementAddDescriptionTab(
                       key: keyJobAdvertisementAddDescriptionTabState,
                     ),
                     "Thông tin liên hệ": JobAdvertisementAddContractTab(
@@ -134,9 +138,52 @@ class _JobAdvertisementAddPageState
 
   bool _validBeforeSend(BuildContext context) {
     if (_validPage(
-        context, keyJobAdvertisementAddBasicTabState.currentState, 0)) {
-      if (_validPage(
-          context, keyJobAdvertisementAddGeneralTabState.currentState, 1)) {}
+            context, keyJobAdvertisementAddBasicTabState.currentState, 0) &&
+        _validPage(
+            context, keyJobAdvertisementAddGeneralTabState.currentState, 1) &&
+        _validPage(context,
+            keyJobAdvertisementAddDescriptionTabState.currentState, 2) &&
+        _validPage(
+            context, keyJobAdvertisementAddContractTabState.currentState, 3)) {
+      workAddBloc.add(WorkAddEvent(
+          request: WorkAddRequest(
+              obj: WorkAddDataRequest(
+                  tieuDe: keyJobAdvertisementAddBasicTabState
+                      .currentState?.tieuDeController.text,
+                  doTuoi: keyJobAdvertisementAddGeneralTabState
+                      .currentState?.doTuoiController.text,
+                  soLuong: keyJobAdvertisementAddGeneralTabState
+                      .currentState?.soLuongController.text,
+                  hanNopHoSo: keyJobAdvertisementAddBasicTabState
+                      .currentState?.hanNopHoSoController.text,
+                  dangTuNgay: keyJobAdvertisementAddBasicTabState
+                      .currentState?.dangTuNgayController.text,
+                  dangDenNgay: keyJobAdvertisementAddBasicTabState
+                      .currentState?.dangDenNgayController.text,
+                tinhTP: keyJobAdvertisementAddBasicTabState.currentState?.widget.danhSachTinhTpDataResponse?.regionalID,
+                tinNoiBat:(keyJobAdvertisementAddBasicTabState.currentState?.widget.tinNoiBat).toInt().toString(),
+                dauThongTinDN:(keyJobAdvertisementAddBasicTabState.currentState?.widget.dauThongTinDN).toInt().toString(),
+                dangGap:(keyJobAdvertisementAddBasicTabState.currentState?.widget.dangGap).toInt().toString(),
+                thoiGianLV: keyJobAdvertisementAddGeneralTabState
+                    .currentState?.thoiGianLVController.text,
+                chucVu:
+                      keyJobAdvertisementAddGeneralTabState.currentState?.widget.danhSachChucVuDataResponse?.id,
+                  mucLuong: keyJobAdvertisementAddGeneralTabState.currentState?.widget.danhSachMucLuongDataResponse?.salaryID,
+                  kinhNghiem: keyJobAdvertisementAddGeneralTabState.currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
+                  trinhdoCM: keyJobAdvertisementAddGeneralTabState.currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
+                  tinhChatCV: keyJobAdvertisementAddGeneralTabState.currentState?.widget.danhSachTinhChatCongViecDataResponse?.typeOfID,
+                  nganhNghe: keyJobAdvertisementAddGeneralTabState.currentState?.widget.danhSachNganhNgheDataResponse?.careerID,
+                  viTriTuyenDung: keyJobAdvertisementAddGeneralTabState.currentState?.widget.danhSachViTriTuyenDungDataResponse?.jobPlaceID,
+                  mota: keyJobAdvertisementAddDescriptionTabState.currentState?.motaController.text,
+                  yeuCauCV: keyJobAdvertisementAddDescriptionTabState.currentState?.yeuCauCVController.text,
+                  yeuCauHoSo: keyJobAdvertisementAddDescriptionTabState.currentState?.yeuCauHoSoController.text,
+                  quyenLoi: keyJobAdvertisementAddDescriptionTabState.currentState?.quyenLoiController.text,
+                  ghiChu: keyJobAdvertisementAddContractTabState.currentState?.ghiChuController.text,
+                  tenNguoiLH: keyJobAdvertisementAddContractTabState.currentState?.tenNguoiLHController.text,
+                  diaChiNguoiLH:keyJobAdvertisementAddContractTabState.currentState?.tenNguoiLHController.text,
+                  dienThoaiNguoiLH:keyJobAdvertisementAddContractTabState.currentState?.dienThoaiNguoiLHController.text,
+                  emailNguoiLH:keyJobAdvertisementAddContractTabState.currentState?.emailNguoiLHController.text,
+              ))));
     }
     return false;
   }

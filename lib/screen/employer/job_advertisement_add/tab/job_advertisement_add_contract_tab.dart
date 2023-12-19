@@ -25,6 +25,7 @@ class JobAdvertisementAddContractTabState
   TextEditingController diaChiNguoiLHController = TextEditingController();
   TextEditingController dienThoaiNguoiLHController = TextEditingController();
   TextEditingController emailNguoiLHController = TextEditingController();
+  TextEditingController ghiChuController = TextEditingController();
 
   @override
   void initBloc() {}
@@ -88,6 +89,19 @@ class JobAdvertisementAddContractTabState
               textInputAction: TextInputAction.next,
               hintText: 'Email',
               icon: FontAwesomeIcons.envelope,
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: FieldInput(
+              controller: ghiChuController,
+              textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.multiline,
+              maxLength: 2000,
+              minLines: 5,
+              maxLines: 50,
+              icon: Icons.description,
+              hintText: "Ghi chú nội dung đăng tin tuyển dụng",
             ),
           ),
         ],

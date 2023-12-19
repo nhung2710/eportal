@@ -26,7 +26,6 @@ class JobAdvertisementAddDescriptionTabState
   TextEditingController yeuCauCVController = TextEditingController();
   TextEditingController yeuCauHoSoController = TextEditingController();
   TextEditingController quyenLoiController = TextEditingController();
-  TextEditingController ghiChuController = TextEditingController();
 
   @override
   void initBloc() {}
@@ -62,7 +61,7 @@ class JobAdvertisementAddDescriptionTabState
               minLines: 5,
               maxLines: 50,
               icon: Icons.description,
-              hintText: "Mô tả",
+              hintText: "Mô tả công việc",
             ),
           ),
           Container(
@@ -101,20 +100,7 @@ class JobAdvertisementAddDescriptionTabState
               minLines: 5,
               maxLines: 50,
               icon: Icons.description,
-              hintText: "Quyền lợi",
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: ghiChuController,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.multiline,
-              maxLength: 2000,
-              minLines: 5,
-              maxLines: 50,
-              icon: Icons.description,
-              hintText: "Ghi chú",
+              hintText: "Quyền lợi người lao động",
             ),
           ),
         ],

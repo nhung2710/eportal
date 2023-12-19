@@ -20,6 +20,7 @@ import 'package:eportal/model/api/response/common_new/data/danh_sach_quan_huyen_
 import 'package:eportal/model/api/response/common_new/data/danh_sach_tinh_tp_data_response.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
+import 'package:eportal/widget/checkbox/custom_checkbox.dart';
 import 'package:eportal/widget/input/date_input.dart';
 import 'package:eportal/widget/input/field_input.dart';
 import 'package:eportal/widget/select/select_item.dart';
@@ -31,10 +32,10 @@ import '../../../../extension/string_extension.dart';
 
 class JobAdvertisementAddBasicTab extends BasePage {
   JobAdvertisementAddBasicTab({super.key});
-
+  bool? tinNoiBat = false;
+  bool? dauThongTinDN= false;
+  bool? dangGap= false;
   DanhSachTinhTpDataResponse? danhSachTinhTpDataResponse;
-  DanhSachQuanHuyenDataResponse? danhSachQuanHuyenDataResponse;
-  DanhSachNganhNgheDataResponse? danhSachNganhNgheDataResponse;
 
   @override
   State<StatefulWidget> createState() => JobAdvertisementAddBasicTabState();
@@ -43,26 +44,26 @@ class JobAdvertisementAddBasicTab extends BasePage {
 class JobAdvertisementAddBasicTabState
     extends BaseScreenStateActive<JobAdvertisementAddBasicTab> {
   TextEditingController tieuDeController = TextEditingController();
-  TextEditingController soLuongController = TextEditingController();
-  TextEditingController doTuoiController = TextEditingController();
-  TextEditingController thoiGianLVController = TextEditingController();
   TextEditingController hanNopHoSoController = TextEditingController();
   TextEditingController hinhThucNopController = TextEditingController();
   TextEditingController dangTuNgayController = TextEditingController();
   TextEditingController dangDenNgayController = TextEditingController();
 
-  @override
-  void initBloc() {}
+  late DanhSachTinhTpBloc danhSachTinhTpBloc;
 
   @override
+  void initBloc() {
+    danhSachTinhTpBloc = DanhSachTinhTpBloc();
+  }
+  @override
   void initDataLoading() {
-    callApi();
-    // TODO: implement initDataLoading
-    super.initDataLoading();
   }
 
   @override
   void callApi() {
+
+    danhSachTinhTpBloc.add(DanhSachTinhTpEvent(
+        request: DanhSachTinhTpRequest(obj: DanhSachTinhTpDataRequest())));
     super.callApi();
   }
 
@@ -93,59 +94,23 @@ class JobAdvertisementAddBasicTabState
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: doTuoiController,
-              maxLength: 100,
-              textInputAction: TextInputAction.next,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Độ tuổi làm việc không được để trống';
-                }
-                var resultParse = int.tryParse(text);
-                if (resultParse == null || resultParse <= 0) {
-                  return 'Độ tuổi làm việc sai định dạng hoặc nhỏ hơn 1';
-                }
-                return null;
-              },
-              hintText: 'Độ tuổi',
-              icon: FontAwesomeIcons.child,
+            child: CustomCheckbox(
+              title: "Tin nổi bật",
+              onChanged: (value) => widget.tinNoiBat = value,
             ),
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: soLuongController,
-              maxLength: 100,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.number,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Số lượng tuyển làm việc không được để trống';
-                }
-                var resultParse = int.tryParse(text);
-                if (resultParse == null || resultParse <= 0) {
-                  return 'Số lượng tuyển làm việc sai định dạng hoặc nhỏ hơn 1';
-                }
-                return null;
-              },
-              hintText: 'Số lượng tuyển',
-              icon: FontAwesomeIcons.listOl,
+            child: CustomCheckbox(
+              title: "Đầu thông tin doanh nghiệp",
+              onChanged: (value) => widget.dauThongTinDN = value,
             ),
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
-            child: FieldInput(
-              controller: thoiGianLVController,
-              maxLength: 100,
-              textInputAction: TextInputAction.next,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Thời gian làm việc không được để trống';
-                }
-                return null;
-              },
-              hintText: 'Thời gian làm việc',
-              icon: FontAwesomeIcons.clock,
+            child: CustomCheckbox(
+              title: "Đăng gấp",
+              onChanged: (value) => widget.dangGap = value,
             ),
           ),
           Container(
@@ -188,6 +153,53 @@ class JobAdvertisementAddBasicTabState
               hintText: 'Ngày hết hạn',
             ),
           ),
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: DateInput(
+              controller: dangDenNgayController,
+              textInputAction: TextInputAction.next,
+              validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Ngày hết hạn không được để trống';
+                }
+                return null;
+              },
+              hintText: 'Ngày hết hạn',
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: BlocProvider(
+                create: (_) => danhSachTinhTpBloc,
+                child: BlocListener<DanhSachTinhTpBloc,
+                    DataMultiState<DanhSachTinhTpDataResponse>>(
+                  listener: (BuildContext context,
+                      DataMultiState<DanhSachTinhTpDataResponse> state) {},
+                  child: BlocBuilder<DanhSachTinhTpBloc,
+                      DataMultiState<DanhSachTinhTpDataResponse>>(
+                    builder: (BuildContext context,
+                        DataMultiState<DanhSachTinhTpDataResponse> state) =>
+                        _buildViewSearchDanhSachTinhTp(context, state.data),
+                  ),
+                )),
+          ),
+
         ],
       );
+  Widget _buildViewSearchDanhSachTinhTp(
+      BuildContext context, List<DanhSachTinhTpDataResponse> list) {
+    return SelectItem<DanhSachTinhTpDataResponse>(
+      icon: FontAwesomeIcons.locationDot,
+      selectedItem: widget.danhSachTinhTpDataResponse,
+      list: list,
+      itemAsString: (DanhSachTinhTpDataResponse u) =>
+          u.regionalName.supportHtml(),
+      onChanged: (DanhSachTinhTpDataResponse? data) {
+        if (widget.danhSachTinhTpDataResponse != data) {
+          widget.danhSachTinhTpDataResponse = data;
+        }
+      },
+      title: "Tình thành phố",
+    );
+  }
 }
