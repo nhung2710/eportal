@@ -91,7 +91,8 @@ class _FieldInputState extends State<FieldInput> {
           labelText: widget.hintText,
           labelStyle: AppTextStyle.titleChild1
               .copyWith(color: AppColor.colorOfHintText),
-          hintStyle: AppTextStyle.title,
+          hintStyle:
+              AppTextStyle.title.copyWith(color: AppColor.colorOfHintText),
           focusedBorder: OutlineInputBorder(
             borderSide:
                 const BorderSide(color: AppColor.colorOfIcon, width: 2.0),

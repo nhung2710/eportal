@@ -83,6 +83,7 @@ class _CapchaInputState extends State<CapchaInput> {
             letterSpacing: 1,
           ),
           hintStyle: AppTextStyle.title.copyWith(
+            color: AppColor.colorOfHintText,
             letterSpacing: 1,
           ),
           isDense: true,

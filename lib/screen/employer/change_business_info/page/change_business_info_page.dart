@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../bloc/admin/job_user_add_bloc.dart';
 import '../../../../widget/base/base_page.dart';
+import '../../../../widget/tab/custom_tab_view.dart';
 import '../tab/change_business_info_about_tab.dart';
 import '../tab/change_business_info_account_tab.dart';
 import '../tab/change_business_info_contract_tab.dart';
@@ -73,56 +74,25 @@ class _ChangeBusinessInfoPageState extends BasePageState<ChangeBusinessInfoPage>
           },
           child: Column(
             children: [
-              TabBar(
-                controller: _tabController,
-                indicatorColor: AppColor.colorOfIcon,
-                labelColor: AppColor.colorOfIcon,
-                indicatorSize: TabBarIndicatorSize.tab,
-                indicatorPadding: EdgeInsets.zero,
-                padding: EdgeInsets.zero,
-                tabAlignment: TabAlignment.start,
-                isScrollable: true,
-                labelStyle:
-                    AppTextStyle.title.copyWith(overflow: TextOverflow.visible),
-                indicatorWeight: 2,
-                tabs: const [
-                  Tab(
-                    text: "Thông tin hồ sơ nhà tuyển dụng",
-                  ),
-                  Tab(
-                    text: "Giới thiệu về nhà tuyển dụng",
-                  ),
-                  Tab(
-                    text: "Thông tin người liên hệ",
-                  ),
-                  Tab(
-                    text: "Thông tin tài khoản quản trị doanh nghiệp",
-                  ),
-                ],
-              ),
               Expanded(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 5),
-                  child: TabBarView(
-                    controller: _tabController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: [
+                  child: CustomTabView(
+                tabViews: {
+                  "Thông tin hồ sơ nhà tuyển dụng":
                       ChangeBusinessInfoGeneralTab(
-                        key: keyChangeBusinessInfoGeneralTabState,
-                      ),
-                      ChangeBusinessInfoAboutTab(
-                        key: keyChangeBusinessInfoAboutTabState,
-                      ),
-                      ChangeBusinessInfoContractTab(
-                        key: keyChangeBusinessInfoContractTabState,
-                      ),
-                      ChangeBusinessInfoAccountTab(
-                        key: keyChangeBusinessInfoAccountTabState,
-                      ),
-                    ],
+                    key: keyChangeBusinessInfoGeneralTabState,
                   ),
-                ),
-              ),
+                  "Giới thiệu về nhà tuyển dụng": ChangeBusinessInfoAboutTab(
+                    key: keyChangeBusinessInfoAboutTabState,
+                  ),
+                  "Thông tin người liên hệ": ChangeBusinessInfoContractTab(
+                    key: keyChangeBusinessInfoContractTabState,
+                  ),
+                  "Thông tin tài khoản quản trị doanh nghiệp":
+                      ChangeBusinessInfoAccountTab(
+                    key: keyChangeBusinessInfoAccountTabState,
+                  ),
+                },
+              )),
               Container(
                 margin: const EdgeInsets.only(top: 10),
                 child: CapchaInput(

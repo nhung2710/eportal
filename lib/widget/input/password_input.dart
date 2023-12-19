@@ -47,7 +47,8 @@ class _PasswordInputState extends State<PasswordInput> {
           alignLabelWithHint: true,
           labelStyle: AppTextStyle.titleChild1
               .copyWith(color: AppColor.colorOfHintText),
-          hintStyle: AppTextStyle.title,
+          hintStyle:
+              AppTextStyle.title.copyWith(color: AppColor.colorOfHintText),
           isDense: true,
           focusedBorder: OutlineInputBorder(
             borderSide:

@@ -100,7 +100,8 @@ class SelectItemNormalState<T> extends State<SelectItemNormal<T>> {
           alignLabelWithHint: true,
           labelStyle: AppTextStyle.titleChild1
               .copyWith(color: AppColor.colorOfHintText),
-          hintStyle: AppTextStyle.title,
+          hintStyle:
+              AppTextStyle.title.copyWith(color: AppColor.colorOfHintText),
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(5.0),

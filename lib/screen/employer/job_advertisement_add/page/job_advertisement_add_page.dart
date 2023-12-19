@@ -5,6 +5,8 @@ import 'package:eportal/model/api/request/admin/data/job_user_add_data_request.d
 import 'package:eportal/model/api/request/admin/job_user_add_request.dart';
 import 'package:eportal/model/api/response/admin/data/job_user_add_data_response.dart';
 import 'package:eportal/model/api/response/admin/data/work_add_data_response.dart';
+import 'package:eportal/screen/employer/job_advertisement_add/tab/job_advertisement_add_contract_tab.dart';
+import 'package:eportal/screen/employer/job_advertisement_add/tab/job_advertisement_add_description_tab.dart';
 import 'package:eportal/screen/worker/profile_add/tab/profile_add_basic_tab.dart';
 import 'package:eportal/screen/worker/profile_add/tab/profile_add_career_goals_tab.dart';
 import 'package:eportal/screen/worker/profile_add/tab/profile_add_field_skills_tab.dart';
@@ -21,6 +23,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../extension/string_extension.dart';
+import '../../../../widget/tab/custom_tab_view.dart';
 import '../tab/job_advertisement_add_basic_tab.dart';
 import '../tab/job_advertisement_add_general_tab.dart';
 
@@ -37,16 +40,22 @@ class JobAdvertisementAddPage extends BasePage {
 }
 
 class _JobAdvertisementAddPageState
-    extends BasePageState<JobAdvertisementAddPage>
-    with SingleTickerProviderStateMixin {
+    extends BasePageState<JobAdvertisementAddPage> {
+  GlobalKey<CustomTabViewState> keyCustomTabViewState =
+      GlobalKey<CustomTabViewState>();
   GlobalKey<JobAdvertisementAddBasicTabState>
       keyJobAdvertisementAddBasicTabState =
       GlobalKey<JobAdvertisementAddBasicTabState>();
   GlobalKey<JobAdvertisementAddGeneralTabState>
       keyJobAdvertisementAddGeneralTabState =
       GlobalKey<JobAdvertisementAddGeneralTabState>();
+  GlobalKey<JobAdvertisementAddContractTabState>
+      keyJobAdvertisementAddContractTabState =
+      GlobalKey<JobAdvertisementAddContractTabState>();
+  GlobalKey<JobAdvertisementAddDescriptionTabState>
+      keyJobAdvertisementAddDescriptionTabState =
+      GlobalKey<JobAdvertisementAddDescriptionTabState>();
   late WorkAddBloc workAddBloc;
-  late TabController _tabController;
 
   @override
   void initBloc() {
@@ -55,9 +64,6 @@ class _JobAdvertisementAddPageState
 
   @override
   void initDataLoading() {
-    // TODO: implement initDataLoading
-    _tabController = TabController(
-        vsync: this, length: 2, animationDuration: const Duration(seconds: 0));
     super.initDataLoading();
   }
 
@@ -77,42 +83,22 @@ class _JobAdvertisementAddPageState
           },
           child: Column(
             children: [
-              TabBar(
-                controller: _tabController,
-                indicatorColor: AppColor.colorOfIcon,
-                labelColor: AppColor.colorOfIcon,
-                indicatorSize: TabBarIndicatorSize.tab,
-                indicatorPadding: EdgeInsets.zero,
-                padding: EdgeInsets.zero,
-                tabAlignment: TabAlignment.start,
-                isScrollable: true,
-                labelStyle:
-                    AppTextStyle.title.copyWith(overflow: TextOverflow.visible),
-                indicatorWeight: 2,
-                tabs: const [
-                  Tab(
-                    text: "Thông tin tuyển dụng",
-                  ),
-                  Tab(
-                    text: "Thông tin chung",
-                  ),
-                ],
-              ),
               Expanded(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 5),
-                  child: TabBarView(
-                    controller: _tabController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: [
-                      JobAdvertisementAddBasicTab(
-                        key: keyJobAdvertisementAddBasicTabState,
-                      ),
-                      JobAdvertisementAddGeneralTab(
-                        key: keyJobAdvertisementAddGeneralTabState,
-                      ),
-                    ],
-                  ),
+                child: CustomTabView(
+                  tabViews: {
+                    "Thông tin tuyển dụng": JobAdvertisementAddBasicTab(
+                      key: keyJobAdvertisementAddBasicTabState,
+                    ),
+                    "Thông tin chung": JobAdvertisementAddGeneralTab(
+                      key: keyJobAdvertisementAddGeneralTabState,
+                    ),
+                    "Mô tả công việc": JobAdvertisementAddDescriptionTab(
+                      key: keyJobAdvertisementAddDescriptionTabState,
+                    ),
+                    "Thông tin liên hệ": JobAdvertisementAddContractTab(
+                      key: keyJobAdvertisementAddContractTabState,
+                    ),
+                  },
                 ),
               ),
               Container(
@@ -137,7 +123,7 @@ class _JobAdvertisementAddPageState
     if (state?.isValid() == true) {
       return true;
     } else {
-      _tabController.animateTo(page);
+      keyCustomTabViewState.currentState?.nextPage(page);
       return false;
     }
   }

@@ -29,7 +29,7 @@ class ProfileAddLevelTabState
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.multiline,
               maxLength: 2000,
-              minLines: 20,
+              minLines: 5,
               maxLines: 50,
               icon: Icons.description,
               hintText: "Trình độ học vấn",

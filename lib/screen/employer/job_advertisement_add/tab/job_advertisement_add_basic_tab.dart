@@ -117,6 +117,7 @@ class JobAdvertisementAddBasicTabState
               controller: soLuongController,
               maxLength: 100,
               textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.number,
               validator: (text) {
                 if (text == null || text.isEmpty) {
                   return 'Số lượng tuyển làm việc không được để trống';

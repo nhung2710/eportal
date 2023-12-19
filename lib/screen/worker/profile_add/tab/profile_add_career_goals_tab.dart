@@ -29,7 +29,7 @@ class ProfileAddCareerGoalsTabState
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.multiline,
               maxLength: 2000,
-              minLines: 20,
+              minLines: 5,
               maxLines: 50,
               icon: Icons.description,
               hintText: "Mục tiêu nghề nghiệp",
