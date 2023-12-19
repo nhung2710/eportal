@@ -7,15 +7,17 @@ import 'package:eportal/model/base/base_eportal_xml.dart';
 //
 
 class ProfileSaveDataRequest extends BaseEportalXml {
-  int? top;
+  String? jobUserID ;
+  String? title ;
 
-  ProfileSaveDataRequest({this.top = ApplicationConstant.NUMBER_FULL_ITEM});
+  ProfileSaveDataRequest({this.jobUserID,this.title});
 
   @override
   StringBuffer toXml() {
     // TODO: implement toXml
     var buffer = super.toXml();
-    buffer.write(createXml(top, "top"));
+    buffer.write(createXml(title, "title"));
+    buffer.write(createXml(jobUserID, "jobUserID"));
     return buffer;
   }
 }

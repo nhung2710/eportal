@@ -53,7 +53,8 @@ class _SearchInputState extends State<SearchInput> {
           alignLabelWithHint: true,
           labelStyle: AppTextStyle.titleChild1
               .copyWith(color: AppColor.colorOfHintText),
-          hintStyle: AppTextStyle.title,
+          hintStyle: AppTextStyle.title
+              .copyWith(color: AppColor.colorOfHintText),
           isDense: true,
           prefixIconConstraints: const BoxConstraints(
             minWidth: 25,
