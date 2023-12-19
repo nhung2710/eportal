@@ -6,6 +6,6 @@ import 'package:eportal/model/api/request/admin/profile_save_list_request.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class ProfileSaveListEvent extends BaseSingleEvent<ProfileSaveListRequest> {
+class ProfileSaveListEvent extends BasePageEvent<ProfileSaveListRequest> {
   const ProfileSaveListEvent({required super.request});
 }

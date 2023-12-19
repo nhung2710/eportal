@@ -1,13 +1,12 @@
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/tab/custom_tab_view.dart';
 import 'package:flutter/material.dart';
 
 import '../tab/list_of_candidate_profile_applied_tab.dart';
-import '../tab/list_of_candidate_profile_invited_tab.dart';
+import '../tab/list_of_candidate_profile_block_tab.dart';
 import '../tab/list_of_candidate_profile_saved_tab.dart';
 import '../tab/list_of_candidate_profile_tab.dart';
+import '../tab/list_of_candidate_profile_viewed_tab.dart';
 
 //
 // Created by BlackRose on 04/12/2023.
@@ -41,9 +40,10 @@ class _CandidateProfilePageState
   Widget pageUI(BuildContext context) => CustomTabView(
         tabViews: const {
           "Danh sách hồ sơ ứng viên": ListOfCandidateProfileTab(),
-          "Hồ sơ đã ứng tuyển": ListOfCandidateProfileAppliedTab(),
+          "Hồ sơ ứng viên đã xem": ListOfCandidateProfileViewedTab(),
           "Hồ sơ ứng viên đã lưu": ListOfCandidateProfileSavedTab(),
-          "Hồ sơ ứng viên đã mời": ListOfCandidateProfileInvitedTab(),
+          "Hồ sơ ứng viên đã ứng tuyển": ListOfCandidateProfileAppliedTab(),
+          "Hồ sơ ứng viên đã chặn": ListOfCandidateProfileBlockTab(),
         },
       );
 }

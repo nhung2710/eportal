@@ -6,6 +6,6 @@ import 'package:eportal/model/api/request/admin/profile_black_list_request.dart'
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class ProfileBlackListEvent extends BaseSingleEvent<ProfileBlackListRequest> {
+class ProfileBlackListEvent extends BasePageEvent<ProfileBlackListRequest> {
   const ProfileBlackListEvent({required super.request});
 }

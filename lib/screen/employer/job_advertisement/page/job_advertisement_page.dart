@@ -1,23 +1,24 @@
-import 'dart:math';
-
+import 'package:eportal/event/admin/work_delete_event.dart';
+import 'package:eportal/model/api/request/admin/data/work_delete_data_request.dart';
 import 'package:eportal/model/api/request/admin/data/work_search_by_user_name_data_request.dart';
+import 'package:eportal/model/api/request/admin/work_delete_request.dart';
 import 'package:eportal/model/api/request/admin/work_search_by_user_name_request.dart';
-import 'package:eportal/model/api/request/common_new/data/work_search_data_request.dart';
-import 'package:eportal/model/api/request/common_new/work_search_request.dart';
+import 'package:eportal/model/api/response/admin/data/work_delete_data_response.dart';
 import 'package:eportal/model/api/response/admin/data/work_search_by_user_name_data_response.dart';
 import 'package:eportal/screen/employer/job_advertisement/dialog/filter_job_advertisement_dialog.dart';
+import 'package:eportal/screen/employer/job_advertisement/widget/job_advertisement_item.dart';
 import 'package:eportal/screen/employer/job_advertisement_add/page/job_advertisement_add_page.dart';
-import 'package:eportal/screen/share/work_search_detail/page/work_search_detail_page.dart';
 import 'package:eportal/state/base/base_state.dart';
+import 'package:eportal/style/app_color.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
-import 'package:eportal/widget/full_data_item/profile_item.dart';
-import 'package:eportal/widget/full_data_item/work_item.dart';
 import 'package:eportal/widget/input/search_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
+import '../../../../bloc/admin/work_delete_bloc.dart';
 import '../../../../bloc/admin/work_search_by_user_name_bloc.dart';
 import '../../../../event/admin/work_search_by_user_name_event.dart';
 import '../../job_advertisement_edit/page/job_advertisement_edit_page.dart';
@@ -38,7 +39,7 @@ class _JobAdvertisementPageState
     extends BasePageStateActive<JobAdvertisementPage> {
   TextEditingController textEditingController = TextEditingController();
   late WorkSearchByUserNameBloc workSearchByUserNameBloc;
-
+  late WorkDeleteBloc workDeleteBloc;
   WorkSearchByUserNameRequest request =
       WorkSearchByUserNameRequest(obj: WorkSearchByUserNameDataRequest());
 
@@ -56,6 +57,7 @@ class _JobAdvertisementPageState
   @override
   void initBloc() {
     workSearchByUserNameBloc = WorkSearchByUserNameBloc();
+    workDeleteBloc = WorkDeleteBloc();
   }
 
   @override
@@ -111,40 +113,81 @@ class _JobAdvertisementPageState
           ),
           Expanded(
             child: BlocProvider(
-              create: (_) => workSearchByUserNameBloc,
-              child: BlocListener<WorkSearchByUserNameBloc,
-                  DataPageState<WorkSearchByUserNameDataResponse>>(
+              create: (_) => workDeleteBloc,
+              child: BlocListener<WorkDeleteBloc,
+                  DataSingleState<WorkDeleteDataResponse>>(
                 listener: (BuildContext context,
-                    DataPageState<WorkSearchByUserNameDataResponse> state) {},
-                child: BlocBuilder<WorkSearchByUserNameBloc,
-                    DataPageState<WorkSearchByUserNameDataResponse>>(
-                  builder: (BuildContext context,
-                          DataPageState<WorkSearchByUserNameDataResponse>
-                              state) =>
-                      handleDataPageState<WorkSearchByUserNameDataResponse>(
-                          state,
-                          (context, state) => ListView.builder(
-                              shrinkWrap: true,
-                              controller: scrollController,
-                              itemCount: state.length,
-                              itemBuilder: (context, i) => WorkItem(
-                                    onTap: () => nextPage(
-                                        (context) => JobAdvertisementEditPage(
+                    DataSingleState<WorkDeleteDataResponse> state) {
+                  handlerActionDataSingleState(state, (obj) {
+                    showCenterMessage("Xoá tin tuyển dụng thành công")
+                        .then((value) => initDataLoading());
+                  });
+                },
+                child: BlocProvider(
+                  create: (_) => workSearchByUserNameBloc,
+                  child: BlocListener<WorkSearchByUserNameBloc,
+                      DataPageState<WorkSearchByUserNameDataResponse>>(
+                    listener: (BuildContext context,
+                        DataPageState<WorkSearchByUserNameDataResponse>
+                            state) {},
+                    child: BlocBuilder<WorkSearchByUserNameBloc,
+                        DataPageState<WorkSearchByUserNameDataResponse>>(
+                      builder: (BuildContext context,
+                              DataPageState<WorkSearchByUserNameDataResponse>
+                                  state) =>
+                          handleDataPageState<WorkSearchByUserNameDataResponse>(
+                              state,
+                              (context, state) => ListView.builder(
+                                  shrinkWrap: true,
+                                  controller: scrollController,
+                                  itemCount: state.length,
+                                  itemBuilder: (context, i) =>
+                                      JobAdvertisementItem(
+                                        onTapEdit: () => nextPage((context) =>
+                                            JobAdvertisementEditPage(
                                               data: state.elementAt(i),
                                             )),
-                                    title: state.elementAt(i).search,
-                                    ages: state.elementAt(i).search,
-                                    benefit: state.elementAt(i).search,
-                                    workTime: state.elementAt(i).search,
-                                    tenTinhTP: state.elementAt(i).search,
-                                    soNamKinhNghiem: state.elementAt(i).search,
-                                    hanNopHoSo: state.elementAt(i).search,
-                                    description: state.elementAt(i).search,
-                                  ))),
+                                        data: state.elementAt(i),
+                                        onTapDelete: () =>
+                                            deleteWork(state.elementAt(i)),
+                                      ))),
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
         ],
       );
+
+  void deleteWork(WorkSearchByUserNameDataResponse item) {
+    Alert(
+        context: context,
+        type: AlertType.warning,
+        title: "Bạn có chắc chắn muốn xoá tin ứng tuyển này không?",
+        desc: "Dữ liệu bị xoá không thể khôi phục lại",
+        buttons: [
+          DialogButton(
+            onPressed: () => Navigator.pop(context),
+            color: AppColor.colorOfIcon,
+            child: const Text(
+              "Huỷ",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          ),
+          DialogButton(
+            onPressed: () {
+              Navigator.pop(context);
+              workDeleteBloc.add(WorkDeleteEvent(
+                  request: WorkDeleteRequest(
+                      obj: WorkDeleteDataRequest(workId: item.workID))));
+            },
+            color: Colors.red,
+            child: const Text(
+              "Tiếp tục",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          )
+        ]).show();
+  }
 }

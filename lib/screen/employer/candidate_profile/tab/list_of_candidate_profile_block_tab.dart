@@ -1,8 +1,8 @@
-import 'package:eportal/bloc/admin/profile_send_list_bloc.dart';
-import 'package:eportal/event/admin/profile_send_list_event.dart';
-import 'package:eportal/model/api/request/admin/data/profile_send_list_data_request.dart';
-import 'package:eportal/model/api/request/admin/profile_send_list_request.dart';
-import 'package:eportal/model/api/response/admin/data/profile_send_list_data_response.dart';
+import 'package:eportal/bloc/admin/profile_black_list_bloc.dart';
+import 'package:eportal/event/admin/profile_black_list_event.dart';
+import 'package:eportal/model/api/request/admin/data/profile_black_list_data_request.dart';
+import 'package:eportal/model/api/request/admin/profile_black_list_request.dart';
+import 'package:eportal/model/api/response/admin/data/profile_black_list_data_response.dart';
 import 'package:eportal/screen/share/news_curriculum_vitae_detail/page/news_curriculum_vitae_detail_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
@@ -12,28 +12,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 //
-// Created by BlackRose on 05/12/2023.
+// Created by BlackRose on 12/20/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class ListOfCandidateProfileAppliedTab extends BasePage {
-  const ListOfCandidateProfileAppliedTab({super.key});
+class ListOfCandidateProfileBlockTab extends BasePage {
+  const ListOfCandidateProfileBlockTab({super.key});
 
   @override
-  State<StatefulWidget> createState() =>
-      _ListOfCandidateProfileAppliedTabState();
+  State<StatefulWidget> createState() => _ListOfCandidateProfileBlockTabState();
 }
 
-class _ListOfCandidateProfileAppliedTabState
-    extends BasePageStateActive<ListOfCandidateProfileAppliedTab> {
-  late ProfileSendListBloc profileSendListBloc;
-  ProfileSendListRequest request =
-      ProfileSendListRequest(obj: ProfileSendListDataRequest());
+class _ListOfCandidateProfileBlockTabState
+    extends BasePageStateActive<ListOfCandidateProfileBlockTab> {
+  late ProfileBlackListBloc profileBlackListBloc;
+  ProfileBlackListRequest request =
+      ProfileBlackListRequest(obj: ProfileBlackListDataRequest());
   TextEditingController textEditingController = TextEditingController();
 
   @override
   void initBloc() {
-    profileSendListBloc = ProfileSendListBloc();
+    profileBlackListBloc = ProfileBlackListBloc();
   }
 
   @override
@@ -53,7 +52,7 @@ class _ListOfCandidateProfileAppliedTabState
 
   @override
   void callApi() {
-    profileSendListBloc.add(ProfileSendListEvent(request: request));
+    profileBlackListBloc.add(ProfileBlackListEvent(request: request));
   }
 
   @override
@@ -79,16 +78,17 @@ class _ListOfCandidateProfileAppliedTabState
           ),
           Expanded(
             child: BlocProvider(
-                create: (_) => profileSendListBloc,
-                child: BlocListener<ProfileSendListBloc,
-                    DataPageState<ProfileSendListDataResponse>>(
+                create: (_) => profileBlackListBloc,
+                child: BlocListener<ProfileBlackListBloc,
+                    DataPageState<ProfileBlackListDataResponse>>(
                   listener: (BuildContext context,
-                      DataPageState<ProfileSendListDataResponse> state) {},
-                  child: BlocBuilder<ProfileSendListBloc,
-                      DataPageState<ProfileSendListDataResponse>>(
+                      DataPageState<ProfileBlackListDataResponse> state) {},
+                  child: BlocBuilder<ProfileBlackListBloc,
+                      DataPageState<ProfileBlackListDataResponse>>(
                     builder: (BuildContext context,
-                            DataPageState<ProfileSendListDataResponse> state) =>
-                        handleDataPageState<ProfileSendListDataResponse>(
+                            DataPageState<ProfileBlackListDataResponse>
+                                state) =>
+                        handleDataPageState<ProfileBlackListDataResponse>(
                       state,
                       (context, state) => ListView.builder(
                           shrinkWrap: true,

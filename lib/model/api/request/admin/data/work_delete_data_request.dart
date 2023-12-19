@@ -1,4 +1,3 @@
-import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/model/base/base_eportal_xml.dart';
 
 //
@@ -7,15 +6,15 @@ import 'package:eportal/model/base/base_eportal_xml.dart';
 //
 
 class WorkDeleteDataRequest extends BaseEportalXml {
-  int? top;
+  String? workId;
 
-  WorkDeleteDataRequest({this.top = ApplicationConstant.NUMBER_FULL_ITEM});
+  WorkDeleteDataRequest({this.workId});
 
   @override
   StringBuffer toXml() {
     // TODO: implement toXml
     var buffer = super.toXml();
-    buffer.write(createXml(top, "top"));
+    buffer.write(createXml(workId, "workId"));
     return buffer;
   }
 }

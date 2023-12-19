@@ -8,7 +8,7 @@ import 'package:eportal/repository/admin/profile_black_list_repository.dart';
 // Created by BlackRose on 13/12/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class ProfileBlackListBloc extends BaseSingleBloc<
+class ProfileBlackListBloc extends BasePageBloc<
     ProfileBlackListDataResponse,
     ProfileBlackListRepository,
     ProfileBlackListEvent,

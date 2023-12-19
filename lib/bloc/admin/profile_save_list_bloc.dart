@@ -9,7 +9,7 @@ import 'package:eportal/repository/admin/profile_save_list_repository.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class ProfileSaveListBloc extends BaseSingleBloc<ProfileSaveListDataResponse,
+class ProfileSaveListBloc extends BasePageBloc<ProfileSaveListDataResponse,
     ProfileSaveListRepository, ProfileSaveListEvent, ProfileSaveListResponse> {
   @override
   Future<ProfileSaveListResponse> callApiResult(

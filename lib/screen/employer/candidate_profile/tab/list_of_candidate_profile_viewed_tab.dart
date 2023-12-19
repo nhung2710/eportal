@@ -1,12 +1,11 @@
-import 'package:eportal/bloc/common_new/job_user_search_bloc.dart';
-import 'package:eportal/event/common_new/job_user_search_event.dart';
-import 'package:eportal/model/api/request/common_new/data/job_user_search_data_request.dart';
-import 'package:eportal/model/api/request/common_new/job_user_search_request.dart';
-import 'package:eportal/model/api/response/common_new/data/job_user_search_data_response.dart';
+import 'package:eportal/bloc/admin/profile_view_list_bloc.dart';
+import 'package:eportal/event/admin/profile_view_list_event.dart';
+import 'package:eportal/model/api/request/admin/data/profile_view_list_data_request.dart';
+import 'package:eportal/model/api/request/admin/profile_view_list_request.dart';
+import 'package:eportal/model/api/response/admin/data/profile_view_list_data_response.dart';
 import 'package:eportal/screen/share/news_curriculum_vitae_detail/page/news_curriculum_vitae_detail_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
-import 'package:eportal/widget/dialog/filter_job_dialog.dart';
 import 'package:eportal/widget/full_data_item/curriculum_vitae_item.dart';
 import 'package:eportal/widget/input/search_input.dart';
 import 'package:flutter/material.dart';
@@ -17,29 +16,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class ListOfCandidateProfileInvitedTab extends BasePage {
-  const ListOfCandidateProfileInvitedTab({super.key});
+class ListOfCandidateProfileViewedTab extends BasePage {
+  const ListOfCandidateProfileViewedTab({super.key});
 
   @override
   State<StatefulWidget> createState() =>
-      _ListOfCandidateProfileInvitedTabState();
+      _ListOfCandidateProfileViewedTabState();
 }
 
-class _ListOfCandidateProfileInvitedTabState
-    extends BasePageStateActive<ListOfCandidateProfileInvitedTab> {
-  late JobUserSearchBloc jobUserSearchBloc;
-  JobUserSearchRequest request =
-      JobUserSearchRequest(obj: JobUserSearchDataRequest());
-  final filterJobDialogKey = GlobalKey<FilterJobDialogState>();
-  late FilterJobDialog filterJobDialog = FilterJobDialog(
-      key: filterJobDialogKey,
-      data: request.obj,
-      onPressed: () => initDataLoading());
+class _ListOfCandidateProfileViewedTabState
+    extends BasePageStateActive<ListOfCandidateProfileViewedTab> {
+  late ProfileViewListBloc profileViewListBloc;
+  ProfileViewListRequest request =
+      ProfileViewListRequest(obj: ProfileViewListDataRequest());
   TextEditingController textEditingController = TextEditingController();
 
   @override
   void initBloc() {
-    jobUserSearchBloc = JobUserSearchBloc();
+    profileViewListBloc = ProfileViewListBloc();
   }
 
   @override
@@ -59,7 +53,7 @@ class _ListOfCandidateProfileInvitedTabState
 
   @override
   void callApi() {
-    jobUserSearchBloc.add(JobUserSearchEvent(request: request));
+    profileViewListBloc.add(ProfileViewListEvent(request: request));
   }
 
   @override
@@ -80,24 +74,21 @@ class _ListOfCandidateProfileInvitedTabState
               onTap: () {
                 initDataLoading();
               },
-              onTapFilter: () {
-                showDialog(context: context, builder: (_) => filterJobDialog);
-              },
               hintText: "Nội dung tìm kiếm",
             ),
           ),
           Expanded(
             child: BlocProvider(
-                create: (_) => jobUserSearchBloc,
-                child: BlocListener<JobUserSearchBloc,
-                    DataPageState<JobUserSearchDataResponse>>(
+                create: (_) => profileViewListBloc,
+                child: BlocListener<ProfileViewListBloc,
+                    DataPageState<ProfileViewListDataResponse>>(
                   listener: (BuildContext context,
-                      DataPageState<JobUserSearchDataResponse> state) {},
-                  child: BlocBuilder<JobUserSearchBloc,
-                      DataPageState<JobUserSearchDataResponse>>(
+                      DataPageState<ProfileViewListDataResponse> state) {},
+                  child: BlocBuilder<ProfileViewListBloc,
+                      DataPageState<ProfileViewListDataResponse>>(
                     builder: (BuildContext context,
-                            DataPageState<JobUserSearchDataResponse> state) =>
-                        handleDataPageState<JobUserSearchDataResponse>(
+                            DataPageState<ProfileViewListDataResponse> state) =>
+                        handleDataPageState<ProfileViewListDataResponse>(
                       state,
                       (context, state) => ListView.builder(
                           shrinkWrap: true,
@@ -106,14 +97,13 @@ class _ListOfCandidateProfileInvitedTabState
                           itemBuilder: (context, i) => CurriculumVitaeItem(
                                 onTap: () => nextPage(
                                     (context) => NewsCurriculumVitaeDetailPage(
-                                          id: state.elementAt(i).id,
+                                          id: state.elementAt(i).search,
                                         )),
-                                title: state.elementAt(i).title,
-                                education: state.elementAt(i).education,
-                                careerGoals: state.elementAt(i).careerGoals,
-                                skillsForte: state.elementAt(i).skillsForte,
-                                workExperience:
-                                    state.elementAt(i).workExperience,
+                                title: state.elementAt(i).search,
+                                education: state.elementAt(i).search,
+                                careerGoals: state.elementAt(i).search,
+                                skillsForte: state.elementAt(i).search,
+                                workExperience: state.elementAt(i).search,
                               )),
                     ),
                   ),

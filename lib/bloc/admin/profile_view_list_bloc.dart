@@ -8,7 +8,7 @@ import 'package:eportal/repository/admin/profile_view_list_repository.dart';
 // Created by BlackRose on 13/12/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class ProfileViewListBloc extends BaseSingleBloc<ProfileViewListDataResponse,
+class ProfileViewListBloc extends BasePageBloc<ProfileViewListDataResponse,
     ProfileViewListRepository, ProfileViewListEvent, ProfileViewListResponse> {
   @override
   Future<ProfileViewListResponse> callApiResult(

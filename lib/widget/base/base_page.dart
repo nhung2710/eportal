@@ -201,9 +201,9 @@ class BasePageState<T extends StatefulWidget> extends State<T>
           DialogButton(
             onPressed: () => Navigator.pop(context),
             gradient: const LinearGradient(colors: [
-              Color.fromRGBO(116, 116, 191, 1.0),
-              Color.fromRGBO(52, 138, 199, 1.0),
               AppColor.colorOfIcon,
+              AppColor.colorOfIcon,
+              AppColor.colorOfIcon
             ]),
             child: const Text(
               "Tôi đã biết",
@@ -224,8 +224,8 @@ class BasePageState<T extends StatefulWidget> extends State<T>
           DialogButton(
             onPressed: () => Navigator.pop(context),
             gradient: const LinearGradient(colors: [
-              Color.fromRGBO(116, 116, 191, 1.0),
-              Color.fromRGBO(52, 138, 199, 1.0),
+              AppColor.colorOfIcon,
+              AppColor.colorOfIcon,
               AppColor.colorOfIcon
             ]),
             child: const Text(

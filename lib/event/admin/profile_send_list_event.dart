@@ -6,6 +6,6 @@ import 'package:eportal/model/api/request/admin/profile_send_list_request.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class ProfileSendListEvent extends BaseSingleEvent<ProfileSendListRequest> {
+class ProfileSendListEvent extends BasePageEvent<ProfileSendListRequest> {
   const ProfileSendListEvent({required super.request});
 }

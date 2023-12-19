@@ -6,6 +6,6 @@ import 'package:eportal/model/api/request/admin/profile_view_list_request.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class ProfileViewListEvent extends BaseSingleEvent<ProfileViewListRequest> {
+class ProfileViewListEvent extends BasePageEvent<ProfileViewListRequest> {
   const ProfileViewListEvent({required super.request});
 }

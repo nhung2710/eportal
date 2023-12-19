@@ -8,13 +8,13 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 import '../../../../extension/map_json_extension.dart';
 
 class ProfileBlackListResponse
-    extends BaseSingleEportalResponse<ProfileBlackListDataResponse> {
+    extends BasePageEportalResponse<ProfileBlackListDataResponse> {
   ProfileBlackListResponse(
       {required super.data, required super.status, required super.message});
 
   factory ProfileBlackListResponse.fromJson(Map<String, dynamic> json) {
     return ProfileBlackListResponse(
-        data: json.toObjectJson(
+        data: json.toListObjectJson(
             mapJson: (v) => ProfileBlackListDataResponse.fromJson(v)),
         status: json["status"],
         message: json["message"]);

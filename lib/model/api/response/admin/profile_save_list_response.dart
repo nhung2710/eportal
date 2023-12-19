@@ -8,13 +8,13 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 import '../../../../extension/map_json_extension.dart';
 
 class ProfileSaveListResponse
-    extends BaseSingleEportalResponse<ProfileSaveListDataResponse> {
+    extends BasePageEportalResponse<ProfileSaveListDataResponse> {
   ProfileSaveListResponse(
       {required super.data, required super.status, required super.message});
 
   factory ProfileSaveListResponse.fromJson(Map<String, dynamic> json) {
     return ProfileSaveListResponse(
-        data: json.toObjectJson(
+        data: json.toListObjectJson(
             mapJson: (v) => ProfileSaveListDataResponse.fromJson(v)),
         status: json["status"],
         message: json["message"]);

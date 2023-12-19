@@ -7,7 +7,7 @@ import 'package:eportal/model/base/base_eportal_request.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class ProfileSendListRequest
-    extends BaseEportalRequest<ProfileSendListDataRequest> {
+    extends BasePageEportalRequest<ProfileSendListDataRequest> {
   ProfileSendListRequest({required super.obj});
 
   @override
