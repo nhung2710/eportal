@@ -9,7 +9,7 @@ import 'package:eportal/repository/admin/work_search_by_user_name_repository.dar
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class WorkSearchByUserNameBloc extends BaseSingleBloc<
+class WorkSearchByUserNameBloc extends BasePageBloc<
     WorkSearchByUserNameDataResponse,
     WorkSearchByUserNameRepository,
     WorkSearchByUserNameEvent,

@@ -55,7 +55,10 @@ class _CapchaInputState extends State<CapchaInput> {
         obscureText: false,
         controller: widget.controller,
         maxLength: widget.maxLength,
-        style: AppTextStyle.title,
+        style: AppTextStyle.title.copyWith(
+            letterSpacing: 10,
+            fontWeight: FontWeight.w900,
+            color: Colors.black),
         textInputAction: widget.textInputAction,
         inputFormatters: [UpperCaseTextFormatter()],
         validator: (text) {
@@ -73,6 +76,15 @@ class _CapchaInputState extends State<CapchaInput> {
         onFieldSubmitted: widget.onFieldSubmitted,
         decoration: InputDecoration(
           hintText: "Mã xác thực",
+          labelText: "Mã xác thực",
+          alignLabelWithHint: true,
+          labelStyle: AppTextStyle.titleChild1.copyWith(
+            color: AppColor.colorOfHintText,
+            letterSpacing: 1,
+          ),
+          hintStyle: AppTextStyle.title.copyWith(
+            letterSpacing: 1,
+          ),
           isDense: true,
           prefixIconConstraints: const BoxConstraints(
             minWidth: 25,
@@ -100,9 +112,12 @@ class _CapchaInputState extends State<CapchaInput> {
                     children: List.generate(
                         code.length,
                         (index) => TextSpan(
-                            text: "\t${code[index]}\t",
+                            text: code[index],
                             style: AppTextStyle.titlePage.copyWith(
+                                overflow: TextOverflow.visible,
                                 color: colors[index],
+                                fontWeight: FontWeight.w900,
+                                letterSpacing: 10,
                                 fontSize: fontSizes[index])))),
               ),
             ),
@@ -122,7 +137,17 @@ class _CapchaInputState extends State<CapchaInput> {
     numberReload = 0;
     widget.controller?.clear();
     code = "".randomString(widget.maxLength).toUpperCase();
-    colors = List.generate(code.length, (index) => getRandomColor());
+    const lstColor = [
+      Colors.black,
+      Colors.red,
+      Colors.blue,
+      Colors.blueGrey,
+      Colors.orange,
+      Colors.indigo
+    ];
+
+    colors = List.generate(code.length,
+        (index) => lstColor.elementAt(Random().nextInt(lstColor.length)));
     fontSizes = List.generate(
         code.length,
         (index) =>

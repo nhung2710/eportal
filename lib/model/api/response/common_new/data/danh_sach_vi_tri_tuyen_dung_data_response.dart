@@ -1,6 +1,8 @@
 import 'package:eportal/model/base/base_eportal_data_response.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../extension/string_extension.dart';
+
 //
 // Created by BlackRose on 14/12/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -46,6 +48,7 @@ class DanhSachViTriTuyenDungDataResponse extends BaseEportalDataResponse {
     userName = json['userName']?.toString();
     updatedBy = json['updatedBy']?.toString();
     userUpdate = json['userUpdate']?.toString();
+    search = jobPlaceName.getValueSearch();
   }
 
   Map<String, dynamic> toJson() {

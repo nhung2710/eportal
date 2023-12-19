@@ -25,6 +25,7 @@ class WorkSearchByUserNameDataRequest extends BasePageEportalXml {
   StringBuffer toXml() {
     // TODO: implement toXml
     var buffer = super.toXml();
+    buffer.write(createXml(mucLuong, "mucLuong"));
     buffer.write(createXml(kinhNghiem, "kinhNghiem"));
     buffer.write(createXml(tinhTp ?? 0, "tinhTp"));
     buffer.write(createXml(quanHuyen ?? 0, "quanHuyen"));

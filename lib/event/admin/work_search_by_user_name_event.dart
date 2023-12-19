@@ -7,6 +7,6 @@ import 'package:eportal/model/api/request/admin/work_search_by_user_name_request
 //
 
 class WorkSearchByUserNameEvent
-    extends BaseSingleEvent<WorkSearchByUserNameRequest> {
+    extends BasePageEvent<WorkSearchByUserNameRequest> {
   const WorkSearchByUserNameEvent({required super.request});
 }

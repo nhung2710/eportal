@@ -49,6 +49,11 @@ class _SearchInputState extends State<SearchInput> {
         onFieldSubmitted: widget.onFieldSubmitted,
         decoration: InputDecoration(
           hintText: widget.hintText,
+          labelText: widget.hintText,
+          alignLabelWithHint: true,
+          labelStyle: AppTextStyle.titleChild1
+              .copyWith(color: AppColor.colorOfHintText),
+          hintStyle: AppTextStyle.title,
           isDense: true,
           prefixIconConstraints: const BoxConstraints(
             minWidth: 25,

@@ -8,13 +8,13 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 import '../../../../extension/map_json_extension.dart';
 
 class WorkSearchByUserNameResponse
-    extends BaseSingleEportalResponse<WorkSearchByUserNameDataResponse> {
+    extends BasePageEportalResponse<WorkSearchByUserNameDataResponse> {
   WorkSearchByUserNameResponse(
       {required super.data, required super.status, required super.message});
 
   factory WorkSearchByUserNameResponse.fromJson(Map<String, dynamic> json) {
     return WorkSearchByUserNameResponse(
-        data: json.toObjectJson(
+        data: json.toListObjectJson(
             mapJson: (v) => WorkSearchByUserNameDataResponse.fromJson(v)),
         status: json["status"],
         message: json["message"]);

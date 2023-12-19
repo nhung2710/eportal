@@ -4,16 +4,22 @@ import 'package:eportal/model/api/request/admin/data/work_search_by_user_name_da
 import 'package:eportal/model/api/request/admin/work_search_by_user_name_request.dart';
 import 'package:eportal/model/api/request/common_new/data/work_search_data_request.dart';
 import 'package:eportal/model/api/request/common_new/work_search_request.dart';
+import 'package:eportal/model/api/response/admin/data/work_search_by_user_name_data_response.dart';
 import 'package:eportal/screen/employer/job_advertisement/dialog/filter_job_advertisement_dialog.dart';
 import 'package:eportal/screen/employer/job_advertisement_add/page/job_advertisement_add_page.dart';
+import 'package:eportal/screen/share/work_search_detail/page/work_search_detail_page.dart';
+import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
 import 'package:eportal/widget/full_data_item/profile_item.dart';
+import 'package:eportal/widget/full_data_item/work_item.dart';
 import 'package:eportal/widget/input/search_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../bloc/admin/work_search_by_user_name_bloc.dart';
+import '../../../../event/admin/work_search_by_user_name_event.dart';
 import '../../job_advertisement_edit/page/job_advertisement_edit_page.dart';
 
 //
@@ -31,13 +37,14 @@ class JobAdvertisementPage extends BasePage {
 class _JobAdvertisementPageState
     extends BasePageStateActive<JobAdvertisementPage> {
   TextEditingController textEditingController = TextEditingController();
-  WorkSearchByUserNameBloc workSearchByUserNameBloc =
-      WorkSearchByUserNameBloc();
+  late WorkSearchByUserNameBloc workSearchByUserNameBloc;
+
   WorkSearchByUserNameRequest request =
       WorkSearchByUserNameRequest(obj: WorkSearchByUserNameDataRequest());
 
   @override
   bool isHasAppBar(BuildContext context) => false;
+
   final filterJobDialogKey = GlobalKey<FilterJobDialogState>();
   late FilterJobAdvertisementDialog filterJobAdvertisementDialog =
       FilterJobAdvertisementDialog(
@@ -45,6 +52,28 @@ class _JobAdvertisementPageState
     data: request.obj,
     onPressed: () => initDataLoading(),
   );
+
+  @override
+  void initBloc() {
+    workSearchByUserNameBloc = WorkSearchByUserNameBloc();
+  }
+
+  @override
+  void callApi() {
+    workSearchByUserNameBloc.add(WorkSearchByUserNameEvent(request: request));
+  }
+
+  @override
+  void initDataLoading() {
+    request.obj.soTrangHienTai = 1;
+    callApi();
+  }
+
+  @override
+  void getMoreData() {
+    request.obj.soTrangHienTai++;
+    callApi();
+  }
 
   @override
   Widget? getFloatingActionButton(BuildContext context) =>
@@ -81,26 +110,39 @@ class _JobAdvertisementPageState
             ),
           ),
           Expanded(
-            child: SingleChildScrollView(
-              child: ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: Random().nextInt(100) + 1,
-                  itemBuilder: (context, index) => ProfileItem(
-                        onTap: () {
-                          nextPage((context) => JobAdvertisementEditPage());
-                        },
-                        title: "Hồ sơ ${index + 1}",
-                        location: "Hà nội",
-                        status: "Chờ duyệt",
-                        experience: "Dưới 1 năm",
-                        salary: "5-7 triệu",
-                        fromDate: "01/11/2023",
-                        toDate: "01/11/2023",
-                        industry: "Bán hàng",
-                        numberView: "2",
-                        isShowFull: true,
-                      )),
+            child: BlocProvider(
+              create: (_) => workSearchByUserNameBloc,
+              child: BlocListener<WorkSearchByUserNameBloc,
+                  DataPageState<WorkSearchByUserNameDataResponse>>(
+                listener: (BuildContext context,
+                    DataPageState<WorkSearchByUserNameDataResponse> state) {},
+                child: BlocBuilder<WorkSearchByUserNameBloc,
+                    DataPageState<WorkSearchByUserNameDataResponse>>(
+                  builder: (BuildContext context,
+                          DataPageState<WorkSearchByUserNameDataResponse>
+                              state) =>
+                      handleDataPageState<WorkSearchByUserNameDataResponse>(
+                          state,
+                          (context, state) => ListView.builder(
+                              shrinkWrap: true,
+                              controller: scrollController,
+                              itemCount: state.length,
+                              itemBuilder: (context, i) => WorkItem(
+                                    onTap: () => nextPage(
+                                        (context) => WorkSearchDetailPage(
+                                              id: state.elementAt(i).search,
+                                            )),
+                                    title: state.elementAt(i).search,
+                                    ages: state.elementAt(i).search,
+                                    benefit: state.elementAt(i).search,
+                                    workTime: state.elementAt(i).search,
+                                    tenTinhTP: state.elementAt(i).search,
+                                    soNamKinhNghiem: state.elementAt(i).search,
+                                    hanNopHoSo: state.elementAt(i).search,
+                                    description: state.elementAt(i).search,
+                                  ))),
+                ),
+              ),
             ),
           ),
         ],

@@ -83,9 +83,15 @@ class _FieldInputState extends State<FieldInput> {
         keyboardType: widget.keyboardType,
         style: AppTextStyle.title,
         textAlignVertical: TextAlignVertical.top,
+        textAlign: TextAlign.start,
         onFieldSubmitted: widget.onFieldSubmitted,
         decoration: InputDecoration(
+          alignLabelWithHint: true,
           hintText: widget.hintText,
+          labelText: widget.hintText,
+          labelStyle: AppTextStyle.titleChild1
+              .copyWith(color: AppColor.colorOfHintText),
+          hintStyle: AppTextStyle.title,
           focusedBorder: OutlineInputBorder(
             borderSide:
                 const BorderSide(color: AppColor.colorOfIcon, width: 2.0),

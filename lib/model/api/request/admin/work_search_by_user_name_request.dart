@@ -7,7 +7,7 @@ import 'package:eportal/model/base/base_eportal_request.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class WorkSearchByUserNameRequest
-    extends BaseEportalRequest<WorkSearchByUserNameDataRequest> {
+    extends BasePageEportalRequest<WorkSearchByUserNameDataRequest> {
   WorkSearchByUserNameRequest({required super.obj});
 
   @override

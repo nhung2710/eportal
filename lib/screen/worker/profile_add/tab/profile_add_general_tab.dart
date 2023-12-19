@@ -62,13 +62,17 @@ class ProfileAddGeneralTabState
   late DanhSachNhuCauBloc danhSachNhuCauBloc;
 
   @override
-  void initDataLoading() {
+  void initBloc() {
     danhSachChucVuBloc = DanhSachChucVuBloc();
     danhSachMucLuongBloc = DanhSachMucLuongBloc();
     danhSachKinhNghiemBloc = DanhSachKinhNghiemBloc();
     danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
     danhSachTrinhDoBloc = DanhSachTrinhDoBloc();
     danhSachNhuCauBloc = DanhSachNhuCauBloc();
+  }
+
+  @override
+  void initDataLoading() {
     callApi();
     // TODO: implement initDataLoading
     super.initDataLoading();
@@ -207,7 +211,7 @@ class ProfileAddGeneralTabState
   Widget _buildViewSearchDanhSachKinhNghiem(
       BuildContext context, List<DanhSachKinhNghiemDataResponse> list) {
     return SelectItem<DanhSachKinhNghiemDataResponse>(
-      icon: FontAwesomeIcons.buildingColumns,
+      icon: FontAwesomeIcons.timeline,
       selectedItem: widget.danhSachKinhNghiemDataResponse,
       list: list,
       itemAsString: (DanhSachKinhNghiemDataResponse u) =>

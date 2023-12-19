@@ -81,28 +81,32 @@ class SelectItemNormalState<T> extends State<SelectItemNormal<T>> {
           BuildContext context, String title) =>
       DropDownDecoratorProps(
         dropdownSearchDecoration: InputDecoration(
-            isDense: true,
-            prefixIconConstraints: const BoxConstraints(
-              minWidth: 25,
-              minHeight: 25,
+          isDense: true,
+          prefixIconConstraints: const BoxConstraints(
+            minWidth: 25,
+            minHeight: 25,
+          ),
+          prefixIcon: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 8),
+            child: Icon(
+              widget.icon,
+              color: AppColor.colorOfIcon,
+              size: AppSizeIcon.sizeOfNormal,
             ),
-            prefixIcon: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8),
-              child: Icon(
-                widget.icon,
-                color: AppColor.colorOfIcon,
-                size: AppSizeIcon.sizeOfNormal,
-              ),
+          ),
+          //labelText: title,
+          hintText: title,
+          labelText: title,
+          alignLabelWithHint: true,
+          labelStyle: AppTextStyle.titleChild1
+              .copyWith(color: AppColor.colorOfHintText),
+          hintStyle: AppTextStyle.title,
+          border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(5.0),
             ),
-            //labelText: title,
-            hintText: "Vui lòng chọn ${title.toLowerCase()}",
-            labelStyle: AppTextStyle.title,
-            border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(5.0),
-              ),
-            ),
-            hintStyle: AppTextStyle.titleHintPage),
+          ),
+        ),
         baseStyle: AppTextStyle.title,
       );
 

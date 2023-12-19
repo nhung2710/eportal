@@ -302,6 +302,7 @@ class FilterJobAdvertisementDialogState
       onChanged: (DanhSachMucLuongDataResponse? data) {
         if (widget.danhSachMucLuongDataResponse != data) {
           widget.danhSachMucLuongDataResponse = data;
+          widget.data.mucLuong = data?.salaryID;
         }
       },
       title: "Mức lương",

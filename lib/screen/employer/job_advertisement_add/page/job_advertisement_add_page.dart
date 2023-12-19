@@ -1,8 +1,10 @@
 import 'package:eportal/bloc/admin/job_user_add_bloc.dart';
+import 'package:eportal/bloc/admin/work_add_bloc.dart';
 import 'package:eportal/event/admin/job_user_add_event.dart';
 import 'package:eportal/model/api/request/admin/data/job_user_add_data_request.dart';
 import 'package:eportal/model/api/request/admin/job_user_add_request.dart';
 import 'package:eportal/model/api/response/admin/data/job_user_add_data_response.dart';
+import 'package:eportal/model/api/response/admin/data/work_add_data_response.dart';
 import 'package:eportal/screen/worker/profile_add/tab/profile_add_basic_tab.dart';
 import 'package:eportal/screen/worker/profile_add/tab/profile_add_career_goals_tab.dart';
 import 'package:eportal/screen/worker/profile_add/tab/profile_add_field_skills_tab.dart';
@@ -19,6 +21,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../extension/string_extension.dart';
+import '../tab/job_advertisement_add_basic_tab.dart';
+import '../tab/job_advertisement_add_general_tab.dart';
 
 //
 // Created by BlackRose on 04/12/2023.
@@ -35,32 +39,25 @@ class JobAdvertisementAddPage extends BasePage {
 class _JobAdvertisementAddPageState
     extends BasePageState<JobAdvertisementAddPage>
     with SingleTickerProviderStateMixin {
-  GlobalKey<ProfileAddBasicTabState> keyProfileAddBasicTabState =
-      GlobalKey<ProfileAddBasicTabState>();
-  GlobalKey<ProfileAddGeneralTabState> keyProfileAddGeneralTabState =
-      GlobalKey<ProfileAddGeneralTabState>();
-  GlobalKey<ProfileAddLevelTabState> keyProfileAddLevelTabState =
-      GlobalKey<ProfileAddLevelTabState>();
-  GlobalKey<ProfileAddWorkExperienceTabState>
-      keyProfileAddWorkExperienceTabState =
-      GlobalKey<ProfileAddWorkExperienceTabState>();
-  GlobalKey<ProfileAddCareerGoalsTabState> keyProfileAddCareerGoalsTabState =
-      GlobalKey<ProfileAddCareerGoalsTabState>();
-  GlobalKey<ProfileAddFieldSkillsTabState> keyProfileAddFieldSkillsTabState =
-      GlobalKey<ProfileAddFieldSkillsTabState>();
-  late JobUserAddBloc jobUserAddBloc;
+  GlobalKey<JobAdvertisementAddBasicTabState>
+      keyJobAdvertisementAddBasicTabState =
+      GlobalKey<JobAdvertisementAddBasicTabState>();
+  GlobalKey<JobAdvertisementAddGeneralTabState>
+      keyJobAdvertisementAddGeneralTabState =
+      GlobalKey<JobAdvertisementAddGeneralTabState>();
+  late WorkAddBloc workAddBloc;
   late TabController _tabController;
 
   @override
   void initBloc() {
-    jobUserAddBloc = JobUserAddBloc();
+    workAddBloc = WorkAddBloc();
   }
 
   @override
   void initDataLoading() {
     // TODO: implement initDataLoading
     _tabController = TabController(
-        vsync: this, length: 6, animationDuration: const Duration(seconds: 0));
+        vsync: this, length: 2, animationDuration: const Duration(seconds: 0));
     super.initDataLoading();
   }
 
@@ -69,12 +66,11 @@ class _JobAdvertisementAddPageState
 
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
-        create: (_) => jobUserAddBloc,
-        child: BlocListener<JobUserAddBloc,
-            DataSingleState<JobUserAddDataResponse>>(
+        create: (_) => workAddBloc,
+        child: BlocListener<WorkAddBloc, DataSingleState<WorkAddDataResponse>>(
           listener: (BuildContext context,
-              DataSingleState<JobUserAddDataResponse> state) {
-            handlerActionDataSingleState<JobUserAddDataResponse>(state, (obj) {
+              DataSingleState<WorkAddDataResponse> state) {
+            handlerActionDataSingleState<WorkAddDataResponse>(state, (obj) {
               showCenterMessage("Tạo tin tuyển dụng thành công")
                   .then((value) => backPage());
             });
@@ -95,22 +91,10 @@ class _JobAdvertisementAddPageState
                 indicatorWeight: 2,
                 tabs: const [
                   Tab(
-                    text: "Thông tin hồ sơ",
+                    text: "Thông tin tuyển dụng",
                   ),
                   Tab(
                     text: "Thông tin chung",
-                  ),
-                  Tab(
-                    text: "Trình độ học vấn",
-                  ),
-                  Tab(
-                    text: "Kinh nghiệm làm việc",
-                  ),
-                  Tab(
-                    text: "Mục tiêu nghề nghiệp",
-                  ),
-                  Tab(
-                    text: "Kỹ năng sở trường",
                   ),
                 ],
               ),
@@ -121,23 +105,11 @@ class _JobAdvertisementAddPageState
                     controller: _tabController,
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
-                      ProfileAddBasicTab(
-                        key: keyProfileAddBasicTabState,
+                      JobAdvertisementAddBasicTab(
+                        key: keyJobAdvertisementAddBasicTabState,
                       ),
-                      ProfileAddGeneralTab(
-                        key: keyProfileAddGeneralTabState,
-                      ),
-                      ProfileAddLevelTab(
-                        key: keyProfileAddLevelTabState,
-                      ),
-                      ProfileAddWorkExperienceTab(
-                        key: keyProfileAddWorkExperienceTabState,
-                      ),
-                      ProfileAddCareerGoalsTab(
-                        key: keyProfileAddCareerGoalsTabState,
-                      ),
-                      ProfileAddFieldSkillsTab(
-                        key: keyProfileAddFieldSkillsTabState,
+                      JobAdvertisementAddGeneralTab(
+                        key: keyJobAdvertisementAddGeneralTabState,
                       ),
                     ],
                   ),
@@ -171,54 +143,14 @@ class _JobAdvertisementAddPageState
   }
 
   _send(BuildContext context) {
-    if (_validBeforeSend(context)) {
-      jobUserAddBloc.add(JobUserAddEvent(
-          request: JobUserAddRequest(
-              obj: JobUserAddDataRequest(
-                  tieuDe: keyProfileAddBasicTabState
-                      .currentState?.titleController.text,
-                  ngayDangTu: keyProfileAddBasicTabState
-                      .currentState?.fromDateController.text,
-                  ngayDangDen: keyProfileAddBasicTabState
-                      .currentState?.toDateController.text,
-                  tinhTp: keyProfileAddBasicTabState.currentState?.widget
-                      .danhSachTinhTpDataResponse?.regionalID,
-                  quanHuyen: keyProfileAddBasicTabState.currentState?.widget
-                      .danhSachQuanHuyenDataResponse?.regionalID,
-                  nganhNghe: keyProfileAddBasicTabState.currentState?.widget
-                      .danhSachNganhNgheDataResponse?.careerID,
-                  chucVuHienTai: keyProfileAddGeneralTabState.currentState
-                      ?.widget.danhSachChucVuDataResponseHienTai?.positionID,
-                  chucVuMongMuon: keyProfileAddGeneralTabState.currentState?.widget.danhSachChucVuDataResponseMongMuon?.positionID,
-                  mucLuong: keyProfileAddGeneralTabState.currentState?.widget.danhSachMucLuongDataResponse?.salaryID,
-                  soNamKinhNghiem: keyProfileAddGeneralTabState.currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
-                  trinhDo: keyProfileAddGeneralTabState.currentState?.widget.danhSachTrinhDoDataResponse?.educationID,
-                  nhuCau: keyProfileAddGeneralTabState.currentState?.widget.danhSachNhuCauDataResponse?.needsID,
-                  kyNang: keyProfileAddFieldSkillsTabState.currentState?.skillController.text,
-                  kinhNghiemLV: keyProfileAddWorkExperienceTabState.currentState?.experienceController.text,
-                  mucTieu: keyProfileAddCareerGoalsTabState.currentState?.objectiveController.text,
-                  trinhDoHocVan: keyProfileAddLevelTabState.currentState?.educationController.text))));
-    }
+    if (_validBeforeSend(context)) {}
   }
 
   bool _validBeforeSend(BuildContext context) {
-    if (_validPage(context, keyProfileAddBasicTabState.currentState, 0)) {
-      if (_validPage(context, keyProfileAddGeneralTabState.currentState, 1)) {
-        if (_validPage(context, keyProfileAddLevelTabState.currentState, 2)) {
-          if (_validPage(
-              context, keyProfileAddWorkExperienceTabState.currentState, 3)) {
-            if (_validPage(
-                context, keyProfileAddCareerGoalsTabState.currentState, 4)) {
-              if (_validPage(
-                  context, keyProfileAddFieldSkillsTabState.currentState, 5)) {
-                if (isValid()) {
-                  return true;
-                }
-              }
-            }
-          }
-        }
-      }
+    if (_validPage(
+        context, keyJobAdvertisementAddBasicTabState.currentState, 0)) {
+      if (_validPage(
+          context, keyJobAdvertisementAddGeneralTabState.currentState, 1)) {}
     }
     return false;
   }

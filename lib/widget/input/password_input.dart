@@ -43,6 +43,11 @@ class _PasswordInputState extends State<PasswordInput> {
         onFieldSubmitted: widget.onFieldSubmitted,
         decoration: InputDecoration(
           hintText: widget.hintText,
+          labelText: widget.hintText,
+          alignLabelWithHint: true,
+          labelStyle: AppTextStyle.titleChild1
+              .copyWith(color: AppColor.colorOfHintText),
+          hintStyle: AppTextStyle.title,
           isDense: true,
           focusedBorder: OutlineInputBorder(
             borderSide:
