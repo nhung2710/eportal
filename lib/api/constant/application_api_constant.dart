@@ -1,20 +1,20 @@
 class ApplicationApiConstant {
-  static const kBASE_AUTH_HEADER_USER_LOGIN = 'eportal';
-  static const kBASE_AUTH_HEADER_PASSWORD = 'CT03-M14IC-PO22SE-0SOFT4-A0P1J';
-  static const kBASE_URI = 'http://work.eportal.top/';
-  static const kBASE_URI_MEDIA = 'http://file.eportal.top/';
-  static const kBASE_API_URI = '$kBASE_URI/api';
-  static const kBASE_API_APP_URI = '$kBASE_URI/api/app';
-  static const kAPI_COMMON_NEW = '$kBASE_API_APP_URI/commonnew.asmx';
-  static const kAPI_ADMIN = '$kBASE_API_APP_URI/admin.asmx';
-  static const kAPI_ADMIN_OP = '$kAPI_ADMIN?op=';
-  static const kAPI_COMMON_NEW_OP = '$kAPI_COMMON_NEW?op=';
+  static const kBASE_AUTH_HEADER_USER_LOGIN = "eportal";
+  static const kBASE_AUTH_HEADER_PASSWORD = "CT03-M14IC-PO22SE-0SOFT4-A0P1J";
+  static const kBASE_URI = "http://work.eportal.top/";
+  static const kBASE_URI_MEDIA = "http://file.eportal.top/";
+  static const kBASE_API_URI = "$kBASE_URI/api";
+  static const kBASE_API_APP_URI = "$kBASE_URI/api/app";
+  static const kAPI_COMMON_NEW = "$kBASE_API_APP_URI/commonnew.asmx";
+  static const kAPI_ADMIN = "$kBASE_API_APP_URI/admin.asmx";
+  static const kAPI_ADMIN_OP = "$kAPI_ADMIN?op=";
+  static const kAPI_COMMON_NEW_OP = "$kAPI_COMMON_NEW?op=";
   static const kAPI_SUCCESS_CODE = 2;
   static const kTIME_CACHE_LOW_DEFAULT = 60 * 5;
   static const kTIME_CACHE_MEDIUM_DEFAULT = kTIME_CACHE_LOW_DEFAULT * 6;
   static const kTIME_CACHE_HIGH_DEFAULT = kTIME_CACHE_MEDIUM_DEFAULT * 2;
   static const kTIME_CACHE_DEFAULT = kTIME_CACHE_HIGH_DEFAULT * 6;
-  static const kAPI_RESULT = 'Result';
+  static const kAPI_RESULT = "Result";
   static const kAPI_COMMON_NEW_OP_HOME_WORKS_LIST = "HomeWorksList";
   static const kAPI_COMMON_NEW_OP_HOME_NEWS_LIST = "HomeNewsList";
   static const kAPI_COMMON_NEW_OP_HOME_SLIDE_LIST = "HomeSlideList";
@@ -85,4 +85,11 @@ class ApplicationApiConstant {
   static const kAPI_ADMIN_OP_PROFILE_VIEW_LIST = "ProfileViewList";
   static const kAPI_ADMIN_OP_PROFILE_SEND_LIST = "ProfileSendList";
   static const kAPI_ADMIN_OP_PROFILE_BLACK_LIST = "ProfileBlackList";
+  
+  static const kAPI_ADMIN_OP_CHAT_BOT_DANH_SACH_HOI_THOAI="ChatBot_DanhSachHoiThoai";
+  static const kAPI_ADMIN_OP_CHAT_BOT_CHI_TIET_HOI_THOAI="ChatBot_ChiTietHoiThoai";
+  static const kAPI_ADMIN_OP_CHAT_BOT_THEM_CAU_MAU="ChatBot_ThemCauMau";
+  static const kAPI_ADMIN_OP_CHAT_BOT_DANH_DAU_SAO="ChatBot_DanhDauSao";
+  static const kAPI_ADMIN_OP_CHAT_BOT_XOA_HOI_THOAI="ChatBot_XoaHoiThoai";
+  
 }

@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 
 class CustomTabView extends StatefulWidget {
   Map<String, Widget> tabViews;
-
-  CustomTabView({super.key, required this.tabViews});
+  bool isScrollable;
+  CustomTabView({super.key, required this.tabViews,this.isScrollable = true});
 
   @override
   State<StatefulWidget> createState() => CustomTabViewState();
@@ -58,8 +58,8 @@ class CustomTabViewState extends State<CustomTabView>
           indicatorSize: TabBarIndicatorSize.tab,
           indicatorPadding: EdgeInsets.zero,
           padding: EdgeInsets.zero,
-          tabAlignment: TabAlignment.start,
-          isScrollable: true,
+          tabAlignment: widget.isScrollable ? TabAlignment.start :null,
+          isScrollable: widget.isScrollable,
           labelStyle:
               AppTextStyle.title.copyWith(overflow: TextOverflow.visible),
           indicatorWeight: 2,

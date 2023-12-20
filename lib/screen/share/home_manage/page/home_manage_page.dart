@@ -12,6 +12,7 @@ import 'package:eportal/model/api/response/common_new/data/home_advertise_list_d
 import 'package:eportal/model/api/response/common_new/data/home_business_list_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/home_slide_list_data_response.dart';
 import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
+import 'package:eportal/screen/share/chat_bot_manage/page/chat_bot_manage_page.dart';
 import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
@@ -19,6 +20,7 @@ import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../application/global_application.dart';
 import '../../../../bloc/common_new/home_slide_list_bloc.dart';
 import '../../../../event/common_new/home_slide_list_event.dart';
 import '../../../../extension/string_extension.dart';
@@ -80,9 +82,7 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
             Icons.support_agent,
             color: Colors.white,
           ),
-          onPressed: () {
-            nextPage((context) => const ChatBotPage());
-          },
+          onPressed: () => openChatBot(context),
         ),
       ]);
 
@@ -408,4 +408,11 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
           ],
         ),
       );
+
+  openChatBot(BuildContext context) {
+    if(GlobalApplication().isLogin)
+      {
+        nextPage((context) => const ChatBotManagePage());
+      }
+  }
 }
