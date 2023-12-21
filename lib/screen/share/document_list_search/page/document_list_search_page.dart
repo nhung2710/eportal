@@ -47,21 +47,20 @@ class _DocumentListSearchPageState
 
   @override
   void initDataLoading() {
-    request.obj.tuKhoa = textEditingController.text;
-    request.obj.soTrangHienTai = 1;
+    request.obj.reloadData();
     callApi();
 
-    super.initDataLoading();
   }
 
   @override
   void getMoreData() {
-    request.obj.soTrangHienTai++;
+    request.obj.nextData();
     callApi();
   }
 
   @override
   void callApi() {
+    request.obj.tuKhoa = textEditingController.text;
     documentListBloc.add(DocumentListEvent(request: request));
   }
 
@@ -131,4 +130,9 @@ class _DocumentListSearchPageState
 
   @override
   String getPageTitle(BuildContext context) => "Tìm kiếm";
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
 }

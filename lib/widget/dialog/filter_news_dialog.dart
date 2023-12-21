@@ -33,10 +33,24 @@ class FilterNewsDialogState extends BaseScreenState<FilterNewsDialog> {
   DanhSachChuyenMucBloc danhSachChuyenMucBloc = DanhSachChuyenMucBloc();
 
   @override
-  void initDataLoading() {
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    danhSachChuyenMucBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
     danhSachChuyenMucBloc = DanhSachChuyenMucBloc();
+  }
+  @override
+  void initDataLoading() {
     callApi();
-    super.initDataLoading();
   }
 
   @override
@@ -45,7 +59,6 @@ class FilterNewsDialogState extends BaseScreenState<FilterNewsDialog> {
         request:
             DanhSachChuyenMucRequest(obj: DanhSachChuyenMucDataRequest())));
     // TODO: implement callApi
-    super.callApi();
   }
 
   @override
@@ -129,4 +142,5 @@ class FilterNewsDialogState extends BaseScreenState<FilterNewsDialog> {
         },
         title: "Loại tin tức");
   }
+
 }

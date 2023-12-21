@@ -65,14 +65,26 @@ class FilterDocumentDialogState extends BaseScreenState<FilterDocumentDialog> {
 
   @override
   void initDataLoading() {
+    callApi();
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
     groupTypeDocuments = [
       GroupTypeDocument(id: "1", name: "Văn bản của Đảng"),
       GroupTypeDocument(id: "0", name: "Văn bản quy phạm pháp luật")
     ];
-    callApi();
-    super.initDataLoading();
   }
-
   @override
   void callApi() {
     danhSachLinhVucVanBanBloc.add(DanhSachLinhVucVanBanEvent(
@@ -84,7 +96,6 @@ class FilterDocumentDialogState extends BaseScreenState<FilterDocumentDialog> {
     danhSachCoQuanBanHanhBloc.add(DanhSachCoQuanBanHanhEvent(
         request: DanhSachCoQuanBanHanhRequest(
             obj: DanhSachCoQuanBanHanhDataRequest())));
-    super.callApi();
   }
 
   @override
@@ -267,4 +278,5 @@ class FilterDocumentDialogState extends BaseScreenState<FilterDocumentDialog> {
       title: "Loại văn bản",
     );
   }
+
 }

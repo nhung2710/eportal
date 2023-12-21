@@ -14,6 +14,9 @@ import 'package:eportal/widget/input/search_input.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../application/global_application.dart';
+import '../widget/chat_bot_manage_item.dart';
+
 class ChatBotManageCurrentlyTab extends BasePage {
   ChatBotManageCurrentlyTab({super.key});
 
@@ -38,6 +41,11 @@ class ChatBotManageCurrentlyTabState
     callApi();
   }
 
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    chatBotDanhSachHoiThoaiBloc.close();
+  }
   @override
   void getMoreData() {
     chatBotDanhSachHoiThoaiRequest.obj.soTrangHienTai++;
@@ -74,15 +82,14 @@ class ChatBotManageCurrentlyTabState
       ),
       Expanded(
         child: ListView(
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-            ),
-
-
-          ],
+          children: getLstData(),
         ),
       ),
     ],
   );
+
+  List<Widget> getLstData() {
+    return List.generate(GlobalApplication().getRandomInt(max: 100), (index) => ChatBotManageItem(onTapEdit: () {  }, onTapDelete: () {  },));
+  }
+
 }

@@ -26,11 +26,28 @@ class _CandidateProfilePageState
   late TabController _tabController;
 
   @override
-  void initDataLoading() {
-    // TODO: implement initDataLoading
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    _tabController.dispose();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
     _tabController = TabController(
         vsync: this, length: 4, animationDuration: const Duration(seconds: 0));
-    super.initDataLoading();
+  }
+  @override
+  void initDataLoading() {
+
   }
 
   @override
@@ -46,4 +63,5 @@ class _CandidateProfilePageState
           "Hồ sơ ứng viên đã chặn": ListOfCandidateProfileBlockTab(),
         },
       );
+
 }

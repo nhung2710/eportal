@@ -58,17 +58,34 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
     homeAdvertiseListBloc = HomeAdvertiseListBloc();
     homeBusinessListBloc = HomeBusinessListBloc();
   }
-
   @override
-  void initDataLoading() {
+  void callApi() {
+    // TODO: implement callApi
     homeSlideListBloc.add(HomeSlideListEvent(
         request: HomeSlideListRequest(obj: HomeSlideListDataRequest())));
     homeBusinessListBloc.add(HomeBusinessListEvent(
         request: HomeBusinessListRequest(obj: HomeBusinessListDataRequest())));
     homeAdvertiseListBloc.add(HomeAdvertiseListEvent(
         request:
-            HomeAdvertiseListRequest(obj: HomeAdvertiseListDataRequest())));
-    super.initDataLoading();
+        HomeAdvertiseListRequest(obj: HomeAdvertiseListDataRequest())));
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    homeSlideListBloc.close();
+    homeAdvertiseListBloc.close();
+    homeBusinessListBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initDataLoading() {
+    callApi();
   }
 
   @override
@@ -415,4 +432,5 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
         nextPage((context) => const ChatBotManagePage());
       }
   }
+
 }

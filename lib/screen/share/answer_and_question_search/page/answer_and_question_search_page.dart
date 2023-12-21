@@ -25,35 +25,38 @@ class AnswerAndQuestionSearchPage extends BasePage {
 class AnswerAndQuestionSearchPageState
     extends BasePageStateActive<AnswerAndQuestionSearchPage> {
   late FaqQuestionSearchBloc faqQuestionSearchBloc;
-  FaqQuestionSearchDataRequest request = FaqQuestionSearchDataRequest();
+  TextEditingController textEditingController = TextEditingController();
+  FaqQuestionSearchRequest request = FaqQuestionSearchRequest(obj: FaqQuestionSearchDataRequest());
 
   @override
   void initBloc() {
     faqQuestionSearchBloc = FaqQuestionSearchBloc();
   }
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
 
-  TextEditingController textEditingController = TextEditingController();
 
   @override
   String getPageTitle(BuildContext context) => "Tìm kiếm câu hỏi";
 
   @override
   void getMoreData() {
-    request.soTrangHienTai++;
+    request.obj.nextData();
     callApi();
   }
 
   @override
   void initDataLoading() {
-    request.soTrangHienTai = 1;
+    request.obj.reloadData();
     callApi();
-    super.initDataLoading();
   }
 
   @override
   void callApi() {
     faqQuestionSearchBloc.add(FaqQuestionSearchEvent(
-        request: FaqQuestionSearchRequest(obj: request)));
+        request: request));
   }
 
   @override
@@ -116,4 +119,5 @@ class AnswerAndQuestionSearchPageState
           ),
         ],
       );
+
 }

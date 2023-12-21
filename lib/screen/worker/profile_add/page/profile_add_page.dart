@@ -14,6 +14,7 @@ import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/admin/data/job_user_add_data_request.dart';
 import '../../../../model/api/request/admin/job_user_add_request.dart';
 import '../../../../widget/base/base_page.dart';
+import '../../../../widget/tab/custom_tab_view.dart';
 import '../tab/profile_add_career_goals_tab.dart';
 import '../tab/profile_add_field_skills_tab.dart';
 import '../tab/profile_add_general_tab.dart';
@@ -32,35 +33,47 @@ class ProfileAddPage extends BasePage {
   State<StatefulWidget> createState() => _ProfileAddPageState();
 }
 
-class _ProfileAddPageState extends BasePageState<ProfileAddPage>
-    with SingleTickerProviderStateMixin {
-  GlobalKey<ProfileAddBasicTabState> keyProfileAddBasicTabState =
+class _ProfileAddPageState extends BasePageState<ProfileAddPage>{
+  final GlobalKey<ProfileAddBasicTabState> keyProfileAddBasicTabState =
       GlobalKey<ProfileAddBasicTabState>();
-  GlobalKey<ProfileAddGeneralTabState> keyProfileAddGeneralTabState =
+  final GlobalKey<ProfileAddGeneralTabState> keyProfileAddGeneralTabState =
       GlobalKey<ProfileAddGeneralTabState>();
-  GlobalKey<ProfileAddLevelTabState> keyProfileAddLevelTabState =
+  final GlobalKey<ProfileAddLevelTabState> keyProfileAddLevelTabState =
       GlobalKey<ProfileAddLevelTabState>();
-  GlobalKey<ProfileAddWorkExperienceTabState>
+  final GlobalKey<ProfileAddWorkExperienceTabState>
       keyProfileAddWorkExperienceTabState =
       GlobalKey<ProfileAddWorkExperienceTabState>();
-  GlobalKey<ProfileAddCareerGoalsTabState> keyProfileAddCareerGoalsTabState =
+  final GlobalKey<ProfileAddCareerGoalsTabState> keyProfileAddCareerGoalsTabState =
       GlobalKey<ProfileAddCareerGoalsTabState>();
-  GlobalKey<ProfileAddFieldSkillsTabState> keyProfileAddFieldSkillsTabState =
+  final GlobalKey<ProfileAddFieldSkillsTabState> keyProfileAddFieldSkillsTabState =
       GlobalKey<ProfileAddFieldSkillsTabState>();
+  final GlobalKey<CustomTabViewState> keyCustomTabViewState =
+  GlobalKey<CustomTabViewState>();
   late JobUserAddBloc jobUserAddBloc;
-  late TabController _tabController;
 
   @override
   void initBloc() {
     jobUserAddBloc = JobUserAddBloc();
-    _tabController = TabController(
-        vsync: this, length: 6, animationDuration: const Duration(seconds: 0));
+  }
+  @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    jobUserAddBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
   }
 
   @override
   void initDataLoading() {
     // TODO: implement initDataLoading
-    super.initDataLoading();
   }
 
   @override
@@ -80,67 +93,27 @@ class _ProfileAddPageState extends BasePageState<ProfileAddPage>
           },
           child: Column(
             children: [
-              TabBar(
-                controller: _tabController,
-                indicatorColor: AppColor.colorOfIcon,
-                labelColor: AppColor.colorOfIcon,
-                indicatorSize: TabBarIndicatorSize.tab,
-                indicatorPadding: EdgeInsets.zero,
-                padding: EdgeInsets.zero,
-                tabAlignment: TabAlignment.start,
-                isScrollable: true,
-                labelStyle:
-                    AppTextStyle.title.copyWith(overflow: TextOverflow.visible),
-                indicatorWeight: 2,
-                tabs: const [
-                  Tab(
-                    text: "Thông tin hồ sơ",
-                  ),
-                  Tab(
-                    text: "Thông tin chung",
-                  ),
-                  Tab(
-                    text: "Trình độ học vấn",
-                  ),
-                  Tab(
-                    text: "Kinh nghiệm làm việc",
-                  ),
-                  Tab(
-                    text: "Mục tiêu nghề nghiệp",
-                  ),
-                  Tab(
-                    text: "Kỹ năng sở trường",
-                  ),
-                ],
-              ),
               Expanded(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 5),
-                  child: TabBarView(
-                    controller: _tabController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: [
-                      ProfileAddBasicTab(
-                        key: keyProfileAddBasicTabState,
-                      ),
-                      ProfileAddGeneralTab(
-                        key: keyProfileAddGeneralTabState,
-                      ),
-                      ProfileAddLevelTab(
-                        key: keyProfileAddLevelTabState,
-                      ),
-                      ProfileAddWorkExperienceTab(
-                        key: keyProfileAddWorkExperienceTabState,
-                      ),
-                      ProfileAddCareerGoalsTab(
-                        key: keyProfileAddCareerGoalsTabState,
-                      ),
-                      ProfileAddFieldSkillsTab(
-                        key: keyProfileAddFieldSkillsTabState,
-                      ),
-                    ],
+                child: CustomTabView(tabViews: {
+                  "Thông tin hồ sơ":ProfileAddBasicTab(
+                    key: keyProfileAddBasicTabState,
                   ),
-                ),
+                  "Thông tin chung":ProfileAddGeneralTab(
+                    key: keyProfileAddGeneralTabState,
+                  ),
+                  "Trình độ học vấn":ProfileAddLevelTab(
+                    key: keyProfileAddLevelTabState,
+                  ),
+                  "Kinh nghiệm làm việc":ProfileAddWorkExperienceTab(
+                    key: keyProfileAddWorkExperienceTabState,
+                  ),
+                  "Mục tiêu nghề nghiệp":ProfileAddCareerGoalsTab(
+                    key: keyProfileAddCareerGoalsTabState,
+                  ),
+                  "Kỹ năng sở trường":ProfileAddFieldSkillsTab(
+                    key: keyProfileAddFieldSkillsTabState,
+                  ),
+                }),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 10),
@@ -164,7 +137,7 @@ class _ProfileAddPageState extends BasePageState<ProfileAddPage>
     if (state?.isValid() == true) {
       return true;
     } else {
-      _tabController.animateTo(page);
+      keyCustomTabViewState.currentState?.nextPage(page);
       return false;
     }
   }
@@ -221,4 +194,5 @@ class _ProfileAddPageState extends BasePageState<ProfileAddPage>
     }
     return false;
   }
+
 }

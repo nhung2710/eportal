@@ -5,6 +5,7 @@ import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../widget/tab/custom_tab_view.dart';
 import '../tab/list_of_job_applied_page.dart';
 import '../tab/list_of_job_saved_page.dart';
 
@@ -20,66 +21,43 @@ class JobPage extends BasePage {
   State<StatefulWidget> createState() => _JobPageState();
 }
 
-class _JobPageState extends BasePageStateActive<JobPage>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+class _JobPageState extends BasePageStateActive<JobPage> {
 
   @override
   void initDataLoading() {
     // TODO: implement initDataLoading
-    _tabController = TabController(
-        vsync: this, length: 4, animationDuration: const Duration(seconds: 0));
-    super.initDataLoading();
+  }
+  @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
   }
 
   @override
   bool isHasAppBar(BuildContext context) => false;
 
   @override
-  Widget pageUI(BuildContext context) => Column(
-        children: [
-          TabBar(
-            controller: _tabController,
-            indicatorColor: AppColor.colorOfIcon,
-            labelColor: AppColor.colorOfIcon,
-            indicatorSize: TabBarIndicatorSize.tab,
-            indicatorPadding: EdgeInsets.zero,
-            padding: EdgeInsets.zero,
-            tabAlignment: TabAlignment.start,
-            isScrollable: true,
-            labelStyle:
-                AppTextStyle.title.copyWith(overflow: TextOverflow.visible),
-            indicatorWeight: 2,
-            tabs: const [
-              Tab(
-                text: "Danh sách việc làm tuyển dụng",
-              ),
-              Tab(
-                text: "Việc làm đã xem",
-              ),
-              Tab(
-                text: "Việc làm đã ứng tuyển",
-              ),
-              Tab(
-                text: "Việc làm đã lưu lại",
-              ),
-            ],
-          ),
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.only(top: 5),
-              child: TabBarView(
-                controller: _tabController,
-                physics: const NeverScrollableScrollPhysics(),
-                children: const [
-                  ListOfJobPage(),
-                  ListOfJobViewedPage(),
-                  ListOfJobAppliedPage(),
-                  ListOfJobSavedPage(),
-                ],
-              ),
-            ),
-          ),
-        ],
-      );
+  Widget pageUI(BuildContext context) => CustomTabView(
+      tabViews: const {
+        "Danh sách việc làm tuyển dụng":ListOfJobPage(),
+        "Việc làm đã xem":ListOfJobViewedPage(),
+        "Việc làm đã ứng tuyểndụng":ListOfJobAppliedPage(),
+        "Việc làm đã lưu lại":ListOfJobSavedPage(),
+      }
+  );
+
 }

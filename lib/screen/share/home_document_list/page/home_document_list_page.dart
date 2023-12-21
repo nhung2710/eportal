@@ -35,6 +35,27 @@ class _HomeDocumentListPageState
   void initBloc() {
     homeDocumentListBloc = HomeDocumentListBloc();
   }
+  @override
+  void initDataLoading() {
+    callApi();
+  }
+  @override
+  void callApi() {
+    // TODO: implement callApi
+    homeDocumentListBloc.add(HomeDocumentListEvent(
+        request: HomeDocumentListRequest(obj: HomeDocumentListDataRequest())));
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    homeDocumentListBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
 
   @override
   String getPageTitle(BuildContext context) {
@@ -55,12 +76,6 @@ class _HomeDocumentListPageState
         ],
       );
 
-  @override
-  void initDataLoading() {
-    homeDocumentListBloc.add(HomeDocumentListEvent(
-        request: HomeDocumentListRequest(obj: HomeDocumentListDataRequest())));
-    super.initDataLoading();
-  }
 
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
@@ -131,4 +146,5 @@ class _HomeDocumentListPageState
           ),
         ),
       ));
+
 }

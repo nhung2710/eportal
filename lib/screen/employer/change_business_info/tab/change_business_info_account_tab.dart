@@ -20,6 +20,30 @@ class ChangeBusinessInfoAccountTabState
   TextEditingController educationController = TextEditingController();
 
   @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
+  }
+
+  @override
+  void initDataLoading() {
+    // TODO: implement initDataLoading
+  }
+  @override
   Widget pageUI(BuildContext context) => SingleChildScrollView(
         child: ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
@@ -39,4 +63,5 @@ class ChangeBusinessInfoAccountTabState
                   isShowFull: true,
                 )),
       );
+
 }

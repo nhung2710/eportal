@@ -66,8 +66,22 @@ class _JobAdvertisementEditPageState
   }
 
   @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    workUpdateBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+  @override
   void initDataLoading() {
-    super.initDataLoading();
   }
 
   @override
@@ -193,4 +207,5 @@ class _JobAdvertisementEditPageState
     }
     return false;
   }
+
 }

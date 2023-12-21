@@ -85,4 +85,29 @@ class _ForgotPasswordPageState extends BasePageState<ForgotPasswordPage> {
           .then((value) => nextPage((context) => const SignUpPage()));
     }
   }
+
+  @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
+  }
+
+  @override
+  void initDataLoading() {
+    // TODO: implement initDataLoading
+  }
 }

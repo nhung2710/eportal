@@ -51,6 +51,28 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
   }
 
   @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    dangKyBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initDataLoading() {
+    // TODO: implement initDataLoading
+  }
+
+
+  @override
   String getPageTitle(BuildContext context) => "Đăng ký tài khoản";
 
   @override
@@ -282,4 +304,5 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
                   passWord: passwordController.text))));
     }
   }
+
 }

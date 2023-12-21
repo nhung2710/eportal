@@ -30,12 +30,31 @@ class ChatBotManagePage extends BasePage {
 
 class _ChatBotManagePageState extends BasePageState<ChatBotManagePage> {
   late ChatBotDanhSachHoiThoaiBloc chatBotDanhSachHoiThoaiBloc;
-  
+
   @override
   void initBloc() {
     chatBotDanhSachHoiThoaiBloc = ChatBotDanhSachHoiThoaiBloc();
   }
+  @override
+  void callApi() {
+    // TODO: implement callApi
+  }
 
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    chatBotDanhSachHoiThoaiBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initDataLoading() {
+    // TODO: implement initDataLoading
+  }
   @override
   Widget pageUI(BuildContext context) => CustomTabView(
     isScrollable: false,
@@ -48,6 +67,8 @@ class _ChatBotManagePageState extends BasePageState<ChatBotManagePage> {
 
   @override
   String getPageTitle(BuildContext context) => "Danh sách hội thoại";
+
+
 
   
 }

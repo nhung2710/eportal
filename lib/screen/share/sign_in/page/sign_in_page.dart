@@ -45,6 +45,12 @@ class _SignInPageState extends BasePageState<SignInPage> {
   @override
   void initBloc() {
     dangNhapBloc = DangNhapBloc();
+    nameController.text = GlobalApplication()
+        .getStringOneTimePreferences(ApplicationConstant.REGISTER_USER_NAME)
+        .replaceWhenNullOrWhiteSpace(GlobalApplication().userNameSaved);
+    passwordController.text = GlobalApplication()
+        .getStringOneTimePreferences(ApplicationConstant.REGISTER_USER_PASSWORD)
+        .replaceWhenNullOrWhiteSpace(GlobalApplication().userPasswordSaved);
   }
 
   @override
@@ -58,15 +64,23 @@ class _SignInPageState extends BasePageState<SignInPage> {
 
   @override
   void initDataLoading() {
-    nameController.text = GlobalApplication()
-        .getStringOneTimePreferences(ApplicationConstant.REGISTER_USER_NAME)
-        .replaceWhenNullOrWhiteSpace(GlobalApplication().userNameSaved);
-    passwordController.text = GlobalApplication()
-        .getStringOneTimePreferences(ApplicationConstant.REGISTER_USER_PASSWORD)
-        .replaceWhenNullOrWhiteSpace(GlobalApplication().userPasswordSaved);
-    super.initDataLoading();
   }
 
+  @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    dangNhapBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
   @override
   Widget pageUI(BuildContext context) {
     return BlocProvider(
@@ -237,4 +251,5 @@ class _SignInPageState extends BasePageState<SignInPage> {
   _skipPage(BuildContext context) {
     nextPageWithoutBack((context) => const anonymous.HomePage());
   }
+
 }

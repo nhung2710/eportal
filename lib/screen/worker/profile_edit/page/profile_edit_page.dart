@@ -21,6 +21,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../widget/base/base_page.dart';
+import '../../../../widget/tab/custom_tab_view.dart';
 
 //
 // Created by BlackRose on 20/11/2023.
@@ -38,29 +39,47 @@ class ProfileEditPage extends BasePage {
 
 class _ProfileEditPageState extends BasePageState<ProfileEditPage>
     with SingleTickerProviderStateMixin {
-  GlobalKey<ProfileEditBasicTabState> keyProfileEditBasicTabState =
+  final GlobalKey<ProfileEditBasicTabState> keyProfileEditBasicTabState =
       GlobalKey<ProfileEditBasicTabState>();
-  GlobalKey<ProfileEditGeneralTabState> keyProfileEditGeneralTabState =
+  final GlobalKey<ProfileEditGeneralTabState> keyProfileEditGeneralTabState =
       GlobalKey<ProfileEditGeneralTabState>();
-  GlobalKey<ProfileEditLevelTabState> keyProfileEditLevelTabState =
+  final GlobalKey<ProfileEditLevelTabState> keyProfileEditLevelTabState =
       GlobalKey<ProfileEditLevelTabState>();
-  GlobalKey<ProfileEditWorkExperienceTabState>
+  final GlobalKey<ProfileEditWorkExperienceTabState>
       keyProfileEditWorkExperienceTabState =
       GlobalKey<ProfileEditWorkExperienceTabState>();
-  GlobalKey<ProfileEditCareerGoalsTabState> keyProfileEditCareerGoalsTabState =
+  final GlobalKey<ProfileEditCareerGoalsTabState> keyProfileEditCareerGoalsTabState =
       GlobalKey<ProfileEditCareerGoalsTabState>();
-  GlobalKey<ProfileEditFieldSkillsTabState> keyProfileEditFieldSkillsTabState =
+  final GlobalKey<ProfileEditFieldSkillsTabState> keyProfileEditFieldSkillsTabState =
       GlobalKey<ProfileEditFieldSkillsTabState>();
+  final GlobalKey<CustomTabViewState> keyCustomTabViewState =
+  GlobalKey<CustomTabViewState>();
   late JobUserUpdateBloc jobUserUpdateBloc;
-  late TabController _tabController;
 
   @override
-  void initDataLoading() {
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    jobUserUpdateBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
     jobUserUpdateBloc = JobUserUpdateBloc();
+  }
+  @override
+  void initDataLoading() {
     // TODO: implement initDataLoading
-    _tabController = TabController(
-        vsync: this, length: 6, animationDuration: const Duration(seconds: 0));
-    super.initDataLoading();
   }
 
   @override
@@ -81,73 +100,35 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage>
           },
           child: Column(
             children: [
-              TabBar(
-                controller: _tabController,
-                indicatorColor: AppColor.colorOfIcon,
-                labelColor: AppColor.colorOfIcon,
-                indicatorSize: TabBarIndicatorSize.tab,
-                indicatorPadding: EdgeInsets.zero,
-                padding: EdgeInsets.zero,
-                tabAlignment: TabAlignment.start,
-                isScrollable: true,
-                labelStyle:
-                    AppTextStyle.title.copyWith(overflow: TextOverflow.visible),
-                indicatorWeight: 2,
-                tabs: const [
-                  Tab(
-                    text: "Thông tin hồ sơ",
-                  ),
-                  Tab(
-                    text: "Thông tin chung",
-                  ),
-                  Tab(
-                    text: "Trình độ học vấn",
-                  ),
-                  Tab(
-                    text: "Kinh nghiệm làm việc",
-                  ),
-                  Tab(
-                    text: "Mục tiêu nghề nghiệp",
-                  ),
-                  Tab(
-                    text: "Kỹ năng sở trường",
-                  ),
-                ],
-              ),
               Expanded(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 5),
-                  child: TabBarView(
-                    controller: _tabController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: [
-                      ProfileEditBasicTab(
-                        key: keyProfileEditBasicTabState,
-                        data: widget.data,
-                      ),
-                      ProfileEditGeneralTab(
-                        key: keyProfileEditGeneralTabState,
-                        data: widget.data,
-                      ),
-                      ProfileEditLevelTab(
-                        key: keyProfileEditLevelTabState,
-                        data: widget.data,
-                      ),
-                      ProfileEditWorkExperienceTab(
-                        key: keyProfileEditWorkExperienceTabState,
-                        data: widget.data,
-                      ),
-                      ProfileEditCareerGoalsTab(
-                        key: keyProfileEditCareerGoalsTabState,
-                        data: widget.data,
-                      ),
-                      ProfileEditFieldSkillsTab(
-                        key: keyProfileEditFieldSkillsTabState,
-                        data: widget.data,
-                      ),
-                    ],
+                child: CustomTabView(
+                    key: keyCustomTabViewState,
+                    tabViews: {
+                  "Thông tin hồ sơ":ProfileEditBasicTab(
+                    key: keyProfileEditBasicTabState,
+                    data: widget.data,
                   ),
-                ),
+                  "Thông tin chung":ProfileEditGeneralTab(
+                    key: keyProfileEditGeneralTabState,
+                    data: widget.data,
+                  ),
+                  "Trình độ học vấn":ProfileEditLevelTab(
+                    key: keyProfileEditLevelTabState,
+                    data: widget.data,
+                  ),
+                  "Kinh nghiệm làm việc":ProfileEditWorkExperienceTab(
+                    key: keyProfileEditWorkExperienceTabState,
+                    data: widget.data,
+                  ),
+                  "Mục tiêu nghề nghiệp":ProfileEditCareerGoalsTab(
+                    key: keyProfileEditCareerGoalsTabState,
+                    data: widget.data,
+                  ),
+                  "Kỹ năng sở trường":ProfileEditFieldSkillsTab(
+                    key: keyProfileEditFieldSkillsTabState,
+                    data: widget.data,
+                  ),
+                }),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 10),
@@ -171,7 +152,7 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage>
     if (state?.isValid() == true) {
       return true;
     } else {
-      _tabController.animateTo(page);
+      keyCustomTabViewState.currentState?.nextPage(page);
       return false;
     }
   }
@@ -228,4 +209,5 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage>
     }
     return false;
   }
+
 }

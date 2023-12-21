@@ -71,20 +71,33 @@ class FilterJobAdvertisementDialogState
   final _danhSachDoanhNghiepKey = GlobalKey<SelectItemState>();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void initDataLoading() {
+  void disposeBloc() {
     danhSachTinhTpBloc = DanhSachTinhTpBloc();
     danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
     danhSachMucLuongBloc = DanhSachMucLuongBloc();
     danhSachKinhNghiemBloc = DanhSachKinhNghiemBloc();
     danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
     danhSachTrinhDoBloc = DanhSachTrinhDoBloc();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    danhSachTinhTpBloc.close();
+    danhSachQuanHuyenBloc.close();
+    danhSachMucLuongBloc.close();
+    danhSachKinhNghiemBloc.close();
+    danhSachGioiTinhBloc.close();
+    danhSachTrinhDoBloc.close();
+  }
+
+  @override
+  void initDataLoading() {
     callApi();
-    super.initDataLoading();
   }
 
   @override
@@ -102,7 +115,6 @@ class FilterJobAdvertisementDialogState
     danhSachKinhNghiemBloc.add(DanhSachKinhNghiemEvent(
         request:
             DanhSachKinhNghiemRequest(obj: DanhSachKinhNghiemDataRequest())));
-    super.callApi();
   }
 
   @override
@@ -308,4 +320,5 @@ class FilterJobAdvertisementDialogState
       title: "Mức lương",
     );
   }
+
 }

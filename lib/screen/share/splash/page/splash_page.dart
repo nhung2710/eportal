@@ -80,8 +80,24 @@ class _SplashPageState extends BasePageState<SplashPage>
   @override
   void initBloc() {
     dangNhapBloc = DangNhapBloc();
+    loadingDataDefault();
   }
 
+  @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    dangNhapBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
   @override
   double currentPadding(BuildContext context) => 10;
 
@@ -93,8 +109,6 @@ class _SplashPageState extends BasePageState<SplashPage>
 
   @override
   void initDataLoading() {
-    loadingDataDefault();
-    super.initDataLoading();
   }
 
   @override
@@ -312,4 +326,5 @@ class _SplashPageState extends BasePageState<SplashPage>
       }
     });
   }
+
 }

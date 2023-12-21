@@ -29,20 +29,21 @@ class _ListOfCandidateProfileViewedTabState
   late ProfileViewListBloc profileViewListBloc;
   ProfileViewListRequest request =
       ProfileViewListRequest(obj: ProfileViewListDataRequest());
-  TextEditingController textEditingController = TextEditingController();
+  final TextEditingController textEditingController = TextEditingController();
 
   @override
   void initBloc() {
     profileViewListBloc = ProfileViewListBloc();
   }
+  @override
+  void disposeBloc() {
+    profileViewListBloc.close();
+  }
 
   @override
   void initDataLoading() {
-    request.obj.tuKhoa = textEditingController.text;
     request.obj.soTrangHienTai = 1;
     callApi();
-
-    super.initDataLoading();
   }
 
   @override
@@ -53,6 +54,7 @@ class _ListOfCandidateProfileViewedTabState
 
   @override
   void callApi() {
+    request.obj.tuKhoa = textEditingController.text;
     profileViewListBloc.add(ProfileViewListEvent(request: request));
   }
 
@@ -111,4 +113,5 @@ class _ListOfCandidateProfileViewedTabState
           ),
         ],
       );
+
 }

@@ -24,7 +24,7 @@ class MediaVideoManagePage extends BasePage {
 class MediaVideoManagePageState
     extends BasePageStateActive<MediaVideoManagePage> {
   late VideoListBloc videoListBloc;
-  VideoListDataRequest request = VideoListDataRequest();
+  VideoListRequest request = VideoListRequest(obj: VideoListDataRequest());
 
   @override
   void initBloc() {
@@ -32,21 +32,25 @@ class MediaVideoManagePageState
   }
 
   @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    videoListBloc.close();
+  }
+  @override
   void getMoreData() {
-    request.soTrangHienTai++;
+    request.obj.nextData();
     callApi();
   }
 
   @override
   void callApi() {
-    videoListBloc.add(VideoListEvent(request: VideoListRequest(obj: request)));
+    videoListBloc.add(VideoListEvent(request: request));
   }
 
   @override
   void initDataLoading() {
-    request.soTrangHienTai = 1;
+    request.obj.reloadData();
     callApi();
-    super.initDataLoading();
   }
 
   @override
@@ -83,4 +87,5 @@ class MediaVideoManagePageState
                   ),
                 )),
       ));
+
 }

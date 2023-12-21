@@ -26,7 +26,6 @@ class _ChartEconomicallyActivePageState
 
   @override
   void initDataLoading() {
-    super.initDataLoading();
     final barGroup1 = makeGroupData(0, 5, 12);
     final barGroup2 = makeGroupData(1, 16, 12);
     final barGroup3 = makeGroupData(2, 18, 5);
@@ -50,6 +49,25 @@ class _ChartEconomicallyActivePageState
     showingBarGroups = rawBarGroups;
   }
 
+  @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
+  }
   @override
   String getPageTitle(BuildContext context) => "Lao động hoạt động";
 
@@ -243,4 +261,5 @@ class _ChartEconomicallyActivePageState
       ],
     );
   }
+
 }

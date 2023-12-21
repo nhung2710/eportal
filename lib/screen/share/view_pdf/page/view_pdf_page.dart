@@ -33,9 +33,29 @@ class _ViewPdfPageState extends BasePageState<ViewPdfPage> {
 
   @override
   void initDataLoading() {
-    widget.url = widget.url.getImageUrl();
+    callApi();
+  }
+
+  @override
+  void callApi() {
+    // TODO: implement callApi
     path = downloadFilePdf();
-    super.initDataLoading();
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    widget.url = widget.url.getImageUrl();
+    // TODO: implement initBloc
   }
 
   @override
@@ -55,6 +75,7 @@ class _ViewPdfPageState extends BasePageState<ViewPdfPage> {
       );
 
   Future<File?> downloadFilePdf() async {
+
     try {
       String fileName = "${md5.convert(utf8.encode(widget.url))}.pdf";
       final fullDirPath = '${GlobalApplication().dirPath}/download/pdf';

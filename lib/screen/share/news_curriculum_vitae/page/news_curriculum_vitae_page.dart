@@ -28,22 +28,31 @@ class NewsCurriculumVitaePage extends BasePage {
 class _NewsCurriculumVitaePageState
     extends BasePageState<NewsCurriculumVitaePage> {
   late HomeJobUserListBloc homeJobUserListBloc;
-
+  HomeJobUserListRequest request = HomeJobUserListRequest(obj: HomeJobUserListDataRequest());
   @override
   void initBloc() {
     homeJobUserListBloc = HomeJobUserListBloc();
   }
 
   @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    homeJobUserListBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+  @override
   void initDataLoading() {
     callApi();
-    super.initDataLoading();
   }
 
   @override
   void callApi() {
     homeJobUserListBloc.add(HomeJobUserListEvent(
-        request: HomeJobUserListRequest(obj: HomeJobUserListDataRequest())));
+        request: request));
   }
 
   @override
@@ -91,9 +100,8 @@ class _NewsCurriculumVitaePageState
         ),
       ));
 
-  @override
-  getBottomNavigationBar(BuildContext context) => null;
 
   @override
   String getPageTitle(BuildContext context) => "Hồ sơ ứng viên";
+
 }

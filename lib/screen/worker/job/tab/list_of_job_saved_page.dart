@@ -43,22 +43,25 @@ class _ListOfJobSavedPageState extends BasePageStateActive<ListOfJobSavedPage> {
   }
 
   @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    workSaveListBloc.close();
+  }
+  @override
   void initDataLoading() {
-    request.obj.tuKhoa = textEditingController.text;
-    request.obj.soTrangHienTai = 1;
+    request.obj.reloadData();
     callApi();
-
-    super.initDataLoading();
   }
 
   @override
   void getMoreData() {
-    request.obj.soTrangHienTai++;
+    request.obj.nextData();
     callApi();
   }
 
   @override
   void callApi() {
+    request.obj.tuKhoa = textEditingController.text;
     workSaveListBloc.add(WorkSaveListEvent(request: request));
   }
 
@@ -117,4 +120,5 @@ class _ListOfJobSavedPageState extends BasePageStateActive<ListOfJobSavedPage> {
           ),
         ],
       );
+
 }

@@ -42,21 +42,25 @@ class _NewsCurriculumVitaeSearchPageState
   }
 
   @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    jobUserSearchBloc.close();
+  }
+  @override
   void initDataLoading() {
-    request.obj.tuKhoa = textEditingController.text;
-    request.obj.soTrangHienTai = 1;
+    request.obj.reloadData();
     callApi();
-    super.initDataLoading();
   }
 
   @override
   void callApi() {
+    request.obj.tuKhoa = textEditingController.text;
     jobUserSearchBloc.add(JobUserSearchEvent(request: request));
   }
 
   @override
   void getMoreData() {
-    request.obj.soTrangHienTai++;
+    request.obj.nextData();
     callApi();
   }
 
@@ -117,9 +121,8 @@ class _NewsCurriculumVitaeSearchPageState
         ],
       );
 
-  @override
-  getBottomNavigationBar(BuildContext context) => null;
 
   @override
   String getPageTitle(BuildContext context) => "Tìm kiếm hồ sơ ứng viên";
+
 }

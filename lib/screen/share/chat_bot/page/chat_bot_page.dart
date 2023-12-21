@@ -24,6 +24,30 @@ class _ChatBotPageState extends BasePageState<ChatBotPage> {
   final List<ChatBotMessage> ChatBotMessages = [];
 
   @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
+  }
+
+  @override
+  void initDataLoading() {
+    // TODO: implement initDataLoading
+  }
+  @override
   double currentPadding(BuildContext context) => 0;
 
   @override
@@ -155,4 +179,5 @@ class _ChatBotPageState extends BasePageState<ChatBotPage> {
           !e.isBot ? Container() : Expanded(flex: 1, child: Container()),
         ],
       );
+
 }

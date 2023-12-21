@@ -47,21 +47,24 @@ class _ListOfJobPageState extends BasePageStateActive<ListOfJobPage> {
 
   @override
   void initDataLoading() {
-    request.obj.tuKhoa = textEditingController.text;
-    request.obj.soTrangHienTai = 1;
+    request.obj.reloadData();
     callApi();
-
-    super.initDataLoading();
   }
 
   @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    workSearchBloc.close();
+  }
+  @override
   void getMoreData() {
-    request.obj.soTrangHienTai++;
+    request.obj.nextData();
     callApi();
   }
 
   @override
   void callApi() {
+    request.obj.tuKhoa = textEditingController.text;
     workSearchBloc.add(WorkSearchEvent(request: request));
   }
 
@@ -127,4 +130,5 @@ class _ListOfJobPageState extends BasePageStateActive<ListOfJobPage> {
           ),
         ],
       );
+
 }

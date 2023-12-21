@@ -63,7 +63,31 @@ class ProfileEditGeneralTabState
   late DanhSachTrinhDoBloc danhSachTrinhDoBloc;
   late DanhSachChucVuBloc danhSachChucVuBloc;
   late DanhSachNhuCauBloc danhSachNhuCauBloc;
+  DanhSachChucVuRequest danhSachChucVuRequest = DanhSachChucVuRequest(obj: DanhSachChucVuDataRequest());
+  DanhSachTrinhDoRequest danhSachTrinhDoRequest = DanhSachTrinhDoRequest(obj: DanhSachTrinhDoDataRequest());
+  DanhSachMucLuongRequest danhSachMucLuongRequest = DanhSachMucLuongRequest(obj: DanhSachMucLuongDataRequest());
+  DanhSachKinhNghiemRequest danhSachKinhNghiemRequest = DanhSachKinhNghiemRequest(obj: DanhSachKinhNghiemDataRequest());
+  DanhSachNhuCauRequest danhSachNhuCauRequest = DanhSachNhuCauRequest(obj: DanhSachNhuCauDataRequest());
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    danhSachChucVuBloc.close();
+    danhSachMucLuongBloc.close();
+    danhSachKinhNghiemBloc.close();
+    danhSachGioiTinhBloc.close();
+    danhSachTrinhDoBloc.close();
+    danhSachNhuCauBloc.close();
+  }
 
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
+  }
   @override
   void initDataLoading() {
     danhSachChucVuBloc = DanhSachChucVuBloc();
@@ -74,23 +98,22 @@ class ProfileEditGeneralTabState
     danhSachNhuCauBloc = DanhSachNhuCauBloc();
     callApi();
     // TODO: implement initDataLoading
-    super.initDataLoading();
   }
 
   @override
   void callApi() {
     danhSachChucVuBloc.add(DanhSachChucVuEvent(
-        request: DanhSachChucVuRequest(obj: DanhSachChucVuDataRequest())));
+        request: danhSachChucVuRequest));
     danhSachTrinhDoBloc.add(DanhSachTrinhDoEvent(
-        request: DanhSachTrinhDoRequest(obj: DanhSachTrinhDoDataRequest())));
+        request: danhSachTrinhDoRequest));
     danhSachMucLuongBloc.add(DanhSachMucLuongEvent(
-        request: DanhSachMucLuongRequest(obj: DanhSachMucLuongDataRequest())));
+        request: danhSachMucLuongRequest));
     danhSachKinhNghiemBloc.add(DanhSachKinhNghiemEvent(
         request:
-            DanhSachKinhNghiemRequest(obj: DanhSachKinhNghiemDataRequest())));
+            danhSachKinhNghiemRequest));
     danhSachNhuCauBloc.add(DanhSachNhuCauEvent(
-        request: DanhSachNhuCauRequest(obj: DanhSachNhuCauDataRequest())));
-    super.callApi();
+        request: danhSachNhuCauRequest));
+
   }
 
   @override
@@ -343,4 +366,5 @@ class ProfileEditGeneralTabState
       title: "Nhu cầu làm việc",
     );
   }
+
 }

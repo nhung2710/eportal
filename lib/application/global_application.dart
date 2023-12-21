@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:eportal/enum/role_type.dart';
 import 'package:eportal/model/api/response/common_new/data/dang_nhap_data_response.dart';
@@ -11,6 +12,7 @@ import '../extension/string_extension.dart';
 
 class GlobalApplication {
   static final GlobalApplication _instance = GlobalApplication._internal();
+  Random _random = Random();
   String userName = ApplicationConstant.EMPTY;
   String userNameSaved = ApplicationConstant.EMPTY;
   String userPasswordSaved = ApplicationConstant.EMPTY;
@@ -29,6 +31,7 @@ class GlobalApplication {
   factory GlobalApplication() {
     return _instance;
   }
+  int getRandomInt({int min = 0,int max = 0}) => min + _random.nextInt(max);
 
   String createXml(Object? value, String tag) {
     var buffer = StringBuffer();

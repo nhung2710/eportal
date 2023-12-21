@@ -41,7 +41,7 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
   TextEditingController addressController = TextEditingController();
   TextEditingController idCardController = TextEditingController();
   late DanhSachGioiTinhBloc danhSachGioiTinhBloc;
-  UserUpdateDataRequest dataRequest = UserUpdateDataRequest();
+  UserUpdateRequest request = UserUpdateRequest(obj: UserUpdateDataRequest());
   DanhSachGioiTinhDataResponse? danhSachGioiTinhDataResponse;
   late UserUpdateBloc userUpdateBloc;
   String? gioitinh = "0";
@@ -51,20 +51,27 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
     userUpdateBloc = UserUpdateBloc();
     danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
   }
+  @override
+  void disposeBloc() {
+    userUpdateBloc.close();
+    danhSachGioiTinhBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
 
   @override
   void initDataLoading() {
-    dataRequest = UserUpdateDataRequest();
     callApi();
     // TODO: implement initDataLoading
-    super.initDataLoading();
   }
 
   @override
   void callApi() {
     danhSachGioiTinhBloc.add(DanhSachGioiTinhEvent(
         request: DanhSachGioiTinhRequest(obj: DanhSachGioiTinhDataRequest())));
-    super.callApi();
   }
 
   @override
@@ -94,7 +101,7 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
                     aspectRatio: 16 / 9,
                     child: ChangeAvatar(
                       changed: (String value) {
-                        dataRequest.anhDaiDien = value;
+                        request.obj.anhDaiDien = value;
                       },
                     )),
               ),
@@ -225,14 +232,14 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
 
   _changeUserInfo(BuildContext context) {
     if (isValid()) {
-      dataRequest.email = emailController.text;
-      dataRequest.cmnd = idCardController.text;
-      dataRequest.diaChi = addressController.text;
-      dataRequest.ngaySinh = birthDayController.text;
-      dataRequest.dienThoai = phoneController.text;
-      dataRequest.hoTen = fullNameController.text;
+      request.obj.email = emailController.text;
+      request.obj.cmnd = idCardController.text;
+      request.obj.diaChi = addressController.text;
+      request.obj.ngaySinh = birthDayController.text;
+      request.obj.dienThoai = phoneController.text;
+      request.obj.hoTen = fullNameController.text;
       userUpdateBloc
-          .add(UserUpdateEvent(request: UserUpdateRequest(obj: dataRequest)));
+          .add(UserUpdateEvent(request: request));
     }
   }
 
@@ -246,10 +253,11 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
       onChanged: (DanhSachGioiTinhDataResponse? data) {
         if (danhSachGioiTinhDataResponse != data) {
           danhSachGioiTinhDataResponse = data;
-          dataRequest.gioiTinh = data?.id;
+          request.obj.gioiTinh = data?.id;
         }
       },
       title: 'Giới tính',
     );
   }
+
 }

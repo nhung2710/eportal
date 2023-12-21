@@ -40,6 +40,27 @@ class _AnswerAndQuestionAddPageState
   }
 
   @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    faqAddQuestionBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initDataLoading() {
+    // TODO: implement initDataLoading
+  }
+
+  @override
   String getPageTitle(BuildContext context) => "Gửi câu hỏi";
 
   @override
@@ -156,4 +177,5 @@ class _AnswerAndQuestionAddPageState
                   phone: phoneController.text))));
     }
   }
+
 }

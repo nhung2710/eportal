@@ -21,9 +21,34 @@ class HomePage extends BasePage {
 
 class _HomePageState extends BasePageStateActive<HomePage> {
   int _currentIndex = 0;
-  final PageController _pageController =
-      PageController(initialPage: 0, keepPage: true);
+  late PageController _pageController;
 
+
+  @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    _pageController.dispose();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    _pageController =
+      PageController(initialPage: _currentIndex, keepPage: true);
+  }
+
+  @override
+  void initDataLoading() {
+    // TODO: implement initDataLoading
+  }
   @override
   void dispose() {
     _pageController.dispose();

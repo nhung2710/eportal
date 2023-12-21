@@ -31,10 +31,24 @@ class _AboutPageState extends BasePageState<AboutPage> {
 
   @override
   void initDataLoading() {
+    callApi();
+  }
+  @override
+  void callApi() {
     gioiThieuTrungTamBloc.add(GioiThieuTrungTamEvent(
         request: GioiThieuTrungTamRequest(
             obj: GioiThieuTrungTamDataRequest(top: 1))));
-    super.initDataLoading();
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    gioiThieuTrungTamBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
   }
 
   @override
@@ -68,4 +82,5 @@ class _AboutPageState extends BasePageState<AboutPage> {
               ),
             )),
       );
+
 }

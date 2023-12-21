@@ -42,12 +42,15 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
   }
 
   @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    workSearchBloc.close();
+  }
+  @override
   void initDataLoading() {
     request.obj.tuKhoa = textEditingController.text;
     request.obj.soTrangHienTai = 1;
     callApi();
-
-    super.initDataLoading();
   }
 
   @override
@@ -126,4 +129,5 @@ class _WorkSearchPageState extends BasePageState<WorkSearchPage> {
 
   @override
   String getPageTitle(BuildContext context) => "Tìm kiếm tuyển dụng";
+
 }

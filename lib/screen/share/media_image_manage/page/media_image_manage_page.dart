@@ -28,7 +28,7 @@ class MediaImageManagePage extends BasePage {
 class MediaImageManagePageState
     extends BasePageStateActive<MediaImageManagePage> {
   late AlbumListBloc albumListBloc;
-  AlbumListDataRequest request = AlbumListDataRequest();
+  AlbumListRequest request = AlbumListRequest(obj: AlbumListDataRequest());
 
   @override
   void initBloc() {
@@ -37,20 +37,24 @@ class MediaImageManagePageState
 
   @override
   void getMoreData() {
-    request.soTrangHienTai++;
+    request.obj.nextData();
     callApi();
   }
 
   @override
   void callApi() {
-    albumListBloc.add(AlbumListEvent(request: AlbumListRequest(obj: request)));
+    albumListBloc.add(AlbumListEvent(request: request));
   }
 
   @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    albumListBloc.close();
+  }
+  @override
   void initDataLoading() {
-    request.soTrangHienTai = 1;
+    request.obj.reloadData();
     callApi();
-    super.initDataLoading();
   }
 
   @override
@@ -112,4 +116,5 @@ class MediaImageManagePageState
                   ),
                 )),
       ));
+
 }

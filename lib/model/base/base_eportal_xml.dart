@@ -40,6 +40,15 @@ class BasePageEportalXml extends BaseEportalXml {
       {this.soTrangHienTai = 1,
       this.soBanGhiTrenTrang = ApplicationConstant.NUMBER_PREVIEW_ITEM});
 
+  void reloadData()
+  {
+    soTrangHienTai = 1;
+  }
+  void nextData()
+  {
+    soTrangHienTai++;
+  }
+
   @override
   StringBuffer toXml() {
     // TODO: implement toXml

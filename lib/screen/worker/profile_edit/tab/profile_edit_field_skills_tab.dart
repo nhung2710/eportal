@@ -25,11 +25,29 @@ class ProfileEditFieldSkillsTabState
 
   @override
   void initDataLoading() {
-    skillController.text =
-        widget.data.skillsForte.replaceWhenNullOrWhiteSpace();
-    super.initDataLoading();
   }
 
+  @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
+    skillController.text =
+        widget.data.skillsForte.replaceWhenNullOrWhiteSpace();
+  }
   @override
   Widget pageUI(BuildContext context) => ListView(
         children: <Widget>[
@@ -48,4 +66,5 @@ class ProfileEditFieldSkillsTabState
           ),
         ],
       );
+
 }

@@ -82,6 +82,30 @@ class _SettingPageState extends BasePageState<SettingPage> {
   };
 
   @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
+  }
+
+  @override
+  void initDataLoading() {
+    // TODO: implement initDataLoading
+  }
+  @override
   bool isHasAppBar(BuildContext context) => false;
 
   Widget pageUI(BuildContext context) => SingleChildScrollView(
@@ -98,4 +122,5 @@ class _SettingPageState extends BasePageState<SettingPage> {
               .toList(),
         ),
       );
+
 }

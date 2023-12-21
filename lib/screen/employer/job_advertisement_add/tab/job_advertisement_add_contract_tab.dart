@@ -32,14 +32,20 @@ class JobAdvertisementAddContractTabState
 
   @override
   void initDataLoading() {
-    callApi();
-    // TODO: implement initDataLoading
-    super.initDataLoading();
   }
 
   @override
   void callApi() {
-    super.callApi();
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
   }
 
   @override
@@ -106,4 +112,5 @@ class JobAdvertisementAddContractTabState
           ),
         ],
       );
+
 }

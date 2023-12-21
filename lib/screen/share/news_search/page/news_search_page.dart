@@ -44,22 +44,25 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
   }
 
   @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    newsSearchBloc.close();
+  }
+  @override
   void initDataLoading() {
-    request.obj.soTrangHienTai = 1;
-    request.obj.tuKhoa = textEditingController.text;
+    request.obj.reloadData();
     callApi();
-    super.initDataLoading();
   }
 
   @override
   void getMoreData() {
-    request.obj.soTrangHienTai++;
+    request.obj.nextData();
     callApi();
-    super.getMoreData();
   }
 
   @override
   void callApi() {
+    request.obj.tuKhoa = textEditingController.text;
     newsSearchBloc.add(NewsSearchEvent(request: request));
   }
 
@@ -131,4 +134,5 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
       newsSearchBloc.add(NewsSearchEvent(request: request));
     }
   }
+
 }

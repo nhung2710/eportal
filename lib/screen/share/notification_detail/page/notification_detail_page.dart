@@ -72,4 +72,29 @@ class _NotificationDetailPageState
           ),
         ),
       );
+
+  @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
+  }
+
+  @override
+  void initDataLoading() {
+    // TODO: implement initDataLoading
+  }
 }

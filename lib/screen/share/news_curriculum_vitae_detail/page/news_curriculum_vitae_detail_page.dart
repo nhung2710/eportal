@@ -16,6 +16,7 @@ import '../../../../bloc/admin/profile_save_bloc.dart';
 import '../../../../enum/role_type.dart';
 import '../../../../event/admin/profile_save_event.dart';
 import '../../../../event/common_new/job_user_detail_event.dart';
+import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/admin/data/profile_save_data_request.dart';
 import '../../../../model/api/request/admin/profile_save_request.dart';
 import '../../../../model/api/request/common_new/data/job_user_detail_data_request.dart';
@@ -43,23 +44,32 @@ class _NewsCurriculumVitaeDetailPageState
     extends BasePageState<NewsCurriculumVitaeDetailPage> {
   late JobUserDetailBloc jobUserDetailBloc;
   TextEditingController tieuDeController = TextEditingController();
+  JobUserDetailRequest request = JobUserDetailRequest(obj: JobUserDetailDataRequest());
   @override
   void initBloc() {
     jobUserDetailBloc = JobUserDetailBloc();
+    request.obj.id = widget.id.replaceWhenNullOrWhiteSpace("0");
   }
 
   @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    jobUserDetailBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+  @override
   void initDataLoading() {
     callApi();
-    super.initDataLoading();
   }
 
   @override
   void callApi() {
     jobUserDetailBloc.add(JobUserDetailEvent(
-        request: JobUserDetailRequest(
-            obj: JobUserDetailDataRequest(id: widget.id ?? "0"))));
-    super.callApi();
+        request: request));
   }
 
   @override
@@ -95,5 +105,6 @@ class _NewsCurriculumVitaeDetailPageState
 
   @override
   String getPageTitle(BuildContext context) => "Chi tiết hồ sơ ứng viên";
+
 
 }

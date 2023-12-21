@@ -49,7 +49,9 @@ class ProfileAddBasicTabState
   TextEditingController experienceController = TextEditingController();
   TextEditingController objectiveController = TextEditingController();
   TextEditingController skillController = TextEditingController();
-
+  DanhSachTinhTpRequest danhSachTinhTpRequest = DanhSachTinhTpRequest(obj: DanhSachTinhTpDataRequest());
+  DanhSachQuanHuyenRequest danhSachQuanHuyenRequest = DanhSachQuanHuyenRequest(obj: DanhSachQuanHuyenDataRequest());
+  DanhSachNganhNgheRequest danhSachNganhNgheRequest = DanhSachNganhNgheRequest(obj: DanhSachNganhNgheDataRequest());
   final _danhSachQuanHuyenKey = GlobalKey<SelectItemNormalState>();
   late DanhSachNganhNgheBloc danhSachNganhNgheBloc;
   late DanhSachTinhTpBloc danhSachTinhTpBloc;
@@ -66,23 +68,32 @@ class ProfileAddBasicTabState
   void initDataLoading() {
     callApi();
     // TODO: implement initDataLoading
-    super.initDataLoading();
   }
 
   @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+
+    danhSachTinhTpBloc.close();
+    danhSachQuanHuyenBloc.close();
+    danhSachNganhNgheBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+  @override
   void callApi() {
     danhSachTinhTpBloc.add(DanhSachTinhTpEvent(
-        request: DanhSachTinhTpRequest(obj: DanhSachTinhTpDataRequest())));
+        request: danhSachTinhTpRequest));
     if (widget.danhSachTinhTpDataResponse != null) {
+      danhSachQuanHuyenRequest.obj.tinhTp = widget.danhSachTinhTpDataResponse?.regionalID;
       danhSachQuanHuyenBloc.add(DanhSachQuanHuyenEvent(
-          request: DanhSachQuanHuyenRequest(
-              obj: DanhSachQuanHuyenDataRequest(
-                  tinhTp: widget.danhSachTinhTpDataResponse!.regionalID))));
+          request: danhSachQuanHuyenRequest));
     }
     danhSachNganhNgheBloc.add(DanhSachNganhNgheEvent(
-        request:
-            DanhSachNganhNgheRequest(obj: DanhSachNganhNgheDataRequest())));
-    super.callApi();
+        request:danhSachNganhNgheRequest));
   }
 
   @override
@@ -247,4 +258,5 @@ class ProfileAddBasicTabState
       title: 'Ngành nghề',
     );
   }
+
 }

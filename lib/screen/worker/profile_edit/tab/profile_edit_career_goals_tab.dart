@@ -25,9 +25,27 @@ class ProfileEditCareerGoalsTabState
 
   @override
   void initDataLoading() {
+  }
+  @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
     objectiveController.text =
         widget.data.careerGoals.replaceWhenNullOrWhiteSpace();
-    super.initDataLoading();
   }
 
   @override
@@ -48,4 +66,5 @@ class ProfileEditCareerGoalsTabState
           ),
         ],
       );
+
 }

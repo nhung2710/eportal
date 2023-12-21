@@ -29,7 +29,7 @@ class AnswerAndQuestionPage extends BasePage {
 class AnswerAndQuestionPageState
     extends BasePageStateActive<AnswerAndQuestionPage> {
   late FaqQuestionSearchBloc faqQuestionSearchBloc;
-  FaqQuestionSearchDataRequest request = FaqQuestionSearchDataRequest();
+  FaqQuestionSearchRequest request = FaqQuestionSearchRequest(obj: FaqQuestionSearchDataRequest());
 
   @override
   void initBloc() {
@@ -37,25 +37,29 @@ class AnswerAndQuestionPageState
   }
 
   @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    faqQuestionSearchBloc.close();
+  }
+  @override
   bool isHasAppBar(BuildContext context) => false;
 
   @override
   void getMoreData() {
-    request.soTrangHienTai++;
+    request.obj.nextData();
     callApi();
   }
 
   @override
   void initDataLoading() {
-    request.soTrangHienTai = 1;
+    request.obj.reloadData();
     callApi();
-    super.initDataLoading();
   }
 
   @override
   void callApi() {
     faqQuestionSearchBloc.add(FaqQuestionSearchEvent(
-        request: FaqQuestionSearchRequest(obj: request)));
+        request: request));
   }
 
   @override
@@ -129,4 +133,5 @@ class AnswerAndQuestionPageState
                           ))),
         ),
       );
+
 }

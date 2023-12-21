@@ -67,13 +67,27 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
   final _danhSachQuanHuyenKey = GlobalKey<SelectItemState>();
   final _danhSachDoanhNghiepKey = GlobalKey<SelectItemState>();
 
+
   @override
-  void initState() {
-    super.initState();
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    danhSachTinhTpBloc.close();
+    danhSachQuanHuyenBloc.close();
+    danhSachDoanhNghiepBloc.close();
+    danhSachMucLuongBloc.close();
+    danhSachKinhNghiemBloc.close();
+    danhSachGioiTinhBloc.close();
+    danhSachTrinhDoBloc.close();
   }
 
   @override
-  void initDataLoading() {
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
     danhSachTinhTpBloc = DanhSachTinhTpBloc();
     danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
     danhSachDoanhNghiepBloc = DanhSachDoanhNghiepBloc();
@@ -81,8 +95,11 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
     danhSachKinhNghiemBloc = DanhSachKinhNghiemBloc();
     danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
     danhSachTrinhDoBloc = DanhSachTrinhDoBloc();
+  }
+
+  @override
+  void initDataLoading() {
     callApi();
-    super.initDataLoading();
   }
 
   @override
@@ -107,7 +124,7 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
     danhSachKinhNghiemBloc.add(DanhSachKinhNghiemEvent(
         request:
             DanhSachKinhNghiemRequest(obj: DanhSachKinhNghiemDataRequest())));
-    super.callApi();
+
   }
 
   @override

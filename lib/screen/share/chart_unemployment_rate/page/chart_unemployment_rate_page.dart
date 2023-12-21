@@ -26,7 +26,6 @@ class _ChartUnemploymentRatePageState
 
   @override
   void initDataLoading() {
-    super.initDataLoading();
     double max = 100;
     int itemLength = Random().nextInt(10);
     for (var i = 0; i < itemLength - 1; i++) {
@@ -38,6 +37,27 @@ class _ChartUnemploymentRatePageState
     percents.add(max);
     colors.add(getRandomColor());
   }
+
+  @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
+  }
+
 
   @override
   String getPageTitle(BuildContext context) => "Lao động thất nghiệp";
@@ -98,4 +118,5 @@ class _ChartUnemploymentRatePageState
     }
     return pieChartSectionDatas;
   }
+
 }

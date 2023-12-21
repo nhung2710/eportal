@@ -61,6 +61,11 @@ class _JobAdvertisementPageState
   }
 
   @override
+  void disposeBloc() {
+    workSearchByUserNameBloc.close();
+    workDeleteBloc.close();
+  }
+  @override
   void callApi() {
     workSearchByUserNameBloc.add(WorkSearchByUserNameEvent(request: request));
   }
@@ -190,4 +195,5 @@ class _JobAdvertisementPageState
           )
         ]).show();
   }
+
 }

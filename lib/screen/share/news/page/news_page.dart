@@ -29,17 +29,32 @@ class NewsPage extends BasePage {
 
 class _NewsPageState extends BasePageState<NewsPage> {
   late HomeNewsListBloc homeNewsListBloc;
-
+  HomeNewsListRequest request = HomeNewsListRequest(obj: HomeNewsListDataRequest());
   @override
   void initBloc() {
     homeNewsListBloc = HomeNewsListBloc();
   }
+  @override
+  void callApi() {
+    // TODO: implement callApi
+    homeNewsListBloc.add(HomeNewsListEvent(
+        request: request));
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    homeNewsListBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
 
   @override
   void initDataLoading() {
-    homeNewsListBloc.add(HomeNewsListEvent(
-        request: HomeNewsListRequest(obj: HomeNewsListDataRequest())));
-    super.initDataLoading();
+    callApi();
   }
 
   @override
@@ -84,9 +99,8 @@ class _NewsPageState extends BasePageState<NewsPage> {
         ),
       ));
 
-  @override
-  getBottomNavigationBar(BuildContext context) => null;
 
   @override
   String getPageTitle(BuildContext context) => "Tin tức";
+
 }

@@ -30,25 +30,35 @@ class HomeNewsListPage extends BasePage {
 
 class _HomeNewsListPageState extends BasePageStateActive<HomeNewsListPage> {
   late HomeNewsListBloc homeNewsListCommonBloc;
-
+  HomeNewsListRequest request = HomeNewsListRequest(obj: HomeNewsListDataRequest());
   @override
   void initBloc() {
     homeNewsListCommonBloc = HomeNewsListBloc();
+    request.obj.flag = widget.flag;
+  }
+  @override
+  void callApi() {
+    // TODO: implement callApi
+    homeNewsListCommonBloc.add(HomeNewsListEvent(
+        request: request));
   }
 
   @override
-  String getPageTitle(BuildContext context) {
-    return "Tin bài";
+  void disposeBloc() {
+    // TODO: implement disposeBloc
   }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  String getPageTitle(BuildContext context)  => "Tin bài";
 
   @override
   void initDataLoading() {
-    homeNewsListCommonBloc.add(HomeNewsListEvent(
-        request: HomeNewsListRequest(
-            obj: HomeNewsListDataRequest(
-      flag: widget.flag,
-    ))));
-    super.initDataLoading();
+    callApi();
   }
 
   @override
@@ -116,4 +126,5 @@ class _HomeNewsListPageState extends BasePageStateActive<HomeNewsListPage> {
           ),
         ),
       ));
+
 }

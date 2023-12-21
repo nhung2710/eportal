@@ -71,7 +71,25 @@ class _ChartEconomicallyInactivePageState
 
   @override
   void initDataLoading() {
-    super.initDataLoading();
+  }
+  @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
   }
 
   @override
@@ -363,4 +381,5 @@ class _ChartEconomicallyInactivePageState
       ),
     ];
   }
+
 }

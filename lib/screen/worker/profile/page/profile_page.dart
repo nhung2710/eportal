@@ -38,14 +38,17 @@ class _ProfilePageState extends BasePageStateActive<ProfilePage> {
   @override
   void initBloc() {
     jobUserListByUserNameBloc = JobUserListByUserNameBloc();
-    super.initBloc();
+  }
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    jobUserListByUserNameBloc.close();
   }
 
   @override
   void initDataLoading() {
-    request.obj.soTrangHienTai = 1;
+    request.obj.reloadData();
     callApi();
-    super.initDataLoading();
   }
 
   @override
@@ -59,9 +62,8 @@ class _ProfilePageState extends BasePageStateActive<ProfilePage> {
 
   @override
   void getMoreData() {
-    request.obj.soTrangHienTai++;
-    callApi();
-    super.getMoreData();
+    request.obj.nextData();
+    callApi();;
   }
 
   @override
@@ -144,4 +146,5 @@ class _ProfilePageState extends BasePageStateActive<ProfilePage> {
           ),
         ],
       );
+
 }

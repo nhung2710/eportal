@@ -60,27 +60,36 @@ class _ReferPageState extends BasePageStateActive<ReferPage> {
   List<JobUserReferDeleteRequest> lstJobUserReferDeleteRequest = [];
   List<JobUserReferAddRequest> lstJobUserReferAddRequest = [];
   List<JobUserReferUpdateRequest> lstJobUserReferUpdateRequest = [];
-
+  JobUserReferListRequest request = JobUserReferListRequest(obj: JobUserReferListDataRequest());
   @override
   void initBloc() {
     jobUserReferListBloc = JobUserReferListBloc();
     jobUserReferSaveBloc = JobUserReferSaveBloc();
     jobUserReferAddBloc = JobUserReferAddBloc();
-    super.initBloc();
+    request.obj.jobUserID =widget.data.jobUserID;
   }
 
   @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    jobUserReferListBloc.close();
+    jobUserReferSaveBloc.close();
+    jobUserReferAddBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+  @override
   void initDataLoading() {
     callApi();
-    super.initDataLoading();
   }
 
   @override
   void callApi() {
     jobUserReferListBloc.add(JobUserReferListEvent(
-        request: JobUserReferListRequest(
-            obj: JobUserReferListDataRequest(
-                jobUserID: widget.data.jobUserID))));
+        request: request));
   }
 
   @override
@@ -211,4 +220,5 @@ class _ReferPageState extends BasePageStateActive<ReferPage> {
       ));
     }
   }
+
 }

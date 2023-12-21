@@ -38,10 +38,25 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
 
   @override
   void initDataLoading() {
-    jobUserSearchBloc.add(JobUserSearchEvent(request: request));
-    super.initDataLoading();
+    callApi();
   }
 
+  @override
+  void callApi() {
+    // TODO: implement callApi
+    jobUserSearchBloc.add(JobUserSearchEvent(request: request));
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    jobUserSearchBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
   @override
   Widget pageUI(BuildContext context) => Column(
         children: [
@@ -133,4 +148,5 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
       jobUserSearchBloc.add(JobUserSearchEvent(request: request));
     }
   }
+
 }

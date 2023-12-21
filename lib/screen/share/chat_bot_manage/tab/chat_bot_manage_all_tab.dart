@@ -33,13 +33,18 @@ class ChatBotManageAllTabState
     chatBotDanhSachHoiThoaiBloc = ChatBotDanhSachHoiThoaiBloc();
   }
   @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    chatBotDanhSachHoiThoaiBloc.close();
+  }
+  @override
   void initDataLoading() {
-    chatBotDanhSachHoiThoaiRequest.obj.soTrangHienTai=1;
+    chatBotDanhSachHoiThoaiRequest.obj.reloadData();
     callApi();
   }
   @override
   void getMoreData() {
-    chatBotDanhSachHoiThoaiRequest.obj.soTrangHienTai++;
+    chatBotDanhSachHoiThoaiRequest.obj.nextData();
     callApi();
   }
 
@@ -84,4 +89,5 @@ class ChatBotManageAllTabState
       ),
     ],
   );
+
 }

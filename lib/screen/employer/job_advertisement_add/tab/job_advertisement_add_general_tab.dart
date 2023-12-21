@@ -121,16 +121,14 @@ class JobAdvertisementAddGeneralTabState
     danhSachViTriTuyenDungBloc = DanhSachViTriTuyenDungBloc();
     danhSachNganhNgheBloc = DanhSachNganhNgheBloc();
     danhSachTinhChatCongViecBloc = DanhSachTinhChatCongViecBloc();
+    thoiGianLVController.text = "Từ 8h đến 17h hàng ngày";
+    soLuongController.text = "1";
+    doTuoiController.text = "Từ 18 đến 35";
   }
 
   @override
   void initDataLoading() {
-    thoiGianLVController.text = "Từ 8h đến 17h hàng ngày";
-    soLuongController.text = "1";
-    doTuoiController.text = "Từ 18 đến 35";
     callApi();
-    // TODO: implement initDataLoading
-    super.initDataLoading();
   }
 
   @override
@@ -158,7 +156,23 @@ class JobAdvertisementAddGeneralTabState
         request:
             DanhSachNganhNgheRequest(obj: DanhSachNganhNgheDataRequest())));
 
-    super.callApi();
+  }
+  @override
+  void disposeBloc() {
+    danhSachChucVuBloc.close();
+    danhSachMucLuongBloc.close();
+    danhSachKinhNghiemBloc.close();
+    danhSachGioiTinhBloc.close();
+    danhSachTrinhDoBloc.close();
+    danhSachNhuCauBloc.close();
+    danhSachViTriTuyenDungBloc.close();
+    danhSachNganhNgheBloc.close();
+    danhSachTinhChatCongViecBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
   }
 
   @override
@@ -498,5 +512,6 @@ class JobAdvertisementAddGeneralTabState
       title: "Vị trí tuyển dụng",
     );
   }
+
 
 }

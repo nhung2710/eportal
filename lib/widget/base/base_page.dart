@@ -1,5 +1,6 @@
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/enum/data_bloc_status.dart';
+import 'package:eportal/extension/error_extension.dart';
 import 'package:eportal/extension/string_extension.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_text_style.dart';
@@ -16,15 +17,11 @@ import '../../style/app_color.dart';
 
 typedef CallbackListener<T> = void Function(T? obj);
 
-class BasePage extends StatefulWidget {
+abstract class BasePage extends StatefulWidget {
   const BasePage({super.key});
-
-  @override
-  State<StatefulWidget> createState() => BasePageState<BasePage>();
 }
 
-class BasePageState<T extends StatefulWidget> extends State<T>
-    with WidgetsBindingObserver {
+abstract class  BasePageState<T extends StatefulWidget> extends State<T> {
   GlobalKey<State<T>> localKey = GlobalKey<State<T>>();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -32,22 +29,34 @@ class BasePageState<T extends StatefulWidget> extends State<T>
   ScrollController? scrollController;
   bool isScrollMore = true;
 
+  void callApi();
+  void initBloc();
+  void disposeBloc();
+  void initDataLoading();
+  void getMoreData();
+
   @override
   void dispose() {
-    scrollController?.removeListener(_onScroll);
-    scrollController?.dispose();
-    scrollController = null;
-    //WidgetsBinding.instance.removeObserver(this);
+    ErrorExtension().handleActionError(() {
+      scrollController?.removeListener(_onScroll);
+      scrollController?.dispose();
+      scrollController = null;
+    });
+    ErrorExtension().handleActionError(() {
+      disposeBloc();
+    });
     super.dispose();
   }
 
   void _onScroll() {
-    final maxScroll = scrollController!.position.maxScrollExtent;
-    final currentScroll = scrollController!.offset;
-    if (currentScroll >= (maxScroll * 0.5) && isScrollMore) {
-      stopScrollMore();
-      getMoreData();
-    }
+    ErrorExtension().handleActionError(() {
+      final maxScroll = scrollController!.position.maxScrollExtent;
+      final currentScroll = scrollController!.offset;
+      if (currentScroll >= (maxScroll * 0.6) && isScrollMore) {
+        stopScrollMore();
+        getMoreData();
+      }
+    });
   }
 
   void startScrollMore() {
@@ -58,28 +67,7 @@ class BasePageState<T extends StatefulWidget> extends State<T>
     isScrollMore = false;
   }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    switch (state) {
-      case AppLifecycleState.resumed:
-        print("$runtimeType app in resumed");
-        break;
-      case AppLifecycleState.inactive:
-        print("$runtimeType app in inactive");
-        break;
-      case AppLifecycleState.paused:
-        print("$runtimeType app in paused");
-        break;
-      case AppLifecycleState.detached:
-        print("$runtimeType app in detached");
-        break;
-      case AppLifecycleState.hidden:
-        print("$runtimeType app in hidden");
-        break;
-    }
-  }
 
-  void getMoreData() {}
 
   @override
   void initState() {
@@ -106,9 +94,6 @@ class BasePageState<T extends StatefulWidget> extends State<T>
     super.initState();
   }
 
-  void callApi() {}
-
-  void initDataLoading() {}
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +134,7 @@ class BasePageState<T extends StatefulWidget> extends State<T>
   }
 
   void hiddenKeyboard() {
-    FocusManager.instance.primaryFocus?.unfocus();
+    ErrorExtension().handleActionError(() => FocusManager.instance.primaryFocus?.unfocus());
   }
 
   late SimpleDialog simpleDialog;
@@ -403,10 +388,9 @@ class BasePageState<T extends StatefulWidget> extends State<T>
         ),
       );
 
-  void initBloc() {}
 }
 
-class BasePageStateActive<T extends StatefulWidget> extends BasePageState<T>
+abstract class BasePageStateActive<T extends StatefulWidget> extends BasePageState<T>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
@@ -443,7 +427,7 @@ class BasePageStateActive<T extends StatefulWidget> extends BasePageState<T>
   }
 }
 
-class BaseScreenState<T extends StatefulWidget> extends BasePageState<T> {
+abstract class BaseScreenState<T extends StatefulWidget> extends BasePageState<T> {
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -456,7 +440,7 @@ class BaseScreenState<T extends StatefulWidget> extends BasePageState<T> {
   }
 }
 
-class BaseScreenStateActive<T extends StatefulWidget>
+abstract class BaseScreenStateActive<T extends StatefulWidget>
     extends BasePageStateActive<T> {
   @override
   Widget build(BuildContext context) {

@@ -34,24 +34,32 @@ class NewsDetailPage extends BasePage {
 
 class _NewsDetailPageState extends BasePageState<NewsDetailPage> {
   late NewsDetailBloc newsDetailBloc;
-
+  NewsDetailRequest request = NewsDetailRequest(obj: NewsDetailDataRequest());
   @override
   void initBloc() {
     newsDetailBloc = NewsDetailBloc();
+    request.obj.id = widget.id.replaceWhenNullOrWhiteSpace("0");
   }
 
   @override
   void initDataLoading() {
     callApi();
-    super.initDataLoading();
   }
 
   @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+  @override
   void callApi() {
     newsDetailBloc.add(NewsDetailEvent(
-        request: NewsDetailRequest(
-            obj: NewsDetailDataRequest(id: widget.id ?? "0"))));
-    super.callApi();
+        request: request));
+
   }
 
   @override
@@ -117,4 +125,5 @@ class _NewsDetailPageState extends BasePageState<NewsDetailPage> {
 
   @override
   String getPageTitle(BuildContext context) => "Chi tiết tin tức";
+
 }

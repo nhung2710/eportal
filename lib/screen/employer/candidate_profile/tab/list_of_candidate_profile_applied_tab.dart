@@ -37,22 +37,25 @@ class _ListOfCandidateProfileAppliedTabState
   }
 
   @override
+  void disposeBloc() {
+    profileSendListBloc.close();
+  }
+  @override
   void initDataLoading() {
-    request.obj.tuKhoa = textEditingController.text;
-    request.obj.soTrangHienTai = 1;
+    request.obj.reloadData();
     callApi();
 
-    super.initDataLoading();
   }
 
   @override
   void getMoreData() {
-    request.obj.soTrangHienTai++;
+    request.obj.nextData();
     callApi();
   }
 
   @override
   void callApi() {
+    request.obj.tuKhoa = textEditingController.text;
     profileSendListBloc.add(ProfileSendListEvent(request: request));
   }
 
@@ -111,4 +114,5 @@ class _ListOfCandidateProfileAppliedTabState
           ),
         ],
       );
+
 }

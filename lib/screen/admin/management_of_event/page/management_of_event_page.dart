@@ -39,14 +39,21 @@ class _ManagementOfEventPageState
   void initDataLoading() {
     // TODO: implement initDataLoading
     callApi();
-    super.initDataLoading();
+  }
+  @override
+  void disposeBloc() {
+    dataExampleTestBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
   }
 
   @override
   void callApi() {
     dataExampleTestBloc.add(DataExampleTestEvent(
         request: DataExampleTestRequest(obj: DataExampleTestDataRequest())));
-    super.callApi();
   }
 
   @override
@@ -136,4 +143,5 @@ class _ManagementOfEventPageState
           ),
         ],
       );
+
 }

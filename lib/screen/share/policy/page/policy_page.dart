@@ -24,9 +24,28 @@ class _PolicyPageState extends BasePageState<PolicyPage> {
 
   @override
   void initDataLoading() {
+  }
+
+  @override
+  void callApi() {
+    // TODO: implement callApi
     _content = getContent();
   }
 
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
+  }
   @override
   Widget pageUI(BuildContext context) => SingleChildScrollView(
         child: FutureBuilder<String>(
@@ -53,4 +72,5 @@ class _PolicyPageState extends BasePageState<PolicyPage> {
     }
     return "";
   }
+
 }

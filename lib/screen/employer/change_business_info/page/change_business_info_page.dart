@@ -47,14 +47,28 @@ class _ChangeBusinessInfoPageState extends BasePageState<ChangeBusinessInfoPage>
   @override
   void initBloc() {
     jobUserAddBloc = JobUserAddBloc();
+    _tabController = TabController(
+        vsync: this, length: 6, animationDuration: const Duration(seconds: 0));
+  }
+
+  @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    jobUserAddBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
   }
 
   @override
   void initDataLoading() {
     // TODO: implement initDataLoading
-    _tabController = TabController(
-        vsync: this, length: 6, animationDuration: const Duration(seconds: 0));
-    super.initDataLoading();
   }
 
   @override

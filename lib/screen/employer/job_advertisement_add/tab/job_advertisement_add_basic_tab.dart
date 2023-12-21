@@ -64,9 +64,17 @@ class JobAdvertisementAddBasicTabState
 
     danhSachTinhTpBloc.add(DanhSachTinhTpEvent(
         request: DanhSachTinhTpRequest(obj: DanhSachTinhTpDataRequest())));
-    super.callApi();
   }
 
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
   @override
   String getPageTitle(BuildContext context) => "Tạo hồ sơ";
 
@@ -202,4 +210,5 @@ class JobAdvertisementAddBasicTabState
       title: "Tình thành phố",
     );
   }
+
 }

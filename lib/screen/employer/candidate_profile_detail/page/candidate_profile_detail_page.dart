@@ -50,9 +50,18 @@ class _CandidateProfileDetailPageState
   }
 
   @override
+  void disposeBloc() {
+    jobUserDetailBloc.close();
+    profileSaveBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+  @override
   void initDataLoading() {
     callApi();
-    super.initDataLoading();
   }
 
   @override
@@ -60,7 +69,6 @@ class _CandidateProfileDetailPageState
     jobUserDetailBloc.add(JobUserDetailEvent(
         request: JobUserDetailRequest(
             obj: JobUserDetailDataRequest(id: widget.id ?? "0"))));
-    super.callApi();
   }
 
   @override
@@ -158,4 +166,5 @@ class _CandidateProfileDetailPageState
           )
         ]).show();
   }
+
 }

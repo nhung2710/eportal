@@ -28,6 +28,26 @@ class _TermsOfUsePageState extends BasePageState<TermsOfUsePage> {
   }
 
   @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
+  }
+
+  @override
   Widget pageUI(BuildContext context) => SingleChildScrollView(
         child: FutureBuilder<String>(
             future: _content,
@@ -53,4 +73,5 @@ class _TermsOfUsePageState extends BasePageState<TermsOfUsePage> {
     }
     return "";
   }
+
 }

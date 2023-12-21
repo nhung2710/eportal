@@ -36,24 +36,27 @@ class _ListOfJobViewedPageState
   void initBloc() {
     workViewListBloc = WorkViewListBloc();
   }
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    workViewListBloc.close();
+  }
 
   @override
   void initDataLoading() {
-    request.obj.tuKhoa = textEditingController.text;
-    request.obj.soTrangHienTai = 1;
+    request.obj.reloadData();
     callApi();
-
-    super.initDataLoading();
   }
 
   @override
   void getMoreData() {
-    request.obj.soTrangHienTai++;
+    request.obj.nextData();
     callApi();
   }
 
   @override
   void callApi() {
+    request.obj.tuKhoa = textEditingController.text;
     workViewListBloc.add(WorkViewListEvent(request: request));
   }
 
@@ -112,4 +115,5 @@ class _ListOfJobViewedPageState
           ),
         ],
       );
+
 }

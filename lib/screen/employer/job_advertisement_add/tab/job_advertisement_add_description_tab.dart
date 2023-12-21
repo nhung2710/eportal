@@ -27,19 +27,30 @@ class JobAdvertisementAddDescriptionTabState
   TextEditingController yeuCauHoSoController = TextEditingController();
   TextEditingController quyenLoiController = TextEditingController();
 
-  @override
-  void initBloc() {}
-
-  @override
-  void initDataLoading() {
-    callApi();
-    // TODO: implement initDataLoading
-    super.initDataLoading();
-  }
 
   @override
   void callApi() {
-    super.callApi();
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
+  }
+
+  @override
+  void initDataLoading() {
+    // TODO: implement initDataLoading
   }
 
   @override
@@ -105,4 +116,5 @@ class JobAdvertisementAddDescriptionTabState
           ),
         ],
       );
+
 }

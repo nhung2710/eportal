@@ -29,12 +29,28 @@ class HomeWorksListPage extends BasePage {
 
 class _HomeWorksListPageState extends BasePageStateActive<HomeWorksListPage> {
   late HomeWorksListBloc homeWorksListCommonBloc;
-
+  HomeWorksListRequest request = HomeWorksListRequest(obj: HomeWorksListDataRequest());
   @override
   void initBloc() {
     homeWorksListCommonBloc = HomeWorksListBloc();
+    request.obj.flag = widget.flag;
   }
 
+  @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    homeWorksListCommonBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
   @override
   String getPageTitle(BuildContext context) {
     switch (widget.flag) {
@@ -51,11 +67,7 @@ class _HomeWorksListPageState extends BasePageStateActive<HomeWorksListPage> {
   @override
   void initDataLoading() {
     homeWorksListCommonBloc.add(HomeWorksListEvent(
-        request: HomeWorksListRequest(
-            obj: HomeWorksListDataRequest(
-      flag: widget.flag,
-    ))));
-    super.initDataLoading();
+        request: request));
   }
 
   @override
@@ -97,4 +109,5 @@ class _HomeWorksListPageState extends BasePageStateActive<HomeWorksListPage> {
           ),
         ),
       ));
+
 }

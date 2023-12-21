@@ -29,6 +29,30 @@ class _ChangePasswordPageState extends BasePageState<ChangePasswordPage> {
   Color currentBackgroundColor(BuildContext context) => Colors.white;
 
   @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
+  }
+
+  @override
+  void initDataLoading() {
+    // TODO: implement initDataLoading
+  }
+  @override
   Widget pageUI(BuildContext context) => ListView(
         children: <Widget>[
           Container(
@@ -93,4 +117,5 @@ class _ChangePasswordPageState extends BasePageState<ChangePasswordPage> {
           .then((value) => backPage());
     }
   }
+
 }

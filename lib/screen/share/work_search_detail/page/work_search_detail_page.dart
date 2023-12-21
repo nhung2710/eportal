@@ -10,6 +10,7 @@ import 'package:eportal/widget/full_data_item/work_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../extension/string_extension.dart';
 import '../../../../widget/button/email_button.dart';
 
 //
@@ -31,24 +32,33 @@ class WorkSearchDetailPage extends BasePage {
 
 class _WorkSearchDetailPageState extends BasePageState<WorkSearchDetailPage> {
   late WorkDetailBloc workDetailBloc;
-
+  WorkDetailRequest request = WorkDetailRequest(obj: WorkDetailDataRequest());
   @override
   void initBloc() {
     workDetailBloc = WorkDetailBloc();
+    request.obj.id = widget.id.replaceWhenNullOrWhiteSpace("0");
   }
 
   @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    workDetailBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+  @override
   void initDataLoading() {
     callApi();
-    super.initDataLoading();
   }
 
   @override
   void callApi() {
     workDetailBloc.add(WorkDetailEvent(
-        request: WorkDetailRequest(
-            obj: WorkDetailDataRequest(id: widget.id ?? "0"))));
-    super.callApi();
+        request: request));
+
   }
 
   @override
@@ -93,4 +103,5 @@ class _WorkSearchDetailPageState extends BasePageState<WorkSearchDetailPage> {
 
   @override
   String getPageTitle(BuildContext context) => "Chi tiết  tuyển dụng";
+
 }

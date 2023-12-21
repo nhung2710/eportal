@@ -55,6 +55,17 @@ class JobAdvertisementEditBasicTabState
   void initBloc() {
     danhSachTinhTpBloc = DanhSachTinhTpBloc();
   }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    danhSachTinhTpBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
   @override
   void initDataLoading() {
   }
@@ -64,7 +75,6 @@ class JobAdvertisementEditBasicTabState
 
     danhSachTinhTpBloc.add(DanhSachTinhTpEvent(
         request: DanhSachTinhTpRequest(obj: DanhSachTinhTpDataRequest())));
-    super.callApi();
   }
 
   @override
@@ -202,4 +212,5 @@ class JobAdvertisementEditBasicTabState
       title: "Tình thành phố",
     );
   }
+
 }

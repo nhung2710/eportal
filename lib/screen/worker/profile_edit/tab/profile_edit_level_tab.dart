@@ -25,11 +25,29 @@ class ProfileEditLevelTabState
 
   @override
   void initDataLoading() {
-    educationController.text =
-        widget.data.education.replaceWhenNullOrWhiteSpace();
-    super.initDataLoading();
   }
 
+  @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
+    educationController.text =
+        widget.data.education.replaceWhenNullOrWhiteSpace();
+  }
   @override
   Widget pageUI(BuildContext context) => ListView(
         children: <Widget>[
@@ -48,4 +66,5 @@ class ProfileEditLevelTabState
           ),
         ],
       );
+
 }

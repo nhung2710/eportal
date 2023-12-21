@@ -35,15 +35,27 @@ class _HomeBusinessListPageState
   }
 
   @override
-  String getPageTitle(BuildContext context) {
-    return "Danh sách công ty tuyển dụng";
+  String getPageTitle(BuildContext context) => "Danh sách công ty tuyển dụng";
+
+  @override
+  void callApi() {
+    // TODO: implement callApi
   }
 
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    homeBusinessListBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
   @override
   void initDataLoading() {
     homeBusinessListBloc.add(HomeBusinessListEvent(
         request: HomeBusinessListRequest(obj: HomeBusinessListDataRequest())));
-    super.initDataLoading();
   }
 
   @override
@@ -91,4 +103,5 @@ class _HomeBusinessListPageState
           ),
         ),
       ));
+
 }

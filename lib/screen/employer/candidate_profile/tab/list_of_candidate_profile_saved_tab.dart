@@ -34,24 +34,26 @@ class _ListOfCandidateProfileSavedTabState
   void initBloc() {
     profileSaveListBloc = ProfileSaveListBloc();
   }
+  @override
+  void disposeBloc() {
+    profileSaveListBloc.close();
+  }
 
   @override
   void initDataLoading() {
-    request.obj.tuKhoa = textEditingController.text;
-    request.obj.soTrangHienTai = 1;
+    request.obj.reloadData();
     callApi();
-
-    super.initDataLoading();
   }
 
   @override
   void getMoreData() {
-    request.obj.soTrangHienTai++;
+    request.obj.nextData();
     callApi();
   }
 
   @override
   void callApi() {
+    request.obj.tuKhoa = textEditingController.text;
     profileSaveListBloc.add(ProfileSaveListEvent(request: request));
   }
 
@@ -110,4 +112,5 @@ class _ListOfCandidateProfileSavedTabState
           ),
         ],
       );
+
 }

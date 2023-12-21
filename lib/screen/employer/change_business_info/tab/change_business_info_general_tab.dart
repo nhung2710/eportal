@@ -54,9 +54,18 @@ class ChangeBusinessInfoGeneralTabState
   }
 
   @override
+  void disposeBloc() {
+    danhSachTinhTpBloc.close();
+    danhSachQuanHuyenBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+  @override
   void initDataLoading() {
     callApi();
-    super.initDataLoading();
   }
 
   @override
@@ -265,4 +274,5 @@ class ChangeBusinessInfoGeneralTabState
       title: 'Quận huyện',
     );
   }
+
 }

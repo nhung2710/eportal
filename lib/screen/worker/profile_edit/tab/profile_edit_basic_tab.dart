@@ -53,6 +53,9 @@ class ProfileEditBasicTabState
   TextEditingController objectiveController = TextEditingController();
   TextEditingController skillController = TextEditingController();
 
+  DanhSachTinhTpRequest danhSachTinhTpRequest = DanhSachTinhTpRequest(obj: DanhSachTinhTpDataRequest());
+  DanhSachQuanHuyenRequest danhSachQuanHuyenRequest = DanhSachQuanHuyenRequest(obj: DanhSachQuanHuyenDataRequest());
+  DanhSachNganhNgheRequest danhSachNganhNgheRequest = DanhSachNganhNgheRequest(obj: DanhSachNganhNgheDataRequest());
   final _danhSachQuanHuyenKey = GlobalKey<SelectItemNormalState>();
   late DanhSachNganhNgheBloc danhSachNganhNgheBloc;
   late DanhSachTinhTpBloc danhSachTinhTpBloc;
@@ -63,42 +66,50 @@ class ProfileEditBasicTabState
     danhSachTinhTpBloc = DanhSachTinhTpBloc();
     danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
     danhSachNganhNgheBloc = DanhSachNganhNgheBloc();
-    super.initBloc();
-  }
-
-  @override
-  void initDataLoading() {
     titleController.text = widget.data.title.replaceWhenNullOrWhiteSpace();
     fromDateController.text = widget.data.startDate.formatDateTimeApi();
     toDateController.text = widget.data.endDate.formatDateTimeApi();
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    danhSachTinhTpBloc.close();
+    danhSachQuanHuyenBloc.close();
+    danhSachNganhNgheBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+  @override
+  void initDataLoading() {
 
     callApi();
     // TODO: implement initDataLoading
-    super.initDataLoading();
   }
 
   @override
   void callApi() {
+
     danhSachTinhTpBloc.add(DanhSachTinhTpEvent(
-        request: DanhSachTinhTpRequest(obj: DanhSachTinhTpDataRequest())));
+        request: danhSachTinhTpRequest));
     if (widget.danhSachTinhTpDataResponse != null) {
+      danhSachQuanHuyenRequest.obj.tinhTp = widget.danhSachTinhTpDataResponse!.regionalID;
       danhSachQuanHuyenBloc.add(DanhSachQuanHuyenEvent(
-          request: DanhSachQuanHuyenRequest(
-              obj: DanhSachQuanHuyenDataRequest(
-                  tinhTp: widget.danhSachTinhTpDataResponse!.regionalID))));
+          request: danhSachQuanHuyenRequest));
     } else {
       if (widget.data.tinhTP != null) {
+        danhSachQuanHuyenRequest.obj.tinhTp = widget.data.tinhTP;
         danhSachQuanHuyenBloc.add(DanhSachQuanHuyenEvent(
-            request: DanhSachQuanHuyenRequest(
-                obj:
-                    DanhSachQuanHuyenDataRequest(tinhTp: widget.data.tinhTP))));
+            request: danhSachQuanHuyenRequest));
       }
     }
-
     danhSachNganhNgheBloc.add(DanhSachNganhNgheEvent(
         request:
-            DanhSachNganhNgheRequest(obj: DanhSachNganhNgheDataRequest())));
-    super.callApi();
+            danhSachNganhNgheRequest));
+
   }
 
   @override
@@ -281,4 +292,5 @@ class ProfileEditBasicTabState
       title: 'Ngành nghề',
     );
   }
+
 }

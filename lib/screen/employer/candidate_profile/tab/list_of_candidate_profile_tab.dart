@@ -35,30 +35,33 @@ class _ListOfCandidateProfileTabState
       key: filterJobDialogKey,
       data: request.obj,
       onPressed: () => initDataLoading());
-  TextEditingController textEditingController = TextEditingController();
+  final TextEditingController textEditingController =  TextEditingController();
 
   @override
   void initBloc() {
     jobUserSearchBloc = JobUserSearchBloc();
   }
+  @override
+  void disposeBloc() {
+    jobUserSearchBloc.close();
+    textEditingController.dispose();
+  }
 
   @override
   void initDataLoading() {
-    request.obj.tuKhoa = textEditingController.text;
-    request.obj.soTrangHienTai = 1;
+    request.obj.reloadData();
     callApi();
-
-    super.initDataLoading();
   }
 
   @override
   void getMoreData() {
-    request.obj.soTrangHienTai++;
+    request.obj.nextData();
     callApi();
   }
 
   @override
   void callApi() {
+    request.obj.tuKhoa = textEditingController.text;
     jobUserSearchBloc.add(JobUserSearchEvent(request: request));
   }
 
@@ -121,4 +124,5 @@ class _ListOfCandidateProfileTabState
           ),
         ],
       );
+
 }

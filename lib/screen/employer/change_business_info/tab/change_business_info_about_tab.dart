@@ -40,7 +40,18 @@ class ChangeBusinessInfoAboutTabState
   @override
   void initDataLoading() {
     callApi();
-    super.initDataLoading();
+  }
+
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    danhSachNganhNgheBloc.close();
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
   }
 
   @override

@@ -43,22 +43,26 @@ class _ListOfJobAppliedPageState
   }
 
   @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+    workSendListBloc.close();
+  }
+  @override
   void initDataLoading() {
-    request.obj.tuKhoa = textEditingController.text;
-    request.obj.soTrangHienTai = 1;
+    request.obj.reloadData();
     callApi();
 
-    super.initDataLoading();
   }
 
   @override
   void getMoreData() {
-    request.obj.soTrangHienTai++;
+    request.obj.nextData();
     callApi();
   }
 
   @override
   void callApi() {
+    request.obj.tuKhoa = textEditingController.text;
     workSendListBloc.add(WorkSendListEvent(request: request));
   }
 
@@ -117,4 +121,5 @@ class _ListOfJobAppliedPageState
           ),
         ],
       );
+
 }

@@ -22,6 +22,30 @@ class _SupportPageState extends BasePageState<SupportPage> {
   TextEditingController textEditingController = TextEditingController();
 
   @override
+  void callApi() {
+    // TODO: implement callApi
+  }
+
+  @override
+  void disposeBloc() {
+    // TODO: implement disposeBloc
+  }
+
+  @override
+  void getMoreData() {
+    // TODO: implement getMoreData
+  }
+
+  @override
+  void initBloc() {
+    // TODO: implement initBloc
+  }
+
+  @override
+  void initDataLoading() {
+    // TODO: implement initDataLoading
+  }
+  @override
   String getPageTitle(BuildContext context) => "Hỗ trợ";
 
   @override
@@ -275,4 +299,5 @@ class _SupportPageState extends BasePageState<SupportPage> {
     launchUrl(
         Uri(scheme: 'mailto', path: '${email}subject=Yêu cầu hỗ trợ&body='));
   }
+
 }

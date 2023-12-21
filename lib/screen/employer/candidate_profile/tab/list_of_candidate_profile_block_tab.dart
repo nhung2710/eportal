@@ -28,7 +28,7 @@ class _ListOfCandidateProfileBlockTabState
   late ProfileBlackListBloc profileBlackListBloc;
   ProfileBlackListRequest request =
       ProfileBlackListRequest(obj: ProfileBlackListDataRequest());
-  TextEditingController textEditingController = TextEditingController();
+  final TextEditingController textEditingController = TextEditingController();
 
   @override
   void initBloc() {
@@ -36,22 +36,24 @@ class _ListOfCandidateProfileBlockTabState
   }
 
   @override
+  void disposeBloc() {
+    profileBlackListBloc.close();
+  }
+  @override
   void initDataLoading() {
-    request.obj.tuKhoa = textEditingController.text;
-    request.obj.soTrangHienTai = 1;
+    request.obj.reloadData();
     callApi();
-
-    super.initDataLoading();
   }
 
   @override
   void getMoreData() {
-    request.obj.soTrangHienTai++;
+    request.obj.nextData();
     callApi();
   }
 
   @override
   void callApi() {
+    request.obj.tuKhoa = textEditingController.text;
     profileBlackListBloc.add(ProfileBlackListEvent(request: request));
   }
 
@@ -111,4 +113,5 @@ class _ListOfCandidateProfileBlockTabState
           ),
         ],
       );
+
 }
