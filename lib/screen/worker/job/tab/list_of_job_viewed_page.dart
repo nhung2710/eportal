@@ -36,6 +36,7 @@ class _ListOfJobViewedPageState
   void initBloc() {
     workViewListBloc = WorkViewListBloc();
   }
+
   @override
   void disposeBloc() {
     // TODO: implement disposeBloc
@@ -115,5 +116,4 @@ class _ListOfJobViewedPageState
           ),
         ],
       );
-
 }

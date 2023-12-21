@@ -29,7 +29,8 @@ class AnswerAndQuestionPage extends BasePage {
 class AnswerAndQuestionPageState
     extends BasePageStateActive<AnswerAndQuestionPage> {
   late FaqQuestionSearchBloc faqQuestionSearchBloc;
-  FaqQuestionSearchRequest request = FaqQuestionSearchRequest(obj: FaqQuestionSearchDataRequest());
+  FaqQuestionSearchRequest request =
+      FaqQuestionSearchRequest(obj: FaqQuestionSearchDataRequest());
 
   @override
   void initBloc() {
@@ -41,6 +42,7 @@ class AnswerAndQuestionPageState
     // TODO: implement disposeBloc
     faqQuestionSearchBloc.close();
   }
+
   @override
   bool isHasAppBar(BuildContext context) => false;
 
@@ -58,8 +60,7 @@ class AnswerAndQuestionPageState
 
   @override
   void callApi() {
-    faqQuestionSearchBloc.add(FaqQuestionSearchEvent(
-        request: request));
+    faqQuestionSearchBloc.add(FaqQuestionSearchEvent(request: request));
   }
 
   @override
@@ -133,5 +134,4 @@ class AnswerAndQuestionPageState
                           ))),
         ),
       );
-
 }

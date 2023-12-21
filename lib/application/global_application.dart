@@ -31,7 +31,8 @@ class GlobalApplication {
   factory GlobalApplication() {
     return _instance;
   }
-  int getRandomInt({int min = 0,int max = 0}) => min + _random.nextInt(max);
+
+  int getRandomInt({int min = 0, int max = 0}) => min + _random.nextInt(max);
 
   String createXml(Object? value, String tag) {
     var buffer = StringBuffer();

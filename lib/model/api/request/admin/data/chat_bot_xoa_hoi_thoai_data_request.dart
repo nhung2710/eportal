@@ -3,19 +3,13 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 import 'package:eportal/constant/application_constant.dart';
+import 'package:eportal/model/api/request/admin/data/chat_bot_chi_tiet_hoi_thoai_data_request.dart';
 import 'package:eportal/model/base/base_eportal_xml.dart';
 
-class ChatBotXoaHoiThoaiDataRequest extends BaseEportalXml {
-  int? top;
+class ChatBotXoaHoiThoaiDataRequest extends ChatBotChiTietHoiThoaiDataRequest {
 
   ChatBotXoaHoiThoaiDataRequest(
-      {this.top = ApplicationConstant.NUMBER_FULL_ITEM});
+      {super.idHoiThoai});
 
-  @override
-  StringBuffer toXml() {
-    // TODO: implement toXml
-    var buffer = super.toXml();
-    buffer.write(createXml(top, "top"));
-    return buffer;
-  }
+
 }

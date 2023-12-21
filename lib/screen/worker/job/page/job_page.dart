@@ -1,7 +1,5 @@
 import 'package:eportal/screen/worker/job/tab/list_of_job_page.dart';
 import 'package:eportal/screen/worker/job/tab/list_of_job_viewed_page.dart';
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:flutter/material.dart';
 
@@ -22,11 +20,11 @@ class JobPage extends BasePage {
 }
 
 class _JobPageState extends BasePageStateActive<JobPage> {
-
   @override
   void initDataLoading() {
     // TODO: implement initDataLoading
   }
+
   @override
   void callApi() {
     // TODO: implement callApi
@@ -51,13 +49,10 @@ class _JobPageState extends BasePageStateActive<JobPage> {
   bool isHasAppBar(BuildContext context) => false;
 
   @override
-  Widget pageUI(BuildContext context) => CustomTabView(
-      tabViews: const {
-        "Danh sách việc làm tuyển dụng":ListOfJobPage(),
-        "Việc làm đã xem":ListOfJobViewedPage(),
-        "Việc làm đã ứng tuyểndụng":ListOfJobAppliedPage(),
-        "Việc làm đã lưu lại":ListOfJobSavedPage(),
-      }
-  );
-
+  Widget pageUI(BuildContext context) => CustomTabView(tabViews: const {
+        "Danh sách việc làm tuyển dụng": ListOfJobPage(),
+        "Việc làm đã xem": ListOfJobViewedPage(),
+        "Việc làm đã ứng tuyểndụng": ListOfJobAppliedPage(),
+        "Việc làm đã lưu lại": ListOfJobSavedPage(),
+      });
 }

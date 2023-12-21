@@ -47,6 +47,7 @@ class _ChatBotPageState extends BasePageState<ChatBotPage> {
   void initDataLoading() {
     // TODO: implement initDataLoading
   }
+
   @override
   double currentPadding(BuildContext context) => 0;
 
@@ -179,5 +180,4 @@ class _ChatBotPageState extends BasePageState<ChatBotPage> {
           !e.isBot ? Container() : Expanded(flex: 1, child: Container()),
         ],
       );
-
 }

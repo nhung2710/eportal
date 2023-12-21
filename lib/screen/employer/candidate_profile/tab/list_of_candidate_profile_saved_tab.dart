@@ -34,6 +34,7 @@ class _ListOfCandidateProfileSavedTabState
   void initBloc() {
     profileSaveListBloc = ProfileSaveListBloc();
   }
+
   @override
   void disposeBloc() {
     profileSaveListBloc.close();
@@ -112,5 +113,4 @@ class _ListOfCandidateProfileSavedTabState
           ),
         ],
       );
-
 }

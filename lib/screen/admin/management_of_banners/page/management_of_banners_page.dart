@@ -44,6 +44,7 @@ class _ManagementOfBannersPageState
   void getMoreData() {
     // TODO: implement getMoreData
   }
+
   @override
   void initDataLoading() {
     // TODO: implement initDataLoading
@@ -143,5 +144,4 @@ class _ManagementOfBannersPageState
           ),
         ],
       );
-
 }

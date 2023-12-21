@@ -73,5 +73,4 @@ class _TermsOfUsePageState extends BasePageState<TermsOfUsePage> {
     }
     return "";
   }
-
 }

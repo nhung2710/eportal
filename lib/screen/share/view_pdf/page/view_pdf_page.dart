@@ -75,7 +75,6 @@ class _ViewPdfPageState extends BasePageState<ViewPdfPage> {
       );
 
   Future<File?> downloadFilePdf() async {
-
     try {
       String fileName = "${md5.convert(utf8.encode(widget.url))}.pdf";
       final fullDirPath = '${GlobalApplication().dirPath}/download/pdf';

@@ -51,6 +51,7 @@ class MediaImageManagePageState
     // TODO: implement disposeBloc
     albumListBloc.close();
   }
+
   @override
   void initDataLoading() {
     request.obj.reloadData();
@@ -116,5 +117,4 @@ class MediaImageManagePageState
                   ),
                 )),
       ));
-
 }

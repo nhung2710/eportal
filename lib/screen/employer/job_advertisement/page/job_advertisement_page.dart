@@ -65,6 +65,7 @@ class _JobAdvertisementPageState
     workSearchByUserNameBloc.close();
     workDeleteBloc.close();
   }
+
   @override
   void callApi() {
     workSearchByUserNameBloc.add(WorkSearchByUserNameEvent(request: request));
@@ -166,34 +167,15 @@ class _JobAdvertisementPageState
       );
 
   void deleteWork(WorkSearchByUserNameDataResponse item) {
-    Alert(
-        context: context,
-        type: AlertType.warning,
-        title: "Bạn có chắc chắn muốn xoá tin ứng tuyển này không?",
-        desc: "Dữ liệu bị xoá không thể khôi phục lại",
-        buttons: [
-          DialogButton(
-            onPressed: () => Navigator.pop(context),
-            color: AppColor.colorOfIcon,
-            child: const Text(
-              "Huỷ",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          ),
-          DialogButton(
-            onPressed: () {
-              Navigator.pop(context);
-              workDeleteBloc.add(WorkDeleteEvent(
-                  request: WorkDeleteRequest(
-                      obj: WorkDeleteDataRequest(workId: item.workID))));
-            },
-            color: Colors.red,
-            child: const Text(
-              "Tiếp tục",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          )
-        ]).show();
+    showAlertChoose(allow: () => delete(item),
+      title: "Bạn có chắc chắn muốn xoá tin ứng tuyển này không?",
+      desc: "Dữ liệu bị xoá không thể khôi phục lại",
+    );
   }
 
+  void delete(WorkSearchByUserNameDataResponse item) {
+    workDeleteBloc.add(WorkDeleteEvent(
+        request: WorkDeleteRequest(
+            obj: WorkDeleteDataRequest(workId: item.workID))));
+  }
 }

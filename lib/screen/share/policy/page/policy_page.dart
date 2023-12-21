@@ -23,8 +23,7 @@ class _PolicyPageState extends BasePageState<PolicyPage> {
   late Future<String> _content;
 
   @override
-  void initDataLoading() {
-  }
+  void initDataLoading() {}
 
   @override
   void callApi() {
@@ -46,6 +45,7 @@ class _PolicyPageState extends BasePageState<PolicyPage> {
   void initBloc() {
     // TODO: implement initBloc
   }
+
   @override
   Widget pageUI(BuildContext context) => SingleChildScrollView(
         child: FutureBuilder<String>(
@@ -72,5 +72,4 @@ class _PolicyPageState extends BasePageState<PolicyPage> {
     }
     return "";
   }
-
 }

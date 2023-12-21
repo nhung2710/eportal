@@ -17,7 +17,8 @@ class WorkSearchByUserNameBloc extends BasePageBloc<
   @override
   Future<WorkSearchByUserNameResponse> callApiResult(
           WorkSearchByUserNameRepository apiRepository,
-          WorkSearchByUserNameEvent event) => apiRepository.get(event.request);
+          WorkSearchByUserNameEvent event) =>
+      apiRepository.get(event.request);
 
   @override
   String? getFailMessage(WorkSearchByUserNameResponse response) => null;

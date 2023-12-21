@@ -58,7 +58,6 @@ class _ChartUnemploymentRatePageState
     // TODO: implement initBloc
   }
 
-
   @override
   String getPageTitle(BuildContext context) => "Lao động thất nghiệp";
 
@@ -118,5 +117,4 @@ class _ChartUnemploymentRatePageState
     }
     return pieChartSectionDatas;
   }
-
 }

@@ -36,6 +36,7 @@ class MediaVideoManagePageState
     // TODO: implement disposeBloc
     videoListBloc.close();
   }
+
   @override
   void getMoreData() {
     request.obj.nextData();
@@ -87,5 +88,4 @@ class MediaVideoManagePageState
                   ),
                 )),
       ));
-
 }

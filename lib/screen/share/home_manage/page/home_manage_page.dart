@@ -11,7 +11,6 @@ import 'package:eportal/model/api/request/common_new/home_business_list_request.
 import 'package:eportal/model/api/response/common_new/data/home_advertise_list_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/home_business_list_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/home_slide_list_data_response.dart';
-import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
 import 'package:eportal/screen/share/chat_bot_manage/page/chat_bot_manage_page.dart';
 import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/style/app_text_style.dart';
@@ -34,6 +33,7 @@ import '../../news/page/news_page.dart';
 import '../../news_curriculum_vitae/page/news_curriculum_vitae_page.dart';
 import '../../news_legal_document/page/news_legal_document_page.dart';
 import '../../news_recruitment/page/news_recruitment_page.dart';
+import '../../sign_in/page/sign_in_page.dart';
 
 //
 // Created by BlackRose on 16/11/2023.
@@ -58,6 +58,7 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
     homeAdvertiseListBloc = HomeAdvertiseListBloc();
     homeBusinessListBloc = HomeBusinessListBloc();
   }
+
   @override
   void callApi() {
     // TODO: implement callApi
@@ -67,7 +68,7 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
         request: HomeBusinessListRequest(obj: HomeBusinessListDataRequest())));
     homeAdvertiseListBloc.add(HomeAdvertiseListEvent(
         request:
-        HomeAdvertiseListRequest(obj: HomeAdvertiseListDataRequest())));
+            HomeAdvertiseListRequest(obj: HomeAdvertiseListDataRequest())));
   }
 
   @override
@@ -427,10 +428,6 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
       );
 
   openChatBot(BuildContext context) {
-    if(GlobalApplication().isLogin)
-      {
-        nextPage((context) => const ChatBotManagePage());
-      }
+    nextPage((context) => GlobalApplication().isLogin ? const ChatBotManagePage(): const SignInPage());
   }
-
 }

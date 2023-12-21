@@ -3,8 +3,6 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-
-import 'package:eportal/application/global_application.dart';
 import 'package:eportal/bloc/admin/profile_save_bloc.dart';
 import 'package:eportal/bloc/common_new/job_user_detail_bloc.dart';
 import 'package:eportal/event/admin/profile_save_event.dart';
@@ -43,6 +41,7 @@ class _CandidateProfileDetailPageState
   late JobUserDetailBloc jobUserDetailBloc;
   late ProfileSaveBloc profileSaveBloc;
   TextEditingController tieuDeController = TextEditingController();
+
   @override
   void initBloc() {
     jobUserDetailBloc = JobUserDetailBloc();
@@ -59,6 +58,7 @@ class _CandidateProfileDetailPageState
   void getMoreData() {
     // TODO: implement getMoreData
   }
+
   @override
   void initDataLoading() {
     callApi();
@@ -73,27 +73,29 @@ class _CandidateProfileDetailPageState
 
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
-    create: (_) => profileSaveBloc,
-    child: BlocListener<ProfileSaveBloc,DataSingleState<ProfileSaveDataResponse>>(
-      listener: (BuildContext context, DataSingleState<ProfileSaveDataResponse> state) {
-        handlerActionDataSingleState<ProfileSaveDataResponse>(state, (obj) {
-          tieuDeController.clear();
-          showCenterMessage("Lưu hồ sơ thành công");
-        });
-      },
-      child: BlocProvider(
-          create: (_) => jobUserDetailBloc,
-          child: BlocListener<JobUserDetailBloc,
-              DataSingleState<JobUserDetailDataResponse>>(
-            listener: (BuildContext context,
-                DataSingleState<JobUserDetailDataResponse> state) {},
-            child: BlocBuilder<JobUserDetailBloc,
-                DataSingleState<JobUserDetailDataResponse>>(
-              builder: (BuildContext context,
-                  DataSingleState<JobUserDetailDataResponse> state) =>
-                  handleDataSingleState<JobUserDetailDataResponse>(
+        create: (_) => profileSaveBloc,
+        child: BlocListener<ProfileSaveBloc,
+            DataSingleState<ProfileSaveDataResponse>>(
+          listener: (BuildContext context,
+              DataSingleState<ProfileSaveDataResponse> state) {
+            handlerActionDataSingleState<ProfileSaveDataResponse>(state, (obj) {
+              tieuDeController.clear();
+              showCenterMessage("Lưu hồ sơ thành công");
+            });
+          },
+          child: BlocProvider(
+              create: (_) => jobUserDetailBloc,
+              child: BlocListener<JobUserDetailBloc,
+                  DataSingleState<JobUserDetailDataResponse>>(
+                listener: (BuildContext context,
+                    DataSingleState<JobUserDetailDataResponse> state) {},
+                child: BlocBuilder<JobUserDetailBloc,
+                    DataSingleState<JobUserDetailDataResponse>>(
+                  builder: (BuildContext context,
+                          DataSingleState<JobUserDetailDataResponse> state) =>
+                      handleDataSingleState<JobUserDetailDataResponse>(
                     state,
-                        (context, state) => SingleChildScrollView(
+                    (context, state) => SingleChildScrollView(
                       child: Column(
                         children: [
                           CurriculumVitaeItem(
@@ -113,58 +115,42 @@ class _CandidateProfileDetailPageState
                       ),
                     ),
                   ),
-            ),
-          )),
-    ),
-  );
+                ),
+              )),
+        ),
+      );
 
   @override
   String getPageTitle(BuildContext context) => "Chi tiết hồ sơ ứng viên";
 
   void saveProfile() {
-    Alert(
-        context: context,
-        type: AlertType.warning,
-        title: "Lưu hồ sơ",
-        content:
-        Container(
-          margin: const EdgeInsets.only(top: 10),
-          width: double.infinity,
-          child: FieldInput(
-            controller: tieuDeController,
-            maxLength: 100,
-            textInputAction: TextInputAction.next,
-            validator: (text) {
-              if (text == null || text.isEmpty) {
-                return 'Tiêu đề không được để trống';
-              }
-              return null;
-            },
-            hintText: 'Tiêu đề',
-            icon: FontAwesomeIcons.tags,
-          ),
+    showAlertChoose(allow: () => save(),
+      content: Container(
+        margin: const EdgeInsets.only(top: 10),
+        width: double.infinity,
+        child: FieldInput(
+          controller: tieuDeController,
+          maxLength: 100,
+          textInputAction: TextInputAction.next,
+          validator: (text) {
+            if (text == null || text.isEmpty) {
+              return 'Tiêu đề không được để trống';
+            }
+            return null;
+          },
+          hintText: 'Tiêu đề',
+          icon: FontAwesomeIcons.tags,
         ),
-        buttons: [
-          DialogButton(
-            onPressed: () => Navigator.pop(context),
-            color: AppColor.colorOfIcon,
-            child: const Text(
-              "Huỷ",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          ),
-          DialogButton(
-            onPressed: () {
-              Navigator.pop(context);
-              profileSaveBloc.add(ProfileSaveEvent(request: ProfileSaveRequest(obj: ProfileSaveDataRequest(jobUserID: widget.id, title: tieuDeController.text))));
-            },
-            color: Colors.red,
-            child: const Text(
-              "Lưu lại",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          )
-        ]).show();
+      ),
+      title: "Lưu hồ sơ",
+    );
   }
 
+  save() {
+    profileSaveBloc.add(ProfileSaveEvent(
+        request: ProfileSaveRequest(
+            obj: ProfileSaveDataRequest(
+                jobUserID: widget.id,
+                title: tieuDeController.text))));
+  }
 }

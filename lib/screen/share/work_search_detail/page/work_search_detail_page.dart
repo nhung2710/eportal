@@ -33,6 +33,7 @@ class WorkSearchDetailPage extends BasePage {
 class _WorkSearchDetailPageState extends BasePageState<WorkSearchDetailPage> {
   late WorkDetailBloc workDetailBloc;
   WorkDetailRequest request = WorkDetailRequest(obj: WorkDetailDataRequest());
+
   @override
   void initBloc() {
     workDetailBloc = WorkDetailBloc();
@@ -49,6 +50,7 @@ class _WorkSearchDetailPageState extends BasePageState<WorkSearchDetailPage> {
   void getMoreData() {
     // TODO: implement getMoreData
   }
+
   @override
   void initDataLoading() {
     callApi();
@@ -56,9 +58,7 @@ class _WorkSearchDetailPageState extends BasePageState<WorkSearchDetailPage> {
 
   @override
   void callApi() {
-    workDetailBloc.add(WorkDetailEvent(
-        request: request));
-
+    workDetailBloc.add(WorkDetailEvent(request: request));
   }
 
   @override
@@ -103,5 +103,4 @@ class _WorkSearchDetailPageState extends BasePageState<WorkSearchDetailPage> {
 
   @override
   String getPageTitle(BuildContext context) => "Chi tiết  tuyển dụng";
-
 }

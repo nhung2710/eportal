@@ -63,6 +63,7 @@ class ChangeBusinessInfoGeneralTabState
   void getMoreData() {
     // TODO: implement getMoreData
   }
+
   @override
   void initDataLoading() {
     callApi();
@@ -274,5 +275,4 @@ class ChangeBusinessInfoGeneralTabState
       title: 'Quận huyện',
     );
   }
-
 }

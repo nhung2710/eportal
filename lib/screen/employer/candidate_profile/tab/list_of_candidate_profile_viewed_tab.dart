@@ -35,6 +35,7 @@ class _ListOfCandidateProfileViewedTabState
   void initBloc() {
     profileViewListBloc = ProfileViewListBloc();
   }
+
   @override
   void disposeBloc() {
     profileViewListBloc.close();
@@ -113,5 +114,4 @@ class _ListOfCandidateProfileViewedTabState
           ),
         ],
       );
-
 }

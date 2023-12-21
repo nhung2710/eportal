@@ -48,6 +48,7 @@ class FilterNewsDialogState extends BaseScreenState<FilterNewsDialog> {
     // TODO: implement initBloc
     danhSachChuyenMucBloc = DanhSachChuyenMucBloc();
   }
+
   @override
   void initDataLoading() {
     callApi();
@@ -142,5 +143,4 @@ class FilterNewsDialogState extends BaseScreenState<FilterNewsDialog> {
         },
         title: "Loại tin tức");
   }
-
 }

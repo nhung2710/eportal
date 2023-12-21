@@ -28,16 +28,18 @@ class NewsLegalDocumentPage extends BasePage {
 
 class _NewsLegalDocumentPageState extends BasePageState<NewsLegalDocumentPage> {
   late HomeDocumentListBloc homeDocumentListBloc;
-  HomeDocumentListRequest request = HomeDocumentListRequest(obj: HomeDocumentListDataRequest());
+  HomeDocumentListRequest request =
+      HomeDocumentListRequest(obj: HomeDocumentListDataRequest());
+
   @override
   void initBloc() {
     homeDocumentListBloc = HomeDocumentListBloc();
   }
+
   @override
   void callApi() {
     // TODO: implement callApi
-    homeDocumentListBloc.add(HomeDocumentListEvent(
-        request: request));
+    homeDocumentListBloc.add(HomeDocumentListEvent(request: request));
   }
 
   @override
@@ -104,5 +106,4 @@ class _NewsLegalDocumentPageState extends BasePageState<NewsLegalDocumentPage> {
 
   @override
   String getPageTitle(BuildContext context) => "Văn bản pháp luật";
-
 }

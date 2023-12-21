@@ -1,8 +1,6 @@
 import 'package:eportal/model/api/response/admin/data/job_user_add_data_response.dart';
 import 'package:eportal/screen/employer/change_business_info/tab/change_business_info_general_tab.dart';
 import 'package:eportal/state/base/base_state.dart';
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:eportal/widget/input/capcha_input.dart';
 import 'package:flutter/material.dart';

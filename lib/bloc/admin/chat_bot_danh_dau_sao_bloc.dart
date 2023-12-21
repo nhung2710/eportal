@@ -8,11 +8,15 @@ import 'package:eportal/model/api/response/admin/chat_bot_danh_dau_sao_response.
 import 'package:eportal/model/api/response/admin/data/chat_bot_danh_dau_sao_data_response.dart';
 import 'package:eportal/repository/admin/chat_bot_danh_dau_sao_repository.dart';
 
-class ChatBotDanhDauSaoBloc extends BaseSingleBloc<ChatBotDanhDauSaoDataResponse,
-    ChatBotDanhDauSaoRepository, ChatBotDanhDauSaoEvent, ChatBotDanhDauSaoResponse> {
+class ChatBotDanhDauSaoBloc extends BaseSingleBloc<
+    String,
+    ChatBotDanhDauSaoRepository,
+    ChatBotDanhDauSaoEvent,
+    ChatBotDanhDauSaoResponse> {
   @override
   Future<ChatBotDanhDauSaoResponse> callApiResult(
-      ChatBotDanhDauSaoRepository apiRepository, ChatBotDanhDauSaoEvent event) =>
+          ChatBotDanhDauSaoRepository apiRepository,
+          ChatBotDanhDauSaoEvent event) =>
       apiRepository.get(event.request);
 
   @override

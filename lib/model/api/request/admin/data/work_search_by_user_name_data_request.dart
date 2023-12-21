@@ -1,5 +1,3 @@
-import 'package:eportal/constant/application_constant.dart';
-import 'package:eportal/model/api/request/common_new/data/search_request_data.dart';
 import 'package:eportal/model/base/base_eportal_xml.dart';
 
 //

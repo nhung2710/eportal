@@ -8,14 +8,13 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 import '../../../../extension/map_json_extension.dart';
 
 class ChatBotThemCauMauResponse
-    extends BaseSingleEportalResponse<ChatBotThemCauMauDataResponse> {
+    extends BaseSingleEportalResponse<String> {
   ChatBotThemCauMauResponse(
       {required super.data, required super.status, required super.message});
 
   factory ChatBotThemCauMauResponse.fromJson(Map<String, dynamic> json) {
     return ChatBotThemCauMauResponse(
-        data: json.toObjectJson(
-            mapJson: (v) => ChatBotThemCauMauDataResponse.fromJson(v)),
+        data: json.toStringJson(),
         status: json["status"],
         message: json["message"]);
   }

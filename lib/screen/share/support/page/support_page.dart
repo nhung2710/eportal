@@ -45,6 +45,7 @@ class _SupportPageState extends BasePageState<SupportPage> {
   void initDataLoading() {
     // TODO: implement initDataLoading
   }
+
   @override
   String getPageTitle(BuildContext context) => "Hỗ trợ";
 
@@ -299,5 +300,4 @@ class _SupportPageState extends BasePageState<SupportPage> {
     launchUrl(
         Uri(scheme: 'mailto', path: '${email}subject=Yêu cầu hỗ trợ&body='));
   }
-
 }

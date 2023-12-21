@@ -57,6 +57,7 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
   void getMoreData() {
     // TODO: implement getMoreData
   }
+
   @override
   Widget pageUI(BuildContext context) => Column(
         children: [
@@ -148,5 +149,4 @@ class _JobUserSearchPageState extends BasePageState<JobUserSearchPage> {
       jobUserSearchBloc.add(JobUserSearchEvent(request: request));
     }
   }
-
 }

@@ -45,10 +45,9 @@ class _CandidateProfilePageState
     _tabController = TabController(
         vsync: this, length: 4, animationDuration: const Duration(seconds: 0));
   }
-  @override
-  void initDataLoading() {
 
-  }
+  @override
+  void initDataLoading() {}
 
   @override
   bool isHasAppBar(BuildContext context) => false;
@@ -63,5 +62,4 @@ class _CandidateProfilePageState
           "Hồ sơ ứng viên đã chặn": ListOfCandidateProfileBlockTab(),
         },
       );
-
 }

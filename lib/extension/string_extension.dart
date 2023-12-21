@@ -63,13 +63,9 @@ extension StringNullExtension on String? {
         List.generate(number, (index) => "\n").join("");
   }
 
-  String supportHtml() =>
-      isNullOrWhiteSpace()
-          ? ApplicationConstant.EMPTY
-          : (htmlparser
-          .parse(this)
-          .firstChild
-          ?.text)
+  String supportHtml() => isNullOrWhiteSpace()
+      ? ApplicationConstant.EMPTY
+      : (htmlparser.parse(this).firstChild?.text)
           .replaceWhenNullOrWhiteSpace()
           .trim();
 
@@ -120,13 +116,9 @@ extension StringExtension on String {
     return "${ApplicationApiConstant.kBASE_URI_MEDIA}/$this";
   }
 
-  String supportHtml() =>
-      isNullOrWhiteSpace()
-          ? ApplicationConstant.EMPTY
-          : (htmlparser
-          .parse(this)
-          .firstChild
-          ?.text).replaceWhenNullOrWhiteSpace();
+  String supportHtml() => isNullOrWhiteSpace()
+      ? ApplicationConstant.EMPTY
+      : (htmlparser.parse(this).firstChild?.text).replaceWhenNullOrWhiteSpace();
 
   String removeUnicode() {
     var value = replaceWhenNullOrWhiteSpace();

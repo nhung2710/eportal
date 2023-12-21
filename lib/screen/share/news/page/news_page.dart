@@ -29,16 +29,18 @@ class NewsPage extends BasePage {
 
 class _NewsPageState extends BasePageState<NewsPage> {
   late HomeNewsListBloc homeNewsListBloc;
-  HomeNewsListRequest request = HomeNewsListRequest(obj: HomeNewsListDataRequest());
+  HomeNewsListRequest request =
+      HomeNewsListRequest(obj: HomeNewsListDataRequest());
+
   @override
   void initBloc() {
     homeNewsListBloc = HomeNewsListBloc();
   }
+
   @override
   void callApi() {
     // TODO: implement callApi
-    homeNewsListBloc.add(HomeNewsListEvent(
-        request: request));
+    homeNewsListBloc.add(HomeNewsListEvent(request: request));
   }
 
   @override
@@ -99,8 +101,6 @@ class _NewsPageState extends BasePageState<NewsPage> {
         ),
       ));
 
-
   @override
   String getPageTitle(BuildContext context) => "Tin tức";
-
 }

@@ -3,7 +3,6 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/model/base/base_eportal_xml.dart';
 
 class ChatBotDanhSachHoiThoaiDataRequest extends BasePageEportalXml {
@@ -13,10 +12,10 @@ class ChatBotDanhSachHoiThoaiDataRequest extends BasePageEportalXml {
 
   ChatBotDanhSachHoiThoaiDataRequest(
       {this.tuKhoa,
-        this.trangThai = 0,
-        this.kieuSapXep = 1,
-        super.soTrangHienTai,
-        super.soBanGhiTrenTrang});
+      this.trangThai = 0,
+      this.kieuSapXep = 1,
+      super.soTrangHienTai,
+      super.soBanGhiTrenTrang});
 
   @override
   StringBuffer toXml() {

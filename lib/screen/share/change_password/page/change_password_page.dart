@@ -52,6 +52,7 @@ class _ChangePasswordPageState extends BasePageState<ChangePasswordPage> {
   void initDataLoading() {
     // TODO: implement initDataLoading
   }
+
   @override
   Widget pageUI(BuildContext context) => ListView(
         children: <Widget>[
@@ -117,5 +118,4 @@ class _ChangePasswordPageState extends BasePageState<ChangePasswordPage> {
           .then((value) => backPage());
     }
   }
-
 }

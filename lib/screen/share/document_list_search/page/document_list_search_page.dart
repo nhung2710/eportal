@@ -49,7 +49,6 @@ class _DocumentListSearchPageState
   void initDataLoading() {
     request.obj.reloadData();
     callApi();
-
   }
 
   @override

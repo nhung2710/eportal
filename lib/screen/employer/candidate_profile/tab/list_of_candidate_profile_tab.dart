@@ -4,7 +4,6 @@ import 'package:eportal/model/api/request/common_new/data/job_user_search_data_r
 import 'package:eportal/model/api/request/common_new/job_user_search_request.dart';
 import 'package:eportal/model/api/response/common_new/data/job_user_search_data_response.dart';
 import 'package:eportal/screen/employer/candidate_profile_detail/page/candidate_profile_detail_page.dart';
-import 'package:eportal/screen/share/news_curriculum_vitae_detail/page/news_curriculum_vitae_detail_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
@@ -35,12 +34,13 @@ class _ListOfCandidateProfileTabState
       key: filterJobDialogKey,
       data: request.obj,
       onPressed: () => initDataLoading());
-  final TextEditingController textEditingController =  TextEditingController();
+  final TextEditingController textEditingController = TextEditingController();
 
   @override
   void initBloc() {
     jobUserSearchBloc = JobUserSearchBloc();
   }
+
   @override
   void disposeBloc() {
     jobUserSearchBloc.close();
@@ -124,5 +124,4 @@ class _ListOfCandidateProfileTabState
           ),
         ],
       );
-
 }

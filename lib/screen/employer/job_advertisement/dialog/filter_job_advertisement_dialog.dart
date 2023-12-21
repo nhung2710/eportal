@@ -3,30 +3,25 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-import 'package:eportal/bloc/common_new/danh_sach_doanh_nghiep_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_gioi_tinh_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_kinh_nghiem_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_muc_luong_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_quan_huyen_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_tinh_tp_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_trinh_do_bloc.dart';
-import 'package:eportal/event/common_new/danh_sach_doanh_nghiep_event.dart';
 import 'package:eportal/event/common_new/danh_sach_kinh_nghiem_event.dart';
 import 'package:eportal/event/common_new/danh_sach_muc_luong_event.dart';
 import 'package:eportal/event/common_new/danh_sach_quan_huyen_event.dart';
 import 'package:eportal/event/common_new/danh_sach_tinh_tp_event.dart';
 import 'package:eportal/model/api/request/admin/data/work_search_by_user_name_data_request.dart';
-import 'package:eportal/model/api/request/common_new/danh_sach_doanh_nghiep_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_kinh_nghiem_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_muc_luong_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_quan_huyen_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_tinh_tp_request.dart';
-import 'package:eportal/model/api/request/common_new/data/danh_sach_doanh_nghiep_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_kinh_nghiem_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_muc_luong_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_quan_huyen_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_tinh_tp_data_request.dart';
-import 'package:eportal/model/api/request/common_new/data/search_request_data.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_doanh_nghiep_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_kinh_nghiem_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_muc_luong_data_response.dart';
@@ -320,5 +315,4 @@ class FilterJobAdvertisementDialogState
       title: "Mức lương",
     );
   }
-
 }

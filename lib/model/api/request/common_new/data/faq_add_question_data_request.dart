@@ -9,7 +9,8 @@ class FaqAddQuestionDataRequest extends BaseEportalXml {
   String? email;
   String? phone;
   String? noiDung;
-  FaqAddQuestionDataRequest({this.hoTen,this.email,this.phone,this.noiDung});
+
+  FaqAddQuestionDataRequest({this.hoTen, this.email, this.phone, this.noiDung});
 
   @override
   StringBuffer toXml() {

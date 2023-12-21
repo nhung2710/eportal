@@ -24,8 +24,8 @@ class ProfileEditCareerGoalsTabState
   TextEditingController objectiveController = TextEditingController();
 
   @override
-  void initDataLoading() {
-  }
+  void initDataLoading() {}
+
   @override
   void callApi() {
     // TODO: implement callApi
@@ -66,5 +66,4 @@ class ProfileEditCareerGoalsTabState
           ),
         ],
       );
-
 }

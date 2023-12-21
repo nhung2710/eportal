@@ -3,20 +3,10 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-import 'package:eportal/bloc/common_new/danh_sach_nganh_nghe_bloc.dart';
-import 'package:eportal/bloc/common_new/danh_sach_quan_huyen_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_tinh_tp_bloc.dart';
-import 'package:eportal/event/common_new/danh_sach_nganh_nghe_event.dart';
-import 'package:eportal/event/common_new/danh_sach_quan_huyen_event.dart';
 import 'package:eportal/event/common_new/danh_sach_tinh_tp_event.dart';
-import 'package:eportal/model/api/request/common_new/danh_sach_nganh_nghe_request.dart';
-import 'package:eportal/model/api/request/common_new/danh_sach_quan_huyen_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_tinh_tp_request.dart';
-import 'package:eportal/model/api/request/common_new/data/danh_sach_nganh_nghe_data_request.dart';
-import 'package:eportal/model/api/request/common_new/data/danh_sach_quan_huyen_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_tinh_tp_data_request.dart';
-import 'package:eportal/model/api/response/common_new/data/danh_sach_nganh_nghe_data_response.dart';
-import 'package:eportal/model/api/response/common_new/data/danh_sach_quan_huyen_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_tinh_tp_data_response.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
@@ -32,9 +22,10 @@ import '../../../../extension/string_extension.dart';
 
 class JobAdvertisementEditBasicTab extends BasePage {
   JobAdvertisementEditBasicTab({super.key});
+
   bool? tinNoiBat = false;
-  bool? dauThongTinDN= false;
-  bool? dangGap= false;
+  bool? dauThongTinDN = false;
+  bool? dangGap = false;
   DanhSachTinhTpDataResponse? danhSachTinhTpDataResponse;
 
   @override
@@ -66,13 +57,12 @@ class JobAdvertisementEditBasicTabState
   void getMoreData() {
     // TODO: implement getMoreData
   }
+
   @override
-  void initDataLoading() {
-  }
+  void initDataLoading() {}
 
   @override
   void callApi() {
-
     danhSachTinhTpBloc.add(DanhSachTinhTpEvent(
         request: DanhSachTinhTpRequest(obj: DanhSachTinhTpDataRequest())));
   }
@@ -188,14 +178,14 @@ class JobAdvertisementEditBasicTabState
                   child: BlocBuilder<DanhSachTinhTpBloc,
                       DataMultiState<DanhSachTinhTpDataResponse>>(
                     builder: (BuildContext context,
-                        DataMultiState<DanhSachTinhTpDataResponse> state) =>
+                            DataMultiState<DanhSachTinhTpDataResponse> state) =>
                         _buildViewSearchDanhSachTinhTp(context, state.data),
                   ),
                 )),
           ),
-
         ],
       );
+
   Widget _buildViewSearchDanhSachTinhTp(
       BuildContext context, List<DanhSachTinhTpDataResponse> list) {
     return SelectItem<DanhSachTinhTpDataResponse>(
@@ -212,5 +202,4 @@ class JobAdvertisementEditBasicTabState
       title: "Tình thành phố",
     );
   }
-
 }

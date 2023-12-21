@@ -22,11 +22,11 @@ class DefaultButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(backgroundColor: backgroundColor),
         onPressed: onPressed,
         child: Container(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(5),
           width: double.infinity,
           child: Center(
             child: Text(text,
-                style: AppTextStyle.titlePage.copyWith(color: Colors.white)),
+                style: AppTextStyle.textButton.copyWith(color: Colors.white)),
           ),
         ),
       );

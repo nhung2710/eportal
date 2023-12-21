@@ -46,6 +46,7 @@ class _NewsCurriculumVitaeSearchPageState
     // TODO: implement disposeBloc
     jobUserSearchBloc.close();
   }
+
   @override
   void initDataLoading() {
     request.obj.reloadData();
@@ -121,8 +122,6 @@ class _NewsCurriculumVitaeSearchPageState
         ],
       );
 
-
   @override
   String getPageTitle(BuildContext context) => "Tìm kiếm hồ sơ ứng viên";
-
 }

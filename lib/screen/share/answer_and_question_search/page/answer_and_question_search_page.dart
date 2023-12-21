@@ -26,17 +26,18 @@ class AnswerAndQuestionSearchPageState
     extends BasePageStateActive<AnswerAndQuestionSearchPage> {
   late FaqQuestionSearchBloc faqQuestionSearchBloc;
   TextEditingController textEditingController = TextEditingController();
-  FaqQuestionSearchRequest request = FaqQuestionSearchRequest(obj: FaqQuestionSearchDataRequest());
+  FaqQuestionSearchRequest request =
+      FaqQuestionSearchRequest(obj: FaqQuestionSearchDataRequest());
 
   @override
   void initBloc() {
     faqQuestionSearchBloc = FaqQuestionSearchBloc();
   }
+
   @override
   void disposeBloc() {
     // TODO: implement disposeBloc
   }
-
 
   @override
   String getPageTitle(BuildContext context) => "Tìm kiếm câu hỏi";
@@ -55,8 +56,7 @@ class AnswerAndQuestionSearchPageState
 
   @override
   void callApi() {
-    faqQuestionSearchBloc.add(FaqQuestionSearchEvent(
-        request: request));
+    faqQuestionSearchBloc.add(FaqQuestionSearchEvent(request: request));
   }
 
   @override
@@ -119,5 +119,4 @@ class AnswerAndQuestionSearchPageState
           ),
         ],
       );
-
 }

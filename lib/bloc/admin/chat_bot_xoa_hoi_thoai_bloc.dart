@@ -8,16 +8,21 @@ import 'package:eportal/model/api/response/admin/chat_bot_xoa_hoi_thoai_response
 import 'package:eportal/model/api/response/admin/data/chat_bot_xoa_hoi_thoai_data_response.dart';
 import 'package:eportal/repository/admin/chat_bot_xoa_hoi_thoai_repository.dart';
 
-class ChatBotXoaHoiThoaiBloc extends BaseSingleBloc<ChatBotXoaHoiThoaiDataResponse,
-    ChatBotXoaHoiThoaiRepository, ChatBotXoaHoiThoaiEvent, ChatBotXoaHoiThoaiResponse> {
+class ChatBotXoaHoiThoaiBloc extends BaseSingleBloc<
+    String,
+    ChatBotXoaHoiThoaiRepository,
+    ChatBotXoaHoiThoaiEvent,
+    ChatBotXoaHoiThoaiResponse> {
   @override
   Future<ChatBotXoaHoiThoaiResponse> callApiResult(
-      ChatBotXoaHoiThoaiRepository apiRepository, ChatBotXoaHoiThoaiEvent event) =>
+          ChatBotXoaHoiThoaiRepository apiRepository,
+          ChatBotXoaHoiThoaiEvent event) =>
       apiRepository.get(event.request);
 
   @override
   String? getFailMessage(ChatBotXoaHoiThoaiResponse response) => null;
 
   @override
-  ChatBotXoaHoiThoaiRepository getRepository() => ChatBotXoaHoiThoaiRepository();
+  ChatBotXoaHoiThoaiRepository getRepository() =>
+      ChatBotXoaHoiThoaiRepository();
 }

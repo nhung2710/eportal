@@ -1,7 +1,6 @@
 import 'package:eportal/screen/share/home_manage/page/home_manage_page.dart';
 import 'package:eportal/screen/worker/job/page/job_page.dart';
 import 'package:eportal/screen/worker/profile/page/profile_page.dart';
-import 'package:eportal/screen/worker/refer/page/refer_page.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/widget/app_bar/default_app_bar.dart';
 import 'package:eportal/widget/base/base_page.dart';
@@ -22,11 +21,10 @@ class HomePage extends BasePage {
 
 class _HomePageState extends BasePageStateActive<HomePage> {
   int _currentIndex = 0;
-  late PageController _pageController;
+  final PageController _pageController = PageController(initialPage: 0, keepPage: true);
 
   @override
   double currentPadding(BuildContext context) => 0;
-
 
   @override
   void callApi() {
@@ -46,17 +44,15 @@ class _HomePageState extends BasePageStateActive<HomePage> {
   @override
   void initBloc() {
     // TODO: implement initBloc
-    _pageController =
-        PageController(initialPage: _currentIndex, keepPage: true);
   }
 
   @override
   void initDataLoading() {
     // TODO: implement initDataLoading
   }
+
   @override
   void dispose() {
-    _pageController.dispose();
     super.dispose();
   }
 

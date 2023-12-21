@@ -3,15 +3,10 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-import 'package:eportal/bloc/admin/work_view_list_bloc.dart';
 import 'package:eportal/bloc/common_new/work_search_bloc.dart';
-import 'package:eportal/event/admin/work_view_list_event.dart';
 import 'package:eportal/event/common_new/work_search_event.dart';
-import 'package:eportal/model/api/request/admin/data/work_view_list_data_request.dart';
-import 'package:eportal/model/api/request/admin/work_view_list_request.dart';
 import 'package:eportal/model/api/request/common_new/data/work_search_data_request.dart';
 import 'package:eportal/model/api/request/common_new/work_search_request.dart';
-import 'package:eportal/model/api/response/admin/data/work_view_list_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/work_search_data_response.dart';
 import 'package:eportal/screen/share/work_search_detail/page/work_search_detail_page.dart';
 import 'package:eportal/state/base/base_state.dart';
@@ -56,6 +51,7 @@ class _ListOfJobPageState extends BasePageStateActive<ListOfJobPage> {
     // TODO: implement disposeBloc
     workSearchBloc.close();
   }
+
   @override
   void getMoreData() {
     request.obj.nextData();
@@ -130,5 +126,4 @@ class _ListOfJobPageState extends BasePageStateActive<ListOfJobPage> {
           ),
         ],
       );
-
 }

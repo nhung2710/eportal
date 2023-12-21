@@ -40,11 +40,11 @@ class _ListOfCandidateProfileAppliedTabState
   void disposeBloc() {
     profileSendListBloc.close();
   }
+
   @override
   void initDataLoading() {
     request.obj.reloadData();
     callApi();
-
   }
 
   @override
@@ -114,5 +114,4 @@ class _ListOfCandidateProfileAppliedTabState
           ),
         ],
       );
-
 }

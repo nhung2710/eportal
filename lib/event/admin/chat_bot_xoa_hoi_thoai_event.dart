@@ -6,6 +6,7 @@
 import 'package:eportal/event/base/base_event.dart';
 import 'package:eportal/model/api/request/admin/chat_bot_xoa_hoi_thoai_request.dart';
 
-class ChatBotXoaHoiThoaiEvent extends BaseSingleEvent<ChatBotXoaHoiThoaiRequest> {
+class ChatBotXoaHoiThoaiEvent
+    extends BaseSingleEvent<ChatBotXoaHoiThoaiRequest> {
   const ChatBotXoaHoiThoaiEvent({required super.request});
 }

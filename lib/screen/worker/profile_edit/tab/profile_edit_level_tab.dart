@@ -24,8 +24,7 @@ class ProfileEditLevelTabState
   TextEditingController educationController = TextEditingController();
 
   @override
-  void initDataLoading() {
-  }
+  void initDataLoading() {}
 
   @override
   void callApi() {
@@ -48,6 +47,7 @@ class ProfileEditLevelTabState
     educationController.text =
         widget.data.education.replaceWhenNullOrWhiteSpace();
   }
+
   @override
   Widget pageUI(BuildContext context) => ListView(
         children: <Widget>[
@@ -66,5 +66,4 @@ class ProfileEditLevelTabState
           ),
         ],
       );
-
 }

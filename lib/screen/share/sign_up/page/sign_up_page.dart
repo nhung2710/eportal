@@ -71,7 +71,6 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
     // TODO: implement initDataLoading
   }
 
-
   @override
   String getPageTitle(BuildContext context) => "Đăng ký tài khoản";
 
@@ -304,5 +303,4 @@ class _SignUpPageState extends BasePageState<SignUpPage> {
                   passWord: passwordController.text))));
     }
   }
-
 }

@@ -42,7 +42,6 @@ class ChangeBusinessInfoAboutTabState
     callApi();
   }
 
-
   @override
   void disposeBloc() {
     // TODO: implement disposeBloc

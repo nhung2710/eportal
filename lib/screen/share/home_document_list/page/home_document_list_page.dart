@@ -35,10 +35,12 @@ class _HomeDocumentListPageState
   void initBloc() {
     homeDocumentListBloc = HomeDocumentListBloc();
   }
+
   @override
   void initDataLoading() {
     callApi();
   }
+
   @override
   void callApi() {
     // TODO: implement callApi
@@ -75,7 +77,6 @@ class _HomeDocumentListPageState
           ),
         ],
       );
-
 
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
@@ -146,5 +147,4 @@ class _HomeDocumentListPageState
           ),
         ),
       ));
-
 }

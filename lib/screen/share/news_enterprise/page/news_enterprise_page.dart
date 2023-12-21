@@ -25,11 +25,14 @@ class NewsEnterprisePage extends BasePage {
 
 class _NewsEnterprisePageState extends BasePageState<NewsEnterprisePage> {
   late HomeBusinessListBloc homeBusinessListBloc;
-  HomeBusinessListRequest request = HomeBusinessListRequest(obj: HomeBusinessListDataRequest());
+  HomeBusinessListRequest request =
+      HomeBusinessListRequest(obj: HomeBusinessListDataRequest());
+
   @override
   void initBloc() {
     homeBusinessListBloc = HomeBusinessListBloc();
   }
+
   @override
   void callApi() {
     // TODO: implement callApi
@@ -48,8 +51,7 @@ class _NewsEnterprisePageState extends BasePageState<NewsEnterprisePage> {
 
   @override
   void initDataLoading() {
-    homeBusinessListBloc.add(HomeBusinessListEvent(
-        request: request));
+    homeBusinessListBloc.add(HomeBusinessListEvent(request: request));
   }
 
   @override
@@ -85,5 +87,4 @@ class _NewsEnterprisePageState extends BasePageState<NewsEnterprisePage> {
 
   @override
   String getPageTitle(BuildContext context) => "Doanh nghiệp";
-
 }

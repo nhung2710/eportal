@@ -28,14 +28,16 @@ extension MapJsonExtension on Map<String, dynamic> {
     if (data != null) return data?.toString();
     return null;
   }
+
   int? toIntJson({String path = "data"}) {
-    var data = toStringJson(path:path);
+    var data = toStringJson(path: path);
     if (data != null) return int.tryParse(data);
     return null;
   }
+
   bool? toBoolJson({String path = "data"}) {
-    var data = toStringJson(path:path);
-    if (data != null) return bool.tryParse(data,caseSensitive: false);
+    var data = toStringJson(path: path);
+    if (data != null) return bool.tryParse(data, caseSensitive: false);
     return null;
   }
 }

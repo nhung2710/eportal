@@ -40,6 +40,7 @@ class _ManagementOfEventPageState
     // TODO: implement initDataLoading
     callApi();
   }
+
   @override
   void disposeBloc() {
     dataExampleTestBloc.close();
@@ -143,5 +144,4 @@ class _ManagementOfEventPageState
           ),
         ],
       );
-
 }

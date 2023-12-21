@@ -63,8 +63,7 @@ class _SignInPageState extends BasePageState<SignInPage> {
   bool isHasAppBar(BuildContext context) => false;
 
   @override
-  void initDataLoading() {
-  }
+  void initDataLoading() {}
 
   @override
   void callApi() {
@@ -81,6 +80,7 @@ class _SignInPageState extends BasePageState<SignInPage> {
   void getMoreData() {
     // TODO: implement getMoreData
   }
+
   @override
   Widget pageUI(BuildContext context) {
     return BlocProvider(
@@ -251,5 +251,4 @@ class _SignInPageState extends BasePageState<SignInPage> {
   _skipPage(BuildContext context) {
     nextPageWithoutBack((context) => const anonymous.HomePage());
   }
-
 }

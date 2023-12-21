@@ -23,6 +23,8 @@ class AppTextStyle {
 
   static const TextStyle title = TextStyle(
       color: Colors.black, fontSize: 12, overflow: TextOverflow.ellipsis);
+  static const TextStyle textButton = TextStyle(
+      color: Colors.black, fontSize: 10, overflow: TextOverflow.ellipsis);
   static const TextStyle normal = TextStyle(
       color: Colors.black, fontSize: 10, overflow: TextOverflow.ellipsis);
   static const TextStyle titleChild1 = TextStyle(

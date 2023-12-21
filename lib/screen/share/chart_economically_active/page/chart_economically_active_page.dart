@@ -68,6 +68,7 @@ class _ChartEconomicallyActivePageState
   void initBloc() {
     // TODO: implement initBloc
   }
+
   @override
   String getPageTitle(BuildContext context) => "Lao động hoạt động";
 
@@ -261,5 +262,4 @@ class _ChartEconomicallyActivePageState
       ],
     );
   }
-
 }

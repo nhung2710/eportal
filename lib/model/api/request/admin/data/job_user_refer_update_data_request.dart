@@ -1,6 +1,3 @@
-import 'package:eportal/constant/application_constant.dart';
-import 'package:eportal/model/base/base_eportal_xml.dart';
-
 import 'job_user_refer_add_data_request.dart';
 
 //

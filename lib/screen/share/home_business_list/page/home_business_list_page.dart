@@ -52,6 +52,7 @@ class _HomeBusinessListPageState
   void getMoreData() {
     // TODO: implement getMoreData
   }
+
   @override
   void initDataLoading() {
     homeBusinessListBloc.add(HomeBusinessListEvent(
@@ -103,5 +104,4 @@ class _HomeBusinessListPageState
           ),
         ),
       ));
-
 }

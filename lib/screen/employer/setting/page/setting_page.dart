@@ -12,9 +12,6 @@ import 'package:flutter/material.dart';
 import '../../../../widget/list_viewer/setting_item_viewer.dart';
 import '../../../share/change_password/page/change_password_page.dart';
 import '../../../share/change_user_info/page/change_user_info_page.dart';
-import '../../../share/chart_economically_active/page/chart_economically_active_page.dart';
-import '../../../share/chart_economically_inactive/page/chart_economically_inactive_page.dart';
-import '../../../share/chart_unemployment_rate/page/chart_unemployment_rate_page.dart';
 
 //
 // Created by BlackRose on 11/7/2023.

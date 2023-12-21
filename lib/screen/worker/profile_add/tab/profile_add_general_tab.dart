@@ -60,11 +60,17 @@ class ProfileAddGeneralTabState
   late DanhSachTrinhDoBloc danhSachTrinhDoBloc;
   late DanhSachChucVuBloc danhSachChucVuBloc;
   late DanhSachNhuCauBloc danhSachNhuCauBloc;
-  DanhSachChucVuRequest danhSachChucVuRequest = DanhSachChucVuRequest(obj: DanhSachChucVuDataRequest());
-  DanhSachTrinhDoRequest danhSachTrinhDoRequest = DanhSachTrinhDoRequest(obj: DanhSachTrinhDoDataRequest());
-  DanhSachMucLuongRequest danhSachMucLuongRequest = DanhSachMucLuongRequest(obj: DanhSachMucLuongDataRequest());
-  DanhSachKinhNghiemRequest danhSachKinhNghiemRequest = DanhSachKinhNghiemRequest(obj: DanhSachKinhNghiemDataRequest());
-  DanhSachNhuCauRequest danhSachNhuCauRequest = DanhSachNhuCauRequest(obj: DanhSachNhuCauDataRequest());
+  DanhSachChucVuRequest danhSachChucVuRequest =
+      DanhSachChucVuRequest(obj: DanhSachChucVuDataRequest());
+  DanhSachTrinhDoRequest danhSachTrinhDoRequest =
+      DanhSachTrinhDoRequest(obj: DanhSachTrinhDoDataRequest());
+  DanhSachMucLuongRequest danhSachMucLuongRequest =
+      DanhSachMucLuongRequest(obj: DanhSachMucLuongDataRequest());
+  DanhSachKinhNghiemRequest danhSachKinhNghiemRequest =
+      DanhSachKinhNghiemRequest(obj: DanhSachKinhNghiemDataRequest());
+  DanhSachNhuCauRequest danhSachNhuCauRequest =
+      DanhSachNhuCauRequest(obj: DanhSachNhuCauDataRequest());
+
   @override
   void initBloc() {
     danhSachChucVuBloc = DanhSachChucVuBloc();
@@ -74,6 +80,7 @@ class ProfileAddGeneralTabState
     danhSachTrinhDoBloc = DanhSachTrinhDoBloc();
     danhSachNhuCauBloc = DanhSachNhuCauBloc();
   }
+
   @override
   void disposeBloc() {
     // TODO: implement disposeBloc
@@ -89,6 +96,7 @@ class ProfileAddGeneralTabState
   void getMoreData() {
     // TODO: implement getMoreData
   }
+
   @override
   void initDataLoading() {
     callApi();
@@ -97,18 +105,14 @@ class ProfileAddGeneralTabState
 
   @override
   void callApi() {
-    danhSachChucVuBloc.add(DanhSachChucVuEvent(
-        request: danhSachChucVuRequest));
-    danhSachTrinhDoBloc.add(DanhSachTrinhDoEvent(
-        request: danhSachTrinhDoRequest));
-    danhSachMucLuongBloc.add(DanhSachMucLuongEvent(
-        request: danhSachMucLuongRequest));
-    danhSachKinhNghiemBloc.add(DanhSachKinhNghiemEvent(
-        request:
-            danhSachKinhNghiemRequest));
-    danhSachNhuCauBloc.add(DanhSachNhuCauEvent(
-        request: danhSachNhuCauRequest));
-
+    danhSachChucVuBloc.add(DanhSachChucVuEvent(request: danhSachChucVuRequest));
+    danhSachTrinhDoBloc
+        .add(DanhSachTrinhDoEvent(request: danhSachTrinhDoRequest));
+    danhSachMucLuongBloc
+        .add(DanhSachMucLuongEvent(request: danhSachMucLuongRequest));
+    danhSachKinhNghiemBloc
+        .add(DanhSachKinhNghiemEvent(request: danhSachKinhNghiemRequest));
+    danhSachNhuCauBloc.add(DanhSachNhuCauEvent(request: danhSachNhuCauRequest));
   }
 
   @override
@@ -325,5 +329,4 @@ class ProfileAddGeneralTabState
       title: "Nhu cầu làm việc",
     );
   }
-
 }

@@ -5,13 +5,14 @@
 
 extension BooleanNullExtension on bool? {
   int toInt() {
-    var result = this??false;
+    var result = this ?? false;
     return result ? 1 : 0;
   }
 }
+
 extension BooleanExtension on bool {
   int toInt() {
-    var result = this??false;
+    var result = this ?? false;
     return result ? 1 : 0;
   }
 }

@@ -1,21 +1,8 @@
-import 'package:eportal/bloc/admin/job_user_add_bloc.dart';
 import 'package:eportal/bloc/admin/work_add_bloc.dart';
-import 'package:eportal/event/admin/job_user_add_event.dart';
-import 'package:eportal/model/api/request/admin/data/job_user_add_data_request.dart';
-import 'package:eportal/model/api/request/admin/job_user_add_request.dart';
-import 'package:eportal/model/api/response/admin/data/job_user_add_data_response.dart';
 import 'package:eportal/model/api/response/admin/data/work_add_data_response.dart';
 import 'package:eportal/screen/employer/job_advertisement_add/tab/job_advertisement_add_contract_tab.dart';
 import 'package:eportal/screen/employer/job_advertisement_add/tab/job_advertisement_add_description_tab.dart';
-import 'package:eportal/screen/worker/profile_add/tab/profile_add_basic_tab.dart';
-import 'package:eportal/screen/worker/profile_add/tab/profile_add_career_goals_tab.dart';
-import 'package:eportal/screen/worker/profile_add/tab/profile_add_field_skills_tab.dart';
-import 'package:eportal/screen/worker/profile_add/tab/profile_add_general_tab.dart';
-import 'package:eportal/screen/worker/profile_add/tab/profile_add_level_tab.dart';
-import 'package:eportal/screen/worker/profile_add/tab/profile_add_work_experience_tab.dart';
 import 'package:eportal/state/base/base_state.dart';
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:eportal/widget/input/capcha_input.dart';
@@ -24,7 +11,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../event/admin/work_add_event.dart';
 import '../../../../extension/boolean_extension.dart';
-import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/admin/data/work_add_data_request.dart';
 import '../../../../model/api/request/admin/work_add_request.dart';
 import '../../../../widget/tab/custom_tab_view.dart';
@@ -67,8 +53,8 @@ class _JobAdvertisementAddPageState
   }
 
   @override
-  void initDataLoading() {
-  }
+  void initDataLoading() {}
+
   @override
   void callApi() {
     // TODO: implement callApi
@@ -105,7 +91,8 @@ class _JobAdvertisementAddPageState
                 child: CustomTabView(
                   key: keyCustomTabViewState,
                   tabViews: {
-                    "Thông tin tin tuyển dụng việc làm": JobAdvertisementAddBasicTab(
+                    "Thông tin tin tuyển dụng việc làm":
+                        JobAdvertisementAddBasicTab(
                       key: keyJobAdvertisementAddBasicTabState,
                     ),
                     "Thông tin tuyển dụng": JobAdvertisementAddGeneralTab(
@@ -152,43 +139,69 @@ class _JobAdvertisementAddPageState
       workAddBloc.add(WorkAddEvent(
           request: WorkAddRequest(
               obj: WorkAddDataRequest(
-                gioiTinh: keyJobAdvertisementAddGeneralTabState.currentState?.widget.danhSachGioiTinhDataResponse?.id,
-                tieuDe: keyJobAdvertisementAddBasicTabState
-                    .currentState?.tieuDeController.text,
-                doTuoi: keyJobAdvertisementAddGeneralTabState
-                    .currentState?.doTuoiController.text,
-                soLuong: keyJobAdvertisementAddGeneralTabState
-                    .currentState?.soLuongController.text,
-                hanNopHoSo: keyJobAdvertisementAddBasicTabState
-                    .currentState?.hanNopHoSoController.text,
-                dangTuNgay: keyJobAdvertisementAddBasicTabState
-                    .currentState?.dangTuNgayController.text,
-                dangDenNgay: keyJobAdvertisementAddBasicTabState
-                    .currentState?.dangDenNgayController.text,
-                tinhTP: keyJobAdvertisementAddBasicTabState.currentState?.widget.danhSachTinhTpDataResponse?.regionalID,
-                tinNoiBat:(keyJobAdvertisementAddBasicTabState.currentState?.widget.tinNoiBat).toInt().toString(),
-                dauThongTinDN:(keyJobAdvertisementAddBasicTabState.currentState?.widget.dauThongTinDN).toInt().toString(),
-                dangGap:(keyJobAdvertisementAddBasicTabState.currentState?.widget.dangGap).toInt().toString(),
-                thoiGianLV: keyJobAdvertisementAddGeneralTabState
-                    .currentState?.thoiGianLVController.text,
-                chucVu:
-                keyJobAdvertisementAddGeneralTabState.currentState?.widget.danhSachChucVuDataResponse?.id,
-                mucLuong: keyJobAdvertisementAddGeneralTabState.currentState?.widget.danhSachMucLuongDataResponse?.salaryID,
-                kinhNghiem: keyJobAdvertisementAddGeneralTabState.currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
-                trinhdoCM: keyJobAdvertisementAddGeneralTabState.currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
-                tinhChatCV: keyJobAdvertisementAddGeneralTabState.currentState?.widget.danhSachTinhChatCongViecDataResponse?.typeOfID,
-                nganhNghe: keyJobAdvertisementAddGeneralTabState.currentState?.widget.danhSachNganhNgheDataResponse?.careerID,
-                viTriTuyenDung: keyJobAdvertisementAddGeneralTabState.currentState?.widget.danhSachViTriTuyenDungDataResponse?.jobPlaceID,
-                mota: keyJobAdvertisementAddDescriptionTabState.currentState?.motaController.text,
-                yeuCauCV: keyJobAdvertisementAddDescriptionTabState.currentState?.yeuCauCVController.text,
-                yeuCauHoSo: keyJobAdvertisementAddDescriptionTabState.currentState?.yeuCauHoSoController.text,
-                quyenLoi: keyJobAdvertisementAddDescriptionTabState.currentState?.quyenLoiController.text,
-                ghiChu: keyJobAdvertisementAddContractTabState.currentState?.ghiChuController.text,
-                tenNguoiLH: keyJobAdvertisementAddContractTabState.currentState?.tenNguoiLHController.text,
-                diaChiNguoiLH:keyJobAdvertisementAddContractTabState.currentState?.tenNguoiLHController.text,
-                dienThoaiNguoiLH:keyJobAdvertisementAddContractTabState.currentState?.dienThoaiNguoiLHController.text,
-                emailNguoiLH:keyJobAdvertisementAddContractTabState.currentState?.emailNguoiLHController.text,
-              ))));
+        gioiTinh: keyJobAdvertisementAddGeneralTabState
+            .currentState?.widget.danhSachGioiTinhDataResponse?.id,
+        tieuDe: keyJobAdvertisementAddBasicTabState
+            .currentState?.tieuDeController.text,
+        doTuoi: keyJobAdvertisementAddGeneralTabState
+            .currentState?.doTuoiController.text,
+        soLuong: keyJobAdvertisementAddGeneralTabState
+            .currentState?.soLuongController.text,
+        hanNopHoSo: keyJobAdvertisementAddBasicTabState
+            .currentState?.hanNopHoSoController.text,
+        dangTuNgay: keyJobAdvertisementAddBasicTabState
+            .currentState?.dangTuNgayController.text,
+        dangDenNgay: keyJobAdvertisementAddBasicTabState
+            .currentState?.dangDenNgayController.text,
+        tinhTP: keyJobAdvertisementAddBasicTabState
+            .currentState?.widget.danhSachTinhTpDataResponse?.regionalID,
+        tinNoiBat:
+            (keyJobAdvertisementAddBasicTabState.currentState?.widget.tinNoiBat)
+                .toInt()
+                .toString(),
+        dauThongTinDN: (keyJobAdvertisementAddBasicTabState
+                .currentState?.widget.dauThongTinDN)
+            .toInt()
+            .toString(),
+        dangGap:
+            (keyJobAdvertisementAddBasicTabState.currentState?.widget.dangGap)
+                .toInt()
+                .toString(),
+        thoiGianLV: keyJobAdvertisementAddGeneralTabState
+            .currentState?.thoiGianLVController.text,
+        chucVu: keyJobAdvertisementAddGeneralTabState
+            .currentState?.widget.danhSachChucVuDataResponse?.id,
+        mucLuong: keyJobAdvertisementAddGeneralTabState
+            .currentState?.widget.danhSachMucLuongDataResponse?.salaryID,
+        kinhNghiem: keyJobAdvertisementAddGeneralTabState
+            .currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
+        trinhdoCM: keyJobAdvertisementAddGeneralTabState
+            .currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
+        tinhChatCV: keyJobAdvertisementAddGeneralTabState.currentState?.widget
+            .danhSachTinhChatCongViecDataResponse?.typeOfID,
+        nganhNghe: keyJobAdvertisementAddGeneralTabState
+            .currentState?.widget.danhSachNganhNgheDataResponse?.careerID,
+        viTriTuyenDung: keyJobAdvertisementAddGeneralTabState.currentState
+            ?.widget.danhSachViTriTuyenDungDataResponse?.jobPlaceID,
+        mota: keyJobAdvertisementAddDescriptionTabState
+            .currentState?.motaController.text,
+        yeuCauCV: keyJobAdvertisementAddDescriptionTabState
+            .currentState?.yeuCauCVController.text,
+        yeuCauHoSo: keyJobAdvertisementAddDescriptionTabState
+            .currentState?.yeuCauHoSoController.text,
+        quyenLoi: keyJobAdvertisementAddDescriptionTabState
+            .currentState?.quyenLoiController.text,
+        ghiChu: keyJobAdvertisementAddContractTabState
+            .currentState?.ghiChuController.text,
+        tenNguoiLH: keyJobAdvertisementAddContractTabState
+            .currentState?.tenNguoiLHController.text,
+        diaChiNguoiLH: keyJobAdvertisementAddContractTabState
+            .currentState?.tenNguoiLHController.text,
+        dienThoaiNguoiLH: keyJobAdvertisementAddContractTabState
+            .currentState?.dienThoaiNguoiLHController.text,
+        emailNguoiLH: keyJobAdvertisementAddContractTabState
+            .currentState?.emailNguoiLHController.text,
+      ))));
     }
   }
 
@@ -205,5 +218,4 @@ class _JobAdvertisementAddPageState
     }
     return false;
   }
-
 }

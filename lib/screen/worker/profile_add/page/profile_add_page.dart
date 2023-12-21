@@ -1,8 +1,6 @@
 import 'package:eportal/model/api/response/admin/data/job_user_add_data_response.dart';
 import 'package:eportal/screen/worker/profile_add/tab/profile_add_basic_tab.dart';
 import 'package:eportal/state/base/base_state.dart';
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:eportal/widget/input/capcha_input.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../bloc/admin/job_user_add_bloc.dart';
 import '../../../../event/admin/job_user_add_event.dart';
-import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/admin/data/job_user_add_data_request.dart';
 import '../../../../model/api/request/admin/job_user_add_request.dart';
 import '../../../../widget/base/base_page.dart';
@@ -33,7 +30,7 @@ class ProfileAddPage extends BasePage {
   State<StatefulWidget> createState() => _ProfileAddPageState();
 }
 
-class _ProfileAddPageState extends BasePageState<ProfileAddPage>{
+class _ProfileAddPageState extends BasePageState<ProfileAddPage> {
   final GlobalKey<ProfileAddBasicTabState> keyProfileAddBasicTabState =
       GlobalKey<ProfileAddBasicTabState>();
   final GlobalKey<ProfileAddGeneralTabState> keyProfileAddGeneralTabState =
@@ -43,18 +40,21 @@ class _ProfileAddPageState extends BasePageState<ProfileAddPage>{
   final GlobalKey<ProfileAddWorkExperienceTabState>
       keyProfileAddWorkExperienceTabState =
       GlobalKey<ProfileAddWorkExperienceTabState>();
-  final GlobalKey<ProfileAddCareerGoalsTabState> keyProfileAddCareerGoalsTabState =
+  final GlobalKey<ProfileAddCareerGoalsTabState>
+      keyProfileAddCareerGoalsTabState =
       GlobalKey<ProfileAddCareerGoalsTabState>();
-  final GlobalKey<ProfileAddFieldSkillsTabState> keyProfileAddFieldSkillsTabState =
+  final GlobalKey<ProfileAddFieldSkillsTabState>
+      keyProfileAddFieldSkillsTabState =
       GlobalKey<ProfileAddFieldSkillsTabState>();
   final GlobalKey<CustomTabViewState> keyCustomTabViewState =
-  GlobalKey<CustomTabViewState>();
+      GlobalKey<CustomTabViewState>();
   late JobUserAddBloc jobUserAddBloc;
 
   @override
   void initBloc() {
     jobUserAddBloc = JobUserAddBloc();
   }
+
   @override
   void callApi() {
     // TODO: implement callApi
@@ -95,22 +95,22 @@ class _ProfileAddPageState extends BasePageState<ProfileAddPage>{
             children: [
               Expanded(
                 child: CustomTabView(tabViews: {
-                  "Thông tin hồ sơ":ProfileAddBasicTab(
+                  "Thông tin hồ sơ": ProfileAddBasicTab(
                     key: keyProfileAddBasicTabState,
                   ),
-                  "Thông tin chung":ProfileAddGeneralTab(
+                  "Thông tin chung": ProfileAddGeneralTab(
                     key: keyProfileAddGeneralTabState,
                   ),
-                  "Trình độ học vấn":ProfileAddLevelTab(
+                  "Trình độ học vấn": ProfileAddLevelTab(
                     key: keyProfileAddLevelTabState,
                   ),
-                  "Kinh nghiệm làm việc":ProfileAddWorkExperienceTab(
+                  "Kinh nghiệm làm việc": ProfileAddWorkExperienceTab(
                     key: keyProfileAddWorkExperienceTabState,
                   ),
-                  "Mục tiêu nghề nghiệp":ProfileAddCareerGoalsTab(
+                  "Mục tiêu nghề nghiệp": ProfileAddCareerGoalsTab(
                     key: keyProfileAddCareerGoalsTabState,
                   ),
-                  "Kỹ năng sở trường":ProfileAddFieldSkillsTab(
+                  "Kỹ năng sở trường": ProfileAddFieldSkillsTab(
                     key: keyProfileAddFieldSkillsTabState,
                   ),
                 }),
@@ -194,5 +194,4 @@ class _ProfileAddPageState extends BasePageState<ProfileAddPage>{
     }
     return false;
   }
-
 }

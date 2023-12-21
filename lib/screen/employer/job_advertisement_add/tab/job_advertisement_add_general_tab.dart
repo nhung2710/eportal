@@ -4,8 +4,6 @@ import 'package:eportal/bloc/common_new/danh_sach_kinh_nghiem_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_muc_luong_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_nganh_nghe_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_nhu_cau_bloc.dart';
-import 'package:eportal/bloc/common_new/danh_sach_quan_huyen_bloc.dart';
-import 'package:eportal/bloc/common_new/danh_sach_tinh_tp_bloc.dart';
 import 'package:eportal/bloc/common_new/danh_sach_trinh_do_bloc.dart';
 import 'package:eportal/event/common_new/danh_sach_chuc_vu_event.dart';
 import 'package:eportal/event/common_new/danh_sach_gioi_tinh_event.dart';
@@ -13,9 +11,7 @@ import 'package:eportal/event/common_new/danh_sach_kinh_nghiem_event.dart';
 import 'package:eportal/event/common_new/danh_sach_muc_luong_event.dart';
 import 'package:eportal/event/common_new/danh_sach_nganh_nghe_event.dart';
 import 'package:eportal/event/common_new/danh_sach_nhu_cau_event.dart';
-import 'package:eportal/event/common_new/danh_sach_quan_huyen_event.dart';
 import 'package:eportal/event/common_new/danh_sach_tinh_chat_cong_viec_event.dart';
-import 'package:eportal/event/common_new/danh_sach_tinh_tp_event.dart';
 import 'package:eportal/event/common_new/danh_sach_trinh_do_event.dart';
 import 'package:eportal/event/common_new/danh_sach_vi_tri_tuyen_dung_event.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_chuc_vu_request.dart';
@@ -24,9 +20,7 @@ import 'package:eportal/model/api/request/common_new/danh_sach_kinh_nghiem_reque
 import 'package:eportal/model/api/request/common_new/danh_sach_muc_luong_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_nganh_nghe_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_nhu_cau_request.dart';
-import 'package:eportal/model/api/request/common_new/danh_sach_quan_huyen_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_tinh_chat_cong_viec_request.dart';
-import 'package:eportal/model/api/request/common_new/danh_sach_tinh_tp_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_trinh_do_request.dart';
 import 'package:eportal/model/api/request/common_new/danh_sach_vi_tri_tuyen_dung_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_chuc_vu_data_request.dart';
@@ -35,9 +29,7 @@ import 'package:eportal/model/api/request/common_new/data/danh_sach_kinh_nghiem_
 import 'package:eportal/model/api/request/common_new/data/danh_sach_muc_luong_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_nganh_nghe_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_nhu_cau_data_request.dart';
-import 'package:eportal/model/api/request/common_new/data/danh_sach_quan_huyen_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_tinh_chat_cong_viec_data_request.dart';
-import 'package:eportal/model/api/request/common_new/data/danh_sach_tinh_tp_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_trinh_do_data_request.dart';
 import 'package:eportal/model/api/request/common_new/data/danh_sach_vi_tri_tuyen_dung_data_request.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_chuc_vu_data_response.dart';
@@ -45,14 +37,11 @@ import 'package:eportal/model/api/response/common_new/data/danh_sach_kinh_nghiem
 import 'package:eportal/model/api/response/common_new/data/danh_sach_muc_luong_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_nganh_nghe_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_nhu_cau_data_response.dart';
-import 'package:eportal/model/api/response/common_new/data/danh_sach_quan_huyen_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_tinh_chat_cong_viec_data_response.dart';
-import 'package:eportal/model/api/response/common_new/data/danh_sach_tinh_tp_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_trinh_do_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/danh_sach_vi_tri_tuyen_dung_data_response.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
-import 'package:eportal/widget/input/date_input.dart';
 import 'package:eportal/widget/input/field_input.dart';
 import 'package:eportal/widget/select/select_item.dart';
 import 'package:flutter/material.dart';
@@ -155,8 +144,8 @@ class JobAdvertisementAddGeneralTabState
     danhSachNganhNgheBloc.add(DanhSachNganhNgheEvent(
         request:
             DanhSachNganhNgheRequest(obj: DanhSachNganhNgheDataRequest())));
-
   }
+
   @override
   void disposeBloc() {
     danhSachChucVuBloc.close();
@@ -192,8 +181,8 @@ class JobAdvertisementAddGeneralTabState
                   child: BlocBuilder<DanhSachMucLuongBloc,
                       DataMultiState<DanhSachMucLuongDataResponse>>(
                     builder: (BuildContext context,
-                        DataMultiState<DanhSachMucLuongDataResponse>
-                        state) =>
+                            DataMultiState<DanhSachMucLuongDataResponse>
+                                state) =>
                         _buildViewSearchDanhSachMucLuong(context, state.data),
                   ),
                 )),
@@ -228,12 +217,11 @@ class JobAdvertisementAddGeneralTabState
                 listener: (BuildContext context,
                     DataMultiState<DanhSachGioiTinhDataResponse> state) {},
                 child: BlocBuilder<DanhSachGioiTinhBloc,
-                    DataMultiState<DanhSachGioiTinhDataResponse>>(
+                        DataMultiState<DanhSachGioiTinhDataResponse>>(
                     builder: (BuildContext context,
-                        DataMultiState<DanhSachGioiTinhDataResponse>
-                        state) =>
-                        _buildViewSearchDanhSachGioiTinh(
-                            context, state.data)),
+                            DataMultiState<DanhSachGioiTinhDataResponse>
+                                state) =>
+                        _buildViewSearchDanhSachGioiTinh(context, state.data)),
               ),
             ),
           ),
@@ -246,10 +234,10 @@ class JobAdvertisementAddGeneralTabState
                 listener: (BuildContext context,
                     DataMultiState<DanhSachKinhNghiemDataResponse> state) {},
                 child: BlocBuilder<DanhSachKinhNghiemBloc,
-                    DataMultiState<DanhSachKinhNghiemDataResponse>>(
+                        DataMultiState<DanhSachKinhNghiemDataResponse>>(
                     builder: (BuildContext context,
-                        DataMultiState<DanhSachKinhNghiemDataResponse>
-                        state) =>
+                            DataMultiState<DanhSachKinhNghiemDataResponse>
+                                state) =>
                         _buildViewSearchDanhSachKinhNghiem(
                             context, state.data)),
               ),
@@ -401,8 +389,7 @@ class JobAdvertisementAddGeneralTabState
       icon: FontAwesomeIcons.timeline,
       selectedItem: widget.danhSachGioiTinhDataResponse,
       list: list,
-      itemAsString: (DanhSachGioiTinhDataResponse u) =>
-          u.name.supportHtml(),
+      itemAsString: (DanhSachGioiTinhDataResponse u) => u.name.supportHtml(),
       onChanged: (DanhSachGioiTinhDataResponse? data) {
         if (widget.danhSachGioiTinhDataResponse != data) {
           widget.danhSachGioiTinhDataResponse = data;
@@ -411,6 +398,7 @@ class JobAdvertisementAddGeneralTabState
       title: "Giới tính",
     );
   }
+
   Widget _buildViewSearchDanhSachKinhNghiem(
       BuildContext context, List<DanhSachKinhNghiemDataResponse> list) {
     return SelectItem<DanhSachKinhNghiemDataResponse>(
@@ -512,6 +500,4 @@ class JobAdvertisementAddGeneralTabState
       title: "Vị trí tuyển dụng",
     );
   }
-
-
 }

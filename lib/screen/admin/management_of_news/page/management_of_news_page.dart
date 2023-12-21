@@ -146,5 +146,4 @@ class _ManagementOfNewsPageState
           ),
         ],
       );
-
 }

@@ -70,8 +70,8 @@ class _ChartEconomicallyInactivePageState
   int touchedGroupIndex = -1;
 
   @override
-  void initDataLoading() {
-  }
+  void initDataLoading() {}
+
   @override
   void callApi() {
     // TODO: implement callApi
@@ -381,5 +381,4 @@ class _ChartEconomicallyInactivePageState
       ),
     ];
   }
-
 }

@@ -67,7 +67,6 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
   final _danhSachQuanHuyenKey = GlobalKey<SelectItemState>();
   final _danhSachDoanhNghiepKey = GlobalKey<SelectItemState>();
 
-
   @override
   void disposeBloc() {
     // TODO: implement disposeBloc
@@ -124,7 +123,6 @@ class FilterJobDialogState extends BaseScreenState<FilterJobDialog> {
     danhSachKinhNghiemBloc.add(DanhSachKinhNghiemEvent(
         request:
             DanhSachKinhNghiemRequest(obj: DanhSachKinhNghiemDataRequest())));
-
   }
 
   @override

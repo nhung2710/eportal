@@ -13,8 +13,6 @@ import 'package:eportal/screen/worker/profile_edit/tab/profile_edit_general_tab.
 import 'package:eportal/screen/worker/profile_edit/tab/profile_edit_level_tab.dart';
 import 'package:eportal/screen/worker/profile_edit/tab/profile_edit_work_experience_tab.dart';
 import 'package:eportal/state/base/base_state.dart';
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:eportal/widget/input/capcha_input.dart';
 import 'package:flutter/material.dart';
@@ -48,12 +46,14 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage>
   final GlobalKey<ProfileEditWorkExperienceTabState>
       keyProfileEditWorkExperienceTabState =
       GlobalKey<ProfileEditWorkExperienceTabState>();
-  final GlobalKey<ProfileEditCareerGoalsTabState> keyProfileEditCareerGoalsTabState =
+  final GlobalKey<ProfileEditCareerGoalsTabState>
+      keyProfileEditCareerGoalsTabState =
       GlobalKey<ProfileEditCareerGoalsTabState>();
-  final GlobalKey<ProfileEditFieldSkillsTabState> keyProfileEditFieldSkillsTabState =
+  final GlobalKey<ProfileEditFieldSkillsTabState>
+      keyProfileEditFieldSkillsTabState =
       GlobalKey<ProfileEditFieldSkillsTabState>();
   final GlobalKey<CustomTabViewState> keyCustomTabViewState =
-  GlobalKey<CustomTabViewState>();
+      GlobalKey<CustomTabViewState>();
   late JobUserUpdateBloc jobUserUpdateBloc;
 
   @override
@@ -77,6 +77,7 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage>
     // TODO: implement initBloc
     jobUserUpdateBloc = JobUserUpdateBloc();
   }
+
   @override
   void initDataLoading() {
     // TODO: implement initDataLoading
@@ -101,30 +102,28 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage>
           child: Column(
             children: [
               Expanded(
-                child: CustomTabView(
-                    key: keyCustomTabViewState,
-                    tabViews: {
-                  "Thông tin hồ sơ":ProfileEditBasicTab(
+                child: CustomTabView(key: keyCustomTabViewState, tabViews: {
+                  "Thông tin hồ sơ": ProfileEditBasicTab(
                     key: keyProfileEditBasicTabState,
                     data: widget.data,
                   ),
-                  "Thông tin chung":ProfileEditGeneralTab(
+                  "Thông tin chung": ProfileEditGeneralTab(
                     key: keyProfileEditGeneralTabState,
                     data: widget.data,
                   ),
-                  "Trình độ học vấn":ProfileEditLevelTab(
+                  "Trình độ học vấn": ProfileEditLevelTab(
                     key: keyProfileEditLevelTabState,
                     data: widget.data,
                   ),
-                  "Kinh nghiệm làm việc":ProfileEditWorkExperienceTab(
+                  "Kinh nghiệm làm việc": ProfileEditWorkExperienceTab(
                     key: keyProfileEditWorkExperienceTabState,
                     data: widget.data,
                   ),
-                  "Mục tiêu nghề nghiệp":ProfileEditCareerGoalsTab(
+                  "Mục tiêu nghề nghiệp": ProfileEditCareerGoalsTab(
                     key: keyProfileEditCareerGoalsTabState,
                     data: widget.data,
                   ),
-                  "Kỹ năng sở trường":ProfileEditFieldSkillsTab(
+                  "Kỹ năng sở trường": ProfileEditFieldSkillsTab(
                     key: keyProfileEditFieldSkillsTabState,
                     data: widget.data,
                   ),
@@ -209,5 +208,4 @@ class _ProfileEditPageState extends BasePageState<ProfileEditPage>
     }
     return false;
   }
-
 }

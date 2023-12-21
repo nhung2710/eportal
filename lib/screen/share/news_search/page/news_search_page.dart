@@ -48,6 +48,7 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
     // TODO: implement disposeBloc
     newsSearchBloc.close();
   }
+
   @override
   void initDataLoading() {
     request.obj.reloadData();
@@ -134,5 +135,4 @@ class _NewsSearchPageState extends BasePageState<NewsSearchPage> {
       newsSearchBloc.add(NewsSearchEvent(request: request));
     }
   }
-
 }

@@ -1,4 +1,3 @@
-
 import 'package:eportal/event/admin/work_update_event.dart';
 import 'package:eportal/model/api/request/admin/data/work_update_data_request.dart';
 import 'package:eportal/model/api/request/admin/work_update_request.dart';
@@ -8,15 +7,7 @@ import 'package:eportal/screen/employer/job_advertisement_edit/tab/job_advertise
 import 'package:eportal/screen/employer/job_advertisement_edit/tab/job_advertisement_edit_contract_tab.dart';
 import 'package:eportal/screen/employer/job_advertisement_edit/tab/job_advertisement_edit_description_tab.dart';
 import 'package:eportal/screen/employer/job_advertisement_edit/tab/job_advertisement_edit_general_tab.dart';
-import 'package:eportal/screen/worker/profile_Edit/tab/profile_Edit_basic_tab.dart';
-import 'package:eportal/screen/worker/profile_Edit/tab/profile_Edit_career_goals_tab.dart';
-import 'package:eportal/screen/worker/profile_Edit/tab/profile_Edit_field_skills_tab.dart';
-import 'package:eportal/screen/worker/profile_Edit/tab/profile_Edit_general_tab.dart';
-import 'package:eportal/screen/worker/profile_Edit/tab/profile_Edit_level_tab.dart';
-import 'package:eportal/screen/worker/profile_Edit/tab/profile_Edit_work_experience_tab.dart';
 import 'package:eportal/state/base/base_state.dart';
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:eportal/widget/input/capcha_input.dart';
@@ -26,7 +17,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../bloc/admin/work_update_bloc.dart';
 import '../../../../extension/boolean_extension.dart';
-import '../../../../extension/string_extension.dart';
 
 //
 // Created by BlackRose on 04/12/2023.
@@ -35,7 +25,8 @@ import '../../../../extension/string_extension.dart';
 
 class JobAdvertisementEditPage extends BasePage {
   WorkSearchByUserNameDataResponse data;
-  JobAdvertisementEditPage({super.key,required this.data});
+
+  JobAdvertisementEditPage({super.key, required this.data});
 
   @override
   State<StatefulWidget> createState() => _JobAdvertisementEditPageState();
@@ -43,21 +34,20 @@ class JobAdvertisementEditPage extends BasePage {
 
 class _JobAdvertisementEditPageState
     extends BasePageState<JobAdvertisementEditPage> {
-
   GlobalKey<CustomTabViewState> keyCustomTabViewState =
-  GlobalKey<CustomTabViewState>();
+      GlobalKey<CustomTabViewState>();
   GlobalKey<JobAdvertisementEditBasicTabState>
-  keyJobAdvertisementEditBasicTabState =
-  GlobalKey<JobAdvertisementEditBasicTabState>();
+      keyJobAdvertisementEditBasicTabState =
+      GlobalKey<JobAdvertisementEditBasicTabState>();
   GlobalKey<JobAdvertisementEditGeneralTabState>
-  keyJobAdvertisementEditGeneralTabState =
-  GlobalKey<JobAdvertisementEditGeneralTabState>();
+      keyJobAdvertisementEditGeneralTabState =
+      GlobalKey<JobAdvertisementEditGeneralTabState>();
   GlobalKey<JobAdvertisementEditContractTabState>
-  keyJobAdvertisementEditContractTabState =
-  GlobalKey<JobAdvertisementEditContractTabState>();
+      keyJobAdvertisementEditContractTabState =
+      GlobalKey<JobAdvertisementEditContractTabState>();
   GlobalKey<JobAdvertisementEditDescriptionTabState>
-  keyJobAdvertisementEditDescriptionTabState =
-  GlobalKey<JobAdvertisementEditDescriptionTabState>();
+      keyJobAdvertisementEditDescriptionTabState =
+      GlobalKey<JobAdvertisementEditDescriptionTabState>();
   late WorkUpdateBloc workUpdateBloc;
 
   @override
@@ -80,9 +70,9 @@ class _JobAdvertisementEditPageState
   void getMoreData() {
     // TODO: implement getMoreData
   }
+
   @override
-  void initDataLoading() {
-  }
+  void initDataLoading() {}
 
   @override
   String getPageTitle(BuildContext context) => "Sửa tin tuyển dụng";
@@ -105,7 +95,8 @@ class _JobAdvertisementEditPageState
                 child: CustomTabView(
                   key: keyCustomTabViewState,
                   tabViews: {
-                    "Thông tin tin tuyển dụng việc làm": JobAdvertisementEditBasicTab(
+                    "Thông tin tin tuyển dụng việc làm":
+                        JobAdvertisementEditBasicTab(
                       key: keyJobAdvertisementEditBasicTabState,
                     ),
                     "Thông tin tuyển dụng": JobAdvertisementEditGeneralTab(
@@ -138,7 +129,6 @@ class _JobAdvertisementEditPageState
         ),
       );
 
-
   _validPage(BuildContext context, BasePageState? state, int page) {
     if (state?.isValid() == true) {
       return true;
@@ -153,50 +143,76 @@ class _JobAdvertisementEditPageState
       workUpdateBloc.add(WorkUpdateEvent(
           request: WorkUpdateRequest(
               obj: WorkUpdateDataRequest(
-                work_ID: widget.data.workID,
-                gioiTinh: keyJobAdvertisementEditGeneralTabState.currentState?.widget.danhSachGioiTinhDataResponse?.id,
-                tieuDe: keyJobAdvertisementEditBasicTabState
-                    .currentState?.tieuDeController.text,
-                doTuoi: keyJobAdvertisementEditGeneralTabState
-                    .currentState?.doTuoiController.text,
-                soLuong: keyJobAdvertisementEditGeneralTabState
-                    .currentState?.soLuongController.text,
-                hanNopHoSo: keyJobAdvertisementEditBasicTabState
-                    .currentState?.hanNopHoSoController.text,
-                dangTuNgay: keyJobAdvertisementEditBasicTabState
-                    .currentState?.dangTuNgayController.text,
-                dangDenNgay: keyJobAdvertisementEditBasicTabState
-                    .currentState?.dangDenNgayController.text,
-                tinhTP: keyJobAdvertisementEditBasicTabState.currentState?.widget.danhSachTinhTpDataResponse?.regionalID,
-                tinNoiBat:(keyJobAdvertisementEditBasicTabState.currentState?.widget.tinNoiBat).toInt().toString(),
-                dauThongTinDN:(keyJobAdvertisementEditBasicTabState.currentState?.widget.dauThongTinDN).toInt().toString(),
-                dangGap:(keyJobAdvertisementEditBasicTabState.currentState?.widget.dangGap).toInt().toString(),
-                thoiGianLV: keyJobAdvertisementEditGeneralTabState
-                    .currentState?.thoiGianLVController.text,
-                chucVu:
-                keyJobAdvertisementEditGeneralTabState.currentState?.widget.danhSachChucVuDataResponse?.id,
-                mucLuong: keyJobAdvertisementEditGeneralTabState.currentState?.widget.danhSachMucLuongDataResponse?.salaryID,
-                kinhNghiem: keyJobAdvertisementEditGeneralTabState.currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
-                trinhdoCM: keyJobAdvertisementEditGeneralTabState.currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
-                tinhChatCV: keyJobAdvertisementEditGeneralTabState.currentState?.widget.danhSachTinhChatCongViecDataResponse?.typeOfID,
-                nganhNghe: keyJobAdvertisementEditGeneralTabState.currentState?.widget.danhSachNganhNgheDataResponse?.careerID,
-                viTriTuyenDung: keyJobAdvertisementEditGeneralTabState.currentState?.widget.danhSachViTriTuyenDungDataResponse?.jobPlaceID,
-                mota: keyJobAdvertisementEditDescriptionTabState.currentState?.motaController.text,
-                yeuCauCV: keyJobAdvertisementEditDescriptionTabState.currentState?.yeuCauCVController.text,
-                yeuCauHoSo: keyJobAdvertisementEditDescriptionTabState.currentState?.yeuCauHoSoController.text,
-                quyenLoi: keyJobAdvertisementEditDescriptionTabState.currentState?.quyenLoiController.text,
-                ghiChu: keyJobAdvertisementEditContractTabState.currentState?.ghiChuController.text,
-                tenNguoiLH: keyJobAdvertisementEditContractTabState.currentState?.tenNguoiLHController.text,
-                diaChiNguoiLH:keyJobAdvertisementEditContractTabState.currentState?.tenNguoiLHController.text,
-                dienThoaiNguoiLH:keyJobAdvertisementEditContractTabState.currentState?.dienThoaiNguoiLHController.text,
-                emailNguoiLH:keyJobAdvertisementEditContractTabState.currentState?.emailNguoiLHController.text,
-              ))));
+        work_ID: widget.data.workID,
+        gioiTinh: keyJobAdvertisementEditGeneralTabState
+            .currentState?.widget.danhSachGioiTinhDataResponse?.id,
+        tieuDe: keyJobAdvertisementEditBasicTabState
+            .currentState?.tieuDeController.text,
+        doTuoi: keyJobAdvertisementEditGeneralTabState
+            .currentState?.doTuoiController.text,
+        soLuong: keyJobAdvertisementEditGeneralTabState
+            .currentState?.soLuongController.text,
+        hanNopHoSo: keyJobAdvertisementEditBasicTabState
+            .currentState?.hanNopHoSoController.text,
+        dangTuNgay: keyJobAdvertisementEditBasicTabState
+            .currentState?.dangTuNgayController.text,
+        dangDenNgay: keyJobAdvertisementEditBasicTabState
+            .currentState?.dangDenNgayController.text,
+        tinhTP: keyJobAdvertisementEditBasicTabState
+            .currentState?.widget.danhSachTinhTpDataResponse?.regionalID,
+        tinNoiBat: (keyJobAdvertisementEditBasicTabState
+                .currentState?.widget.tinNoiBat)
+            .toInt()
+            .toString(),
+        dauThongTinDN: (keyJobAdvertisementEditBasicTabState
+                .currentState?.widget.dauThongTinDN)
+            .toInt()
+            .toString(),
+        dangGap:
+            (keyJobAdvertisementEditBasicTabState.currentState?.widget.dangGap)
+                .toInt()
+                .toString(),
+        thoiGianLV: keyJobAdvertisementEditGeneralTabState
+            .currentState?.thoiGianLVController.text,
+        chucVu: keyJobAdvertisementEditGeneralTabState
+            .currentState?.widget.danhSachChucVuDataResponse?.id,
+        mucLuong: keyJobAdvertisementEditGeneralTabState
+            .currentState?.widget.danhSachMucLuongDataResponse?.salaryID,
+        kinhNghiem: keyJobAdvertisementEditGeneralTabState
+            .currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
+        trinhdoCM: keyJobAdvertisementEditGeneralTabState
+            .currentState?.widget.danhSachKinhNghiemDataResponse?.experienceID,
+        tinhChatCV: keyJobAdvertisementEditGeneralTabState.currentState?.widget
+            .danhSachTinhChatCongViecDataResponse?.typeOfID,
+        nganhNghe: keyJobAdvertisementEditGeneralTabState
+            .currentState?.widget.danhSachNganhNgheDataResponse?.careerID,
+        viTriTuyenDung: keyJobAdvertisementEditGeneralTabState.currentState
+            ?.widget.danhSachViTriTuyenDungDataResponse?.jobPlaceID,
+        mota: keyJobAdvertisementEditDescriptionTabState
+            .currentState?.motaController.text,
+        yeuCauCV: keyJobAdvertisementEditDescriptionTabState
+            .currentState?.yeuCauCVController.text,
+        yeuCauHoSo: keyJobAdvertisementEditDescriptionTabState
+            .currentState?.yeuCauHoSoController.text,
+        quyenLoi: keyJobAdvertisementEditDescriptionTabState
+            .currentState?.quyenLoiController.text,
+        ghiChu: keyJobAdvertisementEditContractTabState
+            .currentState?.ghiChuController.text,
+        tenNguoiLH: keyJobAdvertisementEditContractTabState
+            .currentState?.tenNguoiLHController.text,
+        diaChiNguoiLH: keyJobAdvertisementEditContractTabState
+            .currentState?.tenNguoiLHController.text,
+        dienThoaiNguoiLH: keyJobAdvertisementEditContractTabState
+            .currentState?.dienThoaiNguoiLHController.text,
+        emailNguoiLH: keyJobAdvertisementEditContractTabState
+            .currentState?.emailNguoiLHController.text,
+      ))));
     }
   }
 
   bool _validBeforeSend(BuildContext context) {
     if (_validPage(
-        context, keyJobAdvertisementEditBasicTabState.currentState, 0) &&
+            context, keyJobAdvertisementEditBasicTabState.currentState, 0) &&
         _validPage(
             context, keyJobAdvertisementEditGeneralTabState.currentState, 1) &&
         _validPage(context,
@@ -207,5 +223,4 @@ class _JobAdvertisementEditPageState
     }
     return false;
   }
-
 }

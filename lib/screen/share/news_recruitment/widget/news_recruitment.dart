@@ -28,7 +28,9 @@ class NewsRecruitment extends BasePage {
 
 class _NewsRecruitmentState extends BasePageStateActive<NewsRecruitment> {
   late HomeWorksListBloc homeWorksListCommonBloc;
-  HomeWorksListRequest request = HomeWorksListRequest(obj: HomeWorksListDataRequest());
+  HomeWorksListRequest request =
+      HomeWorksListRequest(obj: HomeWorksListDataRequest());
+
   @override
   void initBloc() {
     homeWorksListCommonBloc = HomeWorksListBloc();
@@ -38,8 +40,7 @@ class _NewsRecruitmentState extends BasePageStateActive<NewsRecruitment> {
   @override
   void callApi() {
     // TODO: implement callApi
-    homeWorksListCommonBloc.add(HomeWorksListEvent(
-        request: request));
+    homeWorksListCommonBloc.add(HomeWorksListEvent(request: request));
   }
 
   @override
@@ -52,6 +53,7 @@ class _NewsRecruitmentState extends BasePageStateActive<NewsRecruitment> {
   void getMoreData() {
     // TODO: implement getMoreData
   }
+
   @override
   bool isHasAppBar(BuildContext context) => false;
 
@@ -93,5 +95,4 @@ class _NewsRecruitmentState extends BasePageStateActive<NewsRecruitment> {
           ),
         ),
       ));
-
 }

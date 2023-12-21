@@ -2,11 +2,7 @@ import 'package:eportal/application/global_application.dart';
 import 'package:eportal/screen/share/about/page/about_page.dart';
 import 'package:eportal/screen/share/change_password/page/change_password_page.dart';
 import 'package:eportal/screen/share/change_user_info/page/change_user_info_page.dart';
-import 'package:eportal/screen/share/chart_economically_active/page/chart_economically_active_page.dart';
-import 'package:eportal/screen/share/chart_economically_inactive/page/chart_economically_inactive_page.dart';
-import 'package:eportal/screen/share/chart_unemployment_rate/page/chart_unemployment_rate_page.dart';
 import 'package:eportal/screen/share/contact/page/contract_page.dart';
-import 'package:eportal/screen/share/empty_example/page/empty_example_page.dart';
 import 'package:eportal/screen/share/policy/page/policy_page.dart';
 import 'package:eportal/screen/share/support/page/support_page.dart';
 import 'package:eportal/screen/share/terms_of_use/page/terms_of_use_page.dart';
@@ -91,6 +87,7 @@ class _SettingPageState extends BasePageState<SettingPage> {
   void initDataLoading() {
     // TODO: implement initDataLoading
   }
+
   @override
   bool isHasAppBar(BuildContext context) => false;
 
@@ -108,5 +105,4 @@ class _SettingPageState extends BasePageState<SettingPage> {
               .toList(),
         ),
       );
-
 }

@@ -7,8 +7,8 @@ import 'package:eportal/model/api/request/admin/chat_bot_xoa_hoi_thoai_request.d
 import 'package:eportal/model/api/response/admin/chat_bot_xoa_hoi_thoai_response.dart';
 import 'package:eportal/repository/base/base_repository.dart';
 
-class ChatBotXoaHoiThoaiRepository
-    extends BaseRepository<ChatBotXoaHoiThoaiRequest, ChatBotXoaHoiThoaiResponse> {
+class ChatBotXoaHoiThoaiRepository extends BaseRepository<
+    ChatBotXoaHoiThoaiRequest, ChatBotXoaHoiThoaiResponse> {
   @override
   ChatBotXoaHoiThoaiResponse mapJsonToObject(Map<String, dynamic> value) =>
       ChatBotXoaHoiThoaiResponse.fromJson(value);

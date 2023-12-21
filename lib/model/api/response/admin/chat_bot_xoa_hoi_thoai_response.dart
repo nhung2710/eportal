@@ -8,14 +8,13 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 import '../../../../extension/map_json_extension.dart';
 
 class ChatBotXoaHoiThoaiResponse
-    extends BaseSingleEportalResponse<ChatBotXoaHoiThoaiDataResponse> {
+    extends BaseSingleEportalResponse<String> {
   ChatBotXoaHoiThoaiResponse(
       {required super.data, required super.status, required super.message});
 
   factory ChatBotXoaHoiThoaiResponse.fromJson(Map<String, dynamic> json) {
     return ChatBotXoaHoiThoaiResponse(
-        data: json.toObjectJson(
-            mapJson: (v) => ChatBotXoaHoiThoaiDataResponse.fromJson(v)),
+        data: json.toStringJson(),
         status: json["status"],
         message: json["message"]);
   }

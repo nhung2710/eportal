@@ -51,6 +51,7 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
     userUpdateBloc = UserUpdateBloc();
     danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
   }
+
   @override
   void disposeBloc() {
     userUpdateBloc.close();
@@ -238,8 +239,7 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
       request.obj.ngaySinh = birthDayController.text;
       request.obj.dienThoai = phoneController.text;
       request.obj.hoTen = fullNameController.text;
-      userUpdateBloc
-          .add(UserUpdateEvent(request: request));
+      userUpdateBloc.add(UserUpdateEvent(request: request));
     }
   }
 
@@ -259,5 +259,4 @@ class _ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
       title: 'Giới tính',
     );
   }
-
 }

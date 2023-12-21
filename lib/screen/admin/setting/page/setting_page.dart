@@ -105,6 +105,7 @@ class _SettingPageState extends BasePageState<SettingPage> {
   void initDataLoading() {
     // TODO: implement initDataLoading
   }
+
   @override
   bool isHasAppBar(BuildContext context) => false;
 
@@ -122,5 +123,4 @@ class _SettingPageState extends BasePageState<SettingPage> {
               .toList(),
         ),
       );
-
 }

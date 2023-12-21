@@ -3,21 +3,19 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/model/base/base_eportal_xml.dart';
 
 class ChatBotThemCauMauDataRequest extends BaseEportalXml {
-  int? top;
+  String? cauMau;
 
-  ChatBotThemCauMauDataRequest(
-      {this.top = ApplicationConstant.NUMBER_FULL_ITEM});
+  ChatBotThemCauMauDataRequest({this.cauMau});
 
   @override
   StringBuffer toXml() {
     // TODO: implement toXml
     var buffer = super.toXml();
-    buffer.write(createXml(top, "top"));
+    buffer.write(createXml(cauMau, "cauMau"));
     return buffer;
   }
 }

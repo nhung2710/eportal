@@ -98,6 +98,7 @@ class _SplashPageState extends BasePageState<SplashPage>
   void getMoreData() {
     // TODO: implement getMoreData
   }
+
   @override
   double currentPadding(BuildContext context) => 10;
 
@@ -108,8 +109,7 @@ class _SplashPageState extends BasePageState<SplashPage>
   bool isHasAppBar(BuildContext context) => false;
 
   @override
-  void initDataLoading() {
-  }
+  void initDataLoading() {}
 
   @override
   Widget pageUI(BuildContext context) {
@@ -326,5 +326,4 @@ class _SplashPageState extends BasePageState<SplashPage>
       }
     });
   }
-
 }

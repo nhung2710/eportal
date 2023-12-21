@@ -1,5 +1,3 @@
-import 'package:eportal/model/api/request/admin/data/job_user_list_by_user_name_data_request.dart';
-
 import '../../../../base/base_eportal_xml.dart';
 
 //

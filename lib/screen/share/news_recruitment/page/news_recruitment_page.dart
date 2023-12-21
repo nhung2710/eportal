@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../style/app_color.dart';
-import '../../../../style/app_text_style.dart';
 import '../../../../widget/base/base_page.dart';
 import '../../../../widget/expandable_fab/expandable_fab.dart';
 import '../../../../widget/tab/custom_tab_view.dart';
@@ -22,8 +20,7 @@ class NewsRecruitmentPage extends BasePage {
   State<StatefulWidget> createState() => _NewsRecruitmentPageState();
 }
 
-class _NewsRecruitmentPageState extends BasePageState<NewsRecruitmentPage>{
-
+class _NewsRecruitmentPageState extends BasePageState<NewsRecruitmentPage> {
   @override
   void initDataLoading() {
     // TODO: implement initDataLoading
@@ -48,15 +45,22 @@ class _NewsRecruitmentPageState extends BasePageState<NewsRecruitmentPage>{
   void initBloc() {
     // TODO: implement initBloc
   }
-  @override
-  Widget pageUI(BuildContext context) => CustomTabView(tabViews: {
-    "Tốt nhất":NewsRecruitment(flag: 0,),
-    "Mới nhất":NewsRecruitment(flag: 1,),
-    "Lương cao nhất":NewsRecruitment(flag: 2,)
-  },
-    isScrollable: false,
 
-  );
+  @override
+  Widget pageUI(BuildContext context) => CustomTabView(
+        tabViews: {
+          "Tốt nhất": NewsRecruitment(
+            flag: 0,
+          ),
+          "Mới nhất": NewsRecruitment(
+            flag: 1,
+          ),
+          "Lương cao nhất": NewsRecruitment(
+            flag: 2,
+          )
+        },
+        isScrollable: false,
+      );
 
   @override
   Widget? getFloatingActionButton(BuildContext context) => ExpandableFab(
@@ -73,5 +77,4 @@ class _NewsRecruitmentPageState extends BasePageState<NewsRecruitmentPage>{
 
   @override
   String getPageTitle(BuildContext context) => "Tuyển dụng";
-
 }

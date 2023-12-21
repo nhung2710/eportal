@@ -39,6 +39,7 @@ class _ListOfCandidateProfileBlockTabState
   void disposeBloc() {
     profileBlackListBloc.close();
   }
+
   @override
   void initDataLoading() {
     request.obj.reloadData();
@@ -113,5 +114,4 @@ class _ListOfCandidateProfileBlockTabState
           ),
         ],
       );
-
 }

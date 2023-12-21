@@ -12,37 +12,37 @@ class CustomCheckbox extends StatefulWidget {
   bool? check;
   String? title;
   ValueChanged<bool?>? onChanged;
-  CustomCheckbox({super.key,this.check = false,this.title = "",this.onChanged});
+
+  CustomCheckbox(
+      {super.key, this.check = false, this.title = "", this.onChanged});
 
   @override
   State<StatefulWidget> createState() => CustomCheckboxState();
 }
 
-
-class CustomCheckboxState extends State<CustomCheckbox>{
-
-
+class CustomCheckboxState extends State<CustomCheckbox> {
   @override
   Widget build(BuildContext context) => Row(
-    children: [
-      Checkbox(
-        isError: true,
-        value: widget.check,
-        activeColor: AppColor.colorOfIcon,
-        side: const BorderSide(color: AppColor.colorOfIcon,width: 2),
-        onChanged: (bool? value) {
-          setState(() {
-            widget.check = value;
-          });
-          if(widget.onChanged!=null) {
-            widget.onChanged!(value);
-          }
-        },
-      ),
-      Expanded(child: Text(
-        widget.title.supportHtml(),
-        style: AppTextStyle.title,
-      ))
-    ],
-  );
+        children: [
+          Checkbox(
+            isError: true,
+            value: widget.check,
+            activeColor: AppColor.colorOfIcon,
+            side: const BorderSide(color: AppColor.colorOfIcon, width: 2),
+            onChanged: (bool? value) {
+              setState(() {
+                widget.check = value;
+              });
+              if (widget.onChanged != null) {
+                widget.onChanged!(value);
+              }
+            },
+          ),
+          Expanded(
+              child: Text(
+            widget.title.supportHtml(),
+            style: AppTextStyle.title,
+          ))
+        ],
+      );
 }

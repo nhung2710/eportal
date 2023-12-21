@@ -21,7 +21,7 @@ abstract class BasePage extends StatefulWidget {
   const BasePage({super.key});
 }
 
-abstract class  BasePageState<T extends StatefulWidget> extends State<T> {
+abstract class BasePageState<T extends StatefulWidget> extends State<T> {
   GlobalKey<State<T>> localKey = GlobalKey<State<T>>();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -30,9 +30,13 @@ abstract class  BasePageState<T extends StatefulWidget> extends State<T> {
   bool isScrollMore = true;
 
   void callApi();
+
   void initBloc();
+
   void disposeBloc();
+
   void initDataLoading();
+
   void getMoreData();
 
   @override
@@ -67,8 +71,6 @@ abstract class  BasePageState<T extends StatefulWidget> extends State<T> {
     isScrollMore = false;
   }
 
-
-
   @override
   void initState() {
     //WidgetsBinding.instance.addObserver(this);
@@ -93,7 +95,6 @@ abstract class  BasePageState<T extends StatefulWidget> extends State<T> {
     // TODO: implement initState
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +135,8 @@ abstract class  BasePageState<T extends StatefulWidget> extends State<T> {
   }
 
   void hiddenKeyboard() {
-    ErrorExtension().handleActionError(() => FocusManager.instance.primaryFocus?.unfocus());
+    ErrorExtension()
+        .handleActionError(() => FocusManager.instance.primaryFocus?.unfocus());
   }
 
   late SimpleDialog simpleDialog;
@@ -172,12 +174,45 @@ abstract class  BasePageState<T extends StatefulWidget> extends State<T> {
       ),
     );
   }
-
+  Future<bool?> showAlertChoose({Widget content= const SizedBox(),String? title,String? desc,required void Function() allow}) async{
+    hiddenKeyboard();
+    return Alert(
+        context: context,
+        type: AlertType.warning,
+        style: const AlertStyle(titleStyle: AppTextStyle.title,descStyle: AppTextStyle.normal),
+        title: title,
+        desc: desc,
+        content: content,
+        buttons: [
+          DialogButton(
+            onPressed: () => Navigator.pop(context),
+            color: Colors.red,
+            radius: const BorderRadius.all(Radius.circular(5)),
+            child: Text(
+              "Huỷ",
+              style: AppTextStyle.textButton.copyWith(color: Colors.white),
+            ),
+          ),
+          DialogButton(
+            onPressed: () {
+              Navigator.pop(context);
+              allow();
+            },
+            radius: const BorderRadius.all(Radius.circular(5)),
+            color: AppColor.colorOfIcon,
+            child:  Text(
+              "Tiếp tục",
+              style: AppTextStyle.textButton.copyWith(color: Colors.white),
+            ),
+          )
+        ]).show();
+  }
   Future<bool?> showCenterError(String? error) async {
     hiddenKeyboard();
     return Alert(
         context: context,
         type: AlertType.error,
+        style: const AlertStyle(titleStyle: AppTextStyle.title,descStyle: AppTextStyle.normal),
         title: "Thông báo",
         desc: error
             .supportHtml()
@@ -185,14 +220,11 @@ abstract class  BasePageState<T extends StatefulWidget> extends State<T> {
         buttons: [
           DialogButton(
             onPressed: () => Navigator.pop(context),
-            gradient: const LinearGradient(colors: [
-              AppColor.colorOfIcon,
-              AppColor.colorOfIcon,
-              AppColor.colorOfIcon
-            ]),
-            child: const Text(
+            radius: const BorderRadius.all(Radius.circular(5)),
+            color: AppColor.colorOfIcon,
+            child:  Text(
               "Tôi đã biết",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: AppTextStyle.textButton.copyWith(color: Colors.white),
             ),
           )
         ]).show();
@@ -387,11 +419,10 @@ abstract class  BasePageState<T extends StatefulWidget> extends State<T> {
           strokeWidth: 5,
         ),
       );
-
 }
 
-abstract class BasePageStateActive<T extends StatefulWidget> extends BasePageState<T>
-    with AutomaticKeepAliveClientMixin {
+abstract class BasePageStateActive<T extends StatefulWidget>
+    extends BasePageState<T> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -427,7 +458,8 @@ abstract class BasePageStateActive<T extends StatefulWidget> extends BasePageSta
   }
 }
 
-abstract class BaseScreenState<T extends StatefulWidget> extends BasePageState<T> {
+abstract class BaseScreenState<T extends StatefulWidget>
+    extends BasePageState<T> {
   @override
   Widget build(BuildContext context) {
     return Form(

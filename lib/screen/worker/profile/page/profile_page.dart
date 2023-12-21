@@ -6,9 +6,7 @@ import 'package:eportal/screen/worker/profile_edit/page/profile_edit_page.dart';
 import 'package:eportal/screen/worker/refer/page/refer_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
-import 'package:eportal/widget/dialog/choose_action_dialog.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
-import 'package:eportal/widget/full_data_item/curriculum_vitae_item.dart';
 import 'package:eportal/widget/input/search_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,6 +37,7 @@ class _ProfilePageState extends BasePageStateActive<ProfilePage> {
   void initBloc() {
     jobUserListByUserNameBloc = JobUserListByUserNameBloc();
   }
+
   @override
   void disposeBloc() {
     // TODO: implement disposeBloc
@@ -63,7 +62,8 @@ class _ProfilePageState extends BasePageStateActive<ProfilePage> {
   @override
   void getMoreData() {
     request.obj.nextData();
-    callApi();;
+    callApi();
+    ;
   }
 
   @override
@@ -146,5 +146,4 @@ class _ProfilePageState extends BasePageStateActive<ProfilePage> {
           ),
         ],
       );
-
 }

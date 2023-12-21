@@ -1,7 +1,7 @@
 class ApplicationConstant {
   ApplicationConstant._internal();
 
-  static const NUMBER_PREVIEW_ITEM = 20;
+  static const NUMBER_PREVIEW_ITEM = 50;
   static const NUMBER_FULL_ITEM = 20 * NUMBER_PREVIEW_ITEM;
 
   static const String EMPTY = "";

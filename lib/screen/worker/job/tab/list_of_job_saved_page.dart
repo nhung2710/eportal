@@ -1,15 +1,8 @@
 import 'package:eportal/bloc/admin/work_save_list_bloc.dart';
-import 'package:eportal/bloc/admin/work_save_list_bloc.dart';
-import 'package:eportal/bloc/common_new/work_search_bloc.dart';
 import 'package:eportal/event/admin/work_save_list_event.dart';
-import 'package:eportal/event/common_new/work_search_event.dart';
 import 'package:eportal/model/api/request/admin/data/work_save_list_data_request.dart';
 import 'package:eportal/model/api/request/admin/work_save_list_request.dart';
-import 'package:eportal/model/api/request/common_new/data/work_search_data_request.dart';
-import 'package:eportal/model/api/request/common_new/work_search_request.dart';
 import 'package:eportal/model/api/response/admin/data/work_save_list_data_response.dart';
-import 'package:eportal/model/api/response/common_new/data/work_search_data_response.dart';
-import 'package:eportal/screen/share/work_search_detail/page/work_search_detail_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
@@ -47,6 +40,7 @@ class _ListOfJobSavedPageState extends BasePageStateActive<ListOfJobSavedPage> {
     // TODO: implement disposeBloc
     workSaveListBloc.close();
   }
+
   @override
   void initDataLoading() {
     request.obj.reloadData();
@@ -120,5 +114,4 @@ class _ListOfJobSavedPageState extends BasePageStateActive<ListOfJobSavedPage> {
           ),
         ],
       );
-
 }

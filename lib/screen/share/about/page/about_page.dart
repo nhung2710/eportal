@@ -33,6 +33,7 @@ class _AboutPageState extends BasePageState<AboutPage> {
   void initDataLoading() {
     callApi();
   }
+
   @override
   void callApi() {
     gioiThieuTrungTamBloc.add(GioiThieuTrungTamEvent(
@@ -82,5 +83,4 @@ class _AboutPageState extends BasePageState<AboutPage> {
               ),
             )),
       );
-
 }

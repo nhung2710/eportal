@@ -35,6 +35,7 @@ class NewsDetailPage extends BasePage {
 class _NewsDetailPageState extends BasePageState<NewsDetailPage> {
   late NewsDetailBloc newsDetailBloc;
   NewsDetailRequest request = NewsDetailRequest(obj: NewsDetailDataRequest());
+
   @override
   void initBloc() {
     newsDetailBloc = NewsDetailBloc();
@@ -55,11 +56,10 @@ class _NewsDetailPageState extends BasePageState<NewsDetailPage> {
   void getMoreData() {
     // TODO: implement getMoreData
   }
+
   @override
   void callApi() {
-    newsDetailBloc.add(NewsDetailEvent(
-        request: request));
-
+    newsDetailBloc.add(NewsDetailEvent(request: request));
   }
 
   @override
@@ -125,5 +125,4 @@ class _NewsDetailPageState extends BasePageState<NewsDetailPage> {
 
   @override
   String getPageTitle(BuildContext context) => "Chi tiết tin tức";
-
 }

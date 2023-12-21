@@ -2,7 +2,6 @@
 // Created by BlackRose on 18/12/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-import 'package:eportal/event/base/base_event.dart';
 import 'package:eportal/model/api/request/admin/job_user_refer_delete_request.dart';
 import 'package:equatable/equatable.dart';
 

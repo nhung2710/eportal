@@ -1,5 +1,4 @@
 import 'package:eportal/model/base/base_eportal_data_response.dart';
-import 'package:flutter/material.dart';
 
 import '../../../../../extension/string_extension.dart';
 

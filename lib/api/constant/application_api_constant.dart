@@ -85,11 +85,12 @@ class ApplicationApiConstant {
   static const kAPI_ADMIN_OP_PROFILE_VIEW_LIST = "ProfileViewList";
   static const kAPI_ADMIN_OP_PROFILE_SEND_LIST = "ProfileSendList";
   static const kAPI_ADMIN_OP_PROFILE_BLACK_LIST = "ProfileBlackList";
-  
-  static const kAPI_ADMIN_OP_CHAT_BOT_DANH_SACH_HOI_THOAI="ChatBot_DanhSachHoiThoai";
-  static const kAPI_ADMIN_OP_CHAT_BOT_CHI_TIET_HOI_THOAI="ChatBot_ChiTietHoiThoai";
-  static const kAPI_ADMIN_OP_CHAT_BOT_THEM_CAU_MAU="ChatBot_ThemCauMau";
-  static const kAPI_ADMIN_OP_CHAT_BOT_DANH_DAU_SAO="ChatBot_DanhDauSao";
-  static const kAPI_ADMIN_OP_CHAT_BOT_XOA_HOI_THOAI="ChatBot_XoaHoiThoai";
-  
+
+  static const kAPI_ADMIN_OP_CHAT_BOT_DANH_SACH_HOI_THOAI =
+      "ChatBot_DanhSachHoiThoai";
+  static const kAPI_ADMIN_OP_CHAT_BOT_CHI_TIET_HOI_THOAI =
+      "ChatBot_ChiTietHoiThoai";
+  static const kAPI_ADMIN_OP_CHAT_BOT_THEM_CAU_MAU = "ChatBot_ThemCauMau";
+  static const kAPI_ADMIN_OP_CHAT_BOT_DANH_DAU_SAO = "ChatBot_DanhDauSao";
+  static const kAPI_ADMIN_OP_CHAT_BOT_XOA_HOI_THOAI = "ChatBot_XoaHoiThoai";
 }

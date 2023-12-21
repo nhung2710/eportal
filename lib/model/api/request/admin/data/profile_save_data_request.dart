@@ -1,4 +1,3 @@
-import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/model/base/base_eportal_xml.dart';
 
 //
@@ -7,10 +6,11 @@ import 'package:eportal/model/base/base_eportal_xml.dart';
 //
 
 class ProfileSaveDataRequest extends BaseEportalXml {
-  String? jobUserID ;
-  String? title ;
+  String? jobUserID;
 
-  ProfileSaveDataRequest({this.jobUserID,this.title});
+  String? title;
+
+  ProfileSaveDataRequest({this.jobUserID, this.title});
 
   @override
   StringBuffer toXml() {

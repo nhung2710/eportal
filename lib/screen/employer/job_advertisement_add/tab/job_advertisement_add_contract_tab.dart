@@ -3,11 +3,7 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-import 'package:eportal/model/api/response/common_new/data/danh_sach_nganh_nghe_data_response.dart';
-import 'package:eportal/model/api/response/common_new/data/danh_sach_quan_huyen_data_response.dart';
-import 'package:eportal/model/api/response/common_new/data/danh_sach_tinh_tp_data_response.dart';
 import 'package:eportal/widget/base/base_page.dart';
-import 'package:eportal/widget/input/date_input.dart';
 import 'package:eportal/widget/input/field_input.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -31,12 +27,10 @@ class JobAdvertisementAddContractTabState
   void initBloc() {}
 
   @override
-  void initDataLoading() {
-  }
+  void initDataLoading() {}
 
   @override
-  void callApi() {
-  }
+  void callApi() {}
 
   @override
   void disposeBloc() {
@@ -112,5 +106,4 @@ class JobAdvertisementAddContractTabState
           ),
         ],
       );
-
 }

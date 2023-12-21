@@ -9,16 +9,21 @@ import 'package:eportal/model/api/response/admin/chat_bot_danh_sach_hoi_thoai_re
 import 'package:eportal/model/api/response/admin/data/chat_bot_danh_sach_hoi_thoai_data_response.dart';
 import 'package:eportal/repository/admin/chat_bot_danh_sach_hoi_thoai_repository.dart';
 
-class ChatBotDanhSachHoiThoaiBloc extends BasePageBloc<ChatBotDanhSachHoiThoaiDataResponse,
-    ChatBotDanhSachHoiThoaiRepository, ChatBotDanhSachHoiThoaiEvent, ChatBotDanhSachHoiThoaiResponse> {
+class ChatBotDanhSachHoiThoaiBloc extends BasePageBloc<
+    ChatBotDanhSachHoiThoaiDataResponse,
+    ChatBotDanhSachHoiThoaiRepository,
+    ChatBotDanhSachHoiThoaiEvent,
+    ChatBotDanhSachHoiThoaiResponse> {
   @override
   Future<ChatBotDanhSachHoiThoaiResponse> callApiResult(
-      ChatBotDanhSachHoiThoaiRepository apiRepository, ChatBotDanhSachHoiThoaiEvent event) =>
+          ChatBotDanhSachHoiThoaiRepository apiRepository,
+          ChatBotDanhSachHoiThoaiEvent event) =>
       apiRepository.get(event.request);
 
   @override
   String? getFailMessage(ChatBotDanhSachHoiThoaiResponse response) => null;
 
   @override
-  ChatBotDanhSachHoiThoaiRepository getRepository() => ChatBotDanhSachHoiThoaiRepository();
+  ChatBotDanhSachHoiThoaiRepository getRepository() =>
+      ChatBotDanhSachHoiThoaiRepository();
 }

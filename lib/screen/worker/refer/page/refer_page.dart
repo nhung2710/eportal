@@ -3,35 +3,24 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-import 'package:eportal/bloc/admin/job_user_list_by_user_name_bloc.dart';
 import 'package:eportal/bloc/admin/job_user_refer_list_bloc.dart';
 import 'package:eportal/bloc/admin/job_user_refer_save_bloc.dart';
 import 'package:eportal/enum/data_bloc_status.dart';
-import 'package:eportal/event/admin/job_user_list_by_user_name_event.dart';
 import 'package:eportal/event/admin/job_user_refer_list_event.dart';
 import 'package:eportal/event/admin/job_user_refer_save_event.dart';
-import 'package:eportal/model/api/request/admin/data/job_user_list_by_user_name_data_request.dart';
 import 'package:eportal/model/api/request/admin/data/job_user_refer_list_data_request.dart';
-import 'package:eportal/model/api/request/admin/job_user_list_by_user_name_request.dart';
 import 'package:eportal/model/api/request/admin/job_user_refer_add_request.dart';
 import 'package:eportal/model/api/request/admin/job_user_refer_delete_request.dart';
 import 'package:eportal/model/api/request/admin/job_user_refer_list_request.dart';
 import 'package:eportal/model/api/request/admin/job_user_refer_update_request.dart';
 import 'package:eportal/model/api/response/admin/data/job_user_list_by_user_name_data_response.dart';
 import 'package:eportal/model/api/response/admin/data/job_user_refer_list_data_response.dart';
-import 'package:eportal/screen/worker/profile_add/page/profile_add_page.dart';
-import 'package:eportal/screen/worker/profile_edit/page/profile_edit_page.dart';
 import 'package:eportal/screen/worker/refer/widget/refer_widget_item.dart';
 import 'package:eportal/state/base/base_state.dart';
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
-import 'package:eportal/widget/full_data_item/curriculum_vitae_item.dart';
 import 'package:eportal/widget/input/capcha_input.dart';
-import 'package:eportal/widget/input/field_input.dart';
-import 'package:eportal/widget/input/search_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -60,13 +49,15 @@ class _ReferPageState extends BasePageStateActive<ReferPage> {
   List<JobUserReferDeleteRequest> lstJobUserReferDeleteRequest = [];
   List<JobUserReferAddRequest> lstJobUserReferAddRequest = [];
   List<JobUserReferUpdateRequest> lstJobUserReferUpdateRequest = [];
-  JobUserReferListRequest request = JobUserReferListRequest(obj: JobUserReferListDataRequest());
+  JobUserReferListRequest request =
+      JobUserReferListRequest(obj: JobUserReferListDataRequest());
+
   @override
   void initBloc() {
     jobUserReferListBloc = JobUserReferListBloc();
     jobUserReferSaveBloc = JobUserReferSaveBloc();
     jobUserReferAddBloc = JobUserReferAddBloc();
-    request.obj.jobUserID =widget.data.jobUserID;
+    request.obj.jobUserID = widget.data.jobUserID;
   }
 
   @override
@@ -81,6 +72,7 @@ class _ReferPageState extends BasePageStateActive<ReferPage> {
   void getMoreData() {
     // TODO: implement getMoreData
   }
+
   @override
   void initDataLoading() {
     callApi();
@@ -88,8 +80,7 @@ class _ReferPageState extends BasePageStateActive<ReferPage> {
 
   @override
   void callApi() {
-    jobUserReferListBloc.add(JobUserReferListEvent(
-        request: request));
+    jobUserReferListBloc.add(JobUserReferListEvent(request: request));
   }
 
   @override
@@ -220,5 +211,4 @@ class _ReferPageState extends BasePageStateActive<ReferPage> {
       ));
     }
   }
-
 }

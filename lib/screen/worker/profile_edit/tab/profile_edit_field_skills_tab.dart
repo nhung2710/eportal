@@ -24,8 +24,7 @@ class ProfileEditFieldSkillsTabState
   TextEditingController skillController = TextEditingController();
 
   @override
-  void initDataLoading() {
-  }
+  void initDataLoading() {}
 
   @override
   void callApi() {
@@ -48,6 +47,7 @@ class ProfileEditFieldSkillsTabState
     skillController.text =
         widget.data.skillsForte.replaceWhenNullOrWhiteSpace();
   }
+
   @override
   Widget pageUI(BuildContext context) => ListView(
         children: <Widget>[
@@ -66,5 +66,4 @@ class ProfileEditFieldSkillsTabState
           ),
         ],
       );
-
 }

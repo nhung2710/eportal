@@ -24,8 +24,8 @@ class ProfileEditWorkExperienceTabState
   TextEditingController experienceController = TextEditingController();
 
   @override
-  void initDataLoading() {
-  }
+  void initDataLoading() {}
+
   @override
   void callApi() {
     // TODO: implement callApi
@@ -66,5 +66,4 @@ class ProfileEditWorkExperienceTabState
           ),
         ],
       );
-
 }

@@ -43,6 +43,7 @@ class ChangeBusinessInfoAccountTabState
   void initDataLoading() {
     // TODO: implement initDataLoading
   }
+
   @override
   Widget pageUI(BuildContext context) => SingleChildScrollView(
         child: ListView.builder(
@@ -63,5 +64,4 @@ class ChangeBusinessInfoAccountTabState
                   isShowFull: true,
                 )),
       );
-
 }

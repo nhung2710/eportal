@@ -85,6 +85,7 @@ class FilterDocumentDialogState extends BaseScreenState<FilterDocumentDialog> {
       GroupTypeDocument(id: "0", name: "Văn bản quy phạm pháp luật")
     ];
   }
+
   @override
   void callApi() {
     danhSachLinhVucVanBanBloc.add(DanhSachLinhVucVanBanEvent(
@@ -278,5 +279,4 @@ class FilterDocumentDialogState extends BaseScreenState<FilterDocumentDialog> {
       title: "Loại văn bản",
     );
   }
-
 }

@@ -3,12 +3,10 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 import 'package:eportal/model/api/request/admin/data/job_user_refer_add_data_request.dart';
-import 'package:eportal/model/api/response/admin/data/job_user_refer_list_data_response.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/widget/default_button/default_button.dart';
 import 'package:eportal/widget/input/field_input.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

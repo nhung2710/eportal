@@ -6,17 +6,20 @@
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/model/base/base_eportal_xml.dart';
 
-class ChatBotDanhDauSaoDataRequest extends BaseEportalXml {
-  int? top;
+import 'chat_bot_chi_tiet_hoi_thoai_data_request.dart';
+
+class ChatBotDanhDauSaoDataRequest extends ChatBotChiTietHoiThoaiDataRequest {
+  String? idHoiThoai;
+  String? soSao;
 
   ChatBotDanhDauSaoDataRequest(
-      {this.top = ApplicationConstant.NUMBER_FULL_ITEM});
+      {this.soSao,super.idHoiThoai});
 
   @override
   StringBuffer toXml() {
     // TODO: implement toXml
     var buffer = super.toXml();
-    buffer.write(createXml(top, "top"));
+    buffer.write(createXml(soSao, "soSao"));
     return buffer;
   }
 }
