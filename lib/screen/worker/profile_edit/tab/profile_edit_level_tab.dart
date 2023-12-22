@@ -45,7 +45,7 @@ class ProfileEditLevelTabState
   void initBloc() {
     // TODO: implement initBloc
     educationController.text =
-        widget.data.education.replaceWhenNullOrWhiteSpace();
+        widget.data.education.supportHtml();
   }
 
   @override

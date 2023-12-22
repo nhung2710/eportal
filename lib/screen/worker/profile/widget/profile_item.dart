@@ -81,19 +81,26 @@ class ProfileItem extends StatelessWidget {
                   isHasBorder: false,
                 ),
                 Container(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: DefaultButton(
-                    onPressed: onTapProfileEdit,
-                    text: "Sửa",
+                  margin: const EdgeInsets.only(top: 10),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: DefaultButton(
+                          onPressed: onTapProfileEdit,
+                          text: "Sửa",
+                        ),
+                      ),
+                      const SizedBox(width: 10,),
+                      Expanded(
+                        child: DefaultButton(
+                          onPressed: onTapReferEdit,
+                          text: "Người tham khảo",
+                        ),
+                      )
+                    ],
                   ),
                 ),
-                Container(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: DefaultButton(
-                    onPressed: onTapReferEdit,
-                    text: "Người tham khảo",
-                  ),
-                )
               ]),
         ),
       );

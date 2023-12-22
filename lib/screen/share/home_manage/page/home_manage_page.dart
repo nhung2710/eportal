@@ -97,7 +97,7 @@ class HomeManagePageState extends BasePageStateActive<HomeManagePage> {
       ExpandableFab(children: [
         ActionButton(
           icon: const Icon(
-            Icons.support_agent,
+            Icons.message,
             color: Colors.white,
           ),
           onPressed: () => openChatBot(context),

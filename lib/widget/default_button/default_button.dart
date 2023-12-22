@@ -22,7 +22,7 @@ class DefaultButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(backgroundColor: backgroundColor),
         onPressed: onPressed,
         child: Container(
-          padding: const EdgeInsets.all(5),
+          padding: const EdgeInsets.all(2),
           width: double.infinity,
           child: Center(
             child: Text(text,

@@ -235,19 +235,17 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
     return Alert(
         context: context,
         type: AlertType.info,
+        style: const AlertStyle(titleStyle: AppTextStyle.title,descStyle: AppTextStyle.normal),
         title: "Thông báo",
         desc: message,
         buttons: [
           DialogButton(
             onPressed: () => Navigator.pop(context),
-            gradient: const LinearGradient(colors: [
-              AppColor.colorOfIcon,
-              AppColor.colorOfIcon,
-              AppColor.colorOfIcon
-            ]),
-            child: const Text(
+            radius: const BorderRadius.all(Radius.circular(5)),
+            color: AppColor.colorOfIcon,
+            child:  Text(
               "Tôi đã biết",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: AppTextStyle.textButton.copyWith(color: Colors.white),
             ),
           )
         ]).show();

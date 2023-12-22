@@ -67,12 +67,12 @@ class FilterJobAdvertisementDialogState
 
   @override
   void disposeBloc() {
-    danhSachTinhTpBloc = DanhSachTinhTpBloc();
-    danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
-    danhSachMucLuongBloc = DanhSachMucLuongBloc();
-    danhSachKinhNghiemBloc = DanhSachKinhNghiemBloc();
-    danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
-    danhSachTrinhDoBloc = DanhSachTrinhDoBloc();
+    danhSachTinhTpBloc.close();
+    danhSachQuanHuyenBloc.close();
+    danhSachMucLuongBloc.close();
+    danhSachKinhNghiemBloc.close();
+    danhSachGioiTinhBloc.close();
+    danhSachTrinhDoBloc.close();
   }
 
   @override
@@ -82,12 +82,12 @@ class FilterJobAdvertisementDialogState
 
   @override
   void initBloc() {
-    danhSachTinhTpBloc.close();
-    danhSachQuanHuyenBloc.close();
-    danhSachMucLuongBloc.close();
-    danhSachKinhNghiemBloc.close();
-    danhSachGioiTinhBloc.close();
-    danhSachTrinhDoBloc.close();
+    danhSachTinhTpBloc = DanhSachTinhTpBloc();
+    danhSachQuanHuyenBloc = DanhSachQuanHuyenBloc();
+    danhSachMucLuongBloc = DanhSachMucLuongBloc();
+    danhSachKinhNghiemBloc = DanhSachKinhNghiemBloc();
+    danhSachGioiTinhBloc = DanhSachGioiTinhBloc();
+    danhSachTrinhDoBloc = DanhSachTrinhDoBloc();
   }
 
   @override

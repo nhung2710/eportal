@@ -45,7 +45,7 @@ class ProfileEditWorkExperienceTabState
   void initBloc() {
     // TODO: implement initBloc
     experienceController.text =
-        widget.data.workExperience.replaceWhenNullOrWhiteSpace();
+        widget.data.workExperience.supportHtml();
   }
 
   @override

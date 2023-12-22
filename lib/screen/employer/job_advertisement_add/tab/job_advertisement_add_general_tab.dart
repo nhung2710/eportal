@@ -386,7 +386,7 @@ class JobAdvertisementAddGeneralTabState
   Widget _buildViewSearchDanhSachGioiTinh(
       BuildContext context, List<DanhSachGioiTinhDataResponse> list) {
     return SelectItem<DanhSachGioiTinhDataResponse>(
-      icon: FontAwesomeIcons.timeline,
+      icon: FontAwesomeIcons.venusDouble,
       selectedItem: widget.danhSachGioiTinhDataResponse,
       list: list,
       itemAsString: (DanhSachGioiTinhDataResponse u) => u.name.supportHtml(),

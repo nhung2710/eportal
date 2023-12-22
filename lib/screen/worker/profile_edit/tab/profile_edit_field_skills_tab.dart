@@ -45,7 +45,7 @@ class ProfileEditFieldSkillsTabState
   void initBloc() {
     // TODO: implement initBloc
     skillController.text =
-        widget.data.skillsForte.replaceWhenNullOrWhiteSpace();
+        widget.data.skillsForte.supportHtml();
   }
 
   @override

@@ -23,6 +23,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../bloc/admin/chat_bot_chi_tiet_hoi_thoai_bloc.dart';
 import '../../../../event/admin/chat_bot_them_cau_mau_event.dart';
+import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/admin/chat_bot_chi_tiet_hoi_thoai_request.dart';
 import '../../../../model/api/request/admin/chat_bot_them_cau_mau_request.dart';
 import '../../../../model/api/request/admin/data/chat_bot_chi_tiet_hoi_thoai_data_request.dart';
@@ -47,7 +48,7 @@ class _ChatBotDetailPageState extends BasePageState<ChatBotDetailPage> {
   void initBloc() {
     chatBotThemCauMauBloc = ChatBotThemCauMauBloc();
     chatBotChiTietHoiThoaiBloc = ChatBotChiTietHoiThoaiBloc();
-    chatBotChiTietHoiThoaiEvent.request.obj.idHoiThoai = "12";// widget.id;
+    chatBotChiTietHoiThoaiEvent.request.obj.idHoiThoai =  widget.id;
   }
 
   @override
@@ -73,6 +74,17 @@ class _ChatBotDetailPageState extends BasePageState<ChatBotDetailPage> {
     callApi();
   }
 
+  @override
+  Widget? getFloatingActionButton(BuildContext context) =>
+      ExpandableFab(children: [
+        ActionButton(
+          icon: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+          onPressed: () => themCauMau(""),
+        ),
+      ]);
 
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
@@ -81,7 +93,7 @@ class _ChatBotDetailPageState extends BasePageState<ChatBotDetailPage> {
         DataSingleState<String>>(
       listener: (BuildContext context, DataSingleState<String> state) {
         handlerActionDataSingleState<String>(state, (obj) {
-          showCenterMessage("Xoá hội thoại thành công").then((value) => initDataLoading());
+          showCenterMessage("Thêm câu mẫu thành công").then((value) => initDataLoading());
         });
       },
       child: BlocProvider(
@@ -103,7 +115,7 @@ class _ChatBotDetailPageState extends BasePageState<ChatBotDetailPage> {
                           itemCount: state.length,
                           itemBuilder: (context, i) => ChatBotDetailItem(
                             data : state.elementAt(i),
-                            onTap: () => themCauMau(state.elementAt(i)),
+                            onTap: () => themCauMau(state.elementAt(i).noiDungText.replaceWhenNullOrWhiteSpace()),
 
                           ));
                     },
@@ -116,9 +128,9 @@ class _ChatBotDetailPageState extends BasePageState<ChatBotDetailPage> {
   @override
   String getPageTitle(BuildContext context) => "Chi tiết hội thoại";
 
-  void themCauMau(ChatBotChiTietHoiThoaiDataResponse item) {
-
-    showAlertChoose(allow: () => themCauMauCommit(item),
+  void themCauMau(String text) {
+    cauMauController.text = text;
+    showAlertChoose(allow: () => themCauMauCommit(),
       content: Container(
         margin: const EdgeInsets.only(top: 10),
         width: double.infinity,
@@ -141,7 +153,7 @@ class _ChatBotDetailPageState extends BasePageState<ChatBotDetailPage> {
     );
   }
 
-  void themCauMauCommit(ChatBotChiTietHoiThoaiDataResponse item) {
+  void themCauMauCommit() {
     chatBotThemCauMauEvent.request.obj.cauMau = cauMauController.text;
     chatBotThemCauMauBloc.add(chatBotThemCauMauEvent);
   }

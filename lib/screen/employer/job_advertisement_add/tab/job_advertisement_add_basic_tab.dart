@@ -48,7 +48,9 @@ class JobAdvertisementAddBasicTabState
   }
 
   @override
-  void initDataLoading() {}
+  void initDataLoading() {
+    callApi();
+  }
 
   @override
   void callApi() {
@@ -59,6 +61,7 @@ class JobAdvertisementAddBasicTabState
   @override
   void disposeBloc() {
     // TODO: implement disposeBloc
+    danhSachTinhTpBloc.close();
   }
 
   @override
@@ -136,20 +139,6 @@ class JobAdvertisementAddBasicTabState
                 return null;
               },
               hintText: 'Ngày đăng',
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: DateInput(
-              controller: dangDenNgayController,
-              textInputAction: TextInputAction.next,
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Ngày hết hạn không được để trống';
-                }
-                return null;
-              },
-              hintText: 'Ngày hết hạn',
             ),
           ),
           Container(

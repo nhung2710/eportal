@@ -45,7 +45,7 @@ class ProfileEditCareerGoalsTabState
   void initBloc() {
     // TODO: implement initBloc
     objectiveController.text =
-        widget.data.careerGoals.replaceWhenNullOrWhiteSpace();
+        widget.data.careerGoals.supportHtml();
   }
 
   @override
