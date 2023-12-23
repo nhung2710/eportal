@@ -1,7 +1,8 @@
+import 'package:eportal/application/global_application.dart';
 import 'package:eportal/model/api/response/common_new/data/faq_question_search_data_response.dart';
 import 'package:eportal/screen/share/answer_and_question_add/page/answer_and_question_add_page.dart';
 import 'package:eportal/screen/share/answer_and_question_search/page/answer_and_question_search_page.dart';
-import 'package:eportal/screen/share/chat_bot/page/chat_bot_page.dart';
+import 'package:eportal/screen/share/sign_in/page/sign_in_page.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
 import 'package:eportal/widget/full_data_item/answer_and_question_item.dart';
@@ -13,6 +14,7 @@ import '../../../../event/common_new/faq_question_search_event.dart';
 import '../../../../model/api/request/common_new/data/faq_question_search_data_request.dart';
 import '../../../../model/api/request/common_new/faq_question_search_request.dart';
 import '../../../../state/base/base_state.dart';
+import '../../chat_bot_manage/page/chat_bot_manage_page.dart';
 
 //
 // Created by BlackRose on 11/7/2023.
@@ -91,7 +93,9 @@ class AnswerAndQuestionPageState
               color: Colors.white,
             ),
             onPressed: () {
-              nextPage((context) => const ChatBotPage());
+              nextPage((context) => GlobalApplication().isLogin
+                  ? const ChatBotManagePage()
+                  : const SignInPage());
             },
           ),
         ],

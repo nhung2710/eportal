@@ -1,12 +1,15 @@
 import 'package:eportal/bloc/test/data_example_test_bloc.dart';
 import 'package:eportal/model/api/request/common_new/data/work_search_data_request.dart';
 import 'package:eportal/model/api/request/common_new/work_search_request.dart';
-import 'package:eportal/screen/share/empty_example/page/empty_example_page.dart';
+import 'package:eportal/screen/admin/management_of_banners_add/page/management_of_banners_add_page.dart';
+import 'package:eportal/screen/admin/management_of_banners_edit/page/management_of_banners_edit_page.dart';
+import 'package:eportal/screen/admin/management_of_events/widget/management_of_events_item.dart';
+import 'package:eportal/screen/admin/management_of_events_add/page/management_of_events_add_page.dart';
+import 'package:eportal/screen/admin/management_of_events_edit/page/management_of_events_edit_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
-import 'package:eportal/widget/full_data_item/profile_item.dart';
 import 'package:eportal/widget/input/search_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,15 +19,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class ManagementOfEventPage extends BasePage {
-  const ManagementOfEventPage({super.key});
+class ManagementOfEventsPage extends BasePage {
+  const ManagementOfEventsPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _ManagementOfEventPageState();
+  State<StatefulWidget> createState() => _ManagementOfEventsPageState();
 }
 
-class _ManagementOfEventPageState
-    extends BasePageStateActive<ManagementOfEventPage> {
+class _ManagementOfEventsPageState
+    extends BasePageStateActive<ManagementOfEventsPage> {
   TextEditingController textEditingController = TextEditingController();
 
   WorkSearchRequest request = WorkSearchRequest(obj: WorkSearchDataRequest());
@@ -72,15 +75,15 @@ class _ManagementOfEventPageState
         ActionButton(
           icon: const Icon(Icons.add, color: Colors.white),
           onPressed: () {
-            nextPage((context) => EmptyExamplePage(
-                  isHasAppBar: true,
-                ));
+            nextPage(
+                    (context) => ManagementOfEventsAddPage());
           },
         ),
       ]);
 
   @override
-  Widget pageUI(BuildContext context) => Column(
+  Widget pageUI(BuildContext context) =>
+      Column(
         children: [
           Container(
             margin: const EdgeInsets.only(bottom: 5, top: 5),
@@ -104,44 +107,61 @@ class _ManagementOfEventPageState
             child: BlocProvider(
                 create: (_) => dataExampleTestBloc,
                 child: BlocListener<DataExampleTestBloc,
-                    DataMultiState<DataExampleTestDataResponse>>(
+                    DataPageState<DataExampleTestDataResponse>>(
                   listener: (BuildContext context,
-                      DataMultiState<DataExampleTestDataResponse> state) {
+                      DataPageState<DataExampleTestDataResponse> state) {
                     print(state);
                   },
                   child: BlocBuilder<DataExampleTestBloc,
-                      DataMultiState<DataExampleTestDataResponse>>(
+                      DataPageState<DataExampleTestDataResponse>>(
                     builder: (BuildContext context,
-                            DataMultiState<DataExampleTestDataResponse>
-                                state) =>
-                        handleDataMultiState<DataExampleTestDataResponse>(
-                      state,
-                      (context, state) => SingleChildScrollView(
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: state.length,
-                            itemBuilder: (context, i) => ProfileItem(
-                                  onTap: () {
-                                    nextPage((context) => EmptyExamplePage(
-                                          isHasAppBar: true,
-                                        ));
-                                  },
-                                  title: "Hồ sơ ${i + 1}",
-                                  location: "Hà nội",
-                                  status: "Chờ duyệt",
-                                  experience: "Dưới 1 năm",
-                                  salary: "5-7 triệu",
-                                  fromDate: "01/11/2023",
-                                  toDate: "01/11/2023",
-                                  industry: "Bán hàng",
-                                  numberView: "2",
-                                  isShowFull: true,
-                                )),
-                      ),
-                    ),
+                        DataPageState<DataExampleTestDataResponse> state) =>
+                        handleDataPageState<DataExampleTestDataResponse>(
+                          state,
+                              (context, state) =>
+                              ListView.builder(
+                                  controller: scrollController,
+                                  shrinkWrap: true,
+                                  itemCount: state.length,
+                                  itemBuilder: (context, i) =>
+                                      ManagementOfEventItem(index: i,
+                                        onTapTop: () =>
+                                            selectTopItem(state.elementAt(i)),
+                                        onTapEdit: () =>
+                                            nextPage(
+                                                    (context) =>
+                                                    ManagementOfEventsEditPage()),
+                                        onTapDelete: () =>
+                                            deleteItem(state.elementAt(i)),
+                                      )),
+                        ),
                   ),
                 )),
           ),
         ],
       );
+
+  void deleteItem(DataExampleTestDataResponse item) {
+    showAlertChoose(
+        allow: () => delete(item),
+        title: "Cảnh báo",
+        desc: "Bạn chắc chắn muốn xoá dữ liệu này?");
+  }
+
+  delete(DataExampleTestDataResponse item) {
+    showCenterMessage("Đã xoá dữ liệu thành công")
+        .then((value) => initDataLoading());
+  }
+
+  selectTopItem(DataExampleTestDataResponse item) {
+    showAlertChoose(
+        allow: () => selectTop(item),
+        title: "Cảnh báo",
+        desc: "Bạn chắc chắn muốn cho lên top hiện thị?");
+  }
+
+  selectTop(DataExampleTestDataResponse item) {
+    showCenterMessage("Đã cho lên top hiện thị thành công")
+        .then((value) => initDataLoading());
+  }
 }

@@ -3,6 +3,7 @@ import 'package:eportal/screen/share/about/page/about_page.dart';
 import 'package:eportal/screen/share/change_password/page/change_password_page.dart';
 import 'package:eportal/screen/share/change_user_info/page/change_user_info_page.dart';
 import 'package:eportal/screen/share/contact/page/contract_page.dart';
+import 'package:eportal/screen/share/map/page/map_page.dart';
 import 'package:eportal/screen/share/policy/page/policy_page.dart';
 import 'package:eportal/screen/share/support/page/support_page.dart';
 import 'package:eportal/screen/share/terms_of_use/page/terms_of_use_page.dart';
@@ -35,6 +36,10 @@ class _SettingPageState extends BasePageState<SettingPage> {
           builder: (context) => const ChangePasswordPage()),
     ],
     "Hệ thống": [
+      SettingPageModel(
+          icon: Icons.map,
+          title: "Gmap",
+          builder: (context) => const MapPage()),
       SettingPageModel(
           icon: Icons.account_tree,
           title: "Giới thiệu",

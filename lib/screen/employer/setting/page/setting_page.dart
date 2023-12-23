@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import '../../../../widget/list_viewer/setting_item_viewer.dart';
 import '../../../share/change_password/page/change_password_page.dart';
 import '../../../share/change_user_info/page/change_user_info_page.dart';
+import '../../../share/map/page/map_page.dart';
 
 //
 // Created by BlackRose on 11/7/2023.
@@ -41,6 +42,10 @@ class _SettingPageState extends BasePageStateActive<SettingPage> {
           builder: (context) => const ChangePasswordPage()),
     ],
     "Hệ thống": [
+      SettingPageModel(
+          icon: Icons.map,
+          title: "Gmap",
+          builder: (context) => const MapPage()),
       SettingPageModel(
           icon: Icons.account_tree,
           title: "Giới thiệu",

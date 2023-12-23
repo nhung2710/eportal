@@ -26,7 +26,7 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   DialogRoute? loaddingDialog;
-  ScrollController? scrollController;
+  late ScrollController scrollController;
   bool isScrollMore = true;
 
   void callApi();
@@ -42,9 +42,8 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
   @override
   void dispose() {
     ErrorExtension().handleActionError(() {
-      scrollController?.removeListener(_onScroll);
-      scrollController?.dispose();
-      scrollController = null;
+      scrollController.removeListener(_onScroll);
+      scrollController.dispose();
     });
     ErrorExtension().handleActionError(() {
       disposeBloc();
@@ -54,10 +53,11 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
 
   void _onScroll() {
     ErrorExtension().handleActionError(() {
-      final maxScroll = scrollController!.position.maxScrollExtent;
-      final currentScroll = scrollController!.offset;
-      if (currentScroll >= (maxScroll * 0.6) && isScrollMore) {
+      final maxScroll = scrollController.position.maxScrollExtent;
+      final currentScroll = scrollController.offset;
+      if (currentScroll >= (maxScroll * 0.8) && isScrollMore) {
         stopScrollMore();
+        showBottomError("Đang tải trang tiếp theo");
         getMoreData();
       }
     });
@@ -76,7 +76,7 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
     //WidgetsBinding.instance.addObserver(this);
     startScrollMore();
     scrollController = ScrollController();
-    scrollController!.addListener(_onScroll);
+    scrollController.addListener(_onScroll);
     simpleDialog = SimpleDialog(
       elevation: 0.0,
       backgroundColor: Colors.transparent,
@@ -163,6 +163,7 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
   Future<void> showBottomError(String error) async {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
+        duration: Duration(milliseconds: 500),
         action: SnackBarAction(
           label: 'Dismiss',
           onPressed: () {
@@ -174,12 +175,18 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
       ),
     );
   }
-  Future<bool?> showAlertChoose({Widget content= const SizedBox(),String? title,String? desc,required void Function() allow}) async{
+
+  Future<bool?> showAlertChoose(
+      {Widget content = const SizedBox(),
+      String? title,
+      String? desc,
+      required void Function() allow}) async {
     hiddenKeyboard();
     return Alert(
         context: context,
         type: AlertType.warning,
-        style: const AlertStyle(titleStyle: AppTextStyle.title,descStyle: AppTextStyle.normal),
+        style: const AlertStyle(
+            titleStyle: AppTextStyle.title, descStyle: AppTextStyle.normal),
         title: title,
         desc: desc,
         content: content,
@@ -200,19 +207,21 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
             },
             radius: const BorderRadius.all(Radius.circular(5)),
             color: AppColor.colorOfIcon,
-            child:  Text(
+            child: Text(
               "Tiếp tục",
               style: AppTextStyle.textButton.copyWith(color: Colors.white),
             ),
           )
         ]).show();
   }
+
   Future<bool?> showCenterError(String? error) async {
     hiddenKeyboard();
     return Alert(
         context: context,
         type: AlertType.error,
-        style: const AlertStyle(titleStyle: AppTextStyle.title,descStyle: AppTextStyle.normal),
+        style: const AlertStyle(
+            titleStyle: AppTextStyle.title, descStyle: AppTextStyle.normal),
         title: "Thông báo",
         desc: error
             .supportHtml()
@@ -222,7 +231,7 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
             onPressed: () => Navigator.pop(context),
             radius: const BorderRadius.all(Radius.circular(5)),
             color: AppColor.colorOfIcon,
-            child:  Text(
+            child: Text(
               "Tôi đã biết",
               style: AppTextStyle.textButton.copyWith(color: Colors.white),
             ),
@@ -235,7 +244,8 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
     return Alert(
         context: context,
         type: AlertType.info,
-        style: const AlertStyle(titleStyle: AppTextStyle.title,descStyle: AppTextStyle.normal),
+        style: const AlertStyle(
+            titleStyle: AppTextStyle.title, descStyle: AppTextStyle.normal),
         title: "Thông báo",
         desc: message,
         buttons: [
@@ -243,7 +253,7 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
             onPressed: () => Navigator.pop(context),
             radius: const BorderRadius.all(Radius.circular(5)),
             color: AppColor.colorOfIcon,
-            child:  Text(
+            child: Text(
               "Tôi đã biết",
               style: AppTextStyle.textButton.copyWith(color: Colors.white),
             ),
@@ -362,10 +372,11 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
         return buildScreenError(state.errorMessage);
       case DataBlocStatus.success:
         {
+          var result = builder(context, state.data);
           if (!state.hasReachedMax) {
             startScrollMore();
           }
-          return builder(context, state.data);
+          return result;
         }
     }
   }

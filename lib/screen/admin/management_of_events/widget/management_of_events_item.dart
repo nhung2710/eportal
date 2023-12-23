@@ -1,9 +1,3 @@
-//
-// Created by BlackRose on 12/20/2023.
-// Copyright (c) 2023 Hilo All rights reserved.
-//
-
-import 'package:eportal/model/api/response/admin/data/work_search_by_user_name_data_response.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/style/app_text_style.dart';
@@ -12,15 +6,22 @@ import 'package:eportal/widget/text_icon/text_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class JobAdvertisementItem extends StatelessWidget {
+//
+// Created by BlackRose on 12/23/2023.
+// Copyright (c) 2023 Hilo All rights reserved.
+//
+
+class ManagementOfEventItem extends StatelessWidget {
+  final GestureTapCallback onTapTop;
   final GestureTapCallback onTapEdit;
   final GestureTapCallback onTapDelete;
-  final WorkSearchByUserNameDataResponse data;
+  final int index;
 
-  JobAdvertisementItem({
+  ManagementOfEventItem({
+    required this.index,
     required this.onTapEdit,
+    required this.onTapTop,
     required this.onTapDelete,
-    required this.data,
   });
 
   @override
@@ -41,7 +42,7 @@ class JobAdvertisementItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextIcon(
-                  text: data.title,
+                  text: "test ${index + 1}",
                   overflow: TextOverflow.visible,
                   icon: FontAwesomeIcons.tags,
                   textStyle: AppTextStyle.title
@@ -49,7 +50,7 @@ class JobAdvertisementItem extends StatelessWidget {
                   isHasBorder: false,
                 ),
                 TextIcon(
-                  text: data.description,
+                  text: "test",
                   overflow: TextOverflow.visible,
                   icon: FontAwesomeIcons.briefcase,
                   textStyle: AppTextStyle.title
@@ -57,7 +58,7 @@ class JobAdvertisementItem extends StatelessWidget {
                   isHasBorder: false,
                 ),
                 TextIcon(
-                  text: data.workTime,
+                  text: "test",
                   overflow: TextOverflow.visible,
                   icon: FontAwesomeIcons.businessTime,
                   textStyle: AppTextStyle.title
@@ -65,7 +66,7 @@ class JobAdvertisementItem extends StatelessWidget {
                   isHasBorder: false,
                 ),
                 TextIcon(
-                  text: data.benefit,
+                  text: "test",
                   overflow: TextOverflow.visible,
                   icon: FontAwesomeIcons.thumbsUp,
                   textStyle: AppTextStyle.title
@@ -73,7 +74,7 @@ class JobAdvertisementItem extends StatelessWidget {
                   isHasBorder: false,
                 ),
                 TextIcon(
-                  text: data.soNamKinhNghiem,
+                  text: "test",
                   overflow: TextOverflow.visible,
                   icon: FontAwesomeIcons.bookmark,
                   textStyle: AppTextStyle.title
@@ -81,7 +82,7 @@ class JobAdvertisementItem extends StatelessWidget {
                   isHasBorder: false,
                 ),
                 TextIcon(
-                  text: data.hanNopHoSo,
+                  text: "test",
                   overflow: TextOverflow.visible,
                   icon: FontAwesomeIcons.calendar,
                   textStyle: AppTextStyle.title
@@ -89,9 +90,8 @@ class JobAdvertisementItem extends StatelessWidget {
                   isHasBorder: false,
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 10),
                   child: Row(
-                    mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
                         child: DefaultButton(
@@ -104,9 +104,29 @@ class JobAdvertisementItem extends StatelessWidget {
                       ),
                       Expanded(
                         child: DefaultButton(
+                          onPressed: onTapTop,
+                          text: "Lên top",
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: DefaultButton(
                           onPressed: onTapDelete,
+                          backgroundColor: Colors.red,
                           text: "Xoá",
                         ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: Container(),
                       )
                     ],
                   ),

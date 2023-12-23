@@ -14,7 +14,7 @@ import '../../model/base/base_eportal_response.dart';
 // Created by BlackRose on 05/12/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class DataExampleTestBloc extends BaseMultiBloc<DataExampleTestDataResponse,
+class DataExampleTestBloc extends BasePageBloc<DataExampleTestDataResponse,
     DataExampleTestRepository, DataExampleTestEvent, DataExampleTestResponse> {
   DataExampleTestBloc() : super();
 
@@ -23,9 +23,12 @@ class DataExampleTestBloc extends BaseMultiBloc<DataExampleTestDataResponse,
           DataExampleTestRepository apiRepository,
           DataExampleTestEvent event) =>
       Future.delayed(
-          const Duration(seconds: 2),
+          const Duration(seconds: 1),
           () => DataExampleTestResponse(
-              data: List.generate(Random().nextInt(10),
+              data: List.generate(
+                  event.request.obj.soTrangHienTai <= 10
+                      ? event.request.obj.soBanGhiTrenTrang
+                      : Random().nextInt(10),
                   (index) => DataExampleTestDataResponse()),
               status: 2,
               message: 'ok'));
@@ -44,7 +47,7 @@ class DataExampleTestDataResponse extends BaseEportalDataResponse {
 }
 
 class DataExampleTestResponse
-    extends BaseMultiEportalResponse<DataExampleTestDataResponse> {
+    extends BasePageEportalResponse<DataExampleTestDataResponse> {
   DataExampleTestResponse(
       {required super.data, required super.status, required super.message});
 
@@ -64,13 +67,13 @@ class DataExampleTestRepository
       DataExampleTestResponse.fromJson(value);
 }
 
-class DataExampleTestEvent extends BaseMultiEvent<DataExampleTestRequest> {
+class DataExampleTestEvent extends BasePageEvent<DataExampleTestRequest> {
   const DataExampleTestEvent({required super.request});
 }
 
 class DataExampleTestRequest
-    extends BaseEportalRequest<DataExampleTestDataRequest> {
+    extends BasePageEportalRequest<DataExampleTestDataRequest> {
   DataExampleTestRequest({required super.obj});
 }
 
-class DataExampleTestDataRequest extends BaseEportalXml {}
+class DataExampleTestDataRequest extends BasePageEportalXml {}

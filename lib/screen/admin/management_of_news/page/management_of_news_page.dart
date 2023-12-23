@@ -106,17 +106,16 @@ class _ManagementOfNewsPageState
             child: BlocProvider(
                 create: (_) => dataExampleTestBloc,
                 child: BlocListener<DataExampleTestBloc,
-                    DataMultiState<DataExampleTestDataResponse>>(
+                    DataPageState<DataExampleTestDataResponse>>(
                   listener: (BuildContext context,
-                      DataMultiState<DataExampleTestDataResponse> state) {
+                      DataPageState<DataExampleTestDataResponse> state) {
                     print(state);
                   },
                   child: BlocBuilder<DataExampleTestBloc,
-                      DataMultiState<DataExampleTestDataResponse>>(
+                      DataPageState<DataExampleTestDataResponse>>(
                     builder: (BuildContext context,
-                            DataMultiState<DataExampleTestDataResponse>
-                                state) =>
-                        handleDataMultiState<DataExampleTestDataResponse>(
+                            DataPageState<DataExampleTestDataResponse> state) =>
+                        handleDataPageState<DataExampleTestDataResponse>(
                       state,
                       (context, state) => SingleChildScrollView(
                         child: ListView.builder(

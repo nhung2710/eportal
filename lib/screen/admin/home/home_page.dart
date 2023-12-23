@@ -1,3 +1,4 @@
+import 'package:eportal/screen/admin/management_of_events/page/management_of_events_page.dart';
 import 'package:eportal/screen/admin/management_of_news/page/management_of_news_page.dart';
 import 'package:eportal/screen/admin/setting/page/setting_page.dart';
 import 'package:eportal/style/app_color.dart';
@@ -7,7 +8,6 @@ import 'package:flutter/material.dart';
 
 import '../../share/home_manage/page/home_manage_page.dart';
 import '../management_of_banners/page/management_of_banners_page.dart';
-import '../management_of_event/page/management_of_event_page.dart';
 
 //
 // Created by BlackRose on 11/7/2023.
@@ -139,7 +139,7 @@ class _HomePageState extends BasePageStateActive<HomePage> {
         children: const <Widget>[
           HomeManagePage(),
           ManagementOfNewsPage(),
-          ManagementOfEventPage(),
+          ManagementOfEventsPage(),
           ManagementOfBannersPage(),
           SettingPage(),
         ],
