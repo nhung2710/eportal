@@ -6,6 +6,6 @@ import 'package:eportal/model/api/request/admin/job_user_history_list_request.da
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 class JobUserHistoryListEvent
-    extends BaseSingleEvent<JobUserHistoryListRequest> {
+    extends BaseMultiEvent<JobUserHistoryListRequest> {
   const JobUserHistoryListEvent({required super.request});
 }

@@ -1,21 +1,18 @@
-import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/model/base/base_eportal_xml.dart';
 
 //
 // Created by BlackRose on 13/12/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class JobUserHistoryListDataRequest extends BaseEportalXml {
-  int? top;
+class JobUserHistoryListDataRequest extends BaseMultiEportalXml {
+  String? jobUserID;
 
-  JobUserHistoryListDataRequest(
-      {this.top = ApplicationConstant.NUMBER_FULL_ITEM});
+  JobUserHistoryListDataRequest({this.jobUserID});
 
   @override
   StringBuffer toXml() {
-    // TODO: implement toXml
     var buffer = super.toXml();
-    buffer.write(createXml(top, "top"));
+    buffer.write(createXml(jobUserID, "jobUserID"));
     return buffer;
   }
 }

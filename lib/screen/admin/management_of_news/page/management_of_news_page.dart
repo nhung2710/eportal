@@ -1,16 +1,16 @@
 import 'package:eportal/bloc/test/data_example_test_bloc.dart';
 import 'package:eportal/model/api/request/common_new/data/work_search_data_request.dart';
 import 'package:eportal/model/api/request/common_new/work_search_request.dart';
+import 'package:eportal/screen/admin/management_of_events_edit/page/management_of_events_edit_page.dart';
+import 'package:eportal/screen/admin/management_of_news/widget/management_of_news_item.dart';
+import 'package:eportal/screen/admin/management_of_news_add/page/management_of_news_add_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
 import 'package:eportal/widget/dialog/filter_job_dialog.dart';
 import 'package:eportal/widget/expandable_fab/expandable_fab.dart';
-import 'package:eportal/widget/full_data_item/profile_item.dart';
 import 'package:eportal/widget/input/search_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../share/empty_example/page/empty_example_page.dart';
 
 //
 // Created by BlackRose on 05/12/2023.
@@ -27,18 +27,10 @@ class ManagementOfNewsPage extends BasePage {
 class _ManagementOfNewsPageState
     extends BasePageStateActive<ManagementOfNewsPage> {
   TextEditingController textEditingController = TextEditingController();
+  DataExampleTestEvent dataExampleTestEvent = DataExampleTestEvent(
+      request: DataExampleTestRequest(obj: DataExampleTestDataRequest()));
 
   WorkSearchRequest request = WorkSearchRequest(obj: WorkSearchDataRequest());
-
-  @override
-  bool isHasAppBar(BuildContext context) => false;
-  final filterJobDialogKey = GlobalKey<FilterJobDialogState>();
-  late FilterJobDialog filterJobDialog = FilterJobDialog(
-    key: filterJobDialogKey,
-    data: request.obj,
-    onPressed: () => initDataLoading(),
-  );
-
   late DataExampleTestBloc dataExampleTestBloc;
 
   @override
@@ -49,6 +41,7 @@ class _ManagementOfNewsPageState
   @override
   void initDataLoading() {
     // TODO: implement initDataLoading
+    dataExampleTestEvent.request.obj.reloadData();
     callApi();
   }
 
@@ -60,13 +53,23 @@ class _ManagementOfNewsPageState
   @override
   void getMoreData() {
     // TODO: implement getMoreData
+    dataExampleTestEvent.request.obj.nextData();
+    callApi();
   }
 
   @override
   void callApi() {
-    dataExampleTestBloc.add(DataExampleTestEvent(
-        request: DataExampleTestRequest(obj: DataExampleTestDataRequest())));
+    dataExampleTestBloc.add(dataExampleTestEvent);
   }
+
+  @override
+  bool isHasAppBar(BuildContext context) => false;
+  final filterJobDialogKey = GlobalKey<FilterJobDialogState>();
+  late FilterJobDialog filterJobDialog = FilterJobDialog(
+    key: filterJobDialogKey,
+    data: request.obj,
+    onPressed: () => initDataLoading(),
+  );
 
   @override
   Widget? getFloatingActionButton(BuildContext context) =>
@@ -74,9 +77,7 @@ class _ManagementOfNewsPageState
         ActionButton(
           icon: const Icon(Icons.add, color: Colors.white),
           onPressed: () {
-            nextPage((context) => EmptyExamplePage(
-                  isHasAppBar: true,
-                ));
+            nextPage((context) => ManagementOfNewsAddPage());
           },
         ),
       ]);
@@ -117,32 +118,47 @@ class _ManagementOfNewsPageState
                             DataPageState<DataExampleTestDataResponse> state) =>
                         handleDataPageState<DataExampleTestDataResponse>(
                       state,
-                      (context, state) => SingleChildScrollView(
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: state.length,
-                            itemBuilder: (context, i) => ProfileItem(
-                                  onTap: () {
-                                    nextPage((context) => EmptyExamplePage(
-                                          isHasAppBar: true,
-                                        ));
-                                  },
-                                  title: "Hồ sơ ${i + 1}",
-                                  location: "Hà nội",
-                                  status: "Chờ duyệt",
-                                  experience: "Dưới 1 năm",
-                                  salary: "5-7 triệu",
-                                  fromDate: "01/11/2023",
-                                  toDate: "01/11/2023",
-                                  industry: "Bán hàng",
-                                  numberView: "2",
-                                  isShowFull: true,
-                                )),
-                      ),
+                      (context, state) => ListView.builder(
+                          controller: scrollController,
+                          shrinkWrap: true,
+                          itemCount: state.length,
+                          itemBuilder: (context, i) => ManagementOfNewsItem(
+                                index: i,
+                                onTapTop: () =>
+                                    selectTopItem(state.elementAt(i)),
+                                onTapEdit: () => nextPage(
+                                    (context) => ManagementOfEventsEditPage()),
+                                onTapDelete: () =>
+                                    deleteItem(state.elementAt(i)),
+                              )),
                     ),
                   ),
                 )),
           ),
         ],
       );
+
+  void deleteItem(DataExampleTestDataResponse item) {
+    showAlertChoose(
+        allow: () => delete(item),
+        title: "Cảnh báo",
+        desc: "Bạn chắc chắn muốn xoá dữ liệu này?");
+  }
+
+  delete(DataExampleTestDataResponse item) {
+    showCenterMessage("Đã xoá dữ liệu thành công")
+        .then((value) => initDataLoading());
+  }
+
+  selectTopItem(DataExampleTestDataResponse item) {
+    showAlertChoose(
+        allow: () => selectTop(item),
+        title: "Cảnh báo",
+        desc: "Bạn chắc chắn muốn cho lên top hiện thị?");
+  }
+
+  selectTop(DataExampleTestDataResponse item) {
+    showCenterMessage("Đã cho lên top hiện thị thành công")
+        .then((value) => initDataLoading());
+  }
 }

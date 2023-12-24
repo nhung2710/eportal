@@ -1,9 +1,8 @@
 //
-// Created by BlackRose on 18/12/2023.
+// Created by BlackRose on 12/23/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-import 'package:eportal/model/api/response/admin/data/job_user_list_by_user_name_data_response.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_elevation.dart';
 import 'package:eportal/style/app_text_style.dart';
@@ -12,17 +11,17 @@ import 'package:eportal/widget/text_icon/text_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ProfileItem extends StatelessWidget {
-  final GestureTapCallback onTapProfileEdit;
-  final GestureTapCallback onTapReferEdit;
-  final GestureTapCallback onTapHistoryView;
-  final JobUserListByUserNameDataResponse data;
+class ManagementOfNewsItem extends StatelessWidget {
+  final GestureTapCallback onTapTop;
+  final GestureTapCallback onTapEdit;
+  final GestureTapCallback onTapDelete;
+  final int index;
 
-  ProfileItem({
-    required this.onTapProfileEdit,
-    required this.onTapReferEdit,
-    required this.onTapHistoryView,
-    required this.data,
+  ManagementOfNewsItem({
+    required this.index,
+    required this.onTapEdit,
+    required this.onTapTop,
+    required this.onTapDelete,
   });
 
   @override
@@ -43,7 +42,7 @@ class ProfileItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextIcon(
-                  text: data.title,
+                  text: "test tin tức ${index + 1}",
                   overflow: TextOverflow.visible,
                   icon: FontAwesomeIcons.tags,
                   textStyle: AppTextStyle.title
@@ -51,46 +50,53 @@ class ProfileItem extends StatelessWidget {
                   isHasBorder: false,
                 ),
                 TextIcon(
-                  text: data.education,
+                  text: "test",
                   overflow: TextOverflow.visible,
-                  icon: FontAwesomeIcons.graduationCap,
+                  icon: FontAwesomeIcons.briefcase,
                   textStyle: AppTextStyle.title
                       .copyWith(color: Colors.black, fontSize: 12),
                   isHasBorder: false,
                 ),
                 TextIcon(
-                  text: data.careerGoals,
+                  text: "test",
                   overflow: TextOverflow.visible,
-                  icon: FontAwesomeIcons.clockRotateLeft,
+                  icon: FontAwesomeIcons.businessTime,
                   textStyle: AppTextStyle.title
                       .copyWith(color: Colors.black, fontSize: 12),
                   isHasBorder: false,
                 ),
                 TextIcon(
-                  text: data.skillsForte,
+                  text: "test",
                   overflow: TextOverflow.visible,
-                  icon: FontAwesomeIcons.globe,
+                  icon: FontAwesomeIcons.thumbsUp,
                   textStyle: AppTextStyle.title
                       .copyWith(color: Colors.black, fontSize: 12),
                   isHasBorder: false,
                 ),
                 TextIcon(
-                  text: data.workExperience,
+                  text: "test",
                   overflow: TextOverflow.visible,
-                  icon: FontAwesomeIcons.bullseye,
+                  icon: FontAwesomeIcons.bookmark,
+                  textStyle: AppTextStyle.title
+                      .copyWith(color: Colors.black, fontSize: 12),
+                  isHasBorder: false,
+                ),
+                TextIcon(
+                  text: "test",
+                  overflow: TextOverflow.visible,
+                  icon: FontAwesomeIcons.calendar,
                   textStyle: AppTextStyle.title
                       .copyWith(color: Colors.black, fontSize: 12),
                   isHasBorder: false,
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 10),
                   child: Row(
-                    mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
                         child: DefaultButton(
-                          onPressed: onTapHistoryView,
-                          text: "Lịch sử",
+                          onPressed: onTapEdit,
+                          text: "Sửa",
                         ),
                       ),
                       const SizedBox(
@@ -98,22 +104,22 @@ class ProfileItem extends StatelessWidget {
                       ),
                       Expanded(
                         child: DefaultButton(
-                          onPressed: onTapReferEdit,
-                          text: "Người tham khảo",
+                          onPressed: onTapTop,
+                          text: "Lên top",
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 10),
                   child: Row(
-                    mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
                         child: DefaultButton(
-                          onPressed: onTapProfileEdit,
-                          text: "Sửa",
+                          onPressed: onTapDelete,
+                          backgroundColor: Colors.red,
+                          text: "Xoá",
                         ),
                       ),
                       const SizedBox(

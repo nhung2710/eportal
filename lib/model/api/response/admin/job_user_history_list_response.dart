@@ -8,13 +8,13 @@ import 'package:eportal/model/base/base_eportal_response.dart';
 import '../../../../extension/map_json_extension.dart';
 
 class JobUserHistoryListResponse
-    extends BaseSingleEportalResponse<JobUserHistoryListDataResponse> {
+    extends BaseMultiEportalResponse<JobUserHistoryListDataResponse> {
   JobUserHistoryListResponse(
       {required super.data, required super.status, required super.message});
 
   factory JobUserHistoryListResponse.fromJson(Map<String, dynamic> json) {
     return JobUserHistoryListResponse(
-        data: json.toObjectJson(
+        data: json.toListObjectJson(
             mapJson: (v) => JobUserHistoryListDataResponse.fromJson(v)),
         status: json["status"],
         message: json["message"]);

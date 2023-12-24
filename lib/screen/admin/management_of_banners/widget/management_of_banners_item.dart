@@ -42,7 +42,7 @@ class ManagementOfBannersItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextIcon(
-                  text: "test ${index + 1}",
+                  text: "test banner ${index + 1}",
                   overflow: TextOverflow.visible,
                   icon: FontAwesomeIcons.tags,
                   textStyle: AppTextStyle.title

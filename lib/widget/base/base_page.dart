@@ -171,7 +171,10 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
           },
         ),
         backgroundColor: Colors.red,
-        content: Text(error),
+        content: Text(
+          error,
+          style: AppTextStyle.textButton.copyWith(color: Colors.white),
+        ),
       ),
     );
   }

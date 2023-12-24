@@ -8,7 +8,7 @@ import 'package:eportal/repository/admin/job_user_history_list_repository.dart';
 // Created by BlackRose on 13/12/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
 //
-class JobUserHistoryListBloc extends BaseSingleBloc<
+class JobUserHistoryListBloc extends BaseMultiBloc<
     JobUserHistoryListDataResponse,
     JobUserHistoryListRepository,
     JobUserHistoryListEvent,

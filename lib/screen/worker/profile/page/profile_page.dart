@@ -3,6 +3,7 @@ import 'package:eportal/model/api/response/admin/data/job_user_list_by_user_name
 import 'package:eportal/screen/worker/profile/widget/profile_item.dart';
 import 'package:eportal/screen/worker/profile_add/page/profile_add_page.dart';
 import 'package:eportal/screen/worker/profile_edit/page/profile_edit_page.dart';
+import 'package:eportal/screen/worker/profile_history/page/profile_history_page.dart';
 import 'package:eportal/screen/worker/refer/page/refer_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/base/base_page.dart';
@@ -137,6 +138,13 @@ class _ProfilePageState extends BasePageStateActive<ProfilePage> {
                                                           initDataLoading());
                                                 },
                                                 data: state.elementAt(index),
+                                                onTapHistoryView: () {
+                                                  nextPage((context) =>
+                                                      ProfileHistoryPage(
+                                                        data: state
+                                                            .elementAt(index),
+                                                      ));
+                                                },
                                               )),
                                     ),
                                   ],

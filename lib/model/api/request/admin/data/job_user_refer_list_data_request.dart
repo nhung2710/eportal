@@ -8,7 +8,7 @@ import '../../../../base/base_eportal_xml.dart';
 class JobUserReferListDataRequest extends BaseMultiEportalXml {
   String? jobUserID;
 
-  JobUserReferListDataRequest({this.jobUserID, super.top});
+  JobUserReferListDataRequest({this.jobUserID});
 
   @override
   StringBuffer toXml() {

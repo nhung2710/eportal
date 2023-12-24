@@ -11,13 +11,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
-class ManagementOfEventItem extends StatelessWidget {
+class ManagementOfEventsItem extends StatelessWidget {
   final GestureTapCallback onTapTop;
   final GestureTapCallback onTapEdit;
   final GestureTapCallback onTapDelete;
   final int index;
 
-  ManagementOfEventItem({
+  ManagementOfEventsItem({
     required this.index,
     required this.onTapEdit,
     required this.onTapTop,
@@ -42,7 +42,7 @@ class ManagementOfEventItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextIcon(
-                  text: "test ${index + 1}",
+                  text: "test sự kiện ${index + 1}",
                   overflow: TextOverflow.visible,
                   icon: FontAwesomeIcons.tags,
                   textStyle: AppTextStyle.title
