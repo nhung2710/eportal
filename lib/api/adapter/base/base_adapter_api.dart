@@ -8,6 +8,7 @@ import 'package:eportal/application/global_application.dart';
 import 'package:eportal/constant/application_constant.dart';
 import 'package:eportal/extension/string_extension.dart';
 import 'package:eportal/model/base/base_eportal_request.dart';
+import 'package:eportal/model/base/base_osm_request.dart';
 import 'package:xml/xml.dart';
 
 class CacheApi {
@@ -45,6 +46,20 @@ class BaseAdapterApi {
     "xmlns:soap": "http://schemas.xmlsoap.org/soap/envelope/",
   };
 
+  Future<Map<String, dynamic>> callApiOSMAsync(BaseOsmRequest request) async {
+    StringBuffer logApiData = StringBuffer();
+    //await Future.delayed(const Duration(milliseconds: 200));
+    try {
+      Uri uri = Uri.parse(request.url.replaceWhenNullOrWhiteSpace());
+      var responseOSMBody = await _callApiOSMAsync(
+          uri,  "application/json; charset=utf-8", logApiData);
+      return json.decode(responseOSMBody);
+    } finally {
+      if (isNeedLogApi) {
+        print(logApiData.toString());
+      }
+    }
+  }
   Future<Map<String, dynamic>> callApiAsync(BaseEportalRequest request) async {
     StringBuffer logApiData = StringBuffer();
     //await Future.delayed(const Duration(milliseconds: 200));
@@ -160,6 +175,35 @@ class BaseAdapterApi {
     }
   }
 
+  Future<String> _callApiOSMAsync(
+      Uri uri, String contentType, StringBuffer logApiData,
+      {int seconds = 30}) async {
+    try {
+      if (isNeedLogApi) {
+        logApiData.writeln('uri: $uri');
+      }
+      HttpClient client = HttpClient();
+      client.badCertificateCallback =
+      ((X509Certificate cert, String host, int port) => true);
+      HttpClientRequest httpClientRequest = await client.getUrl(uri);
+      httpClientRequest.headers.set('Content-Type', contentType);
+      final stopwatch = Stopwatch()..start();
+      HttpClientResponse httpClientResponse =
+      await httpClientRequest.close().timeout(Duration(seconds: seconds));
+      String responseSoap =
+      await httpClientResponse.transform(utf8.decoder).join();
+      client.close();
+
+      if (isNeedLogApi) {
+        logApiData.writeln('timecall: ${stopwatch.elapsedMilliseconds} ms');
+        logApiData.writeln('body: $responseSoap');
+      }
+      return responseSoap;
+    } on Exception catch (ex) {
+      log(ex.toString());
+      return "";
+    }
+  }
   Future<String> _callWebServiceAsync(
       Uri uri, String request, String contentType, StringBuffer logApiData,
       {int seconds = 30}) async {

@@ -56,7 +56,7 @@ class _SettingPageState extends BasePageState<SettingPage> {
     "Hệ thống": [
       SettingPageModel(
           icon: Icons.map,
-          title: "Gmap",
+          title: "Bản đồ",
           builder: (context) => const MapPage()),
       SettingPageModel(
           icon: Icons.account_tree,

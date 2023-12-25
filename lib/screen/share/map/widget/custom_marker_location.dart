@@ -36,7 +36,7 @@ class CustomMarkerLocationState extends State<CustomMarkerLocation> {
         backgroundColor: AppColor.colorOfIcon,
         content: Text(
           widget.title,
-          style: AppTextStyle.textButton.copyWith(color: Colors.white),
+          style: AppTextStyle.textButton.copyWith(color: Colors.white,overflow: TextOverflow.visible),
         ),
       ),
     );
