@@ -113,7 +113,6 @@ flutter:
 
   assets:
     - assets/images/Logo.jpg
-    - assets/images/Logo.png
     - assets/images/logoapp.png
     - assets/images/404.png
     - assets/images/ErrorImage.png

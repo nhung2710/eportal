@@ -28,7 +28,6 @@ class _PolicyPageState extends BasePageState<PolicyPage> {
   @override
   void callApi() {
     // TODO: implement callApi
-    _content = getContent();
   }
 
   @override
@@ -44,6 +43,7 @@ class _PolicyPageState extends BasePageState<PolicyPage> {
   @override
   void initBloc() {
     // TODO: implement initBloc
+    _content = getContent();
   }
 
   @override
