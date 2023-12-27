@@ -85,7 +85,7 @@ class _ManagementOfNewsAddPageState
               child: AspectRatio(
                 aspectRatio: 16 / 9,
                 child: Image.asset(
-                  'assets/images/logoapp.png',
+                  'assets/images/app.png',
                   alignment: Alignment.center,
                   fit: BoxFit.contain,
                 ),

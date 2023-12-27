@@ -32,7 +32,7 @@ class DefaultAppBar {
                   child: GlobalApplication().isLogin
                       ? ImageLoading(
                           imageUrl: 'https://via.placeholder.com/10a0',
-                          imageError: "assets/images/logoapp.png",
+                          imageError: "assets/images/app.png",
                           imageBuilder: (context, imageProvider) {
                             // you can access to imageProvider
                             return CircleAvatar(
@@ -42,7 +42,7 @@ class DefaultAppBar {
                           })
                       : const CircleAvatar(
                           backgroundImage:
-                              AssetImage("assets/images/logoapp.png"),
+                              AssetImage("assets/images/app.png"),
                         ),
                 )),
             Expanded(

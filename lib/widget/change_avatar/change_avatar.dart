@@ -28,7 +28,7 @@ class _ChangeAvatarState extends State<ChangeAvatar> {
         onTap: () => selectImage(),
         child: path == null
             ? const CircleAvatar(
-                backgroundImage: AssetImage("assets/images/logoapp.png"),
+                backgroundImage: AssetImage("assets/images/app.png"),
               )
             : CircleAvatar(
                 backgroundImage: FileImage(File(path!)),

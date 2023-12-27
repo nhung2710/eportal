@@ -6,8 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:window_manager/window_manager.dart';
 
+import 'page/share/splash/page/splash_page.dart';
 import 'screen/anonymous/home/home_page.dart';
-import 'screen/share/splash/page/splash_page.dart';
 import 'style/app_color.dart';
 import 'style/app_theme.dart';
 

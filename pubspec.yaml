@@ -78,6 +78,7 @@ dependencies:
   latlong2: ^0.9.0
   flutter_map_cancellable_tile_provider: ^2.0.0
   geolocator: ^10.1.0
+  flutter_easyloading: ^3.0.5
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -91,7 +92,7 @@ dev_dependencies:
   flutter_launcher_icons: "^0.13.1"
 
 flutter_launcher_icons:
-  image_path: "assets/images/logoapp.png"
+  image_path: "assets/images/app.png"
   android: true # can specify file name here e.g. "ic_launcher"
   ios: true # can specify file name here e.g. "My-Launcher-Icon"
   remove_alpha_ios: true
@@ -112,8 +113,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   assets:
-    - assets/images/Logo.jpg
-    - assets/images/logoapp.png
+    - assets/images/app.png
     - assets/images/404.png
     - assets/images/ErrorImage.png
     - assets/images/NotFoundData.jpg
@@ -156,8 +156,8 @@ flutter:
   #flutter build apk --release
 flutter_native_splash:
   color: "#ffffff"
-  image: assets/images/logoapp.png
+  image: assets/images/app.png
   android_12:
-    image: assets/images/logoapp.png
+    image: assets/images/app.png
   android: true
   ios: true
