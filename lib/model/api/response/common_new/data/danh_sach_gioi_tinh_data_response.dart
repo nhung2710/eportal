@@ -4,6 +4,8 @@
 //
 import 'package:eportal/model/base/base_eportal_data_response.dart';
 
+import '../../../../../extension/string_extension.dart';
+
 class DanhSachGioiTinhDataResponse extends BaseEportalDataResponse {
   String? name;
   String? id;
@@ -13,6 +15,7 @@ class DanhSachGioiTinhDataResponse extends BaseEportalDataResponse {
   DanhSachGioiTinhDataResponse.fromJson(Map<String, dynamic> json) {
     name = json['name']?.toString();
     id = json['id']?.toString();
+    search = name.getValueSearch();
   }
 
   Map<String, dynamic> toJson() {
