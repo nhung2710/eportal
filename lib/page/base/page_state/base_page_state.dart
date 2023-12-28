@@ -3,6 +3,7 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 import 'package:eportal/constant/application_constant.dart';
+import 'package:eportal/custom/custom_page_route_builder.dart';
 import 'package:eportal/enum/data_bloc_status.dart';
 import 'package:eportal/extension/error_extension.dart';
 import 'package:eportal/state/base/base_state.dart';
@@ -281,7 +282,7 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
 
   Future nextPage(WidgetBuilder builder) {
     stopLoading();
-    return Navigator.push(context, MaterialPageRoute(builder: builder));
+    return Navigator.push(context, CustomPageRouteBuilder(exitPage: widget,enterPage : builder(context)));
   }
 
   void nextPageWithoutBack(WidgetBuilder builder) {

@@ -64,8 +64,9 @@ class DefaultCapchaTextFormFieldState
         controller: widget.controller,
         maxLength: widget.maxLength,
         style: AppTextStyle.title.copyWith(
-          color: Colors.black,
+          color: AppColor.colorOfIcon,
           overflow: TextOverflow.visible,
+          fontWeight: FontWeight.w900,
           letterSpacing: 10,
         ),
         textInputAction: widget.textInputAction,
@@ -142,6 +143,7 @@ class DefaultCapchaTextFormFieldState
                       code.length,
                       (index) => TextSpan(
                           text: code[index],
+
                           style: AppTextStyle.titlePage.copyWith(
                               overflow: TextOverflow.visible,
                               color: colors[index],

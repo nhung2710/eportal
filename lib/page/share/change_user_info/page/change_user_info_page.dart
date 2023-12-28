@@ -11,6 +11,7 @@ import 'package:eportal/model/api/response/admin/data/user_update_data_response.
 import 'package:eportal/model/api/response/common_new/data/danh_sach_gioi_tinh_data_response.dart';
 import 'package:eportal/page/base/page_state/base_page_state.dart';
 import 'package:eportal/page/base/page_widget/base_page_widget.dart';
+import 'package:eportal/page/widget/default_button.dart';
 import 'package:eportal/page/widget/default_capcha_text_form_field.dart';
 import 'package:eportal/page/widget/default_date_text_form_field.dart';
 import 'package:eportal/page/widget/default_text_form_field.dart';
@@ -101,6 +102,7 @@ class ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
             });
           },
           child: ListView(
+            shrinkWrap: true,
             children: [
               Container(
                 margin: const EdgeInsets.only(bottom: 10),
@@ -165,7 +167,15 @@ class ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
               ),
               DefaultCapchaTextFormField(
                 helperText: "Ví dụ: AAAAAA",
-              )
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: DefaultButton(
+                  onPressed: () => changeUserInfo(),
+                  text: 'Thay đổi',
+
+                ),
+              ),
             ],
           ),
         ),
@@ -190,5 +200,18 @@ class ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
       },
       title: 'Giới tính',
     );
+  }
+
+
+  void changeUserInfo() {
+    if (isValid()) {
+      userUpdateEvent.request.obj.email = emailController.text;
+      userUpdateEvent.request.obj.cmnd = idCardController.text;
+      userUpdateEvent.request.obj.diaChi = addressController.text;
+      userUpdateEvent.request.obj.ngaySinh = birthDayController.text;
+      userUpdateEvent.request.obj.dienThoai = phoneController.text;
+      userUpdateEvent.request.obj.hoTen = fullNameController.text;
+      userUpdateBloc.add(userUpdateEvent);
+    }
   }
 }

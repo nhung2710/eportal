@@ -9,11 +9,12 @@ class MoreActionPageModel {
   IconData icon;
   String title;
   GestureTapCallback? onTap;
-  WidgetBuilder builder;
+  WidgetBuilder? builder;
+  void Function() function;
 
   MoreActionPageModel(
       {required this.icon,
         required this.title,
-        required this.builder,
+        required this.function,
         this.onTap});
 }

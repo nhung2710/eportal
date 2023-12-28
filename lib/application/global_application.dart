@@ -124,8 +124,8 @@ class GlobalApplication {
 
     final appId =
         Platform.isAndroid ? 'YOUR_ANDROID_PACKAGE_ID' : 'YOUR_IOS_APP_ID';
-    appUri = Uri.parse(Platform.isAndroid
-        ? "market://details?id=$appId"
-        : "https://apps.apple.com/app/id$appId");
+    appUri = Uri.parse(Platform.isIOS
+            ? "https://apps.apple.com/app/id$appId"
+        : "market://details?id=$appId");
   }
 }
