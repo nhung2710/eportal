@@ -84,10 +84,10 @@ class GroupMoreActionSubItem extends StatelessWidget{
                 child: Text(item.title,textAlign: TextAlign.start,style: AppTextStyle.title,)
             )
           ),
-           const Icon(FontAwesomeIcons.angleRight,
+          item.isHasRightIcon ? const Icon(FontAwesomeIcons.angleRight,
             color: AppColor.colorOfIcon,
             size: AppSizeIcon.sizeOfNormal,
-          )
+          ) : Container()
         ],
       ),
     ),

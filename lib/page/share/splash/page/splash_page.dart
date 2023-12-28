@@ -192,6 +192,7 @@ class _SplashPageState extends BasePageState<SplashPage> {
 
   _skipPage(BuildContext context) {
     keyLoadingProcessState.currentState?.endLoading(txt: "Đang truy cập ...");
+    nextPageWithoutBack((context) => anonymous.DefaultPage());
   }
 
   Future<void> loadProcess(double percent, Iterable<Future> futures) {

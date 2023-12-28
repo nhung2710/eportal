@@ -50,10 +50,12 @@ class SupportPageState extends BasePageState<SupportPage> {
           MoreActionPageModel(
               icon: FontAwesomeIcons.phone,
               title: "02963.831.123",
+              isHasRightIcon: false,
               function: () => launchHotline("02963831123")),
           MoreActionPageModel(
               icon: FontAwesomeIcons.envelope,
               title: "vieclamhoabinh@gmail.com",
+              isHasRightIcon: false,
               function: () => launchEmail("vieclamhoabinh@gmail.com")),
         ]);
     actions.putIfAbsent(
@@ -62,10 +64,12 @@ class SupportPageState extends BasePageState<SupportPage> {
               MoreActionPageModel(
                   icon: FontAwesomeIcons.phone,
                   title: "02963.831.123",
+                  isHasRightIcon: false,
                   function: () => launchHotline("02963831123")),
               MoreActionPageModel(
                   icon: FontAwesomeIcons.envelope,
                   title: "vieclamhoabinh@gmail.com",
+                  isHasRightIcon: false,
                   function: () => launchEmail("vieclamhoabinh@gmail.com")),
             ]);
   }

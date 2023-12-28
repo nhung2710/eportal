@@ -114,68 +114,70 @@ class DefaultTextFormFieldState extends State<DefaultTextFormField> {
   }
 
   @override
-  Widget build(BuildContext context) => TextFormField(
-        maxLength: widget.maxLength ?? 100,
-        maxLines: widget.maxLines ?? 1,
-        minLines: widget.minLines ?? 1,
-        readOnly: widget.readOnly,
-        textAlignVertical: widget.textAlignVertical ?? TextAlignVertical.center,
-        keyboardType: widget.keyboardType,
-        onFieldSubmitted: widget.onFieldSubmitted,
-        controller: widget.controller,
-        focusNode: widget.focusNode,
-        textInputAction: widget.textInputAction ?? TextInputAction.next,
-        autovalidateMode: AutovalidateMode.always,
-        validator: widget.validator,
-        inputFormatters: widget.inputFormatters,
-        style: AppTextStyle.title
-            .copyWith(color: Colors.black, overflow: TextOverflow.visible),
-        decoration: InputDecoration(
-          isDense: true,
-          contentPadding: EdgeInsets.zero,
-          icon: Icon(
-            widget.icon ?? Icons.tag,
-            color: AppColor.colorOfIcon,
-            size: AppSizeIcon.sizeOfNormal,
-          ),
-          labelText: widget.labelText,
-          hintText: widget.hintText,
-          helperText: widget.helperText,
-          alignLabelWithHint: true,
-          errorStyle: AppTextStyle.normal.copyWith(
-            color: Colors.red,
-          ),
-          helperStyle: AppTextStyle.normal.copyWith(
-            color: Colors.grey,
-          ),
-          labelStyle: AppTextStyle.normal.copyWith(
-            color: AppColor.colorOfIcon,
-          ),
-          hintStyle: AppTextStyle.normal.copyWith(
-            color: Colors.grey,
-          ),
-          counterStyle: AppTextStyle.normal.copyWith(
-            color: Colors.red,
-          ),
-          suffixIcon: suffixIcon,
-          enabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.black,
-              width: 0.3,
+  Widget build(BuildContext context) => Container(
+    margin: const EdgeInsets.only(top: 5),
+    child: TextFormField(
+          maxLength: widget.maxLength ?? 100,
+          maxLines: widget.maxLines ?? 1,
+          minLines: widget.minLines ?? 1,
+          readOnly: widget.readOnly,
+          textAlignVertical: widget.textAlignVertical ?? TextAlignVertical.center,
+          keyboardType: widget.keyboardType,
+          onFieldSubmitted: widget.onFieldSubmitted,
+          controller: widget.controller,
+          focusNode: widget.focusNode,
+          textInputAction: widget.textInputAction ?? TextInputAction.next,
+          autovalidateMode: AutovalidateMode.always,
+          validator: widget.validator,
+          inputFormatters: widget.inputFormatters,
+          style: AppTextStyle.title
+              .copyWith(color: Colors.black, overflow: TextOverflow.visible),
+          decoration: InputDecoration(
+            isDense: true,
+            prefixIcon: Icon(
+              widget.icon ?? Icons.tag,
+              color: AppColor.colorOfIcon,
+              size: AppSizeIcon.sizeOfNormal,
             ),
-          ),
-          focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(
+            labelText: widget.labelText,
+            hintText: widget.hintText,
+            helperText: widget.helperText,
+            alignLabelWithHint: true,
+            errorStyle: AppTextStyle.normal.copyWith(
               color: Colors.red,
-              width: 0.3,
             ),
-          ),
-          border: const UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.black,
-              width: 0.3,
+            helperStyle: AppTextStyle.normal.copyWith(
+              color: Colors.grey,
+            ),
+            labelStyle: AppTextStyle.normal.copyWith(
+              color: AppColor.colorOfIcon,
+            ),
+            hintStyle: AppTextStyle.normal.copyWith(
+              color: Colors.grey,
+            ),
+            counterStyle: AppTextStyle.normal.copyWith(
+              color: Colors.red,
+            ),
+            suffixIcon: suffixIcon,
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColor.colorOfIcon,
+                width: 0.3,
+              ),
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.red,
+                width: 0.3,
+              ),
+            ),
+            border: const OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColor.colorOfIcon,
+                width: 0.3,
+              ),
             ),
           ),
         ),
-      );
+  );
 }

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -40,7 +41,15 @@ Future<void> main() async {
   ));
   runApp(MyApp());
 }
-
+class NoThumbScrollBehavior extends ScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+    PointerDeviceKind.touch,
+    PointerDeviceKind.mouse,
+    PointerDeviceKind.stylus,
+    PointerDeviceKind.trackpad,
+  };
+}
 // ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   final PageStorageBucket _bucket = PageStorageBucket();
@@ -53,6 +62,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Việc làm Hòa Bình',
       debugShowCheckedModeBanner: false,
+      scrollBehavior: NoThumbScrollBehavior().copyWith(scrollbars: false),
       theme: ThemeData(
           textTheme: AppTheme.textTheme,
           cardTheme: const CardTheme(surfaceTintColor: Colors.white),

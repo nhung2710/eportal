@@ -107,11 +107,12 @@ class RequestSupportPageState extends BasePageState<RequestSupportPage> {
 
         DefaultCapchaTextFormField(
           helperText: "Ví dụ: AAAAAA",
+          onFieldSubmitted: (v)=> submitForm(),
         ),
         Container(
           margin: const EdgeInsets.only(top: 10),
           child: DefaultButton(
-            onPressed: () => sendRequestSupport(),
+            onPressed: () => submitForm(),
             text: 'Gửi',
 
           ),
@@ -120,7 +121,7 @@ class RequestSupportPageState extends BasePageState<RequestSupportPage> {
     ),
   );
 
-  void sendRequestSupport() {
+  void submitForm() {
     showCenterMessage("Gửi yêu cầu thành công").then((value) => backPage());
   }
 

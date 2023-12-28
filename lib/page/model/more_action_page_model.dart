@@ -10,11 +10,13 @@ class MoreActionPageModel {
   String title;
   GestureTapCallback? onTap;
   WidgetBuilder? builder;
+  bool isHasRightIcon;
   void Function() function;
 
   MoreActionPageModel(
       {required this.icon,
         required this.title,
         required this.function,
+        this.isHasRightIcon = true,
         this.onTap});
 }

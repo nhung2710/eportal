@@ -59,101 +59,103 @@ class DefaultCapchaTextFormFieldState
   }
 
   @override
-  Widget build(BuildContext context) => TextFormField(
-        obscureText: false,
-        controller: widget.controller,
-        maxLength: widget.maxLength,
-        style: AppTextStyle.title.copyWith(
-          color: AppColor.colorOfIcon,
-          overflow: TextOverflow.visible,
-          fontWeight: FontWeight.w900,
-          letterSpacing: 10,
-        ),
-        textInputAction: widget.textInputAction,
-        textAlignVertical: widget.textAlignVertical ?? TextAlignVertical.center,
-        inputFormatters: [UpperCaseTextFormatter()],
-        validator: (text) {
-          if (text == null || text.isEmpty) {
-            return 'Mã xác nhận không được để trống';
-          }
-          if (text != code) {
-            numberReload++;
-            if (numberReload >= 1) _newText();
-            return 'Mã xác nhận không hợp lệ';
-          }
-          //_newText();
-          return null;
-        },
-        onFieldSubmitted: widget.onFieldSubmitted,
-        decoration: InputDecoration(
-          hintText: widget.hintText ?? "Mã xác thực",
-          labelText: widget.labelText ?? "Mã xác thực",
-          helperText: widget.helperText ?? "",
-          isDense: true,
-          contentPadding: EdgeInsets.zero,
-          alignLabelWithHint: true,
-          errorStyle: AppTextStyle.normal.copyWith(
-            color: Colors.red,
-            letterSpacing: 1,
-          ),
-          helperStyle: AppTextStyle.normal.copyWith(
-            color: Colors.grey,
-            letterSpacing: 1,
-          ),
-          labelStyle: AppTextStyle.normal.copyWith(
+  Widget build(BuildContext context) => Container(
+    margin: EdgeInsets.only(top: 5),
+    child: TextFormField(
+          obscureText: false,
+          controller: widget.controller,
+          maxLength: widget.maxLength,
+          style: AppTextStyle.title.copyWith(
             color: AppColor.colorOfIcon,
-            letterSpacing: 1,
+            overflow: TextOverflow.visible,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 10,
           ),
-          hintStyle: AppTextStyle.normal.copyWith(
-            color: Colors.grey,
-            letterSpacing: 1,
-          ),
-          counterStyle: AppTextStyle.normal.copyWith(
-            color: Colors.red,
-          ),
-          enabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.black,
-              width: 0.3,
-            ),
-          ),
-          focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(
+          textInputAction: widget.textInputAction,
+          textAlignVertical: widget.textAlignVertical ?? TextAlignVertical.center,
+          inputFormatters: [UpperCaseTextFormatter()],
+          validator: (text) {
+            if (text == null || text.isEmpty) {
+              return 'Mã xác nhận không được để trống';
+            }
+            if (text != code) {
+              numberReload++;
+              if (numberReload >= 1) _newText();
+              return 'Mã xác nhận không hợp lệ';
+            }
+            //_newText();
+            return null;
+          },
+          onFieldSubmitted: widget.onFieldSubmitted,
+          decoration: InputDecoration(
+            hintText: widget.hintText ?? "Mã xác thực",
+            labelText: widget.labelText ?? "Mã xác thực",
+            helperText: widget.helperText ?? "",
+            isDense: true,
+            alignLabelWithHint: true,
+            errorStyle: AppTextStyle.normal.copyWith(
               color: Colors.red,
-              width: 0.3,
+              letterSpacing: 1,
             ),
-          ),
-          border: const UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.black,
-              width: 0.3,
+            helperStyle: AppTextStyle.normal.copyWith(
+              color: Colors.grey,
+              letterSpacing: 1,
             ),
-          ),
-          icon: Icon(
-            widget.icon ?? FontAwesomeIcons.key,
-            color: AppColor.colorOfIcon,
-            size: AppSizeIcon.sizeOfNormal,
-          ),
-          suffixIcon: GestureDetector(
-            onTap: () => _newText(),
-            child: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                  children: List.generate(
-                      code.length,
-                      (index) => TextSpan(
-                          text: code[index],
+            labelStyle: AppTextStyle.normal.copyWith(
+              color: AppColor.colorOfIcon,
+              letterSpacing: 1,
+            ),
+            hintStyle: AppTextStyle.normal.copyWith(
+              color: Colors.grey,
+              letterSpacing: 1,
+            ),
+            counterStyle: AppTextStyle.normal.copyWith(
+              color: Colors.red,
+            ),
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColor.colorOfIcon,
+                width: 0.3,
+              ),
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.red,
+                width: 0.3,
+              ),
+            ),
+            border: const OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColor.colorOfIcon,
+                width: 0.3,
+              ),
+            ),
+            prefixIcon: Icon(
+              widget.icon ?? FontAwesomeIcons.key,
+              color: AppColor.colorOfIcon,
+              size: AppSizeIcon.sizeOfNormal,
+            ),
+            suffixIcon: GestureDetector(
+              onTap: () => _newText(),
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                    children: List.generate(
+                        code.length,
+                        (index) => TextSpan(
+                            text: code[index],
 
-                          style: AppTextStyle.titlePage.copyWith(
-                              overflow: TextOverflow.visible,
-                              color: colors[index],
-                              fontWeight: FontWeight.w900,
-                              letterSpacing: 10,
-                              fontSize: fontSizes[index])))),
+                            style: AppTextStyle.titlePage.copyWith(
+                                overflow: TextOverflow.visible,
+                                color: colors[index],
+                                fontWeight: FontWeight.w900,
+                                letterSpacing: 10,
+                                fontSize: fontSizes[index])))),
+              ),
             ),
           ),
         ),
-      );
+  );
 
   void _newText() {
     Random random = Random();

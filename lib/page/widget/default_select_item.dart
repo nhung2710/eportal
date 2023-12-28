@@ -43,19 +43,22 @@ class DefaultSelectItemState<T> extends State<DefaultSelectItem<T>> {
   final GlobalKey<DropdownSearchState> key = GlobalKey<DropdownSearchState>();
 
   @override
-  Widget build(BuildContext context) => DropdownSearch<T>(
-        key: key,
-        dropdownButtonProps: buildDropdownButtonProps(context),
-        popupProps: buildPopupProps(context),
-        clearButtonProps: buildClearButtonProps(),
-        filterFn: widget.filterFn,
-        selectedItem: widget.selectedItem,
-        asyncItems: (String filter) => Future.value(widget.list),
-        itemAsString: widget.itemAsString,
-        onChanged: widget.onChanged,
-        dropdownDecoratorProps:
-            buildDropDownDecoratorProps(context, widget.title),
-      );
+  Widget build(BuildContext context) => Container(
+    margin: const EdgeInsets.only(top: 5),
+    child: DropdownSearch<T>(
+          key: key,
+          dropdownButtonProps: buildDropdownButtonProps(context),
+          popupProps: buildPopupProps(context),
+          clearButtonProps: buildClearButtonProps(),
+          filterFn: widget.filterFn,
+          selectedItem: widget.selectedItem,
+          asyncItems: (String filter) => Future.value(widget.list),
+          itemAsString: widget.itemAsString,
+          onChanged: widget.onChanged,
+          dropdownDecoratorProps:
+              buildDropDownDecoratorProps(context, widget.title),
+        ),
+  );
 
   PopupProps<T> buildPopupProps<T>(BuildContext context) => PopupProps.dialog(
       showSearchBox: true,
@@ -81,7 +84,7 @@ class DefaultSelectItemState<T> extends State<DefaultSelectItem<T>> {
         maxLength: 100,
         decoration: InputDecoration(
           isDense: true,
-          icon: const Icon(
+          prefixIcon: const Icon(
             FontAwesomeIcons.magnifyingGlass,
             color: AppColor.colorOfIcon,
             size: AppSizeIcon.sizeOfNormal,
@@ -104,21 +107,21 @@ class DefaultSelectItemState<T> extends State<DefaultSelectItem<T>> {
           counterStyle: AppTextStyle.normal.copyWith(
             color: Colors.red,
           ),
-          enabledBorder: const UnderlineInputBorder(
+          enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.black,
+              color: AppColor.colorOfIcon,
               width: 0.3,
             ),
           ),
-          focusedBorder: const UnderlineInputBorder(
+          focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.red,
               width: 0.3,
             ),
           ),
-          border: const UnderlineInputBorder(
+          border: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.black,
+              color: AppColor.colorOfIcon,
               width: 0.3,
             ),
           ),
@@ -133,7 +136,7 @@ class DefaultSelectItemState<T> extends State<DefaultSelectItem<T>> {
         dropdownSearchDecoration: InputDecoration(
           isDense: true,
           contentPadding: EdgeInsets.zero,
-          icon: Icon(
+          prefixIcon: Icon(
             widget.icon ?? Icons.tag,
             color: AppColor.colorOfIcon,
             size: AppSizeIcon.sizeOfNormal,
@@ -157,21 +160,21 @@ class DefaultSelectItemState<T> extends State<DefaultSelectItem<T>> {
           counterStyle: AppTextStyle.normal.copyWith(
             color: Colors.red,
           ),
-          enabledBorder: const UnderlineInputBorder(
+          enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.black,
+              color: AppColor.colorOfIcon,
               width: 0.3,
             ),
           ),
-          focusedBorder: const UnderlineInputBorder(
+          focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.red,
               width: 0.3,
             ),
           ),
-          border: const UnderlineInputBorder(
+          border: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.black,
+              color: AppColor.colorOfIcon,
               width: 0.3,
             ),
           ),

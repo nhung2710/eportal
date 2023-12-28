@@ -151,14 +151,14 @@ class _AnswerAndQuestionAddPageState
                   margin: const EdgeInsets.only(top: 10),
                   child: CapchaInput(
                     textInputAction: TextInputAction.done,
-                    onFieldSubmitted: (value) => _send(context),
+                    onFieldSubmitted: (value) => submitForm(),
                   ),
                 ),
                 Container(
                     margin: const EdgeInsets.only(top: 10, bottom: 10),
                     child: DefaultButton(
                       text: 'Gửi',
-                      onPressed: () => _send(context),
+                      onPressed: () => submitForm(),
                     )),
               ],
             ),
@@ -166,7 +166,7 @@ class _AnswerAndQuestionAddPageState
         ),
       );
 
-  _send(BuildContext context) {
+  submitForm() {
     if (isValid()) {
       faqAddQuestionBloc.add(FaqAddQuestionEvent(
           request: FaqAddQuestionRequest(
