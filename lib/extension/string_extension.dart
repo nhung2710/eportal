@@ -33,6 +33,8 @@ extension StringNullExtension on String? {
   String getImageUrl() {
     if (isNullOrWhiteSpace()) return ApplicationApiConstant.kBASE_URI_MEDIA;
     if (this!.contains(ApplicationApiConstant.kBASE_URI_MEDIA)) return this!;
+    if (this!.startsWith("http")) return this!;
+    if (this!.startsWith("www.")) return this!;
     return "${ApplicationApiConstant.kBASE_URI_MEDIA}/$this";
   }
 

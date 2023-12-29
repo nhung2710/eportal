@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../extension/string_extension.dart';
 import '../../style/app_text_style.dart';
 
 class DefaultTextFormField extends StatefulWidget {
@@ -25,20 +26,22 @@ class DefaultTextFormField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final TextInputAction? textInputAction;
   final bool readOnly;
+  final bool required;
   TextEditingController? controller;
   FocusNode? focusNode;
   TextAlignVertical? textAlignVertical;
 
   DefaultTextFormField(
       {super.key,
+      this.required = false,
       this.icon,
       this.suffixIcon,
       this.labelText,
       this.helperText,
       this.hintText,
-      this.maxLength,
-      this.maxLines,
-      this.minLines,
+      this.maxLength = 50,
+      this.maxLines = 1,
+      this.minLines = 1,
       this.inputFormatters,
       this.keyboardType,
       this.focusNode,
@@ -56,6 +59,7 @@ class DefaultTextFormField extends StatefulWidget {
 class DefaultTextFormFieldState extends State<DefaultTextFormField> {
   Widget? suffixIcon;
   Widget? preSuffixIcon;
+  bool obscureText = false;
 
   @override
   void initState() {
@@ -117,18 +121,29 @@ class DefaultTextFormFieldState extends State<DefaultTextFormField> {
   Widget build(BuildContext context) => Container(
     margin: const EdgeInsets.only(top: 5),
     child: TextFormField(
-          maxLength: widget.maxLength ?? 100,
-          maxLines: widget.maxLines ?? 1,
-          minLines: widget.minLines ?? 1,
+          maxLength: widget.maxLength,
+          maxLines: widget.maxLines,
+          minLines: widget.minLines,
           readOnly: widget.readOnly,
           textAlignVertical: widget.textAlignVertical ?? TextAlignVertical.center,
           keyboardType: widget.keyboardType,
           onFieldSubmitted: widget.onFieldSubmitted,
           controller: widget.controller,
           focusNode: widget.focusNode,
+          obscureText: obscureText,
+          obscuringCharacter: '*',
           textInputAction: widget.textInputAction ?? TextInputAction.next,
-          autovalidateMode: AutovalidateMode.always,
-          validator: widget.validator,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          enableSuggestions: false,
+          validator: (value){
+            if(widget.required && value.isNullOrWhiteSpace()){
+              return "${widget.labelText} không được để trống";
+            }
+            if(widget.validator!=null) {
+              return widget.validator!(value);
+            }
+            return null;
+          },
           inputFormatters: widget.inputFormatters,
           style: AppTextStyle.title
               .copyWith(color: Colors.black, overflow: TextOverflow.visible),

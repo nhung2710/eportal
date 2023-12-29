@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:eportal/custom/io_file_system.dart';
 import 'package:eportal/enum/role_type.dart';
 import 'package:eportal/model/api/response/common_new/data/dang_nhap_data_response.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,7 +29,7 @@ class GlobalApplication {
   RoleType roleType = RoleType.anonymous;
   SharedPreferences? preferences;
   PackageInfo? packageInfo;
-
+  late CacheManager cacheManager;
   factory GlobalApplication() {
     return _instance;
   }
@@ -56,7 +58,7 @@ class GlobalApplication {
     return value;
   }
 
-  String HelloMessage() {
+  String helloMessage() {
     DateTime now = DateTime.now();
     int currentHour = now.hour;
     String message = ApplicationConstant.EMPTY;
@@ -127,5 +129,15 @@ class GlobalApplication {
     appUri = Uri.parse(Platform.isIOS
             ? "https://apps.apple.com/app/id$appId"
         : "market://details?id=$appId");
+    cacheManager = CacheManager(
+      Config(
+        appId,
+        stalePeriod: const Duration(days: 7),
+        maxNrOfCacheObjects: 20,
+        repo: JsonCacheInfoRepository(databaseName: appId),
+        fileSystem: IOFileSystem(appId),
+        fileService: HttpFileService(),
+      ),
+    );
   }
 }

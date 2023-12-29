@@ -48,7 +48,7 @@ class BaseAdapterApi {
 
   Future<Map<String, dynamic>> callApiOSMAsync(BaseOsmRequest request) async {
     StringBuffer logApiData = StringBuffer();
-    //await Future.delayed(const Duration(milliseconds: 200));
+    ///await Future.delayed(const Duration(milliseconds: 2000));
     try {
       Uri uri = Uri.parse(request.url.replaceWhenNullOrWhiteSpace());
       var responseOSMBody = await _callApiOSMAsync(
@@ -62,7 +62,6 @@ class BaseAdapterApi {
   }
   Future<Map<String, dynamic>> callApiAsync(BaseEportalRequest request) async {
     StringBuffer logApiData = StringBuffer();
-    //await Future.delayed(const Duration(milliseconds: 200));
     try {
       Uri uri = Uri();
       if (!request.getQuery().isNullOrWhiteSpace()) {

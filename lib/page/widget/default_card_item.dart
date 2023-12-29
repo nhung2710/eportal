@@ -9,7 +9,9 @@ import 'package:flutter/material.dart';
 class DefaultCardItem extends StatelessWidget{
   final Widget child;
   final GestureTapCallback? onTap;
-  const DefaultCardItem({super.key,required this.child,this.onTap});
+  final EdgeInsetsGeometry? margin;
+  final ShapeBorder? shape;
+  const DefaultCardItem({super.key,required this.child,this.onTap,this.margin,this.shape});
 
   @override
   Widget build(BuildContext context)  => GestureDetector(
@@ -19,8 +21,8 @@ class DefaultCardItem extends StatelessWidget{
       color: AppColor.colorOfApp,
       shadowColor: AppColor.colorOfIcon,
       borderOnForeground: false,
-      margin: const EdgeInsets.all(5),
-      shape: const RoundedRectangleBorder(
+      margin: margin?? const EdgeInsets.all(5),
+      shape: shape?? const RoundedRectangleBorder(
           side: BorderSide(color: AppColor.colorOfDrawer, width: 0.2),
           borderRadius: BorderRadius.all(Radius.circular(5))),
       child: child,

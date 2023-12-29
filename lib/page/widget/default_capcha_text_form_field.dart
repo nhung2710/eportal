@@ -60,7 +60,7 @@ class DefaultCapchaTextFormFieldState
 
   @override
   Widget build(BuildContext context) => Container(
-    margin: EdgeInsets.only(top: 5),
+    margin: const EdgeInsets.only(top: 5),
     child: TextFormField(
           obscureText: false,
           controller: widget.controller,

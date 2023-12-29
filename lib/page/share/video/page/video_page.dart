@@ -97,11 +97,9 @@ class VideoPageState
                               itemBuilder:
                                   (BuildContext context, int index) => VideoItem(
                                 data: state.elementAt(index),
-                                onClickItem: (VideoListDataResponse value)  => nextPage((context) => VideoItem(
-                                  data:value,
-                                  onClickItem: (VideoListDataResponse value) {
+                                onClickItem: (VideoListDataResponse value)  => {
 
-                                  },)),
+                                },
                               )
                           ),
                         ),

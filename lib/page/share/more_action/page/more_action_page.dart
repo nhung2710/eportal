@@ -14,6 +14,7 @@ import 'package:eportal/page/share/policy/page/policy_page.dart';
 import 'package:eportal/page/share/question_answer/page/question_answer_page.dart';
 import 'package:eportal/page/share/request_support/page/request_support_page.dart';
 import 'package:eportal/page/share/rule/page/rule_page.dart';
+import 'package:eportal/page/share/sign_in/page/sign_in_page.dart';
 import 'package:eportal/screen/share/change_password/page/change_password_page.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
@@ -25,6 +26,7 @@ import '../../../../enum/role_type.dart';
 import '../../../base/page_widget/base_page_widget.dart';
 import '../../support/page/support_page.dart';
 import '../../video/page/video_page.dart';
+import '../widget/more_action_card.dart';
 
 class MoreActionPage extends BasePageWidget {
   const MoreActionPage({super.key});
@@ -36,7 +38,7 @@ class MoreActionPage extends BasePageWidget {
 class MoreActionPageState extends BasePageState<MoreActionPage> {
   Map<String, List<MoreActionPageModel>> actions = <String, List<MoreActionPageModel>>{};
   final InAppReview inAppReview = InAppReview.instance;
-
+  final List<Widget> children = [];
   @override
   void callApi() {
     // TODO: implement callApi
@@ -158,7 +160,16 @@ class MoreActionPageState extends BasePageState<MoreActionPage> {
                   title: "Đánh giá",
                   function: () => inAppReview.isAvailable().then((value) => inAppReview.requestReview()),)
         ]);
-
+    children.clear();
+    children.add(MoreActionCard(
+      onSignIn: ()=> submitSignIn(),
+      onSignOut: ()=> submitSignOut(),
+    ));
+    children.addAll(actions.entries.map((e) => GroupMoreActionItem(
+      title: e.key,
+      items: e.value,
+      onClickItem: (item) => item.function(),
+    )).toList());
   }
 
   @override
@@ -170,14 +181,17 @@ class MoreActionPageState extends BasePageState<MoreActionPage> {
   @override
   Widget pageUI(BuildContext context) => Container(
     margin: const EdgeInsets.all(10),
-    child: ListView.builder(
-        itemCount: actions.length,
-        itemBuilder: (c, index) {
-          return GroupMoreActionItem(
-            title: actions.keys.elementAt(index),
-            items: actions.values.elementAt(index),
-            onClickItem: (item) => item.function(),
-          );
-        }),
+    child: ListView(
+      children: children,
+    ),
   );
+
+  submitSignIn() {
+    nextPage((context) => const SignInPage());
+  }
+
+  submitSignOut() {
+
+    showCenterMessage("submitSignOut");
+  }
 }

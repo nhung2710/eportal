@@ -103,6 +103,7 @@ class QuestionAnswerAddPageState
                     hintText: "Họ và tên",
                     labelText: "Họ và tên",
                     helperText: "Ví dụ: Nguyễn Văn A",
+                    required: true,
                   ),
                   DefaultTextFormField(
                     icon: FontAwesomeIcons.envelope,
@@ -110,6 +111,7 @@ class QuestionAnswerAddPageState
                     hintText: "Email",
                     labelText: "Email",
                     helperText: "Ví dụ: abc@gmail.com",
+                    required: true,
                   ),
                   DefaultTextFormField(
                     icon: FontAwesomeIcons.mobileScreenButton,
@@ -117,6 +119,7 @@ class QuestionAnswerAddPageState
                     hintText: "Số điện thoại",
                     labelText: "Số điện thoại",
                     helperText: "Ví dụ: 0380000000",
+                    required: true,
                   ),
                   DefaultTextFormField(
                     icon: FontAwesomeIcons.noteSticky,
@@ -127,6 +130,7 @@ class QuestionAnswerAddPageState
                     hintText: "Nội dung",
                     labelText: "Nội dung",
                     helperText: "Ví dụ: abc",
+                    required: true,
                   ),
 
                   DefaultCapchaTextFormField(

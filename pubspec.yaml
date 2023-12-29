@@ -80,6 +80,8 @@ dependencies:
   geolocator: ^10.1.0
   flutter_easyloading: ^3.0.5
   in_app_review: ^2.0.8
+  flutter_screenutil: ^5.9.0
+  flutter_cache_manager: ^3.3.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -115,6 +117,7 @@ flutter:
 
   assets:
     - assets/images/app.png
+    - assets/images/userLogo.png
     - assets/images/404.png
     - assets/images/ErrorImage.png
     - assets/images/NotFoundData.jpg

@@ -55,7 +55,7 @@ class DefaultAppBar {
                   Text(GlobalApplication().helloUser(),
                       style: AppTextStyle.titlePage),
                   Text(
-                    GlobalApplication().HelloMessage(),
+                    GlobalApplication().helloMessage(),
                     style: AppTextStyle.normal
                         .copyWith(color: AppColor.colorOfHintText),
                   ),

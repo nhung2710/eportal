@@ -96,11 +96,9 @@ class AlbumPageState
                               itemBuilder:
                                   (BuildContext context, int index) => AlbumItem(
                                 data: state.elementAt(index),
-                                onClickItem: (AlbumListDataResponse value)  => nextPage((context) => AlbumItem(
-                                  data:value,
-                                  onClickItem: (AlbumListDataResponse value) {
+                                onClickItem: (AlbumListDataResponse value)  => {
 
-                                  },)),
+                                },
                               )
                           ),
                         ),

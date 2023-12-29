@@ -134,11 +134,17 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
     );
   }
 
+
+
   Widget? getEndDrawer(BuildContext context) => null;
 
   Widget? getDrawer(BuildContext context) => null;
 
   Widget pageUI(BuildContext context);
+
+  Future processDemo() => startLoading()
+          .then((value) => Future.delayed(const Duration(seconds: 5)))
+          .then((value) => stopLoading());
 
   void hiddenKeyboard() {
     ErrorExtension()
@@ -149,7 +155,7 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
 
   Future<void> startLoading() async {
     hiddenKeyboard();
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: 'Hệ thông đang xử lý...',maskType: EasyLoadingMaskType.clear);
   }
 
   Future<void> stopLoading() async {
@@ -170,7 +176,7 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
         backgroundColor: Colors.red,
         content: Text(
           error,
-          style: AppTextStyle.textButton.copyWith(color: Colors.white),
+          style: AppTextStyle.textButton.copyWith(color: Colors.white,),
         ),
       ),
     );
@@ -185,8 +191,8 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
     return Alert(
         context: context,
         type: AlertType.warning,
-        style: const AlertStyle(
-            titleStyle: AppTextStyle.title, descStyle: AppTextStyle.normal),
+        style: AlertStyle(
+            titleStyle: AppTextStyle.title.copyWith(overflow: TextOverflow.visible), descStyle: AppTextStyle.normal.copyWith(overflow: TextOverflow.visible)),
         title: title,
         desc: desc,
         content: content,
@@ -220,8 +226,8 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
     return Alert(
         context: context,
         type: AlertType.error,
-        style: const AlertStyle(
-            titleStyle: AppTextStyle.title, descStyle: AppTextStyle.normal),
+        style: AlertStyle(
+            titleStyle: AppTextStyle.title.copyWith(overflow: TextOverflow.visible), descStyle: AppTextStyle.normal.copyWith(overflow: TextOverflow.visible)),
         title: "Thông báo",
         desc: error
             .supportHtml()
@@ -244,8 +250,8 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
     return Alert(
         context: context,
         type: AlertType.info,
-        style: const AlertStyle(
-            titleStyle: AppTextStyle.title, descStyle: AppTextStyle.normal),
+        style:  AlertStyle(
+            titleStyle: AppTextStyle.title.copyWith(overflow: TextOverflow.visible), descStyle: AppTextStyle.normal.copyWith(overflow: TextOverflow.visible)),
         title: "Thông báo",
         desc: message,
         buttons: [
@@ -278,7 +284,7 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
 
   bool isValid() => isValidForm(context);
 
-  void backPage() => Navigator.pop(context);
+  void backPage([ Object? result ]) => Navigator.pop(context,result);
 
   Future nextPage(WidgetBuilder builder) {
     stopLoading();
