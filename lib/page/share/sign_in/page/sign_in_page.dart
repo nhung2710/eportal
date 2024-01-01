@@ -3,7 +3,9 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
+import 'package:eportal/application/global_application.dart';
 import 'package:eportal/bloc/common_new/dang_nhap_bloc.dart';
+import 'package:eportal/enum/role_type.dart';
 import 'package:eportal/event/common_new/dang_nhap_event.dart';
 import 'package:eportal/model/api/request/common_new/dang_nhap_request.dart';
 import 'package:eportal/model/api/request/common_new/data/dang_nhap_data_request.dart';
@@ -34,17 +36,20 @@ class SignInPage extends BasePageWidget {
   State<StatefulWidget> createState() => SignInPageState();
 }
 
-class SignInPageState
-    extends BasePageState<SignInPage> {
+class SignInPageState extends BasePageState<SignInPage> {
   late DangNhapBloc dangNhapBloc;
-  DangNhapEvent dangNhapEvent = DangNhapEvent(request: DangNhapRequest(obj: DangNhapDataRequest()));
+  DangNhapEvent dangNhapEvent =
+      DangNhapEvent(request: DangNhapRequest(obj: DangNhapDataRequest()));
 
   TextEditingController userNameController = TextEditingController();
   TextEditingController passWordController = TextEditingController();
   int number = 0;
+
   @override
   void initBloc() {
     dangNhapBloc = DangNhapBloc();
+    userNameController.text = GlobalApplication().userNameSaved;
+    passWordController.text = GlobalApplication().userPasswordSaved;
   }
 
   @override
@@ -53,151 +58,146 @@ class SignInPageState
     dangNhapBloc.close();
   }
 
-
   @override
   void getMoreData() {
     callApi();
   }
 
   @override
-  void initDataLoading() {
-  }
-
+  void initDataLoading() {}
 
   @override
   void callApi() {
     dangNhapBloc.add(dangNhapEvent);
   }
 
-
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
-    create: (_) => dangNhapBloc,
-    child: BlocListener<DangNhapBloc,
-        DataSingleState<DangNhapDataResponse>>(
-      listener: (BuildContext context, state) {
-        handlerActionDataSingleState<DangNhapDataResponse>(state,
-                (obj) async {
-              showCenterMessage("Bạn đã gửi câu hỏi thành công")
-                  .then((value) => backPage());
-            });
-        if(state.status == DataBlocStatus.error){
-          number++;
-          setState(() {
-
-          });
-        }
-      },
-      child: Container(
-        margin: const EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(bottom: 10),
-              child: Text(
-                "Đăng nhập",
-                style: AppTextStyle.titlePage.copyWith(
-                    overflow: TextOverflow.visible,
-                    fontSize: 18,
-                    color: AppColor.colorOfIconActive),
-              ),
-            ),
-            Expanded(
-              child: ListView(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 30, bottom: 20),
-                    padding: const EdgeInsets.only(top: 10),
-                    child: SizedBox(
-                      height: 150,
-                      child: AspectRatio(
-                        aspectRatio: 16 / 9,
-                        child: Image.asset(
-                          'assets/images/app.png',
-                          alignment: Alignment.center,
-                          fit: BoxFit.contain,
+        create: (_) => dangNhapBloc,
+        child:
+            BlocListener<DangNhapBloc, DataSingleState<DangNhapDataResponse>>(
+          listener: (BuildContext context, state) {
+            handlerActionDataSingleState<DangNhapDataResponse>(
+                state, (obj) => signInSucess(obj));
+            if (state.status == DataBlocStatus.error) {
+              number++;
+              setState(() {});
+            }
+          },
+          child: Container(
+            margin: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  child: Text(
+                    "Đăng nhập",
+                    style: AppTextStyle.titlePage.copyWith(
+                        overflow: TextOverflow.visible,
+                        fontSize: 18,
+                        color: AppColor.colorOfIconActive),
+                  ),
+                ),
+                Expanded(
+                  child: ListView(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 20, bottom: 5),
+                        padding: const EdgeInsets.only(top: 10),
+                        child: SizedBox(
+                          height: 150,
+                          child: AspectRatio(
+                            aspectRatio: 16 / 9,
+                            child: Image.asset(
+                              'assets/images/app.png',
+                              alignment: Alignment.center,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  DefaultTextFormField(
-                    icon: FontAwesomeIcons.user,
-                    controller: userNameController,
-                    hintText: "Tài khoản",
-                    labelText: "Tài khoản",
-                    helperText: "Ví dụ: abc",
-                    required: true,
-                  ),
-                  DefaultPasswordFormField(
-                    icon: FontAwesomeIcons.lock,
-                    controller: passWordController,
-                    hintText: "Mật khẩu",
-                    labelText: "Mật khẩu",
-                    helperText: "Ví dụ: xyz",
-                    required: true,
-                  ),
-                  number < 3 ? Container() : DefaultCapchaTextFormField(
-                    helperText: "Ví dụ: AAAAAA",
-                    onFieldSubmitted: (v)=> submitForm(),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    child: DefaultButton(
-                      onPressed: () => submitForm(),
-                      text: 'Đăng nhập ',
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    child: Center(
-                      child: RichText(
-                        text: TextSpan(
-                          style: AppTextStyle.titleAppbarPage.copyWith(
-                              color: Colors.black, fontWeight: FontWeight.normal),
-                          children: <TextSpan>[
-                            const TextSpan(text: 'Bạn chưa có tài khoản? '),
-                            TextSpan(
-                                text: 'Đăng ký',
-                                style: AppTextStyle.titleAppbarPage
-                                    .copyWith(color: AppColor.colorOfIcon),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () => openSignUp()),
-                          ],
+                      DefaultTextFormField(
+                        icon: FontAwesomeIcons.user,
+                        controller: userNameController,
+                        hintText: "Tài khoản",
+                        labelText: "Tài khoản",
+                        helperText: "Ví dụ: abc",
+                        required: true,
+                      ),
+                      DefaultPasswordFormField(
+                        icon: FontAwesomeIcons.lock,
+                        controller: passWordController,
+                        hintText: "Mật khẩu",
+                        labelText: "Mật khẩu",
+                        helperText: "Ví dụ: xyz",
+                        required: true,
+                      ),
+                      number < 3
+                          ? Container()
+                          : DefaultCapchaTextFormField(
+                              helperText: "Ví dụ: AAAAAA",
+                              onFieldSubmitted: (v) => submitForm(),
+                            ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 10),
+                        child: DefaultButton(
+                          onPressed: () => submitForm(),
+                          text: 'Đăng nhập ',
                         ),
                       ),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    child: GestureDetector(
-                        onTap: () => openForgotPassword(),
+                      Container(
+                        margin: const EdgeInsets.only(top: 10),
                         child: Center(
-                            child: Text(
+                          child: RichText(
+                            text: TextSpan(
+                              style: AppTextStyle.titleAppbarPage.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal),
+                              children: <TextSpan>[
+                                const TextSpan(text: 'Bạn chưa có tài khoản? '),
+                                TextSpan(
+                                    text: 'Đăng ký',
+                                    style: AppTextStyle.titleAppbarPage
+                                        .copyWith(color: AppColor.colorOfIcon),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () => openSignUp()),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 10),
+                        child: GestureDetector(
+                            onTap: () => openForgotPassword(),
+                            child: Center(
+                                child: Text(
                               'Quên mật khẩu',
                               style: AppTextStyle.titleAppbarPage
                                   .copyWith(color: AppColor.colorOfIcon),
                             ))),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    child: GestureDetector(
-                        onTap: () => openHomePage(),
-                        child: Center(
-                            child: Text(
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 10),
+                        child: GestureDetector(
+                            onTap: () => openHomePage(),
+                            child: Center(
+                                child: Text(
                               'Trải nghiệm không đăng nhập',
-                              style: AppTextStyle.titleAppbarPage
-                                  .copyWith(color: Colors.black, fontWeight: FontWeight.normal),
+                              style: AppTextStyle.titleAppbarPage.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal),
                             ))),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
-    ),
-  );
+      );
 
   void submitForm() {
     if (isValid()) {
@@ -208,18 +208,17 @@ class SignInPageState
   }
 
   void openSignUp() {
-    nextPage((context) => const SignUpPage()).then((value){
-      if(value!=null){
+    nextPage((context) => const SignUpPage()).then((value) {
+      if (value != null) {
         userNameController.text = value.toString();
         passWordController.clear();
       }
     });
-
   }
 
   void openForgotPassword() {
-    nextPage((context) => const ForgotPasswordPage()).then((value){
-      if(value!=null){
+    nextPage((context) => const ForgotPasswordPage()).then((value) {
+      if (value != null) {
         userNameController.text = value.toString();
         passWordController.clear();
       }
@@ -228,5 +227,28 @@ class SignInPageState
 
   openHomePage() {
     nextPageWithoutBack((context) => DefaultPage());
+  }
+
+  signInSucess(DangNhapDataResponse? obj) {
+    if (obj != null) {
+      GlobalApplication()
+          .signIn(obj, userNameController.text, passWordController.text)
+          .then((value) {
+        switch (GlobalApplication().roleType) {
+          case RoleType.users:
+            nextPageWithoutBack((context) => DefaultPage());
+            break;
+          case RoleType.bussiness:
+            nextPageWithoutBack((context) => DefaultPage());
+            break;
+          case RoleType.cms:
+            nextPageWithoutBack((context) => DefaultPage());
+            break;
+          case RoleType.anonymous:
+            // TODO: Handle this case.
+            break;
+        }
+      });
+    }
   }
 }

@@ -15,9 +15,6 @@ import 'package:eportal/page/share/question_answer/page/question_answer_page.dar
 import 'package:eportal/page/share/request_support/page/request_support_page.dart';
 import 'package:eportal/page/share/rule/page/rule_page.dart';
 import 'package:eportal/page/share/sign_in/page/sign_in_page.dart';
-import 'package:eportal/screen/share/change_password/page/change_password_page.dart';
-import 'package:eportal/style/app_color.dart';
-import 'package:eportal/style/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_review/in_app_review.dart';
 
@@ -36,9 +33,11 @@ class MoreActionPage extends BasePageWidget {
 }
 
 class MoreActionPageState extends BasePageState<MoreActionPage> {
-  Map<String, List<MoreActionPageModel>> actions = <String, List<MoreActionPageModel>>{};
+  Map<String, List<MoreActionPageModel>> actions =
+      <String, List<MoreActionPageModel>>{};
   final InAppReview inAppReview = InAppReview.instance;
   final List<Widget> children = [];
+
   @override
   void callApi() {
     // TODO: implement callApi
@@ -53,84 +52,93 @@ class MoreActionPageState extends BasePageState<MoreActionPage> {
   void getMoreData() {
     // TODO: implement getMoreData
   }
+
   @override
   void initBloc() {
     // TODO: implement initBloc
     actions.clear();
-    if(GlobalApplication().roleType == RoleType.bussiness){
+    if (GlobalApplication().roleType == RoleType.bussiness) {
       actions.putIfAbsent(
           "Doanh nghiệp",
-              () => [
-            MoreActionPageModel(
-                icon: Icons.change_circle_outlined,
-                title: "Đổi thông tin",
-                function: () => nextPage((context) => const ChangeUserInfoPage())),
-            MoreActionPageModel(
-                icon: Icons.password_sharp,
-                title: "Đổi mật khẩu",
-                function: () => nextPage((context) => const ChangeUserInfoPage())),
-          ]);
+          () => [
+                MoreActionPageModel(
+                    icon: Icons.change_circle_outlined,
+                    title: "Đổi thông tin",
+                    function: () =>
+                        nextPage((context) => const ChangeUserInfoPage())),
+              ]);
     }
 
-    actions.putIfAbsent(
-        "Tài khoản",
-            () => [
-          MoreActionPageModel(
-              icon: Icons.change_circle_outlined,
-              title: "Đổi thông tin",
-              function: () => nextPage((context) => const ChangeUserInfoPage())),
-          MoreActionPageModel(
-              icon: Icons.password_sharp,
-              title: "Đổi mật khẩu",
-              function: () => nextPage((context) => const ChangeUserInfoPage())),
-        ]);
+    if (GlobalApplication().isLogin) {
+      actions.putIfAbsent(
+          "Tài khoản",
+          () => [
+                MoreActionPageModel(
+                    icon: Icons.change_circle_outlined,
+                    title: "Đổi thông tin",
+                    function: () =>
+                        nextPage((context) => const ChangeUserInfoPage())),
+                MoreActionPageModel(
+                    icon: Icons.password_sharp,
+                    title: "Đổi mật khẩu",
+                    function: () =>
+                        nextPage((context) => const ChangeUserInfoPage())),
+              ]);
+    }
     actions.putIfAbsent(
         "Đa phương tiện",
-            () => [
-          MoreActionPageModel(
-              icon: Icons.video_collection,
-              title: "Video",
-              function: () => nextPage((context) => const VideoPage())),
-          MoreActionPageModel(
-              icon: Icons.image,
-              title: "Album",
-              function: () => nextPage((context) => const AlbumPage())),
-        ]);
+        () => [
+              MoreActionPageModel(
+                  icon: Icons.video_collection,
+                  title: "Video",
+                  function: () => nextPage((context) => const VideoPage())),
+              MoreActionPageModel(
+                  icon: Icons.image,
+                  title: "Album",
+                  function: () => nextPage((context) => const AlbumPage())),
+            ]);
     actions.putIfAbsent(
         "Biểu đồ",
-            () => [
-          MoreActionPageModel(
-              icon: Icons.area_chart,
-              title: "Biểu đồ 1",
-              function: () => nextPage((context) => const ChangeUserInfoPage())),
+        () => [
+              MoreActionPageModel(
+                  icon: Icons.area_chart,
+                  title: "Biểu đồ 1",
+                  function: () =>
+                      nextPage((context) => const ChangeUserInfoPage())),
               MoreActionPageModel(
                   icon: Icons.bar_chart,
                   title: "Biểu đồ 2",
-                  function: () => nextPage((context) => const ChangeUserInfoPage())),
+                  function: () =>
+                      nextPage((context) => const ChangeUserInfoPage())),
               MoreActionPageModel(
                   icon: Icons.pie_chart,
                   title: "Biểu đồ 3",
-                  function: () => nextPage((context) => const ChangeUserInfoPage())),
+                  function: () =>
+                      nextPage((context) => const ChangeUserInfoPage())),
               MoreActionPageModel(
                   icon: Icons.bubble_chart,
                   title: "Biểu đồ 4",
-                  function: () => nextPage((context) => const ChangeUserInfoPage())),
+                  function: () =>
+                      nextPage((context) => const ChangeUserInfoPage())),
               MoreActionPageModel(
                   icon: Icons.multiline_chart,
                   title: "Biểu đồ 5",
-                  function: () => nextPage((context) => const ChangeUserInfoPage())),
-        ]);
+                  function: () =>
+                      nextPage((context) => const ChangeUserInfoPage())),
+            ]);
     actions.putIfAbsent(
         "Ứng dụng",
-            () => [
+        () => [
               MoreActionPageModel(
                   icon: Icons.question_answer,
                   title: "Hỏi đáp",
-                  function: () => nextPage((context) => const QuestionAnswerPage())),
+                  function: () =>
+                      nextPage((context) => const QuestionAnswerPage())),
               MoreActionPageModel(
                   icon: Icons.upload,
                   title: "Gửi yêu cầu hỗ trợ",
-                  function: () => nextPage((context) => const RequestSupportPage())),
+                  function: () =>
+                      nextPage((context) => const RequestSupportPage())),
               MoreActionPageModel(
                   icon: Icons.support_agent,
                   title: "Dịch vụ khách hàng",
@@ -156,20 +164,25 @@ class MoreActionPageState extends BasePageState<MoreActionPage> {
                   title: "Chia sẻ",
                   function: () => GlobalApplication().shareApp()),
               MoreActionPageModel(
-                  icon: Icons.star_rate,
-                  title: "Đánh giá",
-                  function: () => inAppReview.isAvailable().then((value) => inAppReview.requestReview()),)
-        ]);
+                icon: Icons.star_rate,
+                title: "Đánh giá",
+                function: () => inAppReview
+                    .isAvailable()
+                    .then((value) => inAppReview.requestReview()),
+              )
+            ]);
     children.clear();
     children.add(MoreActionCard(
-      onSignIn: ()=> submitSignIn(),
-      onSignOut: ()=> submitSignOut(),
+      onSignIn: () => submitSignIn(),
+      onSignOut: () => submitSignOut(),
     ));
-    children.addAll(actions.entries.map((e) => GroupMoreActionItem(
-      title: e.key,
-      items: e.value,
-      onClickItem: (item) => item.function(),
-    )).toList());
+    children.addAll(actions.entries
+        .map((e) => GroupMoreActionItem(
+              title: e.key,
+              items: e.value,
+              onClickItem: (item) => item.function(),
+            ))
+        .toList());
   }
 
   @override
@@ -180,18 +193,24 @@ class MoreActionPageState extends BasePageState<MoreActionPage> {
 
   @override
   Widget pageUI(BuildContext context) => Container(
-    margin: const EdgeInsets.all(10),
-    child: ListView(
-      children: children,
-    ),
-  );
+        margin: const EdgeInsets.all(10),
+        child: ListView(
+          children: children,
+        ),
+      );
 
   submitSignIn() {
     nextPage((context) => const SignInPage());
   }
 
   submitSignOut() {
-
-    showCenterMessage("submitSignOut");
+    showAlertChoose(
+        allow: () => startLoading()
+            .then((value) => GlobalApplication().signOut())
+            .then((value) => stopLoading())
+            .then((value) =>
+                nextPageWithoutBack((context) => const SignInPage())),
+        title: "Thông báo",
+        desc: "Bạn chắc chắn muốn đăng xuất khỏi hệ thống?");
   }
 }

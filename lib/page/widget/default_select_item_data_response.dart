@@ -20,6 +20,7 @@ class DefaultSelectItemDataResponse<T extends BaseEportalDataResponse>
       super.labelText,
       required super.list,
       super.onChanged,
+      super.validator,
       required super.title});
 
   @override
@@ -31,8 +32,8 @@ class DefaultSelectItemDataResponseState<T extends BaseEportalDataResponse>
     extends DefaultSelectItemState<T> {
   @override
   Widget build(BuildContext context) => Container(
-    margin: EdgeInsets.only(top: 5),
-    child: DropdownSearch<T>(
+        margin: const EdgeInsets.only(top: 5),
+        child: DropdownSearch<T>(
           key: key,
           popupProps: buildPopupProps(context),
           dropdownButtonProps: buildDropdownButtonProps(context),
@@ -45,5 +46,5 @@ class DefaultSelectItemDataResponseState<T extends BaseEportalDataResponse>
           dropdownDecoratorProps:
               buildDropDownDecoratorProps(context, widget.title),
         ),
-  );
+      );
 }

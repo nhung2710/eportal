@@ -20,9 +20,12 @@ class DefaultSelectItem<T> extends StatefulWidget {
   final String? labelText;
   final String? helperText;
   final String? hintText;
+  final bool required;
+  final FormFieldValidator<T>? validator;
 
   const DefaultSelectItem({
     super.key,
+    this.required = false,
     this.selectedItem,
     required this.list,
     required this.title,
@@ -33,6 +36,7 @@ class DefaultSelectItem<T> extends StatefulWidget {
     this.hintText,
     this.labelText,
     this.helperText,
+    this.validator,
   });
 
   @override
@@ -44,8 +48,8 @@ class DefaultSelectItemState<T> extends State<DefaultSelectItem<T>> {
 
   @override
   Widget build(BuildContext context) => Container(
-    margin: const EdgeInsets.only(top: 5),
-    child: DropdownSearch<T>(
+        margin: const EdgeInsets.only(top: 5),
+        child: DropdownSearch<T>(
           key: key,
           dropdownButtonProps: buildDropdownButtonProps(context),
           popupProps: buildPopupProps(context),
@@ -55,10 +59,11 @@ class DefaultSelectItemState<T> extends State<DefaultSelectItem<T>> {
           asyncItems: (String filter) => Future.value(widget.list),
           itemAsString: widget.itemAsString,
           onChanged: widget.onChanged,
+          validator: widget.validator,
           dropdownDecoratorProps:
               buildDropDownDecoratorProps(context, widget.title),
         ),
-  );
+      );
 
   PopupProps<T> buildPopupProps<T>(BuildContext context) => PopupProps.dialog(
       showSearchBox: true,
@@ -183,10 +188,11 @@ class DefaultSelectItemState<T> extends State<DefaultSelectItem<T>> {
             .copyWith(color: Colors.black, overflow: TextOverflow.visible),
       );
 
-  ClearButtonProps buildClearButtonProps() => const ClearButtonProps(
+  ClearButtonProps buildClearButtonProps() => ClearButtonProps(
       isVisible: true,
       padding: EdgeInsets.zero,
-      icon: Icon(
+      onPressed: () => {},
+      icon: const Icon(
         FontAwesomeIcons.deleteLeft,
         color: Colors.red,
         size: AppSizeIcon.sizeOfNormal,

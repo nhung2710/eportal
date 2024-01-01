@@ -68,15 +68,14 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
   }
 
   PreferredSizeWidget defaultTabBar() => AppBar(
-    title: Text(
-      getPageTitle(context),
-      style: AppTextStyle.titleAppbarPage,
-    ),
-    backgroundColor: AppColor.colorOfIcon,
-    automaticallyImplyLeading: true,
-    centerTitle: true,
-
-  );
+        title: Text(
+          getPageTitle(context),
+          style: AppTextStyle.titleAppbarPage,
+        ),
+        backgroundColor: AppColor.colorOfIcon,
+        automaticallyImplyLeading: true,
+        centerTitle: true,
+      );
 
   @override
   void initState() {
@@ -126,15 +125,13 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
           endDrawer: getEndDrawer(context),
           drawer: getDrawer(context),
           floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniEndFloat,
+              FloatingActionButtonLocation.miniEndFloat,
           floatingActionButton: getFloatingActionButton(context),
           bottomNavigationBar: getBottomNavigationBar(context),
         ),
       ),
     );
   }
-
-
 
   Widget? getEndDrawer(BuildContext context) => null;
 
@@ -143,8 +140,8 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
   Widget pageUI(BuildContext context);
 
   Future processDemo() => startLoading()
-          .then((value) => Future.delayed(const Duration(seconds: 5)))
-          .then((value) => stopLoading());
+      .then((value) => Future.delayed(const Duration(seconds: 5)))
+      .then((value) => stopLoading());
 
   void hiddenKeyboard() {
     ErrorExtension()
@@ -155,7 +152,8 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
 
   Future<void> startLoading() async {
     hiddenKeyboard();
-    EasyLoading.show(status: 'Hệ thông đang xử lý...',maskType: EasyLoadingMaskType.clear);
+    EasyLoading.show(
+        status: 'Hệ thông đang xử lý...', maskType: EasyLoadingMaskType.clear);
   }
 
   Future<void> stopLoading() async {
@@ -176,7 +174,9 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
         backgroundColor: Colors.red,
         content: Text(
           error,
-          style: AppTextStyle.textButton.copyWith(color: Colors.white,),
+          style: AppTextStyle.textButton.copyWith(
+            color: Colors.white,
+          ),
         ),
       ),
     );
@@ -184,15 +184,18 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
 
   Future<bool?> showAlertChoose(
       {Widget content = const SizedBox(),
-        String? title,
-        String? desc,
-        required void Function() allow}) async {
+      String? title,
+      String? desc,
+      required void Function() allow}) async {
     hiddenKeyboard();
     return Alert(
         context: context,
         type: AlertType.warning,
         style: AlertStyle(
-            titleStyle: AppTextStyle.title.copyWith(overflow: TextOverflow.visible), descStyle: AppTextStyle.normal.copyWith(overflow: TextOverflow.visible)),
+            titleStyle:
+                AppTextStyle.title.copyWith(overflow: TextOverflow.visible),
+            descStyle:
+                AppTextStyle.normal.copyWith(overflow: TextOverflow.visible)),
         title: title,
         desc: desc,
         content: content,
@@ -227,7 +230,10 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
         context: context,
         type: AlertType.error,
         style: AlertStyle(
-            titleStyle: AppTextStyle.title.copyWith(overflow: TextOverflow.visible), descStyle: AppTextStyle.normal.copyWith(overflow: TextOverflow.visible)),
+            titleStyle:
+                AppTextStyle.title.copyWith(overflow: TextOverflow.visible),
+            descStyle:
+                AppTextStyle.normal.copyWith(overflow: TextOverflow.visible)),
         title: "Thông báo",
         desc: error
             .supportHtml()
@@ -250,8 +256,11 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
     return Alert(
         context: context,
         type: AlertType.info,
-        style:  AlertStyle(
-            titleStyle: AppTextStyle.title.copyWith(overflow: TextOverflow.visible), descStyle: AppTextStyle.normal.copyWith(overflow: TextOverflow.visible)),
+        style: AlertStyle(
+            titleStyle:
+                AppTextStyle.title.copyWith(overflow: TextOverflow.visible),
+            descStyle:
+                AppTextStyle.normal.copyWith(overflow: TextOverflow.visible)),
         title: "Thông báo",
         desc: message,
         buttons: [
@@ -269,7 +278,6 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
 
   PreferredSizeWidget? getAppBar(BuildContext context) => null;
 
-
   String getPageTitle(BuildContext context) => "";
 
   Widget? getFloatingActionButton(BuildContext context) => null;
@@ -284,16 +292,18 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
 
   bool isValid() => isValidForm(context);
 
-  void backPage([ Object? result ]) => Navigator.pop(context,result);
+  void backPage([Object? result]) => Navigator.pop(context, result);
 
   Future nextPage(WidgetBuilder builder) {
     stopLoading();
-    return Navigator.push(context, CustomPageRouteBuilder(exitPage: widget,enterPage : builder(context)));
+    return Navigator.push(context,
+        CustomPageRouteBuilder(exitPage: widget, enterPage: builder(context)));
   }
 
-  void nextPageWithoutBack(WidgetBuilder builder) {
+  Future nextPageWithoutBack(WidgetBuilder builder) {
     stopLoading();
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: builder));
+    return Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: builder));
   }
 
   Future<void> scrollToEnd() =>
@@ -335,9 +345,9 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
   }
 
   Widget handleSelectDataMultiState<T>(
-      DataMultiState<T> state,
-      BlocWidgetBuilder<List<T>> builder,
-      ) {
+    DataMultiState<T> state,
+    BlocWidgetBuilder<List<T>> builder,
+  ) {
     switch (state.status) {
       case DataBlocStatus.init:
         return buildSelectLoading(context);
@@ -397,8 +407,8 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
   }
 
   Widget buildScreenLoading(BuildContext buildContext) => Center(
-    child: Image.asset("assets/images/loading.gif"),
-  );
+        child: Image.asset("assets/images/loading.gif"),
+      );
 
   Widget buildScreenError(String error) => Container(
       height: 100,
@@ -408,20 +418,20 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
       ));
 
   Widget buildNotFoundData(BuildContext buildContext) => Center(
-    child: Image.asset("assets/images/NotFoundData.jpg"),
-  );
+        child: Image.asset("assets/images/NotFoundData.jpg"),
+      );
 
   Widget buildImplement(BuildContext buildContext) => Center(
-    child: Image.asset("assets/images/Implement.jpg"),
-  );
+        child: Image.asset("assets/images/Implement.jpg"),
+      );
 
   Widget buildSelectLoading(BuildContext context) => const SizedBox(
-    height: 25,
-    child: CircularProgressIndicator(
-      color: AppColor.colorOfIcon,
-      strokeWidth: 5,
-    ),
-  );
+        height: 25,
+        child: CircularProgressIndicator(
+          color: AppColor.colorOfIcon,
+          strokeWidth: 5,
+        ),
+      );
 
   Color getBackgroundColor(BuildContext context) => Colors.white;
 }
