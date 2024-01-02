@@ -3,6 +3,7 @@
 // Copyright (c) 2023 Hilo All rights reserved.
 //
 
+import 'package:eportal/page/base/page_state/base_page_keep_state.dart';
 import 'package:eportal/page/base/page_state/base_page_state.dart';
 import 'package:eportal/page/model/more_action_page_model.dart';
 import 'package:eportal/page/share/about_us/page/about_us_page.dart';
@@ -34,7 +35,7 @@ class MoreActionPage extends BasePageWidget {
   State<StatefulWidget> createState() => MoreActionPageState();
 }
 
-class MoreActionPageState extends BasePageState<MoreActionPage> {
+class MoreActionPageState extends BasePageKeepState<MoreActionPage> {
   Map<String, List<MoreActionPageModel>> actions =
       <String, List<MoreActionPageModel>>{};
   final InAppReview inAppReview = InAppReview.instance;

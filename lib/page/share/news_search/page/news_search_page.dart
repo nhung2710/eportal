@@ -7,10 +7,11 @@ import 'package:eportal/bloc/common_new/news_search_bloc.dart';
 import 'package:eportal/model/api/request/common_new/news_search_request.dart';
 import 'package:eportal/model/api/response/common_new/data/news_search_data_response.dart';
 import 'package:eportal/page/base/page_state/base_page_state.dart';
+import 'package:eportal/page/share/news_detail/page/news_detail_page.dart';
 import 'package:eportal/page/share/news_search/page/news_search_filter_page.dart';
+import 'package:eportal/page/share/news_search/widget/news_search_item.dart';
 import 'package:eportal/page/widget/default_search_form_field.dart';
 import 'package:eportal/page/widget/default_text_form_field.dart';
-import 'package:eportal/screen/share/news_detail/page/news_detail_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_size_icon.dart';
@@ -145,21 +146,13 @@ class NewsSearchPageState extends BasePageState<NewsSearchPage> {
                       DataPageState<NewsSearchDataResponse> state) =>
                       handleDataPageState<NewsSearchDataResponse>(
                         state,
-                            (context, state) => ListView.builder(
+                            (context, state) => ListView(
                             controller: scrollController,
                             shrinkWrap: true,
-                            itemCount: state.length,
-                            itemBuilder: (context, i) => GestureDetector(
-                              onTap: () =>
-                                  nextPage((context) => NewsDetailPage(
-                                    id: state.elementAt(i).newId,
-                                  )),
-                              child: NewsWidget(
-                                title: state.elementAt(i).title,
-                                imageUrl: state.elementAt(i).imagePath,
-                                content: state.elementAt(i).summary,
-                              ),
-                            )),
+                            children: state.map((e) => NewsSearchItem(data: e, onClickItem: (NewsSearchDataResponse value) =>
+                              nextPage((context) => NewsDetailPage(
+                                newId: value.newId,
+                              )))).toList()),
                       ),
                 ),
               )),

@@ -8,6 +8,7 @@ import 'package:eportal/model/api/request/common_new/home_news_list_request.dart
 import 'package:eportal/model/api/response/common_new/data/home_news_list_data_response.dart';
 import 'package:eportal/page/base/page_state/base_page_state.dart';
 import 'package:eportal/page/share/news/widget/news_item.dart';
+import 'package:eportal/page/share/news_detail/page/news_detail_page.dart';
 import 'package:eportal/page/share/news_search/page/news_search_page.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
@@ -106,7 +107,10 @@ class NewsPageState extends BasePageState<NewsPage> {
                           Expanded(
                             child: ListView(
                             shrinkWrap: true,
-                            children: state.map((e) => NewsItem(data:e)).toList(),
+                            children: state.map((e) => NewsItem(
+                              data:e,
+                              onClickItem: (HomeNewsListDataResponse value) => nextPage((context) => NewsDetailPage(newId: value.newId,)),))
+                                .toList(),
                             ),
                           ),
                         ],

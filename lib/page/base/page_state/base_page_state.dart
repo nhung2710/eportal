@@ -79,6 +79,7 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
 
   @override
   void initState() {
+    print("initState: ${runtimeType}");
     //WidgetsBinding.instance.addObserver(this);
     startScrollMore();
     scrollController = ScrollController();
@@ -98,6 +99,7 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
     );
     initBloc();
     initDataLoading();
+
     // TODO: implement initState
     super.initState();
   }
@@ -128,6 +130,7 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
               FloatingActionButtonLocation.miniEndFloat,
           floatingActionButton: getFloatingActionButton(context),
           bottomNavigationBar: getBottomNavigationBar(context),
+          bottomSheet: getBottomSheet(context),
         ),
       ),
     );
@@ -296,6 +299,15 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
 
   Future nextPage(WidgetBuilder builder) {
     stopLoading();
+    return Navigator.push(context, MaterialPageRoute(builder: builder));
+  }
+
+  Future nextPageWithoutBack(WidgetBuilder builder) {
+    stopLoading();
+    return Navigator.pushReplacement(context, MaterialPageRoute(builder: builder));
+  }
+  /*Future nextPage(WidgetBuilder builder) {
+    stopLoading();
     return Navigator.push(context,
         CustomPageRouteBuilder(exitPage: widget, enterPage: builder(context)));
   }
@@ -304,7 +316,7 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
     stopLoading();
     return Navigator.pushReplacement(
         context, MaterialPageRoute(builder: builder));
-  }
+  }*/
 
   Future<void> scrollToEnd() =>
       scrollController.animateTo(scrollController.position.maxScrollExtent,
@@ -433,5 +445,8 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
         ),
       );
 
-  Color getBackgroundColor(BuildContext context) => Colors.white;
+  Color getBackgroundColor(BuildContext context) => Colors.transparent;
+
+  Widget? getBottomSheet(BuildContext context) => null;
+
 }

@@ -60,8 +60,8 @@ class MoreActionCard extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment:CrossAxisAlignment.start,
                           children: [
-                            Text(GlobalApplication().helloUser(),style: AppTextStyle.titlePage.copyWith(color: AppColor.colorOfIconActive),),
-                            Text(GlobalApplication().helloMessage(),style: AppTextStyle.title.copyWith(color: AppColor.colorOfIcon),),
+                            Text(GlobalApplication().helloUser(),style: AppTextStyle.titlePage.copyWith(color: AppColor.colorOfIconActive),maxLines: 2,),
+                            Text(GlobalApplication().helloMessage(),style: AppTextStyle.title.copyWith(color: AppColor.colorOfIcon),maxLines: 1,),
                             Expanded(
                               child: Align(
                                 alignment: Alignment.bottomLeft,

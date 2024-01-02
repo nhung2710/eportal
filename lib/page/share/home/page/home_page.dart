@@ -18,6 +18,7 @@ import 'package:eportal/model/api/request/common_new/home_business_list_request.
 import 'package:eportal/model/api/request/common_new/home_slide_list_request.dart';
 import 'package:eportal/model/api/response/common_new/data/home_advertise_list_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/home_slide_list_data_response.dart';
+import 'package:eportal/page/base/page_state/base_page_keep_state.dart';
 import 'package:eportal/page/base/page_state/base_page_state.dart';
 import 'package:eportal/page/base/page_widget/base_page_widget.dart';
 import 'package:eportal/page/model/more_action_page_model.dart';
@@ -42,7 +43,7 @@ class HomePage extends BasePageWidget {
   State<StatefulWidget> createState() => HomePageState();
 }
 
-class HomePageState extends BasePageState<HomePage> {
+class HomePageState extends BasePageKeepState<HomePage> {
   late HomeSlideListBloc homeSlideListBloc;
   late HomeAdvertiseListBloc homeAdvertiseListBloc;
   late HomeBusinessListBloc homeBusinessListBloc;
