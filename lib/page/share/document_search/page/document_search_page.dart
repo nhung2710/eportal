@@ -2,70 +2,67 @@
 // Created by BlackRose on 02/01/2024.
 // Copyright (c) 2024 Hilo All rights reserved.
 //
-
-import 'package:eportal/bloc/common_new/news_search_bloc.dart';
-import 'package:eportal/model/api/request/common_new/news_search_request.dart';
-import 'package:eportal/model/api/response/common_new/data/news_search_data_response.dart';
+import 'package:eportal/bloc/common_new/document_list_bloc.dart';
+import 'package:eportal/event/common_new/document_list_event.dart';
+import 'package:eportal/model/api/request/common_new/data/document_list_data_request.dart';
+import 'package:eportal/model/api/request/common_new/document_list_request.dart';
+import 'package:eportal/model/api/response/common_new/data/document_list_data_response.dart';
 import 'package:eportal/page/base/page_state/base_page_state.dart';
-import 'package:eportal/page/share/news_detail/page/news_detail_page.dart';
-import 'package:eportal/page/share/news_search/page/news_search_filter_page.dart';
-import 'package:eportal/page/share/news_search/widget/news_search_item.dart';
+import 'package:eportal/page/base/page_widget/base_page_widget.dart';
+import 'package:eportal/page/share/document_search/page/document_search_filter_page.dart';
+import 'package:eportal/page/share/document_search/widget/document_search_item.dart';
 import 'package:eportal/page/widget/default_search_form_field.dart';
-import 'package:eportal/page/widget/default_text_form_field.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_size_icon.dart';
 import 'package:eportal/style/app_text_style.dart';
-import 'package:eportal/widget/dialog/filter_news_dialog.dart';
-import 'package:eportal/widget/input/search_input.dart';
-import 'package:eportal/widget/news/news_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../event/common_new/news_search_event.dart';
-import '../../../../model/api/request/common_new/data/news_search_data_request.dart';
-import '../../../base/page_widget/base_page_widget.dart';
+import '../../document_preview/page/document_preview_page.dart';
 
-class NewsSearchPage extends BasePageWidget {
-  const NewsSearchPage({super.key});
+
+class DocumentSearchPage extends BasePageWidget {
+  const DocumentSearchPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => NewsSearchPageState();
+  State<StatefulWidget> createState() => DocumentSearchPageState();
 }
 
-class NewsSearchPageState extends BasePageState<NewsSearchPage> {
-  late NewsSearchBloc newsSearchBloc;
-  NewsSearchEvent newsSearchEvent = NewsSearchEvent(request: NewsSearchRequest(obj: NewsSearchDataRequest()));
+class DocumentSearchPageState extends BasePageState<DocumentSearchPage> {
+  late DocumentListBloc documentListBloc;
+  DocumentListEvent documentListEvent = DocumentListEvent(request: DocumentListRequest(obj: DocumentListDataRequest()));
   TextEditingController textEditingController = TextEditingController();
 
   @override
   void initBloc() {
-    newsSearchBloc = NewsSearchBloc();
+    documentListBloc = DocumentListBloc();
   }
 
   @override
   void disposeBloc() {
     // TODO: implement disposeBloc
-    newsSearchBloc.close();
+    documentListBloc.close();
   }
 
   @override
   void initDataLoading() {
-    newsSearchEvent.request.obj.reloadData();
+    documentListEvent.request.obj.reloadData();
     callApi();
   }
 
   @override
   void getMoreData() {
-    newsSearchEvent.request.obj.nextData();
+    documentListEvent.request.obj.nextData();
     callApi();
   }
 
   @override
   void callApi() {
-    newsSearchEvent.request.obj.tuKhoa = textEditingController.text;
-    newsSearchBloc.add(newsSearchEvent);
+    documentListEvent.request.obj.tuKhoa = textEditingController.text;
+    documentListBloc.add(documentListEvent);
   }
 
   @override
@@ -83,9 +80,9 @@ class NewsSearchPageState extends BasePageState<NewsSearchPage> {
         child: Center(
           child: GestureDetector(
             onTap: () {
-              nextPage((context) => NewsSearchFilterPage(data:newsSearchEvent)).then((value) {
+              nextPage((context) => DocumentSearchFilterPage(data:documentListEvent)).then((value) {
                 if(value!=null) {
-                  newsSearchEvent = value;
+                  documentListEvent = value;
                   initDataLoading();
                 }
               });
@@ -135,24 +132,24 @@ class NewsSearchPageState extends BasePageState<NewsSearchPage> {
         ),
         Expanded(
           child: BlocProvider(
-              create: (_) => newsSearchBloc,
-              child: BlocListener<NewsSearchBloc,
-                  DataPageState<NewsSearchDataResponse>>(
+              create: (_) => documentListBloc,
+              child: BlocListener<DocumentListBloc,
+                  DataPageState<DocumentListDataResponse>>(
                 listener: (BuildContext context,
-                    DataPageState<NewsSearchDataResponse> state) {},
-                child: BlocBuilder<NewsSearchBloc,
-                    DataPageState<NewsSearchDataResponse>>(
+                    DataPageState<DocumentListDataResponse> state) {},
+                child: BlocBuilder<DocumentListBloc,
+                    DataPageState<DocumentListDataResponse>>(
                   builder: (BuildContext context,
-                      DataPageState<NewsSearchDataResponse> state) =>
-                      handleDataPageState<NewsSearchDataResponse>(
+                      DataPageState<DocumentListDataResponse> state) =>
+                      handleDataPageState<DocumentListDataResponse>(
                         state,
                             (context, state) => ListView(
                             controller: scrollController,
                             shrinkWrap: true,
-                            children: state.map((e) => NewsSearchItem(data: e, onClickItem: (NewsSearchDataResponse value) =>
-                              nextPage((context) => NewsDetailPage(
-                                newId: value.newId,
-                              )))).toList()),
+                            children: state.map((e) => DocumentSearchItem(data: e, onClickItem: (DocumentListDataResponse value) =>
+                                nextPage((context) => DocumentPreviewPage(
+                                   url: value.fileSource,
+                                )))).toList()),
                       ),
                 ),
               )),

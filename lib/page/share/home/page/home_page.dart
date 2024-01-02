@@ -23,6 +23,7 @@ import 'package:eportal/page/base/page_state/base_page_state.dart';
 import 'package:eportal/page/base/page_widget/base_page_widget.dart';
 import 'package:eportal/page/model/more_action_page_model.dart';
 import 'package:eportal/page/share/album/page/album_page.dart';
+import 'package:eportal/page/share/document/page/document_page.dart';
 import 'package:eportal/page/share/home/widget/home_page_action_item.dart';
 import 'package:eportal/page/share/news/page/news_page.dart';
 import 'package:eportal/page/share/news_search/page/news_search_page.dart';
@@ -109,7 +110,7 @@ class HomePageState extends BasePageKeepState<HomePage> {
               MoreActionPageModel(
                   icon: Icons.folder_copy,
                   title: "Văn bản pháp luật",
-                  function: () => nextPage((context) => const AlbumPage())),
+                  function: () => nextPage((context) => const DocumentPage())),
             ]);
     actions.putIfAbsent(
         "Tìm kiếm",

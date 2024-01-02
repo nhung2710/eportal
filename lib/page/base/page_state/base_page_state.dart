@@ -418,9 +418,10 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
     }
   }
 
-  Widget buildScreenLoading(BuildContext buildContext) => Center(
-        child: Image.asset("assets/images/loading.gif"),
-      );
+  Widget buildScreenLoading(BuildContext buildContext) => const Center(
+      child: RefreshProgressIndicator(
+      )
+  );
 
   Widget buildScreenError(String error) => Container(
       height: 100,
