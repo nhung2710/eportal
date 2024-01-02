@@ -210,8 +210,9 @@ class SignInPageState extends BasePageState<SignInPage> {
   void openSignUp() {
     nextPage((context) => const SignUpPage()).then((value) {
       if (value != null) {
-        userNameController.text = value.toString();
-        passWordController.clear();
+        print(value);
+        userNameController.text = value["userName"].toString();
+        passWordController.text= value["password"].toString();
       }
     });
   }

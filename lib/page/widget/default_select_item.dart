@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DefaultSelectItem<T> extends StatefulWidget {
-  final T? selectedItem;
+  T? selectedItem;
   final List<T> list;
   final String title;
   final ValueChanged<T?>? onChanged;
@@ -23,7 +23,7 @@ class DefaultSelectItem<T> extends StatefulWidget {
   final bool required;
   final FormFieldValidator<T>? validator;
 
-  const DefaultSelectItem({
+  DefaultSelectItem({
     super.key,
     this.required = false,
     this.selectedItem,
@@ -191,7 +191,13 @@ class DefaultSelectItemState<T> extends State<DefaultSelectItem<T>> {
   ClearButtonProps buildClearButtonProps() => ClearButtonProps(
       isVisible: true,
       padding: EdgeInsets.zero,
-      onPressed: () => {},
+      onPressed: (){
+        widget.selectedItem = null;
+        if(widget.onChanged!=null) {
+          widget.onChanged!(null);
+        }
+        clear();
+      },
       icon: const Icon(
         FontAwesomeIcons.deleteLeft,
         color: Colors.red,

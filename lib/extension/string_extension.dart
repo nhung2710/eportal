@@ -38,6 +38,10 @@ extension StringNullExtension on String? {
     return "${ApplicationApiConstant.kBASE_URI_MEDIA}/$this";
   }
 
+  String capitalize() {
+    if (isNullOrWhiteSpace()) return "";
+    return "${this![0].toUpperCase()}${this!.substring(1).toLowerCase()}";
+  }
   String convertUrlToYoutubeId({bool trimWhitespaces = true}) {
     String url = replaceWhenNullOrWhiteSpace();
     if (!url.contains("http") && (url.length == 11)) return url;
@@ -96,6 +100,12 @@ extension StringNullExtension on String? {
 }
 
 extension StringExtension on String {
+
+  String capitalize() {
+    if (isNullOrWhiteSpace()) return "";
+    return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
+  }
+
   bool isNullOrEmpty() => isNull() || isEmpty;
 
   bool isNullOrWhiteSpace() => isNull() || isEmpty || trim().isEmpty;

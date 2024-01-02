@@ -1,5 +1,7 @@
 import 'package:eportal/model/base/base_eportal_xml.dart';
 
+import '../../../../../constant/application_constant.dart';
+
 //
 // Created by BlackRose on 13/11/2023.
 // Copyright (c) 2023 Hilo All rights reserved.
@@ -9,7 +11,7 @@ class NewsSearchDataRequest extends BasePageEportalXml {
   String? chuyenMuc;
 
   NewsSearchDataRequest(
-      {this.tuKhoa,
+      {this.tuKhoa = ApplicationConstant.EMPTY,
       this.chuyenMuc,
       super.soBanGhiTrenTrang,
       super.soTrangHienTai});

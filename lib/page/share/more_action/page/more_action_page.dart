@@ -8,6 +8,7 @@ import 'package:eportal/page/model/more_action_page_model.dart';
 import 'package:eportal/page/share/about_us/page/about_us_page.dart';
 import 'package:eportal/page/share/album/page/album_page.dart';
 import 'package:eportal/page/share/change_user_info/page/change_user_info_page.dart';
+import 'package:eportal/page/share/change_user_password/page/change_user_password_page.dart';
 import 'package:eportal/page/share/map/page/map_page.dart';
 import 'package:eportal/page/share/more_action/widget/group_more_action_item.dart';
 import 'package:eportal/page/share/policy/page/policy_page.dart';
@@ -21,6 +22,7 @@ import 'package:in_app_review/in_app_review.dart';
 import '../../../../application/global_application.dart';
 import '../../../../enum/role_type.dart';
 import '../../../base/page_widget/base_page_widget.dart';
+import '../../forgot_password/page/forgot_password_page.dart';
 import '../../support/page/support_page.dart';
 import '../../video/page/video_page.dart';
 import '../widget/more_action_card.dart';
@@ -82,7 +84,7 @@ class MoreActionPageState extends BasePageState<MoreActionPage> {
                     icon: Icons.password_sharp,
                     title: "Đổi mật khẩu",
                     function: () =>
-                        nextPage((context) => const ChangeUserInfoPage())),
+                        nextPage((context) => const ChangeUserPasswordPage())),
               ]);
     }
     actions.putIfAbsent(
@@ -97,7 +99,7 @@ class MoreActionPageState extends BasePageState<MoreActionPage> {
                   title: "Album",
                   function: () => nextPage((context) => const AlbumPage())),
             ]);
-    actions.putIfAbsent(
+    /*actions.putIfAbsent(
         "Biểu đồ",
         () => [
               MoreActionPageModel(
@@ -125,7 +127,7 @@ class MoreActionPageState extends BasePageState<MoreActionPage> {
                   title: "Biểu đồ 5",
                   function: () =>
                       nextPage((context) => const ChangeUserInfoPage())),
-            ]);
+            ]);*/
     actions.putIfAbsent(
         "Ứng dụng",
         () => [

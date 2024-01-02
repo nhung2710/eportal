@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 
 class DefaultSelectItemDataResponse<T extends BaseEportalDataResponse>
     extends DefaultSelectItem<T> {
-  const DefaultSelectItemDataResponse(
+  DefaultSelectItemDataResponse(
       {super.key,
       super.selectedItem,
       super.filterFn,

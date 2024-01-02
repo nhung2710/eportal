@@ -84,8 +84,15 @@ class SignUpPageState extends BasePageState<SignUpPage> {
           listener: (BuildContext context, state) {
             handlerActionDataSingleState<DangKyDataResponse>(state,
                 (obj) async {
-              showCenterMessage("Bạn đã gửi câu hỏi thành công")
-                  .then((value) => backPage());
+              if((obj?.userName).isNullOrWhiteSpace())
+                {
+                  showCenterError(obj?.userName);
+                }
+              else{
+                showCenterMessage("Bạn đã tạo tài khoản thành công")
+                    .then((value) => backPage({"userName":obj?.userName.replaceWhenNullOrWhiteSpace(emailController.text),"password":passWordController.text,}));
+              }
+
             });
           },
           child: Container(
@@ -177,10 +184,17 @@ class SignUpPageState extends BasePageState<SignUpPage> {
                       DefaultPasswordFormField(
                         icon: FontAwesomeIcons.lock,
                         controller: passWordConfirmController,
-                        hintText: "Mật khẩu",
-                        labelText: "Mật khẩu",
+                        hintText: "Nhập lại mật khẩu",
+                        labelText: "Nhập lại mật khẩu",
                         helperText: "Ví dụ: xyz",
                         required: true,
+                        validator: (v)
+                        {
+                          if(passWordController.text!= v) {
+                            return "Nhập lại mật khẩu không khớp với mật khẩu đã nhập ";
+                          }
+                          return null;
+                        },
                       ),
                       DefaultCapchaTextFormField(
                         helperText: "Ví dụ: AAAAAA",
@@ -216,8 +230,18 @@ class SignUpPageState extends BasePageState<SignUpPage> {
 
   void submitForm() {
     if (isValid()) {
-      processDemo().then((value) => showCenterMessage(
-          "Lấy lại mật khẩu thành công vui lòng kiểm tra email để lấy mật khẩu mới"));
+      var fullNames = hoVaTenController.text.split(' ').where((element) => !element.isNullOrWhiteSpace()).map((e) => e.capitalize()).toList();
+      if(fullNames.isEmpty){
+        showCenterError("Vui lòng nhập họ và tên");
+        return;
+      }
+      dangKyEvent.request.obj.ten = fullNames.removeLast();
+      dangKyEvent.request.obj.hoDem = fullNames.join(" ");
+      dangKyEvent.request.obj.email = emailController.text;
+      dangKyEvent.request.obj.soDienThoai = soDienThoaiController.text;
+      dangKyEvent.request.obj.passWord = passWordController.text;
+      dangKyEvent.request.obj.role = role?.item;
+      callApi();
     }
   }
 

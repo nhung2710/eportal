@@ -51,7 +51,7 @@ class DefaultImageNetwork extends StatelessWidget {
 
   Widget defaultImageBuilder(BuildContext context, ImageProvider<Object> imageProvider)=> ClipRRect(
     borderRadius: borderRadius??BorderRadius.all(
-        Radius.circular(radius??20)),
+        Radius.circular(radius??10)),
     child: Image(
       image: imageProvider,
       fit: BoxFit.fill,
