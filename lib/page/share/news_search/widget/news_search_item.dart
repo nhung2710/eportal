@@ -6,6 +6,7 @@
 import 'package:eportal/model/api/response/common_new/data/home_news_list_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/news_search_data_response.dart';
 import 'package:eportal/page/widget/default_card_item.dart';
+import 'package:eportal/page/widget/default_image_network.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/image/image_loading.dart';
 import 'package:flutter/material.dart';
@@ -27,14 +28,8 @@ class NewsSearchItem extends StatelessWidget{
           child: ClipRRect(
               borderRadius:
               const BorderRadius.all(Radius.circular(5.0)),
-              child: ImageLoading(
-                  imageUrl: data.imagePath.getImageUrl(),
-                  imageBuilder: (context, imageProvider) {
-                    return Image(
-                      image: imageProvider,
-                      fit: BoxFit.fill,
-                    );
-                  })),
+              child: DefaultImageNetwork(
+                  imageUrl: data.imagePath.getImageUrl(),)),
 
         ),
         Container(

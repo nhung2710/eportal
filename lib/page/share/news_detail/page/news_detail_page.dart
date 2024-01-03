@@ -10,6 +10,7 @@ import 'package:eportal/model/api/request/common_new/home_news_list_request.dart
 import 'package:eportal/model/api/response/common_new/data/news_detail_data_response.dart';
 import 'package:eportal/page/base/page_state/base_page_state.dart';
 import 'package:eportal/page/base/page_widget/base_page_widget.dart';
+import 'package:eportal/page/widget/default_image_network.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
@@ -116,14 +117,8 @@ class _NewsDetailPageState extends BasePageState<NewsDetailPage> {
                                       child: ClipRRect(
                                         borderRadius:
                                         const BorderRadius.all(Radius.circular(5.0)),
-                                        child: ImageLoading(
+                                        child: DefaultImageNetwork(
                                             imageUrl: (state?.imagePath).getImageUrl(),
-                                            imageBuilder: (context, imageProvider) {
-                                              return Image(
-                                                image: imageProvider,
-                                                fit: BoxFit.fill,
-                                              );
-                                            }
                                         ),
                                       ),
                                     ),

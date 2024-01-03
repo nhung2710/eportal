@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import '../../../../extension/string_extension.dart';
 import '../../../../style/app_text_style.dart';
 import '../../../widget/default_card_item.dart';
+import '../../../widget/default_image_network.dart';
 
 class NewsItem extends StatelessWidget{
   final HomeNewsListDataResponse data;
@@ -25,14 +26,8 @@ class NewsItem extends StatelessWidget{
           child: ClipRRect(
               borderRadius:
               const BorderRadius.all(Radius.circular(5.0)),
-              child: ImageLoading(
-                  imageUrl: data.imagePath.getImageUrl(),
-                  imageBuilder: (context, imageProvider) {
-                    return Image(
-                      image: imageProvider,
-                      fit: BoxFit.fill,
-                    );
-                  })),
+              child: DefaultImageNetwork(
+                  imageUrl: data.imagePath.getImageUrl())),
 
         ),
         Container(

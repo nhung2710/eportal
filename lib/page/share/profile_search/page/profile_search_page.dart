@@ -1,70 +1,73 @@
 //
-// Created by BlackRose on 02/01/2024.
+// Created by BlackRose on 03/01/2024.
 // Copyright (c) 2024 Hilo All rights reserved.
 //
-import 'package:eportal/bloc/common_new/document_list_bloc.dart';
-import 'package:eportal/event/common_new/document_list_event.dart';
-import 'package:eportal/model/api/request/common_new/data/document_list_data_request.dart';
-import 'package:eportal/model/api/request/common_new/document_list_request.dart';
-import 'package:eportal/model/api/response/common_new/data/document_list_data_response.dart';
+
+import 'package:eportal/bloc/common_new/home_job_user_list_bloc.dart';
+import 'package:eportal/bloc/common_new/job_user_search_bloc.dart';
+import 'package:eportal/event/common_new/home_job_user_list_event.dart';
+import 'package:eportal/event/common_new/job_user_search_event.dart';
+import 'package:eportal/model/api/request/common_new/data/job_user_search_data_request.dart';
+import 'package:eportal/model/api/request/common_new/job_user_search_request.dart';
+import 'package:eportal/model/api/response/common_new/data/job_user_search_data_response.dart';
 import 'package:eportal/page/base/page_state/base_page_state.dart';
 import 'package:eportal/page/base/page_widget/base_page_widget.dart';
-import 'package:eportal/page/share/document_search/page/document_search_filter_page.dart';
-import 'package:eportal/page/share/document_search/widget/document_search_item.dart';
+import 'package:eportal/page/share/news_search/page/news_search_filter_page.dart';
+import 'package:eportal/page/share/profile_detail/page/profile_detail_page.dart';
+import 'package:eportal/page/share/profile_search/page/profile_search_filter_page.dart';
+import 'package:eportal/page/share/profile_search/widget/profile_search_page_item.dart';
 import 'package:eportal/page/widget/default_search_form_field.dart';
-import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_size_icon.dart';
 import 'package:eportal/style/app_text_style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../document_preview/page/document_preview_page.dart';
+import '../../../../state/base/base_state.dart';
 
-
-class DocumentSearchPage extends BasePageWidget {
-  const DocumentSearchPage({super.key});
+class ProfileSearchPage extends BasePageWidget {
+  const ProfileSearchPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => DocumentSearchPageState();
+  State<StatefulWidget> createState() => ProfileSearchPageState();
 }
 
-class DocumentSearchPageState extends BasePageState<DocumentSearchPage> {
-  late DocumentListBloc documentListBloc;
-  DocumentListEvent documentListEvent = DocumentListEvent(request: DocumentListRequest(obj: DocumentListDataRequest()));
+class ProfileSearchPageState
+    extends BasePageState<ProfileSearchPage> {
+  late JobUserSearchBloc jobUserSearchBloc;
+  JobUserSearchEvent jobUserSearchEvent = JobUserSearchEvent(request: JobUserSearchRequest(obj: JobUserSearchDataRequest()));
   TextEditingController textEditingController = TextEditingController();
 
   @override
   void initBloc() {
-    documentListBloc = DocumentListBloc();
+    jobUserSearchBloc = JobUserSearchBloc();
   }
 
   @override
   void disposeBloc() {
     // TODO: implement disposeBloc
-    documentListBloc.close();
-  }
-
-  @override
-  void initDataLoading() {
-    documentListEvent.request.obj.reloadData();
-    callApi();
+    jobUserSearchBloc.close();
   }
 
   @override
   void getMoreData() {
-    documentListEvent.request.obj.nextData();
+    // TODO: implement getMoreData
+    jobUserSearchEvent.request.obj.nextData();
+    callApi();
+  }
+
+  @override
+  void initDataLoading() {
+    jobUserSearchEvent.request.obj.reloadData();
     callApi();
   }
 
   @override
   void callApi() {
-    documentListEvent.request.obj.tuKhoa = textEditingController.text;
-    documentListBloc.add(documentListEvent);
+    jobUserSearchEvent.request.obj.tuKhoa = textEditingController.text;
+    jobUserSearchBloc.add(jobUserSearchEvent);
   }
-
   @override
   PreferredSizeWidget? getAppBar(BuildContext context) => AppBar(
     title: Text(
@@ -80,9 +83,9 @@ class DocumentSearchPageState extends BasePageState<DocumentSearchPage> {
         child: Center(
           child: GestureDetector(
             onTap: () {
-              nextPage((context) => DocumentSearchFilterPage(data:documentListEvent)).then((value) {
+              nextPage((context) => ProfileSearchFilterPage(data:jobUserSearchEvent)).then((value) {
                 if(value!=null) {
-                  documentListEvent = value;
+                  jobUserSearchEvent = value;
                   initDataLoading();
                 }
               });
@@ -99,7 +102,6 @@ class DocumentSearchPageState extends BasePageState<DocumentSearchPage> {
   );
 
 
-
   @override
   Widget pageUI(BuildContext context) => Container(
     margin: const EdgeInsets.all(10),
@@ -109,7 +111,7 @@ class DocumentSearchPageState extends BasePageState<DocumentSearchPage> {
         Container(
           margin: const EdgeInsets.only(bottom: 10),
           child: Text(
-            "Tìm kiếm văn bản pháp luật",
+            "Tìm kiếm tin tức hồ sơ",
             style: AppTextStyle.titlePage.copyWith(
                 overflow: TextOverflow.visible,
                 fontSize: 18,
@@ -132,24 +134,25 @@ class DocumentSearchPageState extends BasePageState<DocumentSearchPage> {
         ),
         Expanded(
           child: BlocProvider(
-              create: (_) => documentListBloc,
-              child: BlocListener<DocumentListBloc,
-                  DataPageState<DocumentListDataResponse>>(
+              create: (_) => jobUserSearchBloc,
+              child: BlocListener<JobUserSearchBloc,
+                  DataPageState<JobUserSearchDataResponse>>(
                 listener: (BuildContext context,
-                    DataPageState<DocumentListDataResponse> state) {},
-                child: BlocBuilder<DocumentListBloc,
-                    DataPageState<DocumentListDataResponse>>(
+                    DataPageState<JobUserSearchDataResponse> state) {},
+                child: BlocBuilder<JobUserSearchBloc,
+                    DataPageState<JobUserSearchDataResponse>>(
                   builder: (BuildContext context,
-                      DataPageState<DocumentListDataResponse> state) =>
-                      handleDataPageState<DocumentListDataResponse>(
+                      DataPageState<JobUserSearchDataResponse> state) =>
+                      handleDataPageState<JobUserSearchDataResponse>(
                         state,
                             (context, state) => ListView(
-                            controller: scrollController,
-                            shrinkWrap: true,
-                            children: state.map((e) => DocumentSearchItem(data: e, onClickItem: (DocumentListDataResponse value) =>
-                                nextPage((context) => DocumentPreviewPage(
-                                   url: value.fileSource,
-                                )))).toList()),
+                              shrinkWrap: true,
+                              controller: scrollController,
+                              children: state.map((e) => ProfileSearchPageItem(data: e,
+                                onClickItem: (JobUserSearchDataResponse value) {
+                                    nextPage((context) => ProfileDetailPage(profileId: value.id,));
+                                },
+                              )).toList(),),
                       ),
                 ),
               )),
@@ -157,6 +160,5 @@ class DocumentSearchPageState extends BasePageState<DocumentSearchPage> {
       ],
     ),
   );
-
 
 }

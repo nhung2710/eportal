@@ -2,7 +2,7 @@ class ApplicationConstant {
   ApplicationConstant._internal();
 
   static const NUMBER_PREVIEW_ITEM = 50;
-  static const NUMBER_FULL_ITEM = 20 * NUMBER_PREVIEW_ITEM;
+  static const NUMBER_FULL_ITEM = 50 * NUMBER_PREVIEW_ITEM;
 
   static const String EMPTY = "";
   static const String FIRST_TIME_OPEN_APP = "FIRST_TIME_OPEN_APP";

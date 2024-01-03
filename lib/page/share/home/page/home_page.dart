@@ -24,11 +24,15 @@ import 'package:eportal/page/base/page_widget/base_page_widget.dart';
 import 'package:eportal/page/model/more_action_page_model.dart';
 import 'package:eportal/page/share/album/page/album_page.dart';
 import 'package:eportal/page/share/document/page/document_page.dart';
+import 'package:eportal/page/share/enterprise/page/enterprise_page.dart';
 import 'package:eportal/page/share/home/widget/home_page_action_item.dart';
 import 'package:eportal/page/share/news/page/news_page.dart';
 import 'package:eportal/page/share/news_search/page/news_search_page.dart';
+import 'package:eportal/page/share/profile/page/profile_page.dart';
+import 'package:eportal/page/share/profile_search/page/profile_search_page.dart';
 import 'package:eportal/page/share/video/page/video_page.dart';
 import 'package:eportal/page/widget/default_carousel_slider_image.dart';
+import 'package:eportal/page/widget/default_image_network.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/widget/image/image_loading.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +40,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../extension/string_extension.dart';
 import '../../../widget/default_card_item.dart';
+import '../../document_search/page/document_search_page.dart';
 
 class HomePage extends BasePageWidget {
   const HomePage({super.key});
@@ -56,8 +61,7 @@ class HomePageState extends BasePageKeepState<HomePage> {
   HomeAdvertiseListEvent homeAdvertiseListEvent = HomeAdvertiseListEvent(
       request: HomeAdvertiseListRequest(obj: HomeAdvertiseListDataRequest()));
 
-  Map<String, List<MoreActionPageModel>> actions =
-      <String, List<MoreActionPageModel>>{};
+  List<MoreActionPageModel> actions = [];
   final List<Widget> children = [];
 
   @override
@@ -88,37 +92,23 @@ class HomePageState extends BasePageKeepState<HomePage> {
     homeAdvertiseListBloc = HomeAdvertiseListBloc();
     homeBusinessListBloc = HomeBusinessListBloc();
     actions.clear();
-    actions.putIfAbsent(
-        "Tin tức",
-        () => [
-              MoreActionPageModel(
-                  icon: Icons.newspaper,
-                  title: "Tổng hợp",
-                  function: () => nextPage((context) => const NewsPage(flag: 1,))),
-              MoreActionPageModel(
-                  icon: Icons.work,
-                  title: "Tuyển dụng",
-                  function: () => nextPage((context) => const AlbumPage())),
-              MoreActionPageModel(
-                  icon: Icons.people,
-                  title: "Hố sơ",
-                  function: () => nextPage((context) => const AlbumPage())),
-              MoreActionPageModel(
-                  icon: Icons.business_sharp,
-                  title: "Doanh nghiệp",
-                  function: () => nextPage((context) => const AlbumPage())),
-              MoreActionPageModel(
-                  icon: Icons.folder_copy,
-                  title: "Văn bản pháp luật",
-                  function: () => nextPage((context) => const DocumentPage())),
-            ]);
-    actions.putIfAbsent(
-        "Tìm kiếm",
-        () => [
-          MoreActionPageModel(
-              icon: Icons.newspaper,
-              title: "Tổng hợp",
-              function: () => nextPage((context) => const NewsSearchPage())),
+    actions.add(MoreActionPageModel(
+        icon: Icons.fiber_new_sharp,
+        title: "Tin tức",
+        function: () {  },
+        data: [
+        MoreActionPageModel(
+            icon: Icons.newspaper,
+            title: "Tổng hợp",
+            function: () => nextPage((context) => const NewsPage(flag: 1,))),
+        MoreActionPageModel(
+            icon: Icons.business_sharp,
+            title: "Doanh nghiệp",
+            function: () => nextPage((context) => const EnterprisePage())),
+        MoreActionPageModel(
+            icon: Icons.folder_copy,
+            title: "Văn bản pháp luật",
+            function: () => nextPage((context) => const DocumentPage())),
           MoreActionPageModel(
               icon: Icons.work,
               title: "Tuyển dụng",
@@ -126,18 +116,38 @@ class HomePageState extends BasePageKeepState<HomePage> {
           MoreActionPageModel(
               icon: Icons.people,
               title: "Hố sơ",
-              function: () => nextPage((context) => const AlbumPage())),
+              function: () => nextPage((context) => const ProfilePage())),
+      ]
+    ));
+
+    actions.add(MoreActionPageModel(
+        icon: Icons.search,
+        title: "Tìm kiếm",
+        function: () {  },
+        data: [
+          MoreActionPageModel(
+              icon: Icons.newspaper,
+              title: "Tổng hợp",
+              function: () => nextPage((context) => const NewsSearchPage())),
           MoreActionPageModel(
               icon: Icons.folder_copy,
               title: "Văn bản pháp luật",
+              function: () => nextPage((context) => const DocumentSearchPage())),
+          MoreActionPageModel(
+              icon: Icons.work,
+              title: "Tuyển dụng",
               function: () => nextPage((context) => const AlbumPage())),
-            ]);
-
+          MoreActionPageModel(
+              icon: Icons.people,
+              title: "Hố sơ",
+              function: () => nextPage((context) => const ProfileSearchPage())),
+        ]
+    ));
     children.clear();
-    children.addAll(actions.entries
+    children.addAll(actions
         .map((e) => HomePageActionItem(
-              title: e.key,
-              items: e.value,
+              item: e,
+              items: e.data,
               onClickItem: (item) => item.function(),
             ))
         .toList());
@@ -176,7 +186,7 @@ class HomePageState extends BasePageKeepState<HomePage> {
                         child: ClipRRect(
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(5.0)),
-                            child: ImageLoading(
+                            child: DefaultImageNetwork(
                                 imageUrl: item.avatar.getImageUrl(),
                                 imageBuilder: (context, imageProvider) {
                                   return Image(
@@ -190,13 +200,13 @@ class HomePageState extends BasePageKeepState<HomePage> {
                 ),
               )),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 20),
+            margin: const EdgeInsets.only(top: 10),
             child: Column(
               children: children,
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 20),
+            margin: const EdgeInsets.only(top: 10),
             child: BlocProvider(
                 create: (_) => homeAdvertiseListBloc,
                 child: BlocListener<HomeAdvertiseListBloc,
@@ -219,14 +229,8 @@ class HomePageState extends BasePageKeepState<HomePage> {
                           child: ClipRRect(
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(5.0)),
-                              child: ImageLoading(
-                                  imageUrl: item.images.getImageUrl(),
-                                  imageBuilder: (context, imageProvider) {
-                                    return Image(
-                                      image: imageProvider,
-                                      fit: BoxFit.fill,
-                                    );
-                                  })),
+                              child: DefaultImageNetwork(
+                                  imageUrl: item.images.getImageUrl(),)),
                         ),
                       ),
                     ),

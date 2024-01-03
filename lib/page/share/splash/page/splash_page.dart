@@ -43,7 +43,11 @@ import 'package:eportal/model/api/request/common_new/home_slide_list_request.dar
 import 'package:eportal/model/api/response/common_new/data/dang_nhap_data_response.dart';
 import 'package:eportal/model/api/response/common_new/data/home_slide_list_data_response.dart';
 import 'package:eportal/page/anonymous/default/page/default_page.dart' as anonymous;
+import 'package:eportal/page/cms/default/page/default_page.dart' as cms;
+import 'package:eportal/page/business/default/page/default_page.dart' as business;
+import 'package:eportal/page/users/default/page/default_page.dart' as users;
 import 'package:eportal/page/base/page_state/base_page_state.dart';
+import 'package:eportal/page/widget/default_image_network.dart';
 import 'package:eportal/repository/common_new/danh_sach_chuyen_muc_repository.dart';
 import 'package:eportal/repository/common_new/danh_sach_co_quan_ban_hanh_repository.dart';
 import 'package:eportal/repository/common_new/danh_sach_gioi_tinh_repository.dart';
@@ -360,15 +364,15 @@ class _SplashPageState extends BasePageState<SplashPage> {
       switch (GlobalApplication().roleType) {
         case RoleType.users:
           keyLoadingProcessState.currentState?.endLoading(txt: "Đăng nhập thành công");
-          nextPageWithoutBack((context) => anonymous.DefaultPage());
+          nextPageWithoutBack((context) => users.DefaultPage());
           break;
         case RoleType.bussiness:
           keyLoadingProcessState.currentState?.endLoading(txt: "Đăng nhập thành công");
-          nextPageWithoutBack((context) => anonymous.DefaultPage());
+          nextPageWithoutBack((context) => business.DefaultPage());
           break;
         case RoleType.cms:
           keyLoadingProcessState.currentState?.endLoading(txt: "Đăng nhập thành công");
-          nextPageWithoutBack((context) => anonymous.DefaultPage());
+          nextPageWithoutBack((context) => cms.DefaultPage());
           break;
         case RoleType.anonymous:
           _skipPage(context);
@@ -417,14 +421,8 @@ class _SplashPageState extends BasePageState<SplashPage> {
                 child: ClipRRect(
                     borderRadius: const BorderRadius.all(
                         Radius.circular(5.0)),
-                    child: ImageLoading(
-                        imageUrl: item.avatar.getImageUrl(),
-                        imageBuilder: (context, imageProvider) {
-                          return Image(
-                            image: imageProvider,
-                            fit: BoxFit.fill,
-                          );
-                        })),
+                    child: DefaultImageNetwork(
+                        imageUrl: item.avatar.getImageUrl(),)),
               );
             },
           );

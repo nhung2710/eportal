@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class MoreActionPageModel {
 
+  List<MoreActionPageModel> data;
   IconData icon;
   String title;
   GestureTapCallback? onTap;
@@ -18,5 +19,6 @@ class MoreActionPageModel {
         required this.title,
         required this.function,
         this.isHasRightIcon = true,
+        this.data = const [],
         this.onTap});
 }

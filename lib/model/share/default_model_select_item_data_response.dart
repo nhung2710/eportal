@@ -4,9 +4,13 @@
 //
 import 'package:eportal/model/base/base_eportal_data_response.dart';
 
+import '../../extension/string_extension.dart';
+
 class DefaultModelSelectItemDataResponse<T> extends BaseEportalDataResponse {
   String text;
   T item;
 
-  DefaultModelSelectItemDataResponse({required this.text, required this.item});
+  DefaultModelSelectItemDataResponse({required this.text, required this.item}){
+    search = text.getValueSearch();
+  }
 }

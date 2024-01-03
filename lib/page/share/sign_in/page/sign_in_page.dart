@@ -21,13 +21,16 @@ import 'package:eportal/page/widget/default_text_form_field.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
+import 'package:eportal/page/anonymous/default/page/default_page.dart' as anonymous;
+import 'package:eportal/page/cms/default/page/default_page.dart' as cms;
+import 'package:eportal/page/business/default/page/default_page.dart' as business;
+import 'package:eportal/page/users/default/page/default_page.dart' as users;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../enum/data_bloc_status.dart';
-import '../../../anonymous/default/page/default_page.dart';
 
 class SignInPage extends BasePageWidget {
   const SignInPage({super.key});
@@ -227,7 +230,7 @@ class SignInPageState extends BasePageState<SignInPage> {
   }
 
   openHomePage() {
-    nextPageWithoutBack((context) => DefaultPage());
+    nextPageWithoutBack((context) => anonymous.DefaultPage());
   }
 
   signInSucess(DangNhapDataResponse? obj) {
@@ -237,16 +240,16 @@ class SignInPageState extends BasePageState<SignInPage> {
           .then((value) {
         switch (GlobalApplication().roleType) {
           case RoleType.users:
-            nextPageWithoutBack((context) => DefaultPage());
+            nextPageWithoutBack((context) =>users.DefaultPage());
             break;
           case RoleType.bussiness:
-            nextPageWithoutBack((context) => DefaultPage());
+            nextPageWithoutBack((context) => business.DefaultPage());
             break;
           case RoleType.cms:
-            nextPageWithoutBack((context) => DefaultPage());
+            nextPageWithoutBack((context) => cms.DefaultPage());
             break;
           case RoleType.anonymous:
-            // TODO: Handle this case.
+            openHomePage();
             break;
         }
       });

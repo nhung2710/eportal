@@ -8,6 +8,8 @@ import '../api/constant/application_api_constant.dart';
 import '../constant/application_constant.dart';
 import 'dateTime_extension.dart';
 
+import 'dart:convert';
+import 'package:html_unescape/html_unescape.dart';
 const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
 
 extension StringNullExtension on String? {
@@ -69,11 +71,16 @@ extension StringNullExtension on String? {
         List.generate(number, (index) => "\n").join("");
   }
 
-  String supportHtml() => isNullOrWhiteSpace()
-      ? ApplicationConstant.EMPTY
-      : (htmlparser.parse(this).firstChild?.text)
-          .replaceWhenNullOrWhiteSpace()
-          .trim();
+  String supportHtml() {
+    if(isNullOrWhiteSpace()) return ApplicationConstant.EMPTY;
+    var result = const HtmlEscape(HtmlEscapeMode()).convert(this!);
+    result = (htmlparser.parse(this).firstChild?.text)
+        .replaceWhenNullOrWhiteSpace()
+        .trim();
+    final unescape = HtmlUnescape();
+    final escaped = unescape.convert(result);
+    return escaped;
+  }
 
   String removeUnicode() {
     var value = replaceWhenNullOrWhiteSpace();
@@ -128,10 +135,14 @@ extension StringExtension on String {
     return "${ApplicationApiConstant.kBASE_URI_MEDIA}/$this";
   }
 
-  String supportHtml() => isNullOrWhiteSpace()
-      ? ApplicationConstant.EMPTY
-      : (htmlparser.parse(this).firstChild?.text).replaceWhenNullOrWhiteSpace();
-
+  String supportHtml() {
+    if(isNullOrWhiteSpace()) return ApplicationConstant.EMPTY;
+    var result = (htmlparser.parse(this).firstChild?.text)
+        .replaceWhenNullOrWhiteSpace()
+        .trim();
+    result = const HtmlEscape().convert(result);
+    return result;
+  }
   String removeUnicode() {
     var value = replaceWhenNullOrWhiteSpace();
     return removeDiacritics(value);
