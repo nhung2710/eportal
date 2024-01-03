@@ -22,7 +22,7 @@ class SupportPage extends BasePageWidget {
 }
 
 class SupportPageState extends BasePageState<SupportPage> {
-  Map<String, List<MoreActionPageModel>> actions = <String, List<MoreActionPageModel>>{};
+  List<MoreActionPageModel> actions = [];
 
   @override
   void callApi() {
@@ -44,9 +44,9 @@ class SupportPageState extends BasePageState<SupportPage> {
     // TODO: implement initBloc
     actions.clear();
 
-    actions.putIfAbsent(
-        "Doanh nghiệp",
-            () => [
+    actions.add(MoreActionPageModel(icon: Icons.add,
+        title: 'Doanh nghiệp',
+        data: [
           MoreActionPageModel(
               icon: FontAwesomeIcons.phone,
               title: "02963.831.123",
@@ -57,21 +57,25 @@ class SupportPageState extends BasePageState<SupportPage> {
               title: "vieclamhoabinh@gmail.com",
               isHasRightIcon: false,
               function: () => launchEmail("vieclamhoabinh@gmail.com")),
-        ]);
-    actions.putIfAbsent(
-        "Người lao động",
-            () => [
-              MoreActionPageModel(
-                  icon: FontAwesomeIcons.phone,
-                  title: "02963.831.123",
-                  isHasRightIcon: false,
-                  function: () => launchHotline("02963831123")),
-              MoreActionPageModel(
-                  icon: FontAwesomeIcons.envelope,
-                  title: "vieclamhoabinh@gmail.com",
-                  isHasRightIcon: false,
-                  function: () => launchEmail("vieclamhoabinh@gmail.com")),
-            ]);
+        ],
+        function: () {  }
+    ));
+    actions.add(MoreActionPageModel(icon: Icons.add,
+        title: 'Người lao động',
+        data: [
+          MoreActionPageModel(
+              icon: FontAwesomeIcons.phone,
+              title: "02963.831.123",
+              isHasRightIcon: false,
+              function: () => launchHotline("02963831123")),
+          MoreActionPageModel(
+              icon: FontAwesomeIcons.envelope,
+              title: "vieclamhoabinh@gmail.com",
+              isHasRightIcon: false,
+              function: () => launchEmail("vieclamhoabinh@gmail.com")),
+        ],
+        function: () {  }
+    ));
   }
 
   @override
@@ -99,15 +103,11 @@ class SupportPageState extends BasePageState<SupportPage> {
           ),
         ),
         Expanded(
-          child: ListView.builder(
-              itemCount: actions.length,
-              itemBuilder: (c, index) {
-                return GroupMoreActionItem(
-                  title: actions.keys.elementAt(index),
-                  items: actions.values.elementAt(index),
-                  onClickItem: (item) => item.function(),
-                );
-              }),
+          child: ListView(
+              children: actions.map((e) => GroupMoreActionItem(
+                item: e,
+                onClickItem: (item) => item.function(),
+              )).toList()),
         ),
       ],
     ),

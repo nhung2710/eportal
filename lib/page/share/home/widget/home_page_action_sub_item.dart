@@ -36,7 +36,7 @@ class HomePageActionSubItem extends StatelessWidget{
           Expanded(
             child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-                child: Text(item.title,textAlign: TextAlign.center,maxLines: 2,style: AppTextStyle.normal.copyWith(color: AppColor.colorOfIcon),overflow: TextOverflow.visible)
+                child: Text(item.title,textAlign: TextAlign.center,maxLines: 2,style: AppTextStyle.normalChild1.copyWith(color: AppColor.colorOfIcon),overflow: TextOverflow.visible)
             ),
           ),
         ],

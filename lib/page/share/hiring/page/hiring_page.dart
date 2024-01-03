@@ -7,6 +7,7 @@
 import 'package:eportal/page/base/page_state/base_page_state.dart';
 import 'package:eportal/page/base/page_widget/base_page_widget.dart';
 import 'package:eportal/page/share/hiring/tab/hiring_tab.dart';
+import 'package:eportal/page/share/hiring_search/page/hiring_search_page.dart';
 import 'package:eportal/screen/share/news_recruitment/widget/news_recruitment.dart';
 import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
@@ -58,7 +59,7 @@ class HiringPageState
             color: Colors.white,
           ),
           onPressed: () {
-            //nextPage((context) => const ProfileSearchPage());
+            nextPage((context) => const HiringSearchPage());
           }
 
       ),

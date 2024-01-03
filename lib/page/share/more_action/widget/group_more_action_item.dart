@@ -14,10 +14,9 @@ import '../../../../style/app_text_style.dart';
 import '../../../widget/default_card_item.dart';
 
 class GroupMoreActionItem extends StatefulWidget{
-  final String title;
-  final List<MoreActionPageModel> items;
+  final MoreActionPageModel item;
   final ValueChanged<MoreActionPageModel>? onClickItem;
-  const GroupMoreActionItem({super.key,required this.title,required this.items,this.onClickItem});
+  const GroupMoreActionItem({super.key,required this.item,this.onClickItem});
 
   @override
   State<StatefulWidget> createState() => GroupMoreActionItemState();
@@ -32,23 +31,20 @@ class GroupMoreActionItemState extends State<GroupMoreActionItem> {
     children: [
       Container(
           margin: const EdgeInsets.symmetric(horizontal: 10),
-          child: Text(widget.title,textAlign: TextAlign.start,style: AppTextStyle.titlePage,)),
+          child: Text(widget.item.title,textAlign: TextAlign.start,style: AppTextStyle.titlePage,)),
       Container(
         margin: const EdgeInsets.only(top: 5,bottom: 20),
         child: DefaultCardItem(
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-            child: ListView.builder(
-              itemCount: widget.items.length,
+            child: ListView(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) {
-                return GroupMoreActionSubItem(
-                  item: widget.items.elementAt(index),
-                  onClickItem: widget.onClickItem,
+              children: widget.item.data.map((e) => GroupMoreActionSubItem(
+                item: e,
+                onClickItem: widget.onClickItem,
 
-                );
-              },
+              )).toList(),
             ),
           ),
         ),

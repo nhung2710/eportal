@@ -26,6 +26,7 @@ import 'package:eportal/page/share/album/page/album_page.dart';
 import 'package:eportal/page/share/document/page/document_page.dart';
 import 'package:eportal/page/share/enterprise/page/enterprise_page.dart';
 import 'package:eportal/page/share/hiring/page/hiring_page.dart';
+import 'package:eportal/page/share/hiring_search/page/hiring_search_page.dart';
 import 'package:eportal/page/share/home/widget/home_page_action_item.dart';
 import 'package:eportal/page/share/news/page/news_page.dart';
 import 'package:eportal/page/share/news_search/page/news_search_page.dart';
@@ -137,7 +138,7 @@ class HomePageState extends BasePageKeepState<HomePage> {
           MoreActionPageModel(
               icon: Icons.work,
               title: "Tuyển dụng",
-              function: () => nextPage((context) => const AlbumPage())),
+              function: () => nextPage((context) => const HiringSearchPage())),
           MoreActionPageModel(
               icon: Icons.people,
               title: "Hố sơ",

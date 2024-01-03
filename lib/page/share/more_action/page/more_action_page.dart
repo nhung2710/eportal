@@ -36,8 +36,7 @@ class MoreActionPage extends BasePageWidget {
 }
 
 class MoreActionPageState extends BasePageKeepState<MoreActionPage> {
-  Map<String, List<MoreActionPageModel>> actions =
-      <String, List<MoreActionPageModel>>{};
+  List<MoreActionPageModel> actions = [];
   final InAppReview inAppReview = InAppReview.instance;
   final List<Widget> children = [];
 
@@ -61,45 +60,63 @@ class MoreActionPageState extends BasePageKeepState<MoreActionPage> {
     // TODO: implement initBloc
     actions.clear();
     if (GlobalApplication().roleType == RoleType.bussiness) {
-      actions.putIfAbsent(
-          "Doanh nghiệp",
-          () => [
-                MoreActionPageModel(
-                    icon: Icons.change_circle_outlined,
-                    title: "Đổi thông tin",
-                    function: () =>
-                        nextPage((context) => const ChangeUserInfoPage())),
-              ]);
+      actions.add(MoreActionPageModel(icon: Icons.add,
+          title: 'Doanh nghiệp',
+          data: [
+            MoreActionPageModel(
+                icon: Icons.change_circle_outlined,
+                title: "Đổi thông tin",
+                function: () =>
+                    nextPage((context) => const ChangeUserInfoPage())),
+          ],
+          function: () {  }
+      ));
     }
 
     if (GlobalApplication().isLogin) {
-      actions.putIfAbsent(
-          "Tài khoản",
-          () => [
-                MoreActionPageModel(
-                    icon: Icons.change_circle_outlined,
-                    title: "Đổi thông tin",
-                    function: () =>
-                        nextPage((context) => const ChangeUserInfoPage())),
-                MoreActionPageModel(
-                    icon: Icons.password_sharp,
-                    title: "Đổi mật khẩu",
-                    function: () =>
-                        nextPage((context) => const ChangeUserPasswordPage())),
-              ]);
+      actions.add(MoreActionPageModel(icon: Icons.add,
+          title: 'Tài khoản',
+          data: [
+            MoreActionPageModel(
+                icon: Icons.change_circle_outlined,
+                title: "Đổi thông tin",
+                function: () =>
+                    nextPage((context) => const ChangeUserInfoPage())),
+            MoreActionPageModel(
+                icon: Icons.password_sharp,
+                title: "Đổi mật khẩu",
+                function: () =>
+                    nextPage((context) => const ChangeUserPasswordPage())),
+          ],
+          function: () {  }
+      ));
+
+      actions.add(MoreActionPageModel(icon: Icons.add,
+          title: 'Tiện ích',
+          data: [
+            MoreActionPageModel(
+                icon: Icons.message,
+                title: "Chat bot",
+                function: () =>
+                    nextPage((context) => const ChangeUserInfoPage())),
+          ],
+          function: () {  }
+      ));
     }
-    actions.putIfAbsent(
-        "Đa phương tiện",
-        () => [
-              MoreActionPageModel(
-                  icon: Icons.video_collection,
-                  title: "Video",
-                  function: () => nextPage((context) => const VideoPage())),
-              MoreActionPageModel(
-                  icon: Icons.image,
-                  title: "Album",
-                  function: () => nextPage((context) => const AlbumPage())),
-            ]);
+    actions.add(MoreActionPageModel(icon: Icons.add,
+        title: 'Đa phương tiện',
+        data: [
+          MoreActionPageModel(
+              icon: Icons.video_collection,
+              title: "Video",
+              function: () => nextPage((context) => const VideoPage())),
+          MoreActionPageModel(
+              icon: Icons.image,
+              title: "Album",
+              function: () => nextPage((context) => const AlbumPage())),
+        ],
+        function: () {  }
+    ));
     /*actions.putIfAbsent(
         "Biểu đồ",
         () => [
@@ -129,60 +146,62 @@ class MoreActionPageState extends BasePageKeepState<MoreActionPage> {
                   function: () =>
                       nextPage((context) => const ChangeUserInfoPage())),
             ]);*/
-    actions.putIfAbsent(
-        "Ứng dụng",
-        () => [
-              MoreActionPageModel(
-                  icon: Icons.question_answer,
-                  title: "Hỏi đáp",
-                  function: () =>
-                      nextPage((context) => const QuestionAnswerPage())),
-              MoreActionPageModel(
-                  icon: Icons.upload,
-                  title: "Gửi yêu cầu hỗ trợ",
-                  function: () =>
-                      nextPage((context) => const RequestSupportPage())),
-              MoreActionPageModel(
-                  icon: Icons.support_agent,
-                  title: "Dịch vụ khách hàng",
-                  function: () => nextPage((context) => const SupportPage())),
-              MoreActionPageModel(
-                  icon: Icons.map,
-                  title: "Bản đồ",
-                  function: () => nextPage((context) => const MapPage())),
-              MoreActionPageModel(
-                  icon: Icons.account_tree,
-                  title: "Giới thiệu",
-                  function: () => nextPage((context) => const AboutUsPage())),
-              MoreActionPageModel(
-                  icon: Icons.policy,
-                  title: "Chính sách",
-                  function: () => nextPage((context) => const PolicyPage())),
-              MoreActionPageModel(
-                  icon: Icons.rule,
-                  title: "Quy định",
-                  function: () => nextPage((context) => const RulePage())),
-              MoreActionPageModel(
-                  icon: Icons.share,
-                  title: "Chia sẻ",
-                  function: () => GlobalApplication().shareApp()),
-              MoreActionPageModel(
-                icon: Icons.star_rate,
-                title: "Đánh giá",
-                function: () => inAppReview
-                    .isAvailable()
-                    .then((value) => inAppReview.requestReview()),
-              )
-            ]);
+
+    actions.add(MoreActionPageModel(icon: Icons.add,
+        title: 'Ứng dụng',
+        data: [
+          MoreActionPageModel(
+              icon: Icons.question_answer,
+              title: "Hỏi đáp",
+              function: () =>
+                  nextPage((context) => const QuestionAnswerPage())),
+          MoreActionPageModel(
+              icon: Icons.upload,
+              title: "Gửi yêu cầu hỗ trợ",
+              function: () =>
+                  nextPage((context) => const RequestSupportPage())),
+          MoreActionPageModel(
+              icon: Icons.support_agent,
+              title: "Dịch vụ khách hàng",
+              function: () => nextPage((context) => const SupportPage())),
+          MoreActionPageModel(
+              icon: Icons.map,
+              title: "Bản đồ",
+              function: () => nextPage((context) => const MapPage())),
+          MoreActionPageModel(
+              icon: Icons.account_tree,
+              title: "Giới thiệu",
+              function: () => nextPage((context) => const AboutUsPage())),
+          MoreActionPageModel(
+              icon: Icons.policy,
+              title: "Chính sách",
+              function: () => nextPage((context) => const PolicyPage())),
+          MoreActionPageModel(
+              icon: Icons.rule,
+              title: "Quy định",
+              function: () => nextPage((context) => const RulePage())),
+          MoreActionPageModel(
+              icon: Icons.share,
+              title: "Chia sẻ",
+              function: () => GlobalApplication().shareApp()),
+          MoreActionPageModel(
+            icon: Icons.star_rate,
+            title: "Đánh giá",
+            function: () => inAppReview
+                .isAvailable()
+                .then((value) => inAppReview.requestReview()),
+          )
+        ],
+        function: () {  }
+    ));
     children.clear();
     children.add(MoreActionCard(
       onSignIn: () => submitSignIn(),
       onSignOut: () => submitSignOut(),
     ));
-    children.addAll(actions.entries
+    children.addAll(actions
         .map((e) => GroupMoreActionItem(
-              title: e.key,
-              items: e.value,
+              item: e,
               onClickItem: (item) => item.function(),
             ))
         .toList());
