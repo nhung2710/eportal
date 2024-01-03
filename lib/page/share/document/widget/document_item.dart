@@ -30,19 +30,21 @@ class DocumentItem extends StatelessWidget{
             child: Row(
               children: [
                 Expanded(
+                  flex: 2,
                     child: Text(data.docUnitName.supportHtml(),style: AppTextStyle.title.copyWith(fontWeight: FontWeight.w900,color: AppColor.colorOfIcon),maxLines: 4,textAlign: TextAlign.start)),
                 Expanded(
-                    child: Text(data.noCode.supportHtml(),style: AppTextStyle.title.copyWith(fontWeight: FontWeight.w900,color: AppColor.colorOfIcon),maxLines: 4,textAlign: TextAlign.end)),
+                  flex: 1,
+                    child: Text(data.noCode.supportHtml(),style: AppTextStyle.title.copyWith(fontWeight: FontWeight.w900,fontSize: 9,color: Colors.green),maxLines: 4,textAlign: TextAlign.end)),
               ],
             ),
           ),
           Container(
               margin: const EdgeInsets.symmetric(vertical: 10),
-              child: Text(data.documentName.supportHtml(),style: AppTextStyle.title.copyWith(),maxLines: 3,textAlign: TextAlign.start,)
+              child: Text("${data.documentName.supportHtml()}\n\n\n\n",style: AppTextStyle.title.copyWith(),maxLines: 4,textAlign: TextAlign.start,)
           ),
           Container(
               margin: const EdgeInsets.symmetric(vertical: 10),
-              child: Text(data.contents.supportHtml(),style: AppTextStyle.normal.copyWith(),maxLines: 2,textAlign: TextAlign.start,)
+              child: Text("${data.contents.supportHtml()}\n\n\n\n",style: AppTextStyle.normal.copyWith(),maxLines: 4,textAlign: TextAlign.start,)
           ),
           Container(
               margin: const EdgeInsets.symmetric(vertical: 10),

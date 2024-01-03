@@ -118,9 +118,5 @@ class _DocumentPageState extends BasePageState<DocumentPage> {
         ),
       ));
 
-  @override
-  getBottomNavigationBar(BuildContext context) => null;
 
-  @override
-  String getPageTitle(BuildContext context) => "Văn bản pháp luật";
 }

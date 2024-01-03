@@ -8,10 +8,14 @@ import 'package:eportal/enum/data_bloc_status.dart';
 import 'package:eportal/extension/error_extension.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:eportal/style/app_color.dart';
+import 'package:eportal/style/app_elevation.dart';
+import 'package:eportal/style/app_size_icon.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../extension/string_extension.dart';
@@ -184,6 +188,25 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
       ),
     );
   }
+
+  Future showBaseBottomSheet({required List<Widget> children}){
+    return showModalBottomSheet(
+        context: context,
+        elevation: AppElevation.sizeOfNormal,
+        useSafeArea: true,
+        backgroundColor: Colors.white,
+        builder: (context) => Container(
+          padding: const EdgeInsets.only(top: 10),
+          child: Wrap(
+            children: children,
+          ),
+        ));
+  }
+
+  void copyText({required String text}){
+    Clipboard.setData(ClipboardData(text: text));
+  }
+
 
   Future<bool?> showAlertChoose(
       {Widget content = const SizedBox(),

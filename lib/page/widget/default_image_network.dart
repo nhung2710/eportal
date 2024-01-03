@@ -17,6 +17,7 @@ class DefaultImageNetwork extends StatelessWidget {
   final BorderRadius? borderRadius;
   final String? localImageError;
   final BoxFit fit;
+  final BoxFit fitError;
   final ImageWidgetBuilder? imageBuilder;
 
   const DefaultImageNetwork(
@@ -26,6 +27,7 @@ class DefaultImageNetwork extends StatelessWidget {
         this.borderRadius,
         this.radius,
         this.fit = BoxFit.fill,
+        this.fitError = BoxFit.fill,
         this.localImageError});
 
   @override
@@ -36,25 +38,25 @@ class DefaultImageNetwork extends StatelessWidget {
             value: downloadProgress.progress,
         )
     ),
-    errorWidget: (context, url, error) => getImageBuilder(context,Image.asset(localImageError.replaceWhenNullOrWhiteSpace("assets/images/404.png")).image),
+    errorWidget: (context, url, error) => getImageBuilder(context,Image.asset(localImageError.replaceWhenNullOrWhiteSpace("assets/images/404.png")).image,fitError),
     //Image.asset('assets/images/ErrorImage.png'),
-    fit: BoxFit.contain,
+    fit: fit,
     imageUrl: imageUrl.getImageUrl(),
-    imageBuilder: (BuildContext context, ImageProvider<Object> imageProvider) => getImageBuilder(context,imageProvider),
+    imageBuilder: (BuildContext context, ImageProvider<Object> imageProvider) => getImageBuilder(context,imageProvider,fit),
   );
-  Widget getImageBuilder(BuildContext context, ImageProvider<Object> imageProvider){
+  Widget getImageBuilder(BuildContext context, ImageProvider<Object> imageProvider,BoxFit fit){
     if(imageBuilder!=null) {
       return imageBuilder!(context,imageProvider);
     }
-    return defaultImageBuilder(context, imageProvider);
+    return defaultImageBuilder(context, imageProvider,fit);
   }
 
-  Widget defaultImageBuilder(BuildContext context, ImageProvider<Object> imageProvider)=> ClipRRect(
+  Widget defaultImageBuilder(BuildContext context, ImageProvider<Object> imageProvider,BoxFit fit)=> ClipRRect(
     borderRadius: borderRadius??BorderRadius.all(
         Radius.circular(radius??10)),
     child: Image(
       image: imageProvider,
-      fit: BoxFit.fill,
+      fit: fit,
     ),
   );
 }
