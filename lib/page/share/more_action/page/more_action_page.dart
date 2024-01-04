@@ -97,7 +97,7 @@ class MoreActionPageState extends BasePageKeepState<MoreActionPage> {
           data: [
             MoreActionPageModel(
                 icon: Icons.message,
-                title: "Chat bot",
+                title: "Hội thoại",
                 function: () =>
                     nextPage((context) => const ChatBotConversationSearchPage())),
           ],

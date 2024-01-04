@@ -110,6 +110,15 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
 
   @override
   Widget build(BuildContext context) {
+    Widget? floatingActionButton = getFloatingActionButton(context);
+    Widget? bottomNavigationBar = getBottomNavigationBar(context);
+    if(floatingActionButton!=null){
+      floatingActionButton = Padding(
+        padding:   EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom + getBottomFloatingActionButtonBottom(context)),
+            child: floatingActionButton,
+        );
+    }
     return Form(
       key: formKey,
       child: SafeArea(
@@ -117,6 +126,7 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
         child: Scaffold(
           key: scaffoldKey,
           resizeToAvoidBottomInset: true,
+          extendBody: true,
           backgroundColor: getBackgroundColor(context),
           appBar: getAppBar(context),
           body: Container(
@@ -132,15 +142,15 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
           drawer: getDrawer(context),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.miniEndFloat,
-          floatingActionButton: getFloatingActionButton(context),
-          bottomNavigationBar: getBottomNavigationBar(context),
+          floatingActionButton: floatingActionButton,
+          bottomNavigationBar: bottomNavigationBar,
           bottomSheet: getBottomSheet(context),
 
         ),
       ),
     );
   }
-
+  double getBottomFloatingActionButtonBottom(BuildContext context) => 0;
   Widget? getEndDrawer(BuildContext context) => null;
 
   Widget? getDrawer(BuildContext context) => null;

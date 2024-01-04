@@ -80,6 +80,10 @@ class MyApp extends StatelessWidget {
             tabBarTheme: const TabBarTheme(
                 indicatorColor: AppColor.colorOfIcon,
                 indicatorSize: TabBarIndicatorSize.tab),
+            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+              backgroundColor: Colors.transparent,
+              type: BottomNavigationBarType.shifting
+            ),
             bottomSheetTheme: const BottomSheetThemeData(
                 shape: RoundedRectangleBorder(
                   side: BorderSide(

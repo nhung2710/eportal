@@ -39,32 +39,41 @@ class BottomControllerNavigationBarState extends State<BottomControllerNavigatio
   }
   @override
   Widget build(BuildContext context){
-    return ClipRRect(
-      borderRadius: const BorderRadius.only(
-        topRight: Radius.circular(30),
-        topLeft: Radius.circular(30),
-      ),
-      child: BottomNavigationBar(
-        useLegacyColorScheme: false,
-        enableFeedback: false,
-        currentIndex: _currentIndex,
-        onTap: (page) {
-          if(widget.onTap!=null) {
-            widget.onTap!(page);
-          }
-          _currentIndex = page;
-          setState(() {});
-        },
-        backgroundColor: Colors.blueAccent,
-        type: BottomNavigationBarType.fixed,
-        iconSize: 20,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        fixedColor: AppColor.colorOfIconActive,
-        unselectedItemColor: Colors.white,
-        selectedFontSize: 8,
-        unselectedFontSize: 8,
-        items: items,
+    return Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+          boxShadow: [
+            BoxShadow(color: Colors.green, spreadRadius: 0, blurRadius: 5),
+          ],
+        ),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(30),
+          topLeft: Radius.circular(30),
+        ),
+        child: BottomNavigationBar(
+          useLegacyColorScheme: false,
+          enableFeedback: false,
+          currentIndex: _currentIndex,
+          onTap: (page) {
+            if(widget.onTap!=null) {
+              widget.onTap!(page);
+            }
+            _currentIndex = page;
+            setState(() {});
+          },
+          backgroundColor: Colors.blueAccent,
+          type: BottomNavigationBarType.fixed,
+          iconSize: 20,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          fixedColor: AppColor.colorOfIconActive,
+          unselectedItemColor: Colors.white,
+          selectedFontSize: 8,
+          unselectedFontSize: 8,
+          items: items,
+        ),
       ),
     );
   }

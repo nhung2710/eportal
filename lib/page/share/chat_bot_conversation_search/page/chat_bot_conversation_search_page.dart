@@ -214,7 +214,6 @@ class ChatBotConversationSearchPageState
                                       controller: scrollController,
                                       children: state.where((element) => element.isDelete != true).map((e) => ChatBotConversationSearchItem(data: e,
                                         onClickItem: (ChatBotDanhSachHoiThoaiDataResponse value) => showChooseAction(value),
-                                        onRateChanged: (ChatBotDanhSachHoiThoaiDataResponse value) => alertChangeRateStar(value),
                                       )).toList(),),
                                   ),
                             ),
@@ -291,6 +290,20 @@ class ChatBotConversationSearchPageState
                 size: AppSizeIcon.sizeOfNormal,
               ),
               title: Text("Xem chi tiết hội thoại",style: AppTextStyle.title.copyWith(overflow: TextOverflow.visible),),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+              alertChangeRateStar(value);
+            },
+            child: ListTile(
+              leading: const Icon(
+                FontAwesomeIcons.solidStar,
+                color: AppColor.colorOfIcon,
+                size: AppSizeIcon.sizeOfNormal,
+              ),
+              title: Text("Đánh dấu sao hội thoại",style: AppTextStyle.title.copyWith(overflow: TextOverflow.visible),),
             ),
           ),
           GestureDetector(

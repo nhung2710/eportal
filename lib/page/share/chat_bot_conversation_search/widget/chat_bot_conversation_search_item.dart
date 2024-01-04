@@ -19,9 +19,8 @@ import '../../../../extension/string_extension.dart';
 class ChatBotConversationSearchItem extends StatelessWidget{
   final ChatBotDanhSachHoiThoaiDataResponse data;
   final ValueChanged<ChatBotDanhSachHoiThoaiDataResponse> onClickItem;
-  final ValueChanged<ChatBotDanhSachHoiThoaiDataResponse> onRateChanged;
 
-  const ChatBotConversationSearchItem({super.key,required this.data,required this.onClickItem,required this.onRateChanged});
+  const ChatBotConversationSearchItem({super.key,required this.data,required this.onClickItem});
 
   double getRate(String? danhDauSao) {
     return ErrorExtension().handleFunctionError(() => double.tryParse(danhDauSao??"0")??0)??0;
@@ -54,19 +53,17 @@ class ChatBotConversationSearchItem extends StatelessWidget{
           ),
           Container(
               margin: const EdgeInsets.symmetric(vertical: 5,horizontal: 5),
-              child: GestureDetector(
-                onTap: () => onRateChanged(data),
-                child: RatingBarIndicator(
-                  rating: getRate(data.danhDauSao),
-                  unratedColor: Colors.grey,
-                  itemBuilder: (context, index) => const Icon(
-                    Icons.star,
-                    color: AppColor.colorOfIcon,
-                  ),
-                  itemCount: 5,
-                  itemSize: 20.0,
-                  direction: Axis.horizontal,
+              child: RatingBarIndicator(
+                rating: getRate(data.danhDauSao),
+                unratedColor: Colors.grey,
+                itemBuilder: (context, index) => const Icon(
+                  Icons.star,
+                  color: AppColor.colorOfIcon,
+                  size: AppSizeIcon.sizeOfNormal
                 ),
+                itemCount: 5,
+                itemSize: AppSizeIcon.sizeOfNormal * 2,
+                direction: Axis.horizontal,
               )
           ),
           Container(

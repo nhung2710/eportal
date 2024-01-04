@@ -6,6 +6,7 @@ import 'dart:ffi';
 
 import 'package:eportal/page/base/page_widget/base_page_widget.dart';
 import 'package:eportal/page/share/more_action/page/more_action_page.dart';
+import 'package:eportal/page/users/user_profile/page/user_profile_page.dart';
 import 'package:eportal/page/widget/bottom_controller_navigation_bar.dart';
 import 'package:eportal/screen/share/answer_and_question/page/answer_and_question_page.dart';
 import 'package:eportal/screen/share/home_manage/page/home_manage_page.dart';
@@ -60,6 +61,8 @@ class DefaultPageState extends BasePageState{
     },
     children: const <Widget>[
       HomePage(),
+      UserProfilePage(),
+      UserProfilePage(),
       MoreActionPage(),
     ],
   );
@@ -68,6 +71,8 @@ class DefaultPageState extends BasePageState{
     onTap: (page) => _pageController.jumpToPage(page),
     items: [
       BottomControllerNavigationBarItem(iconData: FontAwesomeIcons.house, label: 'Trang chủ'),
+      BottomControllerNavigationBarItem(iconData: FontAwesomeIcons.boxArchive, label: 'Hồ sơ'),
+      BottomControllerNavigationBarItem(iconData: FontAwesomeIcons.briefcase, label: 'Việc làm'),
       BottomControllerNavigationBarItem(iconData: FontAwesomeIcons.listUl, label: 'Mở rộng'),
     ],
   );
