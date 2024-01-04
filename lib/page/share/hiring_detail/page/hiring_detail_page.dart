@@ -266,7 +266,7 @@ class _HiringDetailPageState extends BasePageState<HiringDetailPage> {
       children.add(GestureDetector(
         onTap: () {
           Navigator.pop(context);
-          _sendEmail(state.contactMobile!);
+          _callPhone(state.contactMobile!);
         },
         child: ListTile(
           leading: const Icon(

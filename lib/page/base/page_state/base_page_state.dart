@@ -85,7 +85,7 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
   void initState() {
     print("initState: ${runtimeType}");
     //WidgetsBinding.instance.addObserver(this);
-    startScrollMore();
+    stopScrollMore();
     scrollController = ScrollController();
     scrollController.addListener(_onScroll);
     simpleDialog = SimpleDialog(
@@ -135,6 +135,7 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
           floatingActionButton: getFloatingActionButton(context),
           bottomNavigationBar: getBottomNavigationBar(context),
           bottomSheet: getBottomSheet(context),
+
         ),
       ),
     );
@@ -194,9 +195,9 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
         context: context,
         elevation: AppElevation.sizeOfNormal,
         useSafeArea: true,
-        backgroundColor: Colors.white,
+        barrierColor: Colors.transparent,
         builder: (context) => Container(
-          padding: const EdgeInsets.only(top: 10),
+          padding: const EdgeInsets.only(top: 20),
           child: Wrap(
             children: children,
           ),
@@ -217,6 +218,8 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
     return Alert(
         context: context,
         type: AlertType.warning,
+        useRootNavigator: true,
+        onWillPopActive: true,
         style: AlertStyle(
             titleStyle:
                 AppTextStyle.title.copyWith(overflow: TextOverflow.visible),

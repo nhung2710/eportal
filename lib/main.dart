@@ -80,6 +80,24 @@ class MyApp extends StatelessWidget {
             tabBarTheme: const TabBarTheme(
                 indicatorColor: AppColor.colorOfIcon,
                 indicatorSize: TabBarIndicatorSize.tab),
+            bottomSheetTheme: const BottomSheetThemeData(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: AppColor.colorOfIcon,
+                    width: 1,
+                    strokeAlign: 1,
+                    style: BorderStyle.solid
+                  ),
+                  borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30)
+                  ),
+                ),
+
+                surfaceTintColor: Colors.white,
+                backgroundColor: Colors.white,
+                modalBackgroundColor:  Colors.white
+            ),
             dialogTheme: DialogTheme(
               surfaceTintColor: Colors.white,
               backgroundColor: Colors.white,

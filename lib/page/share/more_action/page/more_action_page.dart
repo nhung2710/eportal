@@ -10,6 +10,7 @@ import 'package:eportal/page/share/about_us/page/about_us_page.dart';
 import 'package:eportal/page/share/album/page/album_page.dart';
 import 'package:eportal/page/share/change_user_info/page/change_user_info_page.dart';
 import 'package:eportal/page/share/change_user_password/page/change_user_password_page.dart';
+import 'package:eportal/page/share/chat_bot_conversation_search/page/chat_bot_conversation_search_page.dart';
 import 'package:eportal/page/share/map/page/map_page.dart';
 import 'package:eportal/page/share/more_action/widget/group_more_action_item.dart';
 import 'package:eportal/page/share/policy/page/policy_page.dart';
@@ -98,7 +99,7 @@ class MoreActionPageState extends BasePageKeepState<MoreActionPage> {
                 icon: Icons.message,
                 title: "Chat bot",
                 function: () =>
-                    nextPage((context) => const ChangeUserInfoPage())),
+                    nextPage((context) => const ChatBotConversationSearchPage())),
           ],
           function: () {  }
       ));

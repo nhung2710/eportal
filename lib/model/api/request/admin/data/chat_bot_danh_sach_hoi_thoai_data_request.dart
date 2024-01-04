@@ -22,7 +22,7 @@ class ChatBotDanhSachHoiThoaiDataRequest extends BasePageEportalXml {
     // TODO: implement toXml
     var buffer = super.toXml();
     buffer.write(createXml(tuKhoa, "tuKhoa"));
-    buffer.write(createXml(trangThai, "trangThai"));
+    buffer.write(createXml(trangThai??0, "trangThai"));
     buffer.write(createXml(kieuSapXep, "kieuSapXep"));
     return buffer;
   }
