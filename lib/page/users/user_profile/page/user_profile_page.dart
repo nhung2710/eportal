@@ -16,6 +16,7 @@ import 'package:eportal/page/share/profile_detail/page/profile_detail_page.dart'
 import 'package:eportal/page/share/profile_search/page/profile_search_page.dart';
 import 'package:eportal/page/users/reference/page/reference_page.dart';
 import 'package:eportal/page/users/user_profile/widget/user_profile_item.dart';
+import 'package:eportal/page/users/user_profile_add/page/user_profile_add_page.dart';
 import 'package:eportal/page/users/user_profile_history/page/user_profile_history_page.dart';
 import 'package:eportal/page/widget/default_search_form_field.dart';
 import 'package:eportal/state/base/base_state.dart';
@@ -31,6 +32,7 @@ import '../../../../event/common_new/home_job_user_list_event.dart';
 import '../../../../model/api/request/common_new/data/home_job_user_list_data_request.dart';
 import '../../../../model/api/request/common_new/home_job_user_list_request.dart';
 import '../../../base/page_widget/base_page_widget.dart';
+import '../../user_profile_edit/page/user_profile_edit_page.dart';
 class UserProfilePage extends BasePageWidget {
   const UserProfilePage({super.key});
 
@@ -84,7 +86,7 @@ class UserProfilePageState
             color: Colors.white,
           ),
           onPressed: () {
-            nextPage((context) => const ProfileSearchPage());
+            nextPage((context) => const UserProfileAddPage());
           }
 
       ),
@@ -155,6 +157,7 @@ class UserProfilePageState
           GestureDetector(
             onTap: () {
               Navigator.pop(context);
+              nextPage((context) => UserProfileEditPage(data: value,));
             },
             child: ListTile(
               leading: const Icon(

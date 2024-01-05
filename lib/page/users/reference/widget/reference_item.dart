@@ -26,6 +26,23 @@ class ReferenceItem extends StatefulWidget{
 }
 
 class ReferenceItemState extends State<ReferenceItem>{
+  final TextEditingController hoTenTextEditingController = TextEditingController();
+  final TextEditingController chucVuTextEditingController = TextEditingController();
+  final TextEditingController noiCongTacTextEditingController = TextEditingController();
+  final TextEditingController soDienThoaiTextEditingController = TextEditingController();
+  final TextEditingController emailTextEditingController = TextEditingController();
+  final TextEditingController moiQuanHeTextEditingController = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    hoTenTextEditingController.text= widget.data.hoTen.replaceWhenNullOrWhiteSpace();
+    chucVuTextEditingController.text= widget.data.chucVu.replaceWhenNullOrWhiteSpace();
+    noiCongTacTextEditingController.text= widget.data.noiCongTac.replaceWhenNullOrWhiteSpace();
+    soDienThoaiTextEditingController.text= widget.data.soDienThoai.replaceWhenNullOrWhiteSpace();
+    emailTextEditingController.text= widget.data.email.replaceWhenNullOrWhiteSpace();
+    moiQuanHeTextEditingController.text= widget.data.moiQuanHe.replaceWhenNullOrWhiteSpace();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) => DefaultCardItem(
     onTap: ()=> widget.onClickItem(widget.data),
@@ -38,19 +55,24 @@ class ReferenceItemState extends State<ReferenceItem>{
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       child: DefaultTextFormField(
                         icon: FontAwesomeIcons.user,
+                        controller: hoTenTextEditingController,
                         hintText: "Họ và tên",
                         labelText: "Họ và tên",
                         helperText: "Ví dụ: Nguyễn Văn A",
                         required: true,
+                        validator: (value){
+                          widget.data.hoTen = value;
+                          return null;
+                        },
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.only(left: 20),
+                      margin: const EdgeInsets.only(left: 20,top: 15),
                       child: GestureDetector(
                         onTap: ()=> widget.onDeleteItem(widget.data),
                         child: const Icon(FontAwesomeIcons.xmark,
@@ -62,17 +84,63 @@ class ReferenceItemState extends State<ReferenceItem>{
                 ),
                 DefaultTextFormField(
                   icon: FontAwesomeIcons.user,
+                  controller: chucVuTextEditingController,
                   hintText: "Chức vụ",
                   labelText: "Chức vụ",
                   helperText: "Ví dụ: Nhân viên",
                   required: true,
+                  validator: (value){
+                    widget.data.chucVu = value;
+                    return null;
+                  },
                 ),
                 DefaultTextFormField(
                   icon: FontAwesomeIcons.user,
+                  controller: noiCongTacTextEditingController,
                   hintText: "Nơi công tác",
                   labelText: "Nơi công tác",
                   helperText: "Ví dụ: Công ty A",
                   required: true,
+                  validator: (value){
+                    widget.data.noiCongTac = value;
+                    return null;
+                  },
+                ),
+                DefaultTextFormField(
+                  icon: FontAwesomeIcons.user,
+                  controller: soDienThoaiTextEditingController,
+                  hintText: "Số điện thoại",
+                  labelText: "Số điện thoại",
+                  helperText: "Ví dụ: 000000000",
+                  required: true,
+                  validator: (value){
+                    widget.data.soDienThoai = value;
+                    return null;
+                  },
+                ),
+                DefaultTextFormField(
+                  icon: FontAwesomeIcons.user,
+                  controller: emailTextEditingController,
+                  hintText: "Email",
+                  labelText: "Email",
+                  helperText: "Ví dụ: abc@gmail.com",
+                  required: true,
+                  validator: (value){
+                    widget.data.email = value;
+                    return null;
+                  },
+                ),
+                DefaultTextFormField(
+                  icon: FontAwesomeIcons.user,
+                  controller: moiQuanHeTextEditingController,
+                  hintText: "Mối quan hệ",
+                  labelText: "Mối quan hệ",
+                  helperText: "Ví dụ: Đồng nghiệp",
+                  required: true,
+                  validator: (value){
+                    widget.data.moiQuanHe = value;
+                    return null;
+                  },
                 ),
               ],
             ),

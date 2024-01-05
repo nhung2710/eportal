@@ -166,16 +166,19 @@ class _SplashPageState extends BasePageState<SplashPage> {
                       Expanded(
                         child: Align(
                           alignment: state.status == DataBlocStatus.success && state.data.isNotEmpty ? Alignment.bottomCenter : Alignment.center,
-                          child: ConstrainedBox(
-                            constraints: const BoxConstraints(
-                              maxWidth: 225
-                            ),
-                            child: AspectRatio(
-                              aspectRatio: 1,
-                              child: Image.asset(
-                                'assets/images/app.png',
-                                alignment: Alignment.center,
-                                fit: BoxFit.contain,
+                          child:
+                          Container(
+                            margin: const EdgeInsets.only(top: 20, bottom: 5),
+                            padding: const EdgeInsets.only(top: 10),
+                            child: SizedBox(
+                              height: 200,
+                              child: AspectRatio(
+                                aspectRatio: 16 / 9,
+                                child: Image.asset(
+                                  'assets/images/app.png',
+                                  alignment: Alignment.center,
+                                  fit: BoxFit.contain,
+                                ),
                               ),
                             ),
                           ),

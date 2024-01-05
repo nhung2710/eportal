@@ -192,10 +192,6 @@ class DefaultSelectItemState<T> extends State<DefaultSelectItem<T>> {
       isVisible: true,
       padding: EdgeInsets.zero,
       onPressed: (){
-        widget.selectedItem = null;
-        if(widget.onChanged!=null) {
-          widget.onChanged!(null);
-        }
         clear();
       },
       icon: const Icon(

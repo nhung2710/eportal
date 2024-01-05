@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../extension/dateTime_extension.dart';
+import '../../extension/string_extension.dart';
 
 class DefaultDateTextFormField extends StatefulWidget {
   final String? labelText;
@@ -26,10 +27,12 @@ class DefaultDateTextFormField extends StatefulWidget {
   DateTime? initialDate;
   DateTime? lastDate;
   DateTime? firstDate;
+  final bool required;
 
   DefaultDateTextFormField({
     super.key,
     this.controller,
+    this.required = false,
     this.focusNode,
     this.initialDate,
     this.lastDate,
@@ -71,7 +74,15 @@ class DefaultDateTextFormFieldState extends State<DefaultDateTextFormField> {
         focusNode: widget.focusNode,
         labelText: widget.labelText,
         hintText: widget.hintText,
-        validator: widget.validator,
+    validator: (value){
+      if(widget.required && value.isNullOrWhiteSpace()){
+        return "${widget.labelText} không được để trống";
+      }
+      if(widget.validator!=null) {
+        return widget.validator!(value);
+      }
+      return null;
+    },
         onFieldSubmitted: widget.onFieldSubmitted,
         inputFormatters: widget.inputFormatters,
         keyboardType: widget.keyboardType,

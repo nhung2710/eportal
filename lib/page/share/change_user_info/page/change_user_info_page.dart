@@ -11,9 +11,11 @@ import 'package:eportal/model/api/response/admin/data/user_update_data_response.
 import 'package:eportal/model/api/response/common_new/data/danh_sach_gioi_tinh_data_response.dart';
 import 'package:eportal/page/base/page_state/base_page_state.dart';
 import 'package:eportal/page/base/page_widget/base_page_widget.dart';
+import 'package:eportal/page/share/change_user_info/widget/change_user_avatar_item.dart';
 import 'package:eportal/page/widget/default_button.dart';
 import 'package:eportal/page/widget/default_capcha_text_form_field.dart';
 import 'package:eportal/page/widget/default_date_text_form_field.dart';
+import 'package:eportal/page/widget/default_image_network.dart';
 import 'package:eportal/page/widget/default_text_form_field.dart';
 import 'package:eportal/state/base/base_state.dart';
 import 'package:flutter/material.dart';
@@ -37,12 +39,12 @@ class ChangeUserInfoPage extends BasePageWidget {
 }
 
 class ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
-  TextEditingController fullNameController = TextEditingController();
-  TextEditingController birthDayController = TextEditingController();
+  TextEditingController hoTenController = TextEditingController();
+  TextEditingController ngaySinhController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-  TextEditingController idCardController = TextEditingController();
+  TextEditingController dienThoaiController = TextEditingController();
+  TextEditingController diaChiController = TextEditingController();
+  TextEditingController cmndController = TextEditingController();
   UserUpdateEvent userUpdateEvent =
       UserUpdateEvent(request: UserUpdateRequest(obj: UserUpdateDataRequest()));
   DanhSachGioiTinhEvent danhSachGioiTinhEvent = DanhSachGioiTinhEvent(
@@ -114,8 +116,14 @@ class ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
                       color: AppColor.colorOfIconActive),
                 ),
               ),
+              ChangeUserAvatarItem(
+                changed: (String value) {
+                  userUpdateEvent.request.obj.anhDaiDien = value;
+                }
+                ,),
               DefaultTextFormField(
                 icon: FontAwesomeIcons.user,
+                controller: hoTenController,
                 hintText: "Họ và tên",
                 labelText: "Họ và tên",
                 helperText: "Ví dụ: Nguyễn Văn A",
@@ -127,25 +135,29 @@ class ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
               ),
               DefaultTextFormField(
                 icon: FontAwesomeIcons.mobileScreenButton,
+                controller: dienThoaiController,
                 hintText: "Số điện thoại",
                 labelText: "Số điện thoại",
                 helperText: "Ví dụ: 0380000000",
               ),
               DefaultTextFormField(
                 icon: FontAwesomeIcons.envelope,
+                controller: emailController,
                 hintText: "Email",
                 labelText: "Email",
                 helperText: "Ví dụ: abc@gmail.com",
               ),
               DefaultTextFormField(
-                icon: FontAwesomeIcons.envelope,
+                icon: FontAwesomeIcons.idCard,
+                controller: cmndController,
                 hintText: "CMT/CCCD",
                 labelText: "CMT/CCCD",
                 maxLength: 12,
                 helperText: "Ví dụ: 012000000",
               ),
               DefaultTextFormField(
-                icon: FontAwesomeIcons.envelope,
+                icon: FontAwesomeIcons.addressCard,
+                controller: diaChiController,
                 hintText: "Địa chỉ",
                 labelText: "Địa chỉ",
                 helperText: "Ví dụ: Số 1 ngách 1 ngõ 1 đường 1 quận 1 phường 1",
@@ -206,11 +218,11 @@ class ChangeUserInfoPageState extends BasePageState<ChangeUserInfoPage> {
   void changeUserInfo() {
     if (isValid()) {
       userUpdateEvent.request.obj.email = emailController.text;
-      userUpdateEvent.request.obj.cmnd = idCardController.text;
-      userUpdateEvent.request.obj.diaChi = addressController.text;
-      userUpdateEvent.request.obj.ngaySinh = birthDayController.text;
-      userUpdateEvent.request.obj.dienThoai = phoneController.text;
-      userUpdateEvent.request.obj.hoTen = fullNameController.text;
+      userUpdateEvent.request.obj.cmnd = cmndController.text;
+      userUpdateEvent.request.obj.diaChi = diaChiController.text;
+      userUpdateEvent.request.obj.ngaySinh = ngaySinhController.text;
+      userUpdateEvent.request.obj.dienThoai = dienThoaiController.text;
+      userUpdateEvent.request.obj.hoTen = hoTenController.text;
       userUpdateBloc.add(userUpdateEvent);
     }
   }

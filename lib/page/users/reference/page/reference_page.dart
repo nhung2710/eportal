@@ -7,6 +7,11 @@ import 'package:eportal/bloc/admin/job_user_refer_save_bloc.dart';
 import 'package:eportal/enum/data_bloc_status.dart';
 import 'package:eportal/event/admin/job_user_refer_save_event.dart';
 import 'package:eportal/model/api/request/admin/data/job_user_refer_add_data_request.dart';
+import 'package:eportal/model/api/request/admin/data/job_user_refer_delete_data_request.dart';
+import 'package:eportal/model/api/request/admin/data/job_user_refer_update_data_request.dart';
+import 'package:eportal/model/api/request/admin/job_user_refer_add_request.dart';
+import 'package:eportal/model/api/request/admin/job_user_refer_delete_request.dart';
+import 'package:eportal/model/api/request/admin/job_user_refer_update_request.dart';
 import 'package:eportal/model/api/response/admin/data/job_user_refer_list_data_response.dart';
 import 'package:eportal/page/base/page_state/base_page_state.dart';
 import 'package:eportal/page/base/page_widget/base_page_widget.dart';
@@ -23,6 +28,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../event/admin/job_user_refer_list_event.dart';
+import '../../../../extension/string_extension.dart';
 import '../../../../model/api/request/admin/data/job_user_refer_list_data_request.dart';
 import '../../../../model/api/request/admin/job_user_refer_list_request.dart';
 import '../../../../state/base/base_state.dart';
@@ -40,7 +46,7 @@ class ReferencePageState
     extends BasePageState<ReferencePage> {
   late JobUserReferSaveBloc jobUserReferSaveBloc;
   late JobUserReferListBloc jobUserReferListBloc;
-  JobUserReferSaveEvent jobUserReferSaveEvent = JobUserReferSaveEvent(lstJobUserReferDeleteRequest: const [], lstJobUserReferAddRequest: const [], lstJobUserReferUpdateRequest: const []);
+  JobUserReferSaveEvent jobUserReferSaveEvent = JobUserReferSaveEvent(lstJobUserReferDeleteRequest: [], lstJobUserReferAddRequest: [], lstJobUserReferUpdateRequest: []);
   JobUserReferListEvent jobUserReferListEvent = JobUserReferListEvent(request: JobUserReferListRequest(obj: JobUserReferListDataRequest()));
 
   TextEditingController textEditingController = TextEditingController();
@@ -51,6 +57,7 @@ class ReferencePageState
   void initBloc() {
     jobUserReferSaveBloc = JobUserReferSaveBloc();
     jobUserReferListBloc = JobUserReferListBloc();
+    jobUserReferListEvent.request.obj.jobUserID = widget.userProfileId;
   }
 
   @override
@@ -58,6 +65,7 @@ class ReferencePageState
     // TODO: implement disposeBloc
     jobUserReferListBloc.close();
     jobUserReferSaveBloc.close();
+
   }
 
   @override
@@ -67,6 +75,7 @@ class ReferencePageState
 
   @override
   void initDataLoading() {
+    callApi();
   }
   @override
   double getBottomFloatingActionButtonBottom(BuildContext context)  => 100;
@@ -143,7 +152,7 @@ class ReferencePageState
                                 hoTen: e.hoTen,
                                 moiQuanHe: e.moiQuanHe,
                                 noiCongTac: e.noiCongTac,
-                                soDienThoai: e.soDienThoai)));
+                                soDienThoai: e.soDienThoai)).toList());
 
                         setState(() {});
                       }
@@ -157,7 +166,7 @@ class ReferencePageState
                             controller: scrollController,
                             children: lstJobUserReferAddDataRequest.map((e) => ReferenceItem(data: e,
                               onClickItem: (JobUserReferAddDataRequest value) {  },
-                              onDeleteItem: (JobUserReferAddDataRequest value) {  },
+                              onDeleteItem: (JobUserReferAddDataRequest value) => removeItem(value),
                             )).toList(),),
                         ),
                         Container(
@@ -234,6 +243,36 @@ class ReferencePageState
   }
 
   void submitData(BuildContext context) {
+    if(isValid()){
+      jobUserReferSaveEvent.lstJobUserReferAddRequest = lstJobUserReferAddDataRequest
+          .where((element) => element.id.isNullOrWhiteSpace())
+          .map((e) => JobUserReferAddRequest(obj: e))
+          .toList();
+      jobUserReferSaveEvent.lstJobUserReferUpdateRequest = lstJobUserReferAddDataRequest
+          .where((element) => !element.id.isNullOrWhiteSpace())
+          .map((e) => JobUserReferUpdateRequest(
+          obj: JobUserReferUpdateDataRequest(
+            id: e.id,
+            soDienThoai: e.soDienThoai,
+            noiCongTac: e.noiCongTac,
+            moiQuanHe: e.moiQuanHe,
+            hoTen: e.hoTen,
+            email: e.email,
+            chucVu: e.chucVu,
+            jobUserID: e.jobUserID,
+          )))
+          .toList();
+      jobUserReferSaveBloc.add(jobUserReferSaveEvent);
+    }
+  }
 
+  removeItem(JobUserReferAddDataRequest value) {
+
+    var id = value.id;
+    if (!id.isNullOrWhiteSpace()) {
+      jobUserReferSaveEvent.lstJobUserReferDeleteRequest.add(JobUserReferDeleteRequest(obj: JobUserReferDeleteDataRequest(id: value.id)));
+    }
+    lstJobUserReferAddDataRequest.remove(value);
+    setState(() {});
   }
 }

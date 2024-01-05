@@ -48,9 +48,8 @@ class BottomControllerNavigationBarState extends State<BottomControllerNavigatio
           ],
         ),
       child: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(30),
-          topLeft: Radius.circular(30),
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(25),
         ),
         child: BottomNavigationBar(
           useLegacyColorScheme: false,

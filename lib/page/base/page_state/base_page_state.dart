@@ -206,6 +206,9 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
         elevation: AppElevation.sizeOfNormal,
         useSafeArea: true,
         barrierColor: Colors.transparent,
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width - 20, // here increase or decrease in width
+        ),
         builder: (context) => Container(
           padding: const EdgeInsets.only(top: 20),
           child: Wrap(

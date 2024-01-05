@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
             tabBarTheme: const TabBarTheme(
                 indicatorColor: AppColor.colorOfIcon,
                 indicatorSize: TabBarIndicatorSize.tab),
-            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
               backgroundColor: Colors.transparent,
               type: BottomNavigationBarType.shifting
             ),
@@ -92,12 +92,12 @@ class MyApp extends StatelessWidget {
                     strokeAlign: 1,
                     style: BorderStyle.solid
                   ),
-                  borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30)
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(25),
                   ),
                 ),
 
+                modalElevation: 10,
                 surfaceTintColor: Colors.white,
                 backgroundColor: Colors.white,
                 modalBackgroundColor:  Colors.white

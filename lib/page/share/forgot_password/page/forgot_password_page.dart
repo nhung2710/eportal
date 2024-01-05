@@ -104,7 +104,7 @@ class ForgotPasswordPageState extends BasePageState<ForgotPasswordPage> {
                         margin: const EdgeInsets.only(top: 20, bottom: 5),
                         padding: const EdgeInsets.only(top: 10),
                         child: SizedBox(
-                          height: 150,
+                          height: 200,
                           child: AspectRatio(
                             aspectRatio: 16 / 9,
                             child: Image.asset(
