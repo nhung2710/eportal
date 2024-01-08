@@ -25,7 +25,7 @@ abstract class BaseSingleBloc<T, R extends BaseRepository,
       try {
         emit(state.copyWith(status: DataBlocStatus.loading));
         final response = await callApiResult(apiRepository, event);
-        if (response.status != 2) {
+        if (!response.isSuccess) {
           emit(state.copyWith(
               errorMessage: response.message, status: DataBlocStatus.error));
         } else {
@@ -72,7 +72,7 @@ abstract class BaseMultiBloc<
       try {
         emit(state.copyWith(data: const [], status: DataBlocStatus.loading));
         final response = await callApiResult(apiRepository, event);
-        if (response.status != 2) {
+        if (!response.isSuccess) {
           emit(state.copyWith(
               data: const [],
               errorMessage: response.message,

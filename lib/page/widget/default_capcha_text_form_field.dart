@@ -60,8 +60,8 @@ class DefaultCapchaTextFormFieldState
 
   @override
   Widget build(BuildContext context) => Container(
-    margin: const EdgeInsets.only(top: 5),
-    child: TextFormField(
+        margin: const EdgeInsets.only(top: 5),
+        child: TextFormField(
           obscureText: false,
           controller: widget.controller,
           maxLength: widget.maxLength,
@@ -72,7 +72,8 @@ class DefaultCapchaTextFormFieldState
             letterSpacing: 10,
           ),
           textInputAction: widget.textInputAction,
-          textAlignVertical: widget.textAlignVertical ?? TextAlignVertical.center,
+          textAlignVertical:
+              widget.textAlignVertical ?? TextAlignVertical.center,
           inputFormatters: [UpperCaseTextFormatter()],
           validator: (text) {
             if (text == null || text.isEmpty) {
@@ -144,7 +145,6 @@ class DefaultCapchaTextFormFieldState
                         code.length,
                         (index) => TextSpan(
                             text: code[index],
-
                             style: AppTextStyle.titlePage.copyWith(
                                 overflow: TextOverflow.visible,
                                 color: colors[index],
@@ -155,7 +155,7 @@ class DefaultCapchaTextFormFieldState
             ),
           ),
         ),
-  );
+      );
 
   void _newText() {
     Random random = Random();
@@ -178,7 +178,8 @@ class DefaultCapchaTextFormFieldState
         code.length,
         (index) =>
             (random.nextInt(5) + 16 + random.nextInt(index + 1)).toDouble());
-    widget.controller?.text = code;
+
+    ///widget.controller?.text = code;
     setState(() {});
   }
 }

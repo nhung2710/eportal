@@ -7,7 +7,8 @@ class BaseEportalResponse {
   bool isSuccess = false;
 
   BaseEportalResponse({required this.status, required this.message}) {
-    isSuccess = status == ApplicationApiConstant.kAPI_SUCCESS_CODE;
+    isSuccess = status == ApplicationApiConstant.kAPI_SUCCESS_CODE ||
+        message == "Success";
   }
 
   factory BaseEportalResponse.fromJson(Map<String, dynamic> json) {
