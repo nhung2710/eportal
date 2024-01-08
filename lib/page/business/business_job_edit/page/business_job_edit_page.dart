@@ -5,10 +5,20 @@
 //
 
 import 'package:eportal/bloc/admin/job_user_update_bloc.dart';
+import 'package:eportal/bloc/admin/work_update_bloc.dart';
+import 'package:eportal/event/admin/work_update_event.dart';
+import 'package:eportal/model/api/request/admin/data/work_update_data_request.dart';
+import 'package:eportal/model/api/request/admin/work_update_request.dart';
 import 'package:eportal/model/api/response/admin/data/job_user_list_by_user_name_data_response.dart';
 import 'package:eportal/model/api/response/admin/data/job_user_update_data_response.dart';
+import 'package:eportal/model/api/response/admin/data/work_search_by_user_name_data_response.dart';
+import 'package:eportal/model/api/response/admin/data/work_update_data_response.dart';
 import 'package:eportal/page/base/page_state/base_page_state.dart';
 import 'package:eportal/page/base/page_widget/base_page_widget.dart';
+import 'package:eportal/page/business/business_job_share/tab/business_job_basic_tab.dart';
+import 'package:eportal/page/business/business_job_share/tab/business_job_contract_tab.dart';
+import 'package:eportal/page/business/business_job_share/tab/business_job_description_tab.dart';
+import 'package:eportal/page/business/business_job_share/tab/business_job_general_tab.dart';
 import 'package:eportal/page/users/user_profile_share/tab/user_profile_basic_tab.dart';
 import 'package:eportal/page/users/user_profile_share/tab/user_profile_career_goals_tab.dart';
 import 'package:eportal/page/users/user_profile_share/tab/user_profile_field_skills_tab.dart';
@@ -25,11 +35,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../event/admin/job_user_update_event.dart';
+import '../../../../extension/boolean_extension.dart';
 import '../../../../model/api/request/admin/data/job_user_update_data_request.dart';
 import '../../../../model/api/request/admin/job_user_update_request.dart';
 
 class BusinessJobEditPage extends BasePageWidget {
-  final JobUserListByUserNameDataResponse data;
+  final WorkSearchByUserNameDataResponse data;
 
   const BusinessJobEditPage({super.key, required this.data});
 
@@ -38,34 +49,29 @@ class BusinessJobEditPage extends BasePageWidget {
 }
 
 class BusinessJobEditPageState extends BasePageState<BusinessJobEditPage> {
-  late JobUserUpdateBloc jobUserUpdateBloc;
-  JobUserUpdateEvent jobUserUpdateEvent = JobUserUpdateEvent(
-      request: JobUserUpdateRequest(obj: JobUserUpdateDataRequest()));
-  final GlobalKey<UserProfileBasicTabState> keyUserProfileBasicTabState =
-  GlobalKey<UserProfileBasicTabState>();
-  final GlobalKey<UserProfileGeneralTabState> keyUserProfileGeneralTabState =
-  GlobalKey<UserProfileGeneralTabState>();
-  final GlobalKey<UserProfileLevelTabState> keyUserProfileLevelTabState =
-  GlobalKey<UserProfileLevelTabState>();
-  final GlobalKey<UserProfileWorkExperienceTabState>
-  keyUserProfileWorkExperienceTabState =
-  GlobalKey<UserProfileWorkExperienceTabState>();
-  final GlobalKey<UserProfileCareerGoalsTabState>
-  keyUserProfileCareerGoalsTabState =
-  GlobalKey<UserProfileCareerGoalsTabState>();
-  final GlobalKey<UserProfileFieldSkillsTabState>
-  keyUserProfileFieldSkillsTabState =
-  GlobalKey<UserProfileFieldSkillsTabState>();
+  late WorkUpdateBloc workUpdateBloc;
+  WorkUpdateEvent workUpdateEvent = WorkUpdateEvent(
+      request: WorkUpdateRequest(obj: WorkUpdateDataRequest()));
+  GlobalKey<CustomTabViewState> keyCustomTabViewState =
+  GlobalKey<CustomTabViewState>();
+  final GlobalKey<BusinessJobBasicTabState> keyBusinessJobBasicTabState =
+  GlobalKey<BusinessJobBasicTabState>();
+  final GlobalKey<BusinessJobGeneralTabState> keyBusinessJobGeneralTabState =
+  GlobalKey<BusinessJobGeneralTabState>();
+  final GlobalKey<BusinessJobDescriptionTabState> keyBusinessJobDescriptionTabState =
+  GlobalKey<BusinessJobDescriptionTabState>();
+  final GlobalKey<BusinessJobContractTabState> keyBusinessJobContractTabState =
+  GlobalKey<BusinessJobContractTabState>();
 
   @override
   void initBloc() {
-    jobUserUpdateBloc = JobUserUpdateBloc();
+    workUpdateBloc = WorkUpdateBloc();
   }
 
   @override
   void disposeBloc() {
     // TODO: implement disposeBloc
-    jobUserUpdateBloc.close();
+    workUpdateBloc.close();
   }
 
   @override
@@ -79,55 +85,52 @@ class BusinessJobEditPageState extends BasePageState<BusinessJobEditPage> {
 
   @override
   void callApi() {
-    jobUserUpdateEvent.request.obj.tieuDe =
-        keyUserProfileBasicTabState.currentState?.titleController.text;
-    jobUserUpdateEvent.request.obj.ngayDangTu =
-        keyUserProfileBasicTabState.currentState?.fromDateController.text;
-    jobUserUpdateEvent.request.obj.ngayDangDen =
-        keyUserProfileBasicTabState.currentState?.toDateController.text;
-    jobUserUpdateEvent.request.obj.tinhTp = keyUserProfileBasicTabState
-        .currentState?.danhSachTinhTpDataResponse?.regionalID;
-    jobUserUpdateEvent.request.obj.quanHuyen = keyUserProfileBasicTabState
-        .currentState?.danhSachQuanHuyenDataResponse?.regionalID;
-    jobUserUpdateEvent.request.obj.nganhNghe = keyUserProfileBasicTabState
-        .currentState?.danhSachNganhNgheDataResponse?.careerID;
-    jobUserUpdateEvent.request.obj.chucVuHienTai = keyUserProfileGeneralTabState
-        .currentState?.danhSachChucVuDataResponseHienTai?.positionID;
-    jobUserUpdateEvent.request.obj.chucVuMongMuon =
-        keyUserProfileGeneralTabState
-            .currentState?.danhSachChucVuDataResponseMongMuon?.positionID;
-    jobUserUpdateEvent.request.obj.mucLuong = keyUserProfileGeneralTabState
-        .currentState?.danhSachMucLuongDataResponse?.salaryID;
-    jobUserUpdateEvent.request.obj.soNamKinhNghiem =
-        keyUserProfileGeneralTabState
-            .currentState?.danhSachKinhNghiemDataResponse?.experienceID;
-    jobUserUpdateEvent.request.obj.trinhDo = keyUserProfileGeneralTabState
-        .currentState?.danhSachTrinhDoDataResponse?.educationID;
-    jobUserUpdateEvent.request.obj.nhuCau = keyUserProfileGeneralTabState
-        .currentState?.danhSachNhuCauDataResponse?.needsID;
-    jobUserUpdateEvent.request.obj.kyNang =
-        keyUserProfileFieldSkillsTabState.currentState?.skillController.text;
-    jobUserUpdateEvent.request.obj.kinhNghiemLV =
-        keyUserProfileWorkExperienceTabState
-            .currentState?.experienceController.text;
-    jobUserUpdateEvent.request.obj.mucTieu = keyUserProfileCareerGoalsTabState
-        .currentState?.objectiveController.text;
-    jobUserUpdateEvent.request.obj.trinhDoHocVan =
-        keyUserProfileLevelTabState.currentState?.educationController.text;
+    workUpdateEvent.request.obj.tieuDe = keyBusinessJobBasicTabState.currentState?.tieuDeController.text;
+    workUpdateEvent.request.obj.tinNoiBat = (keyBusinessJobBasicTabState.currentState?.tinNoiBat??false).toInt().toString();
+    workUpdateEvent.request.obj.dauThongTinDN = (keyBusinessJobBasicTabState.currentState?.dauThongTinDN??false).toInt().toString();
+    workUpdateEvent.request.obj.dangGap = (keyBusinessJobBasicTabState.currentState?.dangGap??false).toInt().toString();
+    workUpdateEvent.request.obj.hanNopHoSo = keyBusinessJobBasicTabState.currentState?.hanNopHoSoController.text;
+    workUpdateEvent.request.obj.dangTuNgay = keyBusinessJobBasicTabState.currentState?.dangTuNgayController.text;
+    workUpdateEvent.request.obj.dangDenNgay = keyBusinessJobBasicTabState.currentState?.dangDenNgayController.text;
+    workUpdateEvent.request.obj.hanNopHoSo = keyBusinessJobBasicTabState.currentState?.hanNopHoSoController.text;
+    workUpdateEvent.request.obj.tinhTP = keyBusinessJobBasicTabState.currentState?.danhSachTinhTpDataResponse?.regionalID;
 
-    jobUserUpdateBloc.add(jobUserUpdateEvent);
+    workUpdateEvent.request.obj.mucLuong = keyBusinessJobGeneralTabState.currentState?.danhSachMucLuongDataResponse?.salaryID??"0";
+    workUpdateEvent.request.obj.soLuong = keyBusinessJobGeneralTabState.currentState?.soLuongController.text;
+    workUpdateEvent.request.obj.gioiTinh = keyBusinessJobGeneralTabState.currentState?.danhSachGioiTinhDataResponse?.id;
+    workUpdateEvent.request.obj.kinhNghiem = keyBusinessJobGeneralTabState.currentState?.danhSachKinhNghiemDataResponse?.experienceID;
+    workUpdateEvent.request.obj.doTuoi = keyBusinessJobGeneralTabState.currentState?.doTuoiController.text;
+    workUpdateEvent.request.obj.chucVu = keyBusinessJobGeneralTabState.currentState?.danhSachChucVuDataResponse?.positionID;
+    workUpdateEvent.request.obj.trinhdoCM = keyBusinessJobGeneralTabState.currentState?.danhSachTrinhDoDataResponse?.educationID;
+    workUpdateEvent.request.obj.tinhChatCV = keyBusinessJobGeneralTabState.currentState?.danhSachTinhChatCongViecDataResponse?.typeOfID;
+    workUpdateEvent.request.obj.viTriTuyenDung = keyBusinessJobGeneralTabState.currentState?.danhSachViTriTuyenDungDataResponse?.jobPlaceID;
+    workUpdateEvent.request.obj.nganhNghe = keyBusinessJobGeneralTabState.currentState?.danhSachNganhNgheDataResponse?.careerID;
+    workUpdateEvent.request.obj.thoiGianLV = keyBusinessJobGeneralTabState.currentState?.thoiGianLVController.text;
+
+    workUpdateEvent.request.obj.mota = keyBusinessJobDescriptionTabState.currentState?.motaController.text;
+    workUpdateEvent.request.obj.yeuCauCV = keyBusinessJobDescriptionTabState.currentState?.yeuCauHoSoController.text;
+    workUpdateEvent.request.obj.yeuCauHoSo = keyBusinessJobDescriptionTabState.currentState?.yeuCauHoSoController.text;
+    workUpdateEvent.request.obj.quyenLoi = keyBusinessJobDescriptionTabState.currentState?.quyenLoiController.text;
+
+    workUpdateEvent.request.obj.tenNguoiLH = keyBusinessJobContractTabState.currentState?.tenNguoiLHController.text;
+    workUpdateEvent.request.obj.diaChiNguoiLH = keyBusinessJobContractTabState.currentState?.diaChiNguoiLHController.text;
+    workUpdateEvent.request.obj.dienThoaiNguoiLH = keyBusinessJobContractTabState.currentState?.dienThoaiNguoiLHController.text;
+    workUpdateEvent.request.obj.ghiChu = keyBusinessJobContractTabState.currentState?.ghiChuController.text;
+
+
+    workUpdateBloc.add(workUpdateEvent);
   }
 
   @override
   Widget pageUI(BuildContext context) => BlocProvider(
-    create: (_) => jobUserUpdateBloc,
-    child: BlocListener<JobUserUpdateBloc,
-        DataSingleState<List<JobUserUpdateDataResponse>>>(
+    create: (_) => workUpdateBloc,
+    child: BlocListener<WorkUpdateBloc,
+        DataSingleState<WorkUpdateDataResponse>>(
       listener: (BuildContext context,
-          DataSingleState<List<JobUserUpdateDataResponse>> state) {
-        handlerActionDataSingleState<List<JobUserUpdateDataResponse>>(state,
+          DataSingleState<WorkUpdateDataResponse> state) {
+        handlerActionDataSingleState<WorkUpdateDataResponse>(state,
                 (obj) {
-              showCenterMessage("Sửa hồ sơ thành công")
+              showCenterMessage("Sửa tin tuyển dụng thành công")
                   .then((value) => backPage(true));
             });
       },
@@ -137,9 +140,9 @@ class BusinessJobEditPageState extends BasePageState<BusinessJobEditPage> {
           Container(
             margin: const EdgeInsets.all(10),
             child: Container(
-              margin: const EdgeInsets.only(bottom: 10),
+              margin: const EdgeInsets.only(bottom: 20),
               child: Text(
-                "Sửa hồ sơ",
+                "Sửa tin tuyển dụng",
                 style: AppTextStyle.titlePage.copyWith(
                     overflow: TextOverflow.visible,
                     fontSize: 18,
@@ -148,32 +151,28 @@ class BusinessJobEditPageState extends BasePageState<BusinessJobEditPage> {
             ),
           ),
           Expanded(
-            child: CustomTabView(tabViews: {
-              "Thông tin hồ sơ": UserProfileBasicTab(
-                key: keyUserProfileBasicTabState,
-                data: widget.data,
-              ),
-              "Thông tin chung": UserProfileGeneralTab(
-                key: keyUserProfileGeneralTabState,
-                data: widget.data,
-              ),
-              "Trình độ học vấn": UserProfileLevelTab(
-                key: keyUserProfileLevelTabState,
-                data: widget.data,
-              ),
-              "Kinh nghiệm làm việc": UserProfileWorkExperienceTab(
-                key: keyUserProfileWorkExperienceTabState,
-                data: widget.data,
-              ),
-              "Mục tiêu nghề nghiệp": UserProfileCareerGoalsTab(
-                key: keyUserProfileCareerGoalsTabState,
-                data: widget.data,
-              ),
-              "Kỹ năng sở trường": UserProfileFieldSkillsTab(
-                key: keyUserProfileFieldSkillsTabState,
-                data: widget.data,
-              ),
-            }),
+            child: CustomTabView(
+              key: keyCustomTabViewState,
+              tabViews: {
+                "Thông tin tin tuyển dụng việc làm":
+                BusinessJobBasicTab(
+                  key: keyBusinessJobBasicTabState,
+                  data: widget.data,
+                ),
+                "Thông tin tuyển dụng": BusinessJobGeneralTab(
+                  key: keyBusinessJobGeneralTabState,
+                  data: widget.data,
+                ),
+                "Thông tin yêu cầu": BusinessJobDescriptionTab(
+                  key: keyBusinessJobDescriptionTabState,
+                  data: widget.data,
+                ),
+                "Thông tin liên hệ": BusinessJobContractTab(
+                  key: keyBusinessJobContractTabState,
+                  data: widget.data,
+                ),
+              },
+            ),
           ),
           Container(
             margin: const EdgeInsets.all(10),
@@ -196,27 +195,22 @@ class BusinessJobEditPageState extends BasePageState<BusinessJobEditPage> {
     ),
   );
 
-  bool _validPage(BuildContext context, BasePageState? state) {
+  bool _validPage(BuildContext context, BasePageState? state, int page) {
     if (state != null) {
       return state.isValid();
     }
-    return true;
+    keyCustomTabViewState.currentState?.nextPage(page);
+    return false;
   }
 
   void submitForm() {
     if (isValid()) {
-      if (_validPage(context, keyUserProfileBasicTabState.currentState)) {
-        if (_validPage(context, keyUserProfileGeneralTabState.currentState)) {
-          if (_validPage(context, keyUserProfileLevelTabState.currentState)) {
+      if (_validPage(context, keyBusinessJobBasicTabState.currentState,0)) {
+        if (_validPage(context, keyBusinessJobGeneralTabState.currentState,1)) {
+          if (_validPage(context, keyBusinessJobDescriptionTabState.currentState,2)) {
             if (_validPage(
-                context, keyUserProfileWorkExperienceTabState.currentState)) {
-              if (_validPage(
-                  context, keyUserProfileCareerGoalsTabState.currentState)) {
-                if (_validPage(
-                    context, keyUserProfileFieldSkillsTabState.currentState)) {
-                  callApi();
-                }
-              }
+                context, keyBusinessJobContractTabState.currentState,3)) {
+              callApi();
             }
           }
         }

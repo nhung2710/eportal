@@ -5,6 +5,7 @@
 
 import 'package:eportal/page/base/page_state/base_page_state.dart';
 import 'package:eportal/page/base/page_widget/base_page_widget.dart';
+import 'package:eportal/page/business/business_user_profile/tab/business_user_profile_tab.dart';
 import 'package:eportal/screen/employer/candidate_profile/tab/list_of_candidate_profile_applied_tab.dart';
 import 'package:eportal/screen/employer/candidate_profile/tab/list_of_candidate_profile_block_tab.dart';
 import 'package:eportal/screen/employer/candidate_profile/tab/list_of_candidate_profile_saved_tab.dart';
@@ -13,6 +14,11 @@ import 'package:eportal/style/app_color.dart';
 import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/tab/custom_tab_view.dart';
 import 'package:flutter/material.dart';
+
+import '../tab/business_user_profile_applied_tab.dart';
+import '../tab/business_user_profile_block_tab.dart';
+import '../tab/business_user_profile_saved_tab.dart';
+import '../tab/business_user_profile_viewed_tab.dart';
 
 class BusinessUserProfilePage extends BasePageWidget {
   const BusinessUserProfilePage({super.key});
@@ -65,11 +71,12 @@ class BusinessUserProfilePageState
             ),
             Expanded(
               child: CustomTabView(tabViews: const {
-                "Hồ sơ ứng viên đã xem": ListOfCandidateProfileViewedTab(),
-                "Hồ sơ ứng viên đã lưu": ListOfCandidateProfileSavedTab(),
+                "Hồ sơ ứng viên": BusinessUserProfileTab(),
+                "Hồ sơ ứng viên đã xem": BusinessUserProfileViewedTab(),
+                "Hồ sơ ứng viên đã lưu": BusinessUserProfileSavedTab(),
                 "Hồ sơ ứng viên đã ứng tuyển":
-                    ListOfCandidateProfileAppliedTab(),
-                "Hồ sơ ứng viên đã chặn": ListOfCandidateProfileBlockTab(),
+                BusinessUserProfileAppliedTab(),
+                "Hồ sơ ứng viên đã chặn": BusinessUserProfileBlockTab(),
               }),
             ),
           ],
