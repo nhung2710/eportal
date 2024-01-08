@@ -7,15 +7,17 @@ import 'package:eportal/model/base/base_eportal_xml.dart';
 //
 
 class JobUserSendDataRequest extends BaseEportalXml {
-  int? top;
+  String? jobUserID;
+  String? workID;
 
-  JobUserSendDataRequest({this.top = ApplicationConstant.NUMBER_FULL_ITEM});
+  JobUserSendDataRequest({this.jobUserID,this.workID});
 
   @override
   StringBuffer toXml() {
     // TODO: implement toXml
     var buffer = super.toXml();
-    buffer.write(createXml(top, "top"));
+    buffer.write(createXml(jobUserID, "jobUserID"));
+    buffer.write(createXml(workID, "workID"));
     return buffer;
   }
 }

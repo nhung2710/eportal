@@ -5,6 +5,8 @@
 
 import 'package:eportal/page/base/page_state/base_page_state.dart';
 import 'package:eportal/page/base/page_widget/base_page_widget.dart';
+import 'package:eportal/page/users/user_work/tab/user_work_list_tab.dart';
+import 'package:eportal/page/users/user_work/tab/user_work_list_viewed_tab.dart';
 import 'package:eportal/screen/worker/job/tab/list_of_job_applied_page.dart';
 import 'package:eportal/screen/worker/job/tab/list_of_job_saved_page.dart';
 import 'package:eportal/screen/worker/job/tab/list_of_job_viewed_page.dart';
@@ -13,6 +15,10 @@ import 'package:eportal/style/app_text_style.dart';
 import 'package:eportal/widget/tab/custom_tab_view.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../widget/base/base_page.dart';
+import '../tab/user_work_list_applied_tab.dart';
+import '../tab/user_work_list_saved_tab.dart';
+
 class UserWorkPage extends BasePageWidget {
   const UserWorkPage({super.key});
 
@@ -20,7 +26,7 @@ class UserWorkPage extends BasePageWidget {
   State<StatefulWidget> createState() => UserWorkPageState();
 }
 
-class UserWorkPageState extends BasePageState<UserWorkPage> {
+class UserWorkPageState extends BasePageStateActive<UserWorkPage> {
   @override
   void initBloc() {}
 
@@ -46,29 +52,30 @@ class UserWorkPageState extends BasePageState<UserWorkPage> {
   void callApi() {}
 
   @override
-  Widget pageUI(BuildContext context) => Container(
+  Widget pageUI(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Container(
         margin: const EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(bottom: 10),
-              child: Text(
-                "Danh sách việc làm",
-                style: AppTextStyle.titlePage.copyWith(
-                    overflow: TextOverflow.visible,
-                    fontSize: 18,
-                    color: AppColor.colorOfIconActive),
-              ),
-            ),
-            Expanded(
-              child: CustomTabView(tabViews: const {
-                "Việc làm đã xem": ListOfJobViewedPage(),
-                "Việc làm đã ứng tuyển dụng": ListOfJobAppliedPage(),
-                "Việc làm đã lưu lại": ListOfJobSavedPage(),
-              }),
-            ),
-          ],
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 10),
+          child: Text(
+            "Danh sách việc làm",
+            style: AppTextStyle.titlePage.copyWith(
+                overflow: TextOverflow.visible,
+                fontSize: 18,
+                color: AppColor.colorOfIconActive),
+          ),
         ),
-      );
+      ),
+      Expanded(
+        child: CustomTabView(tabViews: const {
+          "Việc làm": UserWorkListTab(),
+          "Việc làm đã xem": UserWorkListViewedTab(),
+          "Việc làm đã ứng tuyển dụng": UserWorkListAppliedTab(),
+          "Việc làm đã lưu lại": UserWorkListSavedTab(),
+        }),
+      ),
+    ],
+  );
 }
