@@ -19,6 +19,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../extension/string_extension.dart';
+import '../../widget/default_card_item.dart';
 
 typedef CallbackHandle<T> = void Function(T? obj);
 
@@ -201,18 +202,50 @@ abstract class BasePageState<T extends StatefulWidget> extends State<T> {
   }
 
   Future showBaseBottomSheet({required List<Widget> children}){
+    List<Widget> _children = [];
+    for(var i = 0 ; i < children.length ; i++){
+      _children.add(children.elementAt(i));
+      if(i< children.length -1) {
+        _children.add(const Divider(
+          height: 1,
+          endIndent: 5,
+          indent: 5,
+          color: AppColor.colorOfIcon,
+        ));
+      }
+    }
     return showModalBottomSheet(
         context: context,
         elevation: AppElevation.sizeOfNormal,
         useSafeArea: true,
         barrierColor: Colors.transparent,
-        constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width - 20, // here increase or decrease in width
-        ),
+        backgroundColor: Colors.transparent,
         builder: (context) => Container(
           padding: const EdgeInsets.only(top: 20),
-          child: Wrap(
-            children: children,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              DefaultCardItem(
+                  child:
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: _children,
+                  )
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              DefaultCardItem(
+                  onTap: () => Navigator.pop(context),
+                  child:ListTile(
+                    title: Text(
+                      "Bỏ qua",
+                      style: AppTextStyle.title.copyWith(overflow: TextOverflow.visible,color: Colors.orangeAccent,fontWeight: FontWeight.w400),
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+              )
+            ],
           ),
         ));
   }

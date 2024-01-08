@@ -11,14 +11,20 @@ import 'package:eportal/page/share/album/page/album_page.dart';
 import 'package:eportal/page/share/change_user_info/page/change_user_info_page.dart';
 import 'package:eportal/page/share/change_user_password/page/change_user_password_page.dart';
 import 'package:eportal/page/share/chat_bot_conversation_search/page/chat_bot_conversation_search_page.dart';
+import 'package:eportal/page/share/job_search_notification/page/job_search_notification_page.dart';
 import 'package:eportal/page/share/map/page/map_page.dart';
 import 'package:eportal/page/share/more_action/widget/group_more_action_item.dart';
 import 'package:eportal/page/share/policy/page/policy_page.dart';
 import 'package:eportal/page/share/question_answer/page/question_answer_page.dart';
+import 'package:eportal/page/share/register_for_job_referral_consultation/page/register_for_job_referral_consultation_page.dart';
+import 'package:eportal/page/share/register_for_online_queue_number/page/register_for_online_queue_number_page.dart';
+import 'package:eportal/page/share/register_for_unemployment_benefits/page/register_for_unemployment_benefits_page.dart';
+import 'package:eportal/page/share/register_for_vocational_training/page/register_for_vocational_training_page.dart';
 import 'package:eportal/page/share/request_support/page/request_support_page.dart';
 import 'package:eportal/page/share/rule/page/rule_page.dart';
 import 'package:eportal/page/share/sign_in/page/sign_in_page.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:in_app_review/in_app_review.dart';
 
 import '../../../../application/global_application.dart';
@@ -91,6 +97,40 @@ class MoreActionPageState extends BasePageKeepState<MoreActionPage> {
           ],
           function: () {  }
       ));
+      if (GlobalApplication().roleType == RoleType.users) {
+
+        actions.add(MoreActionPageModel(icon: Icons.add,
+            title: 'Dịch vụ công',
+            data: [
+              MoreActionPageModel(
+                  icon: FontAwesomeIcons.gavel,
+                  title: "Đăng ký trợ cấp thất nghiệp",
+                  function: () =>
+                      nextPage((context) => const RegisterForUnemploymentBenefitsPage())),
+              MoreActionPageModel(
+                  icon: FontAwesomeIcons.gavel,
+                  title: "Đăng ký tư vấn giới thiệu việc làm",
+                  function: () =>
+                      nextPage((context) => const RegisterForJobReferralConsultationPage())),
+              MoreActionPageModel(
+                  icon: FontAwesomeIcons.gavel,
+                  title: "Đăng ký học nghề",
+                  function: () =>
+                      nextPage((context) => const RegisterForVocationalTrainingPage())),
+              MoreActionPageModel(
+                  icon: FontAwesomeIcons.gavel,
+                  title: "Thông báo tìm kiếm việc làm",
+                  function: () =>
+                      nextPage((context) => const JobSearchNotificationPage())),
+              MoreActionPageModel(
+                  icon: FontAwesomeIcons.gavel,
+                  title: "Đăng ký lấy số trực tuyến",
+                  function: () =>
+                      nextPage((context) => const RegisterForOnlineQueueNumberPage())),
+            ],
+            function: () {  }
+        ));
+      }
 
       actions.add(MoreActionPageModel(icon: Icons.add,
           title: 'Tiện ích',

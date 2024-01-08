@@ -16,6 +16,7 @@ import 'package:eportal/widget/tab/custom_tab_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../widget/base/base_page.dart';
+import '../../../base/page_state/base_page_keep_state.dart';
 import '../tab/user_work_list_applied_tab.dart';
 import '../tab/user_work_list_saved_tab.dart';
 
@@ -26,7 +27,7 @@ class UserWorkPage extends BasePageWidget {
   State<StatefulWidget> createState() => UserWorkPageState();
 }
 
-class UserWorkPageState extends BasePageStateActive<UserWorkPage> {
+class UserWorkPageState extends BasePageKeepState<UserWorkPage> {
   @override
   void initBloc() {}
 

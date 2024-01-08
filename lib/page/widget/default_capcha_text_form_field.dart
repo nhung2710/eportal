@@ -179,7 +179,7 @@ class DefaultCapchaTextFormFieldState
         (index) =>
             (random.nextInt(5) + 16 + random.nextInt(index + 1)).toDouble());
 
-    ///widget.controller?.text = code;
+    widget.controller?.text = code;
     setState(() {});
   }
 }

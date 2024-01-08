@@ -85,22 +85,9 @@ class MyApp extends StatelessWidget {
               type: BottomNavigationBarType.shifting
             ),
             bottomSheetTheme: const BottomSheetThemeData(
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    color: AppColor.colorOfIcon,
-                    width: 1,
-                    strokeAlign: 1,
-                    style: BorderStyle.solid
-                  ),
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(25),
-                  ),
-                ),
-
-                modalElevation: 10,
-                surfaceTintColor: Colors.white,
-                backgroundColor: Colors.white,
-                modalBackgroundColor:  Colors.white
+                surfaceTintColor: Colors.transparent,
+                backgroundColor: Colors.transparent,
+                modalBackgroundColor:  Colors.transparent
             ),
             dialogTheme: DialogTheme(
               surfaceTintColor: Colors.white,

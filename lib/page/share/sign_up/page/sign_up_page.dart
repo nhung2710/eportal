@@ -145,7 +145,7 @@ class SignUpPageState extends BasePageState<SignUpPage> {
                             role = data;
                           }
                         },
-                        title: 'Giới tính',
+                        title: 'Vai trò',
                       ),
                       DefaultTextFormField(
                         icon: FontAwesomeIcons.user,

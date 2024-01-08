@@ -27,6 +27,7 @@ class DefaultTextFormField extends StatefulWidget {
   final TextInputAction? textInputAction;
   final bool readOnly;
   final bool required;
+  final String? regex;
   TextEditingController? controller;
   FocusNode? focusNode;
   TextAlignVertical? textAlignVertical;
@@ -34,12 +35,13 @@ class DefaultTextFormField extends StatefulWidget {
   DefaultTextFormField(
       {super.key,
       this.required = false,
-      this.icon,
+        this.icon,
+        this.regex,
       this.suffixIcon,
       this.labelText,
       this.helperText,
       this.hintText,
-      this.maxLength = 50,
+      this.maxLength = 100,
       this.maxLines = 1,
       this.minLines = 1,
       this.inputFormatters,
@@ -138,6 +140,12 @@ class DefaultTextFormFieldState extends State<DefaultTextFormField> {
           validator: (value){
             if(widget.required && value.isNullOrWhiteSpace()){
               return "${widget.labelText} không được để trống";
+            }
+            if(!widget.regex.isNullOrWhiteSpace() && value.isNullOrWhiteSpace()){
+              final regex = RegExp(widget.regex!);
+                if(!regex.hasMatch(value!)) {
+                  return "${widget.labelText} không đúng định dạng";
+                }
             }
             if(widget.validator!=null) {
               return widget.validator!(value);
